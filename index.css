@@ -1,0 +1,7 @@
+*{ 
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
