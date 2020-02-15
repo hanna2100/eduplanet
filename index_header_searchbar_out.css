@@ -156,7 +156,7 @@ a {
 
 .index_header_menu_hover img {
     position: relative;
-    top: 6px;
+    /* top: 6px; */
     width: 18px;
     height: 9px;
 }
@@ -178,7 +178,7 @@ a {
 
 .index_header_menu_hover_detail img {
     position: relative;
-    top: -24px;
+    top: -30px;
     width: 18px;
     height: 9px;
     z-index: 1;
@@ -189,7 +189,7 @@ a {
     height: 50px;
     border: 1px solid lightgray;
     position: relative;
-    top: -25px;
+    top: -35px;
     right: 65px;
     box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
     border-radius: 4px;
@@ -226,7 +226,7 @@ a {
     height: 180px;
     border: 1px solid lightgray;
     position: relative;
-    top: -25px;
+    top: -35px;
     right: 63px;
     box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
     border-radius: 4px;
