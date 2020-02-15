@@ -13,9 +13,11 @@
 
 <body>
 
+    <div>
     <header>
         <?php include "../index_header_searchbar_in.php"; ?>
     </header>
+    </div>
 
     <div class="body_wrap">
 

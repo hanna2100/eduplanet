@@ -71,7 +71,7 @@
                             <option value="district_31">화성시</option>
                         </select>
 
-                        <input placeholder="학원 이름으로 검색" type="text" name="" id="input_main_serach">
+                        <input placeholder="학원 이름으로 검색" type="text" name="" id="input_main_search">
                         <button id="button_main_search" type="button">검색</button>
 
                     </div>

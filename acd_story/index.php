@@ -13,9 +13,11 @@
 
 <body>
 
+    <div>
     <header>
-        <?php include "../index_header_searchbar_in.php"; ?>
+        <?php include "../index_header_searchbar_out.php"; ?>
     </header>
+    </div>
 
     <div class="story_list_wrap">
         <div class="story_list_background">

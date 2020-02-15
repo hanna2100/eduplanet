@@ -38,7 +38,7 @@
                     </li>
 
                     <li>
-                        <a href="acd_story/index.php">
+                        <a href="/eduplanet/acd_story/index.php">
                             <span>스토리</span>
                             <div class="index_header_menu_hover">
                                 <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
