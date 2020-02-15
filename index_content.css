@@ -52,7 +52,7 @@
     top: 40px;
     text-align: center;
     background-color: white;
-    border: 2px solid  #2E89FF;
+    border: 3px solid #2E89FF;
 }
 
 
@@ -60,9 +60,10 @@
 #input_main_search {
     display: inline-block;
     width: 420px;
+    height: 45px;
     line-height: 45px;
     outline: none;
-    border: 1px solid white;
+    border: 1px solid transparent;
     padding-left: 10px;
     padding-right: 60px;
 }

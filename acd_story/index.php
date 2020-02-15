@@ -13,11 +13,9 @@
 
 <body>
 
-    <div>
     <header>
         <?php include "../index_header_searchbar_out.php"; ?>
     </header>
-    </div>
 
     <div class="story_list_wrap">
         <div class="story_list_background">
@@ -25,7 +23,10 @@
             <!-- select box -------------------------------------------------------------------------------------->
             <div class="story_list_select">
 
-                <h2>학원 스토리</h2>
+                <h2>
+                    학원 스토리
+                    <button id="button_write_story" onclick="location.href='/eduplanet/acd_story/post.php'">스토리 등록</button>
+                </h2>
                 <span id="story_total_span">총 <span id="story_total_num">1024</span> 개의 스토리가 있습니다.</span>
 
                 <select name="story_list_select_district" id="story_list_select_district">
