@@ -1,0 +1,245 @@
+* { 
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    display: block;
+    min-height: 1080px;
+    min-width: 1060px;
+    background: #ebecee;
+    font-size: 13px;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.story_list_wrap {
+    width: 100%;
+    height: 1540px;
+    /* border: 1px solid black; */
+    margin: 0 auto;
+    background-color: #ebecee;
+}
+
+.story_list_background {
+    width: 800px;
+    height: 1520px;
+    /* border: 1px solid black; */
+    background-color: #fff;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.story_list_select {
+    /* border: 1px solid black; */
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+    height: 130px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.story_list_select h2{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#story_total_num {
+    font-size: 14px;
+    color: #2E89FF;
+    font-weight: bold;
+}
+
+#story_total_span {
+    font-size: 14px;
+}
+
+#story_list_select_district {
+    margin-left: 320px;
+    width: 110px;
+    height: 30px;
+    text-align: center;
+    padding-left: 10px;
+    margin-right: 10px;
+}
+
+#story_list_select_mode{
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    padding-left: 10px;
+}
+
+.story_list_column {
+    width: 100%;
+    height: 130px;
+    /* border: 1px solid black; */
+    border-bottom: 1px solid lightgray;
+    padding: 17px;
+    box-sizing: border-box;
+}
+
+.story_list_column_img {
+    float: left;
+    width: 160px;
+    height: 90px;
+    /* border: 1px solid black; */
+}
+
+.story_list_column_img img {
+    width: 160px;
+    height: 90px;
+}
+
+.story_list_column_text {
+    margin-left: 15px;
+    float: left;
+    width: 580px;
+    height: 90px;
+    /* border: 1px solid black; */
+}
+
+#story_text_title {
+    font-size: 17px;
+    font-weight: bold;
+    padding-bottom: 6px;
+}
+
+#story_text_title_sub {
+    font-size: 14px;
+}
+
+#academy_title_span {
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+}
+
+#academy_district {
+    color: gray;
+    font-size: 12px;
+    position: relative;
+    padding-left: 10px;
+}
+
+.academy_small_star {
+    display: inline-block;
+    position: relative;
+}
+
+.academy_small_star img {
+    width: 13px;
+    height: 13px;
+    padding-left: 10px;
+    position: relative;
+    top: 1px;
+}
+
+#academt_review_star_score {
+    padding-left: 2px;
+    color: gray;
+    font-weight: bold;
+}
+
+.story_list_column_academy_info {
+    /* border: 1px solid black; */
+    margin-top: 18px;
+    width: 400px;
+    height: 20px;
+}
+
+.story_academy_heart {
+    float: right;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+#button_academy_heart {
+    float: right;
+    margin-left: 5px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    background : url('/eduplanet_soyoung/img/common_sprite.png') no-repeat 0 -2661px;
+    width: 20px;
+    height: 18px;
+    color: transparent;
+    cursor: pointer;
+}
+
+#button_academy_heart:hover {
+    background : url('/eduplanet_soyoung/img/common_sprite.png') no-repeat 0 -2680px;
+    width: 20px;
+    height: 18px;
+}
+
+ul {
+    list-style: none;
+}
+
+.page_num_wrap {
+    width: 100%;
+    height: 90px;
+    /* border: 1px solid black; */
+}
+
+.page_num {
+    margin: 0 auto;
+    margin-top: 25px;
+    width: 306px;
+    height: 35px;
+    border: 1px solid rgb(185, 185, 185);
+    /* border-top: 1px solid lightgray; */
+    /* border-bottom: 1px solid lightgray; */
+    /* border-left: 1px solid lightgray; */
+    border-radius: 5px;
+}
+
+.page_num_direction {
+    float: left;
+    display: block;
+    width: 34px;
+    height: 35px;
+    /* border: 1px solid black; */
+    border-right: 1px solid rgb(185, 185, 185);
+    text-align: center;
+    padding-top: 7px;
+    box-sizing: border-box;
+    color: lightgray;
+}
+
+.page_num_direction_last {
+    float: left;
+    display: block;
+    width: 34px;
+    height: 35px;
+    /* border: 1px solid black; */
+    text-align: center;
+    padding-top: 7px;
+    box-sizing: border-box;
+    color: lightgray;
+}
+
+.page_num_set {
+    float: left;
+    display: block;
+    width: 34px;
+    height: 35px;
+    /* border: 1px solid black; */
+    border-right: 1px solid rgb(185, 185, 185);
+    text-align: center;
+    padding-top: 7px;
+    box-sizing: border-box;
+    color: #333;
+}
+
+.page_num_direction:hover, .page_num_direction_last:hover, .page_num_set:hover {
+    background-color: #2E89FF;
+    color: white;
+}
