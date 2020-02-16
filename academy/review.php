@@ -1,6 +1,5 @@
 
  <!DOCTYPE html>
- <!-- ddddddddddddddd -->
  <html lang="en" dir="ltr">
    <head>
      <meta charset="utf-8">
@@ -22,10 +21,17 @@
    </head>
    <body>
      <header>
-         <?php include "../index_header_searchbar_out.php"; ?>
+         <?php include "../index_header.php"; ?>
+         <?php include "../academy_header_soyoung.php"; ?>
      </header>
+
      <?php
         include "../lib/db_connector.php";
+        if (isset($_GET["page"])) {
+            $page = $_GET["page"];
+        } else {
+            $page = 1;
+        }
         // content_top
           // parent="현재 리뷰를 보고 있는 학원 넘버"
         $sql_top = "select avg(total_star), avg(facility), avg(acsbl), avg(teacher), avg(cost_efct), avg(achievement) from review where parent=1;";
@@ -39,6 +45,7 @@
         $rate_bar_cost_efct = round($row_top[4],1);
         $rate_bar_achievement = round($row_top[5],1);
     ?>
+    
     <section>
       <div class="inner_section">
         <div id="content_top" class="content">
@@ -111,7 +118,6 @@
         // 3. 전체 페이지 수
         $total_pages = ($total_record % SCALE == 0)?($total_record/SCALE):(ceil($total_record/SCALE));
         // 4. 현재 페이지의 제일 첫 게시글 번호 구하기
-        $page=1; // 임시 페이지 번호
         $set_page_amount = ($page - 1) * SCALE;
         $record_number = $total_record - $set_page_amount;
         // 5. 현재 페이지에 게시글 목록 출력하기
@@ -232,37 +238,57 @@
         mysqli_close($conn);
     ?>
 
-  </table>
-    <ul id="page_num">
 
  <!-- 하단 페이지 번호 인디케이터   -->
-<?php
-// 전체 페이지 갯수가 2페이지 이상일때만 ◀ 이전 나타나기
-if($page>=2 && $total_pages>=2){
-  $new_page = $page-1;
-  echo "<li><a href=''> ◀ 이전&nbsp;</a></li>";
-}else{
-  echo "<li>&nbsp;</li>";
-}
+ <div class="page_num_wrap">
+     <div class="page_num">
 
-// 페이지 번호 출력하기
-for($i=1;$i<$total_pages;$i++){
-  if($i === $page){
-    echo "<li>&nbsp;<span style='weight:bold'>$i</span>&nbsp;</li>";
-  }else{
-    echo "<li><a href=''>&nbsp;$i&nbsp;</a></li>";
-  }
-}
+         <ul class="page_num_ul">
 
-// 전체 페이지 중 마지막 페이지가 아닐때만 다음 ▶ 나타내기
-if($page != $total_pages && $total_pages>=2){
-    $new_page = $page+1;
-    echo "<li><a href=''> &nbsp;$i&nbsp; 다음 ▶ </a></li>";
-}else{
-    echo "<li>&nbsp;</li>";
-}
-?>
-  </ul>
+             <?php
+
+             $prev_page = $page - 1;
+
+             // 첫번째 페이지일 때 앵커 비활성화
+             if ($page == 1) {
+                 echo "<li><a><span class='page_num_direction'><<</span></a></li>";
+                 echo "<li><a><span class='page_num_direction'><</span></a></li>";
+
+             } else {
+                 echo "<li><a href='/eduplanet/academy/review.php?page=1'><span class='page_num_direction'><<</span></a></li>";
+                 echo "<li><a href='/eduplanet/academy/review.php?page=$prev_page'><span class='page_num_direction'><</span></a></li>";
+             }
+
+             // 페이지 설정
+             for ($i = 1; $i <= $total_pages; $i++) {
+
+                 if ($page == $i) {
+
+                     echo "<li><span class='page_num_set'><b> $i </b></span></li>";
+                 } else {
+                     echo "<li><a href='/eduplanet/academy/review.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
+                 }
+             }
+
+             $next_page = $page + 1;
+
+             // 마지막 페이지일 때 앵커 비활성화
+             if ($page == $total_pages) {
+                 echo "<li><a><span class='page_num_direction'>></span></a></li>";
+                 echo "<li><a><span class='page_num_direction_last'>>></span></a></li>";
+
+             } else {
+                 echo "<li><a href='/eduplanet/academy/review.php?page=$next_page'><span class='page_num_direction'>></span></a></li>";
+                 echo "<li><a href='/eduplanet/academy/review.php?page=$total_pages'><span class='page_num_direction_last'>>></span></a></li>";
+             }
+
+             ?>
+
+         </ul>
+
+     </div>
+ </div>
+
 
       </div> <!-- end of inner_section   -->
      </section>
