@@ -10,7 +10,8 @@ body {
     display: block;
     min-height: 1080px;
     min-width: 1060px;
-    background: #ebecee;
+    /* background: #ebecee; */
+    background: #f3f3f4; 
     font-size: 13px;
     color: #333;
 }

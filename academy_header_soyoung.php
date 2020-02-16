@@ -7,8 +7,7 @@
     <title>에듀플래닛</title>
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/eduplanet_soyoung/css/common.css">
-    <link rel="stylesheet" href="/eduplanet_soyoung/css/academy_header.css">
+    <link rel="stylesheet" href="/eduplanet/academy_header_soyoung.css">
 
 </head>
 
@@ -26,13 +25,13 @@
                 <div class="academy_header_info">
 
                 <div class="academy_big_logo">
-                    <img src="/eduplanet_soyoung/img/academy_big_logo.jpg" alt="academy_small_logo">
+                    <img src="/eduplanet/test_img/academy_big_logo.jpg" alt="academy_big_logo">
                 </div>
 
                 <h1 id="academy_title">미래고양이개발학원</h1>
 
                     <div class="academy_title_detail">
-                        <img src="/eduplanet_soyoung/img/academy_big_one_star.png" alt="academy_big_one_star">
+                        <img src="/eduplanet/img/academy_big_one_star.png" alt="academy_big_one_star">
                         <span id="academy_star_span">4.6</span>
                         <span id="academy_district">고양시</span>
                     

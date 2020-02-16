@@ -20,6 +20,21 @@
     <div class="story_list_wrap">
         <div class="story_list_background">
 
+        <?php
+            if (isset($_GET["page"])) {
+                $page = $_GET["page"];
+            } else {
+                $page = 1;
+            }
+
+            $con = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
+            $sql = "select * from acd_story order by no desc";
+
+            $result = mysqli_query($con, $sql);
+            $total_record = mysqli_num_rows($result);
+
+        ?>
+
             <!-- select box -------------------------------------------------------------------------------------->
             <div class="story_list_select">
 
@@ -27,8 +42,9 @@
                     학원 스토리
                     <button id="button_write_story" onclick="location.href='/eduplanet/acd_story/post.php'">스토리 등록</button>
                 </h2>
-                <span id="story_total_span">총 <span id="story_total_num">1024</span> 개의 스토리가 있습니다.</span>
+                <span id="story_total_span">총 <span id="story_total_num"><?=$total_record?></span> 개의 스토리가 있습니다.</span>
 
+                <div class="story_select">
                 <select name="story_list_select_district" id="story_list_select_district">
                     <option selected>시/군 선택</option>
                     <option value="district_01">가평군</option>
@@ -69,6 +85,7 @@
                     <option value="hit_max">조회수 순</option>
                     <option value="hit_max">최근 등록 순</option>
                 </select>
+                </div>
             </div>
 
             <!-- start of ul ------------------------------------------------------------------------------------->
@@ -76,17 +93,6 @@
             <ul class="story_unorder_list">
 
                 <?php
-                if (isset($_GET["page"])) {
-                    $page = $_GET["page"];
-                } else {
-                    $page = 1;
-                }
-
-                $con = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
-                $sql = "select * from acd_story order by no desc";
-
-                $result = mysqli_query($con, $sql);
-                $total_record = mysqli_num_rows($result);
 
                 $scale = 10;
 

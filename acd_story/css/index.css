@@ -65,6 +65,11 @@ a {
     box-sizing: border-box;
 }
 
+.story_select {
+    float: right;
+    padding-right: 5px;
+}
+
 .story_list_select h2{
     margin-top: 10px;
     margin-bottom: 20px;
