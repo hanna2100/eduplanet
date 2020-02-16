@@ -72,368 +72,170 @@
             </div>
 
             <!-- start of ul ------------------------------------------------------------------------------------->
+
             <ul class="story_unorder_list">
 
-                <li>
-                    <!-- 하나의 스토리 컬럼 -->
-                    <div class="story_list_column">
+                <?php
+                if (isset($_GET["page"])) {
+                    $page = $_GET["page"];
+                } else {
+                    $page = 1;
+                }
 
-                        <a href="/eduplanet/acd_story/view.php">
-                            <div class="story_list_column_img">
-                                <img src="/eduplanet/test_img/story_content_image.png" alt="story_list_column_img">
+                $con = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
+                $sql = "select * from acd_story order by no desc";
+
+                $result = mysqli_query($con, $sql);
+                $total_record = mysqli_num_rows($result);
+
+                $scale = 10;
+
+                if ($total_record % $scale == 0) {
+                    $total_page = floor($total_record / $scale);
+                } else {
+                    $total_page = floor($total_record / $scale) + 1;
+                }
+
+                $page_setting = ($page - 1) * $scale;
+
+                $page_start = $total_record - $page_setting;
+
+
+                for ($i = $page_setting; $i < $page_setting + $scale && $i < $total_record; $i++) {
+
+                    mysqli_data_seek($result, $i);
+
+                    $row = mysqli_fetch_array($result);
+
+                    $no = $row["no"];
+                    $parent = $row["parent"];
+                    $acd_name = $row["acd_name"];
+                    $title = $row["title"];
+                    $subtitle = $row["subtitle"];
+                    $content = $row["content"];
+                    $regist_day = $row["regist_day"];
+                    $file_name = $row["file_name"];
+                    $file_copy = $row["file_copy"];
+
+                    if ($row["file_name"]) {
+                        $file_image = "<img src='./img/file.gif' height='13'>";
+                    } else {
+                        $file_image = "";
+                    }
+
+                    // 지역
+                    $sql_district = "select si_name from academy where acd_name = '$acd_name'";
+
+                    $result_district = mysqli_query($con, $sql_district);
+                    $row_district = mysqli_fetch_array($result_district);
+
+                    $si_name = $row_district["si_name"];
+
+                    // 별점
+                    $sql_star = "select total_star from review where parent = $parent";
+
+                    $result_star = mysqli_query($con, $sql_star);
+                    $row_star = mysqli_fetch_array($result_star);
+
+                    $total_star = $row_star["total_star"];
+
+                ?>
+
+                    <li>
+                        <!-- 하나의 스토리 컬럼 -->
+                        <div class="story_list_column">
+
+                            <a href="/eduplanet/acd_story/view.php">
+                                <div class="story_list_column_img">
+                                    <img src="/eduplanet/data/<?= $file_copy ?>" alt="story_list_column_img">
+                                </div>
+
+                                <div class="story_list_column_text">
+                                    <h1 id="story_text_title"><?= $title ?>
+                            </a>
+
+                            <div class="story_academy_heart">
+                                <span>학원 찜하기</span>
+                                <button id="button_academy_heart">like</button>
                             </div>
 
-                            <div class="story_list_column_text">
-                                <h1 id="story_text_title">코딩 8등급에서 1등급이 된 고양이
-                        </a>
+                            </h1>
+                            <p id="story_text_title_sub"><?= $subtitle ?></p>
 
-                        <div class="story_academy_heart">
-                            <span>학원 찜하기</span>
-                            <button id="button_academy_heart">like</button>
-                        </div>
+                            <div class="story_list_column_academy_info">
+                                <span id="academy_title_span"><?= $acd_name ?></span>
+                                <span id="academy_district"><?= $si_name ?></span>
 
-                        </h1>
-                        <p id="story_text_title_sub">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
-
-                        <div class="story_list_column_academy_info">
-                            <span id="academy_title_span">고양이사료개발학원</span>
-                            <span id="academy_district">고양시</span>
-
-                            <div class="academy_small_star">
-                                <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                                <span id="academt_review_star_score">3.2</span>
+                                <div class="academy_small_star">
+                                    <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
+                                    <span id="academt_review_star_score"><?= $total_star ?></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-        </div>
-        </li>
+                    </li>
 
-        <li>
-            <!-- 하나의 스토리 컬럼 -->
-            <div class="story_list_column">
+                <?php
+                    $page_start--;
+                }
+                mysqli_close($con);
+                ?>
 
-                <a href="/eduplanet/acd_story/view.php">
-                    <div class="story_list_column_img">
-                        <img src="/eduplanet/test_img/story_content_image.png" alt="story_list_column_img">
-                    </div>
 
-                    <div class="story_list_column_text">
-                        <h1 id="story_text_title">코딩 8등급에서 1등급이 된 고양이
-                </a>
+            </ul>
+            <!-- end of ul ------------------------------------------------------------------>
 
-                <div class="story_academy_heart">
-                    <span>학원 찜하기</span>
-                    <button id="button_academy_heart">like</button>
-                </div>
+            <div class="page_num_wrap">
+                <div class="page_num">
 
-                </h1>
-                <p id="story_text_title_sub">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
+                    <ul class="page_num_ul">
 
-                <div class="story_list_column_academy_info">
-                    <span id="academy_title_span">고양이사료개발학원</span>
-                    <span id="academy_district">고양시</span>
+                        <?php
+                        
+                        $prev_page = $page - 1;
 
-                    <div class="academy_small_star">
-                        <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                        <span id="academt_review_star_score">3.2</span>
-                    </div>
-                </div>
-            </div>
-    </div>
-    </li>
+                        // 첫번째 페이지일 때 앵커 비활성화
+                        if ($page == 1) {
+                            echo "<li><a><span class='page_num_direction'><<</span></a></li>";
+                            echo "<li><a><span class='page_num_direction'><</span></a></li>";
+                            
+                        } else {
+                            echo "<li><a href='/eduplanet/acd_story/index.php?page=1'><span class='page_num_direction'><<</span></a></li>";
+                            echo "<li><a href='/eduplanet/acd_story/index.php?page=$prev_page'><span class='page_num_direction'><</span></a></li>";
+                        }
 
-    <li>
-        <!-- 하나의 스토리 컬럼 -->
-        <div class="story_list_column">
+                        // 페이지 설정
+                        for ($i = 1; $i <= $total_page; $i++) {
 
-            <a href="/eduplanet/acd_story/view.php">
-                <div class="story_list_column_img">
-                    <img src="/eduplanet/test_img/story_content_image.png" alt="story_list_column_img">
-                </div>
+                            if ($page == $i) {
 
-                <div class="story_list_column_text">
-                    <h1 id="story_text_title">코딩 8등급에서 1등급이 된 고양이
-            </a>
+                                echo "<li><span class='page_num_set'><b> $i </b></span></li>";
+                            } else {
+                                echo "<li><a href='/eduplanet/acd_story/index.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
+                            }
+                        }
 
-            <div class="story_academy_heart">
-                <span>학원 찜하기</span>
-                <button id="button_academy_heart">like</button>
-            </div>
+                        $next_page = $page + 1;
 
-            </h1>
-            <p id="story_text_title_sub">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
+                        // 마지막 페이지일 때 앵커 비활성화
+                        if ($page == $total_page) {
+                            echo "<li><a><span class='page_num_direction'>></span></a></li>";
+                            echo "<li><a><span class='page_num_direction_last'>>></span></a></li>";
+                            
+                        } else {
+                            echo "<li><a href='/eduplanet/acd_story/index.php?page=$next_page'><span class='page_num_direction'>></span></a></li>";
+                            echo "<li><a href='/eduplanet/acd_story/index.php?page=$total_page'><span class='page_num_direction_last'>>></span></a></li>";
+                        }
 
-            <div class="story_list_column_academy_info">
-                <span id="academy_title_span">고양이사료개발학원</span>
-                <span id="academy_district">고양시</span>
+                        ?> 
 
-                <div class="academy_small_star">
-                    <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                    <span id="academt_review_star_score">3.2</span>
+                    </ul>
+
                 </div>
             </div>
+
+
+
         </div>
-        </div>
-    </li>
-
-    <li>
-        <!-- 하나의 스토리 컬럼 -->
-        <div class="story_list_column">
-
-            <a href="/eduplanet/acd_story/view.php">
-                <div class="story_list_column_img">
-                    <img src="/eduplanet/test_img/story_content_image.png" alt="story_list_column_img">
-                </div>
-
-                <div class="story_list_column_text">
-                    <h1 id="story_text_title">코딩 8등급에서 1등급이 된 고양이
-            </a>
-
-            <div class="story_academy_heart">
-                <span>학원 찜하기</span>
-                <button id="button_academy_heart">like</button>
-            </div>
-
-            </h1>
-            <p id="story_text_title_sub">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
-
-            <div class="story_list_column_academy_info">
-                <span id="academy_title_span">고양이사료개발학원</span>
-                <span id="academy_district">고양시</span>
-
-                <div class="academy_small_star">
-                    <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                    <span id="academt_review_star_score">3.2</span>
-                </div>
-            </div>
-        </div>
-        </div>
-    </li>
-
-    <li>
-        <!-- 하나의 스토리 컬럼 -->
-        <div class="story_list_column">
-
-            <a href="/eduplanet/acd_story/view.php">
-                <div class="story_list_column_img">
-                    <img src="/eduplanet/test_img/story_content_image.png" alt="story_list_column_img">
-                </div>
-
-                <div class="story_list_column_text">
-                    <h1 id="story_text_title">코딩 8등급에서 1등급이 된 고양이
-            </a>
-
-            <div class="story_academy_heart">
-                <span>학원 찜하기</span>
-                <button id="button_academy_heart">like</button>
-            </div>
-
-            </h1>
-            <p id="story_text_title_sub">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
-
-            <div class="story_list_column_academy_info">
-                <span id="academy_title_span">고양이사료개발학원</span>
-                <span id="academy_district">고양시</span>
-
-                <div class="academy_small_star">
-                    <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                    <span id="academt_review_star_score">3.2</span>
-                </div>
-            </div>
-        </div>
-        </div>
-    </li>
-
-    <li>
-        <!-- 하나의 스토리 컬럼 -->
-        <div class="story_list_column">
-
-            <a href="/eduplanet/acd_story/view.php">
-                <div class="story_list_column_img">
-                    <img src="/eduplanet/test_img/story_content_image.png" alt="story_list_column_img">
-                </div>
-
-                <div class="story_list_column_text">
-                    <h1 id="story_text_title">코딩 8등급에서 1등급이 된 고양이
-            </a>
-
-            <div class="story_academy_heart">
-                <span>학원 찜하기</span>
-                <button id="button_academy_heart">like</button>
-            </div>
-
-            </h1>
-            <p id="story_text_title_sub">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
-
-            <div class="story_list_column_academy_info">
-                <span id="academy_title_span">고양이사료개발학원</span>
-                <span id="academy_district">고양시</span>
-
-                <div class="academy_small_star">
-                    <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                    <span id="academt_review_star_score">3.2</span>
-                </div>
-            </div>
-        </div>
-        </div>
-    </li>
-
-    <li>
-        <!-- 하나의 스토리 컬럼 -->
-        <div class="story_list_column">
-
-            <a href="/eduplanet/acd_story/view.php">
-                <div class="story_list_column_img">
-                    <img src="/eduplanet/test_img/story_content_image.png" alt="story_list_column_img">
-                </div>
-
-                <div class="story_list_column_text">
-                    <h1 id="story_text_title">코딩 8등급에서 1등급이 된 고양이
-            </a>
-
-            <div class="story_academy_heart">
-                <span>학원 찜하기</span>
-                <button id="button_academy_heart">like</button>
-            </div>
-
-            </h1>
-            <p id="story_text_title_sub">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
-
-            <div class="story_list_column_academy_info">
-                <span id="academy_title_span">고양이사료개발학원</span>
-                <span id="academy_district">고양시</span>
-
-                <div class="academy_small_star">
-                    <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                    <span id="academt_review_star_score">3.2</span>
-                </div>
-            </div>
-        </div>
-        </div>
-    </li>
-
-    <li>
-        <!-- 하나의 스토리 컬럼 -->
-        <div class="story_list_column">
-
-            <a href="/eduplanet/acd_story/view.php">
-                <div class="story_list_column_img">
-                    <img src="/eduplanet/test_img/story_content_image.png" alt="story_list_column_img">
-                </div>
-
-                <div class="story_list_column_text">
-                    <h1 id="story_text_title">코딩 8등급에서 1등급이 된 고양이
-            </a>
-
-            <div class="story_academy_heart">
-                <span>학원 찜하기</span>
-                <button id="button_academy_heart">like</button>
-            </div>
-
-            </h1>
-            <p id="story_text_title_sub">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
-
-            <div class="story_list_column_academy_info">
-                <span id="academy_title_span">고양이사료개발학원</span>
-                <span id="academy_district">고양시</span>
-
-                <div class="academy_small_star">
-                    <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                    <span id="academt_review_star_score">3.2</span>
-                </div>
-            </div>
-        </div>
-        </div>
-    </li>
-
-    <li>
-        <!-- 하나의 스토리 컬럼 -->
-        <div class="story_list_column">
-
-            <a href="/eduplanet/acd_story/view.php">
-                <div class="story_list_column_img">
-                    <img src="/eduplanet/test_img/story_content_image.png" alt="story_list_column_img">
-                </div>
-
-                <div class="story_list_column_text">
-                    <h1 id="story_text_title">코딩 8등급에서 1등급이 된 고양이
-            </a>
-
-            <div class="story_academy_heart">
-                <span>학원 찜하기</span>
-                <button id="button_academy_heart">like</button>
-            </div>
-
-            </h1>
-            <p id="story_text_title_sub">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
-
-            <div class="story_list_column_academy_info">
-                <span id="academy_title_span">고양이사료개발학원</span>
-                <span id="academy_district">고양시</span>
-
-                <div class="academy_small_star">
-                    <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                    <span id="academt_review_star_score">3.2</span>
-                </div>
-            </div>
-        </div>
-        </div>
-    </li>
-
-    <li>
-        <!-- 하나의 스토리 컬럼 -->
-        <div class="story_list_column">
-
-            <a href="/eduplanet/acd_story/view.php">
-                <div class="story_list_column_img">
-                    <img src="/eduplanet/test_img/story_content_image.png" alt="story_list_column_img">
-                </div>
-
-                <div class="story_list_column_text">
-                    <h1 id="story_text_title">코딩 8등급에서 1등급이 된 고양이
-            </a>
-
-            <div class="story_academy_heart">
-                <span>학원 찜하기</span>
-                <button id="button_academy_heart">like</button>
-            </div>
-
-            </h1>
-            <p id="story_text_title_sub">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
-
-            <div class="story_list_column_academy_info">
-                <span id="academy_title_span">고양이사료개발학원</span>
-                <span id="academy_district">고양시</span>
-
-                <div class="academy_small_star">
-                    <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                    <span id="academt_review_star_score">3.2</span>
-                </div>
-            </div>
-        </div>
-        </div>
-    </li>
-
-    </ul>
-    <!-- end of ul ------------------------------------------------------------------>
-
-    <div class="page_num_wrap">
-        <div class="page_num">
-            <a href="#"><span class="page_num_direction">
-                    <<</span> </a> <a href="#"><span class="page_num_direction">
-                            <</span> </a> <a href="#"><span class="page_num_set">1</span></a>
-            <a href="#"><span class="page_num_set">2</span></a>
-            <a href="#"><span class="page_num_set">3</span></a>
-            <a href="#"><span class="page_num_set">4</span></a>
-            <a href="#"><span class="page_num_set">5</span></a>
-            <a href="#"><span class="page_num_direction">></span></a>
-            <a href="#"><span class="page_num_direction_last">>></span></a>
-        </div>
-    </div>
-
-
-
-    </div>
 
     </div>
 </body>
