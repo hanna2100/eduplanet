@@ -24,6 +24,8 @@ function create_table($conn, $table_name){
                     `phone` CHAR(12) NOT NULL,
                     `age` int NOT NULL,
                     `intres` CHAR(10) NOT NULL,
+                    `expiry_day` DATE DEFAULT NULL,
+                    `regist_day` DATE NOT NULL,
                     PRIMARY KEY (`no`),
                     UNIQUE KEY(`id`)
                   );";
@@ -31,12 +33,15 @@ function create_table($conn, $table_name){
           case 'a_members' : //학원회원(academy members)
             $sql = "CREATE TABLE `a_members` (
                     `no` INT NOT NULL AUTO_INCREMENT,
+                    `acd_no` INT DEFAULT 0,
                     `id` CHAR(10) NOT NULL,
                     `pw` CHAR(10) NOT NULL,
                     `email` VARCHAR(80) NOT NULL,
                     `acd_name` VARCHAR(40) NOT NULL,
                     `rprsn` VARCHAR(20) NOT NULL,
                     `file_copy` VARCHAR(50) NOT NULL,
+                    `expiry_day` DATE DEFAULT NULL,
+                    `regist_day` DATE NOT NULL,
                     PRIMARY KEY (`no`),
                     UNIQUE KEY(`id`)
                   );";
@@ -92,12 +97,12 @@ function create_table($conn, $table_name){
                     `no` INT NOT NULL AUTO_INCREMENT,
                     `parent` INT NOT NULL,
                     `user_no` INT NOT NULL,
-                    `total_star` FLOAT NOT NULL,
-                    `facility` FLOAT NOT NULL,
-                    `acsbl` FLOAT NOT NULL,
-                    `teacher` FLOAT NOT NULL,
-                    `cost_efct` FLOAT NOT NULL,
-                    `achievement` FLOAT NOT NULL,
+                    `total_star` INT NOT NULL,
+                    `facility` INT NOT NULL,
+                    `acsbl` INT NOT NULL,
+                    `teacher` INT NOT NULL,
+                    `cost_efct` INT NOT NULL,
+                    `achievement` INT NOT NULL,
                     `benefit` VARCHAR(250) NOT NULL,
                     `drawback` VARCHAR(250) NOT NULL,
                     `regist_day` DATE NOT NULL,
@@ -115,6 +120,7 @@ function create_table($conn, $table_name){
                     `title` VARCHAR(20) NOT NULL,
                     `subtitle` VARCHAR(20) NOT NULL,
                     `content` VARCHAR(500) NOT NULL,
+                    `hit` INT DEFAULT 0,
                     `regist_day` DATE NOT NULL,
                     `file_name` VARCHAR(50) NOT NULL,
                     `file_copy` VARCHAR(50) NOT NULL,
@@ -122,6 +128,49 @@ function create_table($conn, $table_name){
                     FOREIGN KEY(`parent`) REFERENCES academy(`no`) 
                     ON DELETE CASCADE
                   );";
+            break;
+            case 'product' : //멤버십제품 (일반, 학원 통합)
+              $sql = "CREATE TABLE `product` (
+                      `no` INT NOT NULL AUTO_INCREMENT,
+                      `prdct_name` VARCHAR(30) NOT NULL,
+                      `price` INT UNSIGNED NOT NULL,
+                      PRIMARY KEY(`no`),
+                      UNIQUE KEY(`prdct_name`)
+                    );";
+            break;
+            case 'gm_order' : //일반회원 주문테이블(기본키,회원넘버,제품명,가격,결제방식,상태,결제일)
+              $sql = "CREATE TABLE `gm_order` (
+                      `no` INT NOT NULL AUTO_INCREMENT,
+                      `gm_no` INT NOT NULL,
+                      `prdct_name` VARCHAR(30) NOT NULL,
+	                    `price` INT UNSIGNED NOT NULL,
+                      `pay_method` VARCHAR(20) NOT NULL,
+                      `status` CHAR(10) NOT NULL,
+                      `date` DATE NOT NULL,
+                      PRIMARY KEY(`no`)
+                    );";
+            break;
+            case 'am_order' : //학원회원 주문테이블
+              $sql = "CREATE TABLE `am_order` (
+                      `no` INT NOT NULL AUTO_INCREMENT,
+                      `am_no` INT NOT NULL,
+                      `prdct_name` VARCHAR(30) NOT NULL,
+	                    `price` INT UNSIGNED NOT NULL,
+                      `pay_method` VARCHAR(20) NOT NULL,
+                      `status` CHAR(10) NOT NULL,
+                      `date` DATE NOT NULL,
+                      PRIMARY KEY(`no`)
+                    );";
+            break;
+            case 'sales' : //일별 매출테이블
+              $sql = "CREATE TABLE `sales` (
+                      `no` INT NOT NULL AUTO_INCREMENT,
+                      `date` DATE NOT NULL,
+	                    `gm_sales` INT UNSIGNED DEFAULT 0,
+	                    `am_sales` INT UNSIGNED DEFAULT 0,
+                      `total_sales` INT UNSIGNED NOT NULL,
+                      PRIMARY KEY(`no`)
+                    );";
             break;
       default:
         echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
