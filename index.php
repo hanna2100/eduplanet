@@ -37,6 +37,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
     <?php include "index_content.php"; ?>
   </section>
 
+  <footer>
+    <?php include "footer.php"; ?>
+  </footer>
 
 
 
