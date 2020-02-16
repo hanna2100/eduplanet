@@ -20,8 +20,9 @@ a {
     color: #333;
 }
 
-.dd {
+.post_wrap {
     background-color: #ebecee;
+    height: 2400px;
 }
 
 /* 상단 학원 정보 및 팔로우 */
