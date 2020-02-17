@@ -23,7 +23,7 @@
                     <li>
                         <a href="/eduplanet/index.php">
                             <div class="index_header_logo_img">
-                                <img src="./eduplanet/img/eduplanet_logo.png" alt="index_header_logo_img">
+                                <img src="/eduplanet/img/eduplanet_logo.png" alt="index_header_logo_img">
                             </div>
 
                         </a>
@@ -33,7 +33,7 @@
                         <a href="#">
                             <span>학원</span>
                             <div class="index_header_menu_hover">
-                                <img src="./eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
+                                <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
                             </div>
                         </a>
                     </li>
@@ -42,7 +42,7 @@
                         <a href="/eduplanet/acd_story/index.php">
                             <span>스토리</span>
                             <div class="index_header_menu_hover">
-                                <img src="./eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
+                                <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
                             </div>
                         </a>
                     </li>
@@ -51,7 +51,7 @@
                         <a href="#">
                             <span>멤버십</span>
                             <div class="index_header_menu_hover">
-                                <img src="./eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
+                                <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
                             </div>
                         </a>
                     </li>
@@ -68,11 +68,11 @@
                     <li>
                         <!-- 리뷰쓰기 -->
                         <div class="index_header_review_img">
-                            <img src="./eduplanet/img/index_header_review.png" alt="index_header_review">
+                            <img src="/eduplanet/img/index_header_review.png" alt="index_header_review">
                         </div>
 
                         <div class="index_header_menu_hover_detail">
-                            <img src="./eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
+                            <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
 
                             <div class="index_header_menu_hover_detail_review">
                                 <ul>
@@ -86,7 +86,7 @@
                     <li>
                         <!-- 내정보 -->
                         <div class="index_header_profile_img">
-                            <img src="./eduplanet/img/index_header_profile.png" alt="index_header_profile">
+                            <img src="/eduplanet/img/index_header_profile.png" alt="index_header_profile">
                         </div>
 
                         <div class="index_header_menu_hover_detail">
