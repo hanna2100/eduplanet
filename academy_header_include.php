@@ -15,7 +15,7 @@
 
     <div class="body_wrap">
         <?php include './index_header_searchbar_in.php'; ?>
-        <?php include './academy_header_soyoung.php'; ?>
+        <?php include './academy_header.php'; ?>
 
 
 
