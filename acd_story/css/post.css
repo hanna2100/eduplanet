@@ -22,7 +22,7 @@ a {
 
 .post_wrap {
     background-color: #ebecee;
-    height: 2400px;
+    /* height: 1460px; */
 }
 
 /* 상단 학원 정보 및 팔로우 */
@@ -118,13 +118,13 @@ a {
 /* 스토리 */
 .story_academy_content_wrap {
     width: 800px;
-    height: 2150px;
+    /* height: 1210px; */
     /* border: 1px solid lightgray; */
     background-color: #fff;
     margin: 0 auto;
     position: relative;
     top: 150px;
-    margin-bottom: 40px;
+    margin-bottom: 220px;
 }
 
 .story_academy_content {
@@ -132,7 +132,7 @@ a {
     margin: 0 auto;
     box-sizing: border-box;
     width: 800px;
-    height: 2150px;
+    /* height: 2150px; */
     /* border: 1px solid lightgray; */
     /* box-shadow: 0 0 1px 1px rgba(0,0,0,0.2); */
     /* padding: 64px 90px 80px; */
@@ -242,3 +242,32 @@ textarea {
     margin-left: 10px;
     margin-bottom: 15px;
 } 
+
+.story_post_add_subject {
+    margin-top: 30px;
+    box-sizing: border-box;
+}
+
+.story_post_add_subject span {
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+#button_story_post_add_subject {
+    width: 75px;
+    height: 40px;
+    border: 1px solid #2E89FF;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #2E89FF;
+    position: relative;
+    top: -2px;
+    left: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 360px;
+}
+
+#button_story_post_add_subject:hover {
+    background-color: rgba(46, 137, 255, 0.13);
+}

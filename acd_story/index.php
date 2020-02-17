@@ -27,10 +27,13 @@
                 $page = 1;
             }
 
-            $con = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
+            // $con = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
+
+            include "../lib/db_connector.php";
+
             $sql = "select * from acd_story order by no desc";
 
-            $result = mysqli_query($con, $sql);
+            $result = mysqli_query($conn, $sql);
             $total_record = mysqli_num_rows($result);
 
         ?>
@@ -118,10 +121,10 @@
                     $acd_name = $row["acd_name"];
                     $title = $row["title"];
                     $subtitle = $row["subtitle"];
-                    $content = $row["content"];
                     $regist_day = $row["regist_day"];
                     $file_name = $row["file_name"];
                     $file_copy = $row["file_copy"];
+                    $hit = $row["hit"];
 
                     if ($row["file_name"]) {
                         $file_image = "<img src='./img/file.gif' height='13'>";
@@ -132,7 +135,7 @@
                     // 지역
                     $sql_district = "select si_name from academy where acd_name = '$acd_name'";
 
-                    $result_district = mysqli_query($con, $sql_district);
+                    $result_district = mysqli_query($conn, $sql_district);
                     $row_district = mysqli_fetch_array($result_district);
 
                     $si_name = $row_district["si_name"];
@@ -140,7 +143,7 @@
                     // 별점
                     $sql_star = "select total_star from review where parent = $parent";
 
-                    $result_star = mysqli_query($con, $sql_star);
+                    $result_star = mysqli_query($conn, $sql_star);
                     $row_star = mysqli_fetch_array($result_star);
 
                     $total_star = $row_star["total_star"];
@@ -148,10 +151,11 @@
                 ?>
 
                     <li>
-                        <!-- 하나의 스토리 컬럼 -->
+                        <!-- 하나의 스토리 -->
                         <div class="story_list_column">
 
-                            <a href="/eduplanet/acd_story/view.php">
+                            <!-- <a href="/eduplanet/acd_story/view.php?no=<//?=$no?>&si_name=<//?=$si_name?>&total_star=<//?$total_star?>"> -->
+                            <a href="/eduplanet/acd_story/view.php?no=<?=$no?>">
                                 <div class="story_list_column_img">
                                     <img src="/eduplanet/data/<?= $file_copy ?>" alt="story_list_column_img">
                                 </div>
@@ -183,7 +187,7 @@
                 <?php
                     $page_start--;
                 }
-                mysqli_close($con);
+                mysqli_close($conn);
                 ?>
 
 
