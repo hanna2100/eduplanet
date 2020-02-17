@@ -118,11 +118,12 @@ function create_table($conn, $table_name){
                     `parent` INT NOT NULL,
                     `acd_name` VARCHAR(20) NOT NULL,
                     `title` VARCHAR(20) NOT NULL,
-                    `subtitle1` VARCHAR(20) NOT NULL,
+                    `subtitle` VARCHAR(20) NOT NULL,
+                    `subject1` VARCHAR(20) NOT NULL,
                     `content1` VARCHAR(500) NOT NULL,
-                    `subtitle2` VARCHAR(20),
+                    `subject2` VARCHAR(20),
                     `content2` VARCHAR(500),
-                    `subtitle3` VARCHAR(20),
+                    `subject3` VARCHAR(20),
                     `content3` VARCHAR(500),
                     `hit` INT DEFAULT 0,
                     `regist_day` DATE NOT NULL,
@@ -188,6 +189,5 @@ function create_table($conn, $table_name){
       echo "테이블 생성 실패 : ".mysqli_error($conn);
     }
   }//end of if flag
-
 }//end of function
 ?>

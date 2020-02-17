@@ -21,15 +21,12 @@
 </head>
 <body>
 <main>
-
 <?php
   include_once 'nav.php';
   include_once '../lib/db_connector.php';
 
-  $page =isset($_GET["page"])? $_GET["page"]: 1;
-
+  $page = isset($_GET["page"])? $_GET["page"]: 1 ;
 ?>
-
 <section>
   <div class="sec_top">
     <span><i class="fas fa-angle-left"></i></span>
