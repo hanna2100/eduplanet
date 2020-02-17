@@ -64,6 +64,7 @@ td { padding: 0.6em 0;}
 }
 #payment_sum>td { padding: 1em 0; font-weight:bold; border-top: 1px solid #c5c7cc; }
 #payment_sum>td:last-child{ color: #2E89FF; font-size: 1.5em; font-weight: bolder; }
+/* .discounted_price { font-weight: 1000; }  이거 왜 안먹는지? 모르겠음*/ 
 
 /* payment_method 결제수단*/
 h3 {
