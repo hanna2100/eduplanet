@@ -26,7 +26,33 @@
             <h2>프리미엄</h2>
             <div class="mid_sub_title">결제를 해야 학원 리뷰를 볼 수 있답니다!! 우하하</div>
               <div class="whole_card_wrapper">
-                    <button type="button" class="membership_card ">
+                    <button type="button" class="membership_card" onclick="location.href='./payment.php?title=1&percent=0.3&price=21300'">
+                      <div class="card_wrap">
+                        <div class="card_header">
+                          <div class="membership_card_title">
+                            <span class="title">1개월</span><span class="membership_tag tag_red">BEST</span>
+                          </div>
+                          <dl class="price_info clearfix">
+                            <dt class="hide">가격</dt>
+                              <dd class="percent">-30%</dd>
+                              <dd class="price_by_month">14,900원</dd>
+                          </dl>
+                        </div>
+                        <div class="card_content">
+                          <dl class="price_info clearfix">
+                            <dt class="hide">원가</dt>
+                             <dd class="original_price"><del>21,300원</del></dd>
+                            <dt class="hide">할인가</dt>
+                             <dd class="discount_price">총 14,900원</dd>
+                           </dl>
+                         </div>
+                         <div class="card_bottom">
+                           <span class="btn_membership false">구매하기</span>
+                         </div>
+                       </div>
+                     </button>
+
+                    <button type="button" class="membership_card" onclick="location.href='./payment.php?title=3&percent=0.46&price=44700'">
                       <div class="card_wrap">
                         <div class="card_header">
                           <div class="membership_card_title">
@@ -52,24 +78,24 @@
                        </div>
                      </button>
 
-                    <button type="button" class="membership_card ">
+                    <button type="button" class="membership_card" onclick="location.href='./payment.php?title=6&percent=0.7&price=89400'">
                       <div class="card_wrap">
                         <div class="card_header">
                           <div class="membership_card_title">
-                            <span class="title">3개월</span><span class="membership_tag tag_red">BEST</span>
+                            <span class="title">6개월</span><span class="membership_tag tag_red">HIT</span>
                           </div>
                           <dl class="price_info clearfix">
                             <dt class="hide">가격</dt>
-                              <dd class="percent">-46%</dd>
-                              <dd class="price_by_month">월 8,000원</dd>
+                              <dd class="percent">-70%</dd>
+                              <dd class="price_by_month">월 4,500원</dd>
                           </dl>
                         </div>
                         <div class="card_content">
                           <dl class="price_info clearfix">
                             <dt class="hide">원가</dt>
-                             <dd class="original_price"><del>44,700원</del></dd>
+                             <dd class="original_price"><del>89,400원</del></dd>
                             <dt class="hide">할인가</dt>
-                             <dd class="discount_price">총 24,000원</dd>
+                             <dd class="discount_price">총 27,000원</dd>
                            </dl>
                          </div>
                          <div class="card_bottom">
@@ -78,11 +104,11 @@
                        </div>
                      </button>
 
-                    <button type="button" class="membership_card ">
+                    <!-- <button type="button" class="membership_card" onclick="location.href='./payment.php'">
                       <div class="card_wrap">
                         <div class="card_header">
                           <div class="membership_card_title">
-                            <span class="title">3개월</span><span class="membership_tag tag_red">BEST</span>
+                            <span class="title">정기권</span><span class="membership_tag tag_red">BEST</span>
                           </div>
                           <dl class="price_info clearfix">
                             <dt class="hide">가격</dt>
@@ -102,33 +128,7 @@
                            <span class="btn_membership false">구매하기</span>
                          </div>
                        </div>
-                     </button>
-
-                    <button type="button" class="membership_card ">
-                      <div class="wrap">
-                        <div class="card_header">
-                          <div class="membership_card_title">
-                            <span class="title">3개월</span><span class="membership_tag tag_red">BEST</span>
-                          </div>
-                          <dl class="price_info clearfix">
-                            <dt class="hide">가격</dt>
-                              <dd class="percent">-46%</dd>
-                              <dd class="price_by_month">월 8,000원</dd>
-                          </dl>
-                        </div>
-                        <div class="card_content">
-                          <dl class="price_info clearfix">
-                            <dt class="hide">원가</dt>
-                             <dd class="original_price"><del>44,700원</del></dd>
-                            <dt class="hide">할인가</dt>
-                             <dd class="discount_price">총 24,000원</dd>
-                           </dl>
-                         </div>
-                         <div class="card_bottom">
-                           <span class="btn_membership false">구매하기</span>
-                         </div>
-                       </div>
-                     </button>
+                     </button> -->
 
 
               </div> <!--  end of whole_card_wrapper -->

@@ -1,0 +1,47 @@
+#mapp{
+  border-top: 1px solid black;
+}
+#infor_map{
+  border: 1px solid blue;
+  margin: 0 auto;
+  width: 1060px;
+}
+.li_width{
+  width: 120px;
+  color: gray;
+  font-weight: bold;
+}
+
+#infor ul{
+  margin-left: -30px;
+}
+#infor li{
+  list-style: none;
+  display: inline-block;
+
+}
+#eduform{
+  margin: 0 auto;
+  padding: 0auto;
+  width: 1060px;
+  border : 1px solid red;
+  margin-bottom: 50px;
+}
+#infor{
+  width: 100%;
+  height: 100%;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  background-color: white;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+#eduInforMain{
+  background-color: #F6F6F6;
+  width: 100%;
+  height: 1080px;
+}
+#asdf{
+  color: black;
+}

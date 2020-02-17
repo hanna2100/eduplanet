@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- jquery -->
   <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="/eduplanet/admin/index.js"></script>
+  <script src="/eduplanet/admin/js/admin.js"></script>
+  <script src="/eduplanet/admin/js/index.js"></script>
   <!-- css -->
-  <link rel="stylesheet" href="/eduplanet/admin/index.css">
+  <link rel="stylesheet" href="/eduplanet/admin/css/index.css">
+  <link rel="stylesheet" href="/eduplanet/admin/css/nav.css">
   <!-- 폰트 -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Montserrat&display=swap" rel="stylesheet">
@@ -15,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
   <!-- 차트 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-  <title>Document</title>
+  <title>에듀플래닛 관리자페이지</title>
 </head>
 <body>
 <main>
@@ -25,17 +28,9 @@
 <section>
   <div class="sec_top">
     <span><i class="fas fa-angle-left"></i></span>
-    <select id="top_select_year" dir="rtl">
-      <option>2018</option>
-      <option>2019</option>
-      <option>2020</option>
-    </select>
+    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting()"></select>
     <span>년 </span>
-    <select id="top_select_month" dir="rtl">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
+    <select id="top_select_month" dir="rtl"></select>
     <span>월 </span>
     <span><i class="fas fa-angle-right"></i></span>
   </div>

@@ -18,7 +18,7 @@
         <div class="academy_header_wrap">
 
             <div class="academy_header_img">
-                
+
             </div>
 
             <div class="academy_header_info_wrap">
@@ -34,7 +34,7 @@
                         <img src="/eduplanet/img/academy_big_one_star.png" alt="academy_big_one_star">
                         <span id="academy_star_span">4.6</span>
                         <span id="academy_district">고양시</span>
-                    
+
                     </div>
                 </div>
 

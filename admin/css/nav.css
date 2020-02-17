@@ -7,24 +7,15 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-main{
-    width: 100%;
-    height: 100%;
-    display: table;
-
-}
-
 section{
-    display: table-cell;
-    padding-left: 200px;
+    margin-left: 200px;
 }
 
 #navigation{
-    display: table-cell;
     position: fixed;
     height: 100%;
     width: 200px;
-    background-color:#f3f3f4  ;
+    background-color:#f3f3f4;
 }
 
 #navigation ul{
@@ -143,7 +134,6 @@ section{
     margin: 0px auto;
     padding: 30px;
 }
-
 .sec_top{
     width: 100%;
     height: 60px;
@@ -185,170 +175,4 @@ section{
 /* ie용 화살표없애기 */
 #top_select_year::-ms-expand, #top_select_month::-ms-expand {
     display: none;
-}
-
-#dash_salesGraph_wrap{
-    display: table;
-    width: 960px;
-    height: 250px;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 1px 17px -6px #cfcfcf; 
-    box-shadow: 0px 1px 17px -6px #cfcfcf;
-    margin-bottom: 40px;
-}
-
-#dash_salesGraph_cell2{
-    display: table-cell;
-    vertical-align: middle;
-    padding-right: 40px;
-}
-
-#dash_salesGraph_cell1{
-    display: table-cell;
-    width: 500px;
-    height: 250px;
-    padding: 20px 40px 40px 40px;
-}
-
-#dash_salesGraph_cell1>h4{
-    display: inline-block;
-    width: 100%;
-    border-bottom: 1px solid #ececec;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-}
-
-#dash_salesGraph_cell1> h4> span{
-    font-size: 12px;
-    float: right;
-    font-weight: 400;
-    color: #6e6e6e;
-    margin: 5px;
-}
-
-#dash_membersGraph_wrap>h4, #dash_reviewGraph_wrap>h4, #dash_postGraph_wrap>h4{
-    display: inline-block;
-    width: 100%;
-    border-bottom: 1px solid #ececec;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-}
-
-#dash_membersGraph_wrap> h4> span, #dash_reviewGraph_wrap> h4> span, #dash_postGraph_wrap> h4> span{
-    font-size: 12px;
-    float: right;
-    font-weight: 400;
-    color: #6e6e6e;
-    margin: 5px;
-}
-
-.dash_salesGraph_detail{
-    display: table;
-    width: 100%;
-    margin: 10px 0px;
-}
-
-.dash_salesGraph_label{
-    width: 40%;
-    display: table-cell;
-    padding: 5px 10px;
-    font-size: 14px;
-    background-color: #f1f1f1;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    font-weight: bold;
-}
-
-.dash_salesGraph_data{
-    display: table-cell;
-    font-size: 14px;
-    padding: 5px 10px;
-    vertical-align: middle;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background-color: #fafafa;
-}
-
-.dash_salesGraph_data>span>i{
-    font-size: 14px;
-}
-
-.dash_salesGraph_data p{
-    color: #6e6e6e;
-    font-size: 10px;
-}
-
-.dash_salesGraph_data p i{
-    font-size: 12px;
-}
-
-#dash_membersGraph_wrap, #dash_reviewGraph_wrap, #dash_postGraph_wrap{
-    width: 240px;
-    height: 200px;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 1px 17px -6px #cfcfcf; 
-    box-shadow: 0px 1px 17px -6px #cfcfcf;
-    margin-right: 30px;
-    padding: 30px;
-}
-
-#dash_postGraph_wrap{
-    margin-right: 0px;
-}
-
-#dash_topline{
-    display: flex;
-    margin-bottom: 20px;
-}
-
-#dash_topline > div > span:nth-child(1){
-    display: inline-block;
-    font-size: 14px;
-    color:#6e6e6e;
-    padding: 20px 0px 10px 0px;
-}
-
-#dash_topline > div > span:nth-child(3){
-    font-size: 19px;
-    font-weight: bold;
-    font-family: 'Montserrat', sans-serif;
-    color:#6e6e6e;
-}
-
-#dash_topline > div{
-    width: auto;
-    height: 100px;
-    border: 1px solid #ececec;
-    border-radius: 5px;
-    text-align: center;
-    margin: 10px;
-}
-
-#dash_topline i{
-    padding-left: 5px;
-}
-
-#dash_topline> div{
-    display: inline-block;
-    width: 100%;
-    background-color: #fff;
-}
-
-.dash_topline_i i{
-    color: #6e6e6e;
-    font-size: 20px;
-    margin-right: 5px;
-}
-
-.caret i{
-    font-size: 20px;
-    color:#6e6e6e;   
-}
-
-.up i{
-    color:#f66283;
-}
-
-.down i{
-    color:#4da3ee;
 }

@@ -1,0 +1,83 @@
+h3 {
+  padding-top: 10px;
+  text-align: center;
+  height: 35px;
+  background-color: #2E89FF;
+  color: white;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+#teacher {
+  width: 100%;
+}
+#teacher_info {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+#teacher_info h1 {
+  margin: 15px;
+  text-align: center;
+}
+
+#teacher_info div.teacher_card {
+  width: 240px;
+  height: 340px;
+  transition: box-shadow .3s;
+  background-color: white;
+  float: left;
+  margin-left: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#teacher_info div.teacher_card img.teacher_img {
+  margin-left: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 10px;
+  width: 210px;
+  height: 210px;
+  border-radius: 20px;
+}
+#teacher_info div.teacher_card ul.teacher_card_ul li{
+  font-size: 14px;
+  list-style: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 5px;
+  color: black;
+  font-weight: bold;
+}
+#teacher_info div.teacher_card:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+#teacher_schedule {
+  clear: both;
+  padding-top: 30px;
+  width: 60%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+#teacher_schedule h1 {
+  margin: 15px;
+  text-align: center;
+}
+#teacher_schedule table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#teacher_schedule table tr,td {
+  background-color: #2E89FF;
+  border-radius: 4px;
+}
+#teacher_schedule table tr td {
+  text-align: center;
+
+  width: 140px;
+  height: 40px;
+}

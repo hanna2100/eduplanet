@@ -1,33 +1,10 @@
-var red= 'rgb(255, 99, 132)',
-orange= 'rgb(255, 159, 64)',
-yellow= 'rgb(255, 205, 86)',
-green= 'rgb(75, 192, 192)',
-blue= 'rgb(54, 162, 235)',
-purple= 'rgb(153, 102, 255)',
-grey= 'rgb(201, 203, 207)';
 
 $(function(){
-    
-    $('#navigation ul li.nav_menu>a').on('click', function(){
-        $(this).removeAttr('href');
-        var element = $(this).parent('li');
-        if (element.hasClass('open')) {
-            element.removeClass('open');
-            element.find('li').removeClass('open');
-            element.find('ul').slideUp();
-        }
-        else {
-            element.addClass('open');
-            element.children('ul').slideDown();
-            element.siblings('li').children('ul').slideUp();
-            element.siblings('li').removeClass('open');
-            element.siblings('li').find('li').removeClass('open');
-            element.siblings('li').find('ul').slideUp();
-        }
-    });
-    
-    $('#navigation>ul>li.nav_menu>a').append('<span class="holder"></span>');
 
+    //대시보드 년월설정
+    topSelect_init_Setting();
+
+    // 대시보드 그래프설정
     salesGraph();
     membersGraph();
     reviewGraph();
@@ -244,3 +221,6 @@ function postGraph(){
         }
     });
 }
+
+
+

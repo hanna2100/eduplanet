@@ -1,0 +1,160 @@
+/* membership.payment.CSS */
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: auto 0;
+  background-color: #ebecee;
+}
+section {
+  margin: 0;
+  padding: 0;
+  min-width: 1060px;
+}
+.inner_section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55%;
+  margin: 3% auto;
+  background: #fff
+}
+.payment_wrap {
+  margin: 60px;
+}
+
+/* .grid { align-self: stretch;} */
+
+/* payment_header 결제창 제목과 이용기간 */
+.payment_header {
+  text-align: left;
+}
+h2 {
+  font-size: 2em;
+  line-height: 47px;
+  font-weight: 800;
+}
+.period {
+  margin-top: 15px;
+  font-size: 14px;
+  line-height: 19px;
+  color: #85878c;
+}
+/* payment_contents 결제 상세내역*/
+table { padding: 3em 0; margin: 0; width: 500px;}
+td { padding: 0.6em 0;}
+
+.payment_key {
+  font-size: 16px;
+  color: #686a6d;
+  font-weight: 600;
+  line-height: 19px;
+}
+.payment_value {
+  font-size: 1.1em;
+  color: #686a6d;
+  font-weight: 600;
+  text-align: right;
+}
+#payment_sum>td { padding: 1em 0; font-weight:bold; border-top: 1px solid #c5c7cc; }
+#payment_sum>td:last-child{ color: #2E89FF; font-size: 1.5em; font-weight: bolder; }
+/* .discounted_price { font-weight: 1000; }  이거 왜 안먹는지? 모르겠음*/ 
+
+/* payment_method 결제수단*/
+h3 {
+  font-size: 20px;
+  color: #323438;
+  line-height: 24px;
+  font-weight: 600;
+}
+.method_wrap { padding: 25px 0; height: 200px; text-align: center;}
+ul { list-style: none;}
+li { float: left; width: 50%;  }
+.jply_btn_lg {
+  display: inline-block;
+  height: 56px;
+  padding: 16px 24px;
+  margin: 8px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+  vertical-align: top;
+
+  width: 70%;
+  height: 80%;
+  background-color: transparent;
+  border: 1px solid #c5c7cc;
+  border-radius: 3px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.jply_radio_item { opacity:0}
+
+/* payment_member_info 구매자 정보 */
+.payment_member_info{ margin: 30px 0;}
+.member_info_wrap { padding: 25px 0;}
+.member_info_box { margin-bottom: 28px; }
+.member_info_title {
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #85878c;
+  line-height: 19px;
+}
+.member_info_input {
+  width: 100%;
+  height: 48px;
+  padding: 13px 16px;
+  border: 1px solid #c5c7cc;
+  border-radius: 3px;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #323438;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: left;
+}
+
+/* payment_agree 이용약관 */
+.checkbox_text {font-size: 18px; line-height: 24px;}
+.payment_agree_body { width: 100%; height: 200px; background-color: #f7f7f7; margin: 20px 0; padding: 40px;}
+.inline_scroll {
+    width: 100%;
+    font-size: 13px;
+    line-height: 22px;
+    color: #686a6d;
+    max-height: 120px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* payment_button 하단 버튼 2개 */
+.payment_button { text-align: center; margin-top: 50px;}
+.payment_button>button {
+  font-weight: bold;
+  font-size: 18px;
+  padding: 14px 28px;
+  width: 187px;
+  height: 56px;
+  margin: 0 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.payment_button>button:first-child {
+  color: #686a6d;
+  background-color: white;
+  border: 1px solid #c5c7cc;
+}
+.payment_button>button:last-child {
+  border: none;
+  color: white;
+  background-color: #2E89FF;
+}
+.payment_button>button:first-child:hover { background: #c5c7cc;}
+.payment_button>button:last-child:hover { background: #0b7dda;}
