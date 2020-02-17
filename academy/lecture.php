@@ -21,8 +21,10 @@
   </head>
   <body>
     <header>
-      <?php include "../index_header.php"; ?>
-      <?php include "../academy_header_soyoung.php"; ?>
+      <?php
+        include "../index_header.php";
+        include "../academy_header.php";
+      ?>
     </header>
     <section>
       <div id="teacher">
