@@ -1,0 +1,125 @@
+/* membership.index.CSS */
+.hide { display: none;}
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: auto 0;
+}
+
+.membership_section {
+
+}
+
+/* top & bottom */
+.top_banner, .bottom_info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+}
+/*  상단 배너 */
+.top_banner {
+  background-color: tomato;
+  font-size: 3em;
+}
+/*  하단 이용안내 */
+.bottom_info {
+  background-color: #333333;
+  font-size: 1.1em;
+  color: #fff;
+  text-align: left;
+}
+
+/*  중간 콘텐츠 */
+.mid_contents {
+  width: 90%;
+  margin: 3% auto;
+
+}
+h2 {
+  font-weight: 600;
+  font-size: 2.5em;
+}
+.mid_sub_title {
+  font-size: 1.3em;
+}
+/* 카드 */
+.whole_card_wrapper {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  /* grid-template-columns: repeat(3, 1fr); */
+  margin: 5%;
+}
+.membership_card {
+  box-shadow: 0 3px 8px 0 rgba(50,52,56,0.2);
+  padding: 32px;
+  border: 1px solid #c5c7cc;
+  border-radius: 3px;
+  background-color: #fff;
+}
+.card_wrap {
+  text-align: left;
+  cursor: pointer;
+}
+.card_header {
+  padding-bottom: 30%;
+  height: 70%;
+}
+.title {
+  font-size: 2em;
+  font-weight: 300;
+}
+.membership_tag {
+  vertical-align: middle;
+  margin-left: 8px;
+  background-color: #fee8e8;
+  color: #ff5757;
+  line-height: 24px;
+  font-weight: bold;
+  font-size: 1.2em;
+  border-radius: 3px;
+}
+.percent {
+  color: #f44336;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 41px;
+  display: inline-block;
+}
+.price_by_month {
+  margin-left: 12px;
+  color: #323438;
+  font-size: 28px;
+  font-weight: 800;
+  display: inline-block;
+}
+.card_content { margin-bottom: 24px;}
+.original_price, .discount_price {
+  font-size: 16px;
+  line-height: 25px;
+}
+.original_price {
+  color: #85878c;
+}
+.btn_membership {
+  background-color: #2E89FF;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  height: 48px;
+  padding: 15px 25px;
+  width: 100%;
+  display: inline-block;
+}
