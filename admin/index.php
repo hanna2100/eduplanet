@@ -1,3 +1,7 @@
+<?php
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,17 +29,9 @@
 <section>
   <div class="sec_top">
     <span><i class="fas fa-angle-left"></i></span>
-    <select id="top_select_year" dir="rtl">
-      <option>2018</option>
-      <option>2019</option>
-      <option>2020</option>
-    </select>
+    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting()"></select>
     <span>년 </span>
-    <select id="top_select_month" dir="rtl">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
+    <select id="top_select_month" dir="rtl"></select>
     <span>월 </span>
     <span><i class="fas fa-angle-right"></i></span>
   </div>

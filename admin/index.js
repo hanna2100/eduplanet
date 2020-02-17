@@ -28,6 +28,10 @@ $(function(){
     
     $('#navigation>ul>li.nav_menu>a').append('<span class="holder"></span>');
 
+    //대시보드 년월설정
+    topSelect_init_Setting();
+
+    // 대시보드 그래프설정
     salesGraph();
     membersGraph();
     reviewGraph();
@@ -244,3 +248,57 @@ function postGraph(){
         }
     });
 }
+
+function topSelect_init_Setting(){
+    var selectYear = document.getElementById('top_select_year');
+    var selectMonth = document.getElementById('top_select_month');
+    var $selectYear = $('#top_select_year');
+    var $selectMonth = $('#top_select_month');
+    var nowYear = new Date().getFullYear();
+    var nowMonth = new Date().getMonth();
+
+    var yearValue = selectYear.value;
+
+    //옵션 모두 지우기
+    while (selectYear.hasChildNodes()){
+        selectYear.removeChild(selectYear.firstChild);
+    }
+    while (selectMonth.hasChildNodes()){
+        selectMonth.removeChild(selectMonth.firstChild);
+    }
+
+    var yearOpt = "";
+    var monthOpt = "";
+
+    if(yearValue != '' && yearValue != nowYear){ //작년 이하 년도 선택일 경우(12월까지 출력)
+
+        for(var i = 2019; i<=nowYear ; i++){
+            yearOpt += '<option>'+i+'</option>';
+        }
+
+        for(var j= 1; j<=12; j++){
+            monthOpt += '<option>'+j+'</option>';
+        }
+        $selectYear.append(yearOpt);
+        $selectMonth.append(monthOpt);
+
+    }else{ //현재 년도 선택일 경우(현재 달까지만 출력)
+
+        var yearOpt = "";
+        for(var i = 2019; i<=nowYear ; i++){
+            yearOpt += '<option>'+i+'</option>';
+        }
+    
+        var monthOpt = "";
+        for(var j= 1; j<=nowMonth+1; j++){
+            monthOpt += '<option>'+j+'</option>';
+        }
+        
+        $selectYear.append(yearOpt);
+        $selectMonth.append(monthOpt);
+
+        $selectYear.val(nowYear).prop("selected", true);
+        $selectMonth.val(nowMonth+1).prop("selected", true);
+    }
+}
+
