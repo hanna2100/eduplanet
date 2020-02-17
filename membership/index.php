@@ -26,7 +26,7 @@
             <h2>프리미엄</h2>
             <div class="mid_sub_title">결제를 해야 학원 리뷰를 볼 수 있답니다!! 우하하</div>
               <div class="whole_card_wrapper">
-                    <button type="button" class="membership_card ">
+                    <button type="button" class="membership_card" onclick="location.href='./payment.php'">
                       <div class="card_wrap">
                         <div class="card_header">
                           <div class="membership_card_title">
@@ -52,7 +52,7 @@
                        </div>
                      </button>
 
-                    <button type="button" class="membership_card ">
+                    <button type="button" class="membership_card" onclick="location.href='./payment.php'">
                       <div class="card_wrap">
                         <div class="card_header">
                           <div class="membership_card_title">
@@ -78,7 +78,7 @@
                        </div>
                      </button>
 
-                    <button type="button" class="membership_card ">
+                    <button type="button" class="membership_card" onclick="location.href='./payment.php'">
                       <div class="card_wrap">
                         <div class="card_header">
                           <div class="membership_card_title">
@@ -104,8 +104,8 @@
                        </div>
                      </button>
 
-                    <button type="button" class="membership_card ">
-                      <div class="wrap">
+                    <button type="button" class="membership_card" onclick="location.href='./payment.php'">
+                      <div class="card_wrap">
                         <div class="card_header">
                           <div class="membership_card_title">
                             <span class="title">3개월</span><span class="membership_tag tag_red">BEST</span>
