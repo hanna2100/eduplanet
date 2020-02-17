@@ -13,11 +13,66 @@
 
 <body>
 
-    <div>
     <header>
         <?php include "../index_header_searchbar_in.php"; ?>
     </header>
-    </div>
+
+    <?php
+
+        $no = $_GET["no"];
+        $parent = $_GET["parent"];
+        $acd_name = $_GET["acd_name"];
+        // $si_name = $_GET["si_name"];
+        // $total_star = $_GET["total_star"];
+
+        include "../lib/db_connector.php";
+
+        // 지역
+        $sql_district = "select si_name from academy where acd_name = '$acd_name'";
+
+        $result_district = mysqli_query($conn, $sql_district);
+        $row_district = mysqli_fetch_array($result_district);
+
+        $si_name = $row_district["si_name"];
+
+        // 별점
+        $sql_star = "select total_star from review where parent = $parent";
+
+        $result_star = mysqli_query($conn, $sql_star);
+        $row_star = mysqli_fetch_array($result_star);
+
+        $total_star = $row_star["total_star"];
+
+        // 스토리 레코드 가져오기
+        $sql = "select * from acd_story where no=$no";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result);
+
+        $acd_name = $row["acd_name"];
+        $title = $row["title"];
+        $subtitle = $row["subtitle"];
+
+        $subject1 = $row["subject1"];
+        $subject2 = $row["subject2"];
+        $subject3 = $row["subject3"];
+
+        $content1 = $row["content1"];
+        $content2 = $row["content2"];
+        $content3 = $row["content3"];
+
+        $file_name = $row["file_name"];
+        $file_copy = $row["file_copy"];
+        $file_path = "/eduplanet/data/".$file_copy;
+
+        $hit = $row["hit"];
+
+        $new_hit = $hit + 1;
+
+        $sql = "update acd_story set hit=$new_hit where no=$no";
+        mysqli_query($conn, $sql);
+
+    ?>
+
 
     <div class="body_wrap">
 
@@ -35,12 +90,12 @@
                             <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
                         </div>
 
-                        <span id="academy_title_span">고양이사료개발학원</span>
-                        <span id="academy_category">미술</span>
+                        <span id="academy_title_span"><?=$acd_name?></span>
+                        <span id="academy_district"><?=$si_name?></span>
 
                         <div class="academy_small_star">
                             <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                            <span id="academt_review_star_score">3.2</span>
+                            <span id="academt_review_star_score"><?=$total_star?></span>
                         </div>
                     </a>
 
@@ -51,54 +106,6 @@
         </div>
 
         <!-- 스토리 ------------------------------------------------------------------------------------------>
-
-        <?php
-
-            $no = $_GET["no"];
-            // $si_name = $_GET["si_name"];
-            // $total_star = $_GET["total_star"];
-
-            include "../lib/db_connector.php";
-
-            // 지역
-            $sql_district = "select si_name from academy where acd_name = '$acd_name'";
-
-            $result_district = mysqli_query($conn, $sql_district);
-            $row_district = mysqli_fetch_array($result_district);
-
-            $si_name = $row_district["si_name"];
-
-            // 별점
-            $sql_star = "select total_star from review where parent = $parent";
-
-            $result_star = mysqli_query($conn, $sql_star);
-            $row_star = mysqli_fetch_array($result_star);
-
-            $total_star = $row_star["total_star"];
-
-            // 스토리 레코드 가져오기
-            $sql = "select * from acd_story where no=$no";
-            $result = mysqli_query($conn, $sql);
-            $row = mysqli_fetch_array($result);
-
-            $acd_name = $row["acd_name"];
-            $title = $row["title"];
-            $subtitle = $row["subtitle"];
-
-            // $content = $row["content"];
-
-            $file_name = $row["file_name"];
-            $file_copy = $row["file_copy"];
-            $hit = $row["hit"];
-
-            $new_hit = $hit + 1;
-
-            $sql = "update acd_story set hit=$new_hit where no=$no";
-            mysqli_query($conn, $sql);
-
-
-
-        ?>
 
         <div class="story_academy_content_wrap">
             <div class="story_academy_content">
@@ -113,12 +120,12 @@
                     </div>
 
                     <div class="story_content_image">
-                        <img src="/eduplanet/test_img/story_content_image.png" alt="story_content_image">
+                        <img src=<?=$file_path?> alt="story_content_image">
                     </div>
 
                     <div class="story_subject">
-                        <div class="subtitle"><?=$story_post_subtitle_2?></div>
-                        <div class="description"><?=$story_post_description_2?></div>
+                        <div class="subtitle"><?=$subject1?></div>
+                        <div class="description"><?=$content1?></div>
                     </div>
 
                     <!-- <div class="story_subject">
@@ -127,12 +134,12 @@
                     </div> -->
 
                     <?php
-                        if (isset($story_post_subtitle_2) && isset($story_post_description_2)) {
+                        if (isset($subject2) && isset($content2)) {
 
                             echo "
                             <div class='story_subject'>
-                                <div class='subtitle'>$story_post_subtitle_2</div>
-                                <div class='description'>$story_post_description_2</div>
+                                <div class='subtitle'>$subject2</div>
+                                <div class='description'>$content2</div>
                             </div>
                             ";
                         }
@@ -143,12 +150,12 @@
                     </div> -->
 
                     <?php
-                         if (isset($story_post_subtitle_3) && isset($story_post_description_3)) {
+                         if (isset($subject3) && isset($content3)) {
 
                             echo "
                             <div class='story_subject'>
-                                <div class='subtitle'>$story_post_subtitle_3</div>
-                                <div class='description'>$story_post_description_3</div>
+                                <div class='subtitle'>$subject3</div>
+                                <div class='description'>$content3</div>
                             </div>
                             ";
 

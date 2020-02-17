@@ -1,6 +1,9 @@
+<meta charset="UTF-8">
+
 <?php
 
 // 테이블 수정 후 추가예정
+// 세션값으로 학원id를 받아서 학원명, parent 가져오기
 
     // 시간 셋팅하기
 	date_default_timezone_set('Asia/Seoul');
@@ -8,18 +11,23 @@
     include "../lib/db_connector.php";
 
     $title = $_POST["story_post_title"];
-    $content = $_POST["story_post_content"];
+    $subtitle = $_POST["story_post_content"];
 
-    $subtitle_1 = $_POST["story_post_subtitle_1"];
-    $description_1 = $_POST["story_post_description_1"];
+    $subject1 = $_POST["story_post_subtitle_1"];
+    $subject2= $_POST["story_post_subtitle_2"];
+    $subject3 = $_POST["story_post_subtitle_3"];
+
+    $content1 = $_POST["story_post_description_1"];
+    $content2 = $_POST["story_post_description_2"];
+    $content3 = $_POST["story_post_description_3"];
 
     $regist_day = date("Y-m-d (H:i)");
-    $upload_dir = '/eduplanet/data/';
+    $upload_dir = '../data/';
 
-    $upfile_name = $_FILES["story_post_img"]["name"];
-    $upfile_tmp_name = $_FILES["story_post_img"]["tmp_name"];
-    $upfile_size = $_FILES["story_post_img"]["size"];
-    $upfile_error = $_FILES["story_post_img"]["error"];
+    $upfile_name = $_FILES["upfile"]["name"];
+    $upfile_tmp_name = $_FILES["upfile"]["tmp_name"];
+    $upfile_size = $_FILES["upfile"]["size"];
+    $upfile_error = $_FILES["upfile"]["error"];
 
     if ($upfile_name && !$upfile_error) {
 
@@ -28,7 +36,6 @@
         $file_ext = $file[1];
 
         $new_file_name = date("Y_m_d_H_i_s");
-        // $new_file_name = $new_file_name;
         $copied_file_name = $new_file_name.".".$file_ext;
         $uploaded_file = $upload_dir.$copied_file_name;
 
@@ -61,41 +68,11 @@
         $upfile_name = "";
         $copied_file_name = "";
     }
-
-
-    // if-else 로 sql 쿼리문 구분하기
-    if (isset($_POST["story_post_subtitle_2"]) && isset($_POST["story_post_description_2"])) {
-        
-        if (isset($_POST["story_post_subtitle_3"]) && isset($_POST["story_post_description_3"])) {
-
-            // 주제1,2,3 내용1,2,3 insert
-            $subtitle_3 = $_POST["story_post_subtitle_3"];
-            $description_3 = $_POST["story_post_description_3"];
-
-
-
-
-
-        } else {
-
-            // 주제1,2 내용1,2 insert
-            $subtitle_2 = $_POST["story_post_subtitle_2"];
-            $description_2 = $_POST["story_post_description_2"];
-
-
-
-
-        }
-        
     
-    } else {
 
-        // 주제1, 내용1 insert
-
-    }
-
-    // $sql = "insert into acd_story(id, pass, name, birth, email, phone, addnum, address, animal, regist_day, level, point, email_check, sms_check)";
-    // $sql .= "values('$id', '$pass', '$name', '$birth', '$email', '$phone', '$addnum', '$address', '$animal', '$regist_day', 9, 0, '$email_check', '$sms_check')";
+    // 세션값 받아오기 전에 테스트로 parent 넣음
+    $sql = "insert into acd_story(parent, acd_name, title, subtitle, subject1, content1, subject2, content2, subject3, content3, hit, regist_day, file_name, file_copy)";
+    $sql .= "values('2', '냥냥학원', '$title', '$subtitle', '$subject1', '$content1', '$subject2', '$content2', '$subject3', '$content3', 0, '$regist_day', '$upfile_name', '$copied_file_name')";
 
     mysqli_query($conn, $sql);
     mysqli_close($conn);

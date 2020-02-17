@@ -61,7 +61,7 @@
 
         <!-- 스토리 작성 ------------------------------------------------------------------------------------------>
 
-        <form name="story_post_form" action="/eduplanet/acd_story/post_insert.php" method="post">
+        <form name="story_post_form" action="/eduplanet/acd_story/post_insert.php" method="post" enctype="multipart/form-data">
 
             <div class="story_academy_content_wrap">
                 <div class="story_academy_content">
@@ -91,7 +91,7 @@
 
                                 <label id="story_post_img_label" for="story_post_img">사진 (필수)</label>
                                 <span id="story_post_img_check" class="story_post_input_check"></span>
-                                <input type="file" id="story_post_img" name="story_post_img" onchange="checkInputImg();">
+                                <input type="file" id="upfile" name="upfile" onchange="checkInputImg();">
 
                             </div>
 

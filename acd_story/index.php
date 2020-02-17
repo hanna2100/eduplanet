@@ -155,7 +155,7 @@
                         <div class="story_list_column">
 
                             <!-- <a href="/eduplanet/acd_story/view.php?no=<//?=$no?>&si_name=<//?=$si_name?>&total_star=<//?$total_star?>"> -->
-                            <a href="/eduplanet/acd_story/view.php?no=<?=$no?>">
+                            <a href="/eduplanet/acd_story/view.php?no=<?=$no?>&parent=<?=$parent?>&acd_name=<?=$acd_name?>">
                                 <div class="story_list_column_img">
                                     <img src="/eduplanet/data/<?= $file_copy ?>" alt="story_list_column_img">
                                 </div>
