@@ -118,8 +118,12 @@ function create_table($conn, $table_name){
                     `parent` INT NOT NULL,
                     `acd_name` VARCHAR(20) NOT NULL,
                     `title` VARCHAR(20) NOT NULL,
-                    `subtitle` VARCHAR(20) NOT NULL,
-                    `content` VARCHAR(500) NOT NULL,
+                    `subtitle1` VARCHAR(20) NOT NULL,
+                    `content1` VARCHAR(500) NOT NULL,
+                    `subtitle2` VARCHAR(20),
+                    `content2` VARCHAR(500),
+                    `subtitle3` VARCHAR(20),
+                    `content3` VARCHAR(500),
                     `hit` INT DEFAULT 0,
                     `regist_day` DATE NOT NULL,
                     `file_name` VARCHAR(50) NOT NULL,
@@ -133,16 +137,17 @@ function create_table($conn, $table_name){
               $sql = "CREATE TABLE `product` (
                       `no` INT NOT NULL AUTO_INCREMENT,
                       `prdct_name` VARCHAR(30) NOT NULL,
+                      `month`INT NOT NULL,
                       `price` INT UNSIGNED NOT NULL,
-                      PRIMARY KEY(`no`),
-                      UNIQUE KEY(`prdct_name`)
+                      `discount` INT DEFAULT 0,
+                      PRIMARY KEY(`no`)
                     );";
             break;
             case 'gm_order' : //일반회원 주문테이블(기본키,회원넘버,제품명,가격,결제방식,상태,결제일)
               $sql = "CREATE TABLE `gm_order` (
                       `no` INT NOT NULL AUTO_INCREMENT,
                       `gm_no` INT NOT NULL,
-                      `prdct_name` VARCHAR(30) NOT NULL,
+                      `prdct_name_month` VARCHAR(30) NOT NULL,
 	                    `price` INT UNSIGNED NOT NULL,
                       `pay_method` VARCHAR(20) NOT NULL,
                       `status` CHAR(10) NOT NULL,
@@ -154,7 +159,7 @@ function create_table($conn, $table_name){
               $sql = "CREATE TABLE `am_order` (
                       `no` INT NOT NULL AUTO_INCREMENT,
                       `am_no` INT NOT NULL,
-                      `prdct_name` VARCHAR(30) NOT NULL,
+                      `prdct_name_month` VARCHAR(30) NOT NULL,
 	                    `price` INT UNSIGNED NOT NULL,
                       `pay_method` VARCHAR(20) NOT NULL,
                       `status` CHAR(10) NOT NULL,
