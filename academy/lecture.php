@@ -20,7 +20,7 @@
     <title></title>
   </head>
   <body>
-    <header>asdfsadfsadfasfsd
+    <header>
       <?php include "../index_header.php"; ?>
       <?php include "../academy_header_soyoung.php"; ?>
     </header>
