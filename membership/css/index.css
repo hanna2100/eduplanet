@@ -73,7 +73,7 @@ h2 {
   padding-bottom: 30%;
   height: 70%;
 }
-.title {
+.month {
   font-size: 2em;
   font-weight: 300;
 }
@@ -87,7 +87,7 @@ h2 {
   font-size: 1.2em;
   border-radius: 3px;
 }
-.percent {
+.discount {
   color: #f44336;
   font-size: 28px;
   font-weight: bold;

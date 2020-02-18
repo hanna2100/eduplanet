@@ -1,6 +1,21 @@
+var formsForUpdate = new Array();
+
 $(function(){
     topSelect_init_Setting();
     g_membersGraph();
+    listItemPicker();
+
+    $('.date_field').datepicker({
+        dateFormat: 'yy-mm-dd',
+        minDate: -0,
+        maxDate: "+1Y",
+        beforeShow: function() {
+            setTimeout(function(){
+                $('.ui-datepicker').css('z-index', 99999999999999);
+            }, 0);
+        }
+    });
+    
 });
 
 
@@ -73,3 +88,59 @@ function g_membersGraph(){
         }
     });
 }
+
+function listItemPicker(){
+    $('.list_row').click(function(){
+        
+        $(this).css('background-color' , '#8ec4f0a9');
+        $(this).children('form').children('.col4').children('input').prop('disabled',false);
+        $(this).children('form').children('.col5').children('input').prop('disabled',false);
+        $(this).children('form').children('.col7').children('input').prop('disabled',false);
+        $(this).children('form').children('.col8').children('input').prop('disabled',false);
+
+
+        formsForUpdate.push($(this).children('form'));
+    });
+}
+
+function submitUpdate(){
+    var serialize ='';
+
+    //action 경로 설정 및 서브밋
+    for(var i in formsForUpdate){
+        var no = formsForUpdate[i].children('.col2').text();
+        formsForUpdate[i].attr("action", "./lib/gm_members_update.php?no="+no+"&page="+page);
+        serialize += formsForUpdate[i].serialize() + "$$";
+    }
+
+    serialize = serialize.slice(0,-2);
+    console.log(serialize);
+
+    $.ajax({
+		type: "post",
+		data: serialize,
+		url : "./lib/gm_members_update.php?page="+page,
+		success : function(data){
+			alert("전송성공");
+		},
+		error : function(data){
+			alert("시스템에러");
+		}
+	});
+}
+
+function submitDelete(){
+    //action 경로 설정 및 서브밋
+    for(var i in formsForUpdate){
+        var no = formsForUpdate[i].children('.col2').text();
+        formsForUpdate[i].attr("action", "./lib/gm_members_delete.php?no="+no+"&page="+page);
+        formsForUpdate[i].submit();
+    }
+}
+
+function limitMaxLength(e){
+    if(e.value.length> e.maxLength){
+        e.value = e.value.slice(0, e.maxLength);
+    }
+}
+

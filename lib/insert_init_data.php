@@ -1,4 +1,5 @@
 <?php
+include_once 'init_data.php';
 
 function insert_init_data($conn, $table_name){
   $flag="NO";
@@ -14,36 +15,10 @@ function insert_init_data($conn, $table_name){
   if($flag=="NO"){
     switch($table_name){
           case 'g_members' :
-            $sql = "INSERT INTO `g_members` VALUES (1,'test','1234', 'hanna0497@naver.com', '01011112222', '1991','수학', '2020-03-12','2019-01-02'),
-                                                  (2,'test2','1234', 'hanna0497@naver.com', '01011112222', '1990','국어', '2020-03-12','2019-02-12'),
-                                                  (3,'test3','1234', 'hanna0497@naver.com', '01011112222', '1996','수학', '2020-03-12','2019-02-14'),
-                                                  (4,'test4','1234', 'hanna0497@naver.com', '01011112222', '1998','영어', '2020-03-12','2019-03-02'),
-                                                  (5,'test5','1234', 'hanna0497@naver.com', '01011112222', '1994','미술', '2020-03-12', '2019-03-22'),
-                                                  (6,'test6','1234', 'hanna0497@naver.com', '01011112222', '1990','미술', '2020-03-12', '2019-04-02'),
-                                                  (7,'test7','1234', 'hanna0497@naver.com', '01011112222', '1994','미술', null, '2019-04-12'),
-                                                  (8,'test8','1234', 'hanna0497@naver.com', '01011112222', '1992','영어', null, '2019-05-02'),
-                                                  (9,'test9','1234', 'hanna0497@naver.com', '01011112222', '2001','영어', null, '2019-05-12'),
-                                                  (10,'test10','1234', 'hanna0497@naver.com', '01011112222', '2005','영어', null, '2019-05-22'),
-                                                  (11,'test11','1234', 'hanna0497@naver.com', '01011112222', '2009','영어', null, '2019-06-02'),
-                                                  (12,'test12','1234', 'hanna0497@naver.com', '01011112222', '2010','영어', null, '2019-06-12'),
-                                                  (13,'test13','1234', 'hanna0497@naver.com', '01011112222', '2003','영어', null, '2019-06-26');";
+            $sql = g_members_init_data();
             break;
           case 'a_members' :
-            $sql = "INSERT INTO `a_members` VALUES (1, 1, 'test','1234','hanna0497@naver.com','마이피아노교습소', '성미영', '2019_05_29_16_19_19_0.gif', '2020-03-12', '2020-01-02'),
-                                                    (2, 2, 'test2','1234','hanna0497@naver.com','연필의작업실미술교습소', '어혜영', '2019_05_29_16_19_19_1.gif', '2020-03-12', '2019-01-22'),
-                                                    (3, 3, 'test3','1234','hanna0497@naver.com','조이스영어교습소', '신중옥', '2019_05_29_16_19_19_2.gif', '2020-03-12', '2019-01-29'),
-                                                    (4, 4, 'test4','1234','hanna0497@naver.com','다원셈수학교습소', '강은정', '2019_05_29_16_19_19_3.gif', '2020-03-12', '2019-02-02'),
-                                                    (5, 0, 'test5','1234','hanna0497@naver.com','연정서예교습소', '성덕순', '2019_05_29_16_19_19_4.gif', null, '2019-02-22'),
-                                                    (6, 0, 'test6','1234','hanna0497@naver.com','일리노이학원', '(주)일리노이학원', '2019_05_29_16_19_19_5.gif', null, '2019-03-02'),
-                                                    (7, 0, 'test7','1234','hanna0497@naver.com','진음피아노학원', '최규선', '2019_05_29_16_19_19_6.gif', null, '2019-03-12'),
-                                                    (8, 0, 'test8','1234','hanna0497@naver.com','청명멘토르학원', '문영숙', '2019_05_29_16_19_19_7.gif', null, '2019-04-02'),
-                                                    (9, 0, 'test9','1234','hanna0497@naver.com','정수천컴퓨터학원', '정영환', '2019_05_29_16_19_19_8.gif', null, '2019-04-11'),
-                                                    (10, 0, 'test10','1234','hanna0497@naver.com','전통주연구개발학원', '이상균', '2019_05_29_16_19_19_9.gif', null, '2019-04-21'),
-                                                    (11, 0, 'test11','1234','hanna0497@naver.com','디자인포스미술학원', '이웅철', '2019_05_29_16_19_19_10.gif', null, '2019-05-02'),
-                                                    (12, 0, 'test12','1234','hanna0497@naver.com','스카이학원', '홍수연', '2019_05_29_16_19_19_11.gif', null, '2019-05-04'),
-                                                    (13, 0, 'test13','1234','hanna0497@naver.com','장은영음악학원', '장은영', '2019_05_29_16_19_19_12.gif', null, '2019-06-02'),
-                                                    (14, 0, 'test14','1234','hanna0497@naver.com','박피아노학원', '박현', '2019_05_29_16_19_19_13.gif', null, '2019-06-12'),
-                                                    (15, 0, 'test15','1234','hanna0497@naver.com','늘푸른입시종합학원', '박승진', '2019_05_29_16_19_19_14.gif', null, '2019-06-22');";
+            $sql = a_members_init_data();
             break;
           case 'academy' :
             $sql = academy_init_data("가평군","가평읍");
@@ -129,7 +104,12 @@ function insert_init_data($conn, $table_name){
                                               (3, '2019-04-12', 3, 5, 8),
                                               (4, '2019-05-12', 3, 2, 6);";
           break; 
-        
+        case 'follow' :
+          $sql = "INSERT INTO `follow` VALUES (1, 1, 1),
+                                              (2, 1, 2),
+                                              (3, 1, 3),
+                                              (4, 1, 4);";
+          break; 
       default:
         echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
         break;
@@ -144,39 +124,5 @@ function insert_init_data($conn, $table_name){
 
 }//end of function
 
-//가평읍의 학원 데이터 31개를 테스트 데이터로 DB에 저장
-function academy_init_data($si_param, $dong_param){
-  $sql ="INSERT INTO `academy` VALUES "; //리턴할 sql문장
-
-  set_api_index(1);
-  set_api_scale(31);
-
-  $acd_array = get_academy_from_api($si_param, $dong_param);
-
-  
-  for($i=0; $i<sizeof($acd_array); $i++){
-    $si_name = $acd_array[$i]->si_name;
-    $dong_name = $acd_array[$i]->dong_name;
-    $sector = $acd_array[$i]->sector;
-    $acd_name = $acd_array[$i]->acd_name;
-    $rprsn = $acd_array[$i]->rprsn;
-    $class = $acd_array[$i]->class;
-    $tel = $acd_array[$i]->tel;
-    $address = $acd_array[$i]->address;
-    $latitude = $acd_array[$i]->latitude;
-    $longitude = $acd_array[$i]->longitude;
-
-    $no = $i+1;
-
-    $sql .= "($no, '$si_name','$dong_name','$sector','$acd_name','$rprsn','$class','$tel','$address', '$latitude', '$longitude', '', '', '')";
-
-    if($i != sizeof($acd_array)-1){
-      $sql .=", ";
-    }
-  }
-  $sql .= ";";
-
-  return $sql;
-}
 
 ?>

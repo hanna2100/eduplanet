@@ -18,6 +18,10 @@
   <!-- 차트 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <title>에듀플래닛 관리자페이지 - 회원관리</title>
+  <!-- Date 라이브러리 -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
 <main>
@@ -27,6 +31,10 @@
 
   $page = isset($_GET["page"])? $_GET["page"]: 1 ;
 ?>
+<!-- 페이지 변수를 자바스크립트로 넘겨줌 -->
+<script>
+  var page = "<?=$page?>";
+</script>
 <section>
   <div class="sec_top">
     <span><i class="fas fa-angle-left"></i></span>
@@ -36,6 +44,8 @@
     <span>월 </span>
     <span><i class="fas fa-angle-right"></i></span>
   </div>
+  <!--end of 년 월 선택바 -->
+
   <div class="sec_content">
     <div id="dash_topline">
       <div>
@@ -54,18 +64,38 @@
         <span class="caret down"><i class="fas fa-caret-down"></i></span>
       </div>
     </div>
+    <!--end of 상단 회원수 변화-->
+
     <div id="g_members_totalGraph_wrap">
       <div id="g_members_totalGraph_cell1">
         <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;General member Graph<span>단위: 명</span></h4>
         <canvas id="g_members_totalGraph"></canvas>
+        <div class="btn_hide">
+          <button>숨기기</button>
+        </div>
       </div>
     </div>
+    <!-- end of 회원수 변화 그래프 -->
+
     <div id="g_members_list_wrap">
       <div id="g_members_list">
         <h4>
           <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;General member Management
-          <form><fieldset><input type="search" /><button type="submit"><i class="fa fa-search"></i></button></fieldset></form>
+          <div class='search-box'>
+            <form class='search-form'>
+              <input class='form-control' placeholder='검색어를 입력하세요' type='text'>
+              <button class='btn btn-link search-btn'>
+              <i class="fas fa-search"></i>
+              </button>
+            </form>
+          </div>
         </h4>
+        <!-- end of 검색창 -->
+
+        <div class="list_edit_delete_wrap">
+          <button onclick="submitUpdate()">수정</button>
+          <button onclick="submitDelete()">삭제</button>
+        </div>
         <ul id="member_list">
 				<li>
 					<span class="col1">No</span>
@@ -111,16 +141,16 @@
           $expiry_day       = $row["expiry_day"];
           $regist_day  = $row["regist_day"];
 ?>
-        <li>
-        <form method="post" action="admin_member_update.php?num=<?=$num?>">
+        <li class="list_row">
+        <form method="post" action="./lib/gm_members_update.php?no=<?=$no?>">
           <span class="col1"><?=$number?></span>
-          <span class="col2"><?=$no?></a></span>
+          <span class="col2"><?=$no?></span>
           <span class="col3"><?=$id?></span>
-          <span class="col4"><?=$email?></span>
-          <span class="col5"><?=$phone?></span>
+          <span class="col4"><input type="text" name="email<?=$i?>" value="<?=$email?>" disabled maxlength="80" oninput="limitMaxLength(this)"/></span>
+          <span class="col5"><input type="number" name="phone" value="<?=$phone?>" disabled maxlength="12" oninput="limitMaxLength(this)"/></span>
           <span class="col6"><?=$age?></span>
-          <span class="col7"><?=$intres?></span>
-          <span class="col8"><?=$expiry_day?></span>
+          <span class="col7"><input type="text" name="intres" value="<?=$intres?>" disabled maxlength="10" oninput="limitMaxLength(this)"/></span>
+          <span class="col8"><input class="date_field" type="text" name="expiry_day" value="<?=$expiry_day?>" disabled></span>
           <span class="col9"><?=$regist_day?></span>
         </form>
         </li>	
@@ -130,8 +160,75 @@
       }
       mysqli_close($conn);
 ?>
-	    </ul>
+      </ul>
+      <!-- end of ul 회원리스트 -->
 
+      <div class="page_num_wrap">
+        <div class="page_num">
+          <ul class="page_num_ul">
+<?php
+            $page_scale = 5; // 페이지 쪽수 표시 량 (5 페이지씩 표기)
+            $pageGroup = ceil($page/$page_scale); // 페이지 그룹번호(페이지 5개가 1그룹)
+
+            $last_page = $pageGroup * $page_scale; //그룹번호 안에서의 마지막 페이지 숫자
+            //그룹번호의 마지막 페이지는 전체 페이지보다 클 수 없음
+            if($total_page < $page_scale){
+              $last_page = $total_page;
+            }else if($last_page > $total_page){
+              $last_page = $total_page;
+            }
+
+            //그룹번호의 첫번째 페이지 숫자
+            $first_page = $last_page - ($page_scale-1);
+            //그룹번호의 첫번째 페이지는 1페이지보다 작을 수 없음
+            if($first_page < 1){
+              $first_page = 1;
+            }else if($last_page == $total_page){ //마지막 그룹번호일때 첫번째 페이지값 결정
+              $first_page = $total_page - ($total_page % $page_scale)+1;
+            }
+            
+            $next = $last_page + 1;// > 버튼 누를때 나올 페이지
+            $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
+
+            // 첫번째 페이지일 때 앵커 비활성화
+            if ($first_page == 1) {
+              if($page!=1)
+                echo "<li><a href='/eduplanet/admin/gm_members.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+              else
+                echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+              
+              echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
+            } else {
+              echo "<li><a href='/eduplanet/admin/gm_members.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+              echo "<li><a href='/eduplanet/admin/gm_members.php?page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
+            }
+
+            //페이지 번호 매기기
+            for($i= $first_page ; $i <= $last_page ; $i++){
+              if ($page == $i) {
+                echo "<li><span class='page_num_set'><b style='color:#2E89FF'> $i </b></span></li>";
+              } else {
+                echo "<li><a href='/eduplanet/admin/gm_members.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
+              }
+            }
+
+            // 마지막 페이지일 때 앵커 비활성화
+            if ($last_page == $total_page) {
+              echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";   
+              
+              if($page !=$total_page)
+                echo "<li><a href='/eduplanet/admin/gm_members.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+              else
+                echo "<li><a><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+              
+            } else {
+                echo "<li><a href='/eduplanet/admin/gm_members.php?page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
+                echo "<li><a href='/eduplanet/admin/gm_members.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+            }
+?> 
+          </ul>
+        </div>
+      </div>
       </div>
     </div>
   </div>

@@ -24,7 +24,7 @@ function create_table($conn, $table_name){
                     `phone` CHAR(12) NOT NULL,
                     `age` int NOT NULL,
                     `intres` CHAR(10) NOT NULL,
-                    `expiry_day` DATE DEFAULT NULL,
+                    `expiry_day` DATE DEFAULT '0000-00-00',
                     `regist_day` DATE NOT NULL,
                     PRIMARY KEY (`no`),
                     UNIQUE KEY(`id`)
@@ -40,7 +40,7 @@ function create_table($conn, $table_name){
                     `acd_name` VARCHAR(40) NOT NULL,
                     `rprsn` VARCHAR(20) NOT NULL,
                     `file_copy` VARCHAR(50) NOT NULL,
-                    `expiry_day` DATE DEFAULT NULL,
+                    `expiry_day` DATE DEFAULT '0000-00-00',
                     `regist_day` DATE NOT NULL,
                     PRIMARY KEY (`no`),
                     UNIQUE KEY(`id`)
@@ -175,6 +175,14 @@ function create_table($conn, $table_name){
 	                    `gm_sales` INT UNSIGNED DEFAULT 0,
 	                    `am_sales` INT UNSIGNED DEFAULT 0,
                       `total_sales` INT UNSIGNED NOT NULL,
+                      PRIMARY KEY(`no`)
+                    );";
+            break;
+            case 'follow' : //팔로우(찜)테이블
+              $sql = "CREATE TABLE `follow` (
+                      `no` INT NOT NULL AUTO_INCREMENT,
+                      `user_no` INT NOT NULL,
+	                    `acd_no` INT NOT NULL,
                       PRIMARY KEY(`no`)
                     );";
             break;

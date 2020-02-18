@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700,900");
+
 #dash_topline{
     display: flex;
     margin-bottom: 20px;
@@ -58,7 +60,7 @@
 /* 메인 그래프 */
 #g_members_totalGraph_wrap{
     width: 960px;
-    height: 415px;
+    height: 440px;
     border-radius: 10px;
     -webkit-box-shadow: 0px 1px 17px -6px #cfcfcf; 
     box-shadow: 0px 1px 17px -6px #cfcfcf;
@@ -67,7 +69,6 @@
 
 #g_members_totalGraph_cell1{
     width: 880px;
-    height: 360px;
     padding: 25px 40px;
 }
 
@@ -145,9 +146,27 @@
     width: 100%;
     border-bottom: 1px solid #ececec;
     padding-bottom: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
+/* 게시판 */
+
+.list_edit_delete_wrap, .btn_hide{
+    text-align: right;
+}
+
+.list_edit_delete_wrap button, .btn_hide button{
+    padding: 3px 15px;
+    border-radius: 5px;
+    color: #1d1d1d;
+    border: 1px solid #ececec;
+    cursor: pointer;
+}
+
+.list_edit_delete_wrap button:hover,  .btn_hide button:hover{
+    background-color: #4da3ee;
+    color: #fff;
+}
 
 #member_list {
     margin: 10px 0 30px;
@@ -187,13 +206,21 @@
 }
 
 #member_list input {
-    width: 40px;
-    height: 20px;
     text-align: center;
 }
 
 #member_list button {
     padding: 5px;
+}
+
+.list_row:hover{
+    background-color: #e9e9e9a9;
+    cursor: pointer;
+}
+
+.list_row > form > span > input:disabled{
+    background-color:transparent;
+    border: none;
 }
 
 .col1 {
@@ -206,25 +233,30 @@
 .col3 {
     width: 100px;
 }
-.col4 {
-    width: 200px;
+.col4{
+    width: 190px;
 }
-.col5 {
-    width: 80px;
+.col4 input, .col5 input, .col7 input, .col8 input  {
+    width: 90%;
+}
+.col5{
+    width: 90px;
 }
 .col6 {
     width: 80px;
 }
-.col7 {
+.col7{
     width: 90px;
 }
-.col8 {
+.col8  {
     width: 90px;
 }
 .col9 {
     padding-right: 12px;
     width: 90px;
 }
+
+
 
 #board_list {
     margin: 10px 0 50px;
@@ -291,74 +323,129 @@
     text-align: center;
 }
 
+#g_members_list > h4 >form{
+    display: inline-block;
+    position: relative;
+    top: 10px;
+}
+
 /* 검색창 */
-fieldset {
-  position: relative;
+
+.search-box {
   display: inline-block;
-  padding: 0 0 0 40px;
+  margin-left: 390px;
+  position: absolute;
+  width: 160px;
+  border-radius: 3px;
+  padding: 4px 55px 4px 15px;
+  position: relative;
   background: #fff;
+  border: 1px solid #ececec;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+.search-box.hovered, .search-box:hover, .search-box:active {
+  border: 1px solid #dddddd;
+}
+.search-box input[type=text] {
   border: none;
-  border-radius: 5px;
-}
-
-input,
-button {
-  position: relative;
-  width: 200px;
-  height: 50px;
-  padding: 0;
+  box-shadow: none;
   display: inline-block;
-  float: left;
+  padding: 0;
+  background: transparent;
 }
-
-input {
-  color: #666;
-  z-index: 2;
-  border: 0 none;
+.search-box input[type=text]:hover, .search-box input[type=text]:focus, .search-box input[type=text]:active {
+  box-shadow: none;
 }
-input:focus {
-  outline: 0 none;
+.search-box .search-btn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    color: #aaa;
+    border-radius: 3px;
+    font-size: 15px;
+    border: 1px solid #ececec;
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
 }
-input:focus + button {
-  -webkit-transform: translate(0, 0);
-      -ms-transform: translate(0, 0);
-          transform: translate(0, 0);
-  -webkit-transition-duration: 0.3s;
-          transition-duration: 0.3s;
-}
-input:focus + button .fa {
-  -webkit-transform: translate(0px, 0);
-      -ms-transform: translate(0px, 0);
-          transform: translate(0px, 0);
-  -webkit-transition-duration: 0.3s;
-          transition-duration: 0.3s;
+.search-box .search-btn:hover {
   color: #fff;
+  background-color: #2E89FF;
 }
 
-button {
-  z-index: 1;
-  width: 50px;
-  border: 0 none;
-  background: #ceb980;
-  cursor: pointer;
-  border-radius: 0 5px 5px 0;  
-  -webkit-transform: translate(-50px, 0);
-      -ms-transform: translate(-50px, 0);
-          transform: translate(-50px, 0);
-  -webkit-transition-duration: 0.3s;
-          transition-duration: 0.3s;
+/* 게시판 하단 페이징 */
+
+.page_num_wrap {
+    width: 100%;
+    height: 90px;
+    /* border: 1px solid black; */
+    margin: 0 auto;
 }
 
-.fa-search {
-  font-size: 1.4rem;
-  color: #29abe2;
-  z-index: 3;
-  top: 25%;
-  -webkit-transform: translate(-190px, 0);
-      -ms-transform: translate(-190px, 0);
-          transform: translate(-190px, 0);
-  -webkit-transition-duration: 0.3s;
-          transition-duration: 0.3s;
-  -webkit-transition: all 0.1s ease-in-out;
-          transition: all 0.1s ease-in-out;
+.page_num {
+    display: block;
+    margin: 0 auto;
+    margin-top: 25px;
+    /* width: 306px; */
+    width: fit-content;
+    height: 35px;
+    border: 1px solid rgb(185, 185, 185);
+    /* border-top: 1px solid lightgray; */
+    /* border-bottom: 1px solid lightgray; */
+    /* border-left: 1px solid lightgray; */
+    border-radius: 5px;
+}
+
+.page_num_ul {
+    list-style: none;
+}
+
+.page_num_ul li {
+    display: inline-block;
+}
+
+.page_num_direction {
+    float: left;
+    display: block;
+    width: 34px;
+    height: 35px;
+    border-right: 1px solid rgb(185, 185, 185);
+    text-align: center;
+    padding-top: 7px;
+    box-sizing: border-box;
+    color: lightgray;
+}
+
+.page_num_direction_last {
+    float: left;
+    display: block;
+    width: 34px;
+    height: 35px;
+    /* border: 1px solid black; */
+    text-align: center;
+    padding-top: 7px;
+    box-sizing: border-box;
+    color: lightgray;
+}
+
+.page_num_set {
+    float: left;
+    display: block;
+    width: 34px;
+    height: 35px;
+    /* border: 1px solid black; */
+    border-right: 1px solid rgb(185, 185, 185);
+    text-align: center;
+    padding-top: 7px;
+    box-sizing: border-box;
+    color: #333;
+}
+
+.page_num_set:hover {
+    background-color: rgba(46, 137, 255, 0.514);
+    color: white;
 }
