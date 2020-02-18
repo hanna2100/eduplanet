@@ -27,6 +27,10 @@
 
   $page = isset($_GET["page"])? $_GET["page"]: 1 ;
 ?>
+<!-- 페이지 변수를 자바스크립트로 넘겨줌 -->
+<script>
+  var page = "<?=$page?>";
+</script>
 <section>
   <div class="sec_top">
     <span><i class="fas fa-angle-left"></i></span>
@@ -136,13 +140,13 @@
         <li class="list_row">
         <form method="post" action="./lib/gm_members_update.php?no=<?=$no?>">
           <span class="col1"><?=$number?></span>
-          <span class="col2"><?=$no?></a></span>
+          <span class="col2"><?=$no?></span>
           <span class="col3"><?=$id?></span>
-          <span class="col4"><input type="text" value="<?=$email?>" disabled></span>
-          <span class="col5"><input type="text" value="<?=$phone?>" disabled></span>
+          <span class="col4"><input type="text" name="email" value="<?=$email?>" disabled></span>
+          <span class="col5"><input type="text" name="phone" value="<?=$phone?>" disabled></span>
           <span class="col6"><?=$age?></span>
-          <span class="col7"><input type="text" value="<?=$intres?>" disabled></span>
-          <span class="col8"><input type="text" value="<?=$expiry_day?>" disabled></span>
+          <span class="col7"><input type="text" name="intres" value="<?=$intres?>" disabled></span>
+          <span class="col8"><input type="text" name="expiry_day" value="<?=$expiry_day?>" disabled></span>
           <span class="col9"><?=$regist_day?></span>
         </form>
         </li>	

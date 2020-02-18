@@ -1,32 +1,39 @@
 <?php
-    session_start();
-    if (isset($_SESSION["userlevel"])) $userlevel = $_SESSION["userlevel"];
-    else $userlevel = "";
+    // session_start();
+    // $is_admin = isset($_SESSION["admin"])? $_SESSION["admin"]: 0 ;
 
-    if ( $userlevel != 1 )
-    {
-        echo("
-            <script>
-            alert('[회원관리] 관리자 전용 페이지 입니다.');
-            history.go(-1)
-            </script>
-        ");
-        exit;
+    // if ( $is_admin != 1 ){
+    //     echo("
+    //         <script>
+    //         alert('관리자 전용 페이지 입니다.');
+    //         history.go(-1)
+    //         </script>
+    //     ");
+    //     exit;
+    // }
+
+    $no   = $_GET["no"];
+    $page   = $_GET["page"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $intres = $_POST["intres"];
+    $expiry_day = $_POST["expiry_day"];
+
+    include_once '../../lib/db_connector.php';
+
+
+    $sql = "update g_members set email='$email', phone='$phone', intres='$intres', expiry_day='$expiry_day' where no=$no";
+
+    $retval = mysqli_query($conn, $sql);
+    if(! $retval ){
+        die('Could not update data: ' . mysqli_error($conn));
     }
 
-    $num   = $_GET["num"];
-    $level = $_POST["level"];
-    $point = $_POST["point"];
-
-    $con = mysqli_connect("localhost", "root", "123456", "cobrain");
-    $sql = "update members set level=$level, point=$point where num=$num";
-    mysqli_query($con, $sql);
-
-    mysqli_close($con);
+    mysql_close($conn);
 
     echo "
 	     <script>
-	         location.href = 'admin.php';
+            console.log('$sql');
 	     </script>
 	   ";
 ?>
