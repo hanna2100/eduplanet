@@ -10,6 +10,8 @@
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <!--  star rating -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <!-- 리뷰 하단 페이징 아이콘 -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
      <!-- radar chart -->
      <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
      <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-radar.min.js"></script>
@@ -45,7 +47,7 @@
         $rate_bar_cost_efct = round($row_top[4],1);
         $rate_bar_achievement = round($row_top[5],1);
     ?>
-    
+
     <section>
       <div class="inner_section">
         <div id="content_top" class="content">
@@ -238,56 +240,75 @@
         mysqli_close($conn);
     ?>
 
+<!-- 하단 페이지 번호 인디케이터   -->
+    <div class="page_num_wrap">
+           <div class="page_num">
+             <ul class="page_num_ul">
+   <?php
+               $page_scale = 5; // 페이지 쪽수 표시 량 (5 페이지씩 표기)
+               $pageGroup = ceil($page/$page_scale); // 페이지 그룹번호(페이지 5개가 1그룹)
 
- <!-- 하단 페이지 번호 인디케이터   -->
- <div class="page_num_wrap">
-     <div class="page_num">
+               $last_page = $pageGroup * $page_scale; //그룹번호 안에서의 마지막 페이지 숫자
+               //그룹번호의 마지막 페이지는 전체 페이지보다 클 수 없음
+               if($total_pages < $page_scale){
+                 $last_page = $total_pages;
+               }else if($last_page > $total_pages){
+                 $last_page = $total_pages;
+               }
 
-         <ul class="page_num_ul">
+               //그룹번호의 첫번째 페이지 숫자
+               $first_page = $last_page - ($page_scale-1);
+               //그룹번호의 첫번째 페이지는 1페이지보다 작을 수 없음
+               if($first_page < 1){
+                 $first_page = 1;
+               }else if($last_page == $total_pages){ //마지막 그룹번호일때 첫번째 페이지값 결정
+                 $first_page = $total_pages - ($total_pages % $page_scale)+1;
+               }
 
-             <?php
+               $next = $last_page + 1;// > 버튼 누를때 나올 페이지
+               $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
 
-             $prev_page = $page - 1;
+               // 첫번째 페이지일 때 앵커 비활성화
+               if ($first_page == 1) {
+                 if($page!=1)
+                   echo "<li><a href='/eduplanet/admin/gm_members.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                 else
+                   echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
 
-             // 첫번째 페이지일 때 앵커 비활성화
-             if ($page == 1) {
-                 echo "<li><a><span class='page_num_direction'><<</span></a></li>";
-                 echo "<li><a><span class='page_num_direction'><</span></a></li>";
+                 echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
+               } else {
+                 echo "<li><a href='/eduplanet/academy/review.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                 echo "<li><a href='/eduplanet/academy/review.php?page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
+               }
 
-             } else {
-                 echo "<li><a href='/eduplanet/academy/review.php?page=1'><span class='page_num_direction'><<</span></a></li>";
-                 echo "<li><a href='/eduplanet/academy/review.php?page=$prev_page'><span class='page_num_direction'><</span></a></li>";
-             }
-
-             // 페이지 설정
-             for ($i = 1; $i <= $total_pages; $i++) {
-
+               //페이지 번호 매기기
+               for($i= $first_page ; $i <= $last_page ; $i++){
                  if ($page == $i) {
-
-                     echo "<li><span class='page_num_set'><b> $i </b></span></li>";
+                   echo "<li><span class='page_num_set'><b style='color:#2E89FF'> $i </b></span></li>";
                  } else {
-                     echo "<li><a href='/eduplanet/academy/review.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
+                   echo "<li><a href='/eduplanet/academy/review.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
                  }
-             }
+               }
 
-             $next_page = $page + 1;
+               // 마지막 페이지일 때 앵커 비활성화
+               if ($last_page == $total_pages) {
+                 echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
 
-             // 마지막 페이지일 때 앵커 비활성화
-             if ($page == $total_pages) {
-                 echo "<li><a><span class='page_num_direction'>></span></a></li>";
-                 echo "<li><a><span class='page_num_direction_last'>>></span></a></li>";
+                 if($page !=$total_pages)
+                   echo "<li><a href='/eduplanet/academy/review.php?page=$total_pages'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                 else
+                   echo "<li><a><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
 
-             } else {
-                 echo "<li><a href='/eduplanet/academy/review.php?page=$next_page'><span class='page_num_direction'>></span></a></li>";
-                 echo "<li><a href='/eduplanet/academy/review.php?page=$total_pages'><span class='page_num_direction_last'>>></span></a></li>";
-             }
+               } else {
+                   echo "<li><a href='/eduplanet/academy/review.php?page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
+                   echo "<li><a href='/eduplanet/academy/review.php?page=$total_pages'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+               }
+   ?>
+             </ul>
+           </div>
+         </div>
 
-             ?>
 
-         </ul>
-
-     </div>
- </div>
 
 
       </div> <!-- end of inner_section   -->
