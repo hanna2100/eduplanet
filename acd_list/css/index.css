@@ -1,0 +1,310 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* #mva4{
+  width: 100%;
+  height: 130px;
+  border: 1px solid lightblue;
+}
+#mva3{
+  width: 100%;
+  height: 130px;
+  border: 1px solid yellow;
+}
+#mva2{
+  width: 100%;
+  height: 130px;
+  border: 1px solid red;
+} */
+#call_dibs_button{
+  width: 120px;
+  border-radius: 10px;
+  border: 2px solid lightgray;
+  background-color: #2E89FF;
+  font-size: 17px;
+  color: white;
+  padding: 15px;
+}
+#call_dibs{
+  position: absolute;
+  right: 15px;
+  top: 12px;
+
+}
+#academy_address{
+  position: absolute;
+  top: 90px;
+  left: 180px;
+  font-size: 15px;
+  font-weight: bold;
+}
+#academy_cell{
+  position: absolute;
+  top: 55px;
+  left: 180px;
+  font-size: 15px;
+  font-weight: bold;
+}
+#academy_name{
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 180px;
+}
+#mva1_img{
+  width: auto;
+  display: inline-block;
+  position: absolute;
+
+}
+.mva_class{
+  width: 100%;
+  height: 130px;
+  border-top: 1px solid lightgray;
+  position: relative;
+}
+#mva_title{
+  padding: 20px;
+}
+#my_village_academy{
+  width: 800px;
+  height: 602px;
+  margin-top: 20px;
+  border: 1px solid lightgray;
+  background-color: white;
+  display: block;
+}
+
+
+.arrow {
+    position: absolute;
+    top: 8.1px;
+    right: 8px;
+    background-position: 0 -35px;
+    height: 7px;
+    width: 4px;
+    display: block;
+    background-size: auto !important;
+    background-image: url("https://jpassets.jobplanet.co.kr/assets/newjob_sprite-s8251793bbf-40e76c08c555815ac80bf57ac5f4fe4cbaa301be3d6360fb617757e1e6d4ced4.png");
+    background-repeat: no-repeat;
+}
+a {
+    /* color: #333; */
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0;
+  }
+.btn_rnd_arrow {
+    position: relative;
+    padding: 4px 25px 4px 16px;
+    float: right;
+}
+.btn_rnd {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 3px 16px;
+    border: 1px solid #d9d9d9;
+    border-radius: 14px;
+    background-color: #fff;
+    font-size: 13px;
+    color: #333;
+    line-height: 17px;
+}
+#section_bottom{
+  padding: 0 19px;
+  height: 47px;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: -0.5em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.gf_box2>dd .txt1 {
+    float: left;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
+    height: 24px;
+}
+.bl_score {
+    background-image: url("https://jpassets.jobplanet.co.kr/assets/global_sprite-s8f98f6bf17-eff7e5e5fd2bbdcd6eb91a8bb7535979fa2338c4891aa61aa260e9e21b40cfba.png");
+    background-repeat: no-repeat;
+    background-position: 0 -3192px;
+    height: 7px;
+    width: 124px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    text-indent: -100000px;
+}
+.us_bl_s {
+    background-image: url("https://jpassets.jobplanet.co.kr/assets/global_sprite-s8f98f6bf17-eff7e5e5fd2bbdcd6eb91a8bb7535979fa2338c4891aa61aa260e9e21b40cfba.png");
+    background-repeat: no-repeat;
+    background-position: 0 -2581px;
+    height: 7px;
+    width: 124px;
+    display: block;
+    position: relative;
+
+}
+.gf_box2>dd .gf_bar1 {
+    float: left;
+    display: inline-block;
+    height: 24px;
+    position: relative;
+}
+.gf_box2>dd .gf_bar1 .us_bl_s, .gf_bar1 .us_bl_s {
+    top: 7px;
+    left: 0;
+}
+.gf_box2>dd {
+    padding-left: 18px;
+    font-size: 13px;
+    clear: both;
+    overflow: hidden;
+}
+.txt_r{ /* 숫자 */
+  position: absolute;
+  left: 0px;
+  color: red;
+  font-style: italic;
+}
+.gf_box2>dt {
+    position: relative;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    padding-left: 18px;
+}
+.gf_box2{
+  height: 50px;
+  /* border : 1px solid black; */
+  margin: 0px;
+  padding: 0px;
+}
+.txt1 {
+  padding-left: 30px;
+}
+#section_body{
+  padding: 0 19px;
+  height: 257px;
+  /* border: 1px solid black; */
+}
+#section_hd{
+  padding: 19px 19px 15px 19px;
+}
+#section_wrap1{
+  height: 364.4px;
+  margin-left: 15px;
+}
+.card_ty1 {
+    float: left;
+    width: 266px;      /* 나중에 215로 바꿔라 */
+    height: 366.4px;
+    box-sizing: border-box;
+    border: 1px solid lightgray;
+    border-right: none;
+    display: block;
+  }
+.article_ty2 {
+    overflow: hidden;
+    clear: both;
+}
+#first_contents{
+ width: 800px;
+ height: 731.8px;
+  background-color: white;
+ /* border : 1px solid brown; */
+ box-sizing: border-box;
+ display: block;
+}
+#main_contents{
+  /* border: 1px solid purple; */
+  width: 800px;
+  box-sizing: border-box;
+  /* height: 1736.8px; */
+  height: auto;
+  float: left;
+}
+#contents{
+  margin: 0 auto;
+  width: 800px;
+  /* height: 1751.8px; */
+  height: 1341px;
+  /* border: 1px solid black; */
+  position: relative;
+  padding: 0 0 15px 0;
+}
+#contents_wrap{
+  /* position: relative; */
+  /* border: 1px solid red; */
+  display: block;
+  height: 1400px;
+  padding-top: 160px;
+  position: relative;
+}
+body {
+    display: block;
+    min-height: 1080px;
+    min-width: 1060px;
+    background: #f3f3f4;
+    font-size: 13px;
+    color: #333;
+}
+#mapp{
+  border-top: 1px solid black;
+}
+#infor_map{
+  border: 1px solid blue;
+  margin: 0 auto;
+  width: 1060px;
+}
+.li_width{
+  width: 120px;
+  color: gray;
+  font-weight: bold;
+}
+
+#infor ul{
+  margin-left: -30px;
+}
+#infor li{
+  list-style: none;
+  display: inline-block;
+
+}
+#eduform{
+  margin: 0 auto;
+  padding: 0auto;
+  width: 1060px;
+  border : 1px solid red;
+  margin-bottom: 50px;
+}
+#infor{
+  width: 100%;
+  height: 100%;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  background-color: white;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+#eduInforMain{
+  background-color: #F6F6F6;
+  width: 100%;
+  height: 1080px;
+}

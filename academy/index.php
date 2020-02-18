@@ -7,11 +7,17 @@
     <title></title>
   </head>
   <body>
+    <header>
+      <?php include "../index_header_searchbar_out.php"; ?>
+    </header>
+
+    <main>
+
     <div id="eduInforMain">
       <div id="eduform">
 
         <div id="edutitle">
-          <h2>학원정보</h2>
+          <h1>학원정보</h1>
         </div>
         <div id="infor">
           <table>
@@ -52,8 +58,8 @@
       </div><!-- eduform end -->
 
     <div id="infor_map">
-      <div >
-        <h2>위치 보기</h2>
+      <div id="map_div">
+        <h1>위치 보기</h1>
       </div>
       <div id="mapp">
 
@@ -64,9 +70,11 @@
       <?php
         $name = "안녕 세상아";
         // DB에서 가져오기-------------------------------------
-        $con = mysqli_connect("localhost","root","123456","eduplanet");
+        include_once("../lib/db_connector.php");
+
+        // $con = mysqli_connect("localhost","root","123456","eduplanet");
         $sql = "select * from academy";
-        $result = mysqli_query($con,$sql);
+        $result = mysqli_query($conn,$sql);
         $row = mysqli_fetch_array($result);
 
         $acd_name = $row["acd_name"]; //교습과정
@@ -79,7 +87,7 @@
         //-------------------------------
 
         //DB 닫아주기
-        mysqli_close($con);
+        mysqli_close($conn);
 
        ?>
        // 학원 정보 span에 띄우기---------------
@@ -119,7 +127,7 @@
                   map: map,
                   position: coords
               });
-              var iwContent ='<div style="width:150px;text-align:center;padding:6px 0;"><strong><?= $acd_name ?></strong><br><a id="asdf" style="color:green" href="https://map.kakao.com/link/to/HelloWorld!,'+<?= $latitude ?>+','+<?=$longtitude?>+'" style="color:blue" target="_blank">길찾기</a></div>'
+              var iwContent ='<div style="width:150px;text-align:center;padding:6px 0;"><strong><?= $acd_name ?></strong><br><a id="asdf" style="color:green" href="https://map.kakao.com/link/to/<?= $acd_name ?>,'+<?= $latitude ?>+','+<?=$longtitude?>+'" style="color:blue" target="_blank">길찾기</a></div>'
               // 인포윈도우로 장소에 대한 설명을 표시합니다
               var infowindow = new kakao.maps.InfoWindow({
 
@@ -135,5 +143,9 @@
 
     </div>
     </div> <!-- eduInforMain -->
+    </main>
+    <footer>
+      <?php include "../footer.php"; ?>
+    </footer>
   </body>
 </html>
