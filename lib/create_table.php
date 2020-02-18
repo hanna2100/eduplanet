@@ -107,7 +107,6 @@ function create_table($conn, $table_name){
                     `drawback` VARCHAR(250) NOT NULL,
                     `regist_day` DATE NOT NULL,
                     PRIMARY KEY(`no`),
-                    UNIQUE KEY(`user_no`),
                     FOREIGN KEY(`parent`) REFERENCES academy(`no`) 
                     ON DELETE CASCADE
                   );";
