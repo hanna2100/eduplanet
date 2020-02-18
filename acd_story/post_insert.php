@@ -2,8 +2,8 @@
 
 <?php
 
-// 테이블 수정 후 추가예정
-// 세션값으로 학원id를 받아서 학원명, parent 가져오기
+// 추가예정 ()
+// 세션값으로 학원no를 받아서 a_members 테이블에서 acd_name 가져오기 (parent랑 no랑 같은거임)
 
     // 시간 셋팅하기
 	date_default_timezone_set('Asia/Seoul');
@@ -88,13 +88,17 @@
     mysqli_query($conn, $sql);
     mysqli_close($conn);
 
+    // 파일 권한 설정 바꾸는건데 안먹네요,,,ㅠ
 
-
-    // $ftp = ftp_connect("127.0.0.1");
+    // 1번째방법
+    // $ftp = ftp_connect('127.0.0.1');
     // ftp_login($ftp, 'root', '123456');
-    // ftp_chmod($ftp, 0755, '/eduplanet/data/'.$copied_file_name);
+    // ftp_chmod($ftp, 0755, $copied_file_name);
     // ftp_close($ftp);
 
+
+    // 2번째방법
+    // chmod($copied_file_name, 755);
 
 
     echo "

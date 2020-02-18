@@ -15,7 +15,7 @@
     <title>에듀플래닛</title>
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/eduplanet/mypage_header.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/mypage_header.css">
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <!-- identicon (프로필 이미지) -->
@@ -88,16 +88,16 @@
         <div class="mypage_user_menu_background">
             <div class="mypage_user_menu">
                 <ul>
-                    <a href="#">
+                    <a href="/eduplanet/mypage/myinfo.php">
                         <li id="mypage_user_myinfo">내 정보</li>
                     </a>
-                    <a href="#">
+                    <a href="/eduplanet/mypage/follow.php">
                         <li id="mypage_user_like">찜목록</li>
                     </a>
-                    <a href="#">
+                    <a href="/eduplanet/mypage/membership.php">
                         <li id="mypage_user_menu_membership">멤버십/결제</li>
                     </a>
-                    <a href="#">
+                    <a href="/eduplanet/mypage/review.php">
                         <li id="mypage_user_menu_review">리뷰</li>
                     </a>
                 </ul>

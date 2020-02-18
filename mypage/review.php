@@ -7,7 +7,7 @@
     <title>에듀플래닛</title>
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/eduplanet/mypage_form_myinfo_like.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review.css">
 
 </head>
 
@@ -17,7 +17,7 @@
         <header>
 
             <div class="header_searchbar_fix">
-                <?php include './index_header_searchbar_in.php'; ?>
+                <?php include '../index_header_searchbar_in.php'; ?>
             </div>
 
             <div class="header_mypage">
@@ -27,6 +27,10 @@
         </header>
 
         <div class="mypage_content_wrap">
+
+            <div class="mypage_content_aside_menu">
+
+            </div>
 
             <div class="mypage_content">
 
