@@ -85,25 +85,6 @@
             </div>
         </div>
 
-        <div class="mypage_user_menu_background">
-            <div class="mypage_user_menu">
-                <ul>
-                    <a href="/eduplanet/mypage/myinfo.php">
-                        <li id="mypage_user_myinfo">내 정보</li>
-                    </a>
-                    <a href="/eduplanet/mypage/follow.php">
-                        <li id="mypage_user_like">찜목록</li>
-                    </a>
-                    <a href="/eduplanet/mypage/membership.php">
-                        <li id="mypage_user_menu_membership">멤버십/결제</li>
-                    </a>
-                    <a href="/eduplanet/mypage/review.php">
-                        <li id="mypage_user_menu_review">리뷰</li>
-                    </a>
-                </ul>
-            </div>
-        </div>
-
     </div>
 </body>
 

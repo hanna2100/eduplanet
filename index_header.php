@@ -90,8 +90,8 @@
                                 <ul>
                                     <a href="/eduplanet/mypage/myinfo.php"><li>내 정보</li></a>
                                     <a href="/eduplanet/mypage/follow.php"><li>찜목록</li></a>
-                                    <a href="/eduplanet/mypage/membership.php"><li>멤버십/결제</li></a>
-                                    <a href="/eduplanet/mypage/review.php"><li>리뷰</li></a>
+                                    <a href="/eduplanet/mypage/membership_pay.php"><li>멤버십/결제</li></a>
+                                    <a href="/eduplanet/mypage/review_mylist.php"><li>리뷰</li></a>
                                     <a href="#"><li>로그아웃</li></a>
                                 </ul>
                             </div>
