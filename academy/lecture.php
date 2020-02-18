@@ -21,10 +21,8 @@
   </head>
   <body>
     <header>
-      <?php
-        include "../index_header.php";
-        include "../academy_header.php";
-      ?>
+      <?php include "../index_header.php"; ?>
+      <?php include "../academy_header.php"; ?>
     </header>
     <section>
       <div id="teacher">
@@ -63,67 +61,59 @@
       <div id="schedule">
         <h1>강의 시간표</h1>
         <?php
-        mysqli_data_seek($result, 0);
-        $row_teacher = mysqli_fetch_array($result);
-        $name = $row_teacher["name"];
+          mysqli_data_seek($result, 0);
+          $row_teacher = mysqli_fetch_array($result);
+          $name = $row_teacher["name"];
         ?>
         <table>
           <tr>
-            <td colspan="8"><?=$name?> 선생님 시간표</td>
+            <td colspan="8"><?=$name?>선생님 시간표</td>
           </tr>
           <tr>
+            <td>1 교시</td>
+            <?php
+            $sql_schedule = "select * from lecture where teacher_name='$name'";
+            $result_schedule = mysqli_query($conn, $sql_schedule);
+            for ($i=0; $i < 7; $i++) {
+              mysqli_data_seek($result_schedule, $i);
+              $row_schedule = mysqli_fetch_array($result_schedule);
+              $sc_subject = $row_schedule["subject"];
+              $sc_day = $row_schedule["day"];
+              $sc_order = $row_schedule["order"];
+              if ($sc_order == 1) {
+            ?>
+                <td><?=$sc_subject?></td>
+            <?php
+          }else{
+            ?>
             <td>&nbsp</td>
-            <td>월요일</td>
-            <td>화요일</td>
-            <td>수요일</td>
-            <td>목요일</td>
-            <td>금요일</td>
-            <td>토요일</td>
-            <td>일요일</td>
-          </tr>
-          <tr>
-            <td>1교시</td>
             <?php
-              $sql = "select * from lecture where teacher_name='$name'";
-              $result_time = mysqli_query($conn, $sql);
-              for ($j=0; $j < 7; $j++) {
-                mysqli_data_seek($result_time, $j);
-                $row_time = mysqli_fetch_array($result_time);
-                $subject = $row_time["subject"];
-                $day = $row_time["day"];
-                $order = $row_time["order"];
-                if ($order == 1) {
-            ?>
-                <td><?=$subject?></td>;
-            <?php
-                }else{
-            ?>
-                  <td>&nbsp</td>;
-            <?php
-                }
-              }
-            ?>
-          </tr>
-          <tr>
-            <td>2교시</td>
-            <?php
-            for ($j=0; $j < 7; $j++) {
-              mysqli_data_seek($result_time, $j);
-              $row_time = mysqli_fetch_array($result_time);
-              $subject = $row_time["subject"];
-              $day = $row_time["day"];
-              $order = $row_time["order"];
-              if ($order == 2) {
-          ?>
-              <td><?=$subject?></td>;
-          <?php
-              }else{
-          ?>
-                <td>&nbsp</td>;
-          <?php
-              }
+          }
             }
-          ?>
+            ?>
+          </tr>
+          <tr>
+            <td>2 교시</td>
+            <?php
+            $sql_schedule = "select * from lecture where teacher_name='$name'";
+            $result_schedule = mysqli_query($conn, $sql_schedule);
+            for ($i=0; $i < 7; $i++) {
+              mysqli_data_seek($result_schedule, $i);
+              $row_schedule = mysqli_fetch_array($result_schedule);
+              $sc_subject = $row_schedule["subject"];
+              $sc_day = $row_schedule["day"];
+              $sc_order = $row_schedule["order"];
+              if ($sc_order == 2) {
+            ?>
+                <td><?=$sc_subject?></td>
+            <?php
+          }else{
+            ?>
+            <td>&nbsp</td>
+            <?php
+          }
+            }
+            ?>
           </tr>
         </table>
       </div>
