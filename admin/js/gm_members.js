@@ -1,6 +1,9 @@
+var formsForUpdate = new Array();
+
 $(function(){
     topSelect_init_Setting();
     g_membersGraph();
+    listItemPicker();
 });
 
 
@@ -72,4 +75,35 @@ function g_membersGraph(){
             }
         }
     });
+}
+
+function listItemPicker(){
+    $('.list_row').click(function(){
+        
+        $(this).css('background-color' , '#8ec4f0a9');
+        $(this).children('form').children('.col4').children('input').prop('disabled',false);
+        $(this).children('form').children('.col5').children('input').prop('disabled',false);
+        $(this).children('form').children('.col7').children('input').prop('disabled',false);
+        $(this).children('form').children('.col8').children('input').prop('disabled',false);
+
+        formsForUpdate.push($(this).children('form'));
+    });
+}
+
+function submitUpdate(){
+    //action 경로 설정 및 서브밋
+    for(var i in formsForUpdate){
+        var no = formsForUpdate[i].children('.col2').text();
+        formsForUpdate[i].attr("action", "./lib/gm_members_update.php?no="+no+"&page="+page);
+        formsForUpdate[i].submit();
+    }
+}
+
+function submitDelete(){
+    //action 경로 설정 및 서브밋
+    for(var i in formsForUpdate){
+        var no = formsForUpdate[i].children('.col2').text();
+        formsForUpdate[i].attr("action", "./lib/gm_members_delete.php?no="+no+"&page="+page);
+        formsForUpdate[i].submit();
+    }
 }

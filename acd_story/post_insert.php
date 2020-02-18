@@ -2,8 +2,8 @@
 
 <?php
 
-// 테이블 수정 후 추가예정
-// 세션값으로 학원id를 받아서 학원명, parent 가져오기
+// 추가예정 ()
+// 세션값으로 학원no를 받아서 a_members 테이블에서 acd_name 가져오기 (parent랑 no랑 같은거임)
 
     // 시간 셋팅하기
 	date_default_timezone_set('Asia/Seoul');
@@ -14,12 +14,23 @@
     $subtitle = $_POST["story_post_content"];
 
     $subject1 = $_POST["story_post_subtitle_1"];
-    $subject2= $_POST["story_post_subtitle_2"];
-    $subject3 = $_POST["story_post_subtitle_3"];
-
     $content1 = $_POST["story_post_description_1"];
-    $content2 = $_POST["story_post_description_2"];
-    $content3 = $_POST["story_post_description_3"];
+
+    if (isset($_POST["story_post_subtitle_2"]) && isset($_POST["story_post_description_2"])) {
+        $subject2= $_POST["story_post_subtitle_2"];
+        $content2 = $_POST["story_post_description_2"];
+    } else {
+        $subject2= "";
+        $content2 = "";
+    }
+
+    if (isset($_POST["story_post_subtitle_3"]) && isset($_POST["story_post_description_3"])) {
+        $subject3= $_POST["story_post_subtitle_3"];
+        $content3 = $_POST["story_post_description_3"];
+    } else {
+        $subject3= "";
+        $content3 = "";
+    }
 
     $regist_day = date("Y-m-d (H:i)");
     $upload_dir = '../data/';
@@ -76,6 +87,19 @@
 
     mysqli_query($conn, $sql);
     mysqli_close($conn);
+
+    // 파일 권한 설정 바꾸는건데 안먹네요,,,ㅠ
+
+    // 1번째방법
+    // $ftp = ftp_connect('127.0.0.1');
+    // ftp_login($ftp, 'root', '123456');
+    // ftp_chmod($ftp, 0755, $copied_file_name);
+    // ftp_close($ftp);
+
+
+    // 2번째방법
+    // chmod($copied_file_name, 755);
+
 
     echo "
         <script>

@@ -190,7 +190,7 @@ a {
     margin-left: 5px;
     background-color: transparent;
     border: 1px solid transparent;
-    background : url('/eduplanet_soyoung/img/common_sprite.png') no-repeat 0 -2661px;
+    background : url('/eduplanet/img/common_sprite.png') no-repeat 0 -2661px;
     width: 20px;
     height: 18px;
     color: transparent;
@@ -198,7 +198,7 @@ a {
 }
 
 #button_academy_heart:hover {
-    background : url('/eduplanet_soyoung/img/common_sprite.png') no-repeat 0 -2680px;
+    background : url('/eduplanet/img/common_sprite.png') no-repeat 0 -2680px;
     width: 20px;
     height: 18px;
 }

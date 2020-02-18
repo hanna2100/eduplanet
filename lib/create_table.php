@@ -178,6 +178,14 @@ function create_table($conn, $table_name){
                       PRIMARY KEY(`no`)
                     );";
             break;
+            case 'follow' : //팔로우(찜)테이블
+              $sql = "CREATE TABLE `follow` (
+                      `no` INT NOT NULL AUTO_INCREMENT,
+                      `user_no` INT NOT NULL,
+	                    `acd_no` INT NOT NULL,
+                      PRIMARY KEY(`no`)
+                    );";
+            break;
       default:
         echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
         break;

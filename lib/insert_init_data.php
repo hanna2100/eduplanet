@@ -129,7 +129,12 @@ function insert_init_data($conn, $table_name){
                                               (3, '2019-04-12', 3, 5, 8),
                                               (4, '2019-05-12', 3, 2, 6);";
           break; 
-        
+        case 'follow' :
+          $sql = "INSERT INTO `follow` VALUES (1, 1, 1),
+                                              (2, 1, 2),
+                                              (3, 1, 3),
+                                              (4, 1, 4);";
+          break; 
       default:
         echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
         break;

@@ -7,7 +7,7 @@
     <title>에듀플래닛</title>
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/eduplanet/mypage/css/follow.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/membership.css">
 
 </head>
 
@@ -27,6 +27,10 @@
         </header>
 
         <div class="mypage_content_wrap">
+
+            <div class="mypage_content_aside_menu">
+
+            </div>
 
             <div class="mypage_content">
 

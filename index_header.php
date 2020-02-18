@@ -88,10 +88,11 @@
 
                             <div class="index_header_menu_hover_detail_profile">
                                 <ul>
-                                    <li><a href="#">내 정보</a></li>
-                                    <li><a href="#">찜목록</a></li>
-                                    <li><a href="#">멤버십/결제</a></li>
-                                    <li><a href="#">로그아웃</a></li>
+                                    <a href="/eduplanet/mypage/myinfo.php"><li>내 정보</li></a>
+                                    <a href="/eduplanet/mypage/follow.php"><li>찜목록</li></a>
+                                    <a href="/eduplanet/mypage/membership.php"><li>멤버십/결제</li></a>
+                                    <a href="/eduplanet/mypage/review.php"><li>리뷰</li></a>
+                                    <a href="#"><li>로그아웃</li></a>
                                 </ul>
                             </div>
                         </div>

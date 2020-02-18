@@ -35,7 +35,7 @@ $dbconn = mysqli_select_db($conn,"eduplanet") or die('Error: '.mysqli_error($con
 //3. 테이블 생성
 include_once 'create_table.php';
 $table_name = array('academy', 'g_members', 'a_members', 'teacher', 'lecture'
-                    , 'review', 'acd_story', 'product', 'gm_order', 'am_order', 'sales');
+                    , 'review', 'acd_story', 'product', 'gm_order', 'am_order', 'sales', 'follow');
 
 for($i=0; $i<sizeof($table_name); $i++){
   create_table($conn, $table_name[$i]);
