@@ -13,7 +13,7 @@
     // }
 
 
-    $serialize = explode('$$', );
+    //$serialize = explode('$$', );
     $no   = $_GET["no"];
     $page   = $_GET["page"];
 
