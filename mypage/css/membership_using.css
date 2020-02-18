@@ -1,0 +1,294 @@
+* { 
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    display: block;
+    min-height: 1080px;
+    min-width: 1060px;
+    background: #ebecee; 
+    font-size: 13px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.body_wrap {
+    width: 100%;
+    position: relative;
+}
+
+.header_searchbar_fix {
+    position: relative;
+    top: -20px;
+}
+
+.header_mypage {
+    position: relative;
+    top: 32px;
+}
+
+.mypage_user_menu_background {
+    width: 100%;
+    height: 58px;
+    border-bottom: 1px solid lightgray;
+    background-color: #fff;
+    position: relative;
+    top: 52px;
+}
+
+.mypage_user_menu {
+    margin: 0 auto;
+    width: 960px;
+    height: 58px;
+    /* border: 1px solid black; */
+}
+
+.mypage_user_menu_background ul {
+    list-style: none;
+}
+
+.mypage_user_menu_background ul li {
+    width: 120px;
+    height: 58px;
+    /* border: 1px solid black; */
+    text-align: center;
+    box-sizing: border-box;
+    float: left;
+    padding-top: 20px;
+}
+
+.mypage_user_menu_background ul li:hover {
+    font-weight: bold;
+}
+
+/* 선택된 메뉴 효과 */
+#mypage_user_membership {
+    border-bottom: 3px solid #2E89FF;
+    font-weight: bold;
+}
+
+.mypage_content_wrap {
+    width: 960px;
+    /* height: 700px; */
+    /* border: 1px solid black; */
+    margin-top: 73px;
+    box-sizing: border-box;
+    margin-bottom: 60px;
+    display: inline-block;
+    text-align: left;
+}
+
+/* aside menu */
+.mypage_content_aside_menu {
+    float: left;
+    width: 225px;
+    height: 160px;
+    background: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.mypage_content_aside_menu_title {
+    width: 205px;
+    height: 30px;
+    padding-top: 10px;
+    padding-bottom: 7px;
+    color: black;
+    font-size: 15px;
+    border-bottom: 1px solid gray;
+}
+
+.mypage_content_aside_menu_title ul {
+    list-style: none;
+    /* border: 1px solid black; */
+    position: relative;
+    top: 30px;
+    left: 5px;
+}
+
+.mypage_content_aside_menu_title ul li {
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.mypage_content_aside_menu_title ul li:hover {
+    font-weight: bold;
+}
+
+#select_aside_menu {
+    font-weight: bold;
+    color: #2E89FF;
+}
+
+
+/* content */
+.mypage_content {
+    float: left;
+    width: 715px;
+    /* height: 470px; */
+    background: #fff;
+    margin-left: 17px;
+    padding-left: 28px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.mypage_content_title {
+    width: 660px;
+    height: 100px;
+    /* border: 1px solid black; */
+    color: black;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-bottom: 1px solid lightgray;
+}
+
+.mypage_content_title h4{
+    color: black;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 11px;
+}
+
+.mypage_content_title p {
+    font-size: 13px;
+    color: gray;
+    font-weight: normal;
+}
+
+/**************************************************/
+/* 결제내역 없을 때 */
+.mypage_content_list_none {
+    width: 660px;
+    /* height: 195px; */
+    padding-top: 45px;
+    padding-bottom: 35px;
+    /* border: 1px solid black; */
+    text-align: center;
+}
+
+.mypage_content_list_none h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+    margin-bottom: 15px;
+}
+
+.mypage_content_list_none p {
+    color: gray;
+}
+
+#button_membership_go {
+    width: 150px;
+    height: 50px;
+    /* margin-left: 250px; */
+    margin-top: 30px;
+    font-size: 15px;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    background-color: #2E89FF;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.content_wrap {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/**************************************************/
+/* 결제 내역이 있을 때 */
+.mypage_content_list {
+    width: 660px;
+    /* height: 195px; */
+    padding-bottom: 35px;
+    /* border: 1px solid black; */
+    text-align: center;
+}
+
+.membership_table_header {
+    width: 100%;
+    height: 44px;
+    background-color: rgb(247, 247, 247);
+    border-top: 1px solid gray;
+    border-bottom: 1px solid lightgray;
+}
+
+.membership_table_header ul {
+    list-style: none;
+}
+
+.membership_table_header ul li {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#header_membership_name {
+    display: inline-block;
+    width: 160px;
+}
+
+#header_membership_start_day {
+    display: inline-block;
+    width: 130px;
+}
+
+#header_membership_end_day {
+    display: inline-block;
+    width: 130px;
+}
+
+#header_membership_valid_day {
+    display: inline-block;
+    width: 130px;
+}
+
+#membership_name {
+    display: inline-block;
+    width: 160px;
+}
+
+#membership_start_day {
+    display: inline-block;
+    width: 130px;
+}
+
+#membership_end_day {
+    display: inline-block;
+    width: 130px;
+}
+
+#membership_valid_day {
+    display: inline-block;
+    width: 130px;
+}
+
+.membership_table_list {
+    width: 100%;
+    /* border: 1px solid black; */
+}
+
+.membership_table_list ul {
+    list-style: none;
+    border-bottom: 1px solid lightgray;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.membership_table_list ul li {
+    display: inline-block;
+}
