@@ -14,12 +14,23 @@
     $subtitle = $_POST["story_post_content"];
 
     $subject1 = $_POST["story_post_subtitle_1"];
-    $subject2= $_POST["story_post_subtitle_2"];
-    $subject3 = $_POST["story_post_subtitle_3"];
-
     $content1 = $_POST["story_post_description_1"];
-    $content2 = $_POST["story_post_description_2"];
-    $content3 = $_POST["story_post_description_3"];
+
+    if (isset($_POST["story_post_subtitle_2"]) && isset($_POST["story_post_description_2"])) {
+        $subject2= $_POST["story_post_subtitle_2"];
+        $content2 = $_POST["story_post_description_2"];
+    } else {
+        $subject2= "";
+        $content2 = "";
+    }
+
+    if (isset($_POST["story_post_subtitle_3"]) && isset($_POST["story_post_description_3"])) {
+        $subject3= $_POST["story_post_subtitle_3"];
+        $content3 = $_POST["story_post_description_3"];
+    } else {
+        $subject3= "";
+        $content3 = "";
+    }
 
     $regist_day = date("Y-m-d (H:i)");
     $upload_dir = '../data/';
@@ -76,6 +87,15 @@
 
     mysqli_query($conn, $sql);
     mysqli_close($conn);
+
+
+
+    // $ftp = ftp_connect("127.0.0.1");
+    // ftp_login($ftp, 'root', '123456');
+    // ftp_chmod($ftp, 0755, '/eduplanet/data/'.$copied_file_name);
+    // ftp_close($ftp);
+
+
 
     echo "
         <script>
