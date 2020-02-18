@@ -50,6 +50,12 @@ h2 {
 table { padding: 3em 0; margin: 0; width: 500px;}
 td { padding: 0.6em 0;}
 
+#discount_tag {
+  margin-left: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ff9105;
+}
 .payment_key {
   font-size: 16px;
   color: #686a6d;
@@ -64,7 +70,7 @@ td { padding: 0.6em 0;}
 }
 #payment_sum>td { padding: 1em 0; font-weight:bold; border-top: 1px solid #c5c7cc; }
 #payment_sum>td:last-child{ color: #2E89FF; font-size: 1.5em; font-weight: bolder; }
-/* .discounted_price { font-weight: 1000; }  이거 왜 안먹는지? 모르겠음*/ 
+/* .discounted_price { font-weight: 1000; }  이거 왜 안먹는지? 모르겠음*/
 
 /* payment_method 결제수단*/
 h3 {
@@ -94,6 +100,10 @@ li { float: left; width: 50%;  }
   vertical-align: middle;
   cursor: pointer;
 }
+.jply_btn_lg:hover {
+  border: 1px solid tomato;
+}
+
 .jply_radio_item { opacity:0}
 
 /* payment_member_info 구매자 정보 */
