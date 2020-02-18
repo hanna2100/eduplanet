@@ -18,6 +18,10 @@
   <!-- 차트 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <title>에듀플래닛 관리자페이지 - 회원관리</title>
+  <!-- Date 라이브러리 -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
 <main>
@@ -142,11 +146,11 @@
           <span class="col1"><?=$number?></span>
           <span class="col2"><?=$no?></span>
           <span class="col3"><?=$id?></span>
-          <span class="col4"><input type="text" name="email" value="<?=$email?>" disabled></span>
-          <span class="col5"><input type="text" name="phone" value="<?=$phone?>" disabled></span>
+          <span class="col4"><input type="text" name="email<?=$i?>" value="<?=$email?>" disabled maxlength="80" oninput="limitMaxLength(this)"/></span>
+          <span class="col5"><input type="number" name="phone" value="<?=$phone?>" disabled maxlength="12" oninput="limitMaxLength(this)"/></span>
           <span class="col6"><?=$age?></span>
-          <span class="col7"><input type="text" name="intres" value="<?=$intres?>" disabled></span>
-          <span class="col8"><input type="text" name="expiry_day" value="<?=$expiry_day?>" disabled></span>
+          <span class="col7"><input type="text" name="intres" value="<?=$intres?>" disabled maxlength="10" oninput="limitMaxLength(this)"/></span>
+          <span class="col8"><input class="date_field" type="text" name="expiry_day" value="<?=$expiry_day?>" disabled></span>
           <span class="col9"><?=$regist_day?></span>
         </form>
         </li>	

@@ -12,8 +12,11 @@
     //     exit;
     // }
 
+
+    $serialize = explode('$$', );
     $no   = $_GET["no"];
     $page   = $_GET["page"];
+
     $email = $_POST["email"];
     $phone = $_POST["phone"];
     $intres = $_POST["intres"];
@@ -21,19 +24,23 @@
 
     include_once '../../lib/db_connector.php';
 
+    if($expiry_day){
+        $sql = "update g_members set email='$email', phone='$phone', intres='$intres', expiry_day='$expiry_day' where no=$no";
+    }else{
+        $sql = "update g_members set email='$email', phone='$phone', intres='$intres' where no=$no";
+    }
 
-    $sql = "update g_members set email='$email', phone='$phone', intres='$intres', expiry_day='$expiry_day' where no=$no";
 
-    $retval = mysqli_query($conn, $sql);
-    if(! $retval ){
+    $result = mysqli_query($conn, $sql);
+    if(!$result){
         die('Could not update data: ' . mysqli_error($conn));
     }
 
-    mysql_close($conn);
+    mysqli_close($conn);
 
     echo "
 	     <script>
-            console.log('$sql');
+            location.href='/eduplanet/admin/gm_members.php?no=$no&page=$page';
 	     </script>
 	   ";
 ?>
