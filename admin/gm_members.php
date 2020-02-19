@@ -186,7 +186,7 @@
               $first_page = 1;
             }else if($last_page == $total_page){ //마지막 그룹번호일때 첫번째 페이지값 결정
               if($total_page % $page_scale==0){
-                $first_page = $page_scale+1;
+                $first_page = $total_page - $page_scale+1;
               }else{
                 $first_page = $total_page - ($total_page % $page_scale)+1;
               }

@@ -68,6 +68,9 @@ function insert_init_data($conn, $table_name){
                                               (3, 1, 3),
                                               (4, 1, 4);";
           break; 
+        case 'withdrawal' :
+          $sql = withdrawal_init_data();
+          break; 
       default:
         echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
         break;

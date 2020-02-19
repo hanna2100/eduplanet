@@ -2,7 +2,10 @@
 
 //아카데미 이름 배열(a_members_init_data함수에서 데이터 채워짐)
 $acd_name_arr = array();
-
+//일반회원 가입 날짜 배열
+$gm_join_date = array();
+//기업회원 가입 날짜 배열
+$am_join_date = array();
 
 //academy 테이블 -가평읍의 학원 데이터 31개
 function academy_init_data($si_param, $dong_param){
@@ -40,6 +43,7 @@ function academy_init_data($si_param, $dong_param){
 
 //일반 회원 테이블 - row 100개 생성
 function g_members_init_data(){
+  global $gm_join_date;
   
     $sql = "INSERT INTO `g_members` VALUES ";
     $intres_array = array("국어","영어","수학","미술","음악","과학","태권도","필라테스","IT","바리스타","요가","제빵");
@@ -51,23 +55,21 @@ function g_members_init_data(){
       $intres = array_rand($intres_array); //배열의 키값(0~n까지 숫자) 리턴
       $intres = $intres_array[$intres]; //키값으로 배열중 하나 가져오기
 
-      //1월 1일~ 6월 28일 까지 랜덤 날짜 얻기위한 변수들 (2월이 28일까지라 28로함)
-      $join_month = rand(1,6);
-      $join_day = rand(1,28);
-      if($join_day<10){
-        $join_day = "0".(string)$join_day;
-      }
+      //가입일자 생성
+      $join_date = randomDate('2019-01-01', '2019-06-30');
 
       //멤버십기간 날짜 설정
       $mbship_period = rand(0,3);
       if($mbship_period==0){
         $membership = "0000-00-00"; //DATE형 데이터에 자꾸 null이 안들어가서(디폴트 null인데도) 기본값을 00~으로 바꿈.
       }else{
-        $month = $join_month+$mbship_period;
-        $membership = "2019-0".(string)$month."-".$join_day;
+        $membership = strtotime("$join_date +$mbship_period months");
+        $membership= date("Y-m-d", $membership);
       }
 
-      $sql .= "($no, 'test$no', '1234', 'test$no@google.com', '01012345678', '$birth', '$intres', '$membership', '2019-$join_month-$join_day'),";
+      array_push($gm_join_date, $join_date);
+
+      $sql .= "($no, 'test$no', '1234', 'test$no@google.com', '01012345678', '$birth', '$intres', '$membership', '$join_date'),";
       
     }
     //마지막 콤마 제거
@@ -79,10 +81,10 @@ function g_members_init_data(){
 //학원회원 테이블 - 31개 row 생성
 function a_members_init_data(){
   global $acd_name_arr;
+  global $am_join_date;
   include_once 'api_connector.php';
 
   //학원데이터 학원명, 대표자명 가져옴
-  $acd_name_arr = array();
   $rprsn_arr = array();
 
   set_api_index(1);
@@ -106,19 +108,20 @@ function a_members_init_data(){
 
     $file_copy = $no.".jpg";
 
-    //1월 1일~ 6월 28일 까지 랜덤 날짜 얻기위한 변수들
-    $join_month = rand(1,6);
-    $join_day = rand(1,28);
-    if($join_day<10){
-      $join_day = "0".(string)$join_day;
+    //가입일자생성
+    $join_date = randomDate('2019-01-01', '2019-06-30');
+    array_push($am_join_date, $join_date);
+    
+    //멤버십기간 날짜 설정
+    $mbship_period = rand(0,3);
+    if($mbship_period==0){
+      $membership = "0000-00-00"; //DATE형 데이터에 자꾸 null이 안들어가서(디폴트 null인데도) 기본값을 00~으로 바꿈.
+    }else{
+      $membership = strtotime("$join_date +$mbship_period months");
+      $membership= date("Y-m-d", $membership);
     }
 
-    //멤버십기간 날짜 설정
-    $mbship_period = rand(1,3);
-    $month = $join_month+$mbship_period;
-    $membership = "2019-0".(string)$month."-".$join_day;
-
-    $sql .= "($no, $no,'test$no', '1234', 'test$no@google.com', '$a_name', '$r_name', '$file_copy', '$membership', '2019-$join_month-$join_day'),";
+    $sql .= "($no, $no,'test$no', '1234', 'test$no@google.com', '$a_name', '$r_name', '$file_copy', '$membership', '$join_date'),";
     
     $i++;
   }
@@ -155,14 +158,10 @@ function review_init_data(){
     $oneline = array_rand($oneline_array);
     $oneline = $oneline_array[$oneline];
 
-    //1월 1일~ 6월 28일 까지 랜덤 날짜 얻기위한 변수들(리뷰 작성일)
-    $join_month = rand(1,6);
-    $join_day = rand(1,28);
-    if($join_day<10){
-      $join_day = "0".(string)$join_day;
-    }
+    //리뷰일자생성
+    $review_date = randomDate('2019-01-01', '2019-06-30');
 
-    $sql .= "($no, $parent, $user_no, '$oneline', $rating1, $rating2, $rating3, $rating4, $rating5, $rating6, '$benefit', '$drawback', '2019-$join_month-$join_day'),";
+    $sql .= "($no, $parent, $user_no, '$oneline', $rating1, $rating2, $rating3, $rating4, $rating5, $rating6, '$benefit', '$drawback', '$review_date'),";
   }
 
   //마지막 콤마 제거
@@ -187,17 +186,14 @@ function acd_story_init_data(){
       $title = $title_array[$title];
       $subtitle = array_rand($subtitle_array);
       $subtitle = $subtitle_array[$subtitle];
+      $file_copy = (string)$no.'.jpg';
 
-      //1월 1일~ 6월 28일 까지 랜덤 날짜 얻기위한 변수들(리뷰 작성일)
-      $join_month = rand(1,6);
-      $join_day = rand(1,28);
-      if($join_day<10){
-        $join_day = "0".(string)$join_day;
-      }
+      //등록일자생성
+      $regist_date = randomDate('2019-01-01', '2019-06-30');
 
     $sql .= "($no, $parent, '$acd_name', '$title', '$subtitle',
               '부제1', '부제내용1', '부제2', '부제내용2', '부제3', '부제내용3', 0,
-              '2019-$join_month-$join_day', '사진', '2019-$join_month-$join_day-14-20-12.gif'),";
+              '$regist_date', '사진', '$file_copy'),";
   }
 
   //마지막 콤마 제거
@@ -209,9 +205,6 @@ function acd_story_init_data(){
 
 // am_order 더미 데이터 생성하는 함수
 function am_order_init_data() {
-
-  // DB 연결
-  include_once 'api_connector.php';
 
   // 배열에 미리 값 셋팅
   $product_array = array("학원관리 1개월", "학원관리 2개월", "학원관리 3개월");
@@ -225,20 +218,14 @@ function am_order_init_data() {
   // 더미 데이터 100개 생성 // no는 0이아닌 1부터 시작해야 함
   for($no = 1; $no <= 100 ; $no++){
 
-    // 1월 1일~ 6월 28일 까지 랜덤 날짜 얻기위한 변수들
-    $order_month = rand(1,6); // 1~6월 랜덤 저장
-    $order_day = rand(1,28); // 1~28일 랜덤 저장
-
-    // 10 이하의 일수에는 앞에0을 더해서 두자리로 만들기
-    if ($order_day < 10) { 
-      $order_day = "0".(string)$order_day;
-    }
+    //등록일자생성
+    $regist_date = randomDate('2019-01-01', '2019-06-30');
 
     $rand = rand(0,2);
     $product = $product_array[$rand];
     $price = $price_array[$rand];
     
-    $sql .= "($no, $no,'$product', '$price', '카카오페이', '결제완료', '2019-$order_month-$order_day'),";
+    $sql .= "($no, $no,'$product', '$price', '카카오페이', '결제완료', '$regist_date'),";
 
     $i++;
   }
@@ -252,9 +239,6 @@ function am_order_init_data() {
 // gm_order 더미 데이터 생성하는 함수
 function gm_order_init_data() {
 
-  // DB 연결
-  include_once 'api_connector.php';
-
   // 배열에 미리 값 셋팅
   $product_array = array("프리미엄 1개월","프리미엄 2개월","프리미엄 3개월");
   $price_array = array(5000,10000,15000);
@@ -267,20 +251,14 @@ function gm_order_init_data() {
   // 더미 데이터 100개 생성 // no는 0이아닌 1부터 시작해야 함
   for($no = 1; $no <= 100 ; $no++){
 
-    // 1월 1일~ 6월 28일 까지 랜덤 날짜 얻기위한 변수들
-    $order_month = rand(1,6); // 1~6월 랜덤 저장
-    $order_day = rand(1,28); // 1~28일 랜덤 저장
-
-    // 10 이하의 일수에는 앞에0을 더해서 두자리로 만들기
-    if ($order_day < 10) { 
-      $order_day = "0".(string)$order_day;
-    }
+    //등록일자생성
+    $regist_date = randomDate('2019-01-01', '2019-06-30');
 
     $rand = rand(0,2);
     $product = $product_array[$rand];
     $price = $price_array[$rand];
     
-    $sql .= "($no, $no,'$product', '$price', '카카오페이', '결제완료', '2019-$order_month-$order_day'),";
+    $sql .= "($no, $no,'$product', '$price', '카카오페이', '결제완료', '$regist_date'),";
 
     $i++;
   }
@@ -291,5 +269,85 @@ function gm_order_init_data() {
   return $sql;
 }
 
+// 틸퇴회원 더미 데이터 생성하는 함수
+function withdrawal_init_data() {
+  global $gm_join_date;
+  global $am_join_date;
+
+  $sql = "INSERT INTO `withdrawal` VALUES ";
+
+  // 일반회원30명 탈퇴
+  $no_temp = random(1,100, 30); //1~100까지 숫자중 중복없이 30개 추출
+  $no_array = array();
+  foreach ($no_temp as $v){
+    array_push($no_array, $v);
+  }
+
+  for($no = 1; $no <= 30 ; $no++){
+    $mmbr_no = (int)$no_array[$no-1];
+    //해당 회원의 가입날짜 가져오기
+    $start_date = $gm_join_date[$mmbr_no-1];
+    //탈퇴 날짜 생성
+    $end_date = '2019-06-30';
+    $wthd_date = randomDate($start_date, $end_date);
+    
+    $sql .= "($no, 'G' ,'$mmbr_no', '$start_date', '$wthd_date'),";
+  }
+
+
+  // 학원회원8명 탈퇴
+  $no_temp = random(1,31, 8); //1~100까지 숫자중 중복없이 30개 추출
+  $no_array = array();
+  foreach ($no_temp as $v){
+    array_push($no_array, $v);
+  }
+  $i=0;
+  for($no = 31; $no <= 38 ; $no++){
+
+    //회원 번호 뽑기
+    $mmbr_no = (int)$no_array[$i];
+    //해당 회원의 가입날짜 가져오기
+    $start_date = $am_join_date[$mmbr_no-1];
+    //탈퇴 날짜 생성
+    $end_date = '2019-06-30';
+    $wthd_date = randomDate($start_date, $end_date);
+    
+    $sql .= "($no, 'A' ,'$mmbr_no', '$start_date', '$wthd_date'),";
+
+    $i++;
+  }
+  
+  //마지막 콤마 제거
+  $sql = substr($sql, 0, -1);
+  $sql .= ";";
+  return $sql;
+
+}
+
+function random($min, $max, $num) {
+  $arr = array();
+	while ($num > count($arr)) {
+		$i = rand($min, $max);
+		$arr[$i] = $i; 
+	}
+	return $arr;
+}	
+
+function randomDate($start_date, $end_date){
+  // 타임 스탬프로 변환
+  $min = strtotime($start_date);
+  $max = strtotime($end_date);
+
+  // 위에서 얻은 타임 스탬프 값을 사용하여 난수 생성
+  $val = rand($min, $max);
+  // 원하는 날짜 형식으로 다시 변환
+  return date('Y-m-d', $val);
+}
+
+// a_members_init_data();
+// $sql = acd_story_init_data();
+// echo $sql;
+
 ?>
+
 
