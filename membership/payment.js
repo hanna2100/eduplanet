@@ -11,10 +11,9 @@ $(function () {
        merchant_uid : 'merchant_' + new Date().getTime(), // 이걸 주문번호로 쓰면 된다
        name : '프리미엄'+ month + '개월',
        amount : final_price,
-      // amount : <?= $final_price ?>,
-      buyer_email : email,
-      buyer_name : name,
-      buyer_tel : phone_num,
+       buyer_email : email,
+       buyer_name : name,
+       buyer_tel : phone_num,
        m_redirect_url : 'http://www.naver.com' // 모바일 결제시 사용
    }, function(rsp) {
        if ( rsp.success ) {
@@ -41,12 +40,14 @@ $(function () {
 
                    alert(msg);
                } else {
+                 alert("여기는 everyting fine아님");
                    //[3] 아직 제대로 결제가 되지 않았습니다.
                    //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
                }
+               //성공시 이동할 페이지
+               // "./bill.php?product='+name+'&price='+amount"
+               // location.replace('./bill.php');
            });
-           //성공시 이동할 페이지
-           location.href='../index.php';
        } else {
            msg = '결제에 실패하였습니다.';
            msg += '에러내용 : ' + rsp.error_msg;

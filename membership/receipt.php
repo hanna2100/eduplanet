@@ -8,8 +8,7 @@
   </head>
   <body>
 
-    <h1> receipt. PHP</h1>
-    <!-- 여기에 들어가야 하는 것 : 원래 receipt.php에 들어갔어야 하는 화면 -->
+    <h1>receipt.php</h1>
 
     <?php
       include "../lib/db_connector.php";
@@ -25,8 +24,6 @@
       $name = $_POST['name'];
       $phone_num = $_POST['phone_num'];
       $email = $_POST['email'];
-
-
 
      ?>
      <script type="text/javascript">
