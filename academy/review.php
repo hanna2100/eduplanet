@@ -69,7 +69,7 @@
                 <div class="inner_rate_bar">
                   <div class="rate_bar first"></div>
                 </div>
-              <p> 접근성 </p>
+              <p> 교통편의성 </p>
                 <div class="inner_rate_bar">
                   <div class="rate_bar second"></div>
                 </div>
@@ -77,7 +77,7 @@
                 <div class="inner_rate_bar">
                   <div class="rate_bar third"></div>
                 </div>
-              <p> 가성비 </p>
+              <p> 수강료 만족도 </p>
                 <div class="inner_rate_bar">
                   <div class="rate_bar four"></div>
                 </div>
