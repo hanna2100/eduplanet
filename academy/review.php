@@ -257,13 +257,17 @@
                }
 
                //그룹번호의 첫번째 페이지 숫자
-               $first_page = $last_page - ($page_scale-1);
-               //그룹번호의 첫번째 페이지는 1페이지보다 작을 수 없음
-               if($first_page < 1){
-                 $first_page = 1;
-               }else if($last_page == $total_pages){ //마지막 그룹번호일때 첫번째 페이지값 결정
-                 $first_page = $total_pages - ($total_pages % $page_scale)+1;
-               }
+                $first_page = $last_page - ($page_scale-1);
+                //그룹번호의 첫번째 페이지는 1페이지보다 작을 수 없음
+                if($first_page < 1){
+                  $first_page = 1;
+                }else if($last_page == $total_page){ //마지막 그룹번호일때 첫번째 페이지값 결정
+                  if($total_page % $page_scale==0){
+                    $first_page = $page_scale+1;
+                  }else{
+                    $first_page = $total_page - ($total_page % $page_scale)+1;
+                  }
+                }
 
                $next = $last_page + 1;// > 버튼 누를때 나올 페이지
                $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
