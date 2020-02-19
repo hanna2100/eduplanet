@@ -97,6 +97,7 @@ function create_table($conn, $table_name){
                     `no` INT NOT NULL AUTO_INCREMENT,
                     `parent` INT NOT NULL,
                     `user_no` INT NOT NULL,
+                    `one_line` VARCHAR(80) NOT NULL,
                     `total_star` INT NOT NULL,
                     `facility` INT NOT NULL,
                     `acsbl` INT NOT NULL,
@@ -107,7 +108,6 @@ function create_table($conn, $table_name){
                     `drawback` VARCHAR(250) NOT NULL,
                     `regist_day` DATE NOT NULL,
                     PRIMARY KEY(`no`),
-                    UNIQUE KEY(`user_no`),
                     FOREIGN KEY(`parent`) REFERENCES academy(`no`) 
                     ON DELETE CASCADE
                   );";
@@ -116,14 +116,14 @@ function create_table($conn, $table_name){
             $sql = "CREATE TABLE `acd_story` (
                     `no` INT NOT NULL AUTO_INCREMENT,
                     `parent` INT NOT NULL,
-                    `acd_name` VARCHAR(20) NOT NULL,
-                    `title` VARCHAR(20) NOT NULL,
-                    `subtitle` VARCHAR(20) NOT NULL,
-                    `subject1` VARCHAR(20) NOT NULL,
+                    `acd_name` VARCHAR(30) NOT NULL,
+                    `title` VARCHAR(30) NOT NULL,
+                    `subtitle` VARCHAR(30) NOT NULL,
+                    `subject1` VARCHAR(30) NOT NULL,
                     `content1` VARCHAR(500) NOT NULL,
-                    `subject2` VARCHAR(20),
+                    `subject2` VARCHAR(30),
                     `content2` VARCHAR(500),
-                    `subject3` VARCHAR(20),
+                    `subject3` VARCHAR(30),
                     `content3` VARCHAR(500),
                     `hit` INT DEFAULT 0,
                     `regist_day` DATE NOT NULL,
@@ -183,6 +183,16 @@ function create_table($conn, $table_name){
                       `no` INT NOT NULL AUTO_INCREMENT,
                       `user_no` INT NOT NULL,
 	                    `acd_no` INT NOT NULL,
+                      PRIMARY KEY(`no`)
+                    );";
+            break;
+            case 'withdrawal' : //회원탈퇴 테이블
+              $sql = "CREATE TABLE `withdrawal` (
+                      `no` INT NOT NULL AUTO_INCREMENT,
+                      `type` CHAR(1) NOT NULL,
+	                    `mmbr_no` INT NOT NULL,
+	                    `join_date` DATE NOT NULL,
+	                    `wthd_date` DATE NOT NULL,
                       PRIMARY KEY(`no`)
                     );";
             break;

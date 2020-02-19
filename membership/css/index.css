@@ -1,4 +1,4 @@
-/* membership.index.CSS */
+ /* membership.index.CSS */
 .hide { display: none;}
 * {
   padding: 0px;
@@ -41,7 +41,6 @@ body {
 .mid_contents {
   width: 90%;
   margin: 3% auto;
-
 }
 h2 {
   font-weight: 600;

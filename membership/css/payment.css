@@ -82,7 +82,7 @@ h3 {
 .method_wrap { padding: 25px 0; height: 200px; text-align: center;}
 ul { list-style: none;}
 li { float: left; width: 50%;  }
-.jply_btn_lg {
+.button_payMethod_box {
   display: inline-block;
   height: 56px;
   padding: 16px 24px;
@@ -100,11 +100,12 @@ li { float: left; width: 50%;  }
   vertical-align: middle;
   cursor: pointer;
 }
-.jply_btn_lg:hover {
+.button_payMethod_box:hover {
   border: 1px solid tomato;
 }
-
 .jply_radio_item { opacity:0}
+#payMethod_info { font-size: 12px; color: tomato; margin: 25px 10px; }
+.selected { border: 1px solid #2E89FF; color: #2E89FF;}
 
 /* payment_member_info 구매자 정보 */
 .payment_member_info{ margin: 30px 0;}

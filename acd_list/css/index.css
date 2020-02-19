@@ -21,6 +21,26 @@
   height: 130px;
   border: 1px solid red;
 } */
+#button_academy_heart {
+    float: right;
+    margin-left: 5px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    background : url('/eduplanet/img/common_sprite.png') no-repeat 0 -2661px;
+    width: 20px;
+    height: 18px;
+    color: transparent;
+    cursor: pointer;
+}
+
+
+#button_academy_heart:hover {
+    background : url('/eduplanet/img/common_sprite.png') no-repeat 0 -2680px;
+
+    width: 20px;
+    height: 18px;
+}
+
 #call_dibs_button{
   width: 120px;
   border-radius: 10px;
