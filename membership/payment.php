@@ -37,7 +37,7 @@
 
        ?>
 
-      <form id="paypaygo" action="./receipt.php?month=<?=$month?>&final_price=<?=$final_price?>&expired_date=<?=$expired_date?>" method="post">
+      <form id="paypaygo" onsubmit="return paymentCheck()" action="./receipt.php?month=<?=$month?>&final_price=<?=$final_price?>&expired_date=<?=$expired_date?>" method="post">
         <div class="inner_section">
           <div class="payment_wrap">
 
@@ -76,7 +76,7 @@
               <div class="method_wrap">
                 <ul class="button_ty_radio_list">
                   <li>
-                    <label class="button_ty_radio_box jply_btn_lg">
+                    <label class="button_payMethod_box">
                       <input type="radio" class="jply_radio_item" name="payMethod" value="html5_inicis.INIpayTest">
                       <span class="radio_icon"></span>
                       <span class="radio_text">신용카드</span>
@@ -97,27 +97,28 @@
                     </label>
                   </li> -->
                   <li>
-                    <label class="button_ty_radio_box jply_btn_lg">
+                    <label class="button_payMethod_box">
                       <input type="radio" class="jply_radio_item" name="payMethod" value="kakaopay">
                       <span class="radio_icon"></span>
                       <span class="radio_text icon_text ico_samsung">카카오페이</span>
                     </label>
                   </li>
                   <li>
-                    <label class="button_ty_radio_box jply_btn_lg">
+                    <label class="button_payMethod_box">
                       <input type="radio" class="jply_radio_item" name="payMethod" value="payco">
                       <span class="radio_icon"></span>
                       <span class="radio_text icon_text ico_payco">페이코</span>
                     </label>
                   </li>
                   <li>
-                    <label class="button_ty_radio_box jply_btn_lg">
+                    <label class="button_payMethod_box">
                       <input type="radio" class="jply_radio_item" name="payMethod" value="smilepay">
                       <span class="radio_icon"></span>
                       <span class="radio_text icon_text ico_ssgpay">스마일페이</span>
                     </label>
                   </li>
                 </ul>
+                <span id="payMethod_info"></span>
               </div> <!-- end of method_wrap -->
             </div> <!-- end of payment_method -->
 
@@ -126,22 +127,22 @@
               <div class="member_info_wrap">
                 <div class="member_info_box">
                   <div class="member_info_title">결제자 이름</div>
-                  <input type="text" name="name" class="member_info_input" placeholder="결제자, 입금자 이름" value="">
+                  <input type="text" name="name" id="input_name" class="member_info_input" placeholder="결제자, 입금자 이름" value="">
                 </div>
                 <div class="member_info_box">
                   <div class="member_info_title">연락처</div>
-                  <input type="text" name="phone_num" class="member_info_input" placeholder="'-'제외. 예) 01011112222" value="">
+                  <input type="tel" name="phone_num" id="input_tel" class="member_info_input" placeholder="'-'제외. 예) 01011112222" value="">
                 </div>
                 <div class="member_info_box">
                   <div class="member_info_title">결제알림 이메일</div>
-                  <input type="text" name="email" class="member_info_input" placeholder="예) user@email.com" value="">
+                  <input type="email" name="email" id="input_email" class="member_info_input" placeholder="예) user@email.com" value="">
                 </div>
               </div>
             </div>
 
             <div class="grid payment_agree">
               <div class="payment_agree_head">
-                <input type="checkbox" name="agree_checkbox" value="">
+                <input type="checkbox" name="agree_checkbox" id="agree">
                 <span class="checkbox_icon"></span>
                 <span class="checkbox_text">이용약관 및 유의사항에 동의합니다.</span>
               </div>
@@ -163,8 +164,8 @@
               </div>
             </div>
             <div class="grid payment_button">
-              <button type="button" name="button" onclick="alert_back('결제를 취소합니다.');">취소</button>
-              <button type="submit" name="button" onclick="document.getElementById('paypaygo').submit();">결제</button>
+              <button type="button" name="button" onclick="alert_back('결제를 취소합니다.');">취소</button>      
+              <button type="button" name="button" id="pay_commit" onclick="paymentCheck();">결제</button>
             </div>
 
           </div> <!-- end of payment_wrap -->
@@ -177,9 +178,71 @@
 
     </footer>
     <script>
+      var label = document.getElementsByClassName("button_payMethod_box");
+      var payMethod_info = document.getElementById("payMethod_info");
+      var kakao_info = "[KaKaoPay 이용 안내] 지원카드사 : 삼성카드, 하나카드, KB국민카드, 신한카드, 현대카드, 롯데카드, BC카드(씨티카드 제외)";
+      var payco_info = "[Payco 이용 안내] PAYCO는 NHN엔터테인먼트가 만든 안전한 간편결제 서비스입니다.";
+      var smile_info = "[SmilePay 이용 안내] 지원카드사 : KB국민카드, 광주은행BC카드, 전북은행BC카드, 현대카드, 롯데카드, BC카드";
 
-// 여기에 넣을 것 : 결제수단 클릭(선택)하면 테두리랑 내용 색 하늘색으로 바뀌는 코드 넣고 이름, 이메일, 전화번호, 이용약관 체크 여부 확인하는 자스
+      var payment_button = document.getElementsByClassName("payment_button");
+      var pay_commit = document.getElementById("pay_commit");
 
+      function addInfo(label, content){
+        let isSelected = false;
+        label.addEventListener("click", function(){
+          if(isSelected === false){
+            label.classList.remove("selected");
+            isSelected = true;
+            return;
+          }else if(isSelected === true){
+            label.classList.add("selected");
+            isSelected = false;
+          }
+          // console.log("선택되었는지?",isSelected);
+          // console.log(label);
+            payMethod_info.innerHTML = "";
+            payMethod_info.appendChild(document.createTextNode(content));
+        });
+      };
+
+      // 신용카드 클릭시 설명 삭제
+      addInfo(label[0], "");
+
+      // 카카오페이 상세 설명
+      addInfo(label[1], kakao_info);
+
+      // 페이코 상세 설명
+      addInfo(label[2], payco_info);
+
+      // 스마일페이 상세 설명
+      addInfo(label[3], smile_info);
+
+      function paymentCheck(){
+        var agree = document.getElementById("agree");
+        var agreeChecked = $(agree).prop("checked");
+        var MethodChecked = $("input:radio[name='payMethod']").is(":checked");
+        var input_name = document.getElementById("input_name");
+        var input_tel = document.getElementById("input_tel");
+        var input_email = document.getElementById("input_email");
+
+        if(MethodChecked === false) {
+          alert("결제수단을 선택해주세요.");
+          return false;
+        }else if(input_name.value === "") {
+          alert("이름을 입력해주세요.");
+          return false;
+        }else if(input_tel.value === "") {
+          alert("연락처를 입력해주세요.");
+          return false;
+        }else if(input_email.value === "") {
+          alert("이메일을 입력해주세요.");
+          return false;
+        }else if(agreeChecked === false) {
+          alert("반드시 이용약관 및 유의사항에 동의해주세요.");
+          return false;
+        }
+           document.getElementById("paypaygo").submit();
+      }
 
 
     </script>
