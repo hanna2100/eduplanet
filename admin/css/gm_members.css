@@ -218,7 +218,7 @@
     cursor: pointer;
 }
 
-.list_row > form > span > input:disabled{
+.list_row > form > span > input:disabled, .list_row > form > span > input:read-only{
     background-color:transparent;
     border: none;
 }
@@ -236,7 +236,7 @@
 .col4{
     width: 190px;
 }
-.col4 input, .col5 input, .col7 input, .col8 input  {
+.col2 input, .col4 input, .col5 input, .col7 input, .col8 input  {
     width: 90%;
 }
 .col5{

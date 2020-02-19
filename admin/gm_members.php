@@ -128,6 +128,7 @@
         //게시판 맨 상단 번호
         $number = $total_record - $truncated_num;
 
+        echo "<script>console.log($truncated_num)</script>";
         for ($i=$truncated_num; $i < $truncated_num+$scale && $i < $total_record; $i++){
           // 가져올 레코드로 위치(포인터) 이동
           mysqli_data_seek($result, $i);
@@ -142,15 +143,15 @@
           $regist_day  = $row["regist_day"];
 ?>
         <li class="list_row">
-        <form method="post" action="./lib/gm_members_update.php?no=<?=$no?>">
+        <form method="post" action="#">
           <span class="col1"><?=$number?></span>
-          <span class="col2"><?=$no?></span>
+          <span class="col2"><input type="text" name="no[]" value="<?=$no?>" readonly></span>
           <span class="col3"><?=$id?></span>
-          <span class="col4"><input type="text" name="email<?=$i?>" value="<?=$email?>" disabled maxlength="80" oninput="limitMaxLength(this)"/></span>
-          <span class="col5"><input type="number" name="phone" value="<?=$phone?>" disabled maxlength="12" oninput="limitMaxLength(this)"/></span>
+          <span class="col4"><input type="text" name="email[]" value="<?=$email?>" disabled maxlength="80" oninput="limitMaxLength(this)"/></span>
+          <span class="col5"><input type="number" name="phone[]" value="<?=$phone?>" disabled maxlength="12" oninput="limitMaxLength(this)"/></span>
           <span class="col6"><?=$age?></span>
-          <span class="col7"><input type="text" name="intres" value="<?=$intres?>" disabled maxlength="10" oninput="limitMaxLength(this)"/></span>
-          <span class="col8"><input class="date_field" type="text" name="expiry_day" value="<?=$expiry_day?>" disabled></span>
+          <span class="col7"><input type="text" name="intres[]" value="<?=$intres?>" disabled maxlength="10" oninput="limitMaxLength(this)"/></span>
+          <span class="col8"><input class="date_field" type="text" name="expiry_day[]" value="<?=$expiry_day?>" disabled readonly></span>
           <span class="col9"><?=$regist_day?></span>
         </form>
         </li>	
@@ -184,12 +185,16 @@
             if($first_page < 1){
               $first_page = 1;
             }else if($last_page == $total_page){ //마지막 그룹번호일때 첫번째 페이지값 결정
-              $first_page = $total_page - ($total_page % $page_scale)+1;
+              if($total_page % $page_scale==0){
+                $first_page = $total_page - $page_scale+1;
+              }else{
+                $first_page = $total_page - ($total_page % $page_scale)+1;
+              }
             }
+            echo "<script>console.log($first_page, $last_page)</script>";
             
             $next = $last_page + 1;// > 버튼 누를때 나올 페이지
             $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
-
             // 첫번째 페이지일 때 앵커 비활성화
             if ($first_page == 1) {
               if($page!=1)
@@ -203,6 +208,7 @@
               echo "<li><a href='/eduplanet/admin/gm_members.php?page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
             }
 
+            
             //페이지 번호 매기기
             for($i= $first_page ; $i <= $last_page ; $i++){
               if ($page == $i) {
