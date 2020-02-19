@@ -97,6 +97,7 @@ function create_table($conn, $table_name){
                     `no` INT NOT NULL AUTO_INCREMENT,
                     `parent` INT NOT NULL,
                     `user_no` INT NOT NULL,
+                    `one_line` VARCHAR(80) NOT NULL,
                     `total_star` INT NOT NULL,
                     `facility` INT NOT NULL,
                     `acsbl` INT NOT NULL,

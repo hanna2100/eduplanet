@@ -91,51 +91,83 @@ function g_membersGraph(){
 
 function listItemPicker(){
     $('.list_row').click(function(){
-        
+
+        //폼배열에 중복으로 쌓이는 것 방지
+        if($(this).css('background-color')=='rgb(142, 196, 240)'){
+            return;
+        }
+
         $(this).css('background-color' , '#8ec4f0a9');
         $(this).children('form').children('.col4').children('input').prop('disabled',false);
         $(this).children('form').children('.col5').children('input').prop('disabled',false);
         $(this).children('form').children('.col7').children('input').prop('disabled',false);
         $(this).children('form').children('.col8').children('input').prop('disabled',false);
 
-
         formsForUpdate.push($(this).children('form'));
     });
 }
 
-function submitUpdate(){
-    var serialize ='';
+function submitUpdate(){   
 
-    //action 경로 설정 및 서브밋
-    for(var i in formsForUpdate){
-        var no = formsForUpdate[i].children('.col2').text();
-        formsForUpdate[i].attr("action", "./lib/gm_members_update.php?no="+no+"&page="+page);
-        serialize += formsForUpdate[i].serialize() + "$$";
+    var conf = confirm('회원 데이터를 수정하시겠습니까?');
+
+    if(conf){
+        var serialize ='';
+
+        for(var i in formsForUpdate){
+            serialize += formsForUpdate[i].serialize() + "&";
+        }
+
+        serialize = serialize.slice(0,-1);
+        console.log(serialize);
+        $.ajax({
+            type: "post",
+            data: serialize,
+            url : "./lib/gm_members_update.php",
+            success : function(data){
+                if(data==1){
+                    location.href='/eduplanet/admin/gm_members.php?page='+page;
+                }else{
+                    alert('오류발생: '+data);
+                }
+            },
+            error : function(data){
+                alert("시스템에러");
+            }
+        });
     }
-
-    serialize = serialize.slice(0,-2);
-    console.log(serialize);
-
-    $.ajax({
-		type: "post",
-		data: serialize,
-		url : "./lib/gm_members_update.php?page="+page,
-		success : function(data){
-			alert("전송성공");
-		},
-		error : function(data){
-			alert("시스템에러");
-		}
-	});
 }
 
 function submitDelete(){
-    //action 경로 설정 및 서브밋
-    for(var i in formsForUpdate){
-        var no = formsForUpdate[i].children('.col2').text();
-        formsForUpdate[i].attr("action", "./lib/gm_members_delete.php?no="+no+"&page="+page);
-        formsForUpdate[i].submit();
+
+    var conf = confirm('회원 데이터를 삭제하시겠습니까?');
+
+    if(conf){
+        var serialize ='';
+
+        for(var i in formsForUpdate){
+            serialize += formsForUpdate[i].serialize() + "&";
+        }
+
+        serialize = serialize.slice(0,-1);
+        console.log(serialize);
+        $.ajax({
+            type: "post",
+            data: serialize,
+            url : "./lib/gm_members_delete.php",
+            success : function(data){
+                if(data==1){
+                    location.href='/eduplanet/admin/gm_members.php?page='+page;
+                }else{
+                    alert('오류발생: '+data);
+                }
+            },
+            error : function(data){
+                alert("시스템에러");
+            }
+        });
     }
+    
 }
 
 function limitMaxLength(e){
