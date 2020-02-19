@@ -38,7 +38,7 @@ a {
     /* border-bottom: 1px solid black; */
     text-align: center;
     position: fixed;
-    z-index: 99999;
+    z-index: 95;
 }
 
 .index_header_menu {

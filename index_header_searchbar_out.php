@@ -72,7 +72,7 @@
 
                             <div class="index_header_menu_hover_detail_review">
                                 <ul>
-                                    <li>리뷰 작성</li>
+                                    <li id="review_write">리뷰 작성</li>
                                 </ul>
 
                             </div>
@@ -166,6 +166,8 @@
             </div>
         </div>
     </div>
+
+    <?php include "mypage/review_write.php"; ?>
 
 </body>
 
