@@ -273,7 +273,7 @@ a {
     border-radius: 2px;
 }
 
-#input_main_serach {
+#acd_name_in {
     float: left;
     width: 150px;
     line-height: 28px;
@@ -293,4 +293,22 @@ a {
     /* border-left: 1px solid lightgray; */
     cursor: pointer;
     font-size: 12px;
+}
+
+/* 자동완성 결과창 크기와 스크롤바 지정 */
+.ui-autocomplete {
+    max-height: 175px;
+
+    /* 세로 스크롤바 */
+    overflow-y: auto;
+
+    /* 가로 스크롤바 숨기기 */
+    overflow-x: hidden;
+}
+  /* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+
+* html .ui-autocomplete {
+    height: 100px;
 }

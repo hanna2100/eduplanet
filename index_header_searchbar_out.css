@@ -279,15 +279,15 @@ a {
     border-radius: 2px;
 }
 
-#input_main_serach {
+/* #acd_name_out {
     float: left;
     width: 150px;
     line-height: 28px;
     outline: none;
     border: 1px solid white;
     padding-left: 10px;
-    /* padding-right: 60px; */
-}
+    padding-right: 60px;
+} */
 
 #button_main_search {
     float: left;
@@ -352,7 +352,7 @@ a {
     margin-left: 90px;
 }
 
-#input_main_serach {
+#acd_name_out {
     float: left;
     width: 300px;
     line-height: 41px;
@@ -386,4 +386,22 @@ a {
 
 option {
     margin-bottom: 10px;
+}
+
+/* 자동완성 결과창 크기와 스크롤바 지정 */
+.ui-autocomplete {
+    max-height: 175px;
+
+    /* 세로 스크롤바 */
+    overflow-y: auto;
+
+    /* 가로 스크롤바 숨기기 */
+    overflow-x: hidden;
+}
+  /* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+
+* html .ui-autocomplete {
+    height: 100px;
 }

@@ -57,7 +57,7 @@
 
 
 /* 메인 검색창 */
-#input_main_search {
+#acd_name_index {
     display: inline-block;
     width: 420px;
     height: 45px;
@@ -300,4 +300,22 @@ ul {
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
+}
+
+/* 자동완성 결과창 크기와 스크롤바 지정 */
+.ui-autocomplete {
+    max-height: 175px;
+
+    /* 세로 스크롤바 */
+    overflow-y: auto;
+
+    /* 가로 스크롤바 숨기기 */
+    overflow-x: hidden;
+}
+  /* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+
+* html .ui-autocomplete {
+    height: 100px;
 }

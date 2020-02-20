@@ -6,135 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
+    <!-- 제이쿼리 -->
     <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+    <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="/eduplanet/mypage/css/review_write.css">
 
-    <script>
-        $(document).ready(function() {
-
-            // 리뷰 작성 버튼을 눌렀을 때    
-            $("#review_write").click(function() {
-                showPopup(this);
-            });
-
-            // 닫기 버튼을 눌렀을 때
-            $("#button_close_popup").click(function(e) {
-                e.preventDefault();
-                closePopup();
-            });
-
-        });
-
-        // 팝업 보여주기 함수
-        function showPopup(parameter) {
-            $("#popup_wrap, #popup_content").show();
-            setPopupPos("#popup_content");
-            // scrollMove("#popup_content", 400);
-        }
-
-        // 팝업으로 스크롤 자동이동 (팝업창 위치를 알기 위해 팝업객체 가져오기)
-        // selector : 가져올 객체 (아이디, this등) // sec : 이동 시간
-        function scrollMove(selector, sec) {
-            var offset = $(selector).offset();
-            $('html, body').animate({
-                scrollTop: offset.top
-            }, sec);
-        }
-
-        // 화면 크기에 따라 가운데로 위치를 지정해주는 함수
-        function setPopupPos(selector) {
-            // $(selector).css("top", (($(window).height() - $(selector).outerHeight()) / 2 + $(window).scrollTop()) + "px");
-            $(selector).css("left", (($(window).width() - $(selector).outerWidth()) / 2 + $(window).scrollLeft()) + "px");
-            $(selector).css("position", "absolute");
-        }
-
-        // 팝업 닫기 함수
-        function closePopup() {
-            $("#popup_wrap, #popup_content").hide();
-        }
-    </script>
-
-    <script>
-        function totalStarSetting(score) {
-
-            switch (score) {
-
-                case 1:
-                    document.getElementById("total_star_text").innerHTML = "매우 불만족";
-                    document.getElementById("total_star_img_1").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_2").style.backgroundPosition = "0 -350px";
-                    document.getElementById("total_star_img_3").style.backgroundPosition = "0 -350px";
-                    document.getElementById("total_star_img_4").style.backgroundPosition = "0 -350px";
-                    document.getElementById("total_star_img_5").style.backgroundPosition = "0 -350px";
-                    break;
-
-                case 2:
-                    document.getElementById("total_star_text").innerHTML = "불만족";
-                    document.getElementById("total_star_img_1").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_2").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_3").style.backgroundPosition = "0 -350px";
-                    document.getElementById("total_star_img_4").style.backgroundPosition = "0 -350px";
-                    document.getElementById("total_star_img_5").style.backgroundPosition = "0 -350px";
-                    break;
-
-                case 3:
-                    document.getElementById("total_star_text").innerHTML = "보통";
-                    document.getElementById("total_star_img_1").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_2").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_3").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_4").style.backgroundPosition = "0 -350px";
-                    document.getElementById("total_star_img_5").style.backgroundPosition = "0 -350px";
-                    break;
-
-                case 4:
-                    document.getElementById("total_star_text").innerHTML = "만족";
-                    document.getElementById("total_star_img_1").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_2").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_3").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_4").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_5").style.backgroundPosition = "0 -350px";
-                    break;
-
-                case 5:
-                    document.getElementById("total_star_text").innerHTML = "매우 만족";
-                    document.getElementById("total_star_img_1").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_2").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_3").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_4").style.backgroundPosition = "-50px -350px";
-                    document.getElementById("total_star_img_5").style.backgroundPosition = "-50px -350px";
-                    break;
-            }
-        }
-
-        function countTextLength(input) {
-
-            switch (input) {
-
-                case 1:
-                    var text = document.getElementById("one_line").value;
-                    document.getElementById("text_length_one_line").innerHTML = text.length;
-
-                    if
-                    break;
-
-                case 2:
-                    var text = document.getElementById("benefit").value;
-                    document.getElementById("text_length_benefit").innerHTML = text.length;
-                    break;
-
-                case 3:
-                    var text = document.getElementById("drawback").value;
-                    document.getElementById("text_length_drawback").innerHTML = text.length;
-                    break;
-
-            }
-
-
-
-        }
-    </script>
-
+    <!-- 스크립트 -->
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
 
 </head>
 
@@ -164,8 +50,10 @@
                         </div>
 
                         <div class="review_input_content">
-                            <input type="text" id="acd_name" name="acd_name">
-                            <span class="search_academy_check">학원을 선택해 주세요.</span>
+                            <input type="text" id="acd_name" name="acd_name" onchange="checkAcademy();">
+                            <input type="hidden" id="si_name" name="si_name">
+                            <input type="hidden" id="dong_name" name="dong_name">
+                            <span id="search_academy_check">학원을 선택해 주세요.</span>
                         </div>
                     </div>
 
@@ -177,28 +65,28 @@
 
                         <div class="review_input_content">
                             <div class="total_star_wrap">
-                                <img id="total_star_img_1">
-                                <input type="radio" id="total_star_1" name="total_star" value="1" onclick="totalStarSetting(1);">
+                                <img id="total_star_img_1" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="total_star_1" name="total_star" value="1" onclick="reviewStarSetting(0,1);">
                             </div>
 
                             <div class="total_star_wrap">
-                                <img id="total_star_img_2">
-                                <input type="radio" id="total_star_2" name="total_star" value="2" onclick="totalStarSetting(2);">
+                                <img id="total_star_img_2" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="total_star_2" name="total_star" value="2" onclick="reviewStarSetting(0,2);">
                             </div>
 
                             <div class="total_star_wrap">
-                                <img id="total_star_img_3">
-                                <input type="radio" id="total_star_3" name="total_star" value="3" onclick="totalStarSetting(3);">
+                                <img id="total_star_img_3" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="total_star_3" name="total_star" value="3" onclick="reviewStarSetting(0,3);">
                             </div>
 
                             <div class="total_star_wrap">
-                                <img id="total_star_img_4">
-                                <input type="radio" id="total_star_4" name="total_star" value="4" onclick="totalStarSetting(4);">
+                                <img id="total_star_img_4" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="total_star_4" name="total_star" value="4" onclick="reviewStarSetting(0,4);">
                             </div>
 
                             <div class="total_star_wrap">
-                                <img id="total_star_img_5">
-                                <input type="radio" id="total_star_5" name="total_star" value="5" onclick="totalStarSetting(5);">
+                                <img id="total_star_img_5" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="total_star_5" name="total_star" value="5" onclick="reviewStarSetting(0,5);">
                             </div>
 
                             <span id="total_star_text"></span>
@@ -216,7 +104,7 @@
 
                         <div class="review_input_content">
                             <textarea name="one_line" id="one_line" cols="30" rows="8" maxlength="80" onkeyup="countTextLength(1);"></textarea>
-                            
+
                             <div class="count_text_span">
                                 <span><span id="text_length_one_line">0</span> / 80</span>
                             </div>
@@ -253,42 +141,197 @@
                         </div>
                     </div>
 
-                    <!-- 시설 별점 -->
+                    <!-- 시설 만족도 별점 -->
                     <div class="review_star_facility">
+                        <div class="review_subject_star">
+                            <p>시설 만족도</p>
+                        </div>
 
+                        <div class="review_input_content_star">
+                            <div class="facility_star_wrap">
+                                <img id="facility_star_img_1" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="facility_star_1" name="facility_star" value="1" onclick="reviewStarSetting(1,1);">
+                            </div>
+
+                            <div class="facility_star_wrap">
+                                <img id="facility_star_img_2" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="facility_star_2" name="facility_star" value="2" onclick="reviewStarSetting(1,2);">
+                            </div>
+
+                            <div class="facility_star_wrap">
+                                <img id="facility_star_img_3" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="facility_star_3" name="facility_star" value="3" onclick="reviewStarSetting(1,3);">
+                            </div>
+
+                            <div class="facility_star_wrap">
+                                <img id="facility_star_img_4" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="facility_star_4" name="facility_star" value="4" onclick="reviewStarSetting(1,4);">
+                            </div>
+
+                            <div class="facility_star_wrap">
+                                <img id="facility_star_img_5" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="facility_star_5" name="facility_star" value="5" onclick="reviewStarSetting(1,5);">
+                            </div>
+
+                            <span id="facility_star_text"></span>
+                        </div>
                     </div>
 
-                    <!-- 교통편리성 별점 -->
-                    <div class="review_star_facility">
+                    <!-- 교통 편의성 별점 -->
+                    <div class="review_star_acsbl">
+                        <div class="review_subject_star">
+                            <p>교통 편의성</p>
+                        </div>
 
+                        <div class="review_input_content_star">
+                            <div class="acsbl_star_wrap">
+                                <img id="acsbl_star_img_1" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="acsbl_star_1" name="acsbl_star" value="1" onclick="reviewStarSetting(2,1);">
+                            </div>
+
+                            <div class="acsbl_star_wrap">
+                                <img id="acsbl_star_img_2" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="acsbl_star_2" name="acsbl_star" value="2" onclick="reviewStarSetting(2,2);">
+                            </div>
+
+                            <div class="acsbl_star_wrap">
+                                <img id="acsbl_star_img_3" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="acsbl_star_3" name="acsbl_star" value="3" onclick="reviewStarSetting(2,3);">
+                            </div>
+
+                            <div class="acsbl_star_wrap">
+                                <img id="acsbl_star_img_4" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="acsbl_star_4" name="acsbl_star" value="4" onclick="reviewStarSetting(2,4);">
+                            </div>
+
+                            <div class="acsbl_star_wrap">
+                                <img id="acsbl_star_img_5" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="acsbl_star_5" name="acsbl_star" value="5" onclick="reviewStarSetting(2,5);">
+                            </div>
+
+                            <span id="acsbl_star_text"></span>
+                        </div>
                     </div>
 
-                    <!-- 강사 별점 -->
-                    <div class="review_star_facility">
+                    <!-- 강사 만족도 별점 -->
+                    <div class="review_star_teacher">
+                        <div class="review_subject_star">
+                            <p>강사 만족도</p>
+                        </div>
 
+                        <div class="review_input_content_star">
+                            <div class="teacher_star_wrap">
+                                <img id="teacher_star_img_1" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="teacher_star_1" name="teacher_star" value="1" onclick="reviewStarSetting(3,1);">
+                            </div>
+
+                            <div class="teacher_star_wrap">
+                                <img id="teacher_star_img_2" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="teacher_star_2" name="teacher_star" value="2" onclick="reviewStarSetting(3,2);">
+                            </div>
+
+                            <div class="teacher_star_wrap">
+                                <img id="teacher_star_img_3" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="teacher_star_3" name="teacher_star" value="3" onclick="reviewStarSetting(3,3);">
+                            </div>
+
+                            <div class="teacher_star_wrap">
+                                <img id="teacher_star_img_4" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="teacher_star_4" name="teacher_star" value="4" onclick="reviewStarSetting(3,4);">
+                            </div>
+
+                            <div class="teacher_star_wrap">
+                                <img id="teacher_star_img_5" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="teacher_star_5" name="teacher_star" value="5" onclick="reviewStarSetting(3,5);">
+                            </div>
+
+                            <span id="teacher_star_text"></span>
+                        </div>
                     </div>
 
                     <!-- 수강료 만족도 별점 -->
-                    <div class="review_star_facility">
+                    <div class="review_star_cost_efct">
+                        <div class="review_subject_star">
+                            <p>수강료 만족도</p>
+                        </div>
 
+                        <div class="review_input_content_star">
+                            <div class="cost_efct_star_wrap">
+                                <img id="cost_efct_star_img_1" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="cost_efct_star_1" name="cost_efct_star" value="1" onclick="reviewStarSetting(4,1);">
+                            </div>
+
+                            <div class="cost_efct_star_wrap">
+                                <img id="cost_efct_star_img_2" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="cost_efct_star_2" name="cost_efct_star" value="2" onclick="reviewStarSetting(4,2);">
+                            </div>
+
+                            <div class="cost_efct_star_wrap">
+                                <img id="cost_efct_star_img_3" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="cost_efct_star_3" name="cost_efct_star" value="3" onclick="reviewStarSetting(4,3);">
+                            </div>
+
+                            <div class="cost_efct_star_wrap">
+                                <img id="cost_efct_star_img_4" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="cost_efct_star_4" name="cost_efct_star" value="4" onclick="reviewStarSetting(4,4);">
+                            </div>
+
+                            <div class="cost_efct_star_wrap">
+                                <img id="cost_efct_star_img_5" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="cost_efct_star_5" name="cost_efct_star" value="5" onclick="reviewStarSetting(4,5);">
+                            </div>
+
+                            <span id="cost_efct_star_text"></span>
+                        </div>
                     </div>
 
-                    <!-- 학업성취도 별점 -->
-                    <div class="review_star_facility">
+                    <!-- 학업 성취도 별점 -->
+                    <div class="review_star_achievement">
+                        <div class="review_subject_star">
+                            <p>학업 성취도</p>
+                        </div>
 
+                        <div class="review_input_content_star">
+                            <div class="achievement_star_wrap">
+                                <img id="achievement_star_img_1" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="achievement_star_1" name="achievement_star" value="1" onclick="reviewStarSetting(5,1);">
+                            </div>
+
+                            <div class="achievement_star_wrap">
+                                <img id="achievement_star_img_2" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="achievement_star_2" name="achievement_star" value="2" onclick="reviewStarSetting(5,2);">
+                            </div>
+
+                            <div class="achievement_star_wrap">
+                                <img id="achievement_star_img_3" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="achievement_star_3" name="achievement_star" value="3" onclick="reviewStarSetting(5,3);">
+                            </div>
+
+                            <div class="achievement_star_wrap">
+                                <img id="achievement_star_img_4" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="achievement_star_4" name="achievement_star" value="4" onclick="reviewStarSetting(5,4);">
+                            </div>
+
+                            <div class="achievement_star_wrap">
+                                <img id="achievement_star_img_5" src="/eduplanet/img/background_none.png">
+                                <input type="radio" id="achievement_star_5" name="achievement_star" value="5" onclick="reviewStarSetting(5,5);">
+                            </div>
+
+                            <span id="achievement_star_text"></span>
+                        </div>
                     </div>
-
                 </div>
 
+                <div class="review_write_footer">
+                    <button id="button_submit_review" onclick="registReview();">등록하기</button>
+                </div>
+
+
             </div>
-
-
-
         </div>
 
-
-
     </form>
+
 </body>
 
 </html>
