@@ -70,16 +70,21 @@
                         <p>∗ 취소 및 환불에 대한 문의는 고객 문의 페이지를 이용해 주시기 바랍니다.</p>
                     </div>
 
-
-
-
                     <?php
-
                     // 결제내역 test ============================================================
 
-                    $membership = 1;
+                    // user_no 가 gm_no 랑 같은가?
+                    $user_no = 1;
 
-                    if ($membership == 0) {
+                    include "../lib/db_connector.php";
+
+                    $sql = "SELECT * from gm_order WHERE gm_no='$user_no'";
+
+                    $result = mysqli_query($conn, $sql);
+                    $total_record = mysqli_num_rows($result);
+
+
+                    if (!$result) {
 
                     ?>
                         <!-- 결제 내역이 없을 때 -->
@@ -108,61 +113,35 @@
                                 </ul>
                             </div>
 
-                            <div class="membership_table_list">
-                                <ul>
-                                    <li id="membership_name">프리미엄 1개월</li>
-                                    <li id="membership_price">10,000 원</li>
-                                    <li id="membership_method">카카오페이</li>
-                                    <li id="membership_status">결제완료</li>
-                                    <li id="membership_pay_day">2020-02-18</li>
-                                </ul>
-                            </div>
+                            <?php
+                            for ($i = 0; $i < $total_record; $i++) {
 
-                            <div class="membership_table_list">
-                                <ul>
-                                    <li id="membership_name">프리미엄 1개월</li>
-                                    <li id="membership_price">10,000 원</li>
-                                    <li id="membership_method">카카오페이</li>
-                                    <li id="membership_status">결제완료</li>
-                                    <li id="membership_pay_day">2020-02-18</li>
-                                </ul>
-                            </div>
+                                mysqli_data_seek($result, $i);
 
-                            <div class="membership_table_list">
-                                <ul>
-                                    <li id="membership_name">프리미엄 1개월</li>
-                                    <li id="membership_price">10,000 원</li>
-                                    <li id="membership_method">카카오페이</li>
-                                    <li id="membership_status">결제완료</li>
-                                    <li id="membership_pay_day">2020-02-18</li>
-                                </ul>
-                            </div>
+                                $row = mysqli_fetch_array($result);
 
-                            <div class="membership_table_list">
-                                <ul>
-                                    <li id="membership_name">베이직 1개월</li>
-                                    <li id="membership_price">5,000 원</li>
-                                    <li id="membership_method">무통장입금</li>
-                                    <li id="membership_status">결제완료</li>
-                                    <li id="membership_pay_day">2020-02-01</li>
-                                </ul>
-                            </div>
+                                $prdct_name_month = $row["prdct_name_month"];
+                                $price = $row["price"];
+                                $pay_method = $row["pay_method"];
+                                $status = $row["status"];
+                                $date = $row["date"];
+                            ?>
 
-                            <div class="membership_table_list">
-                                <ul>
-                                    <li id="membership_name">프리미엄 6개월</li>
-                                    <li id="membership_price">30,000 원</li>
-                                    <li id="membership_method">신용카드</li>
-                                    <li id="membership_status">결제취소</li>
-                                    <li id="membership_pay_day">2020-01-18</li>
-                                </ul>
-                            </div>
+                                <div class="membership_table_list">
+                                    <ul>
+                                        <li id="membership_name"><?= $prdct_name_month ?></li>
+                                        <li id="membership_price"><?= $price ?> 원</li>
+                                        <li id="membership_method"><?= $pay_method ?></li>
+                                        <li id="membership_status"><?= $status ?></li>
+                                        <li id="membership_pay_day"><?= $date ?></li>
+                                    </ul>
+                                </div>
+
+                        <?php
+                            }
+                        }
+                        ?>
                         </div>
-
-                    <?php
-                    }
-                    ?>
-
                 </div>
             </div>
 
