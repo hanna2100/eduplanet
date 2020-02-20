@@ -103,7 +103,7 @@
 
     echo "
         <script>
-            alert('작성이 완료되었습니다. 관리자 승인 후 등록이 완료됩니다.');
+            alert('스토리 등록이 완료되었습니다.');
             location.href = '/eduplanet/acd_story/index.php';
         </script>
     ";

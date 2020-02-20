@@ -61,25 +61,30 @@
                         </ul>
                     </div>
                 </div>
+                
+                <?php
+                    // 리뷰 test ============================================================
+
+                    // test용
+                    $user_no = 2;
+
+                    include "../lib/db_connector.php";
+
+                    $sql = "SELECT acd_name, total_star, regist_day FROM review INNER JOIN academy ON review.parent = academy.no WHERE user_no='$user_no'";
+
+                    $result = mysqli_query($conn, $sql);
+                    $total_record = mysqli_num_rows($result);
+                    ?>
 
                 <div class="mypage_content">
 
                     <div class="mypage_content_title">
                         <h4>작성한 리뷰</h4>
-                        <p>총 <span id="review_list_num">0</span> 개의 리뷰를 작성하셨습니다.</p>
+                        <p>총 <span id="review_list_num"><?=$total_record?></span> 개의 리뷰를 작성하셨습니다.</p>
                     </div>
 
-
-
-
                     <?php
-
-                    // 결제내역 test ============================================================
-
-                    $review = 1;
-
-                    if ($review == 0) {
-
+                    if (!$result) {
                     ?>
                         <!-- 작성한 리뷰가 없을 때 -->
                         <div class="mypage_content_list_none">
@@ -107,15 +112,33 @@
                                 </ul>
                             </div>
 
+                            <?php
+                                for ($i=0; $i < $total_record; $i++) {
+
+                                mysqli_data_seek($result, $i);
+
+                                $row = mysqli_fetch_array($result);
+                
+                                $acd_name = $row["acd_name"];
+                                $regist_day = $row["regist_day"];
+                                $total_star = $row["total_star"];
+
+                            ?>
+
                             <div class="review_table_list">
                                 <ul>
-                                    <li id="review_acd_name">미래고양이개발교육원</li>
-                                    <li id="review_regist_day">2020-02-18</li>
-                                    <li id="review_status">승인대기</li>
-                                    <li id="review_total_star">5.0</li>
-                                    <li id="review_edit_delete"><a href="#">수정 </a>|<a href="#"> 삭제</a></li>
+                                    <li id="review_acd_name"><?=$acd_name?></li>
+                                    <li id="review_regist_day"><?=$regist_day?></li>
+                                    <li id="review_status">등록완료</li>
+                                    <li id="review_total_star"><?=$total_star?></li>
+                                    <li id="review_edit_delete"><a href="#">수정 </a>|<a href=""> 삭제</a></li>
                                 </ul>
                             </div>
+
+                            <?php
+                            }
+                            mysqli_close($conn);
+                            ?>
 
                             
                         </div>

@@ -6,11 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
-    <!-- css -->
-    <link rel="stylesheet" href="/eduplanet/index_content.css">
+    <!-- 제이쿼리 -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- css -->
+    <link rel="stylesheet" href="/eduplanet/index_content.css">
+
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar_index.js"></script>
+
 
 </head>
 
@@ -28,56 +39,59 @@
                 </div>
             </h2>
 
+            <form name="academy_search_form" action="#" method="POST">
 
-            <!-- 메인 상단 배경 속 검색창 -->
-            <div class="index_main_wrap">
+                <!-- 메인 상단 배경 속 검색창 -->
+                <div class="index_main_wrap">
 
-                <div class="index_main_title">
+                    <div class="index_main_title">
 
-                    <div class="index_main_search">
+                        <div class="index_main_search">
 
-                        <select name="select_district" id="select_district">
-                            <option selected>시/군 선택</option>
-                            <option value="district_01">가평군</option>
-                            <option value="district_02">고양시</option>
-                            <option value="district_03">과천시</option>
-                            <option value="district_04">광명시</option>
-                            <option value="district_05">광주시</option>
-                            <option value="district_06">구리시</option>
-                            <option value="district_07">군포시</option>
-                            <option value="district_08">김포시</option>
-                            <option value="district_09">남양주시</option>
-                            <option value="district_10">동두천시</option>
-                            <option value="district_11">부천시</option>
-                            <option value="district_12">성남시</option>
-                            <option value="district_13">수원시</option>
-                            <option value="district_14">시흥시</option>
-                            <option value="district_15">안산시</option>
-                            <option value="district_16">안성시</option>
-                            <option value="district_17">안양시</option>
-                            <option value="district_18">양주시</option>
-                            <option value="district_19">양평군</option>
-                            <option value="district_20">여주시</option>
-                            <option value="district_21">연천군</option>
-                            <option value="district_22">오산시</option>
-                            <option value="district_23">용인시</option>
-                            <option value="district_24">의왕시</option>
-                            <option value="district_25">의정부시</option>
-                            <option value="district_26">이천시</option>
-                            <option value="district_27">파주시</option>
-                            <option value="district_28">평택시</option>
-                            <option value="district_29">포천시</option>
-                            <option value="district_30">하남시</option>
-                            <option value="district_31">화성시</option>
-                        </select>
+                            <select name="select_district" id="select_district">
+                                <option selected>시/군 선택</option>
+                                <option value="district_01">가평군</option>
+                                <option value="district_02">고양시</option>
+                                <option value="district_03">과천시</option>
+                                <option value="district_04">광명시</option>
+                                <option value="district_05">광주시</option>
+                                <option value="district_06">구리시</option>
+                                <option value="district_07">군포시</option>
+                                <option value="district_08">김포시</option>
+                                <option value="district_09">남양주시</option>
+                                <option value="district_10">동두천시</option>
+                                <option value="district_11">부천시</option>
+                                <option value="district_12">성남시</option>
+                                <option value="district_13">수원시</option>
+                                <option value="district_14">시흥시</option>
+                                <option value="district_15">안산시</option>
+                                <option value="district_16">안성시</option>
+                                <option value="district_17">안양시</option>
+                                <option value="district_18">양주시</option>
+                                <option value="district_19">양평군</option>
+                                <option value="district_20">여주시</option>
+                                <option value="district_21">연천군</option>
+                                <option value="district_22">오산시</option>
+                                <option value="district_23">용인시</option>
+                                <option value="district_24">의왕시</option>
+                                <option value="district_25">의정부시</option>
+                                <option value="district_26">이천시</option>
+                                <option value="district_27">파주시</option>
+                                <option value="district_28">평택시</option>
+                                <option value="district_29">포천시</option>
+                                <option value="district_30">하남시</option>
+                                <option value="district_31">화성시</option>
+                            </select>
 
-                        <input placeholder="학원 이름으로 검색" type="text" name="" id="input_main_search">
-                        <button id="button_main_search" type="button">검색</button>
+                            <form name="search_academy_form" action="#" method="post">
+                                <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_index">
+                                <button id="button_main_search" type="button">검색</button>
+                            </form>
+
+                        </div>
 
                     </div>
-
                 </div>
-            </div>
 
         </div>
 

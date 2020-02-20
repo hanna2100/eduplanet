@@ -1,9 +1,9 @@
 <?php
     // session_start();
 
-    $_SESSION["userid"] = 'test';
+    $_SESSION["user_no"] = 2;
 
-    $userid = $_SESSION["userid"];
+    $user_no = $_SESSION["user_no"];
 ?>
 
 <!DOCTYPE html>
@@ -15,9 +15,15 @@
     <title>에듀플래닛</title>
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="/eduplanet/mypage/css/mypage_header.css">
-    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!-- <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
+
+    <!-- <script src="//code.jquery.com/jquery-3.2.1.min.js"></script> -->
+
+    <!-- 자동완성 -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- identicon (프로필 이미지) -->
     <script src="//cdn.rawgit.com/placemarker/jQuery-MD5/master/jquery.md5.js"></script>
@@ -59,7 +65,7 @@
                         <?php
 
                             $con = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
-                            $sql = "select expiry_day from g_members where id='test'";
+                            $sql = "select expiry_day from g_members where no='$user_no'";
                             $result = mysqli_query($con, $sql);
                             $row = mysqli_fetch_array($result);
 

@@ -6,8 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
+    <!-- 제이쿼리 -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="/eduplanet/index_header_searchbar_in.css">
+
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar_in.js"></script>
 
 </head>
 
@@ -58,10 +71,12 @@
 
                 </ul>
 
-                <div class="index_header_searchbar_in">
-                        <input placeholder="학원 이름으로 검색" type="text" name="" id="input_main_serach">
+                <form name="search_academy_form" action="#" method="post">
+                    <div class="index_header_searchbar_in">
+                        <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_in">
                         <button id="button_main_search" type="button">검색</button>
-                </div>
+                    </div>
+                </form>
 
                 <ul class="index_header_menu_ul_right">
 
@@ -94,16 +109,25 @@
 
                             <div class="index_header_menu_hover_detail_profile">
                                 <ul>
-                                <a href="/eduplanet/mypage/myinfo.php"><li>내 정보</li></a>
-                                    <a href="/eduplanet/mypage/follow.php"><li>찜목록</li></a>
-                                    <a href="/eduplanet/mypage/membership_pay.php"><li>멤버십/결제</li></a>
-                                    <a href="/eduplanet/mypage/review_mylist.php"><li>리뷰</li></a>
-                                    <a href="#"><li>로그아웃</li></a>
+                                    <a href="/eduplanet/mypage/myinfo.php">
+                                        <li>내 정보</li>
+                                    </a>
+                                    <a href="/eduplanet/mypage/follow.php">
+                                        <li>찜목록</li>
+                                    </a>
+                                    <a href="/eduplanet/mypage/membership_pay.php">
+                                        <li>멤버십/결제</li>
+                                    </a>
+                                    <a href="/eduplanet/mypage/review_mylist.php">
+                                        <li>리뷰</li>
+                                    </a>
+                                    <a href="#">
+                                        <li>로그아웃</li>
+                                    </a>
                                 </ul>
                             </div>
                         </div>
-                    </<a>
-
+                    </li>
                 </ul>
 
             </div>
