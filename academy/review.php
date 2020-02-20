@@ -5,7 +5,6 @@
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
      <title>review test</title>
-     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
      <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">\ -->
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <!--  star rating -->
@@ -23,8 +22,10 @@
    </head>
    <body>
      <header>
-         <?php include "../index_header.php"; ?>
-         <?php include "../academy_header_soyoung.php"; ?>
+         <?php
+          // include "../index_header.php";
+          // include "../academy_header_soyoung.php";
+         ?>
      </header>
 
      <?php
@@ -34,9 +35,16 @@
         } else {
             $page = 1;
         }
+
+        if(isset($_SESSION["id"])){
+            $id = $_SESSION["id"];
+        }else{
+          // 테스트하는 동안 쓸 임시 아이디
+            $id = "비회원";
+        }
         // content_top
           // parent="현재 리뷰를 보고 있는 학원 넘버"
-        $sql_top = "select avg(total_star), avg(facility), avg(acsbl), avg(teacher), avg(cost_efct), avg(achievement) from review where parent=1;";
+        $sql_top = "select avg(total_star), avg(facility), avg(acsbl), avg(teacher), avg(cost_efct), avg(achievement) from review where parent=21;";
         $result_top = mysqli_query($conn, $sql_top);
         $row_top = mysqli_fetch_array($result_top);
 
@@ -97,6 +105,7 @@
                 $('.third').css({'width': $rate_bar_teacher+'%'});
                 $('.four').css({'width': $rate_bar_cost_efct+'%'});
                 $('.five').css({'width': $rate_bar_achievement+'%'});
+                console.log("총 만족도", $rate_bar_facility, $rate_bar_acsbl, $rate_bar_teacher,$rate_bar_cost_efct, $rate_bar_achievement);
                 </script>
             </div>
           </div>
@@ -111,7 +120,7 @@
         </div>
     <?php
         // content_bottom
-        $sql_bottom = "select review.*, g_members.age from review inner join g_members on review.user_no=g_members.no where parent=1 order by regist_day desc;";
+        $sql_bottom = "select review.*, g_members.age from review inner join g_members on review.user_no=g_members.no where parent=21 order by regist_day desc;";
         $result_bottom = mysqli_query($conn, $sql_bottom);
         // 1. 전체 리뷰의 갯수
         $total_record = mysqli_num_rows($result_bottom);
@@ -122,18 +131,21 @@
         // 4. 현재 페이지의 제일 첫 게시글 번호 구하기
         $set_page_amount = ($page - 1) * SCALE;
         $record_number = $total_record - $set_page_amount;
+
         // 5. 현재 페이지에 게시글 목록 출력하기
         for($i=$set_page_amount ; $i<$set_page_amount+SCALE && $i<$total_record ; $i++){
           mysqli_data_seek($result_bottom, $i);
           $row = mysqli_fetch_array($result_bottom);
 
           $num = $row["no"];
+          $user_no = $row["user_no"];
+          $one_line = $row["one_line"];
     	    $individual_star = floor($row["total_star"]);
-    	    $facility = $row["facility"];
-    	    $acsbl = $row["acsbl"];
-    	    $teacher = $row["teacher"];
-    	    $cost_efct = $row["cost_efct"];
-    	    $achievement = $row["achievement"];
+    	    $facility = $row["facility"]*20;
+    	    $acsbl = $row["acsbl"]*20;
+    	    $teacher = $row["teacher"]*20;
+    	    $cost_efct = $row["cost_efct"]*20;
+    	    $achievement = $row["achievement"]*20;
     	    $benefit = $row["benefit"];
     	    $drawback = $row["drawback"];
           $regist_day = $row["regist_day"];
@@ -146,33 +158,46 @@
             $grade = "고등";
           }else {$grade = "성인";}
 
-
-
     ?>
+    <!-- 디버깅을 위한 임시 코드 -->
+    <script type="text/javascript">
+    var user_no = <?=$user_no?>;
+    var one_line = "<?=$one_line?>";
+    </script>
+
          <div id="content_bottom" class="content">
              <h2 class="txt_title">멤버십 전용 리뷰</h2>
              <div class="review_head">
                <img src="../img/member_basic.png" alt="" width="50px" height="50px">
                  <div class="review_member_info">
-                   <span> <?=$grade?> </span><span> | </span><span> <?=$regist_day?> </span>
+                   <span> <?=$grade?> // <?=$user_no?> </span><span> | </span><span> <?=$regist_day?> </span>
                  </div>
              </div>
              <hr>
              <div class="review_body_wrap">
                <div class="review_body_left review_body">
                  <div id="rate_5_things">
-                    <span class="fa fa-star g"></span>
-                    <span class="fa fa-star g"></span>
-                    <span class="fa fa-star g3"></span>
-                    <span class="fa fa-star g"></span>
-                    <span class="fa fa-star g"></span>
+                    <!-- <span class="fa fa-star 1"></span>
+                    <span class="fa fa-star 2"></span>
+                    <span class="fa fa-star 3"></span>
+                    <span class="fa fa-star 4"></span>
+                    <span class="fa fa-star 5"></span> -->
+
                     <script>
-                    var individual_star = <?= $individual_star ?>;
-                    for(var j=1;j<=individual_star;j++){
-                       document.querySelector("#rate_5_things span:nth-child("+j+")").classList.add("checked");
-                       // document.querySelector("#rate_5_things span:nth-child(3)").classList.add("checked");
-                       console.log('qqqqqqqqq',j);
-                    }
+                      var span = document.createElement("span");
+                      var div = document.getElementById("rate_5_things");
+                      var star = div.appendChild(span);
+                      var individual_star = <?= $individual_star ?>;
+                      star.className = "fa fa-star";
+                      for(var j=1;j<=individual_star;j++){
+                      }
+
+
+                         // document.querySelector("#rate_5_things span:nth-child("+j+")").classList.add("checked");
+                          console.log('개별 총만족도 별점',user_no, j, individual_star);
+                      }
+
+
                     </script>
 
                  </div>
@@ -180,58 +205,90 @@
                       <div class="side">시설</div>
                       <div class="middle">
                        <div class="bar-container">
-                         <div class="bar-5"></div>
+                         <div class="bar-5" style="width:<?=$facility?>% !important"><?=$facility?></div>
                        </div>
                       </div>
-                      <div class="side">접근성</div>
+                      <div class="side">교통편의성</div>
                       <div class="middle">
                        <div class="bar-container">
-                         <div class="bar-4"></div>
+                         <div class="bar-4" style="width:<?=$acsbl?>% !important"><?=$acsbl?></div>
                        </div>
                       </div>
                       <div class="side">강사</div>
                       <div class="middle">
                        <div class="bar-container">
-                         <div class="bar-3"></div>
+                         <div class="bar-3" style="width:<?=$teacher?>% !important"><?=$teacher?></div>
                        </div>
                       </div>
-                      <div class="side">가성비</div>
+                      <div class="side">수강료만족도</div>
                       <div class="middle">
                        <div class="bar-container">
-                         <div class="bar-2"></div>
+                         <div class="bar-2" style="width:<?=$cost_efct?>% !important"><?=$cost_efct?></div>
                        </div>
                       </div>
-                      <div class="side">성취도</div>
+                      <div class="side">학업성취도</div>
                       <div class="middle">
                        <div class="bar-container">
-                         <div class="bar-1"></div>
+                         <div class="bar-1" style="width:<?=$achievement?>% !important"><?=$achievement?></div>
                        </div>
                       </div>
                     </div>
+
                     <script>
-                    // 개별 리뷰 5가지 항목 rating bar
-                    $facility = 20*"<?=$facility?>";
-                    $acsbl = 20*"<?=$acsbl?>";
-                    $teacher = 20*"<?=$teacher?>";  // 현재 110%로 나오는 이유 : d/b에 임의로 넣은 값 5.5라서,개의치말것
-                    $cost_efct = 20*"<?=$cost_efct?>";
-                    $achievement = 20*"<?=$achievement?>";
-                    $('.bar-5').css({'width': $facility+'%'});
-                    $('.bar-4').css({'width': $acsbl+'%'});
-                    $('.bar-3').css({'width': $teacher+'%'});
-                    $('.bar-2').css({'width': $cost_efct+'%'});
-                    $('.bar-1').css({'width': $achievement+'%'});
-                    console.log($facility, $acsbl, $teacher, $cost_efct,$achievement);
+                    $(function(){
+                      // 개별 리뷰 5가지 항목 rating bar
+                      var facility = '<?=$facility?>';
+                      var acsbl = '<?=$acsbl?>';
+                      var teacher = '<?=$teacher?>';
+                      var cost_efct = '<?=$cost_efct?>';
+                      var achievement = '<?=$achievement?>';
+                      // document.getElementsByClassName("bar-5")[].style.width=facility*20+"%";
+                      // document.getElementsByClassName("bar-4")[i].style.width=acsbl*20+"%";
+                      // document.getElementsByClassName("bar-3")[i].style.width=teacher*20+"%";
+                      // document.getElementsByClassName("bar-2")[i].style.width=cost_efct*20+"%";
+                      // document.getElementsByClassName("bar-1")[i].style.width=achievement*20+"%";
+
+                      // $('.bar-5').css({'width': facility*20+'%'});
+                      // $('.bar-4').css({'width': acsbl*20+'%'});
+                      // $('.bar-3').css({'width': teacher*20+'%'});
+                      // $('.bar-2').css({'width': cost_efct*20+'%'});
+                      // $('.bar-1').css({'width': achievement*20+'%'});
+
+                      console.log(facility, acsbl, teacher, cost_efct, achievement);
+                    });
                     </script>
 
                </div>
                <div class="review_body_right review_body">
+                 <p class="one_line">"<?=$one_line?>"</p>
                  <div class="review_txt">
-                   <p class="review_title" style="font-size:17px; color:tomato"> 장점</p>
+                   <p class="review_title" style="font-size:17px; color:tomato; font-weight:bold;"> 장점</p>
                    <p class="review_content positive"><?=$benefit?></p>
-                   <p class="review_title" style="font-size:17px; color:#00bcd4"> 단점</p>
+                   <p class="review_title" style="font-size:17px; color:#00bcd4; font-weight:bold;"> 단점</p>
                    <p class="review_content negative"><?=$drawback?></p>
                  </div>
                </div>
+
+               <script>
+                  // var id = '<?= $id ?>';
+                  // if(id === "비회원"){
+                  //   var review_body_right = document.querySelector(".review_body_right")
+                  //   var div = document.createElement("div");
+                  //   var btn_membership = document.createElement("button");
+                  //   var btn_review = document.createElement("button");
+                  //
+                  //   // review_body_right.classList.add("blur");
+                  //   div.appendChild(btn_membership);
+                  //   div.appendChild(btn_review);
+                  //   review_body_right.appendChild(div);
+                  //
+                  //   // div.className = 'modal';
+                  //   // modal.style.display = "block";
+                  //
+                  // 	btn_membership.innerHTML = "멤버십 가입하고 전체보기";
+                  // 	btn_review.innerHTML = "학원리뷰 작성하고 전체보기";
+                  // }
+               </script>
              </div>
          </div>
     <?php

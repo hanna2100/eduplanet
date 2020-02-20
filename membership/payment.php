@@ -7,6 +7,7 @@
     <title>멤버십 결제페이지</title>
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
      <link rel="stylesheet" href="./css/payment.css">
   </head>
   <body>
@@ -76,7 +77,7 @@
               <div class="method_wrap">
                 <ul class="button_ty_radio_list">
                   <li>
-                    <label class="button_payMethod_box">
+                    <label class="button_payMethod_box" value="credit_card">
                       <input type="radio" class="jply_radio_item" name="payMethod" value="html5_inicis.INIpayTest">
                       <span class="radio_icon"></span>
                       <span class="radio_text">신용카드</span>
@@ -97,24 +98,24 @@
                     </label>
                   </li> -->
                   <li>
-                    <label class="button_payMethod_box">
+                    <label class="button_payMethod_box" value="kakaopay">
                       <input type="radio" class="jply_radio_item" name="payMethod" value="kakaopay">
                       <span class="radio_icon"></span>
-                      <span class="radio_text icon_text ico_samsung">카카오페이</span>
+                      <span class="radio_text icon_text">카카오페이</span>
                     </label>
                   </li>
                   <li>
-                    <label class="button_payMethod_box">
+                    <label class="button_payMethod_box" value="payco">
                       <input type="radio" class="jply_radio_item" name="payMethod" value="payco">
                       <span class="radio_icon"></span>
-                      <span class="radio_text icon_text ico_payco">페이코</span>
+                      <span class="radio_text icon_text">페이코</span>
                     </label>
                   </li>
                   <li>
-                    <label class="button_payMethod_box">
+                    <label class="button_payMethod_box" value="smilepay">
                       <input type="radio" class="jply_radio_item" name="payMethod" value="smilepay">
                       <span class="radio_icon"></span>
-                      <span class="radio_text icon_text ico_ssgpay">스마일페이</span>
+                      <span class="radio_text icon_text">스마일페이</span>
                     </label>
                   </li>
                 </ul>
@@ -141,11 +142,11 @@
             </div>
 
             <div class="grid payment_agree">
-              <div class="payment_agree_head">
+              <label class="payment_agree_head">
                 <input type="checkbox" name="agree_checkbox" id="agree">
                 <span class="checkbox_icon"></span>
                 <span class="checkbox_text">이용약관 및 유의사항에 동의합니다.</span>
-              </div>
+              </label>
               <div class="payment_agree_body">
                 <div class="inline_scroll">
                   <span class="dd_b">[이용안내]</span><br>
@@ -164,7 +165,7 @@
               </div>
             </div>
             <div class="grid payment_button">
-              <button type="button" name="button" onclick="alert_back('결제를 취소합니다.');">취소</button>      
+              <button type="button" name="button" onclick="alert_back('결제를 취소합니다.');">취소</button>
               <button type="button" name="button" id="pay_commit" onclick="paymentCheck();">결제</button>
             </div>
 
@@ -187,35 +188,41 @@
       var payment_button = document.getElementsByClassName("payment_button");
       var pay_commit = document.getElementById("pay_commit");
 
-      function addInfo(label, content){
+      function addInfo(label, value, content){
         let isSelected = false;
         label.addEventListener("click", function(){
-          if(isSelected === false){
-            label.classList.remove("selected");
-            isSelected = true;
-            return;
-          }else if(isSelected === true){
-            label.classList.add("selected");
-            isSelected = false;
-          }
-          // console.log("선택되었는지?",isSelected);
-          // console.log(label);
-            payMethod_info.innerHTML = "";
-            payMethod_info.appendChild(document.createTextNode(content));
+        //   if(isSelected === false){
+        //     label.classList.remove("selected");
+        //     isSelected = true;
+        //     return;
+        //   }else if(isSelected === true){
+        //     label.classList.add("selected");
+        //     isSelected = false;
+        //   }
+
+         // if(label.classList.contains("selected")){
+         //   label.classList.remove("selected");
+         // }else{
+         //   label.classList.add("selected");
+         // }
+
+           console.log(label);
+          payMethod_info.innerHTML = "";
+          payMethod_info.appendChild(document.createTextNode(content));
         });
       };
 
       // 신용카드 클릭시 설명 삭제
-      addInfo(label[0], "");
+      addInfo(label[0], "credit_card", "");
 
       // 카카오페이 상세 설명
-      addInfo(label[1], kakao_info);
+      addInfo(label[1], "kakaopay", kakao_info);
 
       // 페이코 상세 설명
-      addInfo(label[2], payco_info);
+      addInfo(label[2], this.value, payco_info);
 
       // 스마일페이 상세 설명
-      addInfo(label[3], smile_info);
+      addInfo(label[3], this.value, smile_info);
 
       function paymentCheck(){
         var agree = document.getElementById("agree");

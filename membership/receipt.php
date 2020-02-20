@@ -11,6 +11,7 @@
     <h1>receipt.php</h1>
 
     <?php
+      // include "./payment.php";
       include "../lib/db_connector.php";
       if(isset($_GET['month']) && isset($_GET['final_price']) && isset($_GET['expired_date'])){
         $month = $_GET['month'];
