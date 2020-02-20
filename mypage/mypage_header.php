@@ -1,9 +1,9 @@
 <?php
     // session_start();
 
-    // $_SESSION["userid"] = 'test';
+    $_SESSION["userid"] = 'test';
 
-    // $userid = $_SESSION["userid"];
+    $userid = $_SESSION["userid"];
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/eduplanet/mypage/css/mypage_header.css">
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
 
     <!-- identicon (프로필 이미지) -->
     <script src="//cdn.rawgit.com/placemarker/jQuery-MD5/master/jquery.md5.js"></script>

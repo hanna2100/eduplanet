@@ -55,8 +55,8 @@
                             <a href="/eduplanet/mypage/review_mylist.php">
                                 <li id="select_aside_menu">작성한 리뷰</li>
                             </a>
-                            <a href="/eduplanet/mypage/review_write.php">
-                                <li>리뷰 작성하기</li>
+                            <a href="#">
+                                <li id="review_write" onclick="showPopup(this);">리뷰 작성하기</li>
                             </a>
                         </ul>
                     </div>
@@ -129,12 +129,13 @@
 
         </div>
 
+        
         <footer>
             <?php include "../footer.php"; ?>
         </footer>
-
+        
     </div>
-
+    
 </body>
 
 </html>
