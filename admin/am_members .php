@@ -6,9 +6,9 @@
   <!-- jquery -->
   <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="/eduplanet/admin/js/admin.js"></script>
-  <script src="/eduplanet/admin/js/gm_members.js"></script>
+  <script src="/eduplanet/admin/js/am_members.js"></script>
   <!-- css -->
-  <link rel="stylesheet" href="/eduplanet/admin/css/gm_members.css">
+  <link rel="stylesheet" href="/eduplanet/admin/css/am_members.css">
   <link rel="stylesheet" href="/eduplanet/admin/css/nav.css">
   <!-- 폰트 -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
 
 <section>
   <div class="sec_top">
-    <span onclick="prevDateChange('gm_members')"><i class="fas fa-angle-left"></i></span>
+    <span onclick="prevDateChange('am_members')"><i class="fas fa-angle-left"></i></span>
     <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting()">
 <?php
     for($i = 2010; $i<=date("Y"); $i++){
@@ -56,7 +56,7 @@
 ?>
     </select>
     <span>년 </span>
-    <select id="top_select_month" dir="rtl" onchange="hrefDateChange('gm_members')">
+    <select id="top_select_month" dir="rtl" onchange="hrefDateChange('am_members')">
 <?php
     $last_m = $y==date("Y")? date("n"): 12;
     for($i = 1; $i<=$last_m ; $i++){
@@ -65,7 +65,7 @@
 ?>
     </select>
     <span>월 </span>
-    <span onclick="nextDateChange('gm_members')"><i class="fas fa-angle-right"></i></span>
+    <span onclick="nextDateChange('am_members')"><i class="fas fa-angle-right"></i></span>
   </div>
   <!--end of 년 월 선택바 -->
 
