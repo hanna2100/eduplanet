@@ -244,7 +244,7 @@
                  <div class="overlay"></div>
                  <div id="myModal" class="modal">
                    <button type="button" name="button" class="btn_modal btn_membership" onclick="location.href='../membership/index.php'">멤버십 가입하고 전체보기</button>
-                   <button type="button" name="button" class="btn_modal btn_review" onclick="location.href='index.php'">학원리뷰 작성하고 전체보기</button>
+                   <button type="button" name="button" class="btn_modal btn_review" onclick="location.href='/eduplanet/acd_story/index.php'">학원리뷰 작성하고 전체보기</button>
                  </div>
                </div>
 

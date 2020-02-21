@@ -25,6 +25,27 @@ body {
   background-color: tomato;
   font-size: 3em;
 }
+
+ /* 아이콘 */
+.membership_icons_wrap {
+  margin: 2em;
+}
+.membership_icons {
+  display: inline-block;
+  width: 100px;
+  margin: 1.5em;
+  text-align: center;
+}
+.membership_icons:hover {
+  font-weight: 800;
+  color: #2E89FF;
+}
+.icon_text {
+  display: block;
+  font-size: 0.9em;
+  margin-top:0.5em;
+}
+
 /*  하단 이용안내 */
 .bottom_info {
   background-color: #333333;

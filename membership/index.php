@@ -26,7 +26,30 @@
           <div class="membership_section mid_contents">
             <h2>프리미엄</h2>
             <div class="mid_sub_title">결제를 해야 학원 리뷰를 볼 수 있답니다!! 우하하</div>
-              <!--  여기에 아이콘 5개 넣기 (접근성, 시설, 강사 등 5가지 항목)  -->
+              <div class="membership_icons_wrap">
+                <div class="membership_icons">
+                  <img src="../img/facilities.png" alt="facilities" width="60%" height="60%">
+                  <span class="icon_text">시설</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/budget.png" alt="cost-effective" width="60%" height="60%">
+                  <span class="icon_text">수강료만족도</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/bus.png" alt="Traffic convenience" width="60%" height="60%">
+                  <span class="icon_text">교통편의성</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/work.png" alt="teacher" width="60%" height="60%">
+                  <span class="icon_text">강사</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/book.png" alt="achievement" width="60%" height="60%">
+                  <span class="icon_text">학업성취도</span>
+                </div>
+              </div>
+
+
 
               <div class="whole_card_wrapper">
 
@@ -65,7 +88,7 @@
                        </dl>
                      </div>
                      <div class="card_bottom">
-                       <span class="btn_membership false">구매하기</span>
+                       <span class="btn_membership">구매하기</span>
                      </div>
                    </div>
                  </button>
