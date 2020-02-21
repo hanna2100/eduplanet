@@ -7,17 +7,17 @@ function create_procedure($conn, $prcd_name, $arr_size){
 
   if (mysqli_num_rows($result)==$arr_size) {
     $flag="OK";
-  }//end of while
+  }//end of if
 
   if($flag==="NO"){
     switch($prcd_name){
           case 'get_join_g_members' : //일반회원(general members)
-            $sql = "CREATE PROCEDURE `get_join_g_members`(IN y CHAR(4), IN start_m CHAR(2), IN last_m CHAR(2))
+            $sql = "CREATE PROCEDURE `get_join_g_members`(IN start_y CHAR(4), IN last_y CHAR(4), IN start_m CHAR(2), IN last_m CHAR(2))
             BEGIN 
                   DECLARE start_date CHAR(10);
                   DECLARE last_date CHAR(10);
-                  SET start_date = CONCAT(y,'-', start_m, '-01');
-                  SET last_date = CONCAT(y,'-', last_m, '-01');
+                  SET start_date = CONCAT(start_y,'-', start_m, '-01');
+                  SET last_date = CONCAT(last_y,'-', last_m, '-01');
                   SET last_date = LAST_DAY(last_date);
                   
               SELECT 
@@ -50,12 +50,12 @@ function create_procedure($conn, $prcd_name, $arr_size){
             break;
 
           case 'get_join_a_members' :
-            $sql = "CREATE PROCEDURE `get_join_a_members`(IN y CHAR(4), IN start_m CHAR(2), IN last_m CHAR(2))
+            $sql = "CREATE PROCEDURE `get_join_a_members`(IN start_y CHAR(4), IN last_y CHAR(4), IN start_m CHAR(2), IN last_m CHAR(2))
             BEGIN 
                   DECLARE start_date CHAR(10);
                   DECLARE last_date CHAR(10);
-                  SET start_date = CONCAT(y,'-', start_m, '-01');
-                  SET last_date = CONCAT(y,'-', last_m, '-01');
+                  SET start_date = CONCAT(start_y,'-', start_m, '-01');
+                  SET last_date = CONCAT(last_y,'-', last_m, '-01');
                   SET last_date = LAST_DAY(last_date);
                   
               SELECT 
@@ -88,12 +88,12 @@ function create_procedure($conn, $prcd_name, $arr_size){
           break;
 
           case 'get_wthdr_g_members' :
-            $sql = "CREATE PROCEDURE `get_wthdr_g_members`(IN y CHAR(4), IN start_m CHAR(2), IN last_m CHAR(2))
+            $sql = "CREATE PROCEDURE `get_wthdr_g_members`(IN start_y CHAR(4), IN last_y CHAR(4), IN start_m CHAR(2), IN last_m CHAR(2))
             BEGIN 
                   DECLARE start_date CHAR(10);
                   DECLARE last_date CHAR(10);
-                  SET start_date = CONCAT(y,'-', start_m, '-01');
-                  SET last_date = CONCAT(y,'-', last_m, '-01');
+                  SET start_date = CONCAT(start_y,'-', start_m, '-01');
+                  SET last_date = CONCAT(last_y,'-', last_m, '-01');
                   SET last_date = LAST_DAY(last_date);
                   
               SELECT 
@@ -126,12 +126,12 @@ function create_procedure($conn, $prcd_name, $arr_size){
           break;
 
           case 'get_wthdr_a_members' :
-            $sql = "CREATE PROCEDURE `get_wthdr_a_members`(IN y CHAR(4), IN start_m CHAR(2), IN last_m CHAR(2))
+            $sql = "CREATE PROCEDURE `get_wthdr_a_members`(IN start_y CHAR(4), IN last_y CHAR(4), IN start_m CHAR(2), IN last_m CHAR(2))
             BEGIN 
                   DECLARE start_date CHAR(10);
                   DECLARE last_date CHAR(10);
-                  SET start_date = CONCAT(y,'-', start_m, '-01');
-                  SET last_date = CONCAT(y,'-', last_m, '-01');
+                  SET start_date = CONCAT(start_y,'-', start_m, '-01');
+                  SET last_date = CONCAT(last_y,'-', last_m, '-01');
                   SET last_date = LAST_DAY(last_date);
                   
               SELECT 
@@ -171,7 +171,7 @@ function create_procedure($conn, $prcd_name, $arr_size){
     if(mysqli_query($conn,$sql)){
       echo "<script>alert('$prcd_name 프로시저가 생성되었습니다.');</script>";
     }else{
-      echo "테이블 생성 실패 : ".mysqli_error($conn);
+      echo "프로시저 생성 실패 : ".mysqli_error($conn);
     }
   }//end of if flag
 }//end of function
