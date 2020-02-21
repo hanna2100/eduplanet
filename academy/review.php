@@ -105,7 +105,6 @@
                 $('.third').css({'width': $rate_bar_teacher+'%'});
                 $('.four').css({'width': $rate_bar_cost_efct+'%'});
                 $('.five').css({'width': $rate_bar_achievement+'%'});
-                console.log("총 만족도", $rate_bar_facility, $rate_bar_acsbl, $rate_bar_teacher,$rate_bar_cost_efct, $rate_bar_achievement);
                 </script>
             </div>
           </div>
@@ -157,50 +156,46 @@
           }else if($age>=17 && $age<20){
             $grade = "고등";
           }else {$grade = "성인";}
-
     ?>
-    <!-- 디버깅을 위한 임시 코드 -->
-    <script type="text/javascript">
-    var user_no = <?=$user_no?>;
-    var one_line = "<?=$one_line?>";
-    </script>
 
          <div id="content_bottom" class="content">
              <h2 class="txt_title">멤버십 전용 리뷰</h2>
              <div class="review_head">
                <img src="../img/member_basic.png" alt="" width="50px" height="50px">
                  <div class="review_member_info">
-                   <span> <?=$grade?> // <?=$user_no?> </span><span> | </span><span> <?=$regist_day?> </span>
+                   <span> <?=$grade?> </span><span> | </span><span> <?=$regist_day?> </span>
                  </div>
              </div>
              <hr>
+
              <div class="review_body_wrap">
                <div class="review_body_left review_body">
                  <div id="rate_5_things">
-                    <!-- <span class="fa fa-star 1"></span>
-                    <span class="fa fa-star 2"></span>
-                    <span class="fa fa-star 3"></span>
-                    <span class="fa fa-star 4"></span>
-                    <span class="fa fa-star 5"></span> -->
+                    <span class="fa fa-star star0"></span>
+                    <span class="fa fa-star star1"></span>
+                    <span class="fa fa-star star2"></span>
+                    <span class="fa fa-star star3"></span>
+                    <span class="fa fa-star star4"></span>
 
                     <script>
-                      var span = document.createElement("span");
-                      var div = document.getElementById("rate_5_things");
-                      var star = div.appendChild(span);
+                      var star0 = document.getElementsByClassName("star0");
+                      var star1 = document.getElementsByClassName("star1");
+                      var star2 = document.getElementsByClassName("star2");
+                      var star3 = document.getElementsByClassName("star3");
+                      var star4 = document.getElementsByClassName("star4");
+                      var star = [star0, star1, star2, star3, star4];
+
+                      var i = <?=$i?>;
+                      var scale = <?=SCALE?>;
+                      var i = i - (scale*(<?=$page?>-1));
                       var individual_star = <?= $individual_star ?>;
-                      star.className = "fa fa-star";
-                      for(var j=1;j<=individual_star;j++){
+
+                      for(var j=0;j<individual_star;j++){
+                        star[j][i].style.color="orange";
                       }
-
-
-                         // document.querySelector("#rate_5_things span:nth-child("+j+")").classList.add("checked");
-                          console.log('개별 총만족도 별점',user_no, j, individual_star);
-                      }
-
-
                     </script>
-
                  </div>
+
                     <div class="row">
                       <div class="side">시설</div>
                       <div class="middle">
@@ -233,32 +228,8 @@
                        </div>
                       </div>
                     </div>
-
-                    <script>
-                    $(function(){
-                      // 개별 리뷰 5가지 항목 rating bar
-                      var facility = '<?=$facility?>';
-                      var acsbl = '<?=$acsbl?>';
-                      var teacher = '<?=$teacher?>';
-                      var cost_efct = '<?=$cost_efct?>';
-                      var achievement = '<?=$achievement?>';
-                      // document.getElementsByClassName("bar-5")[].style.width=facility*20+"%";
-                      // document.getElementsByClassName("bar-4")[i].style.width=acsbl*20+"%";
-                      // document.getElementsByClassName("bar-3")[i].style.width=teacher*20+"%";
-                      // document.getElementsByClassName("bar-2")[i].style.width=cost_efct*20+"%";
-                      // document.getElementsByClassName("bar-1")[i].style.width=achievement*20+"%";
-
-                      // $('.bar-5').css({'width': facility*20+'%'});
-                      // $('.bar-4').css({'width': acsbl*20+'%'});
-                      // $('.bar-3').css({'width': teacher*20+'%'});
-                      // $('.bar-2').css({'width': cost_efct*20+'%'});
-                      // $('.bar-1').css({'width': achievement*20+'%'});
-
-                      console.log(facility, acsbl, teacher, cost_efct, achievement);
-                    });
-                    </script>
-
                </div>
+
                <div class="review_body_right review_body">
                  <p class="one_line">"<?=$one_line?>"</p>
                  <div class="review_txt">
@@ -267,27 +238,55 @@
                    <p class="review_title" style="font-size:17px; color:#00bcd4; font-weight:bold;"> 단점</p>
                    <p class="review_content negative"><?=$drawback?></p>
                  </div>
+                 <div id="myModal" class="modal">
+                   <button type="button" name="button" onclick="location.href='../membership/index.php'">멤버십 가입하고 전체보기</button>
+                   <button type="button" name="button" onclick="location.href='index.php">학원리뷰 작성하고 전체보기</button>
+                 </div>
                </div>
 
+
                <script>
-                  // var id = '<?= $id ?>';
-                  // if(id === "비회원"){
-                  //   var review_body_right = document.querySelector(".review_body_right")
-                  //   var div = document.createElement("div");
-                  //   var btn_membership = document.createElement("button");
-                  //   var btn_review = document.createElement("button");
-                  //
-                  //   // review_body_right.classList.add("blur");
-                  //   div.appendChild(btn_membership);
-                  //   div.appendChild(btn_review);
-                  //   review_body_right.appendChild(div);
-                  //
-                  //   // div.className = 'modal';
-                  //   // modal.style.display = "block";
-                  //
-                  // 	btn_membership.innerHTML = "멤버십 가입하고 전체보기";
-                  // 	btn_review.innerHTML = "학원리뷰 작성하고 전체보기";
-                  // }
+                  var id = '<?= $id ?>';
+                  if(id === "비회원"){
+                    var review_body_right = document.getElementsByClassName("review_body_right");
+                    $(".review_body_right[i]").css("overflow","hidden");
+                    $(".review_body_right[i]").append("<div id='backgroundSmsLayer'></div>");
+                    $("#backgroundSmsLayer").css({
+                    "position":"fixed",
+                    "top":"0px",
+                    "left":"0px",
+                    "width":"100%",
+                    "height":"100%",
+                    "background-color":"#000",
+                    "z-index":"5000",
+                    "opacity":"0.3"
+                    });
+
+                    $(".modal[i]").show();
+
+                    $(".modal[i]").css({
+                    "position":"fixed",
+                    "top":"50%",
+                    "left":"50%",
+                    "width":"30%",
+                    "height":"30%",
+                    "margin-left":"-100px",
+                    "margin-top":"-100px",
+                    "display":"block",
+                    "z-index":"5001",
+                    "border":"0px"
+                    });
+                  //   var modal = document.getElementsByClassName("modal");
+                  //   modal[i].style.display = "block";
+                  //   review_body_right[i].classList.add("blur");
+                  }else {
+                    // modal[i].style.display = "none";
+                  }
+
+
+
+
+
                </script>
              </div>
          </div>
@@ -302,27 +301,27 @@
            <div class="page_num">
              <ul class="page_num_ul">
    <?php
-               $page_scale = 5; // 페이지 쪽수 표시 량 (5 페이지씩 표기)
-               $pageGroup = ceil($page/$page_scale); // 페이지 그룹번호(페이지 5개가 1그룹)
 
-               $last_page = $pageGroup * $page_scale; //그룹번호 안에서의 마지막 페이지 숫자
+               $pageGroup = ceil($page/SCALE); // 페이지 그룹번호(페이지 5개가 1그룹)
+
+               $last_page = $pageGroup * SCALE; //그룹번호 안에서의 마지막 페이지 숫자
                //그룹번호의 마지막 페이지는 전체 페이지보다 클 수 없음
-               if($total_pages < $page_scale){
+               if($total_pages < SCALE){
                  $last_page = $total_pages;
                }else if($last_page > $total_pages){
                  $last_page = $total_pages;
                }
 
                //그룹번호의 첫번째 페이지 숫자
-               $first_page = $last_page - ($page_scale-1);
+               $first_page = $last_page - (SCALE-1);
                //그룹번호의 첫번째 페이지는 1페이지보다 작을 수 없음
                if($first_page < 1){
                  $first_page = 1;
                }else if($last_page == $total_page){ //마지막 그룹번호일때 첫번째 페이지값 결정
-                 if($total_page % $page_scale==0){
-                   $first_page = $total_page - $page_scale+1;
+                 if($total_page % SCALE==0){
+                   $first_page = $total_page - SCALE+1;
                  }else{
-                   $first_page = $total_page - ($total_page % $page_scale)+1;
+                   $first_page = $total_page - ($total_page % SCALE)+1;
                  }
                }
 
@@ -379,6 +378,6 @@
      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
    </body>
  </html>

@@ -196,7 +196,7 @@
         //     isSelected = true;
         //     return;
         //   }else if(isSelected === true){
-        //     label.classList.add("selected");
+            label.classList.add("selected");
         //     isSelected = false;
         //   }
 

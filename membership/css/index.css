@@ -8,14 +8,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 body {
   margin: auto 0;
 }
 
-.membership_section {
-
-}
 
 /* top & bottom */
 .top_banner, .bottom_info {
@@ -32,7 +28,7 @@ body {
 /*  하단 이용안내 */
 .bottom_info {
   background-color: #333333;
-  font-size: 1.1em;
+  font-size: 1em;
   color: #fff;
   text-align: left;
 }
