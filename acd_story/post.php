@@ -17,7 +17,7 @@
 
 
     <header>
-        <?php include "../index_header_searchbar_in.php"; ?>
+        <?php include "../index/index_header_searchbar_in.php"; ?>
     </header>
 
     <?php
@@ -147,7 +147,7 @@
     </form>
 
     <footer>
-        <?php include "../footer.php"; ?>
+        <?php include "../index/footer.php"; ?>
     </footer>
 
 </body>

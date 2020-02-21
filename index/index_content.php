@@ -17,10 +17,10 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
 
     <!-- css -->
-    <link rel="stylesheet" href="/eduplanet/index_content.css">
+    <link rel="stylesheet" href="/eduplanet/index/index_content.css">
 
     <!-- 스크립트 -->
-    <script src="/eduplanet/searchbar_index.js"></script>
+    <script src="/eduplanet/searchbar/searchbar_index.js"></script>
 
 
 </head>

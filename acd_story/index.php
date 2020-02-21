@@ -18,7 +18,7 @@
 <body>
 
     <header>
-        <?php include "../index_header_searchbar_out.php"; ?>
+        <?php include "../index/index_header_searchbar_out.php"; ?>
     </header>
 
     <div class="story_list_wrap">
@@ -294,7 +294,7 @@
     </div>
 
     <footer>
-        <?php include "../footer.php"; ?>
+        <?php include "../index/footer.php"; ?>
     </footer>
 
 </body>

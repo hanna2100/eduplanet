@@ -7,7 +7,7 @@
     <title>에듀플래닛</title>
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/eduplanet/index_header.css">
+    <link rel="stylesheet" href="/eduplanet/index/index_header.css">
 
 </head>
 

@@ -17,16 +17,18 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/eduplanet/index_header_searchbar_in.css">
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_out.css">
 
     <!-- 스크립트 -->
-    <script src="/eduplanet/searchbar_in.js"></script>
+    <script src="/eduplanet/searchbar/searchbar_out.js"></script>
+
 
 </head>
 
 <body>
 
     <div class="body_wrap">
+
         <div class="index_header_wrap">
 
             <!-- 헤더 메뉴 -->
@@ -35,8 +37,8 @@
                 <ul class="index_header_menu_ul_left">
                     <li>
                         <a href="/eduplanet/index.php">
-                            <div class="index_header_logo_img">
-                                <img src="/eduplanet/img/eduplanet_logo.png" alt="index_header_logo_img">
+                            <div class="index_header_home_img">
+                                <img src="/eduplanet/img/index_header_home.png" alt="index_header_logo_img">
                             </div>
 
                         </a>
@@ -70,13 +72,6 @@
                     </li>
 
                 </ul>
-
-                <form name="search_academy_form" action="#" method="post">
-                    <div class="index_header_searchbar_in">
-                        <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_in">
-                        <button id="button_main_search" type="button">검색</button>
-                    </div>
-                </form>
 
                 <ul class="index_header_menu_ul_right">
 
@@ -128,14 +123,77 @@
                             </div>
                         </div>
                     </li>
+
                 </ul>
 
             </div>
 
         </div>
+
+        <div class="index_header_search_wrap">
+
+            <div class="index_header_search">
+
+                <a href="/eduplanet/index.php">
+                    <div class="index_header_search_logo">
+                        <img src="/eduplanet/img/eduplanet_logo.png" alt="index_header_search_logo">
+                    </div>
+                </a>
+
+
+                <div class="index_main_title">
+
+                    <div class="index_main_search">
+
+                        <select name="select_district" id="select_district">
+                            <option selected>시/군 선택</option>
+                            <option value="district_01">가평군</option>
+                            <option value="district_02">고양시</option>
+                            <option value="district_03">과천시</option>
+                            <option value="district_04">광명시</option>
+                            <option value="district_05">광주시</option>
+                            <option value="district_06">구리시</option>
+                            <option value="district_07">군포시</option>
+                            <option value="district_08">김포시</option>
+                            <option value="district_09">남양주시</option>
+                            <option value="district_10">동두천시</option>
+                            <option value="district_11">부천시</option>
+                            <option value="district_12">성남시</option>
+                            <option value="district_13">수원시</option>
+                            <option value="district_14">시흥시</option>
+                            <option value="district_15">안산시</option>
+                            <option value="district_16">안성시</option>
+                            <option value="district_17">안양시</option>
+                            <option value="district_18">양주시</option>
+                            <option value="district_19">양평군</option>
+                            <option value="district_20">여주시</option>
+                            <option value="district_21">연천군</option>
+                            <option value="district_22">오산시</option>
+                            <option value="district_23">용인시</option>
+                            <option value="district_24">의왕시</option>
+                            <option value="district_25">의정부시</option>
+                            <option value="district_26">이천시</option>
+                            <option value="district_27">파주시</option>
+                            <option value="district_28">평택시</option>
+                            <option value="district_29">포천시</option>
+                            <option value="district_30">하남시</option>
+                            <option value="district_31">화성시</option>
+                        </select>
+
+                        <form name="search_academy_form" action="#" method="post">
+                        <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_out">
+                        <button id="button_main_search" type="button">검색</button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <?php include "mypage/review_write_popup.php"; ?>
+    <?php include "../mypage/review_write_popup.php"; ?>
 
 </body>
 

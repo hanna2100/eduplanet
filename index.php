@@ -18,15 +18,15 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
 <body>
 
   <header>
-    <?php include "index_header.php"; ?>
+    <?php include "index/index_header.php"; ?>
   </header>
 
   <section>
-    <?php include "index_content.php"; ?>
+    <?php include "index/index_content.php"; ?>
   </section>
 
   <footer>
-    <?php include "footer.php"; ?>
+    <?php include "index/footer.php"; ?>
   </footer>
 
 </body>

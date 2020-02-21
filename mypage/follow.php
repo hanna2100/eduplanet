@@ -33,7 +33,7 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include '../index_header_searchbar_in.php'; ?>
+                <?php include '../index/index_header_searchbar_in.php'; ?>
             </div>
 
             <div class="header_mypage">
@@ -355,7 +355,7 @@
 
 
         <footer>
-            <?php include "../footer.php"; ?>
+            <?php include "../index/footer.php"; ?>
         </footer>
 
 
