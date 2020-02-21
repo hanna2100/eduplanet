@@ -41,14 +41,14 @@ function academy_init_data($si_param, $dong_param){
   return $sql;
 }
 
-//일반 회원 테이블 - row 100개 생성
+//일반 회원 테이블 - row 500개 생성
 function g_members_init_data(){
   global $gm_join_date;
   
     $sql = "INSERT INTO `g_members` VALUES ";
     $intres_array = array("국어","영어","수학","미술","음악","과학","태권도","필라테스","IT","바리스타","요가","제빵");
 
-    for($no = 1; $no<= 100 ; $no++){
+    for($no = 1; $no<= 500 ; $no++){
 
       //난수생성 rand(최소숫자, 최대숫자)
       $birth = rand(1990, 2015);
@@ -277,13 +277,13 @@ function withdrawal_init_data() {
   $sql = "INSERT INTO `withdrawal` VALUES ";
 
   // 일반회원30명 탈퇴
-  $no_temp = random(1,100, 30); //1~100까지 숫자중 중복없이 30개 추출
+  $no_temp = random(1,500, 100); //1~100까지 숫자중 중복없이 30개 추출
   $no_array = array();
   foreach ($no_temp as $v){
     array_push($no_array, $v);
   }
 
-  for($no = 1; $no <= 30 ; $no++){
+  for($no = 1; $no <= 100 ; $no++){
     $mmbr_no = (int)$no_array[$no-1];
     //해당 회원의 가입날짜 가져오기
     $start_date = $gm_join_date[$mmbr_no-1];
@@ -302,7 +302,7 @@ function withdrawal_init_data() {
     array_push($no_array, $v);
   }
   $i=0;
-  for($no = 31; $no <= 38 ; $no++){
+  for($no = 101; $no <= 108 ; $no++){
 
     //회원 번호 뽑기
     $mmbr_no = (int)$no_array[$i];
