@@ -178,6 +178,7 @@
                     <span class="fa fa-star star4"></span>
 
                     <script>
+                    // 각 리뷰의 별점(총만족도) 표시
                       var star0 = document.getElementsByClassName("star0");
                       var star1 = document.getElementsByClassName("star1");
                       var star2 = document.getElementsByClassName("star2");
@@ -196,6 +197,7 @@
                     </script>
                  </div>
 
+                   <!-- 개별 리뷰 5가지 항목 -->
                     <div class="row">
                       <div class="side">시설</div>
                       <div class="middle">
@@ -238,56 +240,29 @@
                    <p class="review_title" style="font-size:17px; color:#00bcd4; font-weight:bold;"> 단점</p>
                    <p class="review_content negative"><?=$drawback?></p>
                  </div>
+
+                 <div class="overlay"></div>
                  <div id="myModal" class="modal">
-                   <button type="button" name="button" onclick="location.href='../membership/index.php'">멤버십 가입하고 전체보기</button>
-                   <button type="button" name="button" onclick="location.href='index.php">학원리뷰 작성하고 전체보기</button>
+                   <button type="button" name="button" class="btn_modal btn_membership" onclick="location.href='../membership/index.php'">멤버십 가입하고 전체보기</button>
+                   <button type="button" name="button" class="btn_modal btn_review" onclick="location.href='index.php'">학원리뷰 작성하고 전체보기</button>
                  </div>
                </div>
 
 
                <script>
                   var id = '<?= $id ?>';
+                  var overlay = document.getElementsByClassName("overlay");
+                  var modal = document.getElementsByClassName("modal");
+
                   if(id === "비회원"){
-                    var review_body_right = document.getElementsByClassName("review_body_right");
-                    $(".review_body_right[i]").css("overflow","hidden");
-                    $(".review_body_right[i]").append("<div id='backgroundSmsLayer'></div>");
-                    $("#backgroundSmsLayer").css({
-                    "position":"fixed",
-                    "top":"0px",
-                    "left":"0px",
-                    "width":"100%",
-                    "height":"100%",
-                    "background-color":"#000",
-                    "z-index":"5000",
-                    "opacity":"0.3"
-                    });
-
-                    $(".modal[i]").show();
-
-                    $(".modal[i]").css({
-                    "position":"fixed",
-                    "top":"50%",
-                    "left":"50%",
-                    "width":"30%",
-                    "height":"30%",
-                    "margin-left":"-100px",
-                    "margin-top":"-100px",
-                    "display":"block",
-                    "z-index":"5001",
-                    "border":"0px"
-                    });
-                  //   var modal = document.getElementsByClassName("modal");
-                  //   modal[i].style.display = "block";
-                  //   review_body_right[i].classList.add("blur");
+                    overlay[i].style.display = "block";
+                    modal[i].style.display = "block";
                   }else {
-                    // modal[i].style.display = "none";
+                    overlay[i].style.display = "none";
+                    modal[i].style.display = "none";
                   }
+                </script>
 
-
-
-
-
-               </script>
              </div>
          </div>
     <?php

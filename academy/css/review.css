@@ -67,7 +67,7 @@ section {
 .review_member_info>span { font-size: 15px; margin: 0 10px 0 10px;}
 
 hr{ border:3px solid #f1f1f1; max-width: 100%; margin: 10px 0;}
-.review_body_wrap { display: grid; grid-template-columns: 1fr 2fr;}
+.review_body_wrap { display: grid; grid-template-columns: 1fr 2fr; z-index: 0;}
 .review_title { font-size : 3em, color: tomato, font-weight: bold; margin: 10px;}
 .review_body_left {
   font-family: Arial;
@@ -75,6 +75,10 @@ hr{ border:3px solid #f1f1f1; max-width: 100%; margin: 10px 0;}
   min-width: 250px; /* Max width */
   padding: 20px 0;
 }
+.review_body_right {
+  position: relative;
+}
+
 .fa {
   font-size: 25px;
 }
@@ -111,7 +115,6 @@ hr{ border:3px solid #f1f1f1; max-width: 100%; margin: 10px 0;}
 .bar-2 { height: 15px; background-color: #ff9800;}
 .bar-1 { height: 15px; background-color: #f44336;}
 
-.blur { filter: blur(3px); -webkit-filter: blur(3px); }
 .one_line { font-size: 23px; margin: 15px 25px 25px 25px; }
 .review_txt { margin: 0 50px;}
 
@@ -188,15 +191,57 @@ hr{ border:3px solid #f1f1f1; max-width: 100%; margin: 10px 0;}
 }
 
 /* 모달 */
-/* .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 9000; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 25%;
-  height: 30%;
-  background-color: white;
-  border: 1px solid black;
+.overlay{
+  filter: blur(3px); -webkit-filter: blur(3px);
+  position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: 0.4;
+	z-index: 1;
 }
- */
+.modal{
+  position: absolute;
+  margin: 0 auto;
+  left: 20%;
+  top: 15%;
+  width: 60%;
+  height: 70%;
+  box-shadow: 0 3px 8px 0 rgba(50,52,56,0.2);
+  padding: 32px;
+  border: 1px solid #c5c7cc;
+  border-radius: 3px;
+  background-color: #fff;
+	z-index: 12;
+}
+.btn_modal {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 4px 8px;
+  margin-bottom: 15px;
+  width: 100%;
+  height: 40%;
+  font-size: 14px;
+  cursor: pointer;
+}
+.btn_membership {
+  border-color: #2196F3;
+  color: dodgerblue
+}
+.btn_membership:hover {
+  background: #2196F3;
+  color: white;
+}
+.btn_review {
+  border-color: #ff9800;
+  color: orange;
+}
+.btn_review:hover {
+  background: #ff9800;
+  color: white;
+}
