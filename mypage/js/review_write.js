@@ -469,15 +469,11 @@ function registReview() {
 
             if (document.getElementById("one_line").value.length < 20) {
                 alert("한줄평은 20자 이상이어야 합니다.");
-                history.go();
-
             } else if (document.getElementById("benefit").value.length < 30) {
                 alert("장점은 30자 이상이어야 합니다.");
-                history.go();
 
             } else if (document.getElementById("drawback").value.length < 30) {
                 alert("단점은 30자 이상이어야 합니다.");
-                history.go();
 
             } else {
 
@@ -487,7 +483,6 @@ function registReview() {
 
         } else {
             alert("입력하지 않은 항목이 있습니다.");
-            history.go();
         }
         
 

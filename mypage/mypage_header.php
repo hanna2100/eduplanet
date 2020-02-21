@@ -1,4 +1,5 @@
 <?php
+    // test
     // session_start();
 
     $_SESSION["user_no"] = 2;
@@ -65,7 +66,7 @@
                         <?php
 
                             $con = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
-                            $sql = "select expiry_day from g_members where no='$user_no'";
+                            $sql = "SELECT expiry_day FROM g_members WHERE no='$user_no'";
                             $result = mysqli_query($con, $sql);
                             $row = mysqli_fetch_array($result);
 

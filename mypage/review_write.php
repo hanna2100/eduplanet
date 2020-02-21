@@ -323,7 +323,7 @@
                 </div>
 
                 <div class="review_write_footer">
-                    <button id="button_submit_review" onclick="registReview();">등록하기</button>
+                    <button type="button" id="button_submit_review" onclick="registReview();">등록하기</button>
                 </div>
 
 

@@ -58,7 +58,6 @@
                 // test용
                 $user_no = 1;
 
-
                 if (isset($_GET["page"])) {
                     $page = $_GET["page"];
                 } else {
@@ -71,43 +70,6 @@
 
                 $result = mysqli_query($conn, $sql);
                 $total_record = mysqli_num_rows($result);
-
-                $row = mysqli_fetch_array($result);
-
-                $acd_name = $row["acd_name"];
-                $si_name = $row["si_name"];
-                $acd_no = $row["acd_no"];
-
-                        
-
-
-
-
-                // 아직 사진 컬럼이 없어서 못가져옴
-                // $sal = "SELECT acd_name, si_name FROM follow INNER JOIN academy ON follow.acd_no = academy.no WHERE user_no='$user_no'";
-
-
-
-                $sql = "SELECT total_star FROM review WHERE parent='$acd_no'";
-                $result = mysqli_query($conn, $sql);
-                $total_record_review = mysqli_num_rows($result);
-
-                $row = mysqli_fetch_array($result);
-
-                $total_star = $row["total_star"]; 
-
-
-
-
-                $sql = "SELECT * FROM acd_story WHERE parent='$acd_no'";
-                $result = mysqli_query($conn, $sql);
-                $total_record_story = mysqli_num_rows($result);
-
-
-
-
-
-
 
                 ?>
 
@@ -189,68 +151,34 @@
 
                         $row = mysqli_fetch_array($result);
 
-                        // $acd_name = $row["acd_name"];
-                        // $si_name = $row["si_name"];
-                        // $acd_no = $row["acd_no"];
+                        $acd_name = $row["acd_name"];
+                        $si_name = $row["si_name"];
+                        $acd_no = $row["acd_no"];
+        
+                        $sql = "SELECT total_star FROM review WHERE parent='$acd_no'";
+                        $result_total_star = mysqli_query($conn, $sql);
+                        $total_record_review = mysqli_num_rows($result_total_star);
+        
+                        $row = mysqli_fetch_array($result_total_star);
+        
+                        $total_star = $row["total_star"]; 
+        
+                        $sql = "SELECT * FROM acd_story WHERE parent='$acd_no'";
+                        $result_story = mysqli_query($conn, $sql);
+                        $total_record_story = mysqli_num_rows($result_story);
 
-                        // $total_star = $row["total_star"];
-
-
+                        // 아직 사진 컬럼이 없어서 못가져옴
                         // if ($row["file_name"]) {
                         //     $file_image = "<img src='./img/file.gif' height='13'>";
                         // } else {
                         //     $file_image = "";
                         // }
 
-                        // // 지역
-                        // $sql_district = "select si_name from academy where acd_name = '$acd_name'";
-
-                        // $result_district = mysqli_query($conn, $sql_district);
-                        // $row_district = mysqli_fetch_array($result_district);
-
-                        // $si_name = $row_district["si_name"];
-
-                        // // 별점
-                        // $sql_star = "select total_star from review where parent = $parent";
-
-                        // $result_star = mysqli_query($conn, $sql_star);
-                        // $row_star = mysqli_fetch_array($result_star);
-
-                        // $total_star = $row_star["total_star"];
-
                     ?>
 
                         <li>
                             <!-- 하나의 찜목록 -->
                             <div class="follow_list_column">
-
-                                <!-- <a href="/eduplanet/acd_story/view.php?no=<?= $no ?>&parent=<?= $parent ?>&acd_name=<?= $acd_name ?>">
-                                    <div class="follow_list_column_img">
-                                        <img src="/eduplanet/data/<?= $file_copy ?>" alt="follow_list_column_img">
-                                    </div>
-
-                                    <div class="follow_list_column_text">
-                                        <h1 id="follow_text_title"><?= $title ?>
-                                </a>
-
-                                <div class="follow_academy_heart">
-                                    <span>학원 삭제</span>
-                                    <button id="button_academy_heart">like</button>
-                                </div>
-
-                                </h1>
-                                <p id="follow_text_title_sub"><?= $subtitle ?></p>
-
-                                <div class="follow_list_column_academy_info">
-                                    <span id="academy_title_span"><?= $acd_name ?></span>
-                                    <span id="academy_district"><?= $si_name ?></span>
-
-                                    <div class="academy_small_star">
-                                        <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                                        <span id="academt_review_star_score"><?= $total_star ?></span>
-                                    </div>
-                                </div> -->
-
 
                                <!-- 왼쪽 학원 로고 및 정보  -->
                                 <!-- 클릭 시 href=학원페이지 -->
@@ -270,10 +198,10 @@
                                     <a href="#"><span id="academy_review_span">학원리뷰 <span id="academy_review_num"><?=$total_record_review?></span></span></a>
                                     <a href="#"><span id="academy_review_span">스토리 <span id="academy_review_num"><?=$total_record_story?></span></span></a>
 
-                                    <!-- <div class="academy_small_star"> -->
-                                        <!-- <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star"> -->
-                                        <!-- <span id="academt_review_star_score"><?= $total_star ?></span> -->
-                                    <!-- </div> -->
+                                    <!-- <div class="academy_small_star">
+                                        <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
+                                        <span id="academt_review_star_score"><?= $total_star ?></span>
+                                    </div> -->
 
                                 </div>
                             </div>
