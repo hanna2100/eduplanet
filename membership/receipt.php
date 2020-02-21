@@ -11,6 +11,7 @@
     <h1>receipt.php</h1>
 
     <?php
+      // include "./payment.php";
       include "../lib/db_connector.php";
       if(isset($_GET['month']) && isset($_GET['final_price']) && isset($_GET['expired_date'])){
         $month = $_GET['month'];
@@ -29,6 +30,7 @@
      <script type="text/javascript">
          var month = '<?= $month ?>';
          var final_price = '<?= $final_price ?>';
+         var expired_date = '<?= $expired_date ?>';
          var payMethod = '<?= $payMethod ?>';
          var name = '<?= $name ?>';
          var phone_num = '<?= $phone_num ?>'

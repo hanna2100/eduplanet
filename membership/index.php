@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <title>멤버십 인덱스</title>
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
      <link rel="stylesheet" href="./css/index.css">
   </head>
   <body>
