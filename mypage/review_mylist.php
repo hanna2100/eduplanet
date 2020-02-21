@@ -56,7 +56,7 @@
                                 <li id="select_aside_menu">작성한 리뷰</li>
                             </a>
                             <a href="#">
-                                <li id="review_write" onclick="showPopup(this);">리뷰 작성하기</li>
+                                <li id="review_write" onclick="showPopup(1);">리뷰 작성하기</li>
                             </a>
                         </ul>
                     </div>
@@ -65,12 +65,13 @@
                 <?php
                     // 리뷰 test ============================================================
 
-                    // test용
+                    // test용 (작성하기, 수정하기)
                     $user_no = 2;
 
                     include "../lib/db_connector.php";
 
-                    $sql = "SELECT acd_name, total_star, regist_day FROM review INNER JOIN academy ON review.parent = academy.no WHERE user_no='$user_no'";
+                    // $sql = "SELECT review.no, acd_name, total_star, one_line, facility, acsbl, teacher, cost_efct, achievement, benefit, drawback FROM review INNER JOIN academy ON review.parent = academy.no WHERE user_no='$user_no'";
+                    $sql = "SELECT review.no, acd_name, total_star, regist_day FROM review INNER JOIN academy ON review.parent = academy.no WHERE user_no='$user_no'";
 
                     $result = mysqli_query($conn, $sql);
                     $total_record = mysqli_num_rows($result);
@@ -91,7 +92,7 @@
                             <h4>작성한 리뷰가 없습니다.</h4>
                             <p>리뷰를 작성하시면 무료로 모든 학원 리뷰를 조회하실 수 있습니다.</p>
                             <p>지금 작성하시고 무료 혜택을 받아 보세요.</p>
-                            <a href="/eduplanet/mypage/review_write.php"><button id="button_review_write">리뷰 작성하기</button></a>
+                            <a href="/eduplanet/mypage/review_write_popup.php"><button id="button_review_write">리뷰 작성하기</button></a>
                         </div>
 
 
@@ -122,16 +123,25 @@
                                 $acd_name = $row["acd_name"];
                                 $regist_day = $row["regist_day"];
                                 $total_star = $row["total_star"];
-
+                                
+                                $no = $row["no"];
+                             
                             ?>
 
                             <div class="review_table_list">
                                 <ul>
+                                    <li id="update_review_no" style="display: none"><?=$no?></li>
+
                                     <li id="review_acd_name"><?=$acd_name?></li>
                                     <li id="review_regist_day"><?=$regist_day?></li>
                                     <li id="review_status">등록완료</li>
                                     <li id="review_total_star"><?=$total_star?></li>
-                                    <li id="review_edit_delete"><a href="#">수정 </a>|<a href=""> 삭제</a></li>
+
+                                    <li id="review_edit_delete">
+                                        <a id="review_update" href="#" onclick="showPopup(2, <?=$no?>);">수정 |</a>
+                                        <a href="#" onclick="deleteReview(<?=$no?>);"> 삭제</a>
+                                    </li>
+
                                 </ul>
                             </div>
 
@@ -151,7 +161,6 @@
             </div>
 
         </div>
-
         
         <footer>
             <?php include "../footer.php"; ?>

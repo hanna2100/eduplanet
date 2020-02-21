@@ -75,7 +75,7 @@ a {
     box-sizing: border-box;
 }
 
-.review_write_header span {
+#review_write_header_title {
     float: left;
     color: white;
     font-size: 16px;
@@ -119,10 +119,26 @@ a {
     /* border: 1px solid black;  */
 }
 
+.review_subject_search {
+    float: left;
+    width: 150px;
+    height: 60px;
+    font-weight: bold;
+    font-size: 14px;
+    /* border: 1px solid black; */
+}
+
+.review_input_content_search {
+    float: left;
+    width: 500px;
+    height: 60px;
+    /* border: 1px solid black;  */
+}
+
 .search_academy {
     margin-top: 40px;
     width: 660px;
-    height: 70px;
+    height: 60px;
     /* border: 1px solid black; */
 }
 
@@ -299,4 +315,8 @@ textarea {
 
 * html .ui-autocomplete {
     height: 100px;
+}
+
+input[type="text"]:disabled {
+    background: white;
 }

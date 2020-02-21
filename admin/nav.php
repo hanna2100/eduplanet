@@ -5,7 +5,7 @@
       <li class='nav_menu'><a class="nav_href"><span><i class="fas fa-angle-right"></i>회원 관리</span></a>
         <ul>
           <li><a class="nav_href" href='/eduplanet/admin/gm_members.php'><span>일반회원</span></a></li>
-          <li><a class="nav_href" href='#'><span>사업자회원</span></a></li>
+          <li><a class="nav_href" href='/eduplanet/admin/am_members.php'><span>사업자회원</span></a></li>
         </ul>
       </li>
       <li class='nav_menu'><a class="nav_href"><span><i class="fas fa-angle-right"></i>수익 관리</span></a>

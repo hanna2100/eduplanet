@@ -86,7 +86,7 @@
 
                             <div class="index_header_menu_hover_detail_review">
                                 <ul>
-                                    <li id="review_write">리뷰 작성</li>
+                                    <li id="review_write"  onclick="showPopup(1);">리뷰 작성</li>
                                 </ul>
 
                             </div>
@@ -193,7 +193,7 @@
         </div>
     </div>
 
-    <?php include "mypage/review_write.php"; ?>
+    <?php include "mypage/review_write_popup.php"; ?>
 
 </body>
 
