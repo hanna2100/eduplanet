@@ -30,6 +30,7 @@
      <script type="text/javascript">
          var month = '<?= $month ?>';
          var final_price = '<?= $final_price ?>';
+         var expired_date = '<?= $expired_date ?>';
          var payMethod = '<?= $payMethod ?>';
          var name = '<?= $name ?>';
          var phone_num = '<?= $phone_num ?>'

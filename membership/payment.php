@@ -35,7 +35,6 @@
           $discounted_price = $price * $discount*0.01;
         // 구매 가격 +부가세 = 최종 실제 카드에서 빠져나가는 금액
           $final_price = $price-$discounted_price+(($price-$discounted_price)*0.1);
-
        ?>
 
       <form id="paypaygo" onsubmit="return paymentCheck()" action="./receipt.php?month=<?=$month?>&final_price=<?=$final_price?>&expired_date=<?=$expired_date?>" method="post">

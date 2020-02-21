@@ -17,13 +17,24 @@
     </header>
 
     <?php
-    if(isset($_GET['product']) && isset($_GET['price'])){
-      $product = $_GET['product'];
-      $price = $_GET['price'];
-    }else { echo "못 받아옴"};
-    // $product = "스탠다드[1개월]";
-    // $price = "11,900원";
-     ?>
+      include "../lib/db_connector.php";
+      if(isset($_GET['product']) && isset($_GET['price']) && isset($_GET['payMethod']) && isset($_GET['expired_date'])){
+        $product = $_GET['product'];
+        $price = $_GET['price'];
+        $payMethod = $_GET['payMethod'];
+        $expired_date = $_GET['expired_date'];
+      }else {
+        echo "못 받아옴";
+      };
+
+      // 로그인 되어있는 user_no(gm_order테이블에서는 gm_no은 세션값으로 insert하기! 지금은 임시로)
+      $user_no = 101;
+      $status = "결제완료";
+      $expired_date = date("yy-m-d", $expired_date);
+      $sql = "INSERT INTO `gm_order` VALUES (null, $user_no, '$product', $price, '$payMethod', '$status', '$expired_date');";
+      mysqli_query($conn, $sql);
+      mysqli_close($conn);
+    ?>
 
     <section>
       <div class="inner_section">
@@ -44,7 +55,7 @@
               </li>
               <li>
                 <span class="key">금액</span>
-                <span class="value"><?=$price?></span>
+                <span class="value"><?=number_format($price)?>원</span>
               </li>
             </ul>
           </div>
