@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
 
     <!-- 스크립트 -->
     <script src="/eduplanet/mypage/js/review_write.js"></script>
@@ -35,21 +35,21 @@
             <div class="review_write">
 
                 <div class="review_write_header">
-                    <span>학원리뷰 작성</span>
+                    <span id="review_write_header_title">학원리뷰 작성</span>
                     <img src="/eduplanet/img/close_icon.png" id="button_close_popup">
                 </div>
 
                 <div class="review_write_content">
-                    <p>작성을 완료하시면 모든 학원의 리뷰를 보실 수 있습니다.</p>
-                    <p>입력하신 모든 정보는 <b>익명</b>으로 처리됩니다.</p>
+                    <p class="review_write_content_p">작성을 완료하시면 모든 학원의 리뷰를 보실 수 있습니다.</p>
+                    <p class="review_write_content_p">입력하신 모든 정보는 <b>익명</b>으로 처리됩니다.</p>
 
                     <!-- 학원명 선택 자동완성 구현하기 -->
                     <div class="search_academy">
-                        <div class="review_subject">
+                        <div class="review_subject_search">
                             <p>학원명</p>
                         </div>
 
-                        <div class="review_input_content">
+                        <div class="review_input_content_search">
                             <input type="text" id="acd_name" name="acd_name" onchange="checkAcademy();">
                             <input type="hidden" id="si_name" name="si_name">
                             <input type="hidden" id="dong_name" name="dong_name">

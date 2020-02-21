@@ -12,6 +12,7 @@
     <!-- 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
+    
 </head>
 
 <body>
@@ -169,7 +170,7 @@
 
                             <div class="story_academy_heart">
                                 <span>학원 찜하기</span>
-                                <button id="button_academy_heart">like</button>
+                                <button type="button" id="button_academy_heart" onclick="followAcademy();">like</button>
                             </div>
 
                             </h1>

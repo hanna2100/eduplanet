@@ -9,6 +9,20 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/eduplanet/mypage/css/follow.css">
 
+    <script>
+        function deleteFollow(follow_no) {
+
+            var deleteConf = confirm('찜하기를 취소하시겠습니까?');
+
+            if (deleteConf === true) {
+                location.href = "/eduplanet/mypage/follow_delete.php?no=" + follow_no;
+
+            } else {
+                alert("삭제가 취소되었습니다.");
+            }
+        }
+    </script>
+
     <!-- 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
@@ -66,7 +80,7 @@
 
                 include "../lib/db_connector.php";
 
-                $sql = "SELECT acd_name, si_name, acd_no FROM follow INNER JOIN academy ON follow.acd_no = academy.no WHERE user_no='$user_no'";
+                $sql = "SELECT acd_name, si_name, acd_no, follow.no FROM follow INNER JOIN academy ON follow.acd_no = academy.no WHERE user_no='$user_no'";
 
                 $result = mysqli_query($conn, $sql);
                 $total_record = mysqli_num_rows($result);
@@ -154,6 +168,7 @@
                         $acd_name = $row["acd_name"];
                         $si_name = $row["si_name"];
                         $acd_no = $row["acd_no"];
+                        $follow_no = $row["no"];
         
                         $sql = "SELECT total_star FROM review WHERE parent='$acd_no'";
                         $result_total_star = mysqli_query($conn, $sql);
@@ -210,8 +225,8 @@
                             <div class="follow_list_column_sub">
 
                                 <div class="follow_academy_heart">
-                                    <span>학원 삭제</span>
-                                    <button id="button_academy_heart">like</button>
+                                    <span>찜하기 취소</span>
+                                    <button type="button" id="button_academy_heart" onclick="deleteFollow(<?=$follow_no?>);">like</button>
                                 </div>
 
                                 <div class="follow_academy_star_wrap">
