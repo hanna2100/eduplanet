@@ -28,11 +28,13 @@
       };
 
       // 로그인 되어있는 user_no(gm_order테이블에서는 gm_no은 세션값으로 insert하기! 지금은 임시로)
-      $user_no = 101;
+      $gm_no = 2;
       $status = "결제완료";
       $expired_date = date("yy-m-d", $expired_date);
-      $sql = "INSERT INTO `gm_order` VALUES (null, $user_no, '$product', $price, '$payMethod', '$status', '$expired_date');";
-      mysqli_query($conn, $sql);
+      $sql_gm_order = "INSERT INTO `gm_order` VALUES (null, $gm_no, '$product', $price, '$payMethod', '$status', '$expired_date');";
+      $sql_g_members = "UPDATE `g_members` SET expiry_day='$expired_date' where no=$gm_no;";
+      mysqli_query($conn, $sql_gm_order);
+      mysqli_query($conn, $sql_g_members);
       mysqli_close($conn);
     ?>
 
