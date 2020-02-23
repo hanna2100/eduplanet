@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include "./lib/db_connector.php";
+  include "../lib/db_connector.php";
 
   $gm_id = test_input($_POST['inputId']);
   $gm_pw = test_input($_POST['inputPw']);
@@ -20,7 +20,7 @@
       $_SESSION["gm_id"] = $pw_match["id"];
 
       mysqli_close($conn);
-      header('Location: index.php');
+      header('Location: ../index.php');
     }
   }
 

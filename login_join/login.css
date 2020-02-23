@@ -8,27 +8,29 @@
 }
 
 body {
-  margin: auto 0;
   background-color: #ebecee;
 }
+a { text-decoration: none; color: #2E89FF;}
 
 #main{
+  margin: 0 auto;
   width: 450px;
-  height: 550px;
+  height: 500px;
 }
 
-main h2{
+section h2{
   font-size: 1.5rem;
   margin-bottom: 50px;
   margin-top: 100px;
 }
 
-#form_login{
+#form_wrapper{
   border: 1px solid #dddddd;
   border-radius: 10px;
   padding: 40px 30px;
   margin-bottom: 100px;
   background-color: #fff;
+  height: 100%;
 }
 
 .formBox{
@@ -77,4 +79,17 @@ main h2{
   background: #ADD8E6;
   border: 1px solid #ADD8E6;
   cursor: default;
+}
+
+/* 폼 하단 */
+.fieldset { margin: 1.4em 0;}
+hr { border:2px solid #f1f1f1; max-width: 100%; margin:30px 0;}
+.form_bottom, .fieldset { font-size:13px; }
+table { width:100%; text-align: center;}
+td { width: 50%;}
+.link {
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top : 12px;
 }

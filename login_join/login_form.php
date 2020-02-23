@@ -9,27 +9,54 @@
   <link rel="stylesheet" href="./login.css">
 
   <body>
-    <main>
-     <center>
+    <header>
 
+    </header>
+
+    <section>
        <div id="main">
-         <h2>로 그 인</h2>
-         <form id="form_login" action="./login.php" method="post">
-           <div class="formBox">
-             <label for="inputId">아이디&nbsp;&nbsp;&nbsp;</label>
-             <input type="text" class="formInput" id="inputId" name="inputId" required>
-             <p class="subMsg" id="idSubMsg"></p>
+         <h2> 로 그 인</h2>
+          <div id="form_wrapper">
+           <form id="form_login" action="./login.php" method="post">
+             <div class="formBox">
+               <label for="inputId">아이디&nbsp;&nbsp;&nbsp;</label>
+               <input type="text" class="formInput" id="inputId" name="inputId" required>
+               <p class="subMsg" id="idSubMsg"></p>
+             </div>
+             <div class="formBox">
+               <label for="inputPw">비밀번호</label>
+               <input type="text" class="formInput" id="inputPw" name="inputPw" required>
+               <p class="subMsg" id="pwSubMsg"></p>
+             </div>
+             <input type="button" id="btnFormSubmit" value="LOGIN" onclick="document.getElementById('form_login').submit()" disabled>
+           </form>
+
+           <p class="fieldset">
+						<input type="checkbox" id="remember-me" checked>
+						<label for="remember-me"> 로그인 상태 유지</label>
+					</p>
+
+           <hr>
+           <div class="form_bottom">
+             <table>
+               <tr>
+                 <td style="border-right: 2px solid #f1f1f1;">
+                   아직 회원이 아니신가요?
+                   <span class="link"><a href="./join_form.php">회원가입</a></span>
+                 </td>
+                 <td>
+                   기업 회원이시라면
+                   <span class="link"><a href="./join_form.php">기업회원 로그인</a></span>
+                 </td>
+               </tr>
+             </table>
            </div>
-           <div class="formBox">
-             <label for="inputPw">비밀번호</label>
-             <input type="text" class="formInput" id="inputPw" name="inputPw" required>
-             <p class="subMsg" id="pwSubMsg"></p>
-           </div>
-           <input type="button" id="btnFormSubmit" value="LOGIN" onclick="document.getElementById('form_login').submit()" disabled>
-         </form>
+         </div>
        </div>
-     </center>
-   </main>
+
+   </section>
+
+   <footer></footer>
 
    <script src="./login.js"></script>
   </body>
