@@ -1,5 +1,5 @@
 /* 공통 css */
-* { 
+* {
     padding: 0px;
     margin: 0px;
     font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
@@ -11,7 +11,7 @@ body {
     display: block;
     min-height: 1080px;
     min-width: 1060px;
-    background: #f3f3f4; 
+    background: #f3f3f4;
     font-size: 13px;
     color: #333;
     margin: 0;

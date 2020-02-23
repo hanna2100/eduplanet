@@ -5,6 +5,22 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+body {
+    display: block;
+    min-height: 1080px;
+    min-width: 1060px;
+    background: #f3f3f4;
+    font-size: 13px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -20px;
+}
+.body_wrap {
+    position: relative;
+    top: 0px;
+}
 
 /* #mva4{
   width: 100%;
@@ -21,6 +37,16 @@
   height: 130px;
   border: 1px solid red;
 } */
+.see_more{
+  position: absolute;
+  bottom: 15px;
+  right: 30px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background-color: #f3f3f4;
+  width: 70px;
+  text-align: center;
+}
 #button_academy_heart {
     float: right;
     margin-left: 5px;
@@ -153,6 +179,7 @@ p {
     line-height: 20px;
     height: 24px;
 }
+
 .bl_score {
     background-image: url("https://jpassets.jobplanet.co.kr/assets/global_sprite-s8f98f6bf17-eff7e5e5fd2bbdcd6eb91a8bb7535979fa2338c4891aa61aa260e9e21b40cfba.png");
     background-repeat: no-repeat;
