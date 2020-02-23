@@ -1,0 +1,80 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: auto 0;
+  background-color: #ebecee;
+}
+
+#main{
+  width: 450px;
+  height: 550px;
+}
+
+main h2{
+  font-size: 1.5rem;
+  margin-bottom: 50px;
+  margin-top: 100px;
+}
+
+#form_login{
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  padding: 40px 30px;
+  margin-bottom: 100px;
+  background-color: #fff;
+}
+
+.formBox{
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.formBox label{
+  display: inline-block;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.formInput{
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.subMsg{
+  font-size: 0.7rem;
+  color: red;
+}
+
+#btnFormSubmit{
+  width: 100%;
+  background-color: #2E89FF;
+  border: 1px solid #2E89FF;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#btnFormSubmit:hover{
+  cursor: pointer;
+}
+
+#btnFormSubmit:disabled {
+  background: #ADD8E6;
+  border: 1px solid #ADD8E6;
+  cursor: default;
+}
