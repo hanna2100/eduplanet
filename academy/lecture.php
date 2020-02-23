@@ -15,6 +15,9 @@
     <!-- word cloud  -->
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+    <script src="./js/lecture.js">
+
+    </script>
     <!-- 나의 css -->
     <link rel="stylesheet" href="./css/lecture.css">
     <title></title>
@@ -30,94 +33,45 @@
 
         <h1>강사 정보</h1>
 
-    <?php
-    include "../lib/db_connector.php";
+          <?php
+          include "../lib/db_connector.php";
+          if (isset($_GET["parent"])) {
+              $parent = $_GET["parent"];
+          } else {
+              $parent = 1;
+          }
 
-    $sql = "select * from teacher where parent=1;";
-    $result = mysqli_query($conn, $sql);
-    $row_num = mysqli_num_rows($result);
+          $sql = "select * from teacher where parent=$parent;";
+          $result = mysqli_query($conn, $sql);
+          $row_num = mysqli_num_rows($result);
 
-    for ($i=0; $i < $row_num; $i++) {
-      mysqli_data_seek($result, $i);
-      $row = mysqli_fetch_array($result);
-      $name = $row["name"];
-      $subject = $row["subject"];
-      $content = $row["content"];
-      $file_name = $row["file_name"];
-      ?>
-      <div class='teacher_card' onclick="">
-      <h3><span><?=$name?> 선생님</span></h3>
-      <img class='teacher_img' src='../img/teacher_img<?=$i?>.jpg'>
-      <ul class='teacher_card_ul'>
-      <li><span>과목 : <?=$subject?></span></li>
-      <li><span>경력 : <?=$content?></span></li>
-      </ul>
-      </div>
-      <?php
-      }
-      ?>
-    </div>
-    <div id="teacher_schedule">
-      <div id="schedule">
-        <h1>강의 시간표</h1>
-        <?php
-          mysqli_data_seek($result, 0);
-          $row_teacher = mysqli_fetch_array($result);
-          $name = $row_teacher["name"];
-        ?>
-        <table>
-          <tr>
-            <td colspan="8"><?=$name?>선생님 시간표</td>
-          </tr>
-          <tr>
-            <td>1 교시</td>
-            <?php
-            $sql_schedule = "select * from lecture where teacher_name='$name'";
-            $result_schedule = mysqli_query($conn, $sql_schedule);
-            for ($i=0; $i < 7; $i++) {
-              mysqli_data_seek($result_schedule, $i);
-              $row_schedule = mysqli_fetch_array($result_schedule);
-              $sc_subject = $row_schedule["subject"];
-              $sc_day = $row_schedule["day"];
-              $sc_order = $row_schedule["order"];
-              if ($sc_order == 1) {
+          for ($i=0; $i < $row_num; $i++) {
+            mysqli_data_seek($result, $i);
+            $row = mysqli_fetch_array($result);
+            $name = $row["name"];
+            $no = $row["no"];
+            $subject = $row["subject"];
+            $content = $row["content"];
+            $teacher_name[$i] = $name;
+            $file_name = $row["file_name"];
             ?>
-                <td><?=$sc_subject?></td>
-            <?php
-          }else{
-            ?>
-            <td>&nbsp</td>
+            <div class='teacher_card' onclick="getinfo(<?=$no?>)">
+              <h3><span><?=$name?> 선생님</span></h3>
+              <img class='teacher_img' src='../img/teacher_img<?=$i?>.jpg'>
+              <ul class='teacher_card_ul'>
+                <li><span>과목 : <?=$subject?></span></li>
+                <li><span>경력 : <?=$content?></span></li>
+                <li><span>선생님 별명 : <?=$file_name?></span></li>
+              </ul>
+            </div>
             <?php
           }
-            }
-            ?>
-          </tr>
-          <tr>
-            <td>2 교시</td>
-            <?php
-            $sql_schedule = "select * from lecture where teacher_name='$name'";
-            $result_schedule = mysqli_query($conn, $sql_schedule);
-            for ($i=0; $i < 7; $i++) {
-              mysqli_data_seek($result_schedule, $i);
-              $row_schedule = mysqli_fetch_array($result_schedule);
-              $sc_subject = $row_schedule["subject"];
-              $sc_day = $row_schedule["day"];
-              $sc_order = $row_schedule["order"];
-              if ($sc_order == 2) {
-            ?>
-                <td><?=$sc_subject?></td>
-            <?php
-          }else{
-            ?>
-            <td>&nbsp</td>
-            <?php
-          }
-            }
-            ?>
-          </tr>
-        </table>
-      </div>
-    </div>
+          ?>
+        </div>
+        <div id="teacher_schedule ">
+          <table id="table">
+          </table>
+        </div>
     </div>
     </section>
     <footer>
