@@ -2,13 +2,25 @@
 
 <?php
 
-// 추가예정 ()
-// 세션값으로 학원no를 받아서 a_members 테이블에서 acd_name 가져오기 (parent랑 no랑 같은거임)
+    if (isset($_SESSION["am_no"])) {
+        $am_no = $_SESSION["am_no"];
+    } else {
+        $am_no = "";
+    }
+
+    // test
+    $am_no = 1;
 
     // 시간 셋팅하기
 	date_default_timezone_set('Asia/Seoul');
 
     include "../lib/db_connector.php";
+
+    $sql_acd = "SELECT acd_name FROM a_members WHERE acd_no=$am_no";
+    $result = mysqli_query($conn, $sql_acd);
+    $row = mysqli_fetch_array($result);
+
+    $acd_name = $row["acd_name"];
 
     $title = $_POST["story_post_title"];
     $subtitle = $_POST["story_post_content"];
@@ -80,10 +92,8 @@
         $copied_file_name = "";
     }
     
-
-    // 세션값 받아오기 전에 테스트로 parent 넣음
     $sql = "insert into acd_story(parent, acd_name, title, subtitle, subject1, content1, subject2, content2, subject3, content3, hit, regist_day, file_name, file_copy)";
-    $sql .= "values('2', '냥냥학원', '$title', '$subtitle', '$subject1', '$content1', '$subject2', '$content2', '$subject3', '$content3', 0, '$regist_day', '$upfile_name', '$copied_file_name')";
+    $sql .= "values('$am_no', '$acd_name', '$title', '$subtitle', '$subject1', '$content1', '$subject2', '$content2', '$subject3', '$content3', 0, '$regist_day', '$upfile_name', '$copied_file_name')";
 
     mysqli_query($conn, $sql);
     mysqli_close($conn);

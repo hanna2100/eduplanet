@@ -21,7 +21,7 @@
         // 테스트 할 때 index header 3개와 mypage header의 세션이 다 같아야 테스트 가능
 
         // 일반회원 세션 테스트
-        // $gm_no = 1;
+        $gm_no = 1;
 
         // 기업회원 세션 테스트
         // $am_no = 1;

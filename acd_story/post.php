@@ -15,14 +15,40 @@
 
 <body>
 
-
     <header>
         <?php include "../index/index_header_searchbar_in.php"; ?>
     </header>
 
     <?php
 
-    // 세션값으로 학원id를 받아서 학원명, 지역 조회 후 상단에 보여주기
+    if (isset($_SESSION["am_no"])) {
+        $am_no = $_SESSION["am_no"];
+    } else {
+        $am_no = "";
+    }
+
+    // test
+    $am_no = 1;
+
+    if(!$am_no) {
+        echo "
+        <script>
+            alert('기업회원만 이용 가능합니다.');
+            location.href = '/eduplanet/acd_story/index.php';
+        </script>
+    ";
+    }
+
+    include "../lib/db_connector.php";
+
+    $sql = "SELECT acd_name, si_name FROM academy WHERE no='$am_no'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result);
+
+    $acd_name = $row["acd_name"];
+    $si_name = $row["si_name"];
+
+    mysqli_close($conn);
 
     ?>
 
@@ -40,16 +66,10 @@
                         <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
                     </div>
 
-                    <span id="academy_title_span">고양이사료개발학원</span>
-                    <span id="academy_category">미술</span>
+                    <span id="academy_title_span"><?=$acd_name?></span>
+                    <span id="academy_district"><?=$si_name?></span>
 
-                    <!-- <div class="academy_small_star">
-                            <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                            <span id="academt_review_star_score">3.2</span>
-                        </div> -->
                 </a>
-
-                <!-- <button id="button_add_like" type="button" onclick="">찜하기</button> -->
 
             </div>
         </div>

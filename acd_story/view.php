@@ -99,7 +99,7 @@
                         </div>
                     </a>
 
-                    <button id="button_add_like" type="button" onclick="">찜하기</button>
+                    <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button id="button_add_like" type="button">찜하기</button></a>
 
                 </div>
             </div>
