@@ -18,8 +18,13 @@
         
         // session test ============================================
 
-        // $gm_no = 1;
-        $am_no = 1;
+        // 일반회원 세션 테스트
+        $gm_no = 1;
+
+        // 기업회원 세션 테스트
+        // $am_no = 1;
+
+        // 세션을 주지 않으면 비회원 테스트
 
         // session ==================================================
 ?>
@@ -128,13 +133,13 @@
                                     // 학원 회원
                                     } else if ($am_no) {
                                     ?>
-                                    <li id="review_write"><a href="javascript:alert('리뷰 작성은 일반 회원만 이용 가능합니다.')">리뷰 작성</a></li>
+                                    <a href="javascript:alert('리뷰 작성은 일반 회원만 이용 가능합니다.')"><li id="review_write">리뷰 작성</li></a>
 
                                     <?php
                                     // 로그인 안했을 때
                                     } else {
                                     ?>
-                                    <li id="review_write"><a href="javascript:alert('로그인 후 이용 가능합니다.')">리뷰 작성</a></li>
+                                    <a href="javascript:alert('로그인 후 이용 가능합니다.')"><li id="review_write">리뷰 작성</li></a>
                                     <?php
                                     }
                                     ?>
@@ -183,13 +188,15 @@
                                                 document.getElementsByClassName("index_header_menu_hover_detail_profile")[0].style.height = "175px";
                                         </script>
 
-                                        <?php
+<?php
                                         // 로그인 안했을 때
                                         } else {
                                         ?>
-                                            <a id="not_mem" href="javascript:alert('로그인 후 이용 가능합니다.')"><li>로그인 해주세요.</li></a>
+                                            <!-- <a id="not_mem" href="javascript:alert('로그인 후 이용 가능합니다.')"><li>로그인 해주세요.</li></a> -->
+                                            <a id="not_mem" href="/eduplanet/login_join/login_form.php"><li>로그인</li></a>
+                                            <a id="not_mem" href="/eduplanet/login_join/join_form.php"><li>회원가입</li></a>
                                             <script>
-                                                document.getElementsByClassName("index_header_menu_hover_detail_profile")[0].style.height = "55px";
+                                                document.getElementsByClassName("index_header_menu_hover_detail_profile")[0].style.height = "95px";
                                             </script>
                                         <?php
                                         }

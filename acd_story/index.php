@@ -8,6 +8,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/eduplanet/acd_story/css/index.css">
+    <!-- <script src="/eduplanet/acd_story/js/follow.js"></script> -->
 
     <!-- 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
@@ -170,7 +171,7 @@
 
                             <div class="story_academy_heart">
                                 <span>학원 찜하기</span>
-                                <button type="button" id="button_academy_heart" onclick="followAcademy();">like</button>
+                                <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart">like</button></a>
                             </div>
 
                             </h1>
