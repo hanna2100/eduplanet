@@ -18,7 +18,6 @@
 
     <section>
         <div class="membership_container">
-
           <div class="membership_section top_banner">
               top_banner
           </div>
@@ -67,7 +66,7 @@
             $price = $row["price"];
             $total_price = $price*(100-$discount)*0.01;
           ?>
-                <button type="button" class="membership_card" onclick="location.href='./payment.php?month=<?=$month?>&discount=<?=$discount?>&price=<?=$price?>'">
+                <button type="button" class="membership_card" onclick="loginCheck();">
                   <div class="card_wrap">
                     <div class="card_header">
                       <div class="membership_card_title">
@@ -121,5 +120,26 @@
     <footer>
 
     </footer>
+    <script>
+
+      function loginCheck(){
+        // 아이디 세션값 있는지 체크
+        var $gm_no=3;
+        var $am_no;
+
+        var month = '<?=$month?>';
+        var discount = '<?=$discount?>';
+        var price = '<?=$price?>';
+
+        if($gm_no){
+          location.href="./payment.php?month="+month+"&discount="+discount+"&price="+price
+        }else if($am_no){
+          alert('해당 멤버십은 일반 회원 전용입니다. 일반회원으로 로그인 하시거나 기업회원 멤버십을 이용해주세요.');
+        }else {
+          alert('멤버십 서비스는 로그인 후 이용하실 수 있습니다.');
+          location.href='../login.php';
+        }
+      }
+    </script>
   </body>
 </html>
