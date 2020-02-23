@@ -2,42 +2,77 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <title>결제 완료 페이지</title>
+     <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="./css/receipt.css">
   </head>
   <body>
-
-    <h1>receipt.php</h1>
+    <header>
+       <?php
+       // include "../index_header.php";
+       ?>
+    </header>
 
     <?php
-      // include "./payment.php";
       include "../lib/db_connector.php";
-      if(isset($_GET['month']) && isset($_GET['final_price']) && isset($_GET['expired_date'])){
-        $month = $_GET['month'];
-        $final_price = $_GET['final_price'];
+      if(isset($_GET['product']) && isset($_GET['price']) && isset($_GET['payMethod']) && isset($_GET['expired_date'])){
+        $product = $_GET['product'];
+        $price = $_GET['price'];
+        $payMethod = $_GET['payMethod'];
         $expired_date = $_GET['expired_date'];
       }else {
-        echo " GET 값이 안들어옴 ";
-      }
+        echo "못 받아옴";
+      };
 
-      $payMethod = $_POST['payMethod'];
-      $name = $_POST['name'];
-      $phone_num = $_POST['phone_num'];
-      $email = $_POST['email'];
+      // 로그인 되어있는 user_no(gm_order테이블에서는 gm_no은 세션값으로 insert하기! 지금은 임시로)
+      $gm_no = 2;
+      $status = "결제완료";
+      $expired_date = date("yy-m-d", $expired_date);
+      $sql_gm_order = "INSERT INTO `gm_order` VALUES (null, $gm_no, '$product', $price, '$payMethod', '$status', '$expired_date');";
+      $sql_g_members = "UPDATE `g_members` SET expiry_day='$expired_date' where no=$gm_no;";
+      mysqli_query($conn, $sql_gm_order);
+      mysqli_query($conn, $sql_g_members);
+      mysqli_close($conn);
+    ?>
 
-     ?>
-     <script type="text/javascript">
-         var month = '<?= $month ?>';
-         var final_price = '<?= $final_price ?>';
-         var expired_date = '<?= $expired_date ?>';
-         var payMethod = '<?= $payMethod ?>';
-         var name = '<?= $name ?>';
-         var phone_num = '<?= $phone_num ?>'
-         var email = '<?= $email ?>'
-     </script>
-     <script src="./payment.js">
+    <section>
+      <div class="inner_section">
+        <div class="thankyou_logo">
+          <a href="../index.php"><img src="../img/thank-you.png" width="100px" height="80px" alt="thank you!"></a>
+        </div>
+        <div class="pay_end_wrap">
+          <h2>결제가 완료되었습니다.</h2>
+          <div class="pay_end_content">
+            <ul>
+              <li>
+                <span class="key">상품명</span>
+                <span class="value"><?=$product?></span>
+              </li>
+              <li>
+                <span class="key">설명</span>
+                <span class="value">학원정보/리뷰 열람</span>
+              </li>
+              <li>
+                <span class="key">금액</span>
+                <span class="value"><?=number_format($price)?>원</span>
+              </li>
+            </ul>
+          </div>
+          <div class="pay_end_button">
+              <button type="button" name="button" onclick="location.href='../index.php'">확인</button>
+          </div>
 
-     </script>
+        </div>
+
+      </div>
+
+    </section>
+
+    <footer>
+
+    </footer>
   </body>
 </html>

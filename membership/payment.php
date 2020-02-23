@@ -20,7 +20,6 @@
 
     <section>
       <?php
-        include "../lib/db_connector.php";
         if(isset($_GET['month']) && isset($_GET['discount']) && isset($_GET['price'])){
           $month = $_GET['month'];
           $discount = $_GET['discount'];
@@ -37,7 +36,6 @@
           $final_price = $price-$discounted_price+(($price-$discounted_price)*0.1);
        ?>
 
-      <form id="paypaygo" onsubmit="return paymentCheck()" action="./receipt.php?month=<?=$month?>&final_price=<?=$final_price?>&expired_date=<?=$expired_date?>" method="post">
         <div class="inner_section">
           <div class="payment_wrap">
 
@@ -64,7 +62,7 @@
                   <td class="payment_key">부가세(10%)</td>
                   <td class="payment_value"><?=number_format(($price-$discounted_price)*0.1)?>원</td>
                 </tr>
-                <tr id="payment_sum">
+                <tr class="payment_sum">
                   <td class="payment_key">총 결제금액</td>
                   <td class="payment_value"><?=number_format($final_price)?>원</td>
                 </tr>
@@ -82,20 +80,6 @@
                       <span class="radio_text">신용카드</span>
                     </label>
                   </li>
-                  <!-- <li>
-                    <label class="button_ty_radio_box jply_btn_lg">
-                      <input type="radio" class="jply_radio_item" name="payMethod" value="trans">
-                      <span class="radio_icon"></span>
-                      <span class="radio_text">실시간 계좌이체</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label class="button_ty_radio_box jply_btn_lg">
-                      <input type="radio" class="jply_radio_item" name="payMethod" value="danal">
-                      <span class="radio_icon"></span>
-                      <span class="radio_text">휴대폰 소액결제</span>
-                    </label>
-                  </li> -->
                   <li>
                     <label class="button_payMethod_box" value="kakaopay">
                       <input type="radio" class="jply_radio_item" name="payMethod" value="kakaopay">
@@ -164,93 +148,27 @@
               </div>
             </div>
             <div class="grid payment_button">
-              <button type="button" name="button" onclick="alert_back('결제를 취소합니다.');">취소</button>
-              <button type="button" name="button" id="pay_commit" onclick="paymentCheck();">결제</button>
+              <button type="button" name="cancel" onclick="location.href='../index.php'">취소</button>
+              <button type="button" name="pay" id="pay_commit" onclick="paymentCheck();">결제</button>
             </div>
 
           </div> <!-- end of payment_wrap -->
         </div> <!-- end of inner_section -->
-      </form>
+
 
     </section>
 
     <footer>
-
+      <?php
+      // include "../index/footer.php";
+      ?>
     </footer>
     <script>
-      var label = document.getElementsByClassName("button_payMethod_box");
-      var payMethod_info = document.getElementById("payMethod_info");
-      var kakao_info = "[KaKaoPay 이용 안내] 지원카드사 : 삼성카드, 하나카드, KB국민카드, 신한카드, 현대카드, 롯데카드, BC카드(씨티카드 제외)";
-      var payco_info = "[Payco 이용 안내] PAYCO는 NHN엔터테인먼트가 만든 안전한 간편결제 서비스입니다.";
-      var smile_info = "[SmilePay 이용 안내] 지원카드사 : KB국민카드, 광주은행BC카드, 전북은행BC카드, 현대카드, 롯데카드, BC카드";
-
-      var payment_button = document.getElementsByClassName("payment_button");
-      var pay_commit = document.getElementById("pay_commit");
-
-      function addInfo(label, value, content){
-        let isSelected = false;
-        label.addEventListener("click", function(){
-        //   if(isSelected === false){
-        //     label.classList.remove("selected");
-        //     isSelected = true;
-        //     return;
-        //   }else if(isSelected === true){
-            label.classList.add("selected");
-        //     isSelected = false;
-        //   }
-
-         // if(label.classList.contains("selected")){
-         //   label.classList.remove("selected");
-         // }else{
-         //   label.classList.add("selected");
-         // }
-
-           console.log(label);
-          payMethod_info.innerHTML = "";
-          payMethod_info.appendChild(document.createTextNode(content));
-        });
-      };
-
-      // 신용카드 클릭시 설명 삭제
-      addInfo(label[0], "credit_card", "");
-
-      // 카카오페이 상세 설명
-      addInfo(label[1], "kakaopay", kakao_info);
-
-      // 페이코 상세 설명
-      addInfo(label[2], this.value, payco_info);
-
-      // 스마일페이 상세 설명
-      addInfo(label[3], this.value, smile_info);
-
-      function paymentCheck(){
-        var agree = document.getElementById("agree");
-        var agreeChecked = $(agree).prop("checked");
-        var MethodChecked = $("input:radio[name='payMethod']").is(":checked");
-        var input_name = document.getElementById("input_name");
-        var input_tel = document.getElementById("input_tel");
-        var input_email = document.getElementById("input_email");
-
-        if(MethodChecked === false) {
-          alert("결제수단을 선택해주세요.");
-          return false;
-        }else if(input_name.value === "") {
-          alert("이름을 입력해주세요.");
-          return false;
-        }else if(input_tel.value === "") {
-          alert("연락처를 입력해주세요.");
-          return false;
-        }else if(input_email.value === "") {
-          alert("이메일을 입력해주세요.");
-          return false;
-        }else if(agreeChecked === false) {
-          alert("반드시 이용약관 및 유의사항에 동의해주세요.");
-          return false;
-        }
-           document.getElementById("paypaygo").submit();
-      }
-
-
+      var month = '<?= $month ?>';
+      var final_price = '<?= $final_price ?>';
+      var expired_date = '<?= $expired_date ?>';
     </script>
+    <script src="./payment.js"></script>
+
   </body>
 </html>
