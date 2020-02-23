@@ -4,11 +4,13 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="./css/index.css">
 
-    <title></title>
+    <title>EduPlanet</title>
   </head>
   <body>
+
     <header>
       <?php include "../index_header_searchbar_out.php"; ?>
+
     </header>
 
     <main>
@@ -69,11 +71,14 @@
       <script>
       <?php
         $name = "안녕 세상아";
+        $no = $_GET["no"];
+        // $page = $_GET["page"];
+
         // DB에서 가져오기-------------------------------------
         include_once("../lib/db_connector.php");
 
         // $con = mysqli_connect("localhost","root","123456","eduplanet");
-        $sql = "select * from academy";
+        $sql = "select * from academy where no = $no";
         $result = mysqli_query($conn,$sql);
         $row = mysqli_fetch_array($result);
 

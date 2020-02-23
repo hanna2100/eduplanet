@@ -1,3 +1,30 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    display: block;
+    min-height: 1080px;
+    min-width: 1060px;
+    background: #f3f3f4;
+    font-size: 13px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -20px;
+}
+
+
+.body_wrap {
+    position: relative;
+    top: 0px;
+}
+
 #mapp{
   border-top: 1px solid lightgray;
 }
@@ -52,7 +79,8 @@
   background-color: #F6F6F6;
   width: 100%;
   height: 1080px;
-  padding-top: 160px;
+  padding-top: 180px;
+
 }
 #asdf{
   color: black;
