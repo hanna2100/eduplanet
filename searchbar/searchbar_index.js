@@ -5,7 +5,7 @@ $(function(){
             
             $.ajax({
                 type: 'post',
-                url: "/eduplanet/auto_searchbar.php",
+                url: "/eduplanet/searchbar/auto_searchbar.php",
                 dataType: "json",
                 data: { search : request.term },
                 success: function(data) {
