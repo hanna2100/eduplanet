@@ -1,3 +1,6 @@
+var y;
+var m;
+
 $(function(){
     $('#navigation ul li.nav_menu>a').on('click', function(){
         //$(this).removeAttr('href');
@@ -18,6 +21,8 @@ $(function(){
     });
     
     $('#navigation>ul>li.nav_menu>a').append('<span class="holder"></span>');
+    $('#top_select_year').val(y).prop("selected", true);
+    $('#top_select_month').val(m).prop("selected", true);
 });
 
 var red= 'rgb(255, 99, 132)',
@@ -32,54 +37,71 @@ var red= 'rgb(255, 99, 132)',
 function topSelect_init_Setting(){
     var selectYear = document.getElementById('top_select_year');
     var selectMonth = document.getElementById('top_select_month');
-    var $selectYear = $('#top_select_year');
-    var $selectMonth = $('#top_select_month');
+    var slctYearVal = selectYear.options[selectYear.selectedIndex].value;
     var nowYear = new Date().getFullYear();
     var nowMonth = new Date().getMonth();
 
-    var yearValue = selectYear.value;
-
-    //옵션 모두 지우기
-    while (selectYear.hasChildNodes()){
-        selectYear.removeChild(selectYear.firstChild);
-    }
-    while (selectMonth.hasChildNodes()){
-        selectMonth.removeChild(selectMonth.firstChild);
-    }
-
-    var yearOpt = "";
     var monthOpt = "";
-
-    if(yearValue != '' && yearValue != nowYear){ //작년 이하 년도 선택일 경우(12월까지 출력)
-
-        for(var i = 2019; i<=nowYear ; i++){
-            yearOpt += '<option>'+i+'</option>';
+    if(slctYearVal<nowYear){
+        while (selectMonth.hasChildNodes()){
+            selectMonth.removeChild(selectMonth.firstChild);
         }
-
         for(var j= 1; j<=12; j++){
             monthOpt += '<option>'+j+'</option>';
         }
-        $selectYear.append(yearOpt);
-        $selectMonth.append(monthOpt);
-
-    }else{ //현재 년도 선택일 경우(현재 달까지만 출력)
-
-        var yearOpt = "";
-        for(var i = 2019; i<=nowYear ; i++){
-            yearOpt += '<option>'+i+'</option>';
+        $("#top_select_month").html(monthOpt);
+    }else{
+        while (selectMonth.hasChildNodes()){
+            selectMonth.removeChild(selectMonth.firstChild);
         }
-    
-        var monthOpt = "";
         for(var j= 1; j<=nowMonth+1; j++){
             monthOpt += '<option>'+j+'</option>';
         }
-        
-        $selectYear.append(yearOpt);
-        $selectMonth.append(monthOpt);
-
-        $selectYear.val(nowYear).prop("selected", true);
-        $selectMonth.val(nowMonth+1).prop("selected", true);
+        $("#top_select_month").html(monthOpt);
     }
+}
+
+
+function hrefDateChange(name){
+    var year = $('#top_select_year option:selected').val();
+    var month = $('#top_select_month option:selected').val();
+
+    location.href ='/eduplanet/admin/'+name+'.php?y='+year+'&m='+month;
+
+}
+
+function prevDateChange(name){
+    var year = $('#top_select_year option:selected').val();
+    var month = $('#top_select_month option:selected').val();
+
+    if(year==2010&&month==1){
+        return;
+    }else if(month==1){
+        //year = (year==2019)? 2019 : year-1;
+        year--;
+        month = 12;
+    }else{
+        month--;
+    }
+
+    location.href ='/eduplanet/admin/'+name+'.php?y='+year+'&m='+month;
+}
+
+function nextDateChange(name){
+    var year = $('#top_select_year option:selected').val();
+    var month = $('#top_select_month option:selected').val();
+
+    if(year == new Date().getFullYear() && month == new Date().getMonth()+1){
+        return;
+    }else if(month==12){
+        //year = (year==2019)? 2019 : year-1;
+        year++;
+        month = 1;
+    }else{
+        month++;
+    }
+
+    location.href ='/eduplanet/admin/'+name+'.php?y='+year+'&m='+month;
 }
 
 function dayArray(year, month){
@@ -111,3 +133,4 @@ function dayArray(year, month){
 
     return dayArray;
 }
+

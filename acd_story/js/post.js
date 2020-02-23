@@ -12,7 +12,7 @@ function checkInput() {
     var classNum = document.getElementsByClassName("story_post_wrap").length;
 
     // 주제가 하나일 때
-    if (classNum == 2) {
+    if (classNum == 1) {
 
         if (document.getElementById("story_post_title").value === "" ||
             document.getElementById("story_post_content").value === "" ||
@@ -34,7 +34,7 @@ function checkInput() {
         }
 
         // 주제가 두개일 때    
-    } else if (classNum == 3) {
+    } else if (classNum == 2) {
 
         if (document.getElementById("story_post_title").value === "" ||
             document.getElementById("story_post_content").value === "" ||
@@ -60,7 +60,7 @@ function checkInput() {
         }
 
     // 주제가 세개일 때
-    } else if (classNum == 4) {
+    } else if (classNum == 3) {
 
         if (document.getElementById("story_post_title").value === "" ||
             document.getElementById("story_post_content").value === "" ||
@@ -217,15 +217,15 @@ function storyPostAddSubject() {
 
     // alert(classNum);
 
-    if (classNum === 2) {
+    if (classNum === 1) {
         var parent = document.getElementById("story_academy_html");
         var subject = document.createElement("div");
         subject.className = "story_post_wrap";
-        subject.innerHTML = "<div class='story_post_wrap'><label for='story_post_subtitle_2'>주제</label><span id='story_post_subtitle_2_check' class='story_post_input_check'></span><input id='story_post_subtitle_2' name='story_post_subtitle_2' type='text' placeholder='ex ) 자기소개' onkeyup='checkInputSubtitle2();'><label for='story_post_description_2'>내용</label><span id='story_post_description_2_check' class='story_post_input_check'></span><textarea id='story_post_description_2' name='story_post_description_2' type='text' placeholder='내용을 입력해 주세요.' onkeyup='checkInputDescription2();'></textarea></div>";
+        subject.innerHTML = "<div class='story_post_wrap'><label for='story_post_subtitle_2'>주제 2)</label><span id='story_post_subtitle_2_check' class='story_post_input_check'></span><input id='story_post_subtitle_2' name='story_post_subtitle_2' type='text' placeholder='ex ) 공부비법 / 강의비법' onkeyup='checkInputSubtitle2();'><label for='story_post_description_2'>내용 2)</label><span id='story_post_description_2_check' class='story_post_input_check'></span><textarea id='story_post_description_2' name='story_post_description_2' type='text' placeholder='내용을 입력해 주세요.' onkeyup='checkInputDescription2();'></textarea></div>";
         parent.appendChild(subject.lastChild);
         alert("추가가 완료되었습니다.");
 
-    } else if (classNum === 3) {
+    } else if (classNum === 2) {
 
         // 이 방법으로 하면 추가할때마다 모두 초기화됨
         // var subject = document.getElementById("story_academy_html");
@@ -235,7 +235,7 @@ function storyPostAddSubject() {
         var parent = document.getElementById("story_academy_html");
         var subject = document.createElement("div");
         subject.className = "story_post_wrap";
-        subject.innerHTML = "<div class='story_post_wrap'><label for='story_post_subtitle_3'>주제</label><span id='story_post_subtitle_3_check' class='story_post_input_check'></span><input id='story_post_subtitle_3' name='story_post_subtitle_3' type='text' placeholder='ex ) 자기소개' onkeyup='checkInputSubtitle3();'><label for='story_post_description_3'>내용</label><span id='story_post_description_3_check' class='story_post_input_check'></span><textarea id='story_post_description_3' name='story_post_description_3' type='text' placeholder='내용을 입력해 주세요.' onkeyup='checkInputDescription3();'></textarea></div>";
+        subject.innerHTML = "<div class='story_post_wrap'><label for='story_post_subtitle_3'>주제 3)</label><span id='story_post_subtitle_3_check' class='story_post_input_check'></span><input id='story_post_subtitle_3' name='story_post_subtitle_3' type='text' placeholder='ex ) 마지막으로 한마디' onkeyup='checkInputSubtitle3();'><label for='story_post_description_3'>내용 3)</label><span id='story_post_description_3_check' class='story_post_input_check'></span><textarea id='story_post_description_3' name='story_post_description_3' type='text' placeholder='내용을 입력해 주세요.' onkeyup='checkInputDescription3();'></textarea></div>";
         parent.appendChild(subject.lastChild);
         alert("추가가 완료되었습니다.");
 

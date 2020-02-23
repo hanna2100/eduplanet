@@ -9,6 +9,20 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/eduplanet/mypage/css/follow.css">
 
+    <script>
+        function deleteFollow(follow_no) {
+
+            var deleteConf = confirm('찜하기를 취소하시겠습니까?');
+
+            if (deleteConf === true) {
+                location.href = "/eduplanet/mypage/follow_delete.php?no=" + follow_no;
+
+            } else {
+                alert("삭제가 취소되었습니다.");
+            }
+        }
+    </script>
+
     <!-- 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
@@ -19,7 +33,7 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include '../index_header_searchbar_in.php'; ?>
+                <?php include '../index/index_header_searchbar_in.php'; ?>
             </div>
 
             <div class="header_mypage">
@@ -49,18 +63,24 @@
         <div class="follow_list_wrap">
             <div class="follow_list_background">
 
+
+            
                 <?php
+
+                // 찜목록 test ============================================================
+
                 if (isset($_GET["page"])) {
                     $page = $_GET["page"];
                 } else {
                     $page = 1;
                 }
 
-                // $con = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
+                $user_no = $gm_no;
 
-                include "../lib/db_connector.php";
+                //  include "../lib/db_connector.php";
+                $conn = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
 
-                $sql = "select * from acd_story order by no desc";
+                $sql = "SELECT acd_name, si_name, acd_no, follow.no FROM follow INNER JOIN academy ON follow.acd_no = academy.no WHERE user_no='$user_no'";
 
                 $result = mysqli_query($conn, $sql);
                 $total_record = mysqli_num_rows($result);
@@ -145,71 +165,35 @@
 
                         $row = mysqli_fetch_array($result);
 
-                        $no = $row["no"];
-                        $parent = $row["parent"];
                         $acd_name = $row["acd_name"];
-                        $title = $row["title"];
-                        $subtitle = $row["subtitle"];
-                        $regist_day = $row["regist_day"];
-                        $file_name = $row["file_name"];
-                        $file_copy = $row["file_copy"];
-                        $hit = $row["hit"];
+                        $si_name = $row["si_name"];
+                        $acd_no = $row["acd_no"];
+                        $follow_no = $row["no"];
+        
+                        $sql = "SELECT total_star FROM review WHERE parent='$acd_no'";
+                        $result_total_star = mysqli_query($conn, $sql);
+                        $total_record_review = mysqli_num_rows($result_total_star);
+        
+                        $row = mysqli_fetch_array($result_total_star);
+        
+                        $total_star = $row["total_star"]; 
+        
+                        $sql = "SELECT * FROM acd_story WHERE parent='$acd_no'";
+                        $result_story = mysqli_query($conn, $sql);
+                        $total_record_story = mysqli_num_rows($result_story);
 
-                        if ($row["file_name"]) {
-                            $file_image = "<img src='./img/file.gif' height='13'>";
-                        } else {
-                            $file_image = "";
-                        }
-
-                        // 지역
-                        $sql_district = "select si_name from academy where acd_name = '$acd_name'";
-
-                        $result_district = mysqli_query($conn, $sql_district);
-                        $row_district = mysqli_fetch_array($result_district);
-
-                        $si_name = $row_district["si_name"];
-
-                        // 별점
-                        $sql_star = "select total_star from review where parent = $parent";
-
-                        $result_star = mysqli_query($conn, $sql_star);
-                        $row_star = mysqli_fetch_array($result_star);
-
-                        $total_star = $row_star["total_star"];
+                        // 아직 사진 컬럼이 없어서 못가져옴
+                        // if ($row["file_name"]) {
+                        //     $file_image = "<img src='./img/file.gif' height='13'>";
+                        // } else {
+                        //     $file_image = "";
+                        // }
 
                     ?>
 
                         <li>
                             <!-- 하나의 찜목록 -->
                             <div class="follow_list_column">
-
-                                <!-- <a href="/eduplanet/acd_story/view.php?no=<?= $no ?>&parent=<?= $parent ?>&acd_name=<?= $acd_name ?>">
-                                    <div class="follow_list_column_img">
-                                        <img src="/eduplanet/data/<?= $file_copy ?>" alt="follow_list_column_img">
-                                    </div>
-
-                                    <div class="follow_list_column_text">
-                                        <h1 id="follow_text_title"><?= $title ?>
-                                </a>
-
-                                <div class="follow_academy_heart">
-                                    <span>학원 삭제</span>
-                                    <button id="button_academy_heart">like</button>
-                                </div>
-
-                                </h1>
-                                <p id="follow_text_title_sub"><?= $subtitle ?></p>
-
-                                <div class="follow_list_column_academy_info">
-                                    <span id="academy_title_span"><?= $acd_name ?></span>
-                                    <span id="academy_district"><?= $si_name ?></span>
-
-                                    <div class="academy_small_star">
-                                        <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
-                                        <span id="academt_review_star_score"><?= $total_star ?></span>
-                                    </div>
-                                </div> -->
-
 
                                <!-- 왼쪽 학원 로고 및 정보  -->
                                 <!-- 클릭 시 href=학원페이지 -->
@@ -219,20 +203,20 @@
                                     </div>
 
                                     <div class="follow_list_column_text">
-                                        <h1 id="follow_text_academy">미래고양이사료교육원
+                                        <h1 id="follow_text_academy"><?=$acd_name?>
                                 </a>
 
                                 </h1>
-                                <p id="follow_text_district">고양시</p>
+                                <p id="follow_text_district"><?=$si_name?></p>
 
                                 <div class="follow_list_column_review">
-                                    <a href="#"><span id="academy_review_span">학원리뷰 <span id="academy_review_num">7</span></span></a>
-                                    <a href="#"><span id="academy_review_span">스토리 <span id="academy_review_num">3</span></span></a>
+                                    <a href="#"><span id="academy_review_span">학원리뷰 <span id="academy_review_num"><?=$total_record_review?></span></span></a>
+                                    <a href="#"><span id="academy_review_span">스토리 <span id="academy_review_num"><?=$total_record_story?></span></span></a>
 
-                                    <!-- <div class="academy_small_star"> -->
-                                        <!-- <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star"> -->
-                                        <!-- <span id="academt_review_star_score"><?= $total_star ?></span> -->
-                                    <!-- </div> -->
+                                    <!-- <div class="academy_small_star">
+                                        <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
+                                        <span id="academt_review_star_score"><?= $total_star ?></span>
+                                    </div> -->
 
                                 </div>
                             </div>
@@ -241,8 +225,8 @@
                             <div class="follow_list_column_sub">
 
                                 <div class="follow_academy_heart">
-                                    <span>학원 삭제</span>
-                                    <button id="button_academy_heart">like</button>
+                                    <span>찜하기 취소</span>
+                                    <button type="button" id="button_academy_heart" onclick="deleteFollow(<?=$follow_no?>);">like</button>
                                 </div>
 
                                 <div class="follow_academy_star_wrap">
@@ -256,7 +240,7 @@
                                         <img id="acd_star_5"class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
                                     </div>
 
-                                    <span class="follow_academy_star_num">5.0</span>
+                                    <span class="follow_academy_star_num"><?=$total_star?></span>
 
                                 </div>
 
@@ -298,16 +282,22 @@
                                 $last_page = $total_page;
                             }
 
-                            // 그룹번호의 첫번째 페이지 숫자
-                            $first_page = $last_page - ($page_scale - 1);
+                            //그룹번호의 첫번째 페이지 숫자
+                            $first_page = $last_page - ($page_scale-1);
 
-                            // 그룹번호의 첫번째 페이지는 1페이지보다 작을 수 없음
+                            //그룹번호의 첫번째 페이지는 1페이지보다 작을 수 없음
                             if ($first_page < 1) {
                                 $first_page = 1;
 
-                                // 마지막 그룹번호일때 첫번째 페이지값 결정
-                            } else if ($last_page == $total_page) {
-                                $first_page = $total_page - ($total_page % $page_scale) + 1;
+                            //마지막 그룹번호일때 첫번째 페이지값 결정
+                            } else if ($last_page == $total_page) { 
+
+                                if ($total_page % $page_scale == 0) {
+                                    $first_page = $total_page - $page_scale + 1;
+
+                                } else {
+                                    $first_page = $total_page - ($total_page % $page_scale) + 1;
+                                }
                             }
 
                             $next = $last_page + 1; // > 버튼 누를때 나올 페이지
@@ -365,7 +355,7 @@
 
 
         <footer>
-            <?php include "../footer.php"; ?>
+            <?php include "../index/footer.php"; ?>
         </footer>
 
 

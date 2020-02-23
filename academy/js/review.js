@@ -5,17 +5,16 @@ $(function(){
    $(".rate_star_ty1 span:nth-child("+i+")").addClass("checked");
   }
 
-
-
+  
 });
 
 anychart.onDocumentReady(function () {
       // //radar
     var data_radar = [
-      {x: "가성비", value: $rate_bar_cost_efct},
+      {x: "수강료만족도", value: $rate_bar_cost_efct},
       {x: "강사", value: $rate_bar_teacher},
       {x: "시설", value: $rate_bar_facility},
-      {x: "접근성", value: $rate_bar_acsbl},
+      {x: "교통편의성", value: $rate_bar_acsbl},
       {x: "학업성취도", value: $rate_bar_achievement}
     ];
     // create a chart

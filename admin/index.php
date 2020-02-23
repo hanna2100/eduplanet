@@ -24,15 +24,37 @@
 <main>
 <?php
   include_once 'nav.php';
+  include_once '../lib/db_connector.php';
+
+  $y = isset($_GET["y"])? $_GET["y"]: date("Y") ;
+  $m = isset($_GET["m"])? $_GET["m"]: date("n") ;
 ?>
+<!-- 페이지 변수를 자바스크립트로 넘겨줌 -->
+<script>
+  var y = <?=$y?>;
+  var m = <?=$m?>;
+</script>
 <section>
   <div class="sec_top">
-    <span><i class="fas fa-angle-left"></i></span>
-    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting()"></select>
+    <span onclick="prevDateChange('index')"><i class="fas fa-angle-left"></i></span>
+    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting()">
+<?php
+    for($i = 2010; $i<=date("Y"); $i++){
+      echo "<option>$i</option>";
+    }
+?>
+    </select>
     <span>년 </span>
-    <select id="top_select_month" dir="rtl"></select>
+    <select id="top_select_month" dir="rtl" onchange="hrefDateChange('index')">
+<?php
+    $last_m = $y==date("Y")? date("n"): 12;
+    for($i = 1; $i<=$last_m ; $i++){
+      echo "<option>$i</option>";
+    }
+?>
+    </select>
     <span>월 </span>
-    <span><i class="fas fa-angle-right"></i></span>
+    <span onclick="nextDateChange('index')"><i class="fas fa-angle-right"></i></span>
   </div>
   <div class="sec_content">
     <div id="dash_topline">
@@ -42,13 +64,13 @@
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
-        <span>일반회원</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user"></i> 132</span>
+        <span>일반회원 순증가</span><br>
+        <span class="dash_topline_i"><i class="fas fa-user"></i> <span id="increse_gm"></span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
-        <span>사업자회원</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-tie"></i> 40</span>
+        <span>사업자회원 순증가</span><br>
+        <span class="dash_topline_i"><i class="fas fa-user-tie"></i> <span id="increse_am"></span></span>
         <span class="caret down"><i class="fas fa-caret-down"></i></span>
       </div>
       <div>

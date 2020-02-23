@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <title>멤버십 인덱스</title>
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
      <link rel="stylesheet" href="./css/index.css">
   </head>
   <body>
@@ -17,7 +18,6 @@
 
     <section>
         <div class="membership_container">
-
           <div class="membership_section top_banner">
               top_banner
           </div>
@@ -25,7 +25,30 @@
           <div class="membership_section mid_contents">
             <h2>프리미엄</h2>
             <div class="mid_sub_title">결제를 해야 학원 리뷰를 볼 수 있답니다!! 우하하</div>
-              <!--  여기에 아이콘 5개 넣기 (접근성, 시설, 강사 등 5가지 항목)  -->
+              <div class="membership_icons_wrap">
+                <div class="membership_icons">
+                  <img src="../img/facilities.png" alt="facilities" width="60%" height="60%">
+                  <span class="icon_text">시설</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/budget.png" alt="cost-effective" width="60%" height="60%">
+                  <span class="icon_text">수강료만족도</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/bus.png" alt="Traffic convenience" width="60%" height="60%">
+                  <span class="icon_text">교통편의성</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/work.png" alt="teacher" width="60%" height="60%">
+                  <span class="icon_text">강사</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/book.png" alt="achievement" width="60%" height="60%">
+                  <span class="icon_text">학업성취도</span>
+                </div>
+              </div>
+
+
 
               <div class="whole_card_wrapper">
 
@@ -43,7 +66,7 @@
             $price = $row["price"];
             $total_price = $price*(100-$discount)*0.01;
           ?>
-                <button type="button" class="membership_card" onclick="location.href='./payment.php?month=<?=$month?>&discount=<?=$discount?>&price=<?=$price?>'">
+                <button type="button" class="membership_card" onclick="loginCheck();">
                   <div class="card_wrap">
                     <div class="card_header">
                       <div class="membership_card_title">
@@ -64,7 +87,7 @@
                        </dl>
                      </div>
                      <div class="card_bottom">
-                       <span class="btn_membership false">구매하기</span>
+                       <span class="btn_membership">구매하기</span>
                      </div>
                    </div>
                  </button>
@@ -97,5 +120,26 @@
     <footer>
 
     </footer>
+    <script>
+
+      function loginCheck(){
+        // 아이디 세션값 있는지 체크
+        var $gm_no=3;
+        var $am_no;
+
+        var month = '<?=$month?>';
+        var discount = '<?=$discount?>';
+        var price = '<?=$price?>';
+
+        if($gm_no){
+          location.href="./payment.php?month="+month+"&discount="+discount+"&price="+price
+        }else if($am_no){
+          alert('해당 멤버십은 일반 회원 전용입니다. 일반회원으로 로그인 하시거나 기업회원 멤버십을 이용해주세요.');
+        }else {
+          alert('멤버십 서비스는 로그인 후 이용하실 수 있습니다.');
+          location.href='../login.php';
+        }
+      }
+    </script>
   </body>
 </html>

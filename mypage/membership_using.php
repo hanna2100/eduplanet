@@ -16,7 +16,7 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include '../index_header_searchbar_in.php'; ?>
+                <?php include '../index/index_header_searchbar_in.php'; ?>
             </div>
 
             <div class="header_mypage">
@@ -72,12 +72,20 @@
 
                     <?php
 
-                    // 결제내역 test ============================================================
+                    // 이용중인 멤버십 test ============================================================
 
-                    $membership = 1;
+                    $user_no = $gm_no;
 
-                    if ($membership == 0) {
+                    //  include "../lib/db_connector.php";
+                     $conn = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
+ 
+                     $sql = "SELECT * from gm_order WHERE gm_no='$user_no'";
+ 
+                     $result = mysqli_query($conn, $sql);
+                     $total_record = mysqli_num_rows($result);
 
+                     if (!$result) {
+ 
                     ?>
                         <!-- 이용 내역이 없을 때 -->
                         <div class="mypage_content_list_none">
@@ -86,7 +94,6 @@
                             <p>현명한 학원 선택, 에듀 플래닛과 함께해 보세요.</p>
                             <button id="button_membership_go" onclick="">멤버십 둘러보기</button>
                         </div>
-
 
                     <?php
                     } else {
@@ -104,12 +111,34 @@
                                 </ul>
                             </div>
 
+                            <?php
+                            for ($i = 0; $i < $total_record; $i++) {
+
+                                mysqli_data_seek($result, $i);
+                                $row = mysqli_fetch_array($result);
+
+                                $prdct_name_month = $row["prdct_name_month"];
+                                $date = $row["date"];
+
+                                $sql = "SELECT expiry_day FROM g_members WHERE no='$user_no'";
+                                $result_exp = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_array($result_exp);
+
+                                $expiry_day = $row["expiry_day"];
+
+                                // 남은일자 계산
+                                $expiry_day_num = substr($expiry_day, 0, 4).substr($expiry_day, 5, 2).substr($expiry_day, 8, 2);
+                                $today = date("Ymd");
+                                $membership_day = (strtotime($expiry_day_num) - strtotime($today))/60/60/24;
+
+                            ?>
+
                             <div class="membership_table_list">
                                 <ul>
-                                    <li id="membership_name">프리미엄 3개월</li>
-                                    <li id="membership_start_day">2020-01-01</li>
-                                    <li id="membership_end_day">2020-03-31</li>
-                                    <li id="membership_valid_day">12 일</li>
+                                    <li id="membership_name"><?=$prdct_name_month?></li>
+                                    <li id="membership_start_day"><?=$date?></li>
+                                    <li id="membership_end_day"><?=$expiry_day?></li>
+                                    <li id="membership_valid_day"><?=$membership_day?> 일</li>
                                 </ul>
                             </div>
 
@@ -118,6 +147,7 @@
 
                     <?php
                     }
+                }
                     ?>
 
                 </div>
@@ -125,7 +155,7 @@
         </div>
 
         <footer>
-            <?php include "../footer.php"; ?>
+            <?php include "../index/footer.php"; ?>
         </footer>
 
     </div>

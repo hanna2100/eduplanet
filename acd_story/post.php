@@ -17,13 +17,13 @@
 
 
     <header>
-        <?php include "../index_header_searchbar_in.php"; ?>
+        <?php include "../index/index_header_searchbar_in.php"; ?>
     </header>
 
     <?php
 
-        // 세션값으로 학원id를 받아서 학원명, 지역 조회 후 상단에 보여주기
-        
+    // 세션값으로 학원id를 받아서 학원명, 지역 조회 후 상단에 보여주기
+
     ?>
 
     <!-- 상단 fixed 타이틀바 ------------------------------------------------------------------------------>
@@ -64,16 +64,17 @@
         <form name="story_post_form" action="/eduplanet/acd_story/post_insert.php" method="post" enctype="multipart/form-data">
 
             <div class="story_academy_content_wrap">
+
+                <div class="story_academy_blue_header">
+                    <p id="story_mini_p">스토리 등록</p>
+                </div>
+
                 <div class="story_academy_content">
-
                     <div class="story_academy_content_text">
-
                         <div id="story_academy_html">
                             <div class="story_academy_content_text_header">
 
-                                <p id="story_mini_p">스토리 등록</p>
-
-                                <div class="story_post_wrap">
+                                <div class="story_post_wrap_titles">
 
                                     <label for="story_post_title">제목</label>
                                     <span id="story_post_title_check" class="story_post_input_check"></span>
@@ -95,8 +96,10 @@
 
                             </div>
 
+                            <hr class="hr_bar">
+
                             <div class="story_post_add_subject">
-                                <span>* 주제는 총 3개까지 추가하실 수 있습니다.</span>
+                                <span><b>* 주제는 총 3개까지 추가하실 수 있습니다.</b></span>
                                 <button type="button" id="button_story_post_add_subject" onclick="storyPostAddSubject();">추가</button>
                             </div>
 
@@ -144,7 +147,7 @@
     </form>
 
     <footer>
-        <?php include "../footer.php"; ?>
+        <?php include "../index/footer.php"; ?>
     </footer>
 
 </body>

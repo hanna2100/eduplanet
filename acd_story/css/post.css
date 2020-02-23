@@ -21,7 +21,7 @@ a {
 }
 
 .post_wrap {
-    background-color: #ebecee;
+    /* background-color: #ebecee; */
     /* height: 1460px; */
 }
 
@@ -139,6 +139,16 @@ a {
     padding: 50px;
 }
 
+.story_academy_blue_header {
+    /* border: 1px solid black; */
+    padding-top: 20px;
+    padding-bottom: 5px;
+    padding-left: 50px;
+    background-color: #2E89FF;
+    color: white;
+    font-weight: bold;
+}
+
 .story_academy_content_text {
     width: 100%;
     /* border: 1px solid black; */
@@ -147,24 +157,33 @@ a {
 
 .story_academy_content_text_header {
     width: 700px;
-    height: 330px;
+    height: 250px;
     /* border: 1px solid black; */
-    /* border-bottom: 1px solid lightgray; */
-    margin-bottom: 40px;
+    /* border-bottom: 2px solid #2E89FF; */
+    margin-bottom: 20px;
 }
 
  #story_mini_p {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 26px;
     width: 700px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 /* 스토리작성 */
+.story_post_wrap_titles {
+    /* margin-top: 30px; */
+    /* border: 1px solid lightgray;
+    border-radius: 10px; */
+    padding: 30px;
+    box-sizing: border-box;
+    /* margin-bottom: 30px; */
+}
+
 .story_post_wrap {
     margin-top: 30px;
-    border: 1px solid lightgray;
-    border-radius: 10px;
+    /* border: 1px solid lightgray;
+    border-radius: 10px; */
     padding: 30px;
     box-sizing: border-box;
     margin-bottom: 30px;
@@ -176,6 +195,7 @@ label {
     line-height: 40px;
     font-size: 18px;
     font-weight: bold;
+    padding-left: 10px;
 }
 
 .story_post_input_check {
@@ -184,7 +204,7 @@ label {
     margin-left: 400px;
 }
 
-form input {
+.story_academy_content_wrap input {
     width: 625px;
     height: 35px;
     padding-left: 10px;
@@ -192,17 +212,18 @@ form input {
     font-size: 14px;
     margin-bottom: 25px;
     border-radius: 3px;
-    border: 1px solid transparent;
-    border-bottom: 1px solid lightgray;
+    border: 1px solid lightgray;
+    /* border-bottom: 1px solid lightgray; */
 }
 
-textarea {
+.story_academy_content_wrap textarea {
     width: 615px;
-    height: 200px;
+    height: 150px;
     padding: 10px;
     font-size: 14px;
-    border-radius: 3px;
+    /* border-radius: 3px; */
     border: 1px solid lightgray;
+    margin-bottom: 70px;
 }
 
 #story_post_img {
@@ -213,7 +234,6 @@ textarea {
     width: 700px;
     height: 50px;
     /* margin-left: 250px; */
-    margin-top: 30px;
     font-size: 16px;
     border: 1px solid #fff;
     border-radius: 3px;
@@ -227,11 +247,15 @@ textarea {
 }
 
 .story_content_image {
+    width: 650px;
     margin-top: 30px;
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    padding: 20px;
+    margin-bottom: 30px;
+    /* border: 1px solid lightgray; */
+    /* border-radius: 10px; */
+    /* padding: 20px; */
     box-sizing: border-box;
+    position: relative;
+    left: 25px;
 }
 
 .story_content_image input {
@@ -244,30 +268,46 @@ textarea {
 } 
 
 .story_post_add_subject {
-    margin-top: 30px;
+    /* border-top: 1px solid gray; */
+    padding-left: 30px;
+    width: 100%;
+    margin-top: 70px;
     box-sizing: border-box;
+    padding-top: 30px;
 }
 
 .story_post_add_subject span {
+    display: inline-block;
+    width: 567px;
     font-size: 14px;
     padding-left: 10px;
 }
 
 #button_story_post_add_subject {
+    display: inline-block;
     width: 75px;
     height: 40px;
     border: 1px solid #2E89FF;
     border-radius: 3px;
     background-color: #fff;
     color: #2E89FF;
-    position: relative;
-    top: -2px;
-    left: 5px;
     cursor: pointer;
     font-size: 14px;
-    margin-left: 360px;
+    /* margin-left: 580px; */
+    /* position: relative; */
+    /* top: -20px; */
 }
 
 #button_story_post_add_subject:hover {
     background-color: rgba(46, 137, 255, 0.13);
+}
+
+.hr_bar {
+    display: block;
+    position: absolute;
+    width: 800px;
+    height: 20px;
+    left: 0;
+    border: 1px solid #ebecee;
+    background-color: #ebecee;
 }

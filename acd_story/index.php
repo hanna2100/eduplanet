@@ -12,12 +12,13 @@
     <!-- 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
+    
 </head>
 
 <body>
 
     <header>
-        <?php include "../index_header_searchbar_out.php"; ?>
+        <?php include "../index/index_header_searchbar_out.php"; ?>
     </header>
 
     <div class="story_list_wrap">
@@ -169,7 +170,7 @@
 
                             <div class="story_academy_heart">
                                 <span>학원 찜하기</span>
-                                <button id="button_academy_heart">like</button>
+                                <button type="button" id="button_academy_heart" onclick="followAcademy();">like</button>
                             </div>
 
                             </h1>
@@ -219,16 +220,22 @@
                                 $last_page = $total_page;
                             }
 
-                            // 그룹번호의 첫번째 페이지 숫자
-                            $first_page = $last_page - ($page_scale - 1);
+                            //그룹번호의 첫번째 페이지 숫자
+                            $first_page = $last_page - ($page_scale-1);
 
-                            // 그룹번호의 첫번째 페이지는 1페이지보다 작을 수 없음
+                            //그룹번호의 첫번째 페이지는 1페이지보다 작을 수 없음
                             if ($first_page < 1) {
                                 $first_page = 1;
 
-                            // 마지막 그룹번호일때 첫번째 페이지값 결정
+                            //마지막 그룹번호일때 첫번째 페이지값 결정
                             } else if ($last_page == $total_page) { 
-                                $first_page = $total_page - ($total_page % $page_scale) + 1;
+
+                                if ($total_page % $page_scale == 0) {
+                                    $first_page = $total_page - $page_scale + 1;
+
+                                } else {
+                                    $first_page = $total_page - ($total_page % $page_scale) + 1;
+                                }
                             }
 
                             $next = $last_page + 1; // > 버튼 누를때 나올 페이지
@@ -287,7 +294,7 @@
     </div>
 
     <footer>
-        <?php include "../footer.php"; ?>
+        <?php include "../index/footer.php"; ?>
     </footer>
 
 </body>

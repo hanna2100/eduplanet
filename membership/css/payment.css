@@ -7,10 +7,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 body {
   margin: auto 0;
   background-color: #ebecee;
+}
+a {
+    color: black;
+    text-decoration: none;
 }
 section {
   margin: 0;
@@ -26,7 +29,7 @@ section {
   background: #fff
 }
 .payment_wrap {
-  margin: 60px;
+  margin: 60px 100px;
 }
 
 /* .grid { align-self: stretch;} */
@@ -46,14 +49,14 @@ h2 {
   line-height: 19px;
   color: #85878c;
 }
-/* payment_contents 결제 상세내역*/
-table { padding: 3em 0; margin: 0; width: 500px;}
-td { padding: 0.6em 0;}
+/* `payment_contents` 결제 상세내역*/
+.payment_contents {}
+table { padding: 3em 0; margin: 0; width: 100%;}
+td { padding: 0.6em 0; }
 
 #discount_tag {
   margin-left: 12px;
   font-size: 16px;
-  font-weight: bold;
   color: #ff9105;
 }
 .payment_key {
@@ -68,8 +71,9 @@ td { padding: 0.6em 0;}
   font-weight: 600;
   text-align: right;
 }
-#payment_sum>td { padding: 1em 0; font-weight:bold; border-top: 1px solid #c5c7cc; }
-#payment_sum>td:last-child{ color: #2E89FF; font-size: 1.5em; font-weight: bolder; }
+
+.payment_sum>td { padding: 1em 0; font-weight:bold; border-top: 2px dashed #c5c7cc; }
+.payment_sum>td:last-child{ color: #2E89FF; font-size: 1.5em; font-weight: bolder; }
 /* .discounted_price { font-weight: 1000; }  이거 왜 안먹는지? 모르겠음*/
 
 /* payment_method 결제수단*/
@@ -81,7 +85,7 @@ h3 {
 }
 .method_wrap { padding: 25px 0; height: 200px; text-align: center;}
 ul { list-style: none;}
-li { float: left; width: 50%;  }
+li { float: left; width: 50%;}
 .button_payMethod_box {
   display: inline-block;
   height: 56px;

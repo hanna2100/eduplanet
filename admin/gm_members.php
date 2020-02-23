@@ -29,38 +29,79 @@
   include_once 'nav.php';
   include_once '../lib/db_connector.php';
 
+  $y = isset($_GET["y"])? $_GET["y"]: date("Y") ;
+  $m = isset($_GET["m"])? $_GET["m"]: date("n") ;
   $page = isset($_GET["page"])? $_GET["page"]: 1 ;
+  $col = isset($_GET["col"])? $_GET["col"]: '' ;
+  $search = isset($_GET["search"])? $_GET["search"]: '' ;
+
 ?>
-<!-- 페이지 변수를 자바스크립트로 넘겨줌 -->
+<!-- php 변수를 자바스크립트로 넘겨줌 -->
 <script>
+  var y = <?=$y?>;
+  var m = <?=$m?>;
   var page = "<?=$page?>";
+  var col = "<?=$col?>";
+  var search = "<?=$search?>";
 </script>
+
 <section>
   <div class="sec_top">
-    <span><i class="fas fa-angle-left"></i></span>
-    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting()"></select>
+    <span onclick="prevDateChange('gm_members')"><i class="fas fa-angle-left"></i></span>
+    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting()">
+<?php
+    for($i = 2010; $i<=date("Y"); $i++){
+      echo "<option>$i</option>";
+    }
+?>
+    </select>
     <span>년 </span>
-    <select id="top_select_month" dir="rtl"></select>
+    <select id="top_select_month" dir="rtl" onchange="hrefDateChange('gm_members')">
+<?php
+    $last_m = $y==date("Y")? date("n"): 12;
+    for($i = 1; $i<=$last_m ; $i++){
+      echo "<option>$i</option>";
+    }
+?>
+    </select>
     <span>월 </span>
-    <span><i class="fas fa-angle-right"></i></span>
+    <span onclick="nextDateChange('gm_members')"><i class="fas fa-angle-right"></i></span>
   </div>
   <!--end of 년 월 선택바 -->
 
+<?php
+  $m2 = $m;
+  if($m2<10){
+    $m2 = "0".$m2;
+  }
+  $sql = "SELECT 
+            COUNT(*) AS count 
+          FROM
+            g_members
+          WHERE
+            regist_day BETWEEN '19-01-01' AND LAST_DAY('$y-$m2-01');";
+
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_array($result);
+  $total_m = $row['count'];
+
+?>
+<!-- 총 회원수 가져오기 -->
   <div class="sec_content">
     <div id="dash_topline">
       <div>
         <span>전체 일반회원</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-friends"></i>&nbsp;123</span>
+        <span class="dash_topline_i"><i class="fas fa-user-friends"></i>&nbsp;<span id="total_m"><?=$total_m?></span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
         <span>신규회원</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-plus"></i>&nbsp;23</span>
+        <span class="dash_topline_i"><i class="fas fa-user-plus"></i>&nbsp;<span id="join_m">0</span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
         <span>탈퇴회원</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-minus"></i>&nbsp;11</span>
+        <span class="dash_topline_i"><i class="fas fa-user-minus"></i>&nbsp;<span id="wthdr_m">0</span></span>
         <span class="caret down"><i class="fas fa-caret-down"></i></span>
       </div>
     </div>
@@ -77,17 +118,57 @@
     </div>
     <!-- end of 회원수 변화 그래프 -->
 
+    <div style="display:flex; width:960px; margin-bottom: 50px;">
+      <div id="dash_age_range_wrap">
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Age range</h4>
+        <canvas id="dash_age_range"></canvas>
+      </div>
+      <div id="dash_pm_ratio_wrap">
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Premium membership Ratio</h4>
+        <canvas id="dash_pm_ratio"></canvas>
+      </div>
+      <div id="dash_postGraph_wrap">
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Interest words</h4>
+        <!-- 관심사 단어 순위 -->
+        <div id="dash_intres_world_wrap">
+<?php
+        for($i=1; $i<=5; $i++){
+?>
+          <div class="dasn_intres_detail">
+            <span class="dasn_intres_label">0</span>
+            <span class="dasn_intres_data"></span>
+          </div>
+<?php
+        }
+?>
+        </div>
+      </div>
+    </div>
+    <!-- end of 그래프 3개 -->
+
     <div id="g_members_list_wrap">
       <div id="g_members_list">
         <h4>
           <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;General member Management
+          <div class="selectbox">
+            <select id="search_select">
+              <option>회원번호</option>
+              <option>아이디</option>
+              <option>이메일</option>
+              <option>연락처</option>
+              <option>출생년도</option>
+              <option>관심사</option>
+              <option>유료만료일</option>
+              <option>가입일</option>
+            </select>
+          </div>
           <div class='search-box'>
-            <form class='search-form'>
+            <div class='search-form'>
               <input class='form-control' placeholder='검색어를 입력하세요' type='text'>
-              <button class='btn btn-link search-btn'>
+              <button class='btn btn-link search-btn' onclick="onclickSearch()" >
               <i class="fas fa-search"></i>
               </button>
-            </form>
+            </div>
           </div>
         </h4>
         <!-- end of 검색창 -->
@@ -103,15 +184,22 @@
 					<span class="col3">아이디</span>
 					<span class="col4">이메일</span>
 					<span class="col5">연락처</span>
-					<span class="col6">나이</span>
+					<span class="col6">출생년도</span>
 					<span class="col7">관심사</span>
 					<span class="col8">유료만료일</span>
 					<span class="col9">가입일</span>
 				</li>
 <?php
-        $sql = "select * from g_members order by no desc";
+        $sql='';
+
+        if($col!='' && $search !=''){
+          $sql = "SELECT * FROM g_members WHERE $col LIKE '%$search%' ORDER BY regist_day DESC";
+        }else{
+          $sql = "SELECT * FROM g_members ORDER BY regist_day DESC";
+        }
+
         $result = mysqli_query($conn, $sql);
-        $total_record = mysqli_num_rows($result); // 전체 회원 수
+        $total_record = mysqli_num_rows($result); 
 
         $scale = 10; // 가져올 글 수
 
@@ -128,7 +216,6 @@
         //게시판 맨 상단 번호
         $number = $total_record - $truncated_num;
 
-        echo "<script>console.log($truncated_num)</script>";
         for ($i=$truncated_num; $i < $truncated_num+$scale && $i < $total_record; $i++){
           // 가져올 레코드로 위치(포인터) 이동
           mysqli_data_seek($result, $i);
@@ -195,17 +282,22 @@
             
             $next = $last_page + 1;// > 버튼 누를때 나올 페이지
             $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
+
+            $url = "/eduplanet/admin/gm_members.php?y=$y&m=$m";
+            if($search!=''){
+              $url .= "&col=$col&search=$search";
+            }
             // 첫번째 페이지일 때 앵커 비활성화
             if ($first_page == 1) {
               if($page!=1)
-                echo "<li><a href='/eduplanet/admin/gm_members.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                echo "<li><a href='$url&page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
               else
                 echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
               
               echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
             } else {
-              echo "<li><a href='/eduplanet/admin/gm_members.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
-              echo "<li><a href='/eduplanet/admin/gm_members.php?page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
+              echo "<li><a href='$url&page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+              echo "<li><a href='$url&page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
             }
 
             
@@ -214,7 +306,7 @@
               if ($page == $i) {
                 echo "<li><span class='page_num_set'><b style='color:#2E89FF'> $i </b></span></li>";
               } else {
-                echo "<li><a href='/eduplanet/admin/gm_members.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
+                echo "<li><a href='$url&page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
               }
             }
 
@@ -223,13 +315,13 @@
               echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";   
               
               if($page !=$total_page)
-                echo "<li><a href='/eduplanet/admin/gm_members.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                echo "<li><a href='$url&page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
               else
                 echo "<li><a><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
               
             } else {
-                echo "<li><a href='/eduplanet/admin/gm_members.php?page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
-                echo "<li><a href='/eduplanet/admin/gm_members.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                echo "<li><a href='$url&page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
+                echo "<li><a href='$url&page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
             }
 ?> 
           </ul>
