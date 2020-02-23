@@ -27,17 +27,16 @@
         <div class="mypage_user_menu_background">
             <div class="mypage_user_menu">
                 <ul>
-                    <a href="/eduplanet/mypage/myinfo.php">
+                    <a href="/eduplanet/mypage/am_myinfo.php">
                         <li id="mypage_user_myinfo">내 정보</li>
                     </a>
-                    <a href="/eduplanet/mypage/follow.php">
-                        <li id="mypage_user_follow">찜목록</li>
-                    </a>
-                    <a href="/eduplanet/mypage/membership_pay.php">
+                    <a href="/eduplanet/mypage/am_membership_pay.php">
                         <li id="mypage_user_membership">멤버십/결제</li>
                     </a>
-                    <a href="/eduplanet/mypage/review_mylist.php">
-                        <li id="mypage_user_review">리뷰</li>
+
+                    <!-- 학원 바로가기 / 경로수정 -->
+                    <a href="#">
+                        <li id="mypage_user_review">My Academy</li>
                     </a>
                 </ul>
             </div>
@@ -52,10 +51,10 @@
                         <h3>&nbsp;멤버십/결제</h3>
 
                         <ul>
-                            <a href="/eduplanet/mypage/membership_pay.php">
+                            <a href="/eduplanet/mypage/am_membership_pay.php">
                                 <li>결제 내역</li>
                             </a>
-                            <a href="/eduplanet/mypage/membership_using.php">
+                            <a href="/eduplanet/mypage/am_membership_using.php">
                                 <li id="select_aside_menu">이용중인 멤버십</li>
                             </a>
                         </ul>
@@ -74,12 +73,12 @@
 
                     // 이용중인 멤버십 test ============================================================
 
-                    $user_no = $gm_no;
+                    $user_no = $am_no;
 
-                    //  include "../lib/db_connector.php";
+                     //  include "../lib/db_connector.php";
                      $conn = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
  
-                     $sql = "SELECT * from gm_order WHERE gm_no='$user_no'";
+                     $sql = "SELECT * from am_order WHERE am_no='$user_no'";
  
                      $result = mysqli_query($conn, $sql);
                      $total_record = mysqli_num_rows($result);
@@ -120,7 +119,7 @@
                                 $prdct_name_month = $row["prdct_name_month"];
                                 $date = $row["date"];
 
-                                $sql = "SELECT expiry_day FROM g_members WHERE no='$user_no'";
+                                $sql = "SELECT expiry_day FROM a_members WHERE no='$user_no'";
                                 $result_exp = mysqli_query($conn, $sql);
                                 $row = mysqli_fetch_array($result_exp);
 

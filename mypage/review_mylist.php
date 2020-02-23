@@ -65,10 +65,10 @@
                 <?php
                     // 리뷰 test ============================================================
 
-                    // test용 (작성하기, 수정하기)
-                    $user_no = 2;
+                    $user_no = $gm_no;
 
-                    include "../lib/db_connector.php";
+                    //  include "../lib/db_connector.php";
+                    $conn = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
 
                     // $sql = "SELECT review.no, acd_name, total_star, one_line, facility, acsbl, teacher, cost_efct, achievement, benefit, drawback FROM review INNER JOIN academy ON review.parent = academy.no WHERE user_no='$user_no'";
                     $sql = "SELECT review.no, acd_name, total_star, regist_day FROM review INNER JOIN academy ON review.parent = academy.no WHERE user_no='$user_no'";

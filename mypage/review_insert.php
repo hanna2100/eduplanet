@@ -1,8 +1,15 @@
 <?php
 
-    // 세션으로 user_no 식별해야함
-    // test용
-    $user_no = 2;
+    if (isset($_SESSION["gm_no"])) {
+        $gm_no = $_SESSION["gm_no"];
+    } else {
+        $gm_no = "";
+    }
+
+    // session test
+    $gm_no = 1;
+
+    $user_no = $gm_no;
 
     date_default_timezone_set('Asia/Seoul');
 
@@ -36,6 +43,7 @@
     $sql .= "values('$no', '$user_no', '$one_line', '$total_star', '$facility_star', '$acsbl_star', '$teacher_star', '$cost_efct_star', '$achievement_star', '$benefit', '$drawback', '$regist_day')";
 
     mysqli_query($conn, $sql);
+    mysqli_error($conn);
     mysqli_close($conn);
 
     echo "

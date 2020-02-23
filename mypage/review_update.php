@@ -1,6 +1,6 @@
 <?php
 
-    include "../lib/db_connector.php";
+    include_once "../lib/db_connector.php";
 
     // 리뷰 글번호
     $review_no = $_GET["no"];

@@ -69,16 +69,16 @@
 
                 // 찜목록 test ============================================================
 
-                // test용
-                $user_no = 1;
-
                 if (isset($_GET["page"])) {
                     $page = $_GET["page"];
                 } else {
                     $page = 1;
                 }
 
-                include "../lib/db_connector.php";
+                $user_no = $gm_no;
+
+                //  include "../lib/db_connector.php";
+                $conn = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
 
                 $sql = "SELECT acd_name, si_name, acd_no, follow.no FROM follow INNER JOIN academy ON follow.acd_no = academy.no WHERE user_no='$user_no'";
 

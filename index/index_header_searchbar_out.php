@@ -1,3 +1,29 @@
+<?php
+
+        // login 에서 세션값 가져오기
+
+        // session_start();
+
+        if (isset($_SESSION["gm_no"])) {
+            $gm_no = $_SESSION["gm_no"];
+        } else {
+            $gm_no = "";
+        } 
+        
+        if (isset($_SESSION["am_no"])) {
+            $am_no = $_SESSION["am_no"];
+        } else {
+            $am_no = "";
+        }
+
+        // session test ============================================
+
+        // $gm_no = 1;
+        $am_no = 1;
+
+        // session ==================================================
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,7 +112,28 @@
 
                             <div class="index_header_menu_hover_detail_review">
                                 <ul>
-                                    <li id="review_write"  onclick="showPopup(1);">리뷰 작성</li>
+
+                                    <?php
+                                    // 일반 회원
+                                    if ($gm_no) {
+                                    ?>
+                                    <li id="review_write" onclick="showPopup(1);">리뷰 작성</li>
+
+                                    <?php
+                                    // 학원 회원
+                                    } else if ($am_no) {
+                                    ?>
+                                    <li id="review_write"><a href="javascript:alert('리뷰 작성은 일반 회원만 이용 가능합니다.')">리뷰 작성</a></li>
+
+                                    <?php
+                                    // 로그인 안했을 때
+                                    } else {
+                                    ?>
+                                    <li id="review_write"><a href="javascript:alert('로그인 후 이용 가능합니다.')">리뷰 작성</a></li>
+                                    <?php
+                                    }
+                                    ?>
+
                                 </ul>
 
                             </div>
@@ -104,21 +151,43 @@
 
                             <div class="index_header_menu_hover_detail_profile">
                                 <ul>
-                                    <a href="/eduplanet/mypage/myinfo.php">
-                                        <li>내 정보</li>
-                                    </a>
-                                    <a href="/eduplanet/mypage/follow.php">
-                                        <li>찜목록</li>
-                                    </a>
-                                    <a href="/eduplanet/mypage/membership_pay.php">
-                                        <li>멤버십/결제</li>
-                                    </a>
-                                    <a href="/eduplanet/mypage/review_mylist.php">
-                                        <li>리뷰</li>
-                                    </a>
-                                    <a href="#">
-                                        <li>로그아웃</li>
-                                    </a>
+                                <?php
+                                        // 일반회원 메뉴
+                                        if ($gm_no) {
+                                        ?>
+
+                                        <a href="/eduplanet/mypage/myinfo.php"><li>내 정보</li></a>
+                                        <a href="/eduplanet/mypage/follow.php"><li>찜목록</li></a>
+                                        <a href="/eduplanet/mypage/membership_pay.php"><li>멤버십/결제</li></a>
+                                        <a href="/eduplanet/mypage/review_mylist.php"><li>리뷰</li></a>
+                                        <a href="/eduplanet/index/logout.php"><li>로그아웃</li></a>
+                                            
+                                        <?php
+                                        // 학원회원 메뉴
+                                        } else if ($am_no) {
+                                        ?>
+                                    
+                                        <a href="/eduplanet/mypage/am_myinfo.php"><li>내 정보</li></a>
+                                        <a href="/eduplanet/mypage/am_membership_pay.php"><li>멤버십/결제</li></a>
+
+                                        <!-- 경로수정하기 -->
+                                        <a href="#"><li>My Academy</li></a>
+                                        <a href="/eduplanet/index/logout.php"><li>로그아웃</li></a>
+                                        <script>
+                                                document.getElementsByClassName("index_header_menu_hover_detail_profile")[0].style.height = "175px";
+                                        </script>
+                                        
+                                        <?php
+                                        // 로그인 안했을 때
+                                        } else {
+                                        ?>
+                                            <a id="not_mem" href="javascript:alert('로그인 후 이용 가능합니다.')"><li>로그인 해주세요.</li></a>
+                                            <script>
+                                                document.getElementsByClassName("index_header_menu_hover_detail_profile")[0].style.height = "55px";
+                                            </script>
+                                        <?php
+                                        }
+                                        ?>
                                 </ul>
                             </div>
                         </div>
