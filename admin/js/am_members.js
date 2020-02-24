@@ -7,7 +7,7 @@ $(function(){
     // else
     //     url = "/eduplanet/admin/gm_members.php?y="+y+"&m="+m+"&col="+col+"&search="+search;
 
-    url = "/eduplanet/admin/gm_members.php?y="+y+"&m="+m;
+    url = "/eduplanet/admin/am_members.php?y="+y+"&m="+m;
 
     $('.date_field').datepicker({
         dateFormat: 'yy-mm-dd',
@@ -65,15 +65,15 @@ function submitUpdate(){
         $.ajax({
             type: "post",
             data: serialize,
-            url : "./lib/gm_members_update.php",
+            url : "./lib/am_members_update.php",
             success : function(data){
-                if(data==1){
+                if(data==1){//업데이트 성공시
                     location.href=url+'&page='+page;
                 }else{
                     alert('오류발생: '+data);
                 }
             },
-            error : function(data){
+            error : function(){
                 alert("시스템에러");
             }
         });
@@ -96,7 +96,7 @@ function submitDelete(){
         $.ajax({
             type: "post",
             data: serialize,
-            url : "./lib/gm_members_delete.php",
+            url : "./lib/am_members_delete.php",
             success : function(data){
                 if(data==1){
                     location.href=url+'&page='+page;
@@ -104,7 +104,7 @@ function submitDelete(){
                     alert('오류발생: '+data);
                 }
             },
-            error : function(data){
+            error : function(){
                 alert("시스템에러");
             }
         });
@@ -129,12 +129,12 @@ function onclickSearch(){
         col="id";
     }else if(col=="이메일"){
         col="email";
-    }else if(col=="연락처"){
-        col="phone";
-    }else if(col=="출생년도"){
-        col="age";
-    }else if(col=="관심사"){
-        col="intres";
+    }else if(col=="학원고유번호"){
+        col="acd_no";
+    }else if(col=="학원명"){
+        col="acd_name";
+    }else if(col=="대표자명"){
+        col="rprsn";
     }else if(col=="유료만료일"){
         col="expiry_day";
     }else if(col=="가입일"){
@@ -148,11 +148,22 @@ function onclickSearch(){
     }
 }
 
+function openWating(){
+    window.open('/eduplanet/admin/am_members_waiting.php'
+                , '가입대기회원'
+                ,"width=1060, height=580, toolbar=no, menubar=no, scrollbars=no, resizable=no");
+}
+
+function openApiUpdate(){
+    window.open('/eduplanet/admin/am_members_api.php'
+    , '학원데이터 업데이트'
+    ,"width=1060, height=580, toolbar=no, menubar=no, scrollbars=no, resizable=no");
+}
 
 function importJoinData(){
 
     $.ajax({
-        url : "/eduplanet/admin/lib/gm_members_graph.php",
+        url : "/eduplanet/admin/lib/am_members_graph.php",
         type : "post",
         dataType: "json",
         data: { y: y,

@@ -73,7 +73,7 @@ function submitUpdate(){
                     alert('오류발생: '+data);
                 }
             },
-            error : function(data){
+            error : function(){
                 alert("시스템에러");
             }
         });
@@ -104,7 +104,7 @@ function submitDelete(){
                     alert('오류발생: '+data);
                 }
             },
-            error : function(data){
+            error : function(){
                 alert("시스템에러");
             }
         });

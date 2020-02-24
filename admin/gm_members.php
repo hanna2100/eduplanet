@@ -48,9 +48,9 @@
 <section>
   <div class="sec_top">
     <span onclick="prevDateChange('gm_members')"><i class="fas fa-angle-left"></i></span>
-    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting()">
+    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting('gm_members')">
 <?php
-    for($i = 2010; $i<=date("Y"); $i++){
+    for($i = 2018; $i<=date("Y"); $i++){
       echo "<option>$i</option>";
     }
 ?>

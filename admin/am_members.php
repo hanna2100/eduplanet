@@ -48,9 +48,9 @@
 <section>
   <div class="sec_top">
     <span onclick="prevDateChange('am_members')"><i class="fas fa-angle-left"></i></span>
-    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting()">
+    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting('am_members')">
 <?php
-    for($i = 2010; $i<=date("Y"); $i++){
+    for($i = 2018; $i<=date("Y"); $i++){
       echo "<option>$i</option>";
     }
 ?>
@@ -77,7 +77,7 @@
   $sql = "SELECT 
             COUNT(*) AS count 
           FROM
-            g_members
+            a_members
           WHERE
             regist_day BETWEEN '19-01-01' AND LAST_DAY('$y-$m2-01');";
 
@@ -86,11 +86,11 @@
   $total_m = $row['count'];
 
 ?>
-<!-- 총 회원수 가져오기 -->
+<!--end of 총 회원수 가져오기 -->
   <div class="sec_content">
     <div id="dash_topline">
       <div>
-        <span>전체 일반회원</span><br>
+        <span>전체 사업자회원</span><br>
         <span class="dash_topline_i"><i class="fas fa-user-friends"></i>&nbsp;<span id="total_m"><?=$total_m?></span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
@@ -109,7 +109,7 @@
 
     <div id="g_members_totalGraph_wrap">
       <div id="g_members_totalGraph_cell1">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;General member Graph<span>단위: 명</span></h4>
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Academy member Graph<span>단위: 명</span></h4>
         <canvas id="g_members_totalGraph"></canvas>
         <div class="btn_hide">
           <button>숨기기</button>
@@ -149,15 +149,15 @@
     <div id="g_members_list_wrap">
       <div id="g_members_list">
         <h4>
-          <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;General member Management
+          <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Academy member Management
           <div class="selectbox">
             <select id="search_select">
               <option>회원번호</option>
               <option>아이디</option>
               <option>이메일</option>
-              <option>연락처</option>
-              <option>출생년도</option>
-              <option>관심사</option>
+              <option>학원번호</option>
+              <option>학원명</option>
+              <option>대표자명</option>
               <option>유료만료일</option>
               <option>가입일</option>
             </select>
@@ -174,6 +174,8 @@
         <!-- end of 검색창 -->
 
         <div class="list_edit_delete_wrap">
+          <button onclick="openWating()">가입대기회원</button>
+          <button onclick="openApiUpdate()">학원데이터 업데이트</button>
           <button onclick="submitUpdate()">수정</button>
           <button onclick="submitDelete()">삭제</button>
         </div>
@@ -183,9 +185,9 @@
 					<span class="col2">회원번호</span>
 					<span class="col3">아이디</span>
 					<span class="col4">이메일</span>
-					<span class="col5">연락처</span>
-					<span class="col6">출생년도</span>
-					<span class="col7">관심사</span>
+					<span class="col5">학원번호</span>
+					<span class="col6">학원명</span>
+					<span class="col7">대표자명</span>
 					<span class="col8">유료만료일</span>
 					<span class="col9">가입일</span>
 				</li>
@@ -193,9 +195,9 @@
         $sql='';
 
         if($col!='' && $search !=''){
-          $sql = "SELECT * FROM g_members WHERE $col LIKE '%$search%' ORDER BY regist_day DESC";
+          $sql = "SELECT * FROM a_members WHERE $col LIKE '%$search%' AND approval = 'Y' ORDER BY regist_day DESC";
         }else{
-          $sql = "SELECT * FROM g_members ORDER BY regist_day DESC";
+          $sql = "SELECT * FROM a_members WHERE approval = 'Y' ORDER BY regist_day DESC";
         }
 
         $result = mysqli_query($conn, $sql);
@@ -223,9 +225,9 @@
           $no         = $row["no"];
           $id          = $row["id"];
           $email        = $row["email"];
-          $phone       = $row["phone"];
-          $age       = $row["age"];
-          $intres       = $row["intres"];
+          $acd_no       = $row["acd_no"];
+          $acd_name       = $row["acd_name"];
+          $rprsn       = $row["rprsn"];
           $expiry_day       = $row["expiry_day"];
           $regist_day  = $row["regist_day"];
 ?>
@@ -235,9 +237,9 @@
           <span class="col2"><input type="text" name="no[]" value="<?=$no?>" readonly></span>
           <span class="col3"><?=$id?></span>
           <span class="col4"><input type="text" name="email[]" value="<?=$email?>" disabled maxlength="80" oninput="limitMaxLength(this)"/></span>
-          <span class="col5"><input type="number" name="phone[]" value="<?=$phone?>" disabled maxlength="12" oninput="limitMaxLength(this)"/></span>
-          <span class="col6"><?=$age?></span>
-          <span class="col7"><input type="text" name="intres[]" value="<?=$intres?>" disabled maxlength="10" oninput="limitMaxLength(this)"/></span>
+          <span class="col5"><?=$acd_no?></span>
+          <span class="col6"><?=$acd_name?></span>
+          <span class="col7"><?=$rprsn?></span>
           <span class="col8"><input class="date_field" type="text" name="expiry_day[]" value="<?=$expiry_day?>" disabled readonly></span>
           <span class="col9"><?=$regist_day?></span>
         </form>
@@ -283,7 +285,7 @@
             $next = $last_page + 1;// > 버튼 누를때 나올 페이지
             $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
 
-            $url = "/eduplanet/admin/gm_members.php?y=$y&m=$m";
+            $url = "/eduplanet/admin/am_members.php?y=$y&m=$m";
             if($search!=''){
               $url .= "&col=$col&search=$search";
             }
