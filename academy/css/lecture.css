@@ -23,12 +23,12 @@ h3 {
 }
 
 #teacher_info div.teacher_card {
-  width: 240px;
-  height: 340px;
+  width: 250px;
+  height: 400px;
   transition: box-shadow .3s;
   background-color: white;
   float: left;
-  margin-left: 40px;
+  margin-left: 30px;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -44,11 +44,14 @@ h3 {
 #teacher_info div.teacher_card ul.teacher_card_ul li{
   font-size: 14px;
   list-style: none;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 7px;
+  margin-left: 20px;
   color: black;
   font-weight: bold;
+}
+#teacher_info div.teacher_card ul.teacher_card_ul li b {
+  color : #2E89FF;
 }
 #teacher_info div.teacher_card:hover {
   box-shadow: 0 0 11px rgba(33,33,33,.2);
@@ -56,7 +59,7 @@ h3 {
 #teacher_schedule {
   clear: both;
   padding-top: 30px;
-  width: 60%;
+  width: 80%;
   display: block;
   margin-left: auto;
   margin-right: auto;

@@ -16,7 +16,7 @@
 <body>
 
     <header>
-        <?php include "../index/index_header_searchbar_in.php"; ?>
+        <?php include_once "../index/index_header_searchbar_in.php"; ?>
     </header>
 
     <?php
@@ -27,7 +27,9 @@
         $am_no = "";
     }
 
-    // test
+    // test ===================================
+
+    // 기업회원 스토리 등록
     $am_no = 1;
 
     if(!$am_no) {
@@ -39,7 +41,7 @@
     ";
     }
 
-    include "../lib/db_connector.php";
+    include_once "../lib/db_connector.php";
 
     $sql = "SELECT acd_name, si_name FROM academy WHERE no='$am_no'";
     $result = mysqli_query($conn, $sql);

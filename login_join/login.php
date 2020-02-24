@@ -1,5 +1,5 @@
 <?php
-  session_start();
+  @session_start();
   include "../lib/db_connector.php";
 
   $gm_id = test_input($_POST['inputId']);

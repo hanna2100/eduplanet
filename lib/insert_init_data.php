@@ -61,16 +61,16 @@ function insert_init_data($conn, $table_name){
                                               (2, '2019-03-12', 2, 1, 3),
                                               (3, '2019-04-12', 3, 5, 8),
                                               (4, '2019-05-12', 3, 2, 6);";
-          break; 
+          break;
         case 'follow' :
           $sql = "INSERT INTO `follow` VALUES (1, 1, 1),
                                               (2, 1, 2),
                                               (3, 1, 3),
                                               (4, 1, 4);";
-          break; 
+          break;
         case 'withdrawal' :
           $sql = withdrawal_init_data();
-          break; 
+          break;
       default:
         echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
         break;

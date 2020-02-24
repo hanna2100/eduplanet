@@ -14,7 +14,7 @@
     // 시간 셋팅하기
 	date_default_timezone_set('Asia/Seoul');
 
-    include "../lib/db_connector.php";
+    include_once "../lib/db_connector.php";
 
     $sql_acd = "SELECT acd_name FROM a_members WHERE acd_no=$am_no";
     $result = mysqli_query($conn, $sql_acd);
