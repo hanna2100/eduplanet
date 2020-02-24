@@ -14,8 +14,8 @@
 <body>
 
     <div class="body_wrap">
-        <?php include './index_header_searchbar_in.php'; ?>
-        <?php include './academy_header.php'; ?>
+        <?php include '../index/index_header_searchbar_in.php'; ?>
+        <?php include './header/academy_header.php'; ?>
 
 
 

@@ -1,9 +1,5 @@
 var idPass = false;
 var pwPass = false;
-var adminPass = false;
-
-const ADMIN_ID = "admin";
-const ADMIN_PW = "admin_12";
 
 $(document).ready(function() {
   var inputId = $("#inputId"),
@@ -22,12 +18,6 @@ $(document).ready(function() {
       //형식에 어긋날경우
       $('#idSubMsg').text("아이디는 소문자와 숫자 4~12자리 입니다.");
       idPass = false;
-      isAllPass();
-    } else if(idValue == ADMIN_ID){
-      $("#idSubMsg").text("관리자 로그인");
-      idPass = true;
-      adminPass = true;
-      isAllPass();
     } else {
       $("#idSubMsg").text("");
       idPass = true;
@@ -49,15 +39,6 @@ $(document).ready(function() {
       $("#pwSubMsg").text("비밀번호는 숫자, 영문자, 특수문자가 모두 있는 8자리 글자여야 합니다.");
       pwPass = false;
       isAllPass();
-    }else if(pwValue === "admin_12"){
-      $("#pwSubMsg").text("관리자로 로그인합니다.");
-      pwPass = true;
-      if(adminPass == true){
-        
-
-        // location.href="../admin/index.php";
-      }
-      isAllPass();
     }else {
       $("#pwSubMsg").text("");
       pwPass = true;
@@ -66,8 +47,8 @@ $(document).ready(function() {
   });
 });
 
-
 function isAllPass(){
+  console.log(idPass, pwPass);
   if(idPass && pwPass){
     $("#btnFormSubmit").attr("disabled", false);
   }else{

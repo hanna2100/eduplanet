@@ -1078,6 +1078,9 @@
         </script>
 
       <!--    --------------------------------------------------------------------------------->
+      <div id="more_s">
+        <button type="button" name="button" id="more_btn">학원 더보기</button>
+      </div>
 
       </div> <!-- main_contents end-->
 
@@ -1087,10 +1090,9 @@
 
 
 
+
     </main>
-    <div id="more_s">
-      <button type="button" name="button" id="more_btn">학원 더보기</button>
-    </div>
+
 
     <footer>
         <?php include "../index/footer.php"; ?>
