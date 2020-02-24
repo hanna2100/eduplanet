@@ -13,11 +13,16 @@
 
     </header>
 
+    <?php
+      $mode = isset($_GET['mode']) ? $_GET['mode'] : "gm";
+      $action = "login.php?mode=".$mode;
+     ?>
+
     <section>
        <div id="main">
          <h2> 로 그 인</h2>
           <div id="form_wrapper">
-           <form id="form_login" name="login_form" action="login.php?mode=gm" method="post">
+           <form id="form_login" name="login_form" action="<?=$action?>" method="post">
              <div class="formBox">
                <label for="inputId">아이디&nbsp;&nbsp;&nbsp;</label>
                <input type="text" class="formInput" id="inputId" name="inputId" required>
@@ -29,7 +34,7 @@
                <p class="subMsg" id="pwSubMsg"></p>
              </div>
              <input type="button" id="btnFormSubmit" value="LOGIN" onclick="document.getElementById('form_login').submit()" disabled>
-             <!-- <input type="button" id="btnFormSubmit" value="LOGIN" onclick="loginCheck();" disabled> -->
+          
            </form>
 
            <p class="fieldset">
@@ -60,8 +65,6 @@
    <footer></footer>
 
    <script src="./login.js"></script>
-   <script>
-  
-   </script>
+
   </body>
 </html>
