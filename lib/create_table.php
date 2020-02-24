@@ -40,6 +40,7 @@ function create_table($conn, $table_name){
                     `acd_name` VARCHAR(40) NOT NULL,
                     `rprsn` VARCHAR(20) NOT NULL,
                     `file_copy` VARCHAR(50) NOT NULL,
+                    `approval` CHAR(1) DEFAULT 'N',
                     `expiry_day` DATE DEFAULT '0000-00-00',
                     `regist_day` DATE NOT NULL,
                     PRIMARY KEY (`no`),
@@ -57,11 +58,24 @@ function create_table($conn, $table_name){
                     `class` VARCHAR(50),
                     `tel` CHAR(15),
                     `address` VARCHAR(80),
-                    `latitude` CHAR(15),
-                    `longitude` CHAR(15),
                     `website` CHAR(50) DEFAULT NULL,
                     `schoolbus` VARCHAR(50) DEFAULT NULL,
                     `introduce` VARCHAR(200) DEFAULT NULL,
+                    `file_copy` VARCHAR(50),
+                    PRIMARY KEY(`no`)
+                  );";
+            break;
+          case 'academy_temp' : //api데이터를 저장해서 기존 데이터와 비교하기위한 임시테이블
+            $sql = "CREATE TABLE `academy_temp` (
+                    `no` INT NOT NULL AUTO_INCREMENT,
+                    `si_name` CHAR(10) NOT NULL,
+                    `dong_name` CHAR(10),
+                    `sector` CHAR(10) NOT NULL,
+                    `acd_name` VARCHAR(40) NOT NULL,
+                    `rprsn` VARCHAR(40),
+                    `class` VARCHAR(50),
+                    `tel` CHAR(15),
+                    `address` VARCHAR(80),
                     PRIMARY KEY(`no`)
                   );";
             break;

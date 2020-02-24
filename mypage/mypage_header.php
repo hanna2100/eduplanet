@@ -22,7 +22,7 @@ if (isset($_SESSION["am_no"])) {
 $gm_no = 1;
 
 // 기업회원 테스트
-// $am_no = 1;
+$am_no = 1;
 
 // session ==================================================
 
@@ -81,7 +81,7 @@ $gm_no = 1;
                     $table_members = 'a_members';
                 }
 
-                include "../lib/db_connector.php";
+                include_once "../lib/db_connector.php";
 
                 $sql = "SELECT id, expiry_day FROM $table_members WHERE no='$user_no'";
                 $result = mysqli_query($conn, $sql);
@@ -131,7 +131,8 @@ $gm_no = 1;
                             }
                         }
 
-                        mysqli_close($conn);
+                        // 헤더에서 DB를 닫으면 밑에 컨텐츠부분에서 실행을 못함 
+                        // mysqli_close($conn);
 
                         ?>
 

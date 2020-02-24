@@ -34,10 +34,11 @@ var red= 'rgb(255, 99, 132)',
     grey= 'rgb(201, 203, 207)';
 
 
-function topSelect_init_Setting(){
+function topSelect_init_Setting(name){
     var selectYear = document.getElementById('top_select_year');
     var selectMonth = document.getElementById('top_select_month');
     var slctYearVal = selectYear.options[selectYear.selectedIndex].value;
+    var slctMonthVal = selectMonth.options[selectYear.selectedIndex].value;
     var nowYear = new Date().getFullYear();
     var nowMonth = new Date().getMonth();
 
@@ -59,6 +60,8 @@ function topSelect_init_Setting(){
         }
         $("#top_select_month").html(monthOpt);
     }
+
+    location.href ='/eduplanet/admin/'+name+'.php?y='+slctYearVal+'&m='+1;
 }
 
 

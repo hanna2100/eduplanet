@@ -14,7 +14,7 @@
 <body>
 
     <header>
-        <?php include "../index/index_header_searchbar_in.php"; ?>
+        <?php include_once "../index/index_header_searchbar_in.php"; ?>
     </header>
 
     <?php
@@ -25,7 +25,7 @@
         // $si_name = $_GET["si_name"];
         // $total_star = $_GET["total_star"];
 
-        include "../lib/db_connector.php";
+        include_once "../lib/db_connector.php";
 
         // 지역
         $sql_district = "select si_name from academy where acd_name = '$acd_name'";
