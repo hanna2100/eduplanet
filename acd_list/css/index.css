@@ -37,6 +37,23 @@ body {
   height: 130px;
   border: 1px solid red;
 } */
+#more_btn{
+  width: 100px;
+  border-radius: 10px;
+  background-color: #2E89FF;
+  color: white;
+  font-weight: bold;
+  /* border: 1px; */
+  outline: 0px;
+  cursor: pointer;
+}
+#more_s{
+  margin-top:10px;
+  margin-left: 1055px;
+  margin-bottom:20px;
+  width: 110px;
+
+}
 .see_more{
   position: absolute;
   bottom: 15px;
@@ -119,7 +136,7 @@ body {
 }
 #my_village_academy{
   width: 800px;
-  height: 602px;
+  height: 594px;
   margin-top: 20px;
   border: 1px solid lightgray;
   background-color: white;
@@ -299,8 +316,8 @@ p {
   /* position: relative; */
   /* border: 1px solid red; */
   display: block;
-  height: 1400px;
-  padding-top: 160px;
+  height: 1350px;
+  padding-top: 180px;
   position: relative;
 }
 body {

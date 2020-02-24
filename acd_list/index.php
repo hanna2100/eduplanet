@@ -11,7 +11,7 @@
   <body>
 
     <header>
-        <?php include "../index_header_searchbar_out.php"; ?>
+       <?php include "../index/index_header_searchbar_out.php"; ?>
 
     </header>
 
@@ -851,7 +851,7 @@
                   </div>
                 </div>
                 <div class="see_more">
-                  <span> <a href="#" id="see_more0">더보기</a></span>
+                  <span> <a href="#" id="see_more">자세히</a></span>
                 </div>
 
               </div>
@@ -877,7 +877,7 @@
                   </div>
                 </div>
                 <div class="see_more">
-                  <span><a href="#" id="see_more1">더보기</a></span>
+                  <span><a href="#" id="see_more">자세히</a></span>
                 </div>
 
               </div>
@@ -903,7 +903,7 @@
                   </div>
                 </div>
                 <div class="see_more">
-                  <span><a href="#" id="see_more2">더보기</a></span>
+                  <span><a href="#" id="see_more">자세히</a></span>
                 </div>
 
               </div>
@@ -928,7 +928,7 @@
                   </div>
                 </div>
                 <div class="see_more">
-                  <span><a href="#" id="see_more3">더보기</a></span>
+                  <span><a href="#" id="see_more">자세히</a></span>
                 </div>
 
               </div>
@@ -966,8 +966,9 @@
                           document.getElementsByClassName("aca_tel")[i].innerHTML = a[i]['tel'];
                         }
                         document.getElementsByClassName("aca_address")[i].innerHTML = a[i]['address'];
-                        console.log(a[i]['num']);
-                        // document.getElementsByClassName("see_more")[i].onclick = function(){ 왜 클래스로 하면 안되는가?
+                        console.log(a[i]['no']);
+
+                        document.getElementsByClassName("see_more")[i].onclick = moreInfo(a[i]['no']);
                         // document.getElementById("see_more"+i).onclick = function(){
                         //
                         //   location.href="../academy/index.php?no="+a[0]['no']+"&page=<?= $page ?>"; 왜 5가뜨는가
@@ -975,27 +976,28 @@
                         // }
                         // console.log(a[i]['no']);
 
-                    }           //이부분이 class로 하려고 했으나 뭔가 자꾸 안됌 ..
-                    document.getElementById("see_more"+0).onclick = function(){
-
-                      location.href="../academy/index.php?no="+a[0]['no'];
-
                     }
-                    document.getElementById("see_more"+1).onclick = function(){
-
-                      location.href="../academy/index.php?no="+a[1]['no'];
-
-                    }
-                    document.getElementById("see_more"+2).onclick = function(){
-
-                      location.href="../academy/index.php?no="+a[2]['no'];
-
-                    }
-                    document.getElementById("see_more"+3).onclick = function(){
-
-                      location.href="../academy/index.php?no="+a[3]['no'];
-
-                    }
+                         //이부분이 class로 하려고 했으나 뭔가 자꾸 안됌 ..
+                    // document.getElementById("see_more"+0).onclick = function(){
+                    //
+                    //   location.href="../academy/index.php?no="+a[0]['no'];
+                    //
+                    // }
+                    // document.getElementById("see_more"+1).onclick = function(){
+                    //
+                    //   location.href="../academy/index.php?no="+a[1]['no'];
+                    //
+                    // }
+                    // document.getElementById("see_more"+2).onclick = function(){
+                    //
+                    //   location.href="../academy/index.php?no="+a[2]['no'];
+                    //
+                    // }
+                    // document.getElementById("see_more"+3).onclick = function(){
+                    //
+                    //   location.href="../academy/index.php?no="+a[3]['no'];
+                    //
+                    // }
 
                 },error:function(request,status,error){
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -1003,6 +1005,14 @@
             });
           }
           // console.log(a[0]['no']);
+
+            //클로저 기능 함수! 이걸 안해주면 자꾸 마지막 값만 들어간다 다중이벤트를 사용할때는 해줘야함!!!!
+            function moreInfo(num){
+              return function(){
+                location.href="../academy/index.php?no="+num;
+              }
+            }
+
 
             function getLocation() {
               if (navigator.geolocation) { // GPS를 지원하면
@@ -1078,9 +1088,12 @@
 
 
     </main>
+    <div id="more_s">
+      <button type="button" name="button" id="more_btn">학원 더보기</button>
+    </div>
 
     <footer>
-        <?php include "../footer.php"; ?>
+        <?php include "../index/footer.php"; ?>
     </footer>
 
   </body>

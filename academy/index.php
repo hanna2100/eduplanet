@@ -9,8 +9,8 @@
   <body>
 
     <header>
-      <?php include "../index_header_searchbar_out.php"; ?>
-
+      <?php include "../index/index_header_searchbar_in.php"; ?>
+       <?php include "./header/academy_header.php"; ?>
     </header>
 
     <main>
@@ -150,7 +150,7 @@
     </div> <!-- eduInforMain -->
     </main>
     <footer>
-      <?php include "../footer.php"; ?>
+      <?php include "../index/footer.php"; ?>
     </footer>
   </body>
 </html>
