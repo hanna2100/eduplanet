@@ -13,11 +13,16 @@
 
     </header>
 
+    <?php
+      $mode = isset($_GET['mode']) ? $_GET['mode'] : "gm";
+      $action = "login.php?mode=".$mode;
+     ?>
+
     <section>
        <div id="main">
-         <h2> 로 그 인</h2>
+         <h2> 일반회원 로 그 인</h2>
           <div id="form_wrapper">
-           <form id="form_login" name="login_form" action="login.php?mode=gm" method="post">
+           <form id="form_login" name="login_form" action="<?=$action?>" method="post">
              <div class="formBox">
                <label for="inputId">아이디&nbsp;&nbsp;&nbsp;</label>
                <input type="text" class="formInput" id="inputId" name="inputId" required>
@@ -25,11 +30,11 @@
              </div>
              <div class="formBox">
                <label for="inputPw">비밀번호</label>
-               <input type="text" class="formInput" id="inputPw" name="inputPw" required>
+               <input type="password" class="formInput" id="inputPw" name="inputPw" required>
                <p class="subMsg" id="pwSubMsg"></p>
              </div>
              <input type="button" id="btnFormSubmit" value="LOGIN" onclick="document.getElementById('form_login').submit()" disabled>
-             <!-- <input type="button" id="btnFormSubmit" value="LOGIN" onclick="loginCheck();" disabled> -->
+
            </form>
 
            <p class="fieldset">
@@ -43,11 +48,11 @@
                <tr>
                  <td style="border-right: 2px solid #f1f1f1;">
                    아직 회원이 아니신가요?
-                   <span class="link"><a href="./join_form.php">회원가입</a></span>
+                   <span class="link join"><a href="./join_form.php?mode=gm">일반회원 가입</a></span>
                  </td>
                  <td>
-                   기업 회원이시라면
-                   <span class="link"><a href="./login_form.php?mode=am">기업회원 로그인</a></span>
+                   <p>학원 회원이시라면</p>
+                   <span class="link login"><a href="./login_form.php?mode=am">학원회원 로그인</a></span>
                  </td>
                </tr>
              </table>
@@ -58,10 +63,17 @@
    </section>
 
    <footer></footer>
+   <script>
+     var mode = '<?=$mode?>';
+     if(mode == "am"){
+       $("#main h2").html("학원회원 로그인");
+       $(".join").html("<a href='./join_form.php?mode=am'>학원회원 가입</a>");
+       $(".login").prev().html("일반 회원이시라면");
+       $(".login").html("<a href='./login_form.php?mode=gm'>일반회원 로그인</a>");
+     }
+   </script>
 
    <script src="./login.js"></script>
-   <script>
-  
-   </script>
+
   </body>
 </html>
