@@ -109,10 +109,8 @@ function get_academy_list($array_input){
         } else{
             $address = $array_input[$i]['REFINE_LOTNO_ADDR'];
         }
-        $latitude = $array_input[$i]['REFINE_WGS84_LAT'];
-        $longitude = $array_input[$i]['REFINE_WGS84_LOGT'];
 
-        $academy = new Academy($si_name, $dong_name, $sector, $acd_name, $rprsn, $class, $tel, $address, $latitude, $longitude);
+        $academy = new Academy($si_name, $dong_name, $sector, $acd_name, $rprsn, $class, $tel, $address);
         
         array_push($array_output, $academy);
     }
@@ -131,14 +129,12 @@ class Academy {
     public $class;
     public $tel;
     public $address;
-    public $latitude;
-    public $longitude;
     public $website;
     public $schoolbus;
     public $introduce;
 
     public function __construct($si_name, $dong_name, $sector, $acd_name, $rprsn, $class
-                                ,$tel, $address, $latitude, $longitude) {
+                                ,$tel, $address) {
         $this->si_name = $si_name;
         $this->dong_name = $dong_name;
         $this->sector = $sector;
@@ -147,8 +143,6 @@ class Academy {
         $this->class = $class;
         $this->tel = $tel;
         $this->address = $address;
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
     }
 
     public function set_add_info($website, $schoolbus, $introduce) { 

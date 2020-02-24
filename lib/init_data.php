@@ -26,12 +26,10 @@ function academy_init_data($si_param, $dong_param){
     $class = $acd_array[$i]->class;
     $tel = $acd_array[$i]->tel;
     $address = $acd_array[$i]->address;
-    $latitude = $acd_array[$i]->latitude;
-    $longitude = $acd_array[$i]->longitude;
 
     $no = $i+1;
 
-    $sql .= "($no, '$si_name','$dong_name','$sector','$acd_name','$rprsn','$class','$tel','$address', '$latitude', '$longitude', '', '', '')";
+    $sql .= "($no, '$si_name','$dong_name','$sector','$acd_name','$rprsn','$class','$tel','$address', '', '', '', '')";
 
     if($i != sizeof($acd_array)-1){
       $sql .=", ";
@@ -121,7 +119,11 @@ function a_members_init_data(){
       $membership= date("Y-m-d", $membership);
     }
 
-    $sql .= "($no, $no,'test$no', '1234', 'test$no@google.com', '$a_name', '$r_name', '$file_copy', '$membership', '$join_date'),";
+    //회원가입 승인여부 설정
+    $approval = rand(0,1);
+    $approval = $approval==0? 'N' : 'Y';
+
+    $sql .= "($no, $no,'test$no', '1234', 'test$no@google.com', '$a_name', '$r_name', '$file_copy', '$approval', '$membership', '$join_date'),";
     
     $i++;
   }
@@ -344,9 +346,6 @@ function randomDate($start_date, $end_date){
   return date('Y-m-d', $val);
 }
 
-// a_members_init_data();
-// $sql = acd_story_init_data();
-// echo $sql;
 
 ?>
 
