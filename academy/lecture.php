@@ -24,8 +24,7 @@
   </head>
   <body>
     <header>
-      <?php include "../index_header.php"; ?>
-      <?php include "../academy_header.php"; ?>
+      <?php include "./header/academy_header_include.php"; ?>
     </header>
     <section>
       <div id="teacher">
@@ -68,14 +67,15 @@
           }
           ?>
         </div>
-        <div id="teacher_schedule ">
+        <div id="teacher_schedule">
+          <h1>강의 시간표</h1>
           <table id="table">
           </table>
         </div>
     </div>
     </section>
     <footer>
-      <?php include "../footer.php"; ?>
+      <?php include "../index/footer.php"; ?>
     </footer>
   </body>
 </html>
