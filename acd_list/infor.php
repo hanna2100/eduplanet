@@ -13,7 +13,7 @@
         $row=mysqli_fetch_array($result);
 
         //리스트에 연관 배열{"name":aa,"address":bb}이런식으로 가져옴
-        $list[$i]=array("acdName" => $row["acd_name"],"tel"=>$row["tel"],"address" => $row['address'], "no" => $row["no"]);
+        $list[$i]=array("acdName" => $row["acd_name"],"tel"=>$row["tel"],"address" => $row['address'], "no" => $row["no"], "img" => $row["file_copy"]);
     }
 
 
