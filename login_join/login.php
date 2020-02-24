@@ -16,14 +16,14 @@
    switch($mode){
      case "gm" :
        $sql = "select * from g_members where id='$input_id'";
-       $id = "gm_id";
+       $no = "gm_no";
        break;
      case "am" :
        $sql = "select * from a_members where id='$input_id'";
-       $id = "am_id";
+       $no = "am_no";
        break;
      case "admin" :
-       $_SESSION["admin_id"] = "admin";
+       $_SESSION["admin_no"] = "admin";
        mysqli_close($conn);
        header('Location: ../admin/index.php');
        break;
@@ -40,7 +40,7 @@
      if($input_pw != $pw_match['pw']){
        alert_back('비밀번호를 잘못 입력하셨습니다.');
      }else{
-       $_SESSION[$id] = $pw_match["id"];
+       $_SESSION[$no] = $pw_match["no"];
 
        mysqli_close($conn);
        header('Location: ../index.php');
