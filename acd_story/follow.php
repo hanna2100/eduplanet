@@ -6,8 +6,10 @@ if (isset($_SESSION["gm_no"])) {
     $gm_no = "";
 }
 
-// test
-$gm_no = 1;
+// test ==============================
+
+// 일반회원 찜하기
+// $gm_no = 1;
 
 if(!$gm_no) {
     echo "
@@ -20,7 +22,7 @@ if(!$gm_no) {
 
 $acd_no = $_GET["no"];
 
-include "../lib/db_connector.php";
+include_once "../lib/db_connector.php";
 
 $sql = "insert into follow(user_no, acd_no)";
 $sql .= "values('$gm_no', '$acd_no')";

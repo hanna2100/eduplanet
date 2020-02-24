@@ -16,11 +16,11 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include '../index/index_header_searchbar_in.php'; ?>
+                <?php include_once '../index/index_header_searchbar_in.php'; ?>
             </div>
 
             <div class="header_mypage">
-                <?php include './mypage_header.php'; ?>
+                <?php include_once './mypage_header.php'; ?>
             </div>
         </header>
 
@@ -76,8 +76,7 @@
 
                     $user_no = $gm_no;
 
-                    //  include "../lib/db_connector.php";
-                     $conn = mysqli_connect("127.0.0.1", "root", "123456", "eduplanet");
+                     include_once "../lib/db_connector.php";
  
                      $sql = "SELECT * from gm_order WHERE gm_no='$user_no'";
  

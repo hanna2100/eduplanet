@@ -13,7 +13,7 @@
 
     date_default_timezone_set('Asia/Seoul');
 
-    include "../lib/db_connector.php";
+    include_once "../lib/db_connector.php";
 
     // hidden input (자동완성 검색창에서 넣어준 값)
     $si_name = $_POST["si_name"];
