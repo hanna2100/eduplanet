@@ -6,11 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+
+    <!-- 제이쿼리 -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+
+    <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/mypage_header.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
     <link rel="stylesheet" href="/eduplanet/mypage/css/follow.css">
 
-    <!-- 아이콘 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
+
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- identicon (프로필 이미지) -->
+    <script src="//cdn.rawgit.com/placemarker/jQuery-MD5/master/jquery.md5.js"></script>
+    <script src="//rawgit.com/stewartlord/identicon.js/master/pnglib.js"></script>
+    <script src="//rawgit.com/stewartlord/identicon.js/master/identicon.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            // 아이디에 따라 생성되는 프로필 이미지 만드는 함수 (세션에서 userid를 받아온다)
+            $(".user_img").each(function() {
+
+                $(this).prop('src', 'data:image/png;base64,' + new Identicon($.md5($(this).data("userid")), 80)).show();
+            });
+        });
+    </script>
 
     <script>
         function deleteFollow(follow_no) {
@@ -33,7 +67,7 @@
             location.href = "/eduplanet/mypage/follow.php?district=" + selectDistrict + "&sort=" + selectSort;
         }
     </script>
-    
+
 </head>
 
 <body onload="setSelectDis(); setSelectSort();">
@@ -42,11 +76,11 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include_once '../index/index_header_searchbar_in.php'; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header_searchbar_in.php"; ?>
             </div>
 
             <div class="header_mypage">
-                <?php include_once './mypage_header.php'; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/mypage/mypage_header.php"; ?>
             </div>
         </header>
 
@@ -102,7 +136,6 @@
                             }
                         </script>
                         ";
-
                 } else {
                     $selectDis = "";
                 }
@@ -121,29 +154,27 @@
                     $selectSort = "";
                 }
 
-                include_once "../lib/db_connector.php";
+                include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
                 // 지역이 선택되어 있을 때
-                if ($selectDis != "") { 
+                if ($selectDis != "") {
 
                     if ($selectSort == "star_max") {
                         $sql = "SELECT acd_name, si_name, acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' and academy.si_name='$selectDis' GROUP BY follow.no ORDER BY review.total_star DESC";
-                        
                     } else if ($selectSort == "regist_day") {
                         $sql = "SELECT acd_name, si_name, acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' and academy.si_name='$selectDis' GROUP BY follow.no ORDER BY follow.no DESC";
                     }
-    
-                // 지역이 선택되지 않았을 때
+
+                    // 지역이 선택되지 않았을 때
                 } else if ($selectDis == "") {
 
                     if ($selectSort == "star_max") {
-                        $sql = "SELECT acd_name, si_name, acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' GROUP BY follow.no ORDER BY review.total_star DESC";                        
+                        $sql = "SELECT acd_name, si_name, acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' GROUP BY follow.no ORDER BY review.total_star DESC";
 
-                    // 기본 셋팅은 최근 등록순
+                        // 기본 셋팅은 최근 등록순
                     } else {
-                        $sql = "SELECT acd_name, si_name, acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' GROUP BY follow.no ORDER BY follow.no DESC";                    
+                        $sql = "SELECT acd_name, si_name, acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' GROUP BY follow.no ORDER BY follow.no DESC";
                     }
-                    
                 }
 
                 $result = mysqli_query($conn, $sql);
@@ -412,7 +443,7 @@
 
 
     <footer>
-        <?php include "../index/footer.php"; ?>
+        <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
     </footer>
 
 

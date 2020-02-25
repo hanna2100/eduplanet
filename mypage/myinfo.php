@@ -6,10 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+
+    <!-- 제이쿼리 -->
     <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+
+    <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/mypage_header.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
     <link rel="stylesheet" href="/eduplanet/mypage/css/myinfo.css">
+
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
     <script src="/eduplanet/mypage/js/myinfo_modify.js"></script>
+
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- identicon (프로필 이미지) -->
+    <script src="//cdn.rawgit.com/placemarker/jQuery-MD5/master/jquery.md5.js"></script>
+    <script src="//rawgit.com/stewartlord/identicon.js/master/pnglib.js"></script>
+    <script src="//rawgit.com/stewartlord/identicon.js/master/identicon.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            // 아이디에 따라 생성되는 프로필 이미지 만드는 함수 (세션에서 userid를 받아온다)
+            $(".user_img").each(function() {
+
+                $(this).prop('src', 'data:image/png;base64,' + new Identicon($.md5($(this).data("userid")), 80)).show();
+            });
+        });
+    </script>
 
 </head>
 
@@ -29,7 +65,7 @@
         ";
     }
 
-    include_once "../lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
     $sql = "SELECT * FROM g_members WHERE no='$user_no'";
     $result = mysqli_query($conn, $sql);
@@ -56,11 +92,11 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include_once '../index/index_header_searchbar_in.php'; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php"; ?>
             </div>
 
             <div class="header_mypage">
-                <?php include_once './mypage_header.php'; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/mypage/mypage_header.php"; ?>
             </div>
         </header>
 
@@ -156,7 +192,7 @@
 
 
         <footer>
-            <?php include "../index/footer.php"; ?>
+            <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
         </footer>
 
 
