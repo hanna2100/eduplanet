@@ -6,8 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+
+    <!-- 제이쿼리 -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+
+    <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/mypage_header.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
     <link rel="stylesheet" href="/eduplanet/mypage/css/follow.css">
+
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
+
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- identicon (프로필 이미지) -->
+    <script src="//cdn.rawgit.com/placemarker/jQuery-MD5/master/jquery.md5.js"></script>
+    <script src="//rawgit.com/stewartlord/identicon.js/master/pnglib.js"></script>
+    <script src="//rawgit.com/stewartlord/identicon.js/master/identicon.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            // 아이디에 따라 생성되는 프로필 이미지 만드는 함수 (세션에서 userid를 받아온다)
+            $(".user_img").each(function() {
+
+                $(this).prop('src', 'data:image/png;base64,' + new Identicon($.md5($(this).data("userid")), 80)).show();
+            });
+        });
+    </script>
 
     <script>
         function deleteFollow(follow_no) {
@@ -22,40 +59,28 @@
             }
         }
 
-        // function selectDistrict() {
+        function selectOption() {
 
-        //     selectDis = document.getElementById("follow_list_select_district").value;
+            selectDistrict = document.getElementById("follow_list_select_district").value;
+            selectSort = document.getElementById("follow_list_select_mode").value;
 
-        //     $.ajax({
-        //         type: 'post',
-        //         url: "/eduplanet/mypage/select_district.php",
-        //         dataType: "json",
-        //         data: {
-        //             review_no: no
-        //         },
-
-        //         success: function (data) {
-        //             $("#acd_name").val(data[0]['acd_name']);
-        //         }
-        //     })
-        // }
+            location.href = "/eduplanet/mypage/follow.php?district=" + selectDistrict + "&sort=" + selectSort;
+        }
     </script>
-
-    <!-- 아이콘 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
 </head>
 
-<body>
+<body onload="setSelectDis(); setSelectSort();">
+
     <div class="body_wrap">
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include_once '../index/index_header_searchbar_in.php'; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header_searchbar_in.php"; ?>
             </div>
 
             <div class="header_mypage">
-                <?php include_once './mypage_header.php'; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/mypage/mypage_header.php"; ?>
             </div>
         </header>
 
@@ -81,23 +106,76 @@
         <div class="follow_list_wrap">
             <div class="follow_list_background">
 
-
-            
                 <?php
 
-                // 찜목록 test ============================================================
+                $user_no = $gm_no;
 
+                if (!$user_no) {
+                    echo "
+                        <script>
+                            alert('잘못된 접근입니다.');
+                            history.go(-1)
+                        </script>
+                    ";
+                }
+
+                // 페이지 수 체크
                 if (isset($_GET["page"])) {
                     $page = $_GET["page"];
                 } else {
                     $page = 1;
                 }
 
-                $user_no = $gm_no;
+                // 지역 선택 체크
+                if (isset($_GET["district"])) {
+                    $selectDis = $_GET["district"];
+                    echo "
+                        <script>
+                            function setSelectDis() {
+                                document.getElementById('follow_list_select_district').value = '$selectDis';
+                            }
+                        </script>
+                        ";
+                } else {
+                    $selectDis = "";
+                }
 
-                include_once "../lib/db_connector.php";
+                // 정렬방법 선택 체크
+                if (isset($_GET["sort"])) {
+                    $selectSort = $_GET["sort"];
+                    echo "
+                    <script>
+                        function setSelectSort() {
+                            document.getElementById('follow_list_select_mode').value = '$selectSort';
+                        }
+                    </script>
+                    ";
+                } else {
+                    $selectSort = "";
+                }
 
-                $sql = "SELECT acd_name, si_name, acd_no, follow.no FROM follow INNER JOIN academy ON follow.acd_no = academy.no WHERE user_no='$user_no'";
+                include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+
+                // 지역이 선택되어 있을 때
+                if ($selectDis != "") {
+
+                    if ($selectSort == "star_max") {
+                        $sql = "SELECT acd_name, si_name, acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' and academy.si_name='$selectDis' GROUP BY follow.no ORDER BY review.total_star DESC";
+                    } else if ($selectSort == "regist_day") {
+                        $sql = "SELECT acd_name, si_name, acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' and academy.si_name='$selectDis' GROUP BY follow.no ORDER BY follow.no DESC";
+                    }
+
+                    // 지역이 선택되지 않았을 때
+                } else if ($selectDis == "") {
+
+                    if ($selectSort == "star_max") {
+                        $sql = "SELECT acd_name, si_name, acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' GROUP BY follow.no ORDER BY review.total_star DESC";
+
+                        // 기본 셋팅은 최근 등록순
+                    } else {
+                        $sql = "SELECT acd_name, si_name, acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' GROUP BY follow.no ORDER BY follow.no DESC";
+                    }
+                }
 
                 $result = mysqli_query($conn, $sql);
                 $total_record = mysqli_num_rows($result);
@@ -109,13 +187,12 @@
 
                     <h2>
                         내 찜목록
-                        <!-- <button id="button_write_follow" onclick="location.href='/eduplanet/acd_story/post.php'">스토리 등록</button> -->
                     </h2>
                     <span id="follow_total_span">총 <span id="follow_total_num"><?= $total_record ?></span> 개의 찜한 학원이 있습니다.</span>
 
                     <div class="follow_select">
-                        <select name="follow_list_select_district" id="follow_list_select_district" onchange="selectDistrict();">
-                            <option selected>시/군 선택</option>
+                        <select name="follow_list_select_district" id="follow_list_select_district" onchange="selectOption();">
+                            <option value="" selected>시/군 선택</option>
                             <option value="가평군">가평군</option>
                             <option value="고양시">고양시</option>
                             <option value="과천시">과천시</option>
@@ -147,43 +224,11 @@
                             <option value="포천시">포천시</option>
                             <option value="하남시">하남시</option>
                             <option value="화성시">화성시</option>
-                            <!-- <option value="district_01">가평군</option>
-                            <option value="district_02">고양시</option>
-                            <option value="district_03">과천시</option>
-                            <option value="district_04">광명시</option>
-                            <option value="district_05">광주시</option>
-                            <option value="district_06">구리시</option>
-                            <option value="district_07">군포시</option>
-                            <option value="district_08">김포시</option>
-                            <option value="district_09">남양주시</option>
-                            <option value="district_10">동두천시</option>
-                            <option value="district_11">부천시</option>
-                            <option value="district_12">성남시</option>
-                            <option value="district_13">수원시</option>
-                            <option value="district_14">시흥시</option>
-                            <option value="district_15">안산시</option>
-                            <option value="district_16">안성시</option>
-                            <option value="district_17">안양시</option>
-                            <option value="district_18">양주시</option>
-                            <option value="district_19">양평군</option>
-                            <option value="district_20">여주시</option>
-                            <option value="district_21">연천군</option>
-                            <option value="district_22">오산시</option>
-                            <option value="district_23">용인시</option>
-                            <option value="district_24">의왕시</option>
-                            <option value="district_25">의정부시</option>
-                            <option value="district_26">이천시</option>
-                            <option value="district_27">파주시</option>
-                            <option value="district_28">평택시</option>
-                            <option value="district_29">포천시</option>
-                            <option value="district_30">하남시</option>
-                            <option value="district_31">화성시</option> -->
                         </select>
 
-                        <select name="follow_list_select_mode" id="follow_list_select_mode">
-                            <option value="star_max">총 만족도 순</option>
-                            <!-- <option value="hit_max">조회수 순</option> -->
-                            <option value="hit_max">최근 찜한 순</option>
+                        <select name="follow_list_select_mode" id="follow_list_select_mode" onchange="selectOption();">
+                            <option value="star_max" selected>총 만족도 순</option>
+                            <option value="regist_day">최근 찜한 순</option>
                         </select>
                     </div>
                 </div>
@@ -217,20 +262,16 @@
                         $si_name = $row["si_name"];
                         $acd_no = $row["acd_no"];
                         $follow_no = $row["no"];
-        
-                        $sql = "SELECT total_star FROM review WHERE parent='$acd_no'";
-                        $result_total_star = mysqli_query($conn, $sql);
-                        $total_record_review = mysqli_num_rows($result_total_star);
-        
-                        $row = mysqli_fetch_array($result_total_star);
-        
-                        $total_star = $row["total_star"]; 
-        
+                        $total_star = $row["total_star"];
+
                         $sql = "SELECT * FROM acd_story WHERE parent='$acd_no'";
                         $result_story = mysqli_query($conn, $sql);
                         $total_record_story = mysqli_num_rows($result_story);
 
-                        // 아직 사진 컬럼이 없어서 못가져옴
+                        $sql = "SELECT total_star FROM review WHERE parent='$acd_no'";
+                        $result_total_star = mysqli_query($conn, $sql);
+                        $total_record_review = mysqli_num_rows($result_total_star);
+
                         // if ($row["file_name"]) {
                         //     $file_image = "<img src='./img/file.gif' height='13'>";
                         // } else {
@@ -243,7 +284,7 @@
                             <!-- 하나의 찜목록 -->
                             <div class="follow_list_column">
 
-                               <!-- 왼쪽 학원 로고 및 정보  -->
+                                <!-- 왼쪽 학원 로고 및 정보  -->
                                 <!-- 클릭 시 href=학원페이지 -->
                                 <a href="/eduplanet/acd_story/view.php?no=<?= $no ?>&parent=<?= $parent ?>&acd_name=<?= $acd_name ?>">
                                     <div class="follow_list_column_img">
@@ -251,15 +292,15 @@
                                     </div>
 
                                     <div class="follow_list_column_text">
-                                        <h1 id="follow_text_academy"><?=$acd_name?>
+                                        <h1 id="follow_text_academy"><?= $acd_name ?>
                                 </a>
 
                                 </h1>
-                                <p id="follow_text_district"><?=$si_name?></p>
+                                <p id="follow_text_district"><?= $si_name ?></p>
 
                                 <div class="follow_list_column_review">
-                                    <a href="#"><span id="academy_review_span">학원리뷰 <span id="academy_review_num"><?=$total_record_review?></span></span></a>
-                                    <a href="#"><span id="academy_review_span">스토리 <span id="academy_review_num"><?=$total_record_story?></span></span></a>
+                                    <a href="#"><span id="academy_review_span">학원리뷰 <span id="academy_review_num"><?= $total_record_review ?></span></span></a>
+                                    <a href="#"><span id="academy_review_span">스토리 <span id="academy_review_num"><?= $total_record_story ?></span></span></a>
 
                                     <!-- <div class="academy_small_star">
                                         <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
@@ -274,137 +315,136 @@
 
                                 <div class="follow_academy_heart">
                                     <span>찜하기 취소</span>
-                                    <button type="button" id="button_academy_heart" onclick="deleteFollow(<?=$follow_no?>);">like</button>
+                                    <button type="button" id="button_academy_heart" onclick="deleteFollow(<?= $follow_no ?>);">like</button>
                                 </div>
 
                                 <div class="follow_academy_star_wrap">
                                     <span class="follow_academy_star_span">총 만족도</span>
-                                    
+
                                     <div class="follow_academy_star">
                                         <img id="acd_star_1" class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
-                                        <img id="acd_star_2"class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
-                                        <img id="acd_star_3"class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
-                                        <img id="acd_star_4"class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
-                                        <img id="acd_star_5"class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
+                                        <img id="acd_star_2" class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
+                                        <img id="acd_star_3" class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
+                                        <img id="acd_star_4" class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
+                                        <img id="acd_star_5" class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
                                     </div>
 
-                                    <span class="follow_academy_star_num"><?=$total_star?></span>
+                                    <span class="follow_academy_star_num"><?= $total_star ?></span>
 
                                 </div>
 
 
                             </div>
 
-                                
-                            </div>
-                        </li>
 
-                    <?php
+            </div>
+            </li>
+
+        <?php
                         $page_start--;
                     }
                     mysqli_close($conn);
+        ?>
+
+        </ul>
+        <!-- end of ul ------------------------------------------------------------------>
+
+        <div class="page_num_wrap">
+            <div class="page_num">
+                <ul class="page_num_ul">
+
+                    <?php
+
+                    // 페이지 쪽수 표시 량 (5 페이지씩 표기)
+                    $page_scale = 5;
+
+                    // 페이지 그룹번호(페이지 5개가 1그룹)
+                    $pageGroup = ceil($page / $page_scale);
+
+                    //그룹번호 안에서의 마지막 페이지 숫자
+                    $last_page = $pageGroup * $page_scale;
+
+                    // 그룹번호의 마지막 페이지는 전체 페이지보다 클 수 없음
+                    if ($total_page < $page_scale) {
+                        $last_page = $total_page;
+                    } else if ($last_page > $total_page) {
+                        $last_page = $total_page;
+                    }
+
+                    //그룹번호의 첫번째 페이지 숫자
+                    $first_page = $last_page - ($page_scale - 1);
+
+                    //그룹번호의 첫번째 페이지는 1페이지보다 작을 수 없음
+                    if ($first_page < 1) {
+                        $first_page = 1;
+
+                        //마지막 그룹번호일때 첫번째 페이지값 결정
+                    } else if ($last_page == $total_page) {
+
+                        if ($total_page % $page_scale == 0) {
+                            $first_page = $total_page - $page_scale + 1;
+                        } else {
+                            $first_page = $total_page - ($total_page % $page_scale) + 1;
+                        }
+                    }
+
+                    $next = $last_page + 1; // > 버튼 누를때 나올 페이지
+                    $prev = $first_page - 1; // < 버튼 누를때 나올 페이지
+
+                    // 첫번째 페이지일 때 앵커 비활성화
+                    if ($first_page == 1) {
+
+                        if ($page != 1) {
+                            echo "<li><a href='/eduplanet/mypage/follow.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                        } else {
+                            echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                        }
+
+                        echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
+                    } else {
+                        echo "<li><a href='/eduplanet/mypage/follow.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                        echo "<li><a href='/eduplanet/mypage/follow.php?page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
+                    }
+
+                    //페이지 번호 매기기
+                    for ($i = $first_page; $i <= $last_page; $i++) {
+
+                        if ($page == $i) {
+                            echo "<li><span class='page_num_set'><b style='color:#2E89FF'> $i </b></span></li>";
+                        } else {
+                            echo "<li><a href='/eduplanet/mypage/follow.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
+                        }
+                    }
+
+                    // 마지막 페이지일 때 앵커 비활성화
+                    if ($last_page == $total_page) {
+                        echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
+
+                        if ($page != $total_page) {
+                            echo "<li><a href='/eduplanet/mypage/follow.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                        } else {
+                            echo "<li><a><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                        }
+                    } else {
+                        echo "<li><a href='/eduplanet/mypage/follow.php?page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
+                        echo "<li><a href='/eduplanet/mypage/follow.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                    }
                     ?>
-
                 </ul>
-                <!-- end of ul ------------------------------------------------------------------>
-
-                <div class="page_num_wrap">
-                    <div class="page_num">
-                        <ul class="page_num_ul">
-
-                            <?php
-
-                            // 페이지 쪽수 표시 량 (5 페이지씩 표기)
-                            $page_scale = 5;
-
-                            // 페이지 그룹번호(페이지 5개가 1그룹)
-                            $pageGroup = ceil($page / $page_scale);
-
-                            //그룹번호 안에서의 마지막 페이지 숫자
-                            $last_page = $pageGroup * $page_scale;
-
-                            // 그룹번호의 마지막 페이지는 전체 페이지보다 클 수 없음
-                            if ($total_page < $page_scale) {
-                                $last_page = $total_page;
-                            } else if ($last_page > $total_page) {
-                                $last_page = $total_page;
-                            }
-
-                            //그룹번호의 첫번째 페이지 숫자
-                            $first_page = $last_page - ($page_scale-1);
-
-                            //그룹번호의 첫번째 페이지는 1페이지보다 작을 수 없음
-                            if ($first_page < 1) {
-                                $first_page = 1;
-
-                            //마지막 그룹번호일때 첫번째 페이지값 결정
-                            } else if ($last_page == $total_page) { 
-
-                                if ($total_page % $page_scale == 0) {
-                                    $first_page = $total_page - $page_scale + 1;
-
-                                } else {
-                                    $first_page = $total_page - ($total_page % $page_scale) + 1;
-                                }
-                            }
-
-                            $next = $last_page + 1; // > 버튼 누를때 나올 페이지
-                            $prev = $first_page - 1; // < 버튼 누를때 나올 페이지
-
-                            // 첫번째 페이지일 때 앵커 비활성화
-                            if ($first_page == 1) {
-
-                                if ($page != 1) {
-                                    echo "<li><a href='/eduplanet/mypage/follow.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
-                                } else {
-                                    echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
-                                }
-
-                                echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
-                            } else {
-                                echo "<li><a href='/eduplanet/mypage/follow.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
-                                echo "<li><a href='/eduplanet/mypage/follow.php?page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
-                            }
-
-                            //페이지 번호 매기기
-                            for ($i = $first_page; $i <= $last_page; $i++) {
-
-                                if ($page == $i) {
-                                    echo "<li><span class='page_num_set'><b style='color:#2E89FF'> $i </b></span></li>";
-                                } else {
-                                    echo "<li><a href='/eduplanet/mypage/follow.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
-                                }
-                            }
-
-                            // 마지막 페이지일 때 앵커 비활성화
-                            if ($last_page == $total_page) {
-                                echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
-
-                                if ($page != $total_page) {
-                                    echo "<li><a href='/eduplanet/mypage/follow.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
-                                } else {
-                                    echo "<li><a><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
-                                }
-                            } else {
-                                echo "<li><a href='/eduplanet/mypage/follow.php?page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
-                                echo "<li><a href='/eduplanet/mypage/follow.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                </div>
-                <!-- end of page_num_wrap -------------------------------------------------------->
-
             </div>
         </div>
+        <!-- end of page_num_wrap -------------------------------------------------------->
+
+        </div>
+    </div>
 
 
 
 
 
-        <footer>
-            <?php include "../index/footer.php"; ?>
-        </footer>
+    <footer>
+        <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
+    </footer>
 
 
     </div>

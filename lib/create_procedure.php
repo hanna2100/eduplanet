@@ -171,10 +171,10 @@ function create_procedure($conn, $prcd_name){
           BEGIN 
         
           SELECT * FROM 
-            (select concat(`no`, "$" , si_name, "$", dong_name, "$", sector, "$", acd_name, "$", rprsn, "$", class, "$", tel, "$", address) as acd_srl 
+            (select no, concat( si_name, "$", dong_name, "$", sector, "$", acd_name, "$", rprsn, "$", class, "$", tel, "$", address) as acd_srl 
             from academy) acd 
           RIGHT OUTER JOIN 
-            (select concat(`no`, "$", si_name, "$", dong_name, "$", sector, "$", acd_name, "$", rprsn, "$", class, "$", tel, "$", address) as temp_srl 
+            (select no as t_no, concat( si_name, "$", dong_name, "$", sector, "$", acd_name, "$", rprsn, "$", class, "$", tel, "$", address) as temp_srl 
             from academy_temp) acd_tmp 
           ON 
             acd.acd_srl = acd_tmp.temp_srl 
@@ -189,10 +189,10 @@ function create_procedure($conn, $prcd_name){
           BEGIN 
         
           SELECT * FROM 
-             (select concat(`no`, "$" , si_name, "$", dong_name, "$", sector, "$", acd_name, "$", rprsn, "$", class, "$", tel, "$", address) as temp_srl 
+             (select no as t_no, concat( si_name, "$", dong_name, "$", sector, "$", acd_name, "$", rprsn, "$", class, "$", tel, "$", address) as temp_srl 
             from academy_temp) acd_tmp 
           RIGHT OUTER JOIN 
-            (select concat(`no`, "$" , si_name, "$", dong_name, "$", sector, "$", acd_name, "$", rprsn, "$", class, "$", tel, "$", address) as acd_srl 
+            (select no, concat( si_name, "$", dong_name, "$", sector, "$", acd_name, "$", rprsn, "$", class, "$", tel, "$", address) as acd_srl 
             from academy) acd
           ON 
             acd_tmp.temp_srl = acd.acd_srl 
@@ -206,9 +206,10 @@ function create_procedure($conn, $prcd_name){
           $sql="CREATE PROCEDURE `modify_data_for_testing`()
           BEGIN
           delete from academy where no=3 or no=4 or no=5 or no=6 or no =7;
-          delete from academy_temp where no=10 or no=11 or no=12;
+          delete from academy_temp where no=23 or no=24 or no=26;
           update academy_temp set acd_name='미래능력개발교육원' where no =8;
           update academy_temp set acd_name='과거능력개발교육원' where no =9;
+          update academy_temp set acd_name='초능력개발교육원' where no =29;
           END";
         break;
           

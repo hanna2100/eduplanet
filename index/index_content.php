@@ -1,33 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>에듀플래닛</title>
-
-    <!-- 제이쿼리 -->
-    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
-
-    <!-- 자동완성 -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <!-- 폰트 -->
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-
-    <!-- css -->
-    <link rel="stylesheet" href="/eduplanet/index/index_content.css">
-
-    <!-- 스크립트 -->
-    <script src="/eduplanet/searchbar/searchbar_index.js"></script>
-
-
-</head>
-
-<body>
-
-    <div class="body_wrap">
+<div class="body_wrap">
 
         <!-- 메인 상단 배경 ------------------------------------------------------>
         <div class="index_main_background">
@@ -619,7 +590,3 @@
 
     </div>
     <!-- end of body_wrap -->
-
-</body>
-
-</html>

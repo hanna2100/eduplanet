@@ -832,7 +832,7 @@
               <div class="mva_class">
 
                 <div id="mva1_img">
-                  <a href=""> <img src="./img/edu_image.jpg" alt="" width="150" height="130"> </a>
+                  <a href=""> <img src="./img/edu_image.jpg" alt="" width="150" height="130" class="acd_img"> </a>
                 </div>
                 <div id="academy_name">
                   <h2 id="titlee"><span class="aca_name">학원이름</span></h2>
@@ -858,7 +858,7 @@
 
               <div class="mva_class">
                 <div id="mva1_img">
-                  <a href=""> <img src="./img/edu_image.jpg" alt="" width="150" height="130"> </a>
+                  <a href=""> <img src="./img/edu_image.jpg" alt="" width="150" height="130" class="acd_img"> </a>
                 </div>
                 <div id="academy_name">
                   <h2 id="titlee"><span class="aca_name">학원이름</span></h2>
@@ -884,7 +884,7 @@
 
               <div class="mva_class">
                 <div id="mva1_img">
-                  <a href=""> <img src="./img/edu_image.jpg" alt="" width="150" height="130"> </a>
+                  <a href=""> <img src="./img/edu_image.jpg" alt="" width="150" height="130" class="acd_img"> </a>
                 </div>
                 <div id="academy_name">
                   <h2 id="titlee"><span class="aca_name">학원이름</span></h2>
@@ -909,7 +909,7 @@
               </div>
               <div class="mva_class">
                 <div id="mva1_img">
-                  <a href=""> <img src="./img/edu_image.jpg" alt="" width="150" height="130"> </a>
+                  <a href=""> <img src="./img/edu_image.jpg" alt="" width="150" height="130" class="acd_img"> </a>
                 </div>
                 <div id="academy_name">
                   <h2 id="titlee"><span class="aca_name">학원이름</span></h2>
@@ -957,27 +957,34 @@
                     var a = JSON.parse(response); //택배를 뜯는느낌 // 이것은 json 정보를 우리가 볼수있게 해독해주는 것이여.
                     console.log(a[0]['acdName']);
                     for (var i = 0; i < 4; i++) {
+                        //이미지 넣어주기
+                        console.log(a);
+                        if(a[i]['img']===""){
+                            document.getElementsByClassName("acd_img")[i].src ="./img/edu_image.jpg";
+                        }
+                        else{
+                            document.getElementsByClassName("acd_img")[i].src = a[i]['img'];
+                        }
+                        //학원명 넣어주기
                         document.getElementsByClassName("aca_name")[i].innerHTML = a[i]['acdName'];
 
+                        //번호 넣어주기
                         if(a[i]['tel']==''){
                           // alert("뭣이여");
                           document.getElementsByClassName("aca_tel")[i].innerHTML = " # 번호 정보 없음";
                         }else{
                           document.getElementsByClassName("aca_tel")[i].innerHTML = a[i]['tel'];
                         }
+                        //학원주소 넣어주기
                         document.getElementsByClassName("aca_address")[i].innerHTML = a[i]['address'];
                         console.log(a[i]['no']);
 
+                        // 학원 정보 자세히
                         document.getElementsByClassName("see_more")[i].onclick = moreInfo(a[i]['no']);
-                        // document.getElementById("see_more"+i).onclick = function(){
-                        //
-                        //   location.href="../academy/index.php?no="+a[0]['no']+"&page=<?= $page ?>"; 왜 5가뜨는가
-                        //
-                        // }
                         // console.log(a[i]['no']);
 
                     }
-                         //이부분이 class로 하려고 했으나 뭔가 자꾸 안됌 ..
+
                     // document.getElementById("see_more"+0).onclick = function(){
                     //
                     //   location.href="../academy/index.php?no="+a[0]['no'];
@@ -1078,6 +1085,9 @@
         </script>
 
       <!--    --------------------------------------------------------------------------------->
+      <div id="more_s">
+        <button type="button" name="button" id="more_btn">학원 더보기</button>
+      </div>
 
       </div> <!-- main_contents end-->
 
@@ -1087,10 +1097,9 @@
 
 
 
+
     </main>
-    <div id="more_s">
-      <button type="button" name="button" id="more_btn">학원 더보기</button>
-    </div>
+
 
     <footer>
         <?php include "../index/footer.php"; ?>

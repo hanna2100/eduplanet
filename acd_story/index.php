@@ -6,55 +6,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/eduplanet/acd_story/css/index.css">
-    <!-- <script src="/eduplanet/acd_story/js/follow.js"></script> -->
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
-    <!-- 아이콘 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <!-- 제이쿼리 -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_out.css">
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+    <link rel="stylesheet" href="/eduplanet/acd_story/css/index.css">
+
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar/searchbar_out.js"></script>
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
+
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script>
-        function selectDistrict() {
+        function selectOption() {
 
-            selectDistrict = document.getElementById("follow_list_select_district").value;
+            selectDistrict = document.getElementById("story_list_select_district").value;
+            selectSort = document.getElementById("story_list_select_mode").value;
 
-            $.ajax({
-                type: 'post',
-                url: "/eduplanet/mypage/select_district.php",
-                dataType: "json",
-                data: {
-                    selectDis: selectDistrict
-                },
+            location.href = "/eduplanet/acd_story/index.php?district=" + selectDistrict + "&sort=" + selectSort;
 
-                success: function(data) {
-                    $("#acd_name").val(data[0]['acd_name']);
-                }
-            })
+            // 에이작수 삽질 흑흑
+            // $.ajax({
+            //     type: 'post',
+            //     url: "/eduplanet/acd_story/select_district.php",
+            //     dataType: "json",
+            //     data: {
+            //         selectDis: selectDistrict
+            //     },
+            //     success: function(data) {
+            //         // $("#acd_name").val(data[0]['acd_name']);
+            //         // $("#acd_name").val('acd_name');
+            //         console.log(data);
+            //     },
+            //     error:function(request,status,error){   
+            //         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
+            //     }
+            // })
         }
     </script>
 
 
 </head>
 
-<body>
+<body onload="setSelectDis(); setSelectSort();">
 
     <header>
-        <?php include_once "../index/index_header_searchbar_out.php"; ?>
+        <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header_searchbar_out.php"; ?>
     </header>
 
     <div class="story_list_wrap">
         <div class="story_list_background">
 
             <?php
+
+            // 페이지 수 체크
             if (isset($_GET["page"])) {
                 $page = $_GET["page"];
             } else {
                 $page = 1;
             }
 
-            include_once "../lib/db_connector.php";
+            // 지역 선택 체크
+            if (isset($_GET["district"])) {
+                $selectDis = $_GET["district"];
+                echo "
+                    <script>
+                        function setSelectDis() {
+                            document.getElementById('story_list_select_district').value = '$selectDis';
+                        }
+                    </script>
+                    ";
+            } else {
+                $selectDis = "";
+            }
 
-            $sql = "select * from acd_story order by no desc";
+            // 정렬방법 선택 체크
+            if (isset($_GET["sort"])) {
+                $selectSort = $_GET["sort"];
+                echo "
+                <script>
+                    function setSelectSort() {
+                        document.getElementById('story_list_select_mode').value = '$selectSort';
+                    }
+                </script>
+                ";
+            } else {
+                $selectSort = "";
+            }
+
+            include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+
+            // 지역 옵션이 선택되어 있을 때
+            if ($selectDis != "") {
+
+                if ($selectSort == "star_max") {
+                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY review.total_star DESC";
+                } else if ($selectSort == "hit_max") {
+                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY acd_story.hit DESC";
+
+                    // 기본 셋팅은 최근 등록순
+                } else {
+                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY acd_story.no DESC";
+                }
+
+                // 지역 옵션이 선택되지 않았을 때
+            } else if ($selectDis == "") {
+
+                if ($selectSort == "star_max") {
+                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY review.total_star DESC";
+                } else if ($selectSort == "hit_max") {
+                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY acd_story.hit DESC";
+
+                    // 기본 셋팅은 최근 등록순
+                } else {
+                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY acd_story.no DESC";
+                }
+            }
 
             $result = mysqli_query($conn, $sql);
             $total_record = mysqli_num_rows($result);
@@ -71,45 +150,45 @@
                 <span id="story_total_span">총 <span id="story_total_num"><?= $total_record ?></span> 개의 스토리가 있습니다.</span>
 
                 <div class="story_select">
-                    <select name="story_list_select_district" id="story_list_select_district" onchange="selectDistrict();">
-                        <option selected>시/군 선택</option>
-                        <option value="district_01">가평군</option>
-                        <option value="district_02">고양시</option>
-                        <option value="district_03">과천시</option>
-                        <option value="district_04">광명시</option>
-                        <option value="district_05">광주시</option>
-                        <option value="district_06">구리시</option>
-                        <option value="district_07">군포시</option>
-                        <option value="district_08">김포시</option>
-                        <option value="district_09">남양주시</option>
-                        <option value="district_10">동두천시</option>
-                        <option value="district_11">부천시</option>
-                        <option value="district_12">성남시</option>
-                        <option value="district_13">수원시</option>
-                        <option value="district_14">시흥시</option>
-                        <option value="district_15">안산시</option>
-                        <option value="district_16">안성시</option>
-                        <option value="district_17">안양시</option>
-                        <option value="district_18">양주시</option>
-                        <option value="district_19">양평군</option>
-                        <option value="district_20">여주시</option>
-                        <option value="district_21">연천군</option>
-                        <option value="district_22">오산시</option>
-                        <option value="district_23">용인시</option>
-                        <option value="district_24">의왕시</option>
-                        <option value="district_25">의정부시</option>
-                        <option value="district_26">이천시</option>
-                        <option value="district_27">파주시</option>
-                        <option value="district_28">평택시</option>
-                        <option value="district_29">포천시</option>
-                        <option value="district_30">하남시</option>
-                        <option value="district_31">화성시</option>
+                    <select name="story_list_select_district" id="story_list_select_district" onchange="selectOption();">
+                        <option value="" selected>시/군 선택</option>
+                        <option value="가평군">가평군</option>
+                        <option value="고양시">고양시</option>
+                        <option value="과천시">과천시</option>
+                        <option value="광명시">광명시</option>
+                        <option value="광주시">광주시</option>
+                        <option value="구리시">구리시</option>
+                        <option value="군포시">군포시</option>
+                        <option value="김포시">김포시</option>
+                        <option value="남양주시">남양주시</option>
+                        <option value="동두천시">동두천시</option>
+                        <option value="부천시">부천시</option>
+                        <option value="성남시">성남시</option>
+                        <option value="수원시">수원시</option>
+                        <option value="시흥시">시흥시</option>
+                        <option value="안산시">안산시</option>
+                        <option value="안성시">안성시</option>
+                        <option value="안양시">안양시</option>
+                        <option value="양주시">양주시</option>
+                        <option value="양평군">양평군</option>
+                        <option value="여주시">여주시</option>
+                        <option value="연천군">연천군</option>
+                        <option value="오산시">오산시</option>
+                        <option value="용인시">용인시</option>
+                        <option value="의왕시">의왕시</option>
+                        <option value="의정부시">의정부시</option>
+                        <option value="이천시">이천시</option>
+                        <option value="파주시">파주시</option>
+                        <option value="평택시">평택시</option>
+                        <option value="포천시">포천시</option>
+                        <option value="하남시">하남시</option>
+                        <option value="화성시">화성시</option>
                     </select>
 
-                    <select name="story_list_select_mode" id="story_list_select_mode">
-                        <option value="star_max">총 만족도 순</option>
+                    <select name="story_list_select_mode" id="story_list_select_mode" onchange="selectOption();">
+                        <option value="star_max" selected>총 만족도 순</option>
                         <option value="hit_max">조회수 순</option>
-                        <option value="hit_max">최근 등록 순</option>
+                        <option value="regist_day">최근 등록 순</option>
                     </select>
                 </div>
             </div>
@@ -148,6 +227,8 @@
                     $file_name = $row["file_name"];
                     $file_copy = $row["file_copy"];
                     $hit = $row["hit"];
+                    $si_name = $row["si_name"];
+                    $total_star = $row["total_star"];
 
                     if ($row["file_name"]) {
                         $file_image = "<img src='./img/file.gif' height='13'>";
@@ -155,21 +236,6 @@
                         $file_image = "";
                     }
 
-                    // 지역
-                    $sql_district = "select si_name from academy where acd_name = '$acd_name'";
-
-                    $result_district = mysqli_query($conn, $sql_district);
-                    $row_district = mysqli_fetch_array($result_district);
-
-                    $si_name = $row_district["si_name"];
-
-                    // 별점
-                    $sql_star = "select total_star from review where parent = $parent";
-
-                    $result_star = mysqli_query($conn, $sql_star);
-                    $row_star = mysqli_fetch_array($result_star);
-
-                    $total_star = $row_star["total_star"];
 
                 ?>
 
@@ -178,7 +244,7 @@
                         <div class="story_list_column">
 
                             <!-- <a href="/eduplanet/acd_story/view.php?no=<//?=$no?>&si_name=<//?=$si_name?>&total_star=<//?$total_star?>"> -->
-                            <a href="/eduplanet/acd_story/view.php?no=<?= $no ?>&parent=<?= $parent ?>&acd_name=<?= $acd_name ?>">
+                            <a href="/eduplanet/acd_story/view.php?no=<?= $no ?>">
                                 <div class="story_list_column_img">
                                     <img src="/eduplanet/data/<?= $file_copy ?>" alt="story_list_column_img">
                                 </div>
@@ -306,7 +372,7 @@
     </div>
 
     <footer>
-        <?php include "../index/footer.php"; ?>
+        <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
     </footer>
 
 </body>

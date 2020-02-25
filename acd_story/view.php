@@ -6,49 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+
+    <!-- 제이쿼리 -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+
+    <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
     <link rel="stylesheet" href="/eduplanet/acd_story/css/view.css">
+
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
+
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
 
 <body>
 
     <header>
-        <?php include_once "../index/index_header_searchbar_in.php"; ?>
+        <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php"; ?>
     </header>
 
     <?php
 
         $no = $_GET["no"];
-        $parent = $_GET["parent"];
-        $acd_name = $_GET["acd_name"];
-        // $si_name = $_GET["si_name"];
-        // $total_star = $_GET["total_star"];
 
-        include_once "../lib/db_connector.php";
+        include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
-        // 지역
-        $sql_district = "select si_name from academy where acd_name = '$acd_name'";
+        $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, subject1, subject2, subject3, content1, content2, content3, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE acd_story.no='$no'";
 
-        $result_district = mysqli_query($conn, $sql_district);
-        $row_district = mysqli_fetch_array($result_district);
-
-        $si_name = $row_district["si_name"];
-
-        // 별점
-        $sql_star = "select total_star from review where parent = $parent";
-
-        $result_star = mysqli_query($conn, $sql_star);
-        $row_star = mysqli_fetch_array($result_star);
-
-        $total_star = $row_star["total_star"];
-
-        // 스토리 레코드 가져오기
-        $sql = "select * from acd_story where no=$no";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_array($result);
 
+        $si_name = $row["si_name"];
+        $total_star = $row["total_star"];
+
         $acd_name = $row["acd_name"];
+        $parent = $row["parent"];
         $title = $row["title"];
         $subtitle = $row["subtitle"];
 
@@ -265,7 +269,7 @@
     </div>
 
     <footer>
-        <?php include "../index/footer.php"; ?>
+        <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
     </footer>
 
 </body>

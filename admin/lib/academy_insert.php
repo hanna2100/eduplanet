@@ -23,11 +23,10 @@
         (SELECT si_name, dong_name, sector, acd_name, rprsn, class, tel, address FROM academy_temp WHERE no = $n)";
 
         mysqli_query($conn, $sql);
-        
-        if(!mysqli_affected_rows($conn)){
-            mysqli_close($conn);
-            die('Could not update data - ' . mysqli_error($conn));
-        }
+
+        //$sql = "DELETE FROM academy_temp WHERE no = $n";
+        //mysqli_query($conn, $sql);
+    
     }
 
     mysqli_close($conn);

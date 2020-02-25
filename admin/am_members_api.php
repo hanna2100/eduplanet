@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicon -->
+   <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
     <!-- jquery -->
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/eduplanet/admin/js/admin.js"></script>
@@ -31,6 +33,10 @@ var page = "<?=$page?>";
 </script>
 <!-- ------------------------------ -->
 <div class="tap_wrap">
+  <button onclick="updateAcdFromApi()">
+    API 업데이트
+    <p>새로운 학원 데이터를 받아옵니다</p>
+  </button>
   <button onclick="location.replace('/eduplanet/admin/am_members_api.php?')">
     신규 학원 추가[<?=$new_acd_count?>]
     <p>새로운 학원이 <?=$new_acd_count?>개 발견되었습니다</p>
@@ -51,10 +57,10 @@ var page = "<?=$page?>";
   </div>
   <div id="g_members_list">
     <h4>
-      <i class="fas fa-download"></i>&nbsp;&nbsp;&nbsp;Update Academy Data
+      <i class="fas fa-download"></i>&nbsp;&nbsp;&nbsp;신규 학원 추가
     </h4>
     
-    <ul id="member_list">
+    <ul class="member_list">
 		<li>
       <span class="col1">No</span>
 			<span class="col2">구분</span>
@@ -73,11 +79,11 @@ var page = "<?=$page?>";
     }else{
       
       $sql = "SELECT * FROM academy_temp WHERE ";
+    //  var_dump($new_acd);
 
       for($i = 0; $i<sizeof($new_acd); $i++){
-        $no = $new_acd[$i][0];
+        $no = $new_acd[$i][8]; //기본키
         $sql .= "no = $no ";
-
         if($i!=sizeof($new_acd)-1){
           $sql.= "OR ";
         }
@@ -212,6 +218,8 @@ var page = "<?=$page?>";
         </div>
       </div>
       </div>
+      <center><button onclick="modifyData()">테스트를 위한 DB정보수정</button></center>
     </div>
+    
 </body>
 </html>

@@ -1,9 +1,14 @@
 var idPass = false;
 var pwPass = false;
 var emailPass = false;
+
 var telPass = false;
 var agePass = false;
 var intresPass = false;
+
+var acdNamePass = false;
+var rprsnPass = false;
+var licensePass= false;
 
 $(document).ready(function(){
   var inputId = $("#inputId"),
@@ -12,7 +17,10 @@ $(document).ready(function(){
       inputEmail = $("#inputEmail"),
       inputTel = $("#inputTel"),
       inputAge = $("#inputAge"),
-      inputIntres = $("#inputIntres");
+      inputIntres = $("#inputIntres"),
+      inputAcdName = $("#acd_name"),
+      inputRprsn = $("#inputRprsn"),
+      inputLicense = $("#inputLicense");
 
   //아이디 중복체크 - ajax사용
   inputId.keyup(function() {
@@ -23,34 +31,44 @@ $(document).ready(function(){
       //아이디 입력 안 할 경우
       $("#idSubMsg").text('아이디를 입력해주세요.');
       idPass = false;
-      isAllPass();
+      isGmAllPass();
+      isAmAllPass();
     } else if(!exp.test(idValue)) {
       //형식에 어긋날경우
       $('#idSubMsg').text("아이디는 소문자와 숫자 4~12자리여야 합니다.");
       idPass = false;
-      isAllPass();
+      isGmAllPass();
+      isAmAllPass();
     } else{
+      if(mode == "gm"){
+        var url = "members_checkId.php?id="+idValue+"&mode=gm";
+      }else if(mode == "am"){
+        var url = "members_checkId.php?id="+idValue+"&mode=am";
+      }
       $.ajax({
-        url : "g_members_checkId.php?id="+ idValue,
+        url : url,
         type : "get",
         success : function(data) {
           //아이디 중복시
-          if (data === "1") {
+          if (data == 1) {
             $("#idSubMsg").text("사용중인 아이디입니다.");
             idPass = false;
-            isAllPass();
+            isGmAllPass();
+            isAmAllPass();
           }else {
             //사용가능한 아이디
             console.log("사용가능아이디");
             $("#idSubMsg").text("");
             idPass = true;
-            isAllPass();
+            isGmAllPass();
+            isAmAllPass();
           }
         },
         error : function() {
             console.log("아이디 중복확인 ajax 실패");
             idPass = false;
-            isAllPass();
+            isGmAllPass();
+            isAmAllPass();
         }
       });
     }
@@ -65,15 +83,18 @@ $(document).ready(function(){
     if(!exp.test(pw1Value) || !exp.test(pw2Value)){
       $("#pwSubMsg").text("비밀번호는 숫자, 영문자, 특수문자가 모두 있는 8자리 글자여야 합니다.");
       pwPass = false;
-      isAllPass();
+      isGmAllPass();
+      isAmAllPass();
     } else if(pw1Value != pw2Value){
       $("#pwSubMsg").text("비밀번호가 서로 일치하지 않습니다.");
       pwPass = false;
-      isAllPass();
+      isGmAllPass();
+      isAmAllPass();
     }else{
       $("#pwSubMsg").text("");
       pwPass = true;
-      isAllPass();
+      isGmAllPass();
+      isAmAllPass();
     }
 
   });
@@ -86,11 +107,13 @@ $(document).ready(function(){
     if(!exp.test(emailValue)){
       $("#emailSubMsg").text("이메일 형식이 맞지 않습니다.");
       emailPass = false;
-      isAllPass();
+      isGmAllPass();
+      isAmAllPass();
     }else{
       $("#emailSubMsg").text("");
       emailPass = true;
-      isAllPass();
+      isGmAllPass();
+      isAmAllPass();
     }
   });
 
@@ -102,11 +125,66 @@ $(document).ready(function(){
     if(!mobile_exp.test(telValue)){
       $("#telSubMsg").text("휴대전화 형식에 맞춰 -없이 입력해주세요");
       telPass = false;
-      isAllPass();
+      isGmAllPass();
     }else{
       $("#telSubMsg").text("");
       telPass = true;
-      isAllPass();
+      isGmAllPass();
+    }
+  });
+
+  // 학원명 자동완성 함수
+  $("#acd_name").autocomplete({
+      source: function (request, response) {
+          $.ajax({
+              type: 'post',
+              url: "/eduplanet/mypage/auto_search.php",
+              dataType: "json",
+              data: {
+                  search: request.term
+              },
+              success: function (data) {
+                  response(data);
+              }
+          });
+      },
+      // 최소 글자입력 수
+      minLength: 1,
+      // 검색결과를 보여주는 시간
+      delay: 100,
+      // 포커스 되었을 때 input에 넣어주기
+      focus: function (event, ui) {
+          $("#acd_name").val(ui.item.acd_name);
+          $("#si_name").val(ui.item.si_name);
+          $("#dong_name").val(ui.item.dong_name);
+      },
+      // 선택 했을 때 input에 넣어주기
+      select: function (event, ui) {
+          // $('#acd_name').val(ui.item.label); // display the selected text
+          $('#acd_name').val(ui.item.acd_name); // save selected id to input
+          $("#si_name").val(ui.item.si_name);
+          $("#dong_name").val(ui.item.dong_name);
+          return false;
+      }
+      // 검색했을 때 나오는 자동완성 창을 커스텀하기
+  }).autocomplete("instance")._renderItem = function (ul, item) {
+      return $("<li>")
+          .append("<div><b>" + item.acd_name + "</b><br><span style='font-size: 12px; color: gray;'>" + item.si_name + " / " + item.dong_name + "</span></div>").appendTo(ul);
+  };
+
+
+  //학원/교습소명 체크
+  inputAcdName.change(function(){
+    var acdNameValue = inputAcdName.val();
+    // var exp = /^[가-힣a-zA-Z]{2,50}$/;
+    if(!acdNameValue){
+      $("#AcdNameSubMsg").text("학원/교습소명은 반드시 입력해 주세요.");
+      acdNamePass = false;
+      isAmAllPass();
+    }else{
+      $("#AcdNameSubMsg").text("");
+      acdNamePass = true;
+      isAmAllPass();
     }
   });
 
@@ -118,10 +196,10 @@ $(document).ready(function(){
 
     if(!ageValue){
       agePass = false;
-      isAllPass();
+      isGmAllPass();
     }else{
       agePass = true;
-      isAllPass();
+      isGmAllPass();
     }
   });
 
@@ -133,13 +211,44 @@ $(document).ready(function(){
     if(!exp.test(intresValue)){
       $("#intresSubMsg").text("관심과목은 한글 혹은 영문 2~10자 이내로 입력해주세요.");
       intresPass = false;
-      isAllPass();
+      isGmAllPass();
     }else{
       $("#intresSubMsg").text("");
       intresPass = true;
-      isAllPass();
+      isGmAllPass();
     }
   });
+
+  //대표자명 체크
+  inputRprsn.keyup(function(){
+    var nameValue = inputRprsn.val();
+    var exp = /^[가-힣a-zA-Z]{2,50}$/;
+
+    if(!exp.test(nameValue)){
+      $("#RprsnSubMsg").text("이름은 한글 혹은 영문 2자 이상이어야 합니다.");
+      rprsnPass = false;
+      isAmAllPass();
+    }else{
+      $("#RprsnSubMsg").text("");
+      rprsnPass = true;
+      isAmAllPass();
+    }
+  });
+
+  // 파일 첨부 여부 확인
+  $("input[name=inputLicense]").change(function(){
+    var licenseValue = inputLicense.val();
+    if(!licenseValue){
+      $("#LicenseSubMsg").text("사업자 등록증을 반드시 업로드 해주세요.");
+      licensePass = false;
+      isAmAllPass();
+    }else{
+      $("#LicenseSubMsg").text("");
+      licensePass = true;
+      isAmAllPass();
+    }
+  });
+
 
 });
 
@@ -154,9 +263,17 @@ function setDateBox(){
    }
 }
 
-function isAllPass(){
-  console.log("올패스", idPass, pwPass, emailPass, telPass, agePass, intresPass);
+function isGmAllPass(){
   if(idPass && pwPass && emailPass && telPass && agePass && intresPass){
+    $("#btnFormSubmit").attr("disabled", false);
+  }else{
+    $("#btnFormSubmit").attr("disabled", true);
+  }
+}
+
+function isAmAllPass(){
+    console.log("올패스", idPass, pwPass, emailPass, acdNamePass, rprsnPass, licensePass);
+  if(idPass && pwPass && emailPass && acdNamePass && rprsnPass && licensePass){
     $("#btnFormSubmit").attr("disabled", false);
   }else{
     $("#btnFormSubmit").attr("disabled", true);

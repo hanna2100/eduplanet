@@ -69,6 +69,7 @@
 
       <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=79f3ade82ebdd492df0cd3712dc6f828&libraries=services"></script>
       <script>
+
       <?php
         $name = "안녕 세상아";
         $no = $_GET["no"];
@@ -80,6 +81,7 @@
         // $con = mysqli_connect("localhost","root","123456","eduplanet");
         $sql = "select * from academy where no = $no";
         $result = mysqli_query($conn,$sql);
+
         $row = mysqli_fetch_array($result);
 
         $acd_name = $row["acd_name"]; //교습과정
@@ -87,8 +89,8 @@
         $class = $row["class"]; //대표과정
         $address = $row["address"]; //주소
         $tel = $row["tel"]; //전화
-        $latitude = $row["latitude"];  //위도
-        $longtitude = $row["longitude"]; //경도
+        // $latitude = $row["latitude"];  //위도
+        // $longtitude = $row["longitude"]; //경도
         //-------------------------------
 
         //DB 닫아주기
@@ -102,7 +104,7 @@
        document.getElementById("number").innerHTML= "<?= $tel ?>"
        document.getElementById("information_class").innerHTML= "<?= $class ?>"
        //-------------------------------------------------------------------
-
+       console.log("sdsdsd");
       var my_address = "<?=$address?>" //위도 경도로 바꿀 주소 넣기
       var mapContainer = document.getElementById('map'), // 지도를 표시할 div
           mapOption = {
@@ -132,7 +134,7 @@
                   map: map,
                   position: coords
               });
-              var iwContent ='<div style="width:150px;text-align:center;padding:6px 0;"><strong><?= $acd_name ?></strong><br><a id="asdf" style="color:green" href="https://map.kakao.com/link/to/<?= $acd_name ?>,'+<?= $latitude ?>+','+<?=$longtitude?>+'" style="color:blue" target="_blank">길찾기</a></div>'
+              var iwContent ='<div style="width:150px;text-align:center;padding:6px 0;"><strong><?= $acd_name ?></strong><br><a id="asdf" style="color:green" href="https://map.kakao.com/link/to/<?= $acd_name ?>,'+result[0].y+','+result[0].x+'" style="color:blue" target="_blank">길찾기</a></div>';
               // 인포윈도우로 장소에 대한 설명을 표시합니다
               var infowindow = new kakao.maps.InfoWindow({
 
