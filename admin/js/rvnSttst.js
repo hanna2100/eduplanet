@@ -2,13 +2,13 @@ var formsForUpdate = new Array();
 var url;
 
 $(function(){
-    // if(!search)
-    //     url = "/eduplanet/admin/gm_members.php?y="+y+"&m="+m;
-    // else
-    //     url = "/eduplanet/admin/gm_members.php?y="+y+"&m="+m+"&col="+col+"&search="+search;
-
+    
     url = "/eduplanet/admin/am_members.php?y="+y+"&m="+m;
-
+    salesGraph(gm_sales, am_sales);
+    dash_prcd1_ratio(am_prdct_one ,am_prdct_two, am_prdct_thr);
+    dash_prcd2_ratio(gm_prdct_one ,gm_prdct_two, gm_prdct_thr);
+    dash_method_ratio(kakao, payco, smile);
+    
     $('.date_field').datepicker({
         dateFormat: 'yy-mm-dd',
         minDate: -0,
@@ -20,240 +20,50 @@ $(function(){
         }
     });
     
-    importJoinData();
-    importPrimiumData();
-    importClassData();
-    importDongData();
-    listItemPicker();
-
-    
 });
 
 
-function listItemPicker(){
-    $('.list_row').click(function(){
+function salesGraph(gm, am){
 
-        //다중 클릭시 폼배열에 중복으로 쌓이는 것 방지
-        if($(this).css('background-color')=='rgb(142, 196, 240)'){
-            return;
-        }
-
-        $(this).css('background-color' , '#8ec4f0a9');
-        $(this).children('form').children('.col4').children('input').prop('disabled',false);
-        $(this).children('form').children('.col5').children('input').prop('disabled',false);
-        $(this).children('form').children('.col7').children('input').prop('disabled',false);
-        $(this).children('form').children('.col8').children('input').prop('disabled',false);
-
-        formsForUpdate.push($(this).children('form'));
-    });
-}
-
-function submitUpdate(){   
-
-    var conf = confirm('회원 데이터를 수정하시겠습니까?');
-
-    if(conf){
-        var serialize ='';
-
-        for(var i in formsForUpdate){
-            serialize += formsForUpdate[i].serialize() + "&";
-        }
-
-        serialize = serialize.slice(0,-1);
-        console.log(serialize);
-        $.ajax({
-            type: "post",
-            data: serialize,
-            url : "./lib/am_members_update.php",
-            success : function(data){
-                if(data==1){//업데이트 성공시
-                    location.href=url+'&page='+page;
-                }else{
-                    alert('오류발생: '+data);
-                }
-            },
-            error : function(){
-                alert("시스템에러");
-            }
-        });
+    for(var i = 0; i<gm.length; i++){
+        gm[i] = gm[i]/10000;
+        am[i] = am[i]/10000;
     }
-}
-
-function submitDelete(){
-
-    var conf = confirm('회원 데이터를 삭제하시겠습니까?');
-
-    if(conf){
-        var serialize ='';
-
-        for(var i in formsForUpdate){
-            serialize += formsForUpdate[i].serialize() + "&";
-        }
-
-        serialize = serialize.slice(0,-1);
-        console.log(serialize);
-        $.ajax({
-            type: "post",
-            data: serialize,
-            url : "./lib/am_members_delete.php",
-            success : function(data){
-                if(data==1){
-                    location.href=url+'&page='+page;
-                }else{
-                    alert('오류발생: '+data);
-                }
-            },
-            error : function(){
-                alert("시스템에러");
-            }
-        });
-    }
-    
-}
-
-function limitMaxLength(e){
-    if(e.value.length> e.maxLength){
-        e.value = e.value.slice(0, e.maxLength);
-    }
-}
-
-function onclickSearch(){
-
-    var col = $('#search_select option:selected').val();
-    var search = $('.form-control').val();
-
-    if(col=="회원번호"){
-        col="no";
-    }else if(col=="아이디"){
-        col="id";
-    }else if(col=="이메일"){
-        col="email";
-    }else if(col=="학원고유번호"){
-        col="acd_no";
-    }else if(col=="학원명"){
-        col="acd_name";
-    }else if(col=="대표자명"){
-        col="rprsn";
-    }else if(col=="유료만료일"){
-        col="expiry_day";
-    }else if(col=="가입일"){
-        col="regist_day";
-    }
-
-    if(!search){
-        alert('검색어를 입력해주세요');
-    }else{
-        location.replace(url+"&col="+col+"&search="+search);
-    }
-}
-
-function openWating(){
-    window.open('/eduplanet/admin/am_members_waiting.php'
-                , '가입대기회원'
-                ,"width=1060, height=580, toolbar=no, menubar=no, scrollbars=no, resizable=no");
-}
-
-function openApiUpdate(){
-    window.open('/eduplanet/admin/am_members_api.php'
-    , '학원데이터 업데이트'
-    ,"width=1200, height=660, toolbar=no, menubar=no, scrollbars=no, resizable=no");
-}
-
-function importJoinData(){
-
-    $.ajax({
-        url : "/eduplanet/admin/lib/am_members_graph.php",
-        type : "post",
-        dataType: "json",
-        data: { y: y,
-            y2: y,
-            m: m,
-            m2: m},
-        success : function(data) {
-            console.log(data[0]);
-            console.log(data[1]);
-
-            var join_arr = data[0];
-            var wthdr_arr = data[1];
-
-            var sbtr_arr = new Array();
-            for(i = 0; i<join_arr.length ; i++){
-                sbtr_arr[i] = join_arr[i]-wthdr_arr[i];
-            }
-
-            g_membersGraph(join_arr,wthdr_arr,sbtr_arr);
-
-            //이번달 가입회원수 구하기
-            var join_sum = 0;
-            for (var i=0; i < join_arr.length; i++ ) {
-                join_sum += parseInt(join_arr[i]);
-            }
-            //이번달 탈퇴회원수 구하기
-            var wthdr_sum = 0;
-            for (var i=0; i < wthdr_arr.length; i++ ) {
-                wthdr_sum += parseInt(wthdr_arr[i]);
-            }
-
-            $('#join_m').text(join_sum);
-            $('#wthdr_m').text(wthdr_sum);
-
-        },
-        error : function() {
-          console.log("회원그래프 가져오기 ajax 실패");
-          }
-    });
-}
-
-
-function g_membersGraph(join, wthdr, sbtr){
 
     var ctx = document.getElementById('g_members_totalGraph').getContext('2d');
     ctx.canvas.width = 880;
     ctx.canvas.height = 310;
     var chart = new Chart(ctx, {
         // The type of chart we want to create
-        type: 'bar',
+        type: 'line',
 
         // The data for our dataset
         data: {
             labels: dayArray(y,m),
             datasets: [{
-                label: '신규회원',
+                label: '일반회원',
                 backgroundColor: red,
                 borderColor: red,
                 pointHoverBackgroundColor: red,
-                data: join,
+                data: gm,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                tension: 0.2,
+                tension: 0.1,
                 fill: false,
-                borderWidth: 1,
-                order: 2
-            },{
-                label: '탈퇴회원',
-                backgroundColor: purple,
-                borderColor: purple,
-                pointHoverBackgroundColor: purple,
-                data: wthdr,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                tension: 0.2,
-                fill: false,
-                borderWidth: 1,
-                order: 3
-            },{
-                label: '순 증가회원 수',
-                backgroundColor: grey,
-                borderColor: grey,
-                pointHoverBackgroundColor: grey,
-                data: sbtr,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                tension: 0.2,
-                fill: false,
-                borderWidth: 5,
-                type: 'line',
+                borderWidth: 3,
                 order: 1
+            },{
+                label: '사업자회원',
+                backgroundColor: blue,
+                borderColor: blue,
+                pointHoverBackgroundColor: blue,
+                data: am,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                tension: 0.1,
+                fill: false,
+                borderWidth: 3,
+                order: 2
             }]
         },
 
@@ -276,8 +86,8 @@ function g_membersGraph(join, wthdr, sbtr){
     });
 }
 
-function dash_pm_ratio(none, primium){
-    var ctx = document.getElementById('dash_pm_ratio').getContext('2d');
+function dash_prcd1_ratio(mnth_one ,mnth_two, mnth_three){
+    var ctx = document.getElementById('dash_prcd1_ratio').getContext('2d');
     ctx.canvas.width = 240;
     ctx.canvas.height = 160;
     var chart = new Chart(ctx, {
@@ -287,12 +97,12 @@ function dash_pm_ratio(none, primium){
         // The data for our dataset
         data: {
             datasets: [{
-                backgroundColor: [purple, grey],
-                borderColor:  [purple, grey],
-                data: [primium,none],
+                backgroundColor: ['#ffcccc', '#ff8080', red],
+                borderColor:  ['#ffcccc', '#ff8080', red],
+                data: [mnth_one ,mnth_two, mnth_three],
                 borderWidth: 1
             }],
-            labels: ['프리미엄', '일반'
+            labels: ['프리미엄 1개월', '프리미엄 2개월', '프리미엄 3개월'
             ]
         },
 
@@ -310,116 +120,68 @@ function dash_pm_ratio(none, primium){
 }
 
 
+function dash_prcd2_ratio(mnth_one ,mnth_two, mnth_three){
+    var ctx = document.getElementById('dash_prcd2_ratio').getContext('2d');
+    ctx.canvas.width = 240;
+    ctx.canvas.height = 160;
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'doughnut',
 
-function importDongData(){
-
-    $.ajax({
-        url : "/eduplanet/admin/lib/am_members_dong_graph.php",
-        type : "post",
-        dataType: "json",
-        data: { y: y,
-                m: m},
-        success : function(data) {
-            console.log(data);
-
-            if(data[0][0]==null)
-                return;
-
-                if(data[0][0]==null)
-                return;
-
-            var temp = data[1][i];
-            var rank = 0;
-
-            for(var i =0; i<5; i++){
-   
-                if(data[1][i]==temp){
-                    document.getElementsByClassName('dasn_dong_label')[i].innerHTML = rank;
-                }else{
-                    document.getElementsByClassName('dasn_dong_label')[i].innerHTML = ++rank;
-                }
-                if(data[0][i]==null){
-                    document.getElementsByClassName('dasn_dong_label')[i].innerHTML = '-';
-                    document.getElementsByClassName('dasn_dong_data')[i].innerHTML =' - ';
-                }else if(data[0][i]==''){
-                    document.getElementsByClassName('dasn_dong_data')[i].innerHTML = '해당없음<span>('+data[1][i]+')</span>';
-                }else{
-                    document.getElementsByClassName('dasn_dong_data')[i].innerHTML =data[0][i]+'<span>('+data[1][i]+')</span>';
-
-                }
-                
-                temp = data[1][i];
-
-            }
-
+        // The data for our dataset
+        data: {
+            datasets: [{
+                backgroundColor: ['#ccebff', '#80ccff', blue],
+                borderColor:  ['#ccebff', '#80ccff', blue],
+                data: [mnth_one ,mnth_two, mnth_three],
+                borderWidth: 1
+            }],
+            labels: ['학원관리 1개월', '학원관리 2개월', '학원관리 3개월'
+            ]
         },
-        error : function() {
-          console.log("지역순위 가져오기 ajax 실패");
-          }
+
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            legend: {
+				display:false
+            },
+            scales: { //X,Y축 옵션
+                display:false
+            }
+        }
     });
 }
 
-function importPrimiumData(){
+function dash_method_ratio(kakao ,payco, smile){
+    var ctx = document.getElementById('dash_method_ratio').getContext('2d');
+    ctx.canvas.width = 240;
+    ctx.canvas.height = 160;
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'doughnut',
 
-    $.ajax({
-        url : "/eduplanet/admin/lib/am_members_primium_graph.php",
-        type : "post",
-        dataType: "json",
-        data: { y: y,
-                m: m,
-                mode: "DATE"},
-        success : function(data) {
-            dash_pm_ratio(data[0], data[1]);
-
+        // The data for our dataset
+        data: {
+            datasets: [{
+                backgroundColor: [yellow, red, '#333399'],
+                borderColor:  [yellow, red, '#333399'],
+                data: [kakao ,payco, smile],
+                borderWidth: 1
+            }],
+            labels: ['카카오페이', '페이코', '스마일페이'
+            ]
         },
-        error : function() {
-          console.log("프리미엄그래프 가져오기 ajax 실패");
-          }
-    });
-}
 
-function importClassData(){
-
-    $.ajax({
-        url : "/eduplanet/admin/lib/am_members_class_graph.php",
-        type : "post",
-        dataType: "json",
-        data: { y: y,
-                m: m},
-        success : function(data) {
-
-            console.log(data);
-
-            if(data[0][0]==null)
-                return;
-
-            var temp = data[1][i];
-            var rank = 0;
-
-            for(var i =0; i<5; i++){
-   
-                if(data[1][i]==temp){
-                    document.getElementsByClassName('dasn_intres_label')[i].innerHTML = rank;
-                }else{
-                    document.getElementsByClassName('dasn_intres_label')[i].innerHTML = ++rank;
-                }
-                if(data[0][i]==null){
-                    document.getElementsByClassName('dasn_intres_label')[i].innerHTML = '-';
-                    document.getElementsByClassName('dasn_intres_data')[i].innerHTML =' - ';
-                }else if(data[0][i]==''){
-                    document.getElementsByClassName('dasn_intres_data')[i].innerHTML = '해당없음<span>('+data[1][i]+')</span>';
-                }else{
-                    document.getElementsByClassName('dasn_intres_data')[i].innerHTML =data[0][i]+'<span>('+data[1][i]+')</span>';
-
-                }
-                
-                temp = data[1][i];
-
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            legend: {
+				display:false
+            },
+            scales: { //X,Y축 옵션
+                display:false
             }
-
-        },
-        error : function() {
-          console.log("과목그래프 가져오기 ajax 실패");
-          }
+        }
     });
 }

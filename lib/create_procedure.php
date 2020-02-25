@@ -212,6 +212,82 @@ function create_procedure($conn, $prcd_name){
           update academy_temp set acd_name='초능력개발교육원' where no =29;
           END";
         break;
+
+        case "get_gm_sales":
+          $sql="CREATE PROCEDURE `get_gm_sales`(IN start_y CHAR(4), IN last_y CHAR(4), IN start_m CHAR(2), IN last_m CHAR(2))
+          BEGIN 
+                DECLARE start_date CHAR(10);
+                DECLARE last_date CHAR(10);
+                SET start_date = CONCAT(start_y,'-', start_m, '-01');
+                SET last_date = CONCAT(last_y,'-', last_m, '-01');
+                SET last_date = LAST_DAY(last_date);
+                
+            SELECT 
+            temp.date, origin.total
+            FROM
+            (SELECT 
+              a.date
+            FROM
+              (SELECT 
+              CURDATE() - INTERVAL (a.a + (10 * b.a) + (100 * c.a) + (1000 * d.a)) DAY AS date
+            FROM
+              (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS a
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS b
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS c
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS d) a
+            WHERE
+              a.date BETWEEN start_date AND last_date) AS temp
+              LEFT JOIN
+            (SELECT 
+              `date`, SUM(`price`) AS `total`
+            FROM
+              gm_order
+            WHERE
+              DATE(`date`) >= STR_TO_DATE(start_date, '%Y-%m-%d') AND DATE(`date`) <= STR_TO_DATE(last_date, '%Y-%m-%d')
+            GROUP BY date) AS origin 
+                ON temp.date = origin.date
+            ORDER BY temp.date;
+                
+          END";
+        break;
+
+        case "get_am_sales":
+          $sql="CREATE PROCEDURE `get_am_sales`(IN start_y CHAR(4), IN last_y CHAR(4), IN start_m CHAR(2), IN last_m CHAR(2))
+          BEGIN 
+                DECLARE start_date CHAR(10);
+                DECLARE last_date CHAR(10);
+                SET start_date = CONCAT(start_y,'-', start_m, '-01');
+                SET last_date = CONCAT(last_y,'-', last_m, '-01');
+                SET last_date = LAST_DAY(last_date);
+                
+            SELECT 
+            temp.date, origin.total
+            FROM
+            (SELECT 
+              a.date
+            FROM
+              (SELECT 
+              CURDATE() - INTERVAL (a.a + (10 * b.a) + (100 * c.a) + (1000 * d.a)) DAY AS date
+            FROM
+              (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS a
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS b
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS c
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS d) a
+            WHERE
+              a.date BETWEEN start_date AND last_date) AS temp
+              LEFT JOIN
+            (SELECT 
+              `date`, SUM(`price`) AS `total`
+            FROM
+              am_order
+            WHERE
+              DATE(`date`) >= STR_TO_DATE(start_date, '%Y-%m-%d') AND DATE(`date`) <= STR_TO_DATE(last_date, '%Y-%m-%d')
+            GROUP BY date) AS origin 
+                ON temp.date = origin.date
+            ORDER BY temp.date;
+                
+          END";
+        break;
           
       default:
         echo "<script>alert('해당 프로시저가 없습니다. ');</script>";
