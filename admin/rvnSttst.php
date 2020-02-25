@@ -49,7 +49,7 @@
 
 <section>
   <div class="sec_top">
-    <span onclick="prevDateChange('am_members')"><i class="fas fa-angle-left"></i></span>
+    <span onclick="prevDateChange('rvnSttst')"><i class="fas fa-angle-left"></i></span>
     <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting('am_members')">
 <?php
     for($i = 2018; $i<=date("Y"); $i++){
@@ -58,7 +58,7 @@
 ?>
     </select>
     <span>년 </span>
-    <select id="top_select_month" dir="rtl" onchange="hrefDateChange('am_members')">
+    <select id="top_select_month" dir="rtl" onchange="hrefDateChange('rvnSttst')">
 <?php
     $last_m = $y==date("Y")? date("n"): 12;
     for($i = 1; $i<=$last_m ; $i++){
@@ -67,7 +67,7 @@
 ?>
     </select>
     <span>월 </span>
-    <span onclick="nextDateChange('am_members')"><i class="fas fa-angle-right"></i></span>
+    <span onclick="nextDateChange('rvnSttst')"><i class="fas fa-angle-right"></i></span>
   </div>
   <!--end of 년 월 선택바 -->
 
@@ -92,18 +92,18 @@
   <div class="sec_content">
     <div id="dash_topline">
       <div>
-        <span>전체 사업자회원</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-friends"></i>&nbsp;<span id="total_m"><?=$total_m?></span></span>
+        <span>월 총 수익</span><br>
+        <span class="dash_topline_i"><i class="fas fa-user-friends"></i>&nbsp;<span id="total_rvn"><?=$total_m?></span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
-        <span>신규회원</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-plus"></i>&nbsp;<span id="join_m">0</span></span>
+        <span>일반회원 수익</span><br>
+        <span class="dash_topline_i"><i class="fas fa-user-plus"></i>&nbsp;<span id="gm_rvn">0</span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
-        <span>탈퇴회원</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-minus"></i>&nbsp;<span id="wthdr_m">0</span></span>
+        <span>사업자회원 수익</span><br>
+        <span class="dash_topline_i"><i class="fas fa-user-minus"></i>&nbsp;<span id="am_rvn">0</span></span>
         <span class="caret down"><i class="fas fa-caret-down"></i></span>
       </div>
     </div>
