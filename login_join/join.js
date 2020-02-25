@@ -22,6 +22,7 @@ $(document).ready(function(){
       inputRprsn = $("#inputRprsn"),
       inputLicense = $("#inputLicense");
 
+  setDateBox();
   //아이디 중복체크 - ajax사용
   inputId.keyup(function() {
     var idValue = inputId.val();
@@ -189,7 +190,6 @@ $(document).ready(function(){
   });
 
   //출생년도 select box
-  setDateBox();
   inputAge.change(function(){
     var ageValue = $("#inputAge option:selected").val();
     console.log("출생년도", ageValue);
@@ -248,7 +248,6 @@ $(document).ready(function(){
       isAmAllPass();
     }
   });
-
 
 });
 
