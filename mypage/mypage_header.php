@@ -22,9 +22,18 @@ if (isset($_SESSION["am_no"])) {
 $gm_no = 1;
 
 // 기업회원 테스트
-$am_no = 1;
+// $am_no = 1;
 
 // session ==================================================
+
+if (!$gm_no && !$am_no) {
+    echo "
+        <script>
+            alert('로그인 후 이용하실 수 있습니다.');
+            history.go(-1)
+        </script>
+    ";
+}
 
 ?>
 
