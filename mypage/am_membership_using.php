@@ -1,3 +1,5 @@
+<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -107,8 +109,6 @@
                     </div>
 
                     <?php
-
-                    // 이용중인 멤버십 test ============================================================
 
                     $user_no = $am_no;
 

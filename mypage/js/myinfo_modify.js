@@ -157,22 +157,44 @@ function setDateBox() {
 
 // 일반회원 가입
 function isGmAllPass() {
+
+    // SELECT 해서 가져온 값은 true 셋팅
+    if (document.getElementById("inputEmail").value !== "" &&
+    document.getElementById("inputTel").value !== "" &&
+    document.getElementById("inputAge").value !== "" &&
+    document.getElementById("inputIntres").value !== "") {
+
+        emailPass = true;
+        telPass = true;
+        agePass = true;
+        intresPass = true;
+    }
+
     if (!(pwPass && emailPass && telPass && agePass && intresPass)) {
         alert("입력하신 항목을 다시 확인해 주세요.");
         
     } else {
         document.getElementById('form_member').submit()
-        // $("#btnFormSubmit").attr("disabled", true);
     }
 }
 
 // 기업회원 가입
 function isAmAllPass() {
+
+    // SELECT 해서 가져온 값은 true 셋팅
+    if (document.getElementById("inputEmail").value !== "" &&
+    document.getElementById("inputAcdName").value !== "" &&
+    document.getElementById("inputRprsn").value !== "") {
+
+        emailPass = true;
+        acdNamePass = true;
+        rprsnPass = true;
+    }
+
     if (!(pwPass && emailPass && acdNamePass && rprsnPass)) {
         alert("입력하신 항목을 다시 확인해 주세요.");
         
     } else {
         document.getElementById('form_member').submit()
-        // $("#btnFormSubmit").attr("disabled", true);
     }
 }

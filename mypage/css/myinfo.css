@@ -134,7 +134,7 @@ label {
 
 .myinfo_content input {
     width: 200px;
-    height: 20px;
+    /* height: 20px; */
     /* border-radius: 5px; */
     border: 1px solid rgb(165, 165, 165);
     padding: 10px;

@@ -1,40 +1,14 @@
 <?php
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
 
-// login 에서 세션값 가져오기
-
-// session_start();
-
-if (isset($_SESSION["gm_no"])) {
-    $gm_no = $_SESSION["gm_no"];
-} else {
-    $gm_no = "";
-}
-
-if (isset($_SESSION["am_no"])) {
-    $am_no = $_SESSION["am_no"];
-} else {
-    $am_no = "";
-}
-
-// session test ============================================
-
-// 일반회원 테스트
-// $gm_no = 1;
-
-// 기업회원 테스트
-$am_no = 1;
-
-// session ==================================================
-
-if (!$gm_no && !$am_no) {
-    echo "
-        <script>
-            alert('로그인 후 이용하실 수 있습니다.');
-            history.go(-1)
-        </script>
-    ";
-}
-
+    if (!$gm_no && !$am_no) {
+        echo "
+            <script>
+                alert('로그인 후 이용하실 수 있습니다.');
+                history.go(-1)
+            </script>
+        ";
+    }
 ?>
 
 <div class="body_wrap">
@@ -46,6 +20,7 @@ if (!$gm_no && !$am_no) {
             if ($gm_no) {
                 $user_no = $gm_no;
                 $table_members = 'g_members';
+
             } else if ($am_no) {
                 $user_no = $am_no;
                 $table_members = 'a_members';
@@ -74,11 +49,6 @@ if (!$gm_no && !$am_no) {
 
                     <?php
 
-                    // $sql = "SELECT expiry_day FROM $table_members WHERE no='$user_no'";
-                    // $result = mysqli_query($conn, $sql);
-                    // $row = mysqli_fetch_array($result);
-
-                    // $expiry_day = $row["expiry_day"];
                     $expiry_day = substr($expiry_day, 0, 4) . substr($expiry_day, 5, 2) . substr($expiry_day, 8, 2);
 
                     // 만료날짜 계산 후 보여주기 // 만료날짜 없으면 다른 문구 보여주기

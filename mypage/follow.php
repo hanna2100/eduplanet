@@ -1,3 +1,5 @@
+<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -235,6 +237,13 @@
 
                 <!-- start of ul ------------------------------------------------------------------------------------->
 
+                <?php
+
+                    // 찜한 목록이 있을 때
+                    if($total_record !== 0) {
+
+                ?>
+
                 <ul class="follow_unorder_list">
 
                     <?php
@@ -279,7 +288,7 @@
                         // }
 
                     ?>
-
+                
                         <li>
                             <!-- 하나의 찜목록 -->
                             <div class="follow_list_column">
@@ -431,6 +440,17 @@
                     }
                     ?>
                 </ul>
+
+                <?php
+                    // 찜한 목록이 없을 때
+                    } else {
+                ?>
+                    <p class="list_none_p">아직 찜한 학원이 없습니다.</p>
+                    <p class="list_none_p">찜하기를 하신 후 모든 학원을 한 눈에 비교해 보세요.</p>
+
+                    <?php
+                    }
+                    ?>
             </div>
         </div>
         <!-- end of page_num_wrap -------------------------------------------------------->

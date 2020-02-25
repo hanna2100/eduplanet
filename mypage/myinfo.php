@@ -1,3 +1,5 @@
+<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,18 +54,7 @@
 <body>
     <?php
 
-    // 일반회원 세션 테스트
-    // $user_no = $gm_no;
-    $user_no = 2;
-
-    if (!$user_no) {
-        echo "
-            <script>
-                alert('잘못된 접근입니다.');
-                history.go(-1)
-            </script>
-        ";
-    }
+    $user_no = $gm_no;
 
     include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
