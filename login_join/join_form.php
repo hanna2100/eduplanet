@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./join.css">
   </head>
 
-  <body>
+  <body onload='setDateBox()'>
     <header>
 
     </header>
