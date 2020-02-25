@@ -202,11 +202,15 @@ $(document).ready(function(){
   // 파일 첨부 여부 확인
   $("input[name=inputLicense]").change(function(){
     var licenseValue = inputLicense.val();
-    console.log("파일 예쓰", licenseValue);
-    if(licenseValue){
+    if(!licenseValue){
+      $("#LicenseSubMsg").text("사업자 등록증을 반드시 업로드 해주세요.");
+      licensePass = false;
+      isAmAllPass();
+    }else{
+      $("#LicenseSubMsg").text("");
       licensePass = true;
       isAmAllPass();
-    }    
+    }
   });
 
 
