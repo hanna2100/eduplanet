@@ -23,8 +23,8 @@
    <body>
      <header>
          <?php
-          // include "../index_header.php";
-          // include "../academy_header_soyoung.php";
+           include "../index/index_header_searchbar_in.php";
+           include "./header/academy_header.php";
          ?>
      </header>
 
@@ -348,6 +348,10 @@
 
       </div> <!-- end of inner_section   -->
      </section>
+
+     <footer>
+       <?php include "../index/footer.php"; ?>
+     </footer>
 
      <script src="./js/review.js"></script>
      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
