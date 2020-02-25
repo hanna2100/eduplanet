@@ -177,7 +177,7 @@ function create_table($conn, $table_name){
                       `prdct_name_month` VARCHAR(30) NOT NULL,
 	                    `price` INT UNSIGNED NOT NULL,
                       `pay_method` VARCHAR(20) NOT NULL,
-                     p `status` CHAR(10) NOT NULL,
+                      `status` CHAR(10) NOT NULL,
                       `date` DATE NOT NULL,
                       PRIMARY KEY(`no`)
                     );";
