@@ -1,3 +1,5 @@
+<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +102,6 @@
                 </div>
                 
                 <?php
-                    // 리뷰 test ============================================================
 
                     $user_no = $gm_no;
 

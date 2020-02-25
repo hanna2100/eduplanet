@@ -1,33 +1,4 @@
-<?php
-
-// login 에서 세션값 가져오기
-
-// session_start();
-
-if (isset($_SESSION["gm_no"])) {
-    $gm_no = $_SESSION["gm_no"];
-} else {
-    $gm_no = "";
-}
-
-if (isset($_SESSION["am_no"])) {
-    $am_no = $_SESSION["am_no"];
-} else {
-    $am_no = "";
-}
-
-// session test ============================================
-
-// 일반회원 세션 테스트
-// $gm_no = 1;
-
-// 기업회원 세션 테스트
-$am_no = 1;
-
-// 세션을 주지 않으면 비회원 테스트
-
-// session ==================================================
-?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
 
 <div class="body_wrap">
     <div class="index_header_wrap">

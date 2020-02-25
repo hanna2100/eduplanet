@@ -1,3 +1,5 @@
+<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,24 +38,6 @@
             selectSort = document.getElementById("story_list_select_mode").value;
 
             location.href = "/eduplanet/acd_story/index.php?district=" + selectDistrict + "&sort=" + selectSort;
-
-            // 에이작수 삽질 흑흑
-            // $.ajax({
-            //     type: 'post',
-            //     url: "/eduplanet/acd_story/select_district.php",
-            //     dataType: "json",
-            //     data: {
-            //         selectDis: selectDistrict
-            //     },
-            //     success: function(data) {
-            //         // $("#acd_name").val(data[0]['acd_name']);
-            //         // $("#acd_name").val('acd_name');
-            //         console.log(data);
-            //     },
-            //     error:function(request,status,error){   
-            //         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
-            //     }
-            // })
         }
     </script>
 
@@ -88,6 +72,7 @@
                         }
                     </script>
                     ";
+
             } else {
                 $selectDis = "";
             }
@@ -102,6 +87,7 @@
                     }
                 </script>
                 ";
+                
             } else {
                 $selectSort = "";
             }

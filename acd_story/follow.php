@@ -1,15 +1,6 @@
 <?php
 
-if (isset($_SESSION["gm_no"])) {
-    $gm_no = $_SESSION["gm_no"];
-} else {
-    $gm_no = "";
-}
-
-// test ==============================
-
-// 일반회원 찜하기
-// $gm_no = 1;
+include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
 
 if (!$gm_no) {
     echo "

@@ -1,3 +1,5 @@
+<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,10 +54,8 @@
 <body>
 
     <?php
-    // 기업회원 세션 테스트
-    // $user_no = $am_no;
 
-    $user_no = 2;
+    $user_no = $am_no;
 
     if (!$user_no) {
         echo "

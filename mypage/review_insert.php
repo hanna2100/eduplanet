@@ -1,14 +1,7 @@
 <?php
 
-    if (isset($_SESSION["gm_no"])) {
-        $gm_no = $_SESSION["gm_no"];
-    } else {
-        $gm_no = "";
-    }
-
-    // session test
-    $gm_no = 1;
-
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
+    
     $user_no = $gm_no;
 
     date_default_timezone_set('Asia/Seoul');

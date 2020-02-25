@@ -1,3 +1,5 @@
+<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,14 +17,14 @@
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
 
-     <!-- CSS -->
-     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
     <link rel="stylesheet" href="/eduplanet/index/footer.css">
     <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
     <link rel="stylesheet" href="/eduplanet/acd_story/css/post.css">
 
-     <!-- 스크립트 -->
-     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
     <script src="/eduplanet/mypage/js/review_write.js"></script>
     <script src="/eduplanet/acd_story/js/post.js"></script>
 
@@ -36,7 +38,7 @@
 <body>
 
     <header>
-        <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php"; ?>
+        <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header_searchbar_in.php"; ?>
     </header>
 
     <?php
@@ -47,12 +49,7 @@
         $am_no = "";
     }
 
-    // test ===================================
-
-    // 기업회원 스토리 등록
-    $am_no = 1;
-
-    if(!$am_no) {
+    if (!$am_no) {
         echo "
         <script>
             alert('기업회원만 이용 가능합니다.');
@@ -61,7 +58,7 @@
     ";
     }
 
-    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
     $sql = "SELECT acd_name, si_name FROM academy WHERE no='$am_no'";
     $result = mysqli_query($conn, $sql);
@@ -88,16 +85,14 @@
                         <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
                     </div>
 
-                    <span id="academy_title_span"><?=$acd_name?></span>
-                    <span id="academy_district"><?=$si_name?></span>
+                    <span id="academy_title_span"><?= $acd_name ?></span>
+                    <span id="academy_district"><?= $si_name ?></span>
 
                 </a>
 
             </div>
         </div>
     </div>
-
-
 
     <div class="post_wrap">
 
@@ -182,14 +177,12 @@
                     </div>
                 </div>
             </div>
-
+        </form>
+        
     </div>
-
-    </div>
-    </form>
 
     <footer>
-        <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
+        <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
     </footer>
 
 </body>

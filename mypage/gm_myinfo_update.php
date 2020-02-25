@@ -1,8 +1,8 @@
 <?php
 
-    // 기업회원 세션 테스트
-    // $user_no = $am_no;
-    $user_no = 2;
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
+
+    $user_no = $am_no;
 
     include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
