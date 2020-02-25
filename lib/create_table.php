@@ -18,8 +18,8 @@ function create_table($conn, $table_name){
           case 'g_members' : //일반회원(general members)
             $sql = "CREATE TABLE `g_members` (
                     `no` INT NOT NULL AUTO_INCREMENT,
-                    `id` CHAR(10) NOT NULL,
-                    `pw` CHAR(10) NOT NULL,
+                    `id` CHAR(12) NOT NULL,
+                    `pw` CHAR(50) NOT NULL,
                     `email` VARCHAR(80),
                     `phone` CHAR(12) NOT NULL,
                     `age` int NOT NULL,
@@ -34,8 +34,8 @@ function create_table($conn, $table_name){
             $sql = "CREATE TABLE `a_members` (
                     `no` INT NOT NULL AUTO_INCREMENT,
                     `acd_no` INT DEFAULT 0,
-                    `id` CHAR(10) NOT NULL,
-                    `pw` CHAR(10) NOT NULL,
+                    `id` CHAR(12) NOT NULL,
+                    `pw` CHAR(50) NOT NULL,
                     `email` VARCHAR(80) NOT NULL,
                     `acd_name` VARCHAR(40) NOT NULL,
                     `rprsn` VARCHAR(20) NOT NULL,

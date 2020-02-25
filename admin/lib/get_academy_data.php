@@ -12,8 +12,7 @@
     //     exit;
     // }
 
-    $mode   = isset($_POST['mode'])? $_POST['mode'] : 0;
-
+  $mode   = isset($_POST['mode'])? $_POST['mode'] : "none";
     
   //api받아오기
   include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
@@ -25,42 +24,6 @@
     echo ('Could not update data - ' . mysqli_error($conn));
   }
 
-  //기존 temp 학원 데이터 삭제
-  $sql = "DELETE FROM `academy_temp`";
-  mysqli_query($conn, $sql);
-
-  //새로운 temp 데이터 가져오기
-  $sql ="INSERT INTO `academy_temp` VALUES "; //리턴할 sql문장
-
-  set_api_index(1);
-  set_api_scale(100);
-
-  $acd_array = get_academy_from_api("가평군", "가평읍");
-
-  for($i=0; $i<sizeof($acd_array); $i++){
-    $si_name = $acd_array[$i]->si_name;
-    $dong_name = $acd_array[$i]->dong_name;
-    $sector = $acd_array[$i]->sector;
-    $acd_name = $acd_array[$i]->acd_name;
-    $rprsn = $acd_array[$i]->rprsn;
-    $class = $acd_array[$i]->class;
-    $tel = $acd_array[$i]->tel;
-    $address = $acd_array[$i]->address;
-
-    $no = $i+1;
-
-    $sql .= "($no, '$si_name','$dong_name','$sector','$acd_name','$rprsn','$class','$tel','$address')";
-
-    if($i != sizeof($acd_array)-1){
-      $sql .=", ";
-    }
-  }
-  $sql .= ";";
-  mysqli_query($conn, $sql);
-
-  //테스트를 위한 데이터 수정 작업
-  $sql = "CALL modify_data_for_testing()";
-  mysqli_query($conn, $sql);
 
   $sql_arr = array();
   //api와 기존 db를 비교하여 새로운 데이터가 있는경우
@@ -75,19 +38,33 @@
   $new_acd = $total_arr[0]; //생기거나 변경된(new데이터) 학원
   $drop_acd = $total_arr[1]; //없어지거나 변경된(old데이터) 학원
 
-  $edit_acd_new = array(); //기존에서 변경된 학원의 새데이터가 들어갈 배열
-  $edit_acd_old = array(); //기존에서 변경된 학원의 기존데이터가 들어갈 배열
 
-  for($i=0; $i<sizeof($new_acd); $i++){
-    
-    for($j=0; $j<sizeof($drop_acd); $j++){
-      
-      $intersection = array_intersect($new_acd[$i], $drop_acd[$j]);
+  //오직 학원명,대표자명,주소,전화번호,업종 만을 구별하기위해 이 항목만으로 구성된 배열 만들기
+  $new_temp = $new_acd;
+  $drop_temp = $drop_acd;
 
-      if(count($intersection)>=5){
+  for($i=0; $i<sizeof($new_temp); $i++){
+    $new_temp[$i] = array_slice($new_temp[$i], 3, 7);
+  }
+  for($i=0; $i<sizeof($drop_temp); $i++){
+    $drop_temp[$i] = array_slice($drop_temp[$i], 3, 7);
+  }
+
+  $edit_acd_new = array(); //변경학원 최신데이터(api 가져온거)
+  $edit_acd_old = array(); //변경학원 옛날데이터(기존db있던거)
+
+  for($i=0; $i<sizeof($new_temp); $i++){
+    for($j=0; $j<sizeof($drop_temp); $j++){
+      //배열을 비교하여 동일한 배열만 반환하는 함수
+      $intersection = array_intersect($new_temp[$i], $drop_temp[$j]);
+
+      //5개 항목중 3개 이상이 같으면 같은 학원으로 판단
+      if(count($intersection)>=3){
         array_push($edit_acd_new, $new_acd[$i]);
         array_push($edit_acd_old, $drop_acd[$j]);
+
         //인덱스를 유지하기위해 slice보다는 해당값을 빈배열로 만들고 array_flilter를 쓸 예정
+        //new와 drop에는 변경된학원이 아니라 신규 혹은 폐업학원으로만 구성됨
         $new_acd[$i] = [];
         $drop_acd[$j] = [];
         break;
@@ -97,32 +74,61 @@
   }//end of outer for;
 
   $new_acd = array_filter($new_acd);
-  $new_acd = array_values($new_acd);
-  $del_acd = array_filter($drop_acd);
-  $del_acd = array_values($del_acd);
+  $new_acd = array_values($new_acd); //신규학원
+  $drop_acd = array_filter($drop_acd);
+  $drop_acd = array_values($drop_acd); //폐업학원
+
+  // $sql = "select no, concat( si_name, '$', dong_name, '$', sector, '$', acd_name, '$', rprsn, '$', class, '$', tel, '$', address) as `serial`  from academy";
+  // $result = mysqli_query($conn, $sql);
+
+
+  // //$drop_acd 직렬화
+  // $drop_acd_serial_arr = array();
+  // for($i=0; $i<sizeof($drop_acd); $i++){
+  //   $t = array_slice($drop_acd[$i],1);
+  //   // var_dump($t);
+  //   $drop_acd_serial_arr[$i] = implode("$", $t);
+  //   // var_dump($drop_acd_serial_arr[$i]);
+  // }
+
+  // for ($i=0; $i < mysqli_num_rows($result); $i++){
+  //   $row = mysqli_fetch_row($result);
+  //   $serial = $row[1];
+  //   for($j=0; $j<sizeof($drop_acd_serial_arr) ; $j++){
+  //     if($drop_acd_serial_arr[$j]==$serial){
+  //       $drop_acd[$j]=[];
+  //     }
+  //   }
+  // }
+  // $drop_acd = array_filter($drop_acd);
+  // $drop_acd = array_values($drop_acd);
 
   //신규학원수
   $new_acd_count = sizeof($new_acd);
   //폐업학원수
-  $drop_acd_count = sizeof($del_acd);
+  $drop_acd_count = sizeof($drop_acd);
   //수정된 학원수
   $edit_acd_count = sizeof($edit_acd_old);
   //혹은 이거 > sizeof($edit_acd_new);
 
-//   if(strcmp($mode, "new")){
-//     // echo json_encode($new_acd);
 
-//   }else if(strcmp($mode, "drop")){
-//     echo json_encode($del_acd);
 
-//   }else if(strcmp($mode, "edit")){
-//     $edit_acd = array();
-//     array_push($edit_acd, $edit_acd_old);
-//     array_push($edit_acd, $edit_acd_new);
-//     echo json_encode($edit_acd);
-//   }else{
-//     die;    
-//   }
+  if($mode== "none"){
+    return;
+
+  }else if($mode=="drop"){
+    echo json_encode($drop_acd);
+
+  }else if($mode=="edit"){
+    $edit_acd = array();
+    array_push($edit_acd, $edit_acd_old);
+    array_push($edit_acd, $edit_acd_new);
+    echo json_encode($edit_acd);
+
+  }else if($mode=="new"){
+    echo json_encode($new_acd);
+
+  }
 
 
   function execute_multi($conn, $sql_arr){
@@ -141,16 +147,21 @@
           while ($row = mysqli_fetch_row($result)) {
 
             if($flag==false){ // 첫번째 쿼리문 결과시
-              $temp_srl = $row[1];
+              $temp_no = $row[2];
+              $temp_srl = $row[3];
+
               //직렬화된 데이터를 잘라서 배열로 저장
               $srl_array = explode('$', $temp_srl);
+              array_push($srl_array, $temp_no); //배열 마지막은 no기본키
               array_push($new_acd_array, $srl_array);
 
             }else{// 두번째 쿼리문 결과시
-              $acd_srl = $row[1];
+              $acd_no = $row[2];
+              $acd_srl = $row[3];
 
               //직렬화된 데이터를 잘라서 배열로 저장
               $srl_array = explode('$', $acd_srl);
+              array_push($srl_array, $acd_no); //배열 마지막은 no기본키
               array_push($empty_acd_array, $srl_array);
 
             }//end of if

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon -->
-   <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
     <!-- jquery -->
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/eduplanet/admin/js/admin.js"></script>
-    <script src="/eduplanet/admin/js/am_members_api.js"></script>
+    <script src="/eduplanet/admin/js/am_members_api3.js"></script>
     <!-- css -->
-    <link rel="stylesheet" href="/eduplanet/admin/css/am_members_api.css">
+    <link rel="stylesheet" href="/eduplanet/admin/css/am_members_api3.css">
     <link rel="stylesheet" href="/eduplanet/admin/css/nav.css">
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
 <body>
 <?php
   $page = isset($_GET["page"])? $_GET["page"]: 1 ;
-  $url = "/eduplanet/admin/am_members_api.php?";
+  $url = "/eduplanet/admin/am_members_api3.php?";
   include_once './lib/get_academy_data.php';
 
 ?>
@@ -52,12 +52,12 @@ var page = "<?=$page?>";
 </div>
 <div id="g_members_list_wrap">
   <div class="list_edit_delete_wrap">
-    <button onclick="submitInsertAcd()">추가</button>
-    <button onclick="submitInsertTotalAcd()">전체추가</button>
+    <button onclick="submitDeleteAcd()">삭제</button>
+    <button onclick="submitDeleteTotalAcd()">전체삭제</button>
   </div>
   <div id="g_members_list">
     <h4>
-      <i class="fas fa-download"></i>&nbsp;&nbsp;&nbsp;신규 학원 추가
+      <i class="fas fa-download"></i>&nbsp;&nbsp;&nbsp;기존 학원 삭제
     </h4>
     
     <ul class="member_list">
@@ -73,18 +73,18 @@ var page = "<?=$page?>";
 		</li>
 <?php
 
-    if($new_acd_count==0){
-      echo "<p id='no_academy'>신규학원이 없습니다</p>";
+    if($drop_acd_count==0){
+      echo "<p id='no_academy'>폐업한 학원이 없습니다</p>";
 
     }else{
       
-      $sql = "SELECT * FROM academy_temp WHERE ";
-    //  var_dump($new_acd);
+      $sql = "SELECT * FROM academy WHERE ";
+     // var_dump($new_acd);
 
-      for($i = 0; $i<sizeof($new_acd); $i++){
-        $no = $new_acd[$i][8]; //기본키
+      for($i = 0; $i<sizeof($drop_acd); $i++){
+        $no = $drop_acd[$i][8];
         $sql .= "no = $no ";
-        if($i!=sizeof($new_acd)-1){
+        if($i!=sizeof($drop_acd)-1){
           $sql.= "OR ";
         }
       }
@@ -218,7 +218,6 @@ var page = "<?=$page?>";
         </div>
       </div>
       </div>
-      <center><button onclick="modifyData()">테스트를 위한 DB정보수정</button></center>
     </div>
     
 </body>

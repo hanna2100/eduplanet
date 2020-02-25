@@ -1,7 +1,7 @@
-var url = "/eduplanet/admin/am_members_api.php?";
+var url = "/eduplanet/admin/am_members_api3.php?";
 
 $(function(){
-   
+    
 });
 
 function getNewAcademy(){
@@ -19,8 +19,8 @@ function getNewAcademy(){
     });
 }
 
-function submitInsertAcd(){
-    var conf = confirm('[학원추가] 선택한 신규학원을 DB에 추가합니다.');
+function submitDeleteAcd(){
+    var conf = confirm('[학원삭제] 선택한 폐업학원을 DB에서 삭제합니다.');
 
     if(conf){
         var formsForUpdate = new Array();
@@ -31,7 +31,7 @@ function submitInsertAcd(){
             }
         });
 
-        insertSerialization(formsForUpdate);
+        deleteSerialization(formsForUpdate);
     }
 }
 
@@ -55,34 +55,15 @@ function updateAcdFromApi(){
     });
 }
 
-function modifyData(){
-    $.ajax({
-        type: "post",
-        dataType: "text",
-        url : "/eduplanet/admin/lib/modify_data_for_testing.php",
-        success : function(data){
-            data.trim();
-            if(data==1){
-                alert("DB정보수정 완료");
-                location.replace('/eduplanet/admin/am_members_api.php');
-            }else{
-                alert("DB정보수정 실패");
-            }
-        },
-        error : function(){
-            alert("시스템에러");
-        }
-    }); 
-}
 
-function submitInsertTotalAcd(){
-    var conf = confirm('[학원추가] 모든 신규학원을 DB에 추가합니다.');
+function submitDeleteTotalAcd(){
+    var conf = confirm('[학원삭제] 모든 폐업학원을 DB에서 삭제합니다.');
 
     if(conf){
         $.ajax({
             type: "post",
             dataType: "json",
-            data: {"mode": "new"},
+            data: {"mode": "drop"},
             url : "/eduplanet/admin/lib/get_academy_data.php",
             success : function(data){
 
@@ -101,7 +82,7 @@ function submitInsertTotalAcd(){
                     formsForUpdate.push($form);
                 }
 
-                insertSerialization(formsForUpdate);
+                deleteSerialization(formsForUpdate);
             
 
             },
@@ -112,22 +93,22 @@ function submitInsertTotalAcd(){
     }
 }
 
-function insertSerialization(formsForUpdate){
+function deleteSerialization(formsForUpdate){
     var serialize ='';
 
         for(var i in formsForUpdate){
-            console.log(formsForUpdate[i]);
             serialize += formsForUpdate[i].serialize() + "&";
         }
 
         serialize = serialize.slice(0,-1);
 
+
         $.ajax({
             type: "post",
             data: serialize,
-            url : "./lib/academy_insert.php",
+            url : "./lib/academy_delete.php",
             success : function(data){
-                if(data==1){//업데이트 성공시
+                if(data.trim()==1){//업데이트 성공시
                     location.href=url+'&page='+page;
                 }else{
                     alert('오류발생: '+data);
