@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
   <!-- jquery -->
   <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="/eduplanet/admin/js/admin.js"></script>

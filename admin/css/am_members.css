@@ -469,7 +469,7 @@
 }
 
 /* 그래프3개 */
-#dash_age_range_wrap>h4, #dash_pm_ratio_wrap>h4, #dash_postGraph_wrap>h4{
+#dash_city_rank_wrap>h4, #dash_pm_ratio_wrap>h4, #dash_postGraph_wrap>h4{
     display: inline-block;
     width: 100%;
     border-bottom: 1px solid #ececec;
@@ -485,7 +485,7 @@
     margin: 5px;
 } */
 
-#dash_age_range_wrap, #dash_pm_ratio_wrap, #dash_postGraph_wrap{
+#dash_city_rank_wrap, #dash_pm_ratio_wrap, #dash_postGraph_wrap{
     width: 240px;
     height: 200px;
     border-radius: 10px;
@@ -501,17 +501,17 @@
 
 /* 단어순위 */
 
-#dash_intres_world_wrap{
+#dash_intres_world_wrap, #dash_dong_rank_wrap{
     display: block;
 }
 
-.dasn_intres_detail{
+.dasn_intres_detail, .dasn_dong_detail{
     display: table;
     width: 100%;
     margin: 3px 0px;
 }
 
-.dasn_intres_label{
+.dasn_intres_label, .dasn_dong_label{
     width: 10%;
     display: table-cell;
     padding: 5px 10px;
@@ -522,7 +522,7 @@
     font-weight: bold;
 }
 
-.dasn_intres_data{
+.dasn_intres_data, .dasn_dong_data{
     display: table-cell;
     font-size: 14px;
     padding: 5px 10px;
@@ -530,6 +530,10 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     background-color: #fafafa;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    word-wrap:normal;
+    overflow:hidden;
 }
 
 .dasn_intres_data span{

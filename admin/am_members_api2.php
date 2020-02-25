@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon -->
-   <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
     <!-- jquery -->
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/eduplanet/admin/js/admin.js"></script>
-    <script src="/eduplanet/admin/js/am_members_api.js"></script>
+    <script src="/eduplanet/admin/js/am_members_api2.js"></script>
     <!-- css -->
-    <link rel="stylesheet" href="/eduplanet/admin/css/am_members_api.css">
+    <link rel="stylesheet" href="/eduplanet/admin/css/am_members_api2.css">
     <link rel="stylesheet" href="/eduplanet/admin/css/nav.css">
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
 <body>
 <?php
   $page = isset($_GET["page"])? $_GET["page"]: 1 ;
-  $url = "/eduplanet/admin/am_members_api.php?";
+  $url = "/eduplanet/admin/am_members_api2.php?";
   include_once './lib/get_academy_data.php';
 
 ?>
@@ -52,12 +52,12 @@ var page = "<?=$page?>";
 </div>
 <div id="g_members_list_wrap">
   <div class="list_edit_delete_wrap">
-    <button onclick="submitInsertAcd()">추가</button>
-    <button onclick="submitInsertTotalAcd()">전체추가</button>
+    <button onclick="submitUpdateAcd()">변경</button>
+    <button onclick="submitUpdateTotalAcd()">전체변경</button>
   </div>
   <div id="g_members_list">
     <h4>
-      <i class="fas fa-download"></i>&nbsp;&nbsp;&nbsp;신규 학원 추가
+      <i class="fas fa-download"></i>&nbsp;&nbsp;&nbsp;기존 학원 변경
     </h4>
     
     <ul class="member_list">
@@ -73,27 +73,48 @@ var page = "<?=$page?>";
 		</li>
 <?php
 
-    if($new_acd_count==0){
-      echo "<p id='no_academy'>신규학원이 없습니다</p>";
+    if($edit_acd_count==0){
+      echo "<p id='no_academy'>변경이력이 없습니다</p>";
 
     }else{
       
-      $sql = "SELECT * FROM academy_temp WHERE ";
-    //  var_dump($new_acd);
+      //기존 학원데이터
+      $sql = "SELECT * FROM academy WHERE ";
 
-      for($i = 0; $i<sizeof($new_acd); $i++){
-        $no = $new_acd[$i][8]; //기본키
+
+      for($i = 0; $i<sizeof($edit_acd_old); $i++){
+
+        $no = $edit_acd_old[$i][8];
         $sql .= "no = $no ";
-        if($i!=sizeof($new_acd)-1){
+
+        if($i!=sizeof($edit_acd_old)-1){
           $sql.= "OR ";
         }
+        
       }
-      $sql .= "ORDER BY si_name ASC";
   
       $result = mysqli_query($conn, $sql);
       $total_record = mysqli_num_rows($result); 
 
-      $scale = 10; // 가져올 글 수
+
+      //바뀐 학원 데이터 가져오기
+      $sql = "SELECT * FROM academy_temp WHERE ";
+
+      for($i = 0; $i<sizeof($edit_acd_new); $i++){
+
+        $no = $edit_acd_new[$i][8];
+        $sql .= "no = $no ";
+
+        if($i!=sizeof($edit_acd_new)-1){
+          $sql.= "OR ";
+        }
+        
+      }
+  
+      $result2 = mysqli_query($conn, $sql);
+      $total_record2 = mysqli_num_rows($result2); 
+
+      $scale = 5; // 가져올 글 수
 
       // 전체 페이지 수($total_page) 계산
       if ($total_record % $scale == 0)
@@ -120,9 +141,33 @@ var page = "<?=$page?>";
         $class       = $row["class"];
         $tel       = $row["tel"];
         $address       = $row["address"];
+
+        mysqli_data_seek($result2, $i);
+        $row = mysqli_fetch_array($result2);
+        $no2         = $row["no"];
+        $si_name2         = $row["si_name"];
+        $dong_name2         = $row["dong_name"];
+        $sector2          = $row["sector"];
+        $sector3 = ($sector2=="학교교과교습학원")? "학원" : "교습소";
+        $acd_name2        = $row["acd_name"];
+        $rprsn2       = $row["rprsn"];
+        $class2       = $row["class"];
+        $tel2       = $row["tel"];
+        $address2       = $row["address"];
 ?>
-        <li class="list_row">
+        <li class="list_row old_data">
         <form method="post" action="#">
+          <!-- 업데이트 누르면 넘겨야할 새 학원데이터 정보들(no2는 temp테이블에서 삭제하기위한것) -->
+          <input type="hidden" name="new_no[]" value="<?=$no2?>">
+          <input type="hidden" name="new_si_name[]" value="<?=$si_name2?>">
+          <input type="hidden" name="new_dong_name[]" value="<?=$dong_name2?>">
+          <input type="hidden" name="new_sector[]" value="<?=$sector2?>">
+          <input type="hidden" name="new_acd_name[]" value="<?=$acd_name2?>">
+          <input type="hidden" name="new_rprsn[]" value="<?=$rprsn2?>">
+          <input type="hidden" name="new_class[]" value="<?=$class2?>">
+          <input type="hidden" name="new_tel[]" value="<?=$tel2?>">
+          <input type="hidden" name="new_address[]" value="<?=$address2?>">
+          <!-- ------------------------------------------- -->
           <span class="col1"><?=$number?></span>
           <span class="col2"><?=$sector?></span>
           <span class="col3"><?=$acd_name?></span>
@@ -133,6 +178,16 @@ var page = "<?=$page?>";
           <span class="col8"><input type="checkbox" name="no[]" id="item<?=$i?>" value="<?=$no?>">
           <label for="item<?=$i?>"></label></span>
         </form>
+        </li>
+        <li class="list_row">
+          <span class="col1">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-level-up-alt fa-rotate-90"></i></span>
+          <span class="col2"><?=$sector3?></span>
+          <span class="col3"><?=$acd_name2?></span>
+          <span class="col4"><?=$rprsn2?></span>
+          <span class="col5"><?=$class2?></span>
+          <span class="col6"><?=$tel2?></span>
+          <span class="col7"><?=$address2?></span>
+          <span class="col8"></span>
         </li>	
 			
 <?php
@@ -218,8 +273,6 @@ var page = "<?=$page?>";
         </div>
       </div>
       </div>
-      <center><button onclick="modifyData()">테스트를 위한 DB정보수정</button></center>
     </div>
-    
 </body>
 </html>

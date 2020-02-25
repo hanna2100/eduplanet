@@ -125,9 +125,6 @@
     padding: 5px;
 }
 
-.list_row:hover{
-    background-color: #e9e9e9a9;
-}
 
 .list_row > form > span > input:disabled, .list_row > form > span > input:read-only{
     background-color:transparent;
@@ -174,6 +171,7 @@
     top:6px;
     left: 10px;
 }
+
 /* 체크박스 */
 
 input[type=checkbox] {  

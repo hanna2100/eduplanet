@@ -19,13 +19,12 @@
     for($i = 0; $i < count($no); $i++){
 
         $n = $no[$i];
-        $sql = "INSERT INTO academy (si_name, dong_name, sector, acd_name, rprsn, class, tel, address) 
-        (SELECT si_name, dong_name, sector, acd_name, rprsn, class, tel, address FROM academy_temp WHERE no = $n)";
+        $sql = "DELETE FROM academy WHERE no = $n;";
 
-        mysqli_query($conn, $sql);
-
-        //$sql = "DELETE FROM academy_temp WHERE no = $n";
-        //mysqli_query($conn, $sql);
+        if(!mysqli_query($conn, $sql)){
+            echo "0";
+            die;
+        };
     
     }
 

@@ -21,10 +21,9 @@ $(function(){
     });
     
     importJoinData();
-    importAgeData();
     importPrimiumData();
-    importIntresData();
-
+    importClassData();
+    importDongData();
     listItemPicker();
 
     
@@ -157,7 +156,7 @@ function openWating(){
 function openApiUpdate(){
     window.open('/eduplanet/admin/am_members_api.php'
     , '학원데이터 업데이트'
-    ,"width=1060, height=580, toolbar=no, menubar=no, scrollbars=no, resizable=no");
+    ,"width=1200, height=660, toolbar=no, menubar=no, scrollbars=no, resizable=no");
 }
 
 function importJoinData(){
@@ -277,41 +276,6 @@ function g_membersGraph(join, wthdr, sbtr){
     });
 }
 
-
-function dash_age_range(child, elmnt, middle, high, adult){
-    var ctx = document.getElementById('dash_age_range').getContext('2d');
-    ctx.canvas.width = 240;
-    ctx.canvas.height = 160;
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'doughnut',
-
-        // The data for our dataset
-        data: {
-            datasets: [{
-                backgroundColor: [yellow, orange, green, blue, red],
-                borderColor:  [yellow, orange, green, blue, red],
-                data: [child,elmnt,middle,high,adult],
-                borderWidth: 1
-            }],
-            labels: ['아동', '초등', '중등', '고등', '성인'
-            ]
-        },
-
-        options: {
-            responsive: false,
-            maintainAspectRatio: false,
-            legend: {
-				display:false
-            },
-            scales: { //X,Y축 옵션
-                display:false
-            }
-        }
-    });
-}
-
-
 function dash_pm_ratio(none, primium){
     var ctx = document.getElementById('dash_pm_ratio').getContext('2d');
     ctx.canvas.width = 240;
@@ -347,21 +311,50 @@ function dash_pm_ratio(none, primium){
 
 
 
-function importAgeData(){
+function importDongData(){
 
     $.ajax({
-        url : "/eduplanet/admin/lib/gm_members_age_graph.php",
+        url : "/eduplanet/admin/lib/am_members_dong_graph.php",
         type : "post",
         dataType: "json",
         data: { y: y,
-                m: m,
-                mode: "DATE"},
+                m: m},
         success : function(data) {
-            dash_age_range(data[0], data[1], data[2], data[3], data[4]);
+            console.log(data);
+
+            if(data[0][0]==null)
+                return;
+
+                if(data[0][0]==null)
+                return;
+
+            var temp = data[1][i];
+            var rank = 0;
+
+            for(var i =0; i<5; i++){
+   
+                if(data[1][i]==temp){
+                    document.getElementsByClassName('dasn_dong_label')[i].innerHTML = rank;
+                }else{
+                    document.getElementsByClassName('dasn_dong_label')[i].innerHTML = ++rank;
+                }
+                if(data[0][i]==null){
+                    document.getElementsByClassName('dasn_dong_label')[i].innerHTML = '-';
+                    document.getElementsByClassName('dasn_dong_data')[i].innerHTML =' - ';
+                }else if(data[0][i]==''){
+                    document.getElementsByClassName('dasn_dong_data')[i].innerHTML = '해당없음<span>('+data[1][i]+')</span>';
+                }else{
+                    document.getElementsByClassName('dasn_dong_data')[i].innerHTML =data[0][i]+'<span>('+data[1][i]+')</span>';
+
+                }
+                
+                temp = data[1][i];
+
+            }
 
         },
         error : function() {
-          console.log("나이그래프 가져오기 ajax 실패");
+          console.log("지역순위 가져오기 ajax 실패");
           }
     });
 }
@@ -369,7 +362,7 @@ function importAgeData(){
 function importPrimiumData(){
 
     $.ajax({
-        url : "/eduplanet/admin/lib/gm_members_primium_graph.php",
+        url : "/eduplanet/admin/lib/am_members_primium_graph.php",
         type : "post",
         dataType: "json",
         data: { y: y,
@@ -385,38 +378,48 @@ function importPrimiumData(){
     });
 }
 
-function importIntresData(){
+function importClassData(){
 
     $.ajax({
-        url : "/eduplanet/admin/lib/gm_members_intres_graph.php",
+        url : "/eduplanet/admin/lib/am_members_class_graph.php",
         type : "post",
         dataType: "json",
         data: { y: y,
-                m: m,
-                mode: "DATE"},
+                m: m},
         success : function(data) {
+
+            console.log(data);
 
             if(data[0][0]==null)
                 return;
 
             var temp = data[1][i];
             var rank = 0;
-            for(var i =0; i<5; i++){
 
+            for(var i =0; i<5; i++){
+   
                 if(data[1][i]==temp){
                     document.getElementsByClassName('dasn_intres_label')[i].innerHTML = rank;
                 }else{
                     document.getElementsByClassName('dasn_intres_label')[i].innerHTML = ++rank;
                 }
-                document.getElementsByClassName('dasn_intres_data')[i].innerHTML
-                =data[0][i]+'<span>('+data[1][i]+')</span>';
+                if(data[0][i]==null){
+                    document.getElementsByClassName('dasn_intres_label')[i].innerHTML = '-';
+                    document.getElementsByClassName('dasn_intres_data')[i].innerHTML =' - ';
+                }else if(data[0][i]==''){
+                    document.getElementsByClassName('dasn_intres_data')[i].innerHTML = '해당없음<span>('+data[1][i]+')</span>';
+                }else{
+                    document.getElementsByClassName('dasn_intres_data')[i].innerHTML =data[0][i]+'<span>('+data[1][i]+')</span>';
 
+                }
+                
                 temp = data[1][i];
+
             }
 
         },
         error : function() {
-          console.log("프리미엄그래프 가져오기 ajax 실패");
+          console.log("과목그래프 가져오기 ajax 실패");
           }
     });
 }

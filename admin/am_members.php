@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
   <!-- jquery -->
   <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="/eduplanet/admin/js/admin.js"></script>
@@ -119,18 +121,30 @@
     <!-- end of 회원수 변화 그래프 -->
 
     <div style="display:flex; width:960px; margin-bottom: 50px;">
-      <div id="dash_age_range_wrap">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Age range</h4>
-        <canvas id="dash_age_range"></canvas>
-      </div>
       <div id="dash_pm_ratio_wrap">
         <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Premium membership Ratio</h4>
         <canvas id="dash_pm_ratio"></canvas>
       </div>
+      <div id="dash_city_rank_wrap">
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Members City</h4>
+        <div id="dash_dong_rank_wrap">
+<?php
+        for($i=1; $i<=5; $i++){
+?>
+          <div class="dasn_dong_detail">
+            <span class="dasn_dong_label">-</span>
+            <span class="dasn_dong_data">-</span>
+          </div>
+<?php
+        }
+?>
+        </div>
+      </div>
+      <!--  -->
       <div id="dash_postGraph_wrap">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Interest words</h4>
-        <!-- 관심사 단어 순위 -->
-        <div id="dash_intres_world_wrap">
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Members Class</h4>
+      <!-- 관심사 단어 순위 -->
+      <div id="dash_intres_world_wrap">
 <?php
         for($i=1; $i<=5; $i++){
 ?>
