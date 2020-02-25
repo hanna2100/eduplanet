@@ -200,14 +200,14 @@ $(document).ready(function(){
   });
 
   // 파일 첨부 여부 확인
-  // inputLicense.blur(function(){
-    // var licenseValue = inputLicense.val();
-    // if(licenseValue){
+  $("input[name=inputLicense]").change(function(){
+    var licenseValue = inputLicense.val();
+    console.log("파일 예쓰", licenseValue);
+    if(licenseValue){
       licensePass = true;
-      console.log("파일 예쓰");
       isAmAllPass();
-    // }
-  // });
+    }    
+  });
 
 
 });
