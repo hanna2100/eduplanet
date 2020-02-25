@@ -124,7 +124,7 @@ label {
     display: inline-block;
     width: 110px;
     color: black;
-    /* font-weight: bold; */
+    font-weight: bold;
     margin-left: 160px;
 }
 
@@ -178,4 +178,5 @@ label {
 input[type="text"]:disabled {
     background: white;
     border: 1px solid white;
+    color: black;
 }

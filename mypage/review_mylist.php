@@ -67,6 +67,15 @@
 
                     $user_no = $gm_no;
 
+                    if (!$user_no) {
+                        echo "
+                            <script>
+                                alert('잘못된 접근입니다.');
+                                history.go(-1)
+                            </script>
+                        ";
+                    }
+
                     include_once "../lib/db_connector.php";
 
                     // $sql = "SELECT review.no, acd_name, total_star, one_line, facility, acsbl, teacher, cost_efct, achievement, benefit, drawback FROM review INNER JOIN academy ON review.parent = academy.no WHERE user_no='$user_no'";

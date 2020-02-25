@@ -76,6 +76,15 @@
 
                     $user_no = $gm_no;
 
+                    if (!$user_no) {
+                        echo "
+                            <script>
+                                alert('잘못된 접근입니다.');
+                                history.go(-1)
+                            </script>
+                        ";
+                    }
+
                      include_once "../lib/db_connector.php";
  
                      $sql = "SELECT * from gm_order WHERE gm_no='$user_no'";

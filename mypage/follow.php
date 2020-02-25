@@ -74,14 +74,23 @@
 
                 <?php
 
+                $user_no = $gm_no;
+
+                if (!$user_no) {
+                    echo "
+                        <script>
+                            alert('잘못된 접근입니다.');
+                            history.go(-1)
+                        </script>
+                    ";
+                }
+
                 // 페이지 수 체크
                 if (isset($_GET["page"])) {
                     $page = $_GET["page"];
                 } else {
                     $page = 1;
                 }
-
-                $user_no = $gm_no;
 
                 // 지역 선택 체크
                 if (isset($_GET["district"])) {

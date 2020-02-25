@@ -74,6 +74,15 @@
 
                     $user_no = $am_no;
 
+                    if (!$user_no) {
+                        echo "
+                            <script>
+                                alert('잘못된 접근입니다.');
+                                history.go(-1)
+                            </script>
+                        ";
+                    }
+
                     include_once "../lib/db_connector.php";
 
                     $sql = "SELECT * from am_order WHERE am_no='$user_no'";

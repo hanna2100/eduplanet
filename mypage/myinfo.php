@@ -14,6 +14,44 @@
 </head>
 
 <body>
+    <?php
+
+    // 일반회원 세션 테스트
+    // $user_no = $gm_no;
+    $user_no = 2;
+
+    if (!$user_no) {
+        echo "
+            <script>
+                alert('잘못된 접근입니다.');
+                history.go(-1)
+            </script>
+        ";
+    }
+
+    include_once "../lib/db_connector.php";
+
+    $sql = "SELECT * FROM g_members WHERE no='$user_no'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result);
+
+    $id = $row["id"];
+    $email = $row["email"];
+    $phone = $row["phone"];
+    $age = $row["age"];
+    $intres = $row["intres"];
+
+    // 출생년도 가져와서 셋팅하기
+    echo "
+        <script>
+            $(document).ready(function () {
+                $('#inputAge option[value=' + $age + ']').attr('selected', 'selected');
+            });
+        </script>
+        ";
+
+    ?>
+
     <div class="body_wrap">
 
         <header>
@@ -58,45 +96,45 @@
 
                     <div class="myinfo_content_form">
 
-                        <form id="form_member" action="./g_members_insert.php" method="post" autocomplete="on">
+                        <form id="form_member" action="/eduplanet/mypage/gm_myinfo_update.php" method="post" autocomplete="on">
                             <div class="formBox">
                                 <label for="inputId">아이디</label>
-                                <input type="text" class="formInput" id="inputId" name="inputId" placeholder="아이디를 입력해주세요" disabled>
+                                <input type="text" class="formInput" id="inputId" name="id" placeholder="아이디를 입력해 주세요" value="<?=$id?>" disabled>
                                 <p class="subMsg" id="idSubMsg"></p>
                             </div>
                             <div class="formBox">
                                 <label for="inputPw1">비밀번호</label>
-                                <input type="password" class="formInput" id="inputPw1" name="inputPw1" placeholder="비밀번호를 입력해주세요" required>
+                                <input type="password" class="formInput" id="inputPw1" name="pw1" placeholder="비밀번호를 입력해 주세요" required>
                             </div>
                             <div class="formBox">
                                 <label for="inputPw2">비밀번호 확인</label>
-                                <input type="password" class="formInput" id="inputPw2" name="inputPw2" placeholder="비밀번호를 확인해주세요" required>
+                                <input type="password" class="formInput" id="inputPw2" name="pw2" placeholder="비밀번호를 확인해 주세요" required>
                                 <p class="subMsg" id="pwSubMsg"></p>
                             </div>
                             <div class="formBox">
                                 <label for="inputEmail">이메일</label>
-                                <input type="email" class="formInput" id="inputEmail" name="inputEmail" placeholder="이메일을 입력해주세요" required>
+                                <input type="email" class="formInput" id="inputEmail" name="email" placeholder="이메일을 입력해 주세요" value="<?=$email?>" required>
                                 <p class="subMsg" id="emailSubMsg"></p>
                             </div>
                             <div class="formBox">
                                 <label for="inputTel">전화번호</label>
-                                <input type="tel" class="formInput" id="inputTel" name="inputTel" placeholder="전화번호를 -없이 입력해주세요" required>
+                                <input type="tel" class="formInput" id="inputTel" name="phone" placeholder="전화번호를 -없이 입력해 주세요" value="<?=$phone?>" required>
                                 <p class="subMsg" id="telSubMsg"></p>
                             </div>
                             <div class="formBox">
                                 <label for="inputIntres">관심과목</label>
-                                <input type="text" class="formInput" id="inputIntres" name="inputIntres" placeholder="관심과목을 입력해주세요" required>
+                                <input type="text" class="formInput" id="inputIntres" name="intres" placeholder="관심과목을 입력해 주세요" value="<?=$intres?>" required>
                                 <p class="subMsg" id="intresSubMsg"></p>
                             </div>
                             <div class="formBox">
                                 <label for="inputAge">출생년도</label>
-                                <select id="inputAge" name="inputAge" title="year" required></select>
+                                <select id="inputAge" name="age" title="year" required></select>
                             </div>
                     </div>
 
 
                     <div class="button_div">
-                        <input type="button" id="btnFormSubmit" value="수정완료" onclick="document.getElementById('form_member').submit()" disabled>
+                        <input type="button" id="btnFormSubmit" value="수정완료" onclick="isGmAllPass();">
                     </div>
                     </form>
                 </div>
