@@ -24,7 +24,7 @@
 
           <div class="membership_section mid_contents">
             <h2>프리미엄</h2>
-            <div class="mid_sub_title">결제를 해야 학원 리뷰를 볼 수 있답니다!! 우하하</div>
+            <div class="mid_sub_title">프리미엄 멤버십에 가입하면 회원들의 상세리뷰를 무제한으로 볼 수 있습니다!</div>
               <div class="membership_icons_wrap">
                 <div class="membership_icons">
                   <img src="../img/facilities.png" alt="facilities" width="60%" height="60%">
@@ -53,6 +53,8 @@
               <div class="whole_card_wrapper">
 
           <?php
+            $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : "";
+
             include "../lib/db_connector.php";
             $sql = "select * from product where prdct_name='프리미엄'";
             $result = mysqli_query($conn, $sql);
@@ -118,13 +120,12 @@
     </section>
 
     <footer>
-
+      <?php include "../index/footer.php"; ?>
     </footer>
     <script>
 
       function loginCheck(){
-        // 아이디 세션값 있는지 체크
-        var $gm_no=3;
+        var $gm_no= '<?=$gm_no?>';
         var $am_no;
 
         var month = '<?=$month?>';
@@ -137,7 +138,7 @@
           alert('해당 멤버십은 일반 회원 전용입니다. 일반회원으로 로그인 하시거나 기업회원 멤버십을 이용해주세요.');
         }else {
           alert('멤버십 서비스는 로그인 후 이용하실 수 있습니다.');
-          location.href='../login.php';
+          location.href='../login_join/login_form.php';
         }
       }
     </script>

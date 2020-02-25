@@ -159,9 +159,7 @@
     </section>
 
     <footer>
-      <?php
-      // include "../index/footer.php";
-      ?>
+     <?php include "../index/footer.php"; ?>    
     </footer>
     <script>
       var month = '<?= $month ?>';

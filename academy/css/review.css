@@ -82,7 +82,7 @@ hr{ border:3px solid #f1f1f1; max-width: 100%; margin: 10px 0;}
 .fa {
   font-size: 25px;
 }
-.row { margin-top: 20px; width:100%}
+.row { margin-top: 20px; width:100%; font-size:10px; font-weight:bold;}
 /* Three column layout */
 .side {
   float: left;
@@ -100,7 +100,7 @@ hr{ border:3px solid #f1f1f1; max-width: 100%; margin: 10px 0;}
   display: table;
   clear: both;
 } */
-.row {font-size:10px; font-weight:bold;}
+
 /* The bar container */
 .bar-container {
   width: 100%;
