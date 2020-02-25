@@ -3,8 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
     <script src="http://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
-
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./join.css">
   </head>
@@ -62,7 +66,9 @@
                      ";
               }else if($mode == "am") {
                 echo "<label for='inputAcdName'>학원/교습소 이름</label>
-                      <input type='text' class='formInput' id='inputAcdName' name='inputAcdName' placeholder='학원/교습소 이름을 띄어쓰기없이 입력해주세요' required>
+                      <input type='text' class='formInput' id='acd_name' name='acd_name' placeholder='학원/교습소 이름을 띄어쓰기없이 입력해주세요' required>
+                      <input type='hidden' id='si_name' name='si_name'>
+                      <input type='hidden' id='dong_name' name='dong_name'>
                       <p class='subMsg' id='AcdNameSubMsg'></p>
                      ";
               }

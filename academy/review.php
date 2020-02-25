@@ -5,6 +5,8 @@
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
      <title>review test</title>
+     <!-- favicon -->
+     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
      <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">\ -->
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <!--  star rating -->
@@ -23,28 +25,20 @@
    <body>
      <header>
          <?php
-          // include "../index_header.php";
-          // include "../academy_header_soyoung.php";
+           // include "../index/index_header_searchbar_in.php";
+           // include "./header/academy_header.php";
          ?>
      </header>
 
      <?php
         include "../lib/db_connector.php";
-        if (isset($_GET["page"])) {
-            $page = $_GET["page"];
-        } else {
-            $page = 1;
-        }
+        $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : 1;
+        // $no : academy 테이블의 no, review 테이블의 parent
+        $no = isset($_GET["no"]) ?  $_GET["no"] : 9;
+        $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
-        if(isset($_SESSION["id"])){
-            $id = $_SESSION["id"];
-        }else{
-          // 테스트하는 동안 쓸 임시 아이디
-            $id = "비회원";
-        }
         // content_top
-          // parent="현재 리뷰를 보고 있는 학원 넘버"
-        $sql_top = "select avg(total_star), avg(facility), avg(acsbl), avg(teacher), avg(cost_efct), avg(achievement) from review where parent=21;";
+        $sql_top = "select avg(total_star), avg(facility), avg(acsbl), avg(teacher), avg(cost_efct), avg(achievement) from review where parent='$no';";
         $result_top = mysqli_query($conn, $sql_top);
         $row_top = mysqli_fetch_array($result_top);
 
@@ -119,7 +113,7 @@
         </div>
     <?php
         // content_bottom
-        $sql_bottom = "select review.*, g_members.age from review inner join g_members on review.user_no=g_members.no where parent=21 order by regist_day desc;";
+        $sql_bottom = "select review.*, g_members.age from review inner join g_members on review.user_no=g_members.no where parent='$no' order by regist_day desc;";
         $result_bottom = mysqli_query($conn, $sql_bottom);
         // 1. 전체 리뷰의 갯수
         $total_record = mysqli_num_rows($result_bottom);
@@ -243,18 +237,32 @@
 
                  <div class="overlay"></div>
                  <div id="myModal" class="modal">
-                   <button type="button" name="button" class="btn_modal btn_membership" onclick="location.href='../membership/index.php'">멤버십 가입하고 전체보기</button>
+                   <?php
+                      if($gm_no){
+                        $url = "../membership/index.php";
+                      }else{
+                        $url = "../login_join/login_form.php";
+                      }
+                    ?>
+                   <button type="button" name="button" class="btn_modal btn_membership" onclick="location.href='<?=$url?>'">멤버십 가입하고 전체보기</button>
                    <button type="button" name="button" class="btn_modal btn_review" onclick="location.href='/eduplanet/acd_story/index.php'">학원리뷰 작성하고 전체보기</button>
                  </div>
                </div>
 
+              <!-- 멤버십에 가입되어 있으면 리뷰 보여주고 아니면 안보여준다  -->
+               <?php
+                  $sql = "select * from gm_order where gm_no='$gm_no'";
+                  $result = mysqli_query($conn, $sql);
+                  $isMember = mysqli_num_rows($result);
+                ?>
 
                <script>
-                  var id = '<?= $id ?>';
+                  var isMember = '<?=$isMember?>';
+                  var gm_no = 1;
                   var overlay = document.getElementsByClassName("overlay");
                   var modal = document.getElementsByClassName("modal");
 
-                  if(id === "비회원"){
+                  if(isMember == 0){
                     overlay[i].style.display = "block";
                     modal[i].style.display = "block";
                   }else {
@@ -349,10 +357,13 @@
       </div> <!-- end of inner_section   -->
      </section>
 
+     <footer>
+       <?php include "../index/footer.php"; ?>
+     </footer>
+
      <script src="./js/review.js"></script>
      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-     <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
    </body>
  </html>

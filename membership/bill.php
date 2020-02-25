@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="utf-8">
     <title>결제 완료 페이지</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
      <link rel="stylesheet" href="./css/bill.css">
@@ -17,6 +19,8 @@
     </header>
 
     <?php
+      $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : "";
+
       include "../lib/db_connector.php";
       if(isset($_GET['product']) && isset($_GET['price']) && isset($_GET['payMethod']) && isset($_GET['expired_date'])){
         $product = $_GET['product'];
@@ -27,8 +31,6 @@
         echo "못 받아옴";
       };
 
-      // 로그인 되어있는 user_no(gm_order테이블에서는 gm_no은 세션값으로 insert하기! 지금은 임시로)
-      $gm_no = 2;
       $status = "결제완료";
       $expired_date = date("yy-m-d", $expired_date);
       $sql_gm_order = "INSERT INTO `gm_order` VALUES (null, $gm_no, '$product', $price, '$payMethod', '$status', '$expired_date');";
@@ -72,7 +74,7 @@
     </section>
 
     <footer>
-
+       <?php include "../index/footer.php"; ?>
     </footer>
   </body>
 </html>
