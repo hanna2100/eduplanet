@@ -72,21 +72,38 @@
             <!-- 강의 추천 ------------------------------------------------------->
             <div class="index_content_cource">
 
-                <!-- 콘텐츠 타이틀 -->
-                <div class="content_title_wrap">
-                    <h2 class="title">학원 스토리</h2>
-                    <button type="button" class="button_service_guide">상품안내 > </button>
-                </div>
+              <!-- 콘텐츠 타이틀 -->
+              <div class="content_title_wrap">
+                  <h2 class="title">학원 스토리</h2>
+                  <a  class="button_service_guide" href="./membership/index.php">상품안내 ></a>
+                  <!-- <button type="button" class="button_service_guide" onclick="location.href='../membership/index.php'">상품안내 > </button> -->
+              </div>
 
 
-                <!-- 강의 추천 리스트 -->
-                <div class="content_cource_list">
-                    <ul class="content_cource_unorder_list">
+              <!-- 강의 추천 리스트 -->
+              <div class="content_cource_list">
+                  <ul class="content_cource_unorder_list">
 
+                    <?php
+                    // 스토리 등록일자 기준 조회순으로 정렬
+                      $sql = "select * from acd_story order by hit desc limit 4;";
+                      $result = mysqli_query($conn, $sql);
+
+                      for($i=0 ; $i<4 ; $i++){
+                        mysqli_data_seek($result, $i);
+                        $row = mysqli_fetch_array($result);
+
+                        $no = $row['parent'];
+                        $acd_name = $row['acd_name'];
+                        $title = $row['title'];
+                        $subtitle = $row['subtitle'];
+                        // $file_copy = $row['$file_copy'];
+
+                     ?>
                         <li>
                             <!-- 강의 추천 리스트 하나의 컬럼 -->
                             <div class="cource_column">
-                                <a href="/eduplanet/acd_story/view.php">
+                                <a href="/eduplanet/acd_story/view.php?no=<?=$no?>">
 
                                     <!-- 1. 로고이미지 & 학원 이름 -->
                                     <div class="cource_column_title">
@@ -95,7 +112,7 @@
                                             <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
                                         </div>
 
-                                        <span id="academy_title_span">고양이사료개발학원</span>
+                                        <span id="academy_title_span"><?=$acd_name?></span>
                                     </div>
 
                                     <!-- 2. 학원 이미지 & 짧은 소개 -->
@@ -105,8 +122,8 @@
                                         </div>
 
                                         <div class="academy_introduce">
-                                            <h3 id="academy_introduce_title">코딩 8등급에서 1등급이 된 고양이</h3>
-                                            <p id="academy_introduce_content">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
+                                            <h3 id="academy_introduce_title"><?=$title?></h3>
+                                            <p id="academy_introduce_content"><?=$subtitle?></p>
                                         </div>
 
                                     </div>
@@ -116,92 +133,11 @@
 
                         <span class="span_padding"></span>
 
-                        <li>
-                            <div class="cource_column">
-                                <a href="/eduplanet/acd_story/view.php">
+                        <?php
+                            } // end of for
+                        ?>
 
-                                    <div class="cource_column_title">
-                                        <div class="academy_small_logo">
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
-                                        </div>
-
-                                        <span id="academy_title_span">고양이사료개발학원</span>
-                                    </div>
-
-                                    <div class="cource_column_box">
-                                        <div class="academy_img_box">
-                                            <img src="/eduplanet/test_img/academy_box_img.jpg" alt="academy_img_box">
-                                        </div>
-
-                                        <div class="academy_introduce">
-                                            <h3 id="academy_introduce_title">코딩 8등급에서 1등급이 된 고양이</h3>
-                                            <p id="academy_introduce_content">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-
-                        <span class="span_padding"></span>
-
-                        <li>
-                            <div class="cource_column">
-                                <a href="/eduplanet/acd_story/view.php">
-
-                                    <div class="cource_column_title">
-                                        <div class="academy_small_logo">
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
-                                        </div>
-
-                                        <span id="academy_title_span">고양이사료개발학원</span>
-                                    </div>
-
-                                    <div class="cource_column_box">
-                                        <div class="academy_img_box">
-                                            <img src="/eduplanet/test_img/academy_box_img.jpg" alt="academy_img_box">
-                                        </div>
-
-                                        <div class="academy_introduce">
-                                            <h3 id="academy_introduce_title">코딩 8등급에서 1등급이 된 고양이</h3>
-                                            <p id="academy_introduce_content">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-
-                        <span class="span_padding"></span>
-
-                        <li>
-                            <div class="cource_column">
-                                <a href="/eduplanet/acd_story/view.php">
-
-                                    <div class="cource_column_title">
-                                        <div class="academy_small_logo">
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
-                                        </div>
-
-                                        <span id="academy_title_span">고양이사료개발학원</span>
-                                    </div>
-
-                                    <div class="cource_column_box">
-                                        <div class="academy_img_box">
-                                            <img src="/eduplanet/test_img/academy_box_img.jpg" alt="academy_img_box">
-                                        </div>
-
-                                        <div class="academy_introduce">
-                                            <h3 id="academy_introduce_title">코딩 8등급에서 1등급이 된 고양이</h3>
-                                            <p id="academy_introduce_content">저는 평생 코딩이 적성에 안맞는다고 생각했어요. 그런데...</p>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
+                  </ul>
                     <!-- end of ul // content_cource_unorder_list -->
                 </div>
             </div>
@@ -221,6 +157,34 @@
                 <div class="content_review_list">
                     <ul>
 
+                      <?php
+                      // 리뷰 등록일자 기준 최신순으로 정렬
+                        $sql = "select R.one_line, R.total_star, R.regist_day, A.no, A.si_name, A.acd_name, A.sector
+                                from review R inner join academy A on R.parent=A.no order by regist_day desc limit 8;";
+
+                        $result = mysqli_query($conn, $sql);
+
+                        for($i=0 ; $i<8 ; $i++){
+                          mysqli_data_seek($result, $i);
+                          $row = mysqli_fetch_array($result);
+
+
+                          $acd_name = $row['acd_name'];
+                          $one_line = $row['one_line'];
+                          $sector = $row['sector'];
+                          $si_name = $row['si_name'];
+                          $regist_day = $row['regist_day'];
+                          $total_star = $row['total_star'];
+                          $no = $row['no'];
+
+                          // 해당 학원의 리뷰 갯수
+                          $sql_count = "select count(*) from review where parent='$no' group by parent;";
+                          $result_count = mysqli_query($conn, $sql_count);
+                          $row_count = mysqli_fetch_array($result_count);
+                          $count = $row_count[0];
+
+                       ?>
+
                         <li>
                             <div class="review_column">
 
@@ -231,7 +195,7 @@
                                             <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
                                         </div>
 
-                                        <span id="academy_title_span">고양이사료개발학원</span>
+                                        <span id="academy_title_span"><?=$acd_name?></span>
                                     </div>
                                 </a>
 
@@ -243,21 +207,23 @@
                                             <img src="/eduplanet/img/double.png" alt="review_img_box">
                                         </div>
 
-                                        <h3 id="academy_review_title">강사분이 굉장히 열정적이시고, 배고플 때 간식도 많이 주셔서 좋았어요.</h3>
+                                        <h3 id="academy_review_title"><?=$one_line?></h3>
 
                                         <div class="academt_review_detail">
-                                            <span id="academy_option">바리스타학원</span>
+                                            <span id="academy_option"><?=$sector?></span>
                                             <span class="comma"> · </span>
-                                            <span id="academy_district">고양시</span>
+                                            <span id="academy_district"><?=$si_name?></span>
                                             <span class="comma"> · </span>
-                                            <span id="regist_day">2020. 02. 12</span>
+                                            <span id="regist_day"><?=$regist_day?></span>
                                         </div>
 
                                         <img id="review_star" src="/eduplanet/img/review_star.png" alt="review_star">
                                     </div>
 
                                     <div class="academy_review_button">
-                                        <button id="button_more_review" type="button">23개의 수강생 리뷰</button>
+                                        <button id="button_more_review" type="button" onclick="location.href='academy/review.php?no=<?=$no?>'">
+                                          <span><?=$count?></span>개의 수강생 리뷰
+                                        </button>
                                     </div>
 
                                 </div>
@@ -267,319 +233,11 @@
 
                         <span class="span_padding"></span>
 
-                        <li>
-                            <div class="review_column">
+                        <?php
+                            } // end of for
+                            mysqli_close($conn);
+                        ?>
 
-                                <!-- 학원 로고 & 학원명 -->
-                                <a href="#">
-                                    <div class="review_column_title">
-                                        <div class="academy_small_logo">
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
-                                        </div>
-
-                                        <span id="academy_title_span">고양이사료개발학원</span>
-                                    </div>
-                                </a>
-
-                                <!-- 학원 리뷰 -->
-                                <div class="review_column_box">
-
-                                    <div class="academy_review">
-                                        <div class="review_img_box">
-                                            <img src="/eduplanet/img/double.png" alt="review_img_box">
-                                        </div>
-
-                                        <h3 id="academy_review_title">강사분이 굉장히 열정적이시고, 배고플 때 간식도 많이 주셔서 좋았어요.</h3>
-
-                                        <div class="academt_review_detail">
-                                            <span id="academy_option">바리스타학원</span>
-                                            <span class="comma"> · </span>
-                                            <span id="academy_district">고양시</span>
-                                            <span class="comma"> · </span>
-                                            <span id="regist_day">2020. 02. 12</span>
-                                        </div>
-
-                                        <img id="review_star" src="/eduplanet/img/review_star.png" alt="review_star">
-                                    </div>
-
-                                    <div class="academy_review_button">
-                                        <button id="button_more_review" type="button">23개의 수강생 리뷰</button>
-                                    </div>
-
-                                </div>
-                                </a>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="review_column">
-
-                                <!-- 학원 로고 & 학원명 -->
-                                <a href="#">
-                                    <div class="review_column_title">
-                                        <div class="academy_small_logo">
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
-                                        </div>
-
-                                        <span id="academy_title_span">고양이사료개발학원</span>
-                                    </div>
-                                </a>
-
-                                <!-- 학원 리뷰 -->
-                                <div class="review_column_box">
-
-                                    <div class="academy_review">
-                                        <div class="review_img_box">
-                                            <img src="/eduplanet/img/double.png" alt="review_img_box">
-                                        </div>
-
-                                        <h3 id="academy_review_title">강사분이 굉장히 열정적이시고, 배고플 때 간식도 많이 주셔서 좋았어요.</h3>
-
-                                        <div class="academt_review_detail">
-                                            <span id="academy_option">바리스타학원</span>
-                                            <span class="comma"> · </span>
-                                            <span id="academy_district">고양시</span>
-                                            <span class="comma"> · </span>
-                                            <span id="regist_day">2020. 02. 12</span>
-                                        </div>
-
-                                        <img id="review_star" src="/eduplanet/img/review_star.png" alt="review_star">
-                                    </div>
-
-                                    <div class="academy_review_button">
-                                        <button id="button_more_review" type="button">23개의 수강생 리뷰</button>
-                                    </div>
-
-                                </div>
-                                </a>
-                            </div>
-                        </li>
-
-                        <span class="span_padding"></span>
-
-                        <li>
-                            <div class="review_column">
-
-                                <!-- 학원 로고 & 학원명 -->
-                                <a href="#">
-                                    <div class="review_column_title">
-                                        <div class="academy_small_logo">
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
-                                        </div>
-
-                                        <span id="academy_title_span">고양이사료개발학원</span>
-                                    </div>
-                                </a>
-
-                                <!-- 학원 리뷰 -->
-                                <div class="review_column_box">
-
-                                    <div class="academy_review">
-                                        <div class="review_img_box">
-                                            <img src="/eduplanet/img/double.png" alt="review_img_box">
-                                        </div>
-
-                                        <h3 id="academy_review_title">강사분이 굉장히 열정적이시고, 배고플 때 간식도 많이 주셔서 좋았어요.</h3>
-
-                                        <div class="academt_review_detail">
-                                            <span id="academy_option">바리스타학원</span>
-                                            <span class="comma"> · </span>
-                                            <span id="academy_district">고양시</span>
-                                            <span class="comma"> · </span>
-                                            <span id="regist_day">2020. 02. 12</span>
-                                        </div>
-
-                                        <img id="review_star" src="/eduplanet/img/review_star.png" alt="review_star">
-                                    </div>
-
-                                    <div class="academy_review_button">
-                                        <button id="button_more_review" type="button">23개의 수강생 리뷰</button>
-                                    </div>
-
-                                </div>
-                                </a>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="review_column">
-
-                                <!-- 학원 로고 & 학원명 -->
-                                <a href="#">
-                                    <div class="review_column_title">
-                                        <div class="academy_small_logo">
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
-                                        </div>
-
-                                        <span id="academy_title_span">고양이사료개발학원</span>
-                                    </div>
-                                </a>
-
-                                <!-- 학원 리뷰 -->
-                                <div class="review_column_box">
-
-                                    <div class="academy_review">
-                                        <div class="review_img_box">
-                                            <img src="/eduplanet/img/double.png" alt="review_img_box">
-                                        </div>
-
-                                        <h3 id="academy_review_title">강사분이 굉장히 열정적이시고, 배고플 때 간식도 많이 주셔서 좋았어요.</h3>
-
-                                        <div class="academt_review_detail">
-                                            <span id="academy_option">바리스타학원</span>
-                                            <span class="comma"> · </span>
-                                            <span id="academy_district">고양시</span>
-                                            <span class="comma"> · </span>
-                                            <span id="regist_day">2020. 02. 12</span>
-                                        </div>
-
-                                        <img id="review_star" src="/eduplanet/img/review_star.png" alt="review_star">
-                                    </div>
-
-                                    <div class="academy_review_button">
-                                        <button id="button_more_review" type="button">23개의 수강생 리뷰</button>
-                                    </div>
-
-                                </div>
-                                </a>
-                            </div>
-                        </li>
-
-                        <span class="span_padding"></span>
-
-                        <li>
-                            <div class="review_column">
-
-                                <!-- 학원 로고 & 학원명 -->
-                                <a href="#">
-                                    <div class="review_column_title">
-                                        <div class="academy_small_logo">
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
-                                        </div>
-
-                                        <span id="academy_title_span">고양이사료개발학원</span>
-                                    </div>
-                                </a>
-
-                                <!-- 학원 리뷰 -->
-                                <div class="review_column_box">
-
-                                    <div class="academy_review">
-                                        <div class="review_img_box">
-                                            <img src="/eduplanet/img/double.png" alt="review_img_box">
-                                        </div>
-
-                                        <h3 id="academy_review_title">강사분이 굉장히 열정적이시고, 배고플 때 간식도 많이 주셔서 좋았어요.</h3>
-
-                                        <div class="academt_review_detail">
-                                            <span id="academy_option">바리스타학원</span>
-                                            <span class="comma"> · </span>
-                                            <span id="academy_district">고양시</span>
-                                            <span class="comma"> · </span>
-                                            <span id="regist_day">2020. 02. 12</span>
-                                        </div>
-
-                                        <img id="review_star" src="/eduplanet/img/review_star.png" alt="review_star">
-                                    </div>
-
-                                    <div class="academy_review_button">
-                                        <button id="button_more_review" type="button">23개의 수강생 리뷰</button>
-                                    </div>
-
-                                </div>
-                                </a>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="review_column">
-
-                                <!-- 학원 로고 & 학원명 -->
-                                <a href="#">
-                                    <div class="review_column_title">
-                                        <div class="academy_small_logo">
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
-                                        </div>
-
-                                        <span id="academy_title_span">고양이사료개발학원</span>
-                                    </div>
-                                </a>
-
-                                <!-- 학원 리뷰 -->
-                                <div class="review_column_box">
-
-                                    <div class="academy_review">
-                                        <div class="review_img_box">
-                                            <img src="/eduplanet/img/double.png" alt="review_img_box">
-                                        </div>
-
-                                        <h3 id="academy_review_title">강사분이 굉장히 열정적이시고, 배고플 때 간식도 많이 주셔서 좋았어요.</h3>
-
-                                        <div class="academt_review_detail">
-                                            <span id="academy_option">바리스타학원</span>
-                                            <span class="comma"> · </span>
-                                            <span id="academy_district">고양시</span>
-                                            <span class="comma"> · </span>
-                                            <span id="regist_day">2020. 02. 12</span>
-                                        </div>
-
-                                        <img id="review_star" src="/eduplanet/img/review_star.png" alt="review_star">
-                                    </div>
-
-                                    <div class="academy_review_button">
-                                        <button id="button_more_review" type="button">23개의 수강생 리뷰</button>
-                                    </div>
-
-                                </div>
-                                </a>
-                            </div>
-                        </li>
-
-                        <span class="span_padding"></span>
-
-                        <li>
-                            <div class="review_column">
-
-                                <!-- 학원 로고 & 학원명 -->
-                                <a href="#">
-                                    <div class="review_column_title">
-                                        <div class="academy_small_logo">
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
-                                        </div>
-
-                                        <span id="academy_title_span">고양이사료개발학원</span>
-                                    </div>
-                                </a>
-
-                                <!-- 학원 리뷰 -->
-                                <div class="review_column_box">
-
-                                    <div class="academy_review">
-                                        <div class="review_img_box">
-                                            <img src="/eduplanet/img/double.png" alt="review_img_box">
-                                        </div>
-
-                                        <h3 id="academy_review_title">강사분이 굉장히 열정적이시고, 배고플 때 간식도 많이 주셔서 좋았어요.</h3>
-
-                                        <div class="academt_review_detail">
-                                            <span id="academy_option">바리스타학원</span>
-                                            <span class="comma"> · </span>
-                                            <span id="academy_district">고양시</span>
-                                            <span class="comma"> · </span>
-                                            <span id="regist_day">2020. 02. 12</span>
-                                        </div>
-
-                                        <img id="review_star" src="/eduplanet/img/review_star.png" alt="review_star">
-                                    </div>
-
-                                    <div class="academy_review_button">
-                                        <button id="button_more_review" type="button">23개의 수강생 리뷰</button>
-                                    </div>
-
-                                </div>
-                                </a>
-                            </div>
-                        </li>
 
                     </ul>
                 </div>
