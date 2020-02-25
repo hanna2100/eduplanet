@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="utf-8">
     <title>결제 완료 페이지</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
      <link rel="stylesheet" href="./css/bill.css">

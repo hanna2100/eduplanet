@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="utf-8">
     <title>멤버십 결제페이지</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -159,7 +161,7 @@
     </section>
 
     <footer>
-     <?php include "../index/footer.php"; ?>    
+     <?php include "../index/footer.php"; ?>
     </footer>
     <script>
       var month = '<?= $month ?>';

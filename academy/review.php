@@ -5,6 +5,8 @@
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
      <title>review test</title>
+     <!-- favicon -->
+     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
      <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">\ -->
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <!--  star rating -->
@@ -30,7 +32,7 @@
 
      <?php
         include "../lib/db_connector.php";
-        $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : "";
+        $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : 1;
         // $no : academy 테이블의 no, review 테이블의 parent
         $no = isset($_GET["no"]) ?  $_GET["no"] : 9;
         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
@@ -247,18 +249,25 @@
                  </div>
                </div>
 
+              <!-- 멤버십에 가입되어 있으면 리뷰 보여주고 아니면 안보여준다  -->
+               <?php
+                  $sql = "select * from gm_order where gm_no='$gm_no'";
+                  $result = mysqli_query($conn, $sql);
+                  $isMember = mysqli_num_rows($result);
+                ?>
 
                <script>
-                  var gm_no = '<?= $gm_no ?>';
+                  var isMember = '<?=$isMember?>';
+                  var gm_no = 1;
                   var overlay = document.getElementsByClassName("overlay");
                   var modal = document.getElementsByClassName("modal");
 
-                  if(gm_no){
-                    overlay[i].style.display = "none";
-                    modal[i].style.display = "none";
-                  }else {
+                  if(isMember == 0){
                     overlay[i].style.display = "block";
                     modal[i].style.display = "block";
+                  }else {
+                    overlay[i].style.display = "none";
+                    modal[i].style.display = "none";
                   }
                 </script>
 

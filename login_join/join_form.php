@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
     <script src="http://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
     <!-- 자동완성 -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -71,7 +73,7 @@
                      ";
               }
                ?>
-              </div>            
+              </div>
 
               <!-- mode:gm이면 관심번호 입력, mode:am이면 대표자명 입력 -->
               <div class="formBox">
