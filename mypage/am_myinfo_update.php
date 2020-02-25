@@ -13,7 +13,7 @@
         ";
     }
 
-    include_once "../lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
     $pw1 = $_POST["pw1"];
     $email = $_POST["email"];

@@ -6,12 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/eduplanet/acd_story/css/index.css">
-    <!-- <script src="/eduplanet/acd_story/js/follow.js"></script> -->
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
-    <!-- 아이콘 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <!-- 제이쿼리 -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_out.css">
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+    <link rel="stylesheet" href="/eduplanet/acd_story/css/index.css">
+
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar/searchbar_out.js"></script>
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
+
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script>
         function selectOption() {
@@ -47,7 +63,7 @@
 <body onload="setSelectDis(); setSelectSort();">
 
     <header>
-        <?php include_once "../index/index_header_searchbar_out.php"; ?>
+        <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header_searchbar_out.php"; ?>
     </header>
 
     <div class="story_list_wrap">
@@ -72,7 +88,6 @@
                         }
                     </script>
                     ";
-
             } else {
                 $selectDis = "";
             }
@@ -91,32 +106,30 @@
                 $selectSort = "";
             }
 
-            include_once "../lib/db_connector.php";
+            include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
             // 지역 옵션이 선택되어 있을 때
             if ($selectDis != "") {
-                
+
                 if ($selectSort == "star_max") {
                     $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY review.total_star DESC";
-                    
                 } else if ($selectSort == "hit_max") {
                     $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY acd_story.hit DESC";
-                    
-                // 기본 셋팅은 최근 등록순
+
+                    // 기본 셋팅은 최근 등록순
                 } else {
                     $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY acd_story.no DESC";
                 }
 
-            // 지역 옵션이 선택되지 않았을 때
+                // 지역 옵션이 선택되지 않았을 때
             } else if ($selectDis == "") {
 
                 if ($selectSort == "star_max") {
                     $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY review.total_star DESC";
-                    
                 } else if ($selectSort == "hit_max") {
                     $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY acd_story.hit DESC";
-                 
-                // 기본 셋팅은 최근 등록순
+
+                    // 기본 셋팅은 최근 등록순
                 } else {
                     $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY acd_story.no DESC";
                 }
@@ -359,7 +372,7 @@
     </div>
 
     <footer>
-        <?php include "../index/footer.php"; ?>
+        <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
     </footer>
 
 </body>

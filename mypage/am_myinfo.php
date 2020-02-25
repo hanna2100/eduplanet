@@ -6,40 +6,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+
+    <!-- 제이쿼리 -->
     <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+
+    <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/mypage_header.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
     <link rel="stylesheet" href="/eduplanet/mypage/css/am_myinfo.css">
+
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
     <script src="/eduplanet/mypage/js/myinfo_modify.js"></script>
+
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- identicon (프로필 이미지) -->
+    <script src="//cdn.rawgit.com/placemarker/jQuery-MD5/master/jquery.md5.js"></script>
+    <script src="//rawgit.com/stewartlord/identicon.js/master/pnglib.js"></script>
+    <script src="//rawgit.com/stewartlord/identicon.js/master/identicon.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            // 아이디에 따라 생성되는 프로필 이미지 만드는 함수 (세션에서 userid를 받아온다)
+            $(".user_img").each(function() {
+
+                $(this).prop('src', 'data:image/png;base64,' + new Identicon($.md5($(this).data("userid")), 80)).show();
+            });
+        });
+    </script>
 
 </head>
 
 <body>
 
     <?php
-        // 기업회원 세션 테스트
-        // $user_no = $am_no;
+    // 기업회원 세션 테스트
+    // $user_no = $am_no;
 
-        $user_no = 2;
+    $user_no = 2;
 
-        if (!$user_no) {
-            echo "
+    if (!$user_no) {
+        echo "
                 <script>
                     alert('잘못된 접근입니다.');
                     history.go(-1)
                 </script>
             ";
-        }
+    }
 
-        include_once "../lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
-        $sql = "SELECT * FROM a_members WHERE no='$user_no'";
-        $result = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_array($result);
+    $sql = "SELECT * FROM a_members WHERE no='$user_no'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result);
 
-        $id = $row["id"];
-        $email = $row["email"];
-        $acd_name = $row["acd_name"];
-        $rprsn = $row["rprsn"];
+    $id = $row["id"];
+    $email = $row["email"];
+    $acd_name = $row["acd_name"];
+    $rprsn = $row["rprsn"];
 
     ?>
 
@@ -47,11 +83,11 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include_once '../index/index_header_searchbar_in.php'; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header_searchbar_in.php"; ?>
             </div>
 
             <div class="header_mypage">
-                <?php include_once './mypage_header.php'; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/mypage/mypage_header.php"; ?>
             </div>
         </header>
 
@@ -89,7 +125,7 @@
                         <form id="form_member" action="/eduplanet/mypage/am_myinfo_update.php" method="post" autocomplete="on">
                             <div class="formBox">
                                 <label for="inputId">아이디</label>
-                                <input type="text" class="formInput" id="inputId" name="id" value="<?=$id?>" disabled>
+                                <input type="text" class="formInput" id="inputId" name="id" value="<?= $id ?>" disabled>
                                 <p class="subMsg" id="idSubMsg"></p>
                             </div>
                             <div class="formBox">
@@ -103,17 +139,17 @@
                             </div>
                             <div class="formBox">
                                 <label for="inputEmail">이메일</label>
-                                <input type="email" class="formInput" id="inputEmail" name="email" placeholder="이메일을 입력해 주세요" value="<?=$email?>" required>
+                                <input type="email" class="formInput" id="inputEmail" name="email" placeholder="이메일을 입력해 주세요" value="<?= $email ?>" required>
                                 <p class="subMsg" id="emailSubMsg"></p>
                             </div>
                             <div class="formBox">
                                 <label for='inputAcdName'>학원/교습소 이름</label>
-                                <input type='text' class='formInput' id='inputAcdName' name='acd_name' placeholder='공백 없이 입력해 주세요.' value="<?=$acd_name?>" required>
+                                <input type='text' class='formInput' id='inputAcdName' name='acd_name' placeholder='공백 없이 입력해 주세요.' value="<?= $acd_name ?>" required>
                                 <p class='subMsg' id='AcdNameSubMsg'></p>
                             </div>
                             <div class="formBox">
                                 <label for='inputRprsn'>대표자명</label>
-                                <input type='text' class='formInput' id='inputRprsn' name='rprsn' placeholder='대표자명을 입력해 주세요' value="<?=$rprsn?>" required>
+                                <input type='text' class='formInput' id='inputRprsn' name='rprsn' placeholder='대표자명을 입력해 주세요' value="<?= $rprsn ?>" required>
                                 <p class='subMsg' id='RprsnSubMsg'></p>
                             </div>
                             <!-- <div class="formBox">
@@ -140,7 +176,7 @@
 
 
         <footer>
-            <?php include "../index/footer.php"; ?>
+            <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
         </footer>
 
 

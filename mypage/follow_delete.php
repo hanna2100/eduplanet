@@ -1,6 +1,6 @@
 <?php
 
-    include_once "../lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
     // 리뷰 글번호
     $follow_no = $_GET["no"];
