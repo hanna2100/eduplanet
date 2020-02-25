@@ -1,3 +1,29 @@
+$(document).ready(function() {
+  $("#myCarousel").on("slide.bs.carousel", function(e) {
+    var $e = $(e.relatedTarget);
+    var idx = $e.index();
+    var itemsPerSlide = 3;
+    var totalItems = $(".carousel-item").length;
+
+    if (idx >= totalItems - (itemsPerSlide - 1)) {
+      var it = itemsPerSlide - (totalItems - idx);
+      for (var i = 0; i < it; i++) {
+        // append slides to end
+        if (e.direction == "left") {
+          $(".carousel-item")
+            .eq(i)
+            .appendTo(".carousel-inner");
+        } else {
+          $(".carousel-item")
+            .eq(0)
+            .appendTo($(this).find(".carousel-inner"));
+        }
+      }
+    }
+  });
+});
+
+
 function getinfo(parent){
     var no = parent;
       $.ajax({
@@ -10,7 +36,6 @@ function getinfo(parent){
       success : function(schedule){
         var html ="";
         var sc = JSON.parse(schedule);
-        console.log(sc);
         if(sc.length==0){
           for(i=2;i>0;i--){
             html += "<tr>";
@@ -72,18 +97,13 @@ function getinfo(parent){
             x++;
           }
           min = min-2;
-          console.log(html);
           document.getElementById('table').innerHTML = html;
 
-          for(i=0;i<sc.length;i++){
-            console.log(sc[i][1],min,sc[i][1]-min+1);
-          }
           for(var i=0; i<sc.length; i++){
             var x = sc[i][1]-min+1;
             var y = parseInt(sc[i][0])+1;
 
             var id = '#x'+x+'y'+y;
-            console.log(id);
             $(id).html(sc[i][2]);
           }
         }

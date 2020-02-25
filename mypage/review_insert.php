@@ -1,19 +1,12 @@
 <?php
 
-    if (isset($_SESSION["gm_no"])) {
-        $gm_no = $_SESSION["gm_no"];
-    } else {
-        $gm_no = "";
-    }
-
-    // session test
-    $gm_no = 1;
-
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
+    
     $user_no = $gm_no;
 
     date_default_timezone_set('Asia/Seoul');
 
-    include_once "../lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
     // hidden input (자동완성 검색창에서 넣어준 값)
     $si_name = $_POST["si_name"];

@@ -1,11 +1,10 @@
 <?php
 
-    include_once "../lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
     // 리뷰 글번호
     $review_no = $_GET["no"];
 
-    // $acd_name = $_POST["acd_name"];
     $total_star = $_POST["total_star"];
     $one_line = $_POST["one_line"];
     $benefit = $_POST["benefit"];

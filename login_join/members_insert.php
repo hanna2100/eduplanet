@@ -8,7 +8,7 @@
   $pw = test_input($_POST['inputPw1']);
   $email = test_input($_POST['inputEmail']);
 
-
+// 일반회원 모드
   if($mode == "gm"){
     $tel = test_input($_POST['inputTel']);
     $age = test_input($_POST['inputAge']);
@@ -19,8 +19,8 @@
     $sql_select = "select * from g_members where id='$id'";
     $no = "gm_no";
 
+// 학원회원 모드
   }else if($mode == "am"){
-    // 2. 파일
     $upload_dir = '../data/bsnsLic/';
     $upfile_name = $_FILES["inputLicense"]["name"]; // 사용자가 실제 올린 파일 이름
     $upfile_tmp_name = $_FILES["inputLicense"]["tmp_name"];  // 서버가 임의로 준 임시 파일 이름
@@ -50,11 +50,16 @@
       $copied_file_name = "";
     }
 
-    $acdName = test_input($_POST['inputAcdName']);
+    $acdName = test_input($_POST['acd_name']);
     $rprsn = test_input($_POST['inputRprsn']);
 
+    $sql_search = "select no from academy where acd_name='$acdName'";
+    $result_search = mysqli_query($conn, $sql_search);
+    $row = mysqli_fetch_array($result_search);
+    $acdNo = $row[0];
+
     $sql_insert = "insert into a_members values
-            (null, 0, '$id', '$pw', '$email', '$acdName', '$rprsn', '$copied_file_name', 'N', '0000-00-00', '$today');";
+            (null, '$acdNo', '$id', '$pw', '$email', '$acdName', '$rprsn', '$copied_file_name', 'N', '0000-00-00', '$today');";
     $sql_select = "select * from a_members where id='$id'";
     $no = "am_no";
   }

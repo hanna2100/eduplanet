@@ -2,7 +2,7 @@
 
 // 셀럭트한 시/구를 조건에 달아야함
 
-    include_once "../lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
     if (isset($_POST['search'])) {
 

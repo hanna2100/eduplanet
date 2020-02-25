@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./login.css">
   </head>
-  <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./login.css">
+
 
   <body>
     <header>

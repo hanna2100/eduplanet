@@ -124,7 +124,7 @@ label {
     display: inline-block;
     width: 110px;
     color: black;
-    /* font-weight: bold; */
+    font-weight: bold;
     margin-left: 160px;
 }
 
@@ -134,7 +134,7 @@ label {
 
 .myinfo_content input {
     width: 200px;
-    height: 20px;
+    /* height: 20px; */
     /* border-radius: 5px; */
     border: 1px solid rgb(165, 165, 165);
     padding: 10px;
@@ -178,4 +178,5 @@ label {
 input[type="text"]:disabled {
     background: white;
     border: 1px solid white;
+    color: black;
 }

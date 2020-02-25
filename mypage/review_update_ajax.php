@@ -1,11 +1,10 @@
 <?php
 
-    include_once "../lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
     if (isset($_POST['review_no'])) {
 
         $review_no = $_POST['review_no'];
-        // $sql = "SELECT * FROM review WHERE no=$review_no";
         $sql = "SELECT acd_name, total_star, one_line, facility, acsbl, teacher, cost_efct, achievement, benefit, drawback FROM review INNER JOIN academy ON review.parent = academy.no WHERE review.no='$review_no'";
         $result = mysqli_query($conn, $sql);
 
@@ -26,10 +25,8 @@
                 "drawback" => $row['drawback']
             );
         }
-
         echo json_encode($response);
     }
-
     exit;
 
 ?>

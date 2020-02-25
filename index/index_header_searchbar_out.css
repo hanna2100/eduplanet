@@ -169,10 +169,14 @@ a {
 
 .index_header_menu_ul_left li:hover .index_header_menu_hover {
     display: block;
+    position: relative;
+    top: 6px;
 }
 
 .index_header_menu_ul_left li:hover .index_header_menu_hover_detail {
     display: block;
+    position: relative;
+    top: 6px;
 }
 
 /* 호버시, 흰색 서브메뉴 */
@@ -184,7 +188,7 @@ a {
 
 .index_header_menu_hover_detail img {
     position: relative;
-    top: -30px;
+    top: -24px;
     width: 18px;
     height: 9px;
     z-index: 1;
@@ -195,7 +199,7 @@ a {
     height: 50px;
     border: 1px solid lightgray;
     position: relative;
-    top: -35px;
+    top: -25px;
     right: 65px;
     box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
     border-radius: 4px;
@@ -232,7 +236,7 @@ a {
     height: 215px;
     border: 1px solid lightgray;
     position: relative;
-    top: -35px;
+    top: -25px;
     right: 63px;
     box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
     border-radius: 4px;
@@ -342,7 +346,7 @@ a {
 .index_main_title {
     float: left;
     margin: 0 auto;
-    width: 492px;
+    width: 460px;
     height: 43px;
     text-align: center;
     background-color: white;

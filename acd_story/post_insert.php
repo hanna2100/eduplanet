@@ -1,20 +1,10 @@
-<meta charset="UTF-8">
-
 <?php
 
-    if (isset($_SESSION["am_no"])) {
-        $am_no = $_SESSION["am_no"];
-    } else {
-        $am_no = "";
-    }
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
 
-    // test
-    $am_no = 1;
-
-    // 시간 셋팅하기
 	date_default_timezone_set('Asia/Seoul');
 
-    include_once "../lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
     $sql_acd = "SELECT acd_name FROM a_members WHERE acd_no=$am_no";
     $result = mysqli_query($conn, $sql_acd);
@@ -106,10 +96,8 @@
     // ftp_chmod($ftp, 0755, $copied_file_name);
     // ftp_close($ftp);
 
-
     // 2번째방법
     // chmod($copied_file_name, 755);
-
 
     echo "
         <script>
