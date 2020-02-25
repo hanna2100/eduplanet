@@ -7,7 +7,7 @@
     <title>에듀플래닛</title>
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/eduplanet/mypage/css/follow.css">
+    <!-- <link rel="stylesheet" href="/eduplanet/mypage/css/follow.css"> -->
     <link rel="stylesheet" href="./css/view_all.css">
 
     <script>
@@ -78,22 +78,39 @@
                 $user_no = $gm_no;
 
                 include_once "../lib/db_connector.php";
-                // select academy.no,academy.acd_name,avg(review.total_star) from academy join review on academy.no = review.parent group by review.parent order by avg(review.total_star) desc
-                $sql = "SELECT acd_name, si_name, acd_no,tel,address,no follow.no FROM follow INNER JOIN academy ON follow.acd_no = academy.no WHERE user_no='$user_no'";
+                // $sql = "select academy.no,academy.acd_name,academy.file_copy,avg(review.total_star),acd_story.parent from academy join review on academy.no = review.parent join acd_story on review.parent = acd_story.parent group by review.parent";
+                $sql = "SELECT
+                            academy.no,
+                            academy.acd_name,
+                            academy.address,
+                            academy.file_copy,
+                            total_star,
+                            str_cnt,
+                            rv_cnt
+                        FROM
+                            academy
+                              left  JOIN
+                            (SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt FROM review group by parent) review ON academy.no = review.parent
+                              left JOIN
+                            (SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent
+                        GROUP BY academy.no";
 
                 $result = mysqli_query($conn, $sql);
                 $total_record = mysqli_num_rows($result);
+
 
                 ?>
 
                 <!-- select box -------------------------------------------------------------------------------------->
                 <div class="follow_list_select">
-
+                  <script type="text/javascript">
+                    console.log(<?= $total_record ?>);
+                  </script>
                     <h2>
                         우리동네학원
                         <!-- <button id="button_write_follow" onclick="location.href='/eduplanet/acd_story/post.php'">스토리 등록</button> -->
                     </h2>
-                    <span id="follow_total_span">총 <span id="follow_total_num"><?= $total_record ?></span> 개의 찜한 학원이 있습니다.</span>
+                    <span id="follow_total_span">총 <span id="follow_total_num"><?= $total_record ?></span> 개의 학원이 있습니다.</span>
 
                     <div class="follow_select">
                         <select name="follow_list_select_district" id="follow_list_select_district" onchange="selectDistrict();">
@@ -194,24 +211,41 @@
                         mysqli_data_seek($result, $i);
 
                         $row = mysqli_fetch_array($result);
+                        $no = $row["no"]; //넘
+                        $acd_name = $row["acd_name"]; //학원명
+                        $address = $row["address"]; //주소
+                        $file_copy = $row["file_copy"]; //학원로고
+                        $total_star = $row["total_star"]; //평점
+                        $review_count = $row["rv_cnt"]; // 리뷰 수
+                        $story_count = $row["str_cnt"]; //스토리 수
 
-                        $acd_name = $row["acd_name"];
-                        $address = $row["address"];
-                        $si_name = $row["si_name"];
-                        $acd_no = $row["acd_no"];
-                        $follow_no = $row["no"];
+                        $total_star = sprintf('%0.1f',$total_star);
 
-                        $sql = "SELECT total_star FROM review WHERE parent='$acd_no'";
-                        $result_total_star = mysqli_query($conn, $sql);
-                        $total_record_review = mysqli_num_rows($result_total_star);
+                        // if(is_float($total_star)===true){
+                        //   $total_star = $total_star;
+                        //
+                        // }else{
+                        //   $total_star = $total_star.'.0';
+                        // }
+                        // else {
+                        //   $total_star= round($total_star,1).'.0';
+                        // }
 
-                        $row = mysqli_fetch_array($result_total_star);
 
-                        $total_star = $row["total_star"];
-
-                        $sql = "SELECT * FROM acd_story WHERE parent='$acd_no'";
-                        $result_story = mysqli_query($conn, $sql);
-                        $total_record_story = mysqli_num_rows($result_story);
+                        // $acd_no = $row["acd_no"];
+                        // $follow_no = $row["no"];
+                        //
+                        // $sql = "SELECT total_star FROM review WHERE parent='$acd_no'";
+                        // $result_total_star = mysqli_query($conn, $sql);
+                        // $total_record_review = mysqli_num_rows($result_total_star);
+                        //
+                        // $row = mysqli_fetch_array($result_total_star);
+                        //
+                        // $total_star = $row["total_star"];
+                        //
+                        // $sql = "SELECT * FROM acd_story WHERE parent='$acd_no'";
+                        // $result_story = mysqli_query($conn, $sql);
+                        // $total_record_story = mysqli_num_rows($result_story);
 
                         // 아직 사진 컬럼이 없어서 못가져옴
                         // if ($row["file_name"]) {
@@ -227,10 +261,10 @@
                             <div class="follow_list_column">
 
                                <!-- 왼쪽 학원 로고 및 정보  -->
-                                <!-- 클릭 시 href=학원페이지 -->
-                                <a href="/eduplanet/acd_story/view.php?no=<?= $no ?>&parent=<?= $parent ?>&acd_name=<?= $acd_name ?>">
+                                <!-- 클릭 시 href=학원페이지                           parent=<?= $parent ?>&acd_name=<?= $acd_name ?>     -->
+                                <a href="/eduplanet/academy/index.php?no=<?= $no ?>">
                                     <div class="follow_list_column_img">
-                                        <img src="/eduplanet/test_img/academy_big_logo.jpg" alt="follow_list_column_img">
+                                        <img src="/eduplanet/data/acd_logo/travel.png" alt="academy_list_column_img">
                                     </div>
 
                                     <div class="follow_list_column_text">
@@ -241,8 +275,8 @@
                                 <p id="follow_text_district"><?=$address?></p>
 
                                 <div class="follow_list_column_review">
-                                    <a href="#"><span id="academy_review_span">학원리뷰 <span id="academy_review_num"><?=$total_record_review?></span></span></a>
-                                    <a href="#"><span id="academy_review_span">스토리 <span id="academy_review_num"><?=$total_record_story?></span></span></a>
+                                    <a href="#"><span id="academy_review_span">학원리뷰 <span id="academy_review_num"><?= $review_count ?></span></span></a>
+                                    <a href="#"><span id="academy_review_span">스토리 <span id="academy_review_num"><?= $story_count ?></span></span></a>
 
                                     <!-- <div class="academy_small_star">
                                         <img src="/eduplanet/img/review_star_one.png" alt="academy_small_star">
@@ -256,7 +290,7 @@
                             <div class="follow_list_column_sub">
 
                                 <div class="follow_academy_heart">
-                                    <span>찜하기 취소</span>
+                                    <span>학원 찜하기</span>
                                     <button type="button" id="button_academy_heart" onclick="deleteFollow(<?=$follow_no?>);">like</button>
                                 </div>
 
@@ -271,7 +305,24 @@
                                         <img id="acd_star_5"class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
                                     </div>
 
-                                    <span class="follow_academy_star_num"><?=$total_star?></span>
+                                    <span class="follow_academy_star_num"><?= $total_star
+
+                                      // echo "
+                                      //   <script>
+                                      //   document.getElementsByClassName('follow_academy_star_num')[$no].innerHTML = $total_star;
+                                      //
+                                      //
+                                      //   </script>
+                                      //
+                                      // ";
+
+                                      // if ($total_star%1===0) {
+                                      //   $total_star.0;
+                                      // }else{
+                                      //   round($total_star,1)
+                                      // }
+                                      ?>
+                                    </span>
 
                                 </div>
 
@@ -338,15 +389,15 @@
                             if ($first_page == 1) {
 
                                 if ($page != 1) {
-                                    echo "<li><a href='/eduplanet/mypage/follow.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                                    echo "<li><a href='/eduplanet/acd_list/view_all.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
                                 } else {
                                     echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
                                 }
 
                                 echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
                             } else {
-                                echo "<li><a href='/eduplanet/mypage/follow.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
-                                echo "<li><a href='/eduplanet/mypage/follow.php?page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
+                                echo "<li><a href='/eduplanet/acd_list/view_all.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                                echo "<li><a href='/eduplanet/acd_list/view_all.php?page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
                             }
 
                             //페이지 번호 매기기
@@ -355,7 +406,7 @@
                                 if ($page == $i) {
                                     echo "<li><span class='page_num_set'><b style='color:#2E89FF'> $i </b></span></li>";
                                 } else {
-                                    echo "<li><a href='/eduplanet/mypage/follow.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
+                                    echo "<li><a href='/eduplanet/acd_list/view_all.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
                                 }
                             }
 
@@ -364,13 +415,13 @@
                                 echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
 
                                 if ($page != $total_page) {
-                                    echo "<li><a href='/eduplanet/mypage/follow.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                                    echo "<li><a href='/eduplanet/acd_list/view_all.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
                                 } else {
                                     echo "<li><a><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
                                 }
                             } else {
-                                echo "<li><a href='/eduplanet/mypage/follow.php?page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
-                                echo "<li><a href='/eduplanet/mypage/follow.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                                echo "<li><a href='/eduplanet/acd_list/view_all.php?page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
+                                echo "<li><a href='/eduplanet/acd_list/view_all.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
                             }
                             ?>
                         </ul>
