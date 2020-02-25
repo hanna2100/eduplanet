@@ -23,28 +23,20 @@
    <body>
      <header>
          <?php
-           include "../index/index_header_searchbar_in.php";
-           include "./header/academy_header.php";
+           // include "../index/index_header_searchbar_in.php";
+           // include "./header/academy_header.php";
          ?>
      </header>
 
      <?php
         include "../lib/db_connector.php";
-        if (isset($_GET["page"])) {
-            $page = $_GET["page"];
-        } else {
-            $page = 1;
-        }
+        $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : "";
+        // $no : academy 테이블의 no, review 테이블의 parent
+        $no = isset($_GET["no"]) ?  $_GET["no"] : 9;
+        $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
-        if(isset($_SESSION["id"])){
-            $id = $_SESSION["id"];
-        }else{
-          // 테스트하는 동안 쓸 임시 아이디
-            $id = "비회원";
-        }
         // content_top
-          // parent="현재 리뷰를 보고 있는 학원 넘버"
-        $sql_top = "select avg(total_star), avg(facility), avg(acsbl), avg(teacher), avg(cost_efct), avg(achievement) from review where parent=21;";
+        $sql_top = "select avg(total_star), avg(facility), avg(acsbl), avg(teacher), avg(cost_efct), avg(achievement) from review where parent='$no';";
         $result_top = mysqli_query($conn, $sql_top);
         $row_top = mysqli_fetch_array($result_top);
 
@@ -119,7 +111,7 @@
         </div>
     <?php
         // content_bottom
-        $sql_bottom = "select review.*, g_members.age from review inner join g_members on review.user_no=g_members.no where parent=21 order by regist_day desc;";
+        $sql_bottom = "select review.*, g_members.age from review inner join g_members on review.user_no=g_members.no where parent='$no' order by regist_day desc;";
         $result_bottom = mysqli_query($conn, $sql_bottom);
         // 1. 전체 리뷰의 갯수
         $total_record = mysqli_num_rows($result_bottom);
@@ -243,23 +235,30 @@
 
                  <div class="overlay"></div>
                  <div id="myModal" class="modal">
-                   <button type="button" name="button" class="btn_modal btn_membership" onclick="location.href='../membership/index.php'">멤버십 가입하고 전체보기</button>
+                   <?php
+                      if($gm_no){
+                        $url = "../membership/index.php";
+                      }else{
+                        $url = "../login_join/login_form.php";
+                      }
+                    ?>
+                   <button type="button" name="button" class="btn_modal btn_membership" onclick="location.href='<?=$url?>'">멤버십 가입하고 전체보기</button>
                    <button type="button" name="button" class="btn_modal btn_review" onclick="location.href='/eduplanet/acd_story/index.php'">학원리뷰 작성하고 전체보기</button>
                  </div>
                </div>
 
 
                <script>
-                  var id = '<?= $id ?>';
+                  var gm_no = '<?= $gm_no ?>';
                   var overlay = document.getElementsByClassName("overlay");
                   var modal = document.getElementsByClassName("modal");
 
-                  if(id === "비회원"){
-                    overlay[i].style.display = "block";
-                    modal[i].style.display = "block";
-                  }else {
+                  if(gm_no){
                     overlay[i].style.display = "none";
                     modal[i].style.display = "none";
+                  }else {
+                    overlay[i].style.display = "block";
+                    modal[i].style.display = "block";
                   }
                 </script>
 
