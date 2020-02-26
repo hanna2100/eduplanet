@@ -134,7 +134,23 @@
 
                 <h2>
                     학원 스토리
+
+                    <?php
+                        if ($am_no) {
+                    ?>
+
                     <button id="button_write_story" onclick="location.href='/eduplanet/acd_story/post.php'">스토리 등록</button>
+                    
+                    <?php
+                        } else {
+                    ?>        
+
+                    <a href="javascript:alert('기업회원만 이용 가능합니다.');"><button id="button_write_story">스토리 등록</button></a>
+
+                    <?php
+                        }
+                    ?>
+                        
                 </h2>
                 <span id="story_total_span">총 <span id="story_total_num"><?= $total_record ?></span> 개의 스토리가 있습니다.</span>
 
@@ -247,7 +263,23 @@
 
                             <div class="story_academy_heart">
                                 <span>학원 찜하기</span>
+
+                                <?php 
+                                    if ($gm_no) {
+                                ?>
+
                                 <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart">like</button></a>
+                                
+                                <?php
+                                    } else {
+                                ?>
+
+                                <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
+
+                                <?php
+                                    }
+                                ?>
+
                             </div>
 
                             </h1>

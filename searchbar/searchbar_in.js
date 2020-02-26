@@ -7,11 +7,16 @@ $(function(){
 
             $.ajax({
                 type: 'post',
-                url: "/eduplanet/searchbar/auto_searchbar.php",
+                url: "/eduplanet/searchbar/auto_searchbar_in.php",
                 dataType: "json",
                 data: { search : request.term },
+
                 success: function(data) {
                     response(data);
+                },
+
+                error:function(request,status,error){
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
             });
         },
