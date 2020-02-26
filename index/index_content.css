@@ -285,7 +285,18 @@ ul {
 
 #review_star {
     padding-top: 10px;
-    width: 100px;
+    width: 24px;
+    height: 24px;
+    margin-right: 3px;
+}
+
+.academy_star_num {
+    font-size: 17px;
+    font-weight: bold;
+    color: #2E89FF;
+    position: relative;
+    top: -5px;
+    left: 5px;
 }
 
 .academy_review_button {
