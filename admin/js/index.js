@@ -12,6 +12,7 @@ $(function(){
 
 
 function importMembersData(){
+
     var year = y;
     var year2 = y;
     var month = m;
@@ -23,8 +24,6 @@ function importMembersData(){
     }else{
         month = month2-5;
     }
-
-    console.log(year+'년 '+month+'월 ~'+year2+' 년'+month2+'월 까지의 정보');
 
     $.ajax({
         url : "/eduplanet/admin/lib/gm_members_graph.php",
@@ -126,7 +125,7 @@ function importMembersData(){
 
             var increase = (total_join_sum[5]) - (total_wthdr_sum[5]);
 
-            console.log(total_join_sum);
+            //console.log(total_join_sum);
 
             $('#increse_gm').text(increase);
 
@@ -238,7 +237,7 @@ function getAcdMemberData(gm_in){
                 for (var j=0; j < total_arr[i].length; j++ ) {
                     sum += parseInt(total_arr[i][j]);
                 }
-                console.log(sum);
+               // console.log(sum);
                 total_join_sum[no] = sum;
                 no++;
             }
@@ -271,8 +270,8 @@ function getAcdMemberData(gm_in){
 
 function membersGraph(lbl, gm_in, am_in){
 
-    console.log(gm_in);
-    console.log(am_in);
+    // console.log(gm_in);
+    // console.log(am_in);
     var ctx = document.getElementById('dash_membersGraph').getContext('2d');
     ctx.canvas.width = 240;
     ctx.canvas.height = 160;
@@ -327,7 +326,115 @@ function membersGraph(lbl, gm_in, am_in){
 }
 
 function salesGraph(){
-    
+    var year = y;
+    var year2 = y;
+    var month = m;
+    var month2 = m;
+
+    if(month2<=5){
+        month = m+7;
+        year = y-1;
+    }else{
+        month = m-5;
+    }
+
+    console.log(gm_sales); //판매금액 6개월동안의 데이터
+    console.log(am_sales); 
+
+    //전년도 마지막날짜 달력
+    var lastDate1 = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+    //현재년도 마지막날짜 달력
+    var lastDate2 = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+
+    //윤년계산
+    if((year%4 === 0 && year%100 !== 0) || year%400 === 0 )
+        lastDate1[1] = 29;
+    if((year2%4 === 0 && year2%100 !== 0) || year2%400 === 0 )
+        lastDate2[1] = 29;
+
+    //달력 붙이기
+    var lastDate = lastDate1.concat(lastDate2);
+
+    //시작년도 끝년도가 다르면 전년도 달력에서부터 lastDate인덱스시작
+    var index;
+    if(year!=year2){ 
+        index = month-1;
+    }else{
+        index = 6+month2;
+    }
+
+    var total_gsales_arr = [];
+    var i=0; //전체 배열 하나씩 돌리려고
+    while(gm_sales.length>0){
+        var arr = [];
+        for(var j = 0; j<lastDate[index]; j++){
+            if(gm_sales[0]!=undefined){ //현재월을 선택하면 undefined가 뜨기때문에 조건넣음
+                arr.push(gm_sales[0]); //원본배열 맨 앞에있는것만 넣어줌
+                gm_sales.shift(); //원본배열 앞에서부터 하나씩 삭제함
+            }
+        }
+        total_gsales_arr[i] = arr;
+        i++;
+        index++;
+    }
+
+    // console.log(total_gsales_arr);
+
+    //인덱스 초기화
+    if(year!=year2){ 
+        index = month-1;
+    }else{
+        index = 6+month2;
+    }
+
+    var total_asales_arr = []; //학원회원매출
+    i=0; //전체 배열 하나씩 돌리려고
+    while(am_sales.length>0){
+        var arr = [];
+        for(var j = 0; j<lastDate[index]; j++){
+            if(am_sales[0]!=undefined){
+                arr.push(am_sales[0]); //원본배열 맨 앞에있는것만 넣어줌
+                am_sales.shift(); //원본배열 앞에서부터 하나씩 삭제함
+            }
+        }
+        total_asales_arr[i] = arr;
+        i++;
+        index++;
+    }
+
+    //일반회원 월별매출 구하기
+    var gsales_arr = [];
+    var no = 0;
+    for(var i = 0; i<total_gsales_arr.length; i++){
+        var sum = 0;
+        for (var j=0; j < total_gsales_arr[i].length; j++ ) {
+            sum += parseInt(total_gsales_arr[i][j]);
+        }
+
+        gsales_arr[no] = sum;
+        no++;
+    }
+
+    //학원회원 월별매출 구하기
+    var asales_arr = [];
+    no = 0;
+    for(var i = 0; i<total_asales_arr.length; i++){
+        var sum = 0;
+        for (var j=0; j < total_asales_arr[i].length; j++ ) {
+            sum += parseInt(total_asales_arr[i][j]);
+        }
+        asales_arr[no] = sum;
+        no++;
+    }
+
+
+    var increase = (gsales_arr[5]) + (asales_arr[5]);
+
+    console.log(gsales_arr);
+    console.log(asales_arr);
+
+    $('#increse_sales').text(increase);
+
     var ctx = document.getElementById('dash_salesGraph').getContext('2d');
     var chart = new Chart(ctx, {
         // The type of chart we want to create
@@ -341,7 +448,7 @@ function salesGraph(){
                 backgroundColor: grey,
                 borderColor: grey,
                 pointHoverBackgroundColor: grey,
-                data: [1000, 800, 870, 820, 900, 990, 1200],
+                data:  gsales_arr.map((x, y) => x + asales_arr[y]),
                 pointRadius: 1,
                 pointHitRadius: 10,
                 tension: 0.2,
@@ -353,7 +460,7 @@ function salesGraph(){
                 backgroundColor: red,
                 borderColor: red,
                 pointHoverBackgroundColor: red,
-                data: [600, 400, 370, 620, 420, 590, 600],
+                data: gsales_arr,
                 pointRadius: 1,
                 pointHitRadius: 10,
                 tension: 0.2,
@@ -365,7 +472,7 @@ function salesGraph(){
                 backgroundColor: blue,
                 borderColor: blue,
                 pointHoverBackgroundColor: blue,
-                data: [400, 400, 500, 200, 480, 400, 600],
+                data: asales_arr,
                 pointRadius: 1,
                 pointHitRadius: 10,
                 tension: 0.2,

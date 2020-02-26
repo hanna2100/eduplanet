@@ -134,8 +134,8 @@
   <div class="sec_content">
     <div id="dash_topline">
       <div>
-        <span>전체 매출</span><br>
-        <span>&#8361; 208,230</span>
+        <span>월 매출</span><br>
+        <span>&#8361; <span id="increse_sales"></span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
@@ -161,7 +161,7 @@
     </div>
     <div id="dash_salesGraph_wrap">
       <div id="dash_salesGraph_cell1">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Sales Graph<span>단위: 천원</span></h4>
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Sales Graph<span>단위: 원</span></h4>
         <canvas id="dash_salesGraph"></canvas>
       </div>
       <div id="dash_salesGraph_cell2">
