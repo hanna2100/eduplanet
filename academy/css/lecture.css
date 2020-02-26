@@ -1,110 +1,47 @@
-body{
-  background: #f3f3f4;
-}
-h1 {
-  margin-top: 20px;
-  margin-bottom: 15px;
+body section h1 {
+  margin-top: 25px;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
   text-align: center;
 }
-h3 {
-  padding-top: 10px;
-  text-align: center;
-  height: 35px;
-  background-color: #2E89FF;
-  color: black;
+body {
+  background-color: #ebecee;
+}
+
+#myCarousel {
+  width: 60%;
+  height: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.card{
+  height: 340px;
+}
+.card p {
   font-weight: bold;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
+  padding-top: 5px;
 }
-#teacher_schedule {
-  width: 80%;
-  margin-top: 30px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-}
-#teacher_schedule h1 {
-  margin: 15px;
+.card h4 {
   text-align: center;
+  font-weight: bold;
+  padding-bottom: 10px;
 }
-#teacher_schedule table {
+#myCarousel .carousel-inner {
+  height: 400px;
+}
+#table {
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 50px;
 }
-
-#teacher_schedule table tr,td {
+#table tr td {
+  text-align: center;
+  border-radius: 10px;
   background-color: #2E89FF;
-  border-radius: 8px;
-}
-#teacher_schedule table tr td {
-  border: 3px solid #f3f3f4;
-  text-align: center;
-  font-size: 24px;
-  padding: 5px;
+  border: 3px solid #ebecee;
   width: 200px;
-  height: 80px;
-}
-
-
-@media (min-width: 768px) {
-  /* show 3 items */
-  .carousel-inner .active,
-  .carousel-inner .active + .carousel-item,
-  .carousel-inner .active + .carousel-item + .carousel-item {
-    display: block;
-  }
-
-  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
-  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
-  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
-    transition: none;
-  }
-
-  .carousel-inner .carousel-item-next,
-  .carousel-inner .carousel-item-prev {
-    position: relative;
-    transform: translate3d(0, 0, 0);
-  }
-
-  .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item {
-    position: absolute;
-    top: 0;
-    right: -33.3333%;
-    z-index: -1;
-    display: block;
-    visibility: visible;
-  }
-
-  /* left or forward direction */
-  .active.carousel-item-left + .carousel-item-next.carousel-item-left,
-  .carousel-item-next.carousel-item-left + .carousel-item,
-  .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
-  .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
-    position: relative;
-    transform: translate3d(-100%, 0, 0);
-    visibility: visible;
-  }
-
-  /* farthest right hidden item must be abso position for animations */
-  .carousel-inner .carousel-item-prev.carousel-item-right {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    display: block;
-    visibility: visible;
-  }
-
-  /* right or prev direction */
-  .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
-  .carousel-item-prev.carousel-item-right + .carousel-item,
-  .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
-  .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
-    position: relative;
-    transform: translate3d(100%, 0, 0);
-    visibility: visible;
-    display: block;
-    visibility: visible;
-  }
+  height: 60px;
 }

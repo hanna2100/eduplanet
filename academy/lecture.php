@@ -3,9 +3,31 @@
   <head>
     <meta charset="utf-8">
     <title>review test</title>
-    <!-- 나의 css -->
+    <!-- index_header_searchbar_in -->
+    <!-- 제이쿼리 -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+
+    <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
+    <link rel="stylesheet" href="./header/academy_header.css">
+    <link rel="stylesheet" href="../index/footer.css">
+    <!-- 나의 css -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="./js/slide.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
     <link rel="stylesheet" href="./css/lecture.css">
@@ -15,9 +37,10 @@
   </head>
   <body>
     <header>
-      <!-- <?php
-      // include "./header/academy_header_include.php";
-       ?> -->
+    <?php
+      include "../index/index_header_searchbar_in.php";
+      include "./header/academy_header.php";
+    ?>
     </header>
     <section>
       <div class="container-fluid">
@@ -45,7 +68,7 @@
           ?>
           <div class="carousel-item col-md-4 active">
             <div class="card" onclick="getinfo(<?=$no?>)">
-              <img class="card-img-top img-fluid" src="../img/teacher_img<?=$i?>.jpg" style="width: 100%; height: 400px;" alt="Card image cap">
+              <img class="card-img-top img-fluid" src="../img/teacher_img<?=$i?>.jpg" style="width: 100%; height: 140px;" alt="Card image cap">
               <div class="card-body">
                 <h4 class="card-title"><?=$name?> 선생님</h4>
                 <p class="card-text">수업 과목 : <?=$subject?></p>
@@ -58,7 +81,7 @@
           ?>
           <div class="carousel-item col-md-4">
             <div class="card" onclick="getinfo(<?=$no?>)">
-              <img class="card-img-top img-fluid" src="../img/teacher_img<?=$i?>.jpg" style="width: 100%; height: 400px;" alt="Card image cap">
+              <img class="card-img-top img-fluid" src="../img/teacher_img<?=$i?>.jpg" style="width: 100%; height: 140px;" alt="Card image cap">
               <div class="card-body">
                 <h4 class="card-title"><?=$name?> 선생님</h4>
                 <p class="card-text">수업 과목 : <?=$subject?></p>
