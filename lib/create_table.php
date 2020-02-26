@@ -182,16 +182,6 @@ function create_table($conn, $table_name){
                       PRIMARY KEY(`no`)
                     );";
             break;
-            case 'sales' : //일별 매출테이블
-              $sql = "CREATE TABLE `sales` (
-                      `no` INT NOT NULL AUTO_INCREMENT,
-                      `date` DATE NOT NULL,
-	                    `gm_sales` INT UNSIGNED DEFAULT 0,
-	                    `am_sales` INT UNSIGNED DEFAULT 0,
-                      `total_sales` INT UNSIGNED NOT NULL,
-                      PRIMARY KEY(`no`)
-                    );";
-            break;
             case 'follow' : //팔로우(찜)테이블
               $sql = "CREATE TABLE `follow` (
                       `no` INT NOT NULL AUTO_INCREMENT,

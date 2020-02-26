@@ -56,12 +56,7 @@ function insert_init_data($conn, $table_name){
         case 'am_order' :
           $sql = am_order_init_data();
           break;
-        case 'sales' :
-          $sql = "INSERT INTO `sales` VALUES (1, '2019-02-12', 1, 3, 4),
-                                              (2, '2019-03-12', 2, 1, 3),
-                                              (3, '2019-04-12', 3, 5, 8),
-                                              (4, '2019-05-12', 3, 2, 6);";
-          break;
+    
         case 'follow' :
           $sql = "INSERT INTO `follow` VALUES (1, 1, 1),
                                               (2, 1, 2),

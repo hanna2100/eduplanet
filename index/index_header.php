@@ -16,7 +16,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="/eduplanet/acd_list/index.php">
                     <span>학원</span>
                     <div class="index_header_menu_hover">
                         <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
@@ -34,7 +34,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="/eduplanet/membership/index.php">
                     <span>멤버십</span>
                     <div class="index_header_menu_hover">
                         <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">

@@ -22,7 +22,7 @@ $(document).ready(function(){
       inputRprsn = $("#inputRprsn"),
       inputLicense = $("#inputLicense");
 
-  setDateBox();
+
   //아이디 중복체크 - ajax사용
   inputId.keyup(function() {
     var idValue = inputId.val();
@@ -134,66 +134,12 @@ $(document).ready(function(){
     }
   });
 
-  // 학원명 자동완성 함수
-  $("#acd_name").autocomplete({
-      source: function (request, response) {
-          $.ajax({
-              type: 'post',
-              url: "/eduplanet/mypage/auto_search.php",
-              dataType: "json",
-              data: {
-                  search: request.term
-              },
-              success: function (data) {
-                  response(data);
-              }
-          });
-      },
-      // 최소 글자입력 수
-      minLength: 1,
-      // 검색결과를 보여주는 시간
-      delay: 100,
-      // 포커스 되었을 때 input에 넣어주기
-      focus: function (event, ui) {
-          $("#acd_name").val(ui.item.acd_name);
-          $("#si_name").val(ui.item.si_name);
-          $("#dong_name").val(ui.item.dong_name);
-      },
-      // 선택 했을 때 input에 넣어주기
-      select: function (event, ui) {
-          // $('#acd_name').val(ui.item.label); // display the selected text
-          $('#acd_name').val(ui.item.acd_name); // save selected id to input
-          $("#si_name").val(ui.item.si_name);
-          $("#dong_name").val(ui.item.dong_name);
-          return false;
-      }
-      // 검색했을 때 나오는 자동완성 창을 커스텀하기
-  }).autocomplete("instance")._renderItem = function (ul, item) {
-      return $("<li>")
-          .append("<div><b>" + item.acd_name + "</b><br><span style='font-size: 12px; color: gray;'>" + item.si_name + " / " + item.dong_name + "</span></div>").appendTo(ul);
-  };
 
-
-  //학원/교습소명 체크
-  inputAcdName.change(function(){
-    var acdNameValue = inputAcdName.val();
-    // var exp = /^[가-힣a-zA-Z]{2,50}$/;
-    if(!acdNameValue){
-      $("#AcdNameSubMsg").text("학원/교습소명은 반드시 입력해 주세요.");
-      acdNamePass = false;
-      isAmAllPass();
-    }else{
-      $("#AcdNameSubMsg").text("");
-      acdNamePass = true;
-      isAmAllPass();
-    }
-  });
 
   //출생년도 select box
   inputAge.change(function(){
-    var ageValue = $("#inputAge option:selected").val();
+    var ageValue = $("#inputAge > option:selected").val();
     console.log("출생년도", ageValue);
-
     if(!ageValue){
       agePass = false;
       isGmAllPass();
@@ -218,6 +164,25 @@ $(document).ready(function(){
       isGmAllPass();
     }
   });
+
+
+
+  //학원/교습소명 체크
+  inputAcdName.change(function(){
+    var acdNameValue = inputAcdName.val();
+    // var exp = /^[가-힣a-zA-Z]{2,50}$/;
+    if(!acdNameValue){
+      $("#AcdNameSubMsg").text("학원/교습소명은 반드시 입력해 주세요.");
+      acdNamePass = false;
+      isAmAllPass();
+    }else{
+      $("#AcdNameSubMsg").text("");
+      acdNamePass = true;
+      isAmAllPass();
+    }
+  });
+
+
 
   //대표자명 체크
   inputRprsn.keyup(function(){
@@ -251,6 +216,46 @@ $(document).ready(function(){
 
 });
 
+// 학원명 자동완성 함수
+$("#acd_name").autocomplete({
+    source: function (request, response) {
+        $.ajax({
+            type: 'post',
+            url: "/eduplanet/mypage/auto_search.php",
+            dataType: "json",
+            data: {
+                search: request.term
+            },
+            success: function (data) {
+                response(data);
+            }
+        });
+    },
+    // 최소 글자입력 수
+    minLength: 1,
+    // 검색결과를 보여주는 시간
+    delay: 100,
+    // 포커스 되었을 때 input에 넣어주기
+    focus: function (event, ui) {
+        $("#acd_name").val(ui.item.acd_name);
+        $("#si_name").val(ui.item.si_name);
+        $("#dong_name").val(ui.item.dong_name);
+    },
+    // 선택 했을 때 input에 넣어주기
+    select: function (event, ui) {
+        // $('#acd_name').val(ui.item.label); // display the selected text
+        $('#acd_name').val(ui.item.acd_name); // save selected id to input
+        $("#si_name").val(ui.item.si_name);
+        $("#dong_name").val(ui.item.dong_name);
+        return false;
+    }
+    // 검색했을 때 나오는 자동완성 창을 커스텀하기
+}).autocomplete("instance")._renderItem = function (ul, item) {
+    return $("<li>")
+        .append("<div><b>" + item.acd_name + "</b><br><span style='font-size: 12px; color: gray;'>" + item.si_name + " / " + item.dong_name + "</span></div>").appendTo(ul);
+};
+
+
 function setDateBox(){
    var dt = new Date();
    var year = "";
@@ -263,6 +268,7 @@ function setDateBox(){
 }
 
 function isGmAllPass(){
+    console.log("GM패스", idPass, pwPass, emailPass, telPass, agePass, intresPass);
   if(idPass && pwPass && emailPass && telPass && agePass && intresPass){
     $("#btnFormSubmit").attr("disabled", false);
   }else{
@@ -271,7 +277,7 @@ function isGmAllPass(){
 }
 
 function isAmAllPass(){
-    console.log("올패스", idPass, pwPass, emailPass, acdNamePass, rprsnPass, licensePass);
+    // console.log("AM패스", idPass, pwPass, emailPass, acdNamePass, rprsnPass, licensePass);
   if(idPass && pwPass && emailPass && acdNamePass && rprsnPass && licensePass){
     $("#btnFormSubmit").attr("disabled", false);
   }else{
