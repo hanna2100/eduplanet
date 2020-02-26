@@ -65,6 +65,8 @@ function paymentCheck(){
      var name = input_name.value;
      var phone_num = input_tel.value;
      var email = input_email.value;
+     var product = $gm_no ? '프리미엄' : '학원관리' ;
+
 
      var IMP = window.IMP; // 생략가능
      IMP.init('imp62882300'); // 가맹점 식별코드 :imp62882300
@@ -75,7 +77,7 @@ function paymentCheck(){
          pay_method : 'card',
          expired_date : expired_date,
          merchant_uid : 'merchant_' + new Date().getTime(), // 이걸 주문번호로 쓰면 된다
-         name : '프리미엄'+ month + '개월',
+         name : product +' '+ month + '개월',
          amount : final_price,
          buyer_email : email,
          buyer_name : name,
@@ -83,7 +85,7 @@ function paymentCheck(){
          m_redirect_url : 'http://www.naver.com' // 모바일 결제시 사용
      }, function(rsp) {
          if ( rsp.success ) {
-           location.replace("./receipt.php?product=프리미엄"+month+"개월&price="+final_price+"&payMethod="+payMethod+"&expired_date="+expired_date);
+           location.replace("./receipt.php?product="+product+month+"개월&price="+final_price+"&payMethod="+payMethod+"&expired_date="+expired_date);
          } else {
              location.href='#';  //실패시 이동할 페이지
              console.log(rsp.error_msg);

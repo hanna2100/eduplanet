@@ -15,7 +15,7 @@ body {
 
 section {
   margin: 0;
-  padding: 0;
+  padding: 120px 0 ;
   min-width: 1060px;
 }
 
@@ -34,11 +34,11 @@ section {
 .pay_end_content{
   background-color: #f7f7f7;
   width: 80%;
-  height: 115px;
+  height: 100px;
   text-align: center;
   margin: 0 auto;
 }
-ul {
+.pay_end_content ul {
   list-style: none;
   text-align: left;
   margin-right: 2em;
@@ -47,7 +47,7 @@ ul {
   width:80%;
 
  }
-li { margin:10px;}
+.pay_end_content li { margin:10px;}
 .key { display:inline-block; color: #888888; font-weight:800; width: 80px;}
 
 .pay_end_button { text-align: center; margin-top: 50px;}
