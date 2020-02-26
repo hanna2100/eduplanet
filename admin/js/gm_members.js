@@ -209,39 +209,39 @@ function g_membersGraph(join, wthdr, sbtr){
             labels: dayArray(y,m),
             datasets: [{
                 label: '신규회원',
-                backgroundColor: red,
-                borderColor: red,
-                pointHoverBackgroundColor: red,
+                backgroundColor: 'rgb(255, 51, 51, 0.2)',
+                borderColor: 'rgb(255, 51, 51, 0.2)',
+                pointHoverBackgroundColor:'rgb(255, 51, 51, 0.2)',
                 data: join,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                tension: 0.2,
+                tension: 0.1,
                 fill: false,
                 borderWidth: 1,
                 order: 2
             },{
                 label: '탈퇴회원',
-                backgroundColor: purple,
-                borderColor: purple,
-                pointHoverBackgroundColor: purple,
+                backgroundColor: 'rgb(128, 128, 128, 0.2)',
+                borderColor: 'rgb(128, 128, 128, 0.2)',
+                pointHoverBackgroundColor: 'rgb(128, 128, 128, 0.2)',
                 data: wthdr,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                tension: 0.2,
+                tension: 0.1,
                 fill: false,
                 borderWidth: 1,
                 order: 3
             },{
                 label: '순 증가회원 수',
-                backgroundColor: grey,
-                borderColor: grey,
-                pointHoverBackgroundColor: grey,
+                backgroundColor: red,
+                borderColor: red,
+                pointHoverBackgroundColor: red,
                 data: sbtr,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                tension: 0.2,
+                tension: 0,
                 fill: false,
-                borderWidth: 5,
+                borderWidth: 2,
                 type: 'line',
                 order: 1
             }]
@@ -362,8 +362,7 @@ function importPrimiumData(){
         type : "post",
         dataType: "json",
         data: { y: y,
-                m: m,
-                mode: "DATE"},
+                m: m},
         success : function(data) {
             dash_pm_ratio(data[0], data[1]);
 

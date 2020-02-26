@@ -211,6 +211,7 @@ function am_order_init_data() {
   // 배열에 미리 값 셋팅
   $product_array = array("학원관리 1개월", "학원관리 2개월", "학원관리 3개월");
   $price_array = array(50000, 100000, 150000);
+  $pay_array = array('카카오페이','스마일페이','페이코');
 
   // 배열 인덱스에 넣어줄 변수
   $i = 0;
@@ -226,8 +227,9 @@ function am_order_init_data() {
     $rand = rand(0,2);
     $product = $product_array[$rand];
     $price = $price_array[$rand];
+    $pay = $pay_array[$rand];
     
-    $sql .= "($no, $no,'$product', '$price', '카카오페이', '결제완료', '$regist_date'),";
+    $sql .= "($no, $no,'$product', '$price', '$pay', '결제완료', '$regist_date'),";
 
     $i++;
   }
@@ -244,6 +246,7 @@ function gm_order_init_data() {
   // 배열에 미리 값 셋팅
   $product_array = array("프리미엄 1개월","프리미엄 2개월","프리미엄 3개월");
   $price_array = array(5000,10000,15000);
+  $pay_array = array('카카오페이','스마일페이','페이코');
 
   // 배열 인덱스에 넣어줄 변수
   $i = 0;
@@ -259,8 +262,9 @@ function gm_order_init_data() {
     $rand = rand(0,2);
     $product = $product_array[$rand];
     $price = $price_array[$rand];
+    $pay = $pay_array[$rand];
     
-    $sql .= "($no, $no,'$product', '$price', '카카오페이', '결제완료', '$regist_date'),";
+    $sql .= "($no, $no,'$product', '$price', '$pay', '결제완료', '$regist_date'),";
 
     $i++;
   }

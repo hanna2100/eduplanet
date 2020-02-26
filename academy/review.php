@@ -7,8 +7,14 @@
      <title>review test</title>
      <!-- favicon -->
      <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
-     <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">\ -->
+     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">\
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+     <!-- 자동완성 -->
+     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+     <!-- 스크립트 -->
+     <script src="/eduplanet/mypage/js/review_write.js"></script>
+     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
      <!--  star rating -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <!-- 리뷰 하단 페이징 아이콘 -->
@@ -19,14 +25,19 @@
      <!-- word cloud  -->
      <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
      <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
-     <!-- 나의 css -->
+
+     <!-- CSS -->
+     <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+     <link rel="stylesheet" href="/eduplanet/index/footer.css">
+     <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
      <link rel="stylesheet" href="./css/review.css">
    </head>
    <body>
      <header>
          <?php
-           // include "../index/index_header_searchbar_in.php";
-           // include "./header/academy_header.php";
+          include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
+          // include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/academy/header/academy_header.php";
          ?>
      </header>
 
@@ -64,6 +75,13 @@
                 <span class="fa fa-star total_star"></span>
                 <span class="fa fa-star total_star"></span>
                 <div class="rate_txt">총 만족도</div>
+
+                <script>
+                var rate_point = '<?=$rate_point?>';
+                console.log("1",rate_point);
+                </script>
+
+
               </div>
             </div>
             <div class="rate_bar_wrap">
@@ -358,7 +376,7 @@
      </section>
 
      <footer>
-       <?php include "../index/footer.php"; ?>
+       <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
      </footer>
 
      <script src="./js/review.js"></script>
