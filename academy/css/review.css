@@ -9,9 +9,9 @@
 
 body, html, #radarChart, #linearGauge { width: 100%; height: 100%; margin: 0; padding:0; }
 #container { width: 100%; height: 90%; margin: 20px 0 0 0; padding: 0; }
-/* header {padding-top:20px;} */
+
 section {
-  background-color: #ebecee;
+  background-color: #f3f3f4;
   font-size: 13px;
   color: #333;
   margin: 0;
