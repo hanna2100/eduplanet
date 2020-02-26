@@ -58,6 +58,79 @@
     <span>월 </span>
     <span onclick="nextDateChange('index')"><i class="fas fa-angle-right"></i></span>
   </div>
+
+<?php
+  //검색기간 변수설정 (6개월전 년, 월 ~현재 년,월)
+  $year = $y;
+  $year2 = $y;
+  $month = $m;
+  $month2 = $m;
+
+  if($month2<=5){
+      $month = $m+7;
+      $year = $y-1;
+  }else{
+      $month = $m-5;
+  }
+
+  //매출데이터 가져오기
+  $sql_arr = array();
+  array_push($sql_arr,"CALL get_gm_sales($year, $year2, $month, $month2)" );
+  array_push($sql_arr,"CALL get_am_sales($year, $year2, $month, $month2)" );
+
+  $total_arr = array();
+  $total_arr = execute_multi($conn, $sql_arr);
+
+  $gm_sales = $total_arr[0]; //일반회원 일별 매출
+  $am_sales = $total_arr[1]; //학원회원 일별 매출
+  $total_sales = array(); //전체 일별 매출
+
+  for($i=0; $i<sizeof($gm_sales); $i++){
+    $day_sales = $gm_sales[$i] + $am_sales[$i];
+    array_push($total_sales, $day_sales);
+    
+  }
+
+  function execute_multi($conn, $sql_arr){
+    $total_arr = array();
+    $am_sales = array();
+    $gm_sales = array();
+
+    $sql = implode(';', $sql_arr) . ';';
+
+    if (mysqli_multi_query($conn, $sql)) {
+
+        $flag = false;
+        do {
+            if ($result = mysqli_store_result($conn)) {
+                $total_record = mysqli_num_rows($result);
+                while ($row = mysqli_fetch_row($result)) {
+                  //row0번이 날짜, 1번이 매출
+                  $data = $row[1];
+                  $data = $data==NULL? 0: $data;
+
+                  if($flag==false){
+                      array_push($am_sales, $data);
+                  }else{
+                      array_push($gm_sales, $data);
+                  }
+                }
+                mysqli_free_result($result);
+                $flag = true;
+            }
+        } while (mysqli_next_result($conn));
+
+        array_push($total_arr, $am_sales);
+        array_push($total_arr, $gm_sales);
+        return $total_arr;
+    }
+  }
+
+?>
+<script>
+  var gm_sales = <?= json_encode($gm_sales);?>;
+  var am_sales = <?= json_encode($am_sales);?>;
+</script>
   <div class="sec_content">
     <div id="dash_topline">
       <div>
