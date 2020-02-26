@@ -1,5 +1,5 @@
 /* 공통 css */
-* { 
+* {
     padding: 0px;
     margin: 0px;
     font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
@@ -84,7 +84,6 @@ a {
 
 .index_header_logo_img img {
     width: 150px;
-    height: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
     /* border: 1px solid black; */
@@ -289,9 +288,9 @@ a {
 }
 
 #button_main_search {
-    float: left;
+    float: right;
     position: relative;
-    width: 40px;
+    width: 38px;
     height: 30px;
     background-color: white;
     border: 1px solid white;
