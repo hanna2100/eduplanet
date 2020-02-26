@@ -9,6 +9,17 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" href="/eduplanet/mypage/css/follow.css"> -->
     <link rel="stylesheet" href="./css/view_all.css">
+    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
+
+
 
     <script>
         // function deleteFollow(follow_no) {
@@ -52,7 +63,7 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include_once '../index/index_header_searchbar_in.php'; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php"; ?>
             </div>
 
 
@@ -437,7 +448,7 @@
 
 
         <footer>
-            <?php include "../index/footer.php"; ?>
+            <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php";?>
         </footer>
 
 

@@ -6,13 +6,30 @@
     <link rel="stylesheet" href="./css/index.css">
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
+    <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
+
+
+
+
+
+
+
     <title>EduPlanet</title>
   </head>
   <body>
 
     <header>
-      <?php include "../index/index_header_searchbar_in.php"; ?>
-       <?php include "./header/academy_header.php"; ?>
+      <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";?>
+      <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/academy/header/academy_header.php"; ?>
     </header>
 
     <main>
@@ -154,7 +171,7 @@
     </div> <!-- eduInforMain -->
     </main>
     <footer>
-      <?php include "../index/footer.php"; ?>
+      <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
     </footer>
   </body>
 </html>
