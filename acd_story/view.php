@@ -45,11 +45,12 @@
 
         include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
-        $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, subject1, subject2, subject3, content1, content2, content3, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE acd_story.no='$no'";
+        $sql = "SELECT academy.no as acd_no, acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, subject1, subject2, subject3, content1, content2, content3, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE acd_story.no='$no'";
 
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_array($result);
 
+        $acd_no = $row["acd_no"];
         $si_name = $row["si_name"];
         $total_star = $row["total_star"];
 
@@ -96,7 +97,7 @@
                             <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
                         </div>
 
-                        <span id="academy_title_span"><?=$acd_name?></span>
+                        <a href="/eduplanet/academy/index.php?no=<?=$acd_no?>"><span id="academy_title_span"><?=$acd_name?></span></a>
                         <span id="academy_district"><?=$si_name?></span>
 
                         <div class="academy_small_star">
@@ -187,6 +188,10 @@
                 </div>
 
                 <ul class="content_cource_unorder_list">
+
+                    <?php
+                    
+                    ?>
                     <li>
                         <div class="cource_column">
                             <a href="/eduplanet/acd_story/view.php">
@@ -207,7 +212,7 @@
 
                     <span class="span_padding"></span>
 
-                    <li>
+                    <!-- <li>
                         <div class="cource_column">
                             <a href="/eduplanet/acd_story/view.php">
                                 <div class="cource_column_box">
@@ -223,11 +228,11 @@
                                 </div>
                             </a>
                         </div>
-                    </li>
+                    </li> -->
 
                     <span class="span_padding"></span>
 
-                    <li>
+                    <!-- <li>
                         <div class="cource_column">
                             <a href="/eduplanet/acd_story/view.php">
                                 <div class="cource_column_box">
@@ -243,11 +248,11 @@
                                 </div>
                             </a>
                         </div>
-                    </li>
+                    </li> -->
 
                     <span class="span_padding"></span>
 
-                    <li>
+                    <!-- <li>
                         <div class="cource_column">
                             <a href="/eduplanet/acd_story/view.php">
                                 <div class="cource_column_box">
@@ -263,7 +268,7 @@
                                 </div>
                             </a>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
 
             </div>
