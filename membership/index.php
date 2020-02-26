@@ -45,7 +45,7 @@
               top_banner
           </div>
 
-          <div class="membership_section mid_contents">
+          <div class="membership_section mid_contents gm_product">
             <h2>프리미엄</h2>
             <div class="mid_sub_title">프리미엄 멤버십에 가입하면 회원들의 상세리뷰를 무제한으로 볼 수 있습니다!</div>
               <div class="membership_icons_wrap">
@@ -87,7 +87,7 @@
             $gm_discount = $row["discount"];
             $gm_total_price = $gm_price*(100-$gm_discount)*0.01;
           ?>
-                <button type="button" class="membership_card gm_product"
+                <button type="button" class="membership_card gm_card"
                 onclick="location.href='./payment.php?month=<?=$gm_month?>&discount=<?=$gm_discount?>&price=<?=$gm_price?>'" disabled>
                   <div class="card_wrap">
                     <div class="card_header">
@@ -122,30 +122,30 @@
 
           </div> <!--  end of mid_contents -->
 
-          <div class="membership_section mid_contents">
+          <div class="membership_section mid_contents am_product" >
             <h2>학원관리</h2>
             <div class="mid_sub_title">학원 회원으로 멤버십 가입하면 우리 학원의 스토리를 포스팅 할 수 있습니다!</div>
               <div class="membership_icons_wrap">
                 <div class="membership_icons">
-                  <img src="../img/facilities.png" alt="facilities" width="60%" height="60%">
-                  <span class="icon_text">시설</span>
+                  <img src="../img/advertising.png" alt="facilities" width="60%" height="60%">
+                  <span class="icon_text">학원 홍보</span>
                 </div>
                 <div class="membership_icons">
-                  <img src="../img/budget.png" alt="cost-effective" width="60%" height="60%">
-                  <span class="icon_text">수강료만족도</span>
+                  <img src="../img/information.png" alt="cost-effective" width="60%" height="60%">
+                  <span class="icon_text">학원 뉴스</span>
                 </div>
                 <div class="membership_icons">
-                  <img src="../img/bus.png" alt="Traffic convenience" width="60%" height="60%">
-                  <span class="icon_text">교통편의성</span>
+                  <img src="../img/communication.png" alt="Traffic convenience" width="60%" height="60%">
+                  <span class="icon_text">커뮤니케이션</span>
                 </div>
                 <div class="membership_icons">
-                  <img src="../img/work.png" alt="teacher" width="60%" height="60%">
-                  <span class="icon_text">강사</span>
+                  <img src="../img/blog.png" alt="teacher" width="60%" height="60%">
+                  <span class="icon_text">학원스토리</span>
                 </div>
-                <div class="membership_icons">
+                <!-- <div class="membership_icons">
                   <img src="../img/book.png" alt="achievement" width="60%" height="60%">
                   <span class="icon_text">학업성취도</span>
-                </div>
+                </div> -->
               </div>
 
 
@@ -164,7 +164,7 @@
             $am_price = $row["price"];
             $am_total_price = $am_price*(100-$am_discount)*0.01;
           ?>
-                <button type="button" class="membership_card am_product"
+                <button type="button" class="membership_card am_card"
                 onclick="location.href='./payment.php?month=<?=$am_month?>&discount=<?=$am_discount?>&price=<?=$am_price?>'" disabled>
                   <div class="card_wrap">
                     <div class="card_header">
@@ -227,16 +227,22 @@
       var $am_no = '<?=$am_no?>';
 
       if($gm_no){
-        $(".gm_product").attr("disabled", false);
-        $(".am_product").css("background", "rgba(46, 137, 255, 0.13)");
-        $(".am_product").css("cursor", "not-allowed");
+        $(".am_product").css("display", "none");
+        $(".gm_card").attr("disabled", false);
+        // $(".am_product").css("background", "rgba(46, 137, 255, 0.13)");
+        // $(".am_product").css("cursor", "not-allowed");
       }else if($am_no){
-        $(".am_product").attr("disabled", false);
-        $(".gm_product").css("background", "rgba(46, 137, 255, 0.13)");
-        $(".gm_product").css("cursor", "not-allowed");
+        $(".gm_product").css("display", "none");
+        $(".am_card").attr("disabled", false);
+        // $(".gm_product").css("background", "rgba(46, 137, 255, 0.13)");
+        // $(".gm_product").css("cursor", "not-allowed");
       }else {
-        alert('멤버십 서비스는 로그인 후 이용하실 수 있습니다.');
-        location.href='../login_join/login_form.php';
+        $(".gm_card").attr("disabled", false);
+        $(".am_card").attr("disabled", false);
+        $(".membership_card").click(function(){
+          alert('멤버십 서비스는 로그인 후 이용하실 수 있습니다.');
+          location.href='../login_join/login_form.php';
+        });
       }
 
     </script>
