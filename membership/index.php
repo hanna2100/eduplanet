@@ -5,16 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="utf-8">
     <title>멤버십 인덱스</title>
-    <!-- favicon -->
-    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+     <!-- favicon -->
+     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+     <!-- CSS -->
+     <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+     <link rel="stylesheet" href="/eduplanet/index/footer.css">
+     <link rel="stylesheet" href="/code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
      <link rel="stylesheet" href="./css/index.css">
+     <!-- 스크립트 -->
+     <script src="/eduplanet/mypage/js/review_write.js"></script>
+     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+     <!-- 자동완성 -->
+     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+     <!-- 아이콘 -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
+
   </head>
   <body>
     <header>
        <?php
-       // include "../index_header.php";
+      include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
        ?>
     </header>
 
@@ -106,14 +120,17 @@
           </div> <!--  end of mid_contents -->
 
           <div class="membership_section bottom_info">
-            <p>
-              [이용 안내] <br>
-              * 표시된 금액은 부가가치세(VAT) 별도 금액입니다.<br>
-              * 구매 기간동안 무제한으로 콘텐츠 열람이 가능합니다.<br>
-              * 이용 기간 중 PC, 모바일웹, 스마트폰(앱)에서 이용 가능합니다.<br>
-              * 구매 내역 및 정기권은 "My-결제/정기결제"에서 확인할 수 있습니다.<br>
-              * 콘텐츠 특성상 실사용 도중 해지 및 이에 따른 환불이 불가능합니다.<br>
-            </p>
+            <div class="bottom_info_container">
+              <p>
+                [이용 안내] <br>
+                * 표시된 금액은 부가가치세(VAT) 별도 금액입니다.<br>
+                * 구매 기간동안 무제한으로 콘텐츠 열람이 가능합니다.<br>
+                * 이용 기간 중 PC, 모바일웹, 스마트폰(앱)에서 이용 가능합니다.<br>
+                * 구매 내역 및 정기권은 "My-결제/정기결제"에서 확인할 수 있습니다.<br>
+                * 콘텐츠 특성상 실사용 도중 해지 및 이에 따른 환불이 불가능합니다.<br>
+              </p>
+            </div>
+
           </div>
 
 
@@ -122,7 +139,7 @@
     </section>
 
     <footer>
-      <?php include "../index/footer.php"; ?>
+       <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
     </footer>
     <script>
 

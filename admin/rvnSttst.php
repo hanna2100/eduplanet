@@ -73,13 +73,13 @@
 
 <?php
   if($m<10){
-    $m = "0".$m;
+    $m2 = "0".$m;
   }
 
   //매출데이터 가져오기
   $sql_arr = array();
-  array_push($sql_arr,"CALL get_gm_sales($y, $y, $m, $m)" );
-  array_push($sql_arr,"CALL get_am_sales($y, $y, $m, $m)" );
+  array_push($sql_arr,"CALL get_gm_sales($y, $y, $m2, $m2)" );
+  array_push($sql_arr,"CALL get_am_sales($y, $y, $m2, $m2)" );
 
   $total_arr = array();
   $total_arr = execute_multi($conn, $sql_arr);
@@ -142,7 +142,7 @@
         FROM 
           am_order
         WHERE 
-          date >= '$y-$m-01' AND date <= LAST_DAY('$y-$m-01')";
+          date >= '$y-$m2-01' AND date <= LAST_DAY('$y-$m2-01')";
 
   $result = mysqli_query($conn, $sql);
   if($result){
@@ -171,7 +171,7 @@
         FROM 
           gm_order
         WHERE 
-          date >= '$y-$m-01' AND date <= LAST_DAY('$y-$m-01')";
+          date >= '$y-$m2-01' AND date <= LAST_DAY('$y-$m2-01')";
 
   $result = mysqli_query($conn, $sql);
   if($result){
@@ -188,10 +188,10 @@
   $sql = "SELECT sum(if(pay_method = '스마일페이',1,0)) smile, sum(if(pay_method = '카카오페이',1,0)) kakao, sum(if(pay_method = '페이코',1,0)) payco
         FROM (
         (SELECT pay_method FROM am_order WHERE 
-          date >= '$y-$m-01' AND date <= LAST_DAY('$y-$m-01'))
+          date >= '$y-$m2-01' AND date <= LAST_DAY('$y-$m2-01'))
         union all
         (SELECT pay_method FROM gm_order WHERE 
-          date >= '$y-$m-01' AND date <= LAST_DAY('$y-$m-01'))
+          date >= '$y-$m2-01' AND date <= LAST_DAY('$y-$m2-01'))
         )tbl";
   $result = mysqli_query($conn, $sql);
   if($result){
@@ -276,56 +276,63 @@ var payco = <?=$payco?>;
     <div id="g_members_list_wrap">
       <div id="g_members_list">
         <h4>
-          <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Academy member Management
-          <div class="selectbox">
-            <select id="search_select">
-              <option>회원번호</option>
-              <option>아이디</option>
-              <option>이메일</option>
-              <option>학원번호</option>
-              <option>학원명</option>
-              <option>대표자명</option>
-              <option>유료만료일</option>
-              <option>가입일</option>
-            </select>
-          </div>
-          <div class='search-box'>
-            <div class='search-form'>
-              <input class='form-control' placeholder='검색어를 입력하세요' type='text'>
-              <button class='btn btn-link search-btn' onclick="onclickSearch()" >
-              <i class="fas fa-search"></i>
-              </button>
-            </div>
-          </div>
+          <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Daily sales
         </h4>
-        <!-- end of 검색창 -->
-
-        <div class="list_edit_delete_wrap">
-          <button onclick="openWating()">가입대기회원</button>
-          <button onclick="openApiUpdate()">학원데이터 업데이트</button>
-          <button onclick="submitUpdate()">수정</button>
-          <button onclick="submitDelete()">삭제</button>
-        </div>
         <ul id="member_list">
 				<li>
-					<span class="col1">No</span>
-					<span class="col2">회원번호</span>
-					<span class="col3">아이디</span>
-					<span class="col4">이메일</span>
-					<span class="col5">학원번호</span>
-					<span class="col6">학원명</span>
-					<span class="col7">대표자명</span>
-					<span class="col8">유료만료일</span>
-					<span class="col9">가입일</span>
+					<span class="col1">날짜</span>
+					<span class="col2">Prm-1</span>
+					<span class="col3">Prm-2</span>
+					<span class="col4">Prm-3</span>
+					<span class="col5">Acd-1</span>
+					<span class="col6">Acd-2</span>
+					<span class="col7">Acd-3</span>
+					<span class="col8">프리미엄 매출</span>
+					<span class="col9">학원관리 매출</span>
+					<span class="col10">총합</span>
 				</li>
 <?php
-        $sql='';
-
-        if($col!='' && $search !=''){
-          $sql = "SELECT * FROM a_members WHERE $col LIKE '%$search%' AND approval = 'Y' ORDER BY regist_day DESC";
-        }else{
-          $sql = "SELECT * FROM a_members WHERE approval = 'Y' ORDER BY regist_day DESC";
-        }
+        $sql="SELECT 
+              a.date,
+              SUM(IF(a.prdct_name_month = '프리미엄 1개월',
+                  1,
+                  NULL)) AS gm1,
+              SUM(IF(a.prdct_name_month = '프리미엄 2개월',
+                  1,
+                  NULL)) AS gm2,
+              SUM(IF(a.prdct_name_month = '프리미엄 3개월',
+                  1,
+                  NULL)) AS gm3,
+              SUM(IF(a.prdct_name_month = '학원관리 1개월',
+                  1,
+                  NULL)) AS am1,
+              SUM(IF(a.prdct_name_month = '학원관리 2개월',
+                  1,
+                  NULL)) AS am2,
+              SUM(IF(a.prdct_name_month = '학원관리 3개월',
+                  1,
+                  NULL)) AS am3,
+              SUM(IF(a.prdct_name_month LIKE '프리미엄%',
+                  a.price,
+                  NULL)) AS go_sales,
+              SUM(IF(a.prdct_name_month LIKE '학원관리%',
+                  a.price,
+                  NULL)) AS ao_sales,
+              SUM(a.price) AS total_sales
+          FROM
+              ((SELECT 
+                  gm_order.date, gm_order.prdct_name_month, gm_order.price
+              FROM
+                  gm_order) UNION ALL (SELECT 
+                  am_order.date, am_order.prdct_name_month, am_order.price
+              FROM
+                  am_order)) a
+          WHERE
+              a.date >= '$y-$m2-01'
+                  AND a.date <= LAST_DAY('$y-$m2-01')
+          GROUP BY a.date
+          ORDER BY a.date DESC;
+          ";
 
         $result = mysqli_query($conn, $sql);
         $total_record = mysqli_num_rows($result); 
@@ -349,27 +356,29 @@ var payco = <?=$payco?>;
           // 가져올 레코드로 위치(포인터) 이동
           mysqli_data_seek($result, $i);
           $row = mysqli_fetch_array($result);
-          $no         = $row["no"];
-          $id          = $row["id"];
-          $email        = $row["email"];
-          $acd_no       = $row["acd_no"];
-          $acd_name       = $row["acd_name"];
-          $rprsn       = $row["rprsn"];
-          $expiry_day       = $row["expiry_day"];
-          $regist_day  = $row["regist_day"];
+
+          $date         = $row["date"];
+          $gm1          = $row["gm1"];
+          $gm2        = $row["gm2"];
+          $gm3       = $row["gm3"];
+          $am1       = $row["am1"];
+          $am2       = $row["am2"];
+          $am3       = $row["am3"];
+          $go_sales  = $row["go_sales"];
+          $ao_sales  = $row["ao_sales"];
+          $total_sales  = $row["total_sales"];
 ?>
         <li class="list_row">
-        <form method="post" action="#">
-          <span class="col1"><?=$number?></span>
-          <span class="col2"><input type="text" name="no[]" value="<?=$no?>" readonly></span>
-          <span class="col3"><?=$id?></span>
-          <span class="col4"><input type="text" name="email[]" value="<?=$email?>" disabled maxlength="80" oninput="limitMaxLength(this)"/></span>
-          <span class="col5"><?=$acd_no?></span>
-          <span class="col6"><?=$acd_name?></span>
-          <span class="col7"><?=$rprsn?></span>
-          <span class="col8"><input class="date_field" type="text" name="expiry_day[]" value="<?=$expiry_day?>" disabled readonly></span>
-          <span class="col9"><?=$regist_day?></span>
-        </form>
+          <span class="col1"><?=$date?></span>
+          <span class="col2"><?=$gm1?></span>
+          <span class="col3"><?=$gm2?></span>
+          <span class="col4"><?=$gm3?></span>
+          <span class="col5"><?=$am1?></span>
+          <span class="col6"><?=$am2?></span>
+          <span class="col7"><?=$am3?></span>
+          <span class="col8"><?=$go_sales?></span>
+          <span class="col9"><?=$ao_sales?></span>
+          <span class="col10"><?=$total_sales?></span>
         </li>	
 			
 <?php
@@ -412,10 +421,8 @@ var payco = <?=$payco?>;
             $next = $last_page + 1;// > 버튼 누를때 나올 페이지
             $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
 
-            $url = "/eduplanet/admin/am_members.php?y=$y&m=$m";
-            if($search!=''){
-              $url .= "&col=$col&search=$search";
-            }
+            $url = "/eduplanet/admin/rvnSttst.php?y=$y&m=$m";
+            
             // 첫번째 페이지일 때 앵커 비활성화
             if ($first_page == 1) {
               if($page!=1)

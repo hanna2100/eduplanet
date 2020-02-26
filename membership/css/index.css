@@ -49,8 +49,21 @@ body {
 /*  하단 이용안내 */
 .bottom_info {
   background-color: #333333;
-  font-size: 1em;
+  font-size: 1.2em;
   color: #fff;
+  position: relative;
+}
+.bottom_info_container {
+  position: absolute;
+  width: 80%;
+  height: 100%;
+  top : 20%;
+  left : 0%;
+}
+.bottom_info p {
+  margin : 0 auto;
+  width: 80%;
+  height: 100%;
   text-align: left;
 }
 

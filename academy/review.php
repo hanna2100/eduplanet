@@ -7,7 +7,7 @@
      <title>review test</title>
      <!-- favicon -->
      <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
-     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">\
+     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <!-- 자동완성 -->
      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -25,19 +25,18 @@
      <!-- word cloud  -->
      <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
      <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
-
      <!-- CSS -->
+     <link rel="stylesheet" href="./css/review.css">
      <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
      <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
      <link rel="stylesheet" href="/eduplanet/index/footer.css">
      <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
-     <link rel="stylesheet" href="./css/review.css">
    </head>
    <body>
      <header>
          <?php
           include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
-          // include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/academy/header/academy_header.php";
+          include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/academy/header/academy_header.php";
          ?>
      </header>
 
@@ -45,7 +44,7 @@
         include "../lib/db_connector.php";
         $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : 1;
         // $no : academy 테이블의 no, review 테이블의 parent
-        $no = isset($_GET["no"]) ?  $_GET["no"] : 9;
+        $no = isset($_GET["no"]) ?  $_GET["no"] : 7;
         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
         // content_top
@@ -78,6 +77,9 @@
 
                 <script>
                 var rate_point = '<?=$rate_point?>';
+                for(var i=1;i<=rate_point;i++){
+                 $(".rate_star_ty1 span:nth-child("+i+")").addClass("checked");
+                }
                 console.log("1",rate_point);
                 </script>
 

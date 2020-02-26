@@ -327,6 +327,7 @@ function membersGraph(lbl, gm_in, am_in){
 }
 
 function salesGraph(){
+    
     var ctx = document.getElementById('dash_salesGraph').getContext('2d');
     var chart = new Chart(ctx, {
         // The type of chart we want to create
