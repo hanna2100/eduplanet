@@ -17,6 +17,9 @@
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
 
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
     <!-- CSS -->
     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_out.css">
     <link rel="stylesheet" href="/eduplanet/index/footer.css">
@@ -34,10 +37,10 @@
     <script>
         function selectOption() {
 
-            selectDistrict = document.getElementById("story_list_select_district").value;
+            selectDis = document.getElementById("story_list_select_district").value;
             selectSort = document.getElementById("story_list_select_mode").value;
 
-            location.href = "/eduplanet/acd_story/index.php?district=" + selectDistrict + "&sort=" + selectSort;
+            location.href = "/eduplanet/acd_story/index.php?district=" + selectDis + "&sort=" + selectSort;
         }
     </script>
 
@@ -98,26 +101,26 @@
             if ($selectDis != "") {
 
                 if ($selectSort == "star_max") {
-                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY review.total_star DESC";
+                    $sql = "SELECT academy.no as acd_no, acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY review.total_star DESC";
                 } else if ($selectSort == "hit_max") {
-                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY acd_story.hit DESC";
+                    $sql = "SELECT academy.no as acd_no, acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY acd_story.hit DESC";
 
                     // 기본 셋팅은 최근 등록순
                 } else {
-                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY acd_story.no DESC";
+                    $sql = "SELECT academy.no as acd_no, acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE academy.si_name='$selectDis' GROUP BY acd_story.no ORDER BY acd_story.no DESC";
                 }
 
                 // 지역 옵션이 선택되지 않았을 때
             } else if ($selectDis == "") {
 
                 if ($selectSort == "star_max") {
-                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY review.total_star DESC";
+                    $sql = "SELECT academy.no as acd_no, acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY review.total_star DESC";
                 } else if ($selectSort == "hit_max") {
-                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY acd_story.hit DESC";
+                    $sql = "SELECT academy.no as acd_no, acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY acd_story.hit DESC";
 
                     // 기본 셋팅은 최근 등록순
                 } else {
-                    $sql = "SELECT acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY acd_story.no DESC";
+                    $sql = "SELECT academy.no as acd_no, acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent GROUP BY acd_story.no ORDER BY acd_story.no DESC";
                 }
             }
 
@@ -131,7 +134,23 @@
 
                 <h2>
                     학원 스토리
+
+                    <?php
+                        if ($am_no) {
+                    ?>
+
                     <button id="button_write_story" onclick="location.href='/eduplanet/acd_story/post.php'">스토리 등록</button>
+                    
+                    <?php
+                        } else {
+                    ?>        
+
+                    <a href="javascript:alert('기업회원만 이용 가능합니다.');"><button id="button_write_story">스토리 등록</button></a>
+
+                    <?php
+                        }
+                    ?>
+                        
                 </h2>
                 <span id="story_total_span">총 <span id="story_total_num"><?= $total_record ?></span> 개의 스토리가 있습니다.</span>
 
@@ -205,6 +224,7 @@
                     $row = mysqli_fetch_array($result);
 
                     $no = $row["no"];
+                    $acd_no = $row["acd_no"];
                     $parent = $row["parent"];
                     $acd_name = $row["acd_name"];
                     $title = $row["title"];
@@ -214,22 +234,24 @@
                     $file_copy = $row["file_copy"];
                     $hit = $row["hit"];
                     $si_name = $row["si_name"];
-                    $total_star = $row["total_star"];
+
+                    $sql = "SELECT AVG(total_star) as total_star FROM review WHERE parent='$parent'";
+                    $result_total_star = mysqli_query($conn, $sql);
+                    $row_total_star = mysqli_fetch_array($result_total_star);
+                    $total_star = $row_total_star["total_star"];
+                    $total_star = sprintf('%0.1f', $total_star);
 
                     if ($row["file_name"]) {
                         $file_image = "<img src='./img/file.gif' height='13'>";
                     } else {
                         $file_image = "";
                     }
-
-
                 ?>
 
                     <li>
                         <!-- 하나의 스토리 -->
                         <div class="story_list_column">
 
-                            <!-- <a href="/eduplanet/acd_story/view.php?no=<//?=$no?>&si_name=<//?=$si_name?>&total_star=<//?$total_star?>"> -->
                             <a href="/eduplanet/acd_story/view.php?no=<?= $no ?>">
                                 <div class="story_list_column_img">
                                     <img src="/eduplanet/data/<?= $file_copy ?>" alt="story_list_column_img">
@@ -241,14 +263,30 @@
 
                             <div class="story_academy_heart">
                                 <span>학원 찜하기</span>
+
+                                <?php 
+                                    if ($gm_no) {
+                                ?>
+
                                 <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart">like</button></a>
+                                
+                                <?php
+                                    } else {
+                                ?>
+
+                                <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
+
+                                <?php
+                                    }
+                                ?>
+
                             </div>
 
                             </h1>
                             <p id="story_text_title_sub"><?= $subtitle ?></p>
 
                             <div class="story_list_column_academy_info">
-                                <span id="academy_title_span"><?= $acd_name ?></span>
+                                <a href="/eduplanet/academy/index.php?no=<?=$acd_no?>"><span id="academy_title_span"><?= $acd_name ?></span></a>
                                 <span id="academy_district"><?= $si_name ?></span>
 
                                 <div class="academy_small_star">

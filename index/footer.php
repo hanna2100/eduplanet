@@ -1,3 +1,5 @@
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/session_start.php"; ?>
+
 <div class="footer_wrap">
 
     <div class="footer_header_wrap">
@@ -11,7 +13,24 @@
             <li class="menu_list"><a href="#">공지사항</a></li>
             <li class="menu_list"><a href="#">광고 및 제휴문의</a></li>
             <li class="menu_list"><a href="#">고객문의</a></li>
-            <li class="menu_list_last"><a href="#">FAQ</a></li>
+            <li class="menu_list"><a href="#">FAQ</a></li>
+
+            <?php
+                if($admin) {
+            ?>
+
+            <li class="menu_list_last"><a href="/eduplanet/admin/index.php">ADMIN</a></li>
+            
+            <?php
+                } else {
+            ?>
+
+            <li class="menu_list_last"><a href="javascript:alert('관리자만 이용 가능합니다.');">ADMIN</a></li>
+
+            <?php
+                }
+            ?>
+            
         </ul>
 
         </div>

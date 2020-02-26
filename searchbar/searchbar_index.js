@@ -1,23 +1,29 @@
 $(function(){
-
+    
+    // 선택한 시/군, 검색어 ajax로 요청
     $("#acd_name_index").autocomplete({
+        
         source : function( request, response ) {
             
+            var selectDis = $("#select_district option:selected").val();
+
             $.ajax({
                 type: 'post',
                 url: "/eduplanet/searchbar/auto_searchbar.php",
                 dataType: "json",
-                data: { search : request.term },
+
+                data: { 
+                    search : request.term,
+                    selectDis : selectDis
+                },
+
                 success: function(data) {
                     response(data);
-                    // alert("ㅠㅠ");
                 },
 
                 error:function(request,status,error){
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
-                
-                
             });
         },
 

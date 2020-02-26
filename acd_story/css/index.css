@@ -244,7 +244,7 @@ ul {
     /* border: 1px solid black; */
     border-right: 1px solid rgb(185, 185, 185);
     text-align: center;
-    padding-top: 7px;
+    padding-top: 12px;
     box-sizing: border-box;
     color: lightgray;
 }
@@ -256,7 +256,7 @@ ul {
     height: 35px;
     /* border: 1px solid black; */
     text-align: center;
-    padding-top: 7px;
+    padding-top: 12px;
     box-sizing: border-box;
     color: lightgray;
 }

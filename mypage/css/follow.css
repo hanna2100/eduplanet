@@ -301,9 +301,9 @@ ul {
 /* 별점이미지 */
 /* 별점바꿀때는 id로 식별하기 */
 .acd_star_class {
-    background: url('/eduplanet/img/common_sprite.png') no-repeat 0 -4039px;
+    /* background: url('/eduplanet/img/yellow_star.png') no-repeat 0 0; */
     width: 15px;
-	height: 14px;
+	height: 15px;
 }
 
 .follow_academy_star_num {
@@ -354,7 +354,7 @@ ul {
     /* border: 1px solid black; */
     border-right: 1px solid rgb(185, 185, 185);
     text-align: center;
-    padding-top: 7px;
+    padding-top: 12px;
     box-sizing: border-box;
     color: lightgray;
 }
@@ -366,7 +366,7 @@ ul {
     height: 35px;
     /* border: 1px solid black; */
     text-align: center;
-    padding-top: 7px;
+    padding-top: 12px;
     box-sizing: border-box;
     color: lightgray;
 }
