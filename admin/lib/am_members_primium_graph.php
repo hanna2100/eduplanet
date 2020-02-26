@@ -13,7 +13,6 @@
 
 $y   = $_POST['y'];
 $m   = $_POST['m'];
-$mode   = $_POST['mode'];
 
 include_once '../../lib/db_connector.php';
 

@@ -36,7 +36,7 @@ $dbconn = mysqli_select_db($conn,"eduplanet") or die('Error: '.mysqli_error($con
 include_once 'create_table.php';
 $table_name = array('academy', 'academy_temp', 'g_members', 'a_members', 'teacher', 'lecture'
                     , 'review', 'acd_story', 'product', 'gm_order', 'am_order'
-                    , 'sales', 'follow', 'withdrawal');
+                    , 'follow', 'withdrawal');
 
 for($i=0; $i<sizeof($table_name); $i++){
   create_table($conn, $table_name[$i]);
@@ -45,7 +45,7 @@ for($i=0; $i<sizeof($table_name); $i++){
 //4. 프로시저 생성
 include_once 'create_procedure.php';
 $prcd_name = array('get_join_g_members', 'get_join_a_members', 'get_wthdr_g_members'
-, 'get_wthdr_a_members', 'get_new_academy_serialize', 'get_empty_academy_serialize'
+, 'get_wthdr_a_members', 'get_new_academy_serialize', 'get_empty_academy_serialize', 'get_am_sales', 'get_gm_sales'
 , 'modify_data_for_testing');
 for($i=0; $i<sizeof($prcd_name); $i++){
   create_procedure($conn, $prcd_name[$i]);
@@ -57,7 +57,7 @@ include_once 'insert_init_data.php';
 
 $table_name = array('academy', 'g_members', 'a_members', 'teacher', 'lecture'
                     , 'review', 'acd_story', 'product', 'gm_order', 'am_order'
-                    , 'sales', 'follow', 'withdrawal');
+                    , 'follow', 'withdrawal');
 for($i=0; $i<sizeof($table_name); $i++){
   insert_init_data($conn, $table_name[$i]);
 }

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- favicon -->
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
   <!-- jquery -->
   <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="/eduplanet/admin/js/admin.js"></script>
@@ -50,7 +50,7 @@
 <section>
   <div class="sec_top">
     <span onclick="prevDateChange('rvnSttst')"><i class="fas fa-angle-left"></i></span>
-    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting('am_members')">
+    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting('rvnSttst')">
 <?php
     for($i = 2018; $i<=date("Y"); $i++){
       echo "<option>$i</option>";
@@ -72,90 +72,203 @@
   <!--end of 년 월 선택바 -->
 
 <?php
-  $m2 = $m;
-  if($m2<10){
-    $m2 = "0".$m2;
+  if($m<10){
+    $m = "0".$m;
   }
+
+  //매출데이터 가져오기
+  $sql_arr = array();
+  array_push($sql_arr,"CALL get_gm_sales($y, $y, $m, $m)" );
+  array_push($sql_arr,"CALL get_am_sales($y, $y, $m, $m)" );
+
+  $total_arr = array();
+  $total_arr = execute_multi($conn, $sql_arr);
+
+  $gm_sales = $total_arr[0]; //일반회원 일별 매출
+  $am_sales = $total_arr[1]; //학원회원 일별 매출
+  $total_sales = array(); //전체 일별 매출
+
+  for($i=0; $i<sizeof($gm_sales); $i++){
+    $day_sales = $gm_sales[$i] + $am_sales[$i];
+    array_push($total_sales, $day_sales);
+    
+  }
+
+  function execute_multi($conn, $sql_arr){
+    $total_arr = array();
+    $am_sales = array();
+    $gm_sales = array();
+
+    $sql = implode(';', $sql_arr) . ';';
+
+    if (mysqli_multi_query($conn, $sql)) {
+
+        $flag = false;
+        do {
+            if ($result = mysqli_store_result($conn)) {
+                $total_record = mysqli_num_rows($result);
+                while ($row = mysqli_fetch_row($result)) {
+                  //row0번이 날짜, 1번이 매출
+                  $data = $row[1];
+                  $data = $data==NULL? 0: $data;
+
+                  if($flag==false){
+                      array_push($am_sales, $data);
+                  }else{
+                      array_push($gm_sales, $data);
+                  }
+                }
+                mysqli_free_result($result);
+                $flag = true;
+            }
+        } while (mysqli_next_result($conn));
+
+        array_push($total_arr, $am_sales);
+        array_push($total_arr, $gm_sales);
+        return $total_arr;
+    }
+  }
+
   $sql = "SELECT 
-            COUNT(*) AS count 
-          FROM
-            a_members
-          WHERE
-            regist_day BETWEEN '19-01-01' AND LAST_DAY('$y-$m2-01');";
+          COUNT(IF(prdct_name_month = '학원관리 1개월',
+              1,
+              NULL)) AS one,
+          COUNT(IF(prdct_name_month = '학원관리 2개월',
+              1,
+              NULL)) AS two,
+          COUNT(IF(prdct_name_month = '학원관리 3개월',
+              1,
+              NULL)) AS three
+        FROM 
+          am_order
+        WHERE 
+          date >= '$y-$m-01' AND date <= LAST_DAY('$y-$m-01')";
 
   $result = mysqli_query($conn, $sql);
-  $row = mysqli_fetch_array($result);
-  $total_m = $row['count'];
+  if($result){
+    $row = mysqli_fetch_array($result);
+    $am_prdct_one = $row['one'];
+    $am_prdct_two = $row['two'];
+    $am_prdct_thr = $row['three'];
+  }else{
+    $am_prdct_one = 0;
+    $am_prdct_two = 0;
+    $am_prdct_thr = 0;
+    
+  }
+
+  
+  $sql = "SELECT 
+          COUNT(IF(prdct_name_month = '프리미엄 1개월',
+              1,
+              NULL)) AS one,
+          COUNT(IF(prdct_name_month = '프리미엄 2개월',
+              1,
+              NULL)) AS two,
+          COUNT(IF(prdct_name_month = '프리미엄 3개월',
+              1,
+              NULL)) AS three
+        FROM 
+          gm_order
+        WHERE 
+          date >= '$y-$m-01' AND date <= LAST_DAY('$y-$m-01')";
+
+  $result = mysqli_query($conn, $sql);
+  if($result){
+    $row = mysqli_fetch_array($result);
+    $gm_prdct_one = $row['one'];
+    $gm_prdct_two = $row['two'];
+    $gm_prdct_thr = $row['three'];
+  }else{
+    $gm_prdct_one = 0;
+    $gm_prdct_two = 0;
+    $gm_prdct_thr = 0;
+  }
+
+  $sql = "SELECT sum(if(pay_method = '스마일페이',1,0)) smile, sum(if(pay_method = '카카오페이',1,0)) kakao, sum(if(pay_method = '페이코',1,0)) payco
+        FROM (
+        (SELECT pay_method FROM am_order WHERE 
+          date >= '$y-$m-01' AND date <= LAST_DAY('$y-$m-01'))
+        union all
+        (SELECT pay_method FROM gm_order WHERE 
+          date >= '$y-$m-01' AND date <= LAST_DAY('$y-$m-01'))
+        )tbl";
+  $result = mysqli_query($conn, $sql);
+  if($result){
+    $row = mysqli_fetch_array($result);
+    $kakao = $row['kakao'];
+    $smile = $row['smile'];
+    $payco = $row['payco'];
+  }else{
+    $kakao = 0;
+    $smile = 0;
+    $payco = 0;
+  }
 
 ?>
+<script>
+
+var gm_sales = <?= json_encode($gm_sales);?>;
+var am_sales = <?= json_encode($am_sales);?>;
+
+var am_prdct_one = <?=$am_prdct_one?>;
+var am_prdct_two = <?=$am_prdct_two?>;
+var am_prdct_thr = <?=$am_prdct_thr?>;
+
+var gm_prdct_one = <?=$gm_prdct_one?>;
+var gm_prdct_two = <?=$gm_prdct_two?>;
+var gm_prdct_thr = <?=$gm_prdct_thr?>;
+
+var kakao = <?=$kakao?>;
+var smile = <?=$smile?>;
+var payco = <?=$payco?>;
+
+</script>
+
 <!--end of 총 회원수 가져오기 -->
   <div class="sec_content">
     <div id="dash_topline">
       <div>
         <span>월 총 수익</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-friends"></i>&nbsp;<span id="total_rvn"><?=$total_m?></span></span>
+        <span class="dash_topline_i"><i class="fas fa-money-bill-wave"></i>&nbsp;<span id="total_rvn"><?=number_format(array_sum($total_sales))?></span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
         <span>일반회원 수익</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-plus"></i>&nbsp;<span id="gm_rvn">0</span></span>
+        <span class="dash_topline_i"><i class="fas fa-user"></i>&nbsp;<span id="gm_rvn"><?=number_format(array_sum($gm_sales))?></span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
         <span>사업자회원 수익</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-minus"></i>&nbsp;<span id="am_rvn">0</span></span>
+        <span class="dash_topline_i"><i class="fas fa-user-tie"></i>&nbsp;<span id="am_rvn"><?=number_format(array_sum($am_sales))?></span></span>
         <span class="caret down"><i class="fas fa-caret-down"></i></span>
       </div>
     </div>
-    <!--end of 상단 회원수 변화-->
+    <!--end of 상단 수익 정보-->
 
     <div id="g_members_totalGraph_wrap">
       <div id="g_members_totalGraph_cell1">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Academy member Graph<span>단위: 명</span></h4>
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Sales Graph<span>단위: 만원</span></h4>
         <canvas id="g_members_totalGraph"></canvas>
         <div class="btn_hide">
           <button>숨기기</button>
         </div>
       </div>
     </div>
-    <!-- end of 회원수 변화 그래프 -->
+    <!-- end of 수익 변화 그래프 -->
 
     <div style="display:flex; width:960px; margin-bottom: 50px;">
       <div id="dash_pm_ratio_wrap">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Premium membership Ratio</h4>
-        <canvas id="dash_pm_ratio"></canvas>
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;일반회원 구매품목</h4>
+        <canvas id="dash_prcd1_ratio"></canvas>
       </div>
-      <div id="dash_city_rank_wrap">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Members City</h4>
-        <div id="dash_dong_rank_wrap">
-<?php
-        for($i=1; $i<=5; $i++){
-?>
-          <div class="dasn_dong_detail">
-            <span class="dasn_dong_label">-</span>
-            <span class="dasn_dong_data">-</span>
-          </div>
-<?php
-        }
-?>
-        </div>
+      <div id="dash_pm_ratio_wrap">
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;사업자회원 구매품목</h4>
+        <canvas id="dash_prcd2_ratio"></canvas>
       </div>
-      <!--  -->
       <div id="dash_postGraph_wrap">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Members Class</h4>
-      <!-- 관심사 단어 순위 -->
-      <div id="dash_intres_world_wrap">
-<?php
-        for($i=1; $i<=5; $i++){
-?>
-          <div class="dasn_intres_detail">
-            <span class="dasn_intres_label">0</span>
-            <span class="dasn_intres_data"></span>
-          </div>
-<?php
-        }
-?>
-        </div>
+      <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;주요 결제수단</h4>
+        <canvas id="dash_method_ratio"></canvas>
       </div>
     </div>
     <!-- end of 그래프 3개 -->
