@@ -47,7 +47,8 @@
         <h1 class="text-center mb-3">강의 정보</h1>
       <?php
         include "../lib/db_connector.php";
-        $sql = "select * from teacher where parent=1";
+        $parent = 1;
+        $sql = "select * from teacher where parent='$parent'";
         $result = mysqli_query($conn, $sql);
         $row_num = mysqli_num_rows($result);
       ?>
