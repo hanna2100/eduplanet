@@ -7,21 +7,38 @@
     <title>멤버십 결제페이지</title>
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
-     <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
-     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="./css/payment.css">
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <!-- 결제 라이브러리 -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/payment.css">
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+    <!-- 스크립트 -->
+    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
+
   </head>
   <body>
     <header>
        <?php
-       // include "../index_header.php";
+        include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
        ?>
     </header>
 
 
     <section>
       <?php
+        $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : "";
+        $am_no = isset($_SESSION["am_no"]) ?  $_SESSION["am_no"] : "";
+
+        $product = $gm_no ? '프리미엄' : '학원관리' ;
+
         if(isset($_GET['month']) && isset($_GET['discount']) && isset($_GET['price'])){
           $month = $_GET['month'];
           $discount = $_GET['discount'];
@@ -42,7 +59,7 @@
           <div class="payment_wrap">
 
             <div class="grid payment_header">
-              <h2>프리미엄 - <span><?=$month?></span>개월 결제</h2>
+              <h2><?=$product?> - <span><?=$month?></span>개월 결제</h2>
               <div class="period">이용기간 <span><?=$today?></span> ~ <span><?=date("yy.m.d", $expired_date)?></span></div>
             </div>
 
@@ -161,9 +178,11 @@
     </section>
 
     <footer>
-     <?php include "../index/footer.php"; ?>
+       <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
     </footer>
     <script>
+      var $gm_no = '<?=$gm_no?>';
+      var $am_no = '<?=$am_no?>';
       var month = '<?= $month ?>';
       var final_price = '<?= $final_price ?>';
       var expired_date = '<?= $expired_date ?>';

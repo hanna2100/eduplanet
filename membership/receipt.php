@@ -7,19 +7,33 @@
     <title>결제 완료 페이지</title>
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
-     <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
-     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="./css/receipt.css">
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
+    <link rel="stylesheet" href="/code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="./css/receipt.css">
+    <!-- 스크립트 -->
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
+    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
   </head>
   <body>
     <header>
        <?php
-       // include "../index_header.php";
+        include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
        ?>
     </header>
 
     <?php
       $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : "";
+      $am_no = isset($_SESSION["am_no"]) ?  $_SESSION["am_no"] : "";
 
       include "../lib/db_connector.php";
       if(isset($_GET['product']) && isset($_GET['price']) && isset($_GET['payMethod']) && isset($_GET['expired_date'])){
@@ -33,10 +47,18 @@
 
       $status = "결제완료";
       $expired_date = date("yy-m-d", $expired_date);
-      $sql_gm_order = "INSERT INTO `gm_order` VALUES (null, $gm_no, '$product', $price, '$payMethod', '$status', '$expired_date');";
-      $sql_g_members = "UPDATE `g_members` SET expiry_day='$expired_date' where no=$gm_no;";
-      mysqli_query($conn, $sql_gm_order);
-      mysqli_query($conn, $sql_g_members);
+      if($gm_no){
+        $sql_order = "INSERT INTO `gm_order` VALUES (null, $gm_no, '$product', $price, '$payMethod', '$status', '$expired_date');";
+        $sql_members = "UPDATE `g_members` SET expiry_day='$expired_date' where no=$gm_no;";
+        $product_info = "학원정보/리뷰 열람";
+      }else if($am_no){
+        $sql_order = "INSERT INTO `am_order` VALUES (null, $am_no, '$product', $price, '$payMethod', '$status', '$expired_date');";
+        $sql_members = "UPDATE `a_members` SET expiry_day='$expired_date' where no=$am_no;";
+        $product_info = "학원 스토리 포스팅";
+      }
+
+      mysqli_query($conn, $sql_order);
+      mysqli_query($conn, $sql_members);
       mysqli_close($conn);
     ?>
 
@@ -55,7 +77,7 @@
               </li>
               <li>
                 <span class="key">설명</span>
-                <span class="value">학원정보/리뷰 열람</span>
+                <span class="value"><?=$product_info?></span>
               </li>
               <li>
                 <span class="key">금액</span>
@@ -74,7 +96,7 @@
     </section>
 
     <footer>
-       <?php include "../index/footer.php"; ?>
+       <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
     </footer>
   </body>
 </html>

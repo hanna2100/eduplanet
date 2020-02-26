@@ -28,11 +28,18 @@
   <body>
     <header>
        <?php
-      include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
+        include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
        ?>
     </header>
 
     <section>
+        <?php
+          $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : "";
+          $am_no = isset($_SESSION["am_no"]) ?  $_SESSION["am_no"] : "";
+
+          include "../lib/db_connector.php";
+        ?>
+
         <div class="membership_container">
           <div class="membership_section top_banner">
               top_banner
@@ -65,13 +72,9 @@
               </div>
 
 
-
               <div class="whole_card_wrapper">
 
           <?php
-            $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : "";
-
-            include "../lib/db_connector.php";
             $sql = "select * from product where prdct_name='프리미엄'";
             $result = mysqli_query($conn, $sql);
             $num_of_records = mysqli_num_rows($result);
@@ -79,29 +82,30 @@
             for ($i=0;$i<$num_of_records;$i++){
             mysqli_data_seek($result, $i);
             $row = mysqli_fetch_array($result);
-            $month = $row["month"];
-            $discount = $row["discount"];
-            $price = $row["price"];
-            $total_price = $price*(100-$discount)*0.01;
+            $gm_month = $row["month"];
+            $gm_price = $row["price"];
+            $gm_discount = $row["discount"];
+            $gm_total_price = $gm_price*(100-$gm_discount)*0.01;
           ?>
-                <button type="button" class="membership_card" onclick="loginCheck();">
+                <button type="button" class="membership_card gm_product"
+                onclick="location.href='./payment.php?month=<?=$gm_month?>&discount=<?=$gm_discount?>&price=<?=$gm_price?>'" disabled>
                   <div class="card_wrap">
                     <div class="card_header">
                       <div class="membership_card_title">
-                        <span class="month"><?=$month?>개월</span><span class="membership_tag">BEST</span>
+                        <span class="month"><?=$gm_month?>개월</span><span class="membership_tag">BEST</span>
                       </div>
                       <dl class="price_info clearfix">
                         <dt class="hide">가격</dt>
-                          <dd class="discount">-<?=$discount?>%</dd>
-                          <dd class="price_by_month">월<?=$total_price/$month?>원</dd>
+                          <dd class="discount">-<?=$gm_discount?>%</dd>
+                          <dd class="price_by_month">월<?=$gm_total_price/$gm_month?>원</dd>
                       </dl>
                     </div>
                     <div class="card_content">
                       <dl class="price_info clearfix">
                         <dt class="hide">원가</dt>
-                         <dd class="original_price"><del><?=$price?>원</del></dd>
+                         <dd class="original_price"><del><?=$gm_price?>원</del></dd>
                         <dt class="hide">할인가</dt>
-                         <dd class="discount_price">총 <?=$total_price?>원</dd>
+                         <dd class="discount_price">총 <?=$gm_total_price?>원</dd>
                        </dl>
                      </div>
                      <div class="card_bottom">
@@ -111,7 +115,84 @@
                  </button>
 
                <?php
-             }
+             } // end of for
+             ?>
+
+              </div> <!--  end of whole_card_wrapper -->
+
+          </div> <!--  end of mid_contents -->
+
+          <div class="membership_section mid_contents">
+            <h2>학원관리</h2>
+            <div class="mid_sub_title">학원 회원으로 멤버십 가입하면 우리 학원의 스토리를 포스팅 할 수 있습니다!</div>
+              <div class="membership_icons_wrap">
+                <div class="membership_icons">
+                  <img src="../img/facilities.png" alt="facilities" width="60%" height="60%">
+                  <span class="icon_text">시설</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/budget.png" alt="cost-effective" width="60%" height="60%">
+                  <span class="icon_text">수강료만족도</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/bus.png" alt="Traffic convenience" width="60%" height="60%">
+                  <span class="icon_text">교통편의성</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/work.png" alt="teacher" width="60%" height="60%">
+                  <span class="icon_text">강사</span>
+                </div>
+                <div class="membership_icons">
+                  <img src="../img/book.png" alt="achievement" width="60%" height="60%">
+                  <span class="icon_text">학업성취도</span>
+                </div>
+              </div>
+
+
+              <div class="whole_card_wrapper">
+
+          <?php
+            $sql = "select * from product where prdct_name='학원관리'";
+            $result = mysqli_query($conn, $sql);
+            $num_of_records = mysqli_num_rows($result);
+
+            for ($i=0;$i<$num_of_records;$i++){
+            mysqli_data_seek($result, $i);
+            $row = mysqli_fetch_array($result);
+            $am_month = $row["month"];
+            $am_discount = $row["discount"];
+            $am_price = $row["price"];
+            $am_total_price = $am_price*(100-$am_discount)*0.01;
+          ?>
+                <button type="button" class="membership_card am_product"
+                onclick="location.href='./payment.php?month=<?=$am_month?>&discount=<?=$am_discount?>&price=<?=$am_price?>'" disabled>
+                  <div class="card_wrap">
+                    <div class="card_header">
+                      <div class="membership_card_title">
+                        <span class="month"><?=$am_month?>개월</span><span class="membership_tag">BEST</span>
+                      </div>
+                      <dl class="price_info clearfix">
+                        <dt class="hide">가격</dt>
+                          <dd class="discount">-<?=$am_discount?>%</dd>
+                          <dd class="price_by_month">월<?=$am_total_price/$am_month?>원</dd>
+                      </dl>
+                    </div>
+                    <div class="card_content">
+                      <dl class="price_info clearfix">
+                        <dt class="hide">원가</dt>
+                         <dd class="original_price"><del><?=$am_price?>원</del></dd>
+                        <dt class="hide">할인가</dt>
+                         <dd class="discount_price">총 <?=$am_total_price?>원</dd>
+                       </dl>
+                     </div>
+                     <div class="card_bottom">
+                       <span class="btn_membership">구매하기</span>
+                     </div>
+                   </div>
+                 </button>
+
+               <?php
+             } // end of for
              mysqli_close($conn);
              ?>
 
@@ -142,24 +223,22 @@
        <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
     </footer>
     <script>
+      var $gm_no = '<?=$gm_no?>';
+      var $am_no = '<?=$am_no?>';
 
-      function loginCheck(){
-        var $gm_no= '<?=$gm_no?>';
-        var $am_no;
-
-        var month = '<?=$month?>';
-        var discount = '<?=$discount?>';
-        var price = '<?=$price?>';
-
-        if($gm_no){
-          location.href="./payment.php?month="+month+"&discount="+discount+"&price="+price
-        }else if($am_no){
-          alert('해당 멤버십은 일반 회원 전용입니다. 일반회원으로 로그인 하시거나 학원회원 멤버십을 이용해주세요.');
-        }else {
-          alert('멤버십 서비스는 로그인 후 이용하실 수 있습니다.');
-          location.href='../login_join/login_form.php';
-        }
+      if($gm_no){
+        $(".gm_product").attr("disabled", false);
+        $(".am_product").css("background", "rgba(46, 137, 255, 0.13)");
+        $(".am_product").css("cursor", "not-allowed");
+      }else if($am_no){
+        $(".am_product").attr("disabled", false);
+        $(".gm_product").css("background", "rgba(46, 137, 255, 0.13)");
+        $(".gm_product").css("cursor", "not-allowed");
+      }else {
+        alert('멤버십 서비스는 로그인 후 이용하실 수 있습니다.');
+        location.href='../login_join/login_form.php';
       }
+
     </script>
   </body>
 </html>

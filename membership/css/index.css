@@ -10,15 +10,15 @@
 }
 body {
   margin: auto 0;
+  background-color: white;
 }
-
 
 /* top & bottom */
 .top_banner, .bottom_info {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40vh;
+  height: 50vh;
 }
 /*  상단 배너 */
 .top_banner {
@@ -28,7 +28,7 @@ body {
 
  /* 아이콘 */
 .membership_icons_wrap {
-  margin: 2em;
+  margin: 2em 0;
 }
 .membership_icons {
   display: inline-block;
@@ -58,7 +58,7 @@ body {
   width: 80%;
   height: 100%;
   top : 20%;
-  left : 0%;
+  left : 8%;
 }
 .bottom_info p {
   margin : 0 auto;
@@ -69,15 +69,17 @@ body {
 
 /*  중간 콘텐츠 */
 .mid_contents {
-  width: 90%;
-  margin: 3% auto;
+  /* width: 90%; */
+  width: 1060px;
+  margin: 8% auto;
 }
 h2 {
   font-weight: 600;
   font-size: 2.5em;
 }
 .mid_sub_title {
-  font-size: 1.3em;
+  font-size: 1.5em;
+  margin-top: 5px;
 }
 /* 카드 */
 .whole_card_wrapper {
@@ -85,7 +87,7 @@ h2 {
   grid-gap: 30px;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   /* grid-template-columns: repeat(3, 1fr); */
-  margin: 5%;
+  margin: 5% 0;
 }
 .membership_card {
   box-shadow: 0 3px 8px 0 rgba(50,52,56,0.2);
@@ -151,4 +153,8 @@ h2 {
   padding: 15px 25px;
   width: 100%;
   display: inline-block;
+}
+
+.disabled {
+
 }
