@@ -318,7 +318,7 @@
 
                                     <div class="follow_list_column_review">
                                         <a href="/eduplanet/academy/review.php?no=<?= $acd_no ?>"><span id="academy_review_span">학원리뷰 <span id="academy_review_num"><?= $total_record_review ?></span></span></a>
-                                        <a href="#"><span id="academy_review_span">스토리 <span id="academy_review_num"><?= $total_record_story ?></span></span></a>
+                                        <a href="/eduplanet/academy/acd_story.php?no=<?= $acd_no ?>"><span id="academy_review_span">스토리 <span id="academy_review_num"><?= $total_record_story ?></span></span></a>
 
                                     </div>
                                 </div>

@@ -51,8 +51,14 @@ a {
     width: 32px;
     height: 32px;
     display: inline-block;
-    background-color: white;
-    border: 2px solid white;
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+.academy_small_logo img {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
     border-radius: 5px;
 }
 
@@ -198,7 +204,8 @@ a {
 
 .cource_column_box {
     width: 100%;
-    /* height: 290px; */
+    height: 290px;
+    /* border: 1px solid black; */
 }
 
 .academy_img_box img{
@@ -212,7 +219,7 @@ a {
 .academy_introduce {
     float: left;
     width: 247px;
-    /* height: 135px; */
+    height: 135px;
     background-color: white;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -223,6 +230,12 @@ a {
 #academy_introduce_title {
     font-size: 17px;
     padding-bottom: 10px;
+    line-height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display:-webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 #academy_introduce_content {

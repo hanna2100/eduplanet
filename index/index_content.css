@@ -122,11 +122,15 @@ option {
 }
 
 .button_service_guide {
-    width: 90px;
+    width: 60px;
     height: 40px;
     float: right;
     background-color: transparent;
     border: 1px solid transparent;
+}
+
+.button_service_guide:hover {
+    font-weight: bold;
 }
 
 .content_cource_list {
@@ -159,8 +163,15 @@ ul {
     width: 32px;
     height: 32px;
     display: inline-block;
-    background-color: white;
-    border: 2px solid white;
+    background-color: transparent;
+    /* border: 2px solid white; */
+    border-radius: 5px;
+}
+
+.academy_small_logo img{
+    width: 32px;
+    height: 32px;
+    display: inline-block;
     border-radius: 5px;
 }
 
@@ -174,13 +185,18 @@ ul {
 
 .cource_column_box {
     width: 100%;
-    height: 290px;
+    height: 305px;
     /* border: 1px solid black; */
+    border-radius: 15px;
+}
+
+.cource_column_box:hover {
+    box-shadow: 0px 0px 5px 5px lightgray;
 }
 
 .academy_img_box img{
     float: left;
-    width: 250px;
+    width: 247px;
     height: 170px;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -200,9 +216,18 @@ ul {
 #academy_introduce_title {
     font-size: 17px;
     padding-bottom: 10px;
+    width: 217px;
+    max-height: 45px;
+    line-height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display:-webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 #academy_introduce_content {
+    padding-top: 5px;
     font-size: 14px;
     color: gray;
 }
@@ -274,19 +299,27 @@ ul {
 
 #academy_review_title {
     font-size: 23px;
+    width: 454px;
+    max-height: 102px;
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    line-height:30px;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .academt_review_detail {
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 15px;
     font-weight: 500;
     color: gray;
 }
 
 #review_star {
-    padding-top: 10px;
-    width: 24px;
-    height: 24px;
+    padding-top: 13px;
+    width: 16px;
+    height: 16px;
     margin-right: 3px;
 }
 
@@ -295,7 +328,7 @@ ul {
     font-weight: bold;
     color: #2E89FF;
     position: relative;
-    top: -5px;
+    top: -3px;
     left: 5px;
 }
 
@@ -311,6 +344,11 @@ ul {
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
+}
+
+#button_more_review:hover {
+    background-color: #2E89FF;
+    color: white;
 }
 
 /* 자동완성 결과창 크기와 스크롤바 지정 */

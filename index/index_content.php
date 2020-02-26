@@ -20,38 +20,38 @@
                     <div class="index_main_search">
 
                         <select name="select_district" id="select_district">
-                            <option selected>시/군 선택</option>
-                            <option value="district_01">가평군</option>
-                            <option value="district_02">고양시</option>
-                            <option value="district_03">과천시</option>
-                            <option value="district_04">광명시</option>
-                            <option value="district_05">광주시</option>
-                            <option value="district_06">구리시</option>
-                            <option value="district_07">군포시</option>
-                            <option value="district_08">김포시</option>
-                            <option value="district_09">남양주시</option>
-                            <option value="district_10">동두천시</option>
-                            <option value="district_11">부천시</option>
-                            <option value="district_12">성남시</option>
-                            <option value="district_13">수원시</option>
-                            <option value="district_14">시흥시</option>
-                            <option value="district_15">안산시</option>
-                            <option value="district_16">안성시</option>
-                            <option value="district_17">안양시</option>
-                            <option value="district_18">양주시</option>
-                            <option value="district_19">양평군</option>
-                            <option value="district_20">여주시</option>
-                            <option value="district_21">연천군</option>
-                            <option value="district_22">오산시</option>
-                            <option value="district_23">용인시</option>
-                            <option value="district_24">의왕시</option>
-                            <option value="district_25">의정부시</option>
-                            <option value="district_26">이천시</option>
-                            <option value="district_27">파주시</option>
-                            <option value="district_28">평택시</option>
-                            <option value="district_29">포천시</option>
-                            <option value="district_30">하남시</option>
-                            <option value="district_31">화성시</option>
+                            <option selected value="">시/군 선택</option>
+                            <option value="가평군">가평군</option>
+                            <option value="고양시">고양시</option>
+                            <option value="과천시">과천시</option>
+                            <option value="광명시">광명시</option>
+                            <option value="광주시">광주시</option>
+                            <option value="구리시">구리시</option>
+                            <option value="군포시">군포시</option>
+                            <option value="김포시">김포시</option>
+                            <option value="남양주시">남양주시</option>
+                            <option value="동두천시">동두천시</option>
+                            <option value="부천시">부천시</option>
+                            <option value="성남시">성남시</option>
+                            <option value="수원시">수원시</option>
+                            <option value="시흥시">시흥시</option>
+                            <option value="안산시">안산시</option>
+                            <option value="안성시">안성시</option>
+                            <option value="안양시">안양시</option>
+                            <option value="양주시">양주시</option>
+                            <option value="양평군">양평군</option>
+                            <option value="여주시">여주시</option>
+                            <option value="연천군">연천군</option>
+                            <option value="오산시">오산시</option>
+                            <option value="용인시">용인시</option>
+                            <option value="의왕시">의왕시</option>
+                            <option value="의정부시">의정부시</option>
+                            <option value="이천시">이천시</option>
+                            <option value="파주시">파주시</option>
+                            <option value="평택시">평택시</option>
+                            <option value="포천시">포천시</option>
+                            <option value="하남시">하남시</option>
+                            <option value="화성시">화성시</option>
                         </select>
 
                         <form name="search_academy_form" action="#" method="post">
@@ -86,7 +86,7 @@
 
                     <?php
                     // 스토리 등록일자 기준 조회순으로 정렬
-                    $sql = "select * from acd_story order by hit desc limit 4;";
+                    $sql = "select acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, academy.file_copy from acd_story INNER JOIN academy ON acd_story.parent=academy.no order by hit desc limit 4;";
                     $result = mysqli_query($conn, $sql);
 
                     for ($i = 0; $i < 4; $i++) {
@@ -97,7 +97,7 @@
                         $acd_name = $row['acd_name'];
                         $title = $row['title'];
                         $subtitle = $row['subtitle'];
-                        // $file_copy = $row['$file_copy'];
+                        $file_copy = $row['file_copy'];
 
                     ?>
                         <li>
@@ -108,8 +108,16 @@
                                     <!-- 1. 로고이미지 & 학원 이름 -->
                                     <div class="cource_column_title">
                                         <div class="academy_small_logo">
-                                            <!-- small logo 이미지는 32x32 만 가능하도록 하기 -->
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
+
+                                            <?php
+                                                if ($file_copy != "") {
+                                                    echo "<img src='/eduplanet/data/acd_logo/$file_copy' alt='academy_small_logo'>";
+
+                                                } else {
+                                                    echo "<img src='/eduplanet/img/acd_logo.png' alt='academy_small_logo'>";
+                                                }
+                                            ?>
+
                                         </div>
 
                                         <span id="academy_title_span"><?= $acd_name ?></span>
@@ -159,7 +167,7 @@
 
                     <?php
                     // 리뷰 등록일자 기준 최신순으로 정렬
-                    $sql = "select R.one_line, R.total_star, R.regist_day, A.no, A.si_name, A.acd_name, A.class
+                    $sql = "select R.one_line, R.total_star, R.regist_day, A.no, A.si_name, A.acd_name, A.class, A.file_copy
                                 from review R inner join academy A on R.parent=A.no order by regist_day desc limit 8;";
 
                     $result = mysqli_query($conn, $sql);
@@ -175,6 +183,7 @@
                         $regist_day = $row['regist_day'];
                         $total_star = $row['total_star'];
                         $no = $row['no'];
+                        $file_copy = $row['file_copy'];
 
                         // 해당 학원의 평균 총 만족도
                         $sql = "SELECT AVG(total_star) as total_star FROM review WHERE parent='$no'";
@@ -198,7 +207,16 @@
                                 <a href="#">
                                     <div class="review_column_title">
                                         <div class="academy_small_logo">
-                                            <img src="/eduplanet/test_img/academy_small_logo.png" alt="academy_small_logo">
+
+                                            <?php
+                                                if ($file_copy != "") {
+                                                    echo "<img src='/eduplanet/data/acd_logo/$file_copy' alt='academy_small_logo'>";
+
+                                                } else {
+                                                    echo "<img src='/eduplanet/img/acd_logo.png' alt='academy_small_logo'>";
+                                                }
+                                            ?>
+                                        
                                         </div>
 
                                         <span id="academy_title_span"><?= $acd_name ?></span>
