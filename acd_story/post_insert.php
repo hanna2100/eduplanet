@@ -2,7 +2,7 @@
 
     include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
 
-	date_default_timezone_set('Asia/Seoul');
+	  date_default_timezone_set('Asia/Seoul');
 
     include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
@@ -81,7 +81,7 @@
         $upfile_name = "";
         $copied_file_name = "";
     }
-    
+
     $sql = "insert into acd_story(parent, acd_name, title, subtitle, subject1, content1, subject2, content2, subject3, content3, hit, regist_day, file_name, file_copy)";
     $sql .= "values('$am_no', '$acd_name', '$title', '$subtitle', '$subject1', '$content1', '$subject2', '$content2', '$subject3', '$content3', 0, '$regist_day', '$upfile_name', '$copied_file_name')";
 

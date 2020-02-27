@@ -86,14 +86,14 @@
 
                     <?php
                     // 스토리 등록일자 기준 조회순으로 정렬
-                    $sql = "select acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, academy.file_copy from acd_story INNER JOIN academy ON acd_story.parent=academy.no order by hit desc limit 4;";
+                    $sql = "select S.parent, S.no, S.acd_name, S.title, S.subtitle, A.file_copy from acd_story S INNER JOIN academy A ON S.parent=A.no order by regist_day desc limit 4;";
                     $result = mysqli_query($conn, $sql);
 
                     for ($i = 0; $i < 4; $i++) {
                         mysqli_data_seek($result, $i);
                         $row = mysqli_fetch_array($result);
 
-                        $no = $row['parent'];
+                        $story_no = $row['no'];
                         $acd_name = $row['acd_name'];
                         $title = $row['title'];
                         $subtitle = $row['subtitle'];
@@ -103,7 +103,7 @@
                         <li>
                             <!-- 강의 추천 리스트 하나의 컬럼 -->
                             <div class="cource_column">
-                                <a href="/eduplanet/acd_story/view.php?no=<?= $no ?>">
+                                <a href="/eduplanet/acd_story/view.php?story_no=<?= $story_no ?>">
 
                                     <!-- 1. 로고이미지 & 학원 이름 -->
                                     <div class="cource_column_title">
@@ -216,7 +216,7 @@
                                                     echo "<img src='/eduplanet/img/acd_logo.png' alt='academy_small_logo'>";
                                                 }
                                             ?>
-                                        
+
                                         </div>
 
                                         <span id="academy_title_span"><?= $acd_name ?></span>
