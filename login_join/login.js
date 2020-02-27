@@ -36,7 +36,7 @@ $(document).ready(function() {
       pwValue = false;
       isAllPass();
     }else if(!exp.test(pwValue)) {
-      $("#pwSubMsg").text("비밀번호는 숫자, 영문자, 특수문자가 모두 있는 8자리 글자여야 합니다.");
+      $("#pwSubMsg").text("비밀번호는 숫자, 영문자, 특수문자를 모두 써주세요.");
       pwPass = false;
       isAllPass();
     }else {
