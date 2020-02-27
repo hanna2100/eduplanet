@@ -3,7 +3,8 @@ var pwPass = false;
 
 $(document).ready(function() {
   var inputId = $("#inputId"),
-      inputPw = $("#inputPw");
+      inputPw = $("#inputPw"),
+      inputRemember = $("#remember_me");
 
   inputId.keyup(function() {
     var idValue = inputId.val();
@@ -45,6 +46,13 @@ $(document).ready(function() {
       isAllPass();
     }
   });
+
+  if(inputRemember){
+    $("input:checkbox[id=remember_me]:checked").val();
+
+  }
+
+
 });
 
 function isAllPass(){
