@@ -41,11 +41,11 @@
 
     <?php
 
-    $no = $_GET["no"];
+    $story_no = $_GET["story_no"];
 
     include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
-    $sql = "SELECT academy.no as acd_no, acd_story.no, acd_story.parent, acd_story.acd_name, acd_story.title, acd_story.subtitle, subject1, subject2, subject3, content1, content2, content3, acd_story.regist_day, acd_story.file_name, acd_story.file_copy, acd_story.hit, academy.si_name, review.total_star, academy.file_copy as logo_file_copy FROM acd_story INNER JOIN academy ON acd_story.parent = academy.no INNER JOIN review ON academy.no = review.parent WHERE acd_story.no='$no'";
+    $sql = "SELECT A.no as acd_no, S.*, A.si_name, R.total_star, A.file_copy as logo_file_copy FROM acd_story S INNER JOIN academy A ON S.parent = A.no INNER JOIN review R ON A.no = R.parent WHERE S.no=$story_no";
 
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
@@ -76,7 +76,7 @@
 
     $new_hit = $hit + 1;
 
-    $sql = "update acd_story set hit=$new_hit where no=$no";
+    $sql = "update acd_story set hit=$new_hit where no=$story_no";
     mysqli_query($conn, $sql);
 
     ?>
@@ -112,7 +112,21 @@
                         <span id="academt_review_star_score"><?= $total_star ?></span>
                     </div>
 
-                    <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button id="button_add_like" type="button">찜하기</button></a>
+                    <?php
+                        if ($gm_no) {
+                    ?>
+
+                    <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_add_like">찜하기</button></a>
+
+                    <?php
+                        } else {
+                    ?>
+
+                    <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_add_like">찜하기</button></a>
+
+                    <?php
+                        }
+                    ?>
 
                 </div>
             </div>
@@ -180,7 +194,8 @@
 
                     <?php
 
-                    $sql = "SELECT * FROM acd_story WHERE acd_name='$acd_name' order by hit desc limit 4";
+                    $sql = "SELECT S.no as story_no, S.* FROM acd_story S inner join academy A on S.parent=A.no
+                            where parent=(select parent from acd_story where acd_story.no=$story_no) order by hit desc limit 4";
                     $result = mysqli_query($conn, $sql);
 
                     for ($i = 0; $i < 4; $i++) {
@@ -188,16 +203,17 @@
                         mysqli_data_seek($result, $i);
                         $row = mysqli_fetch_array($result);
 
-                        $no = $row['no'];
+                        $story_no = $row['story_no'];
                         $acd_name = $row['acd_name'];
                         $title = $row['title'];
                         $subtitle = $row['subtitle'];
                         $file_copy = $row['file_copy'];
+
                     ?>
 
                         <li>
                             <div class="cource_column">
-                                <a href="/eduplanet/acd_story/view.php?no=<?= $no ?>">
+                                <a href="/eduplanet/acd_story/view.php?story_no=<?= $story_no ?>">
                                     <div class="cource_column_box">
 
                                         <div class="academy_img_box">
