@@ -42,7 +42,7 @@
     // 세션 값 점검 콘솔로그
     console.log("gm_no SESSION : <?=$gm_no?>");
     console.log("am_no SESSION : <?=$am_no?>");
-    console.log("gm_no SESSION : <?=$pgm_no?>");
-    console.log("am_no SESSION : <?=$pam_no?>");
+    console.log("pgm_no SESSION : <?=$pgm_no?>");
+    console.log("pam_no SESSION : <?=$pam_no?>");
     console.log("admin SESSION : <?=$admin?>");
 </script>

@@ -43,7 +43,12 @@ $(document).ready(function() {
       $("#pwSubMsg").text("");
       pwPass = true;
       isAllPass();
+      // 엔터키 눌렀을 때 자동 로그인
+    if (window.event.keyCode == 13) {
+      document.getElementById('form_login').submit();
     }
+    }
+
   });
 });
 

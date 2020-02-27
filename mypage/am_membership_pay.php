@@ -69,12 +69,12 @@
                     <a href="/eduplanet/mypage/am_myinfo.php">
                         <li id="mypage_user_myinfo">내 정보</li>
                     </a>
+                    
                     <a href="/eduplanet/mypage/am_membership_pay.php">
                         <li id="mypage_user_membership">멤버십/결제</li>
                     </a>
 
-                    <!-- 학원 바로가기 / 경로수정 -->
-                    <a href="#">
+                    <a href="/eduplanet/academy/index.php?no=<?=$am_no?>">
                         <li id="mypage_user_review">My Academy</li>
                     </a>
                 </ul>

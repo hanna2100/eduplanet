@@ -284,7 +284,10 @@
 
                             $sql = "SELECT AVG(total_star) as total_star FROM review WHERE parent='$f_acd_no'";
                             $result_total_star = mysqli_query($conn, $sql);
-                            $total_record_review = mysqli_num_rows($result_total_star);
+
+                            $sql = "SELECT * FROM review WHERE parent='$f_acd_no'";
+                            $result_review = mysqli_query($conn, $sql);
+                            $total_record_review = mysqli_num_rows($result_review);
 
                             $row = mysqli_fetch_array($result_total_star);
                             $total_star = $row["total_star"];
@@ -454,8 +457,11 @@
                         // 찜한 목록이 없을 때
                     } else {
                         ?>
-                            <p class="list_none_p">아직 찜한 학원이 없습니다.</p>
-                            <p class="list_none_p">찜하기를 하신 후 모든 학원을 한 눈에 비교해 보세요.</p>
+                            <div class="list_none">
+                                <p class="list_none_p">아직 찜한 학원이 없습니다.</p>
+                                <p class="list_none_p">찜하기를 하신 후 모든 학원을 한 눈에 비교해 보세요.</p>
+                                <a href="/eduplanet/acd_list/index.php"></a><button type="button">학원 보러 가기</button>
+                            </div>
 
                         <?php
                     }

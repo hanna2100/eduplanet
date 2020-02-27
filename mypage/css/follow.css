@@ -91,11 +91,12 @@ a {
 
 .follow_list_wrap {
     width: 100%;
-    height: 1600px;
+    /* height: 1600px; */
     /* border: 1px solid black; */
     margin: 0 auto;
     background-color: #ebecee;
     padding-top: 73px;
+    margin-bottom: 80px;
 }
 
 .follow_list_background {
@@ -314,8 +315,6 @@ ul {
     font-weight: bold;
 }
 
-
-
 /* page */
 .page_num_wrap {
     width: 100%;
@@ -387,4 +386,33 @@ ul {
 .page_num_direction:hover, .page_num_direction_last:hover, .page_num_set:hover {
     background-color: #2E89FF;
     color: white;
+}
+
+.list_none {
+    padding-top: 100px;
+    padding-bottom: 140px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.list_none_p {
+    /* text-align: center; */
+    font-size: 13px;
+    color: black;
+    padding-top: 3px;
+}
+
+.list_none button {
+    width: 150px;
+    height: 50px;
+    /* margin-left: 250px; */
+    margin-top: 30px;
+    font-size: 15px;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    background-color: #2E89FF;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    display: inline-block;
 }

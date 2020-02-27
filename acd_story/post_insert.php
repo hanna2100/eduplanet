@@ -34,7 +34,7 @@
         $content3 = "";
     }
 
-    $regist_day = date("Y-m-d (H:i)");
+    $regist_day = date("Y-m-d");
     $upload_dir = '../data/';
 
     $upfile_name = $_FILES["upfile"]["name"];

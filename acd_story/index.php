@@ -136,17 +136,23 @@
                     학원 스토리
 
                     <?php
-                        if ($am_no) {
+                        if ($am_no && $pam_no) {
                     ?>
 
                     <button id="button_write_story" onclick="location.href='/eduplanet/acd_story/post.php'">스토리 등록</button>
                     
                     <?php
-                        } else {
+                        } else if ($am_no && !$pam_no) {
                     ?>        
 
-                    <a href="javascript:alert('기업회원만 이용 가능합니다.');"><button id="button_write_story">스토리 등록</button></a>
+                    <a href="javascript:alert('멤버십 회원만 이용 가능합니다.');"><button id="button_write_story">스토리 등록</button></a>
+                    
+                    <?php
+                        } else {
+                    ?>
 
+                    <a href="javascript:alert('사업자회원만 이용 가능합니다.');"><button id="button_write_story">스토리 등록</button></a>
+                
                     <?php
                         }
                     ?>
