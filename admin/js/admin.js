@@ -27,7 +27,7 @@ $(function(){
 
 var red= '#ff4d4d',
     orange= 'rgb(255, 159, 64)',
-    yellow= 'rgb(255, 205, 86)',
+    yellow= '#ffcc00',
     green= 'rgb(75, 192, 192)',
     blue= '#0099ff',
     purple= 'rgb(153, 102, 255)',

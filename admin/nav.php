@@ -14,7 +14,7 @@
           <li><a class="nav_href" href='/eduplanet/admin/membership.php'><span>멤버십 설정</span></a></li>
         </ul>
       </li>
-      <li class='nav_menu'><a class="nav_href" href='#'><span><i class="fas fa-angle-right"></i>리뷰 관리</span></a></li>
-      <li class='nav_menu'><a class="nav_href" href='#'><span><i class="fas fa-angle-right"></i>스토리 관리</span></a></li>
+      <li class='nav_menu'><a class="nav_href" href='/eduplanet/admin/review_mng.php'><span><i class="fas fa-angle-right"></i>리뷰 관리</span></a></li>
+      <li class='nav_menu'><a class="nav_href" href='/eduplanet/admin/story_mng.php'><span><i class="fas fa-angle-right"></i>스토리 관리</span></a></li>
     </ul>
 </nav>

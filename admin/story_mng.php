@@ -8,9 +8,9 @@
   <!-- jquery -->
   <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="/eduplanet/admin/js/admin.js"></script>
-  <script src="/eduplanet/admin/js/membership.js"></script>
+  <script src="/eduplanet/admin/js/story_mng.js"></script>
   <!-- css -->
-  <link rel="stylesheet" href="/eduplanet/admin/css/membership.css">
+  <link rel="stylesheet" href="/eduplanet/admin/css/story_mng.css">
   <link rel="stylesheet" href="/eduplanet/admin/css/nav.css">
   <!-- 폰트 -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
   <!-- 차트 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-  <title>에듀플래닛 관리자페이지 - 멤버십설정</title>
+  <title>에듀플래닛 관리자페이지 - 스토리 관리</title>
   <!-- Date 라이브러리 -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery.min.js"></script>
@@ -30,91 +30,138 @@
 <?php
   include_once 'nav.php';
   include_once '../lib/db_connector.php';
+
+  $y = isset($_GET["y"])? $_GET["y"]: date("Y") ;
+  $m = isset($_GET["m"])? $_GET["m"]: date("n") ;
   $page = isset($_GET["page"])? $_GET["page"]: 1 ;
   $col = isset($_GET["col"])? $_GET["col"]: '' ;
   $search = isset($_GET["search"])? $_GET["search"]: '' ;
+
 ?>
+<!-- php 변수를 자바스크립트로 넘겨줌 -->
 <script>
-var page = <?=$page?>;
+  var y = <?=$y?>;
+  var m = <?=$m?>;
+  var page = "<?=$page?>";
+  var col = "<?=$col?>";
+  var search = "<?=$search?>";
 </script>
+
 <section>
+  <div class="sec_top">
+    <span onclick="prevDateChange('story_mng')"><i class="fas fa-angle-left"></i></span>
+    <select id="top_select_year" dir="rtl" onchange="topSelect_init_Setting('story_mng')">
+<?php
+    for($i = 2018; $i<=date("Y"); $i++){
+      echo "<option>$i</option>";
+    }
+?>
+    </select>
+    <span>년 </span>
+    <select id="top_select_month" dir="rtl" onchange="hrefDateChange('story_mng')">
+<?php
+    $last_m = $y==date("Y")? date("n"): 12;
+    for($i = 1; $i<=$last_m ; $i++){
+      echo "<option>$i</option>";
+    }
+?>
+    </select>
+    <span>월 </span>
+    <span onclick="nextDateChange('story_mng')"><i class="fas fa-angle-right"></i></span>
+  </div>
+  <!--end of 년 월 선택바 -->
+
+<?php
+  $m2 = $m;
+  if($m2<10){
+    $m2 = "0".$m2;
+  }
+  $sql = "SELECT 
+            COUNT(*) AS count 
+          FROM
+            acd_story
+          WHERE
+            regist_day BETWEEN '19-01-01' AND LAST_DAY('$y-$m2-01');";
+
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_array($result);
+  $total_story = $row['count'];
+
+?>
 <!-- 총 회원수 가져오기 -->
   <div class="sec_content">
     <div id="dash_topline">
       <div>
-        <span>프리미엄</span><br>
-        <?php
-          $sql = "SELECT 
-                    *
-                  FROM
-                  product
-                  WHERE
-                  prdct_name LIKE '프리미엄%'
-                  ORDER BY prdct_name , month";
-
-          $result = mysqli_query($conn, $sql);
-          for($i=0; $i<3 ; $i++){
-
-          mysqli_data_seek($result, $i);
-          $row = mysqli_fetch_array($result);
-          $name = $row['prdct_name']; 
-          $month = $row['month']; 
-          $price = $row['price']; 
-          $discount = $row['discount'];
-          $sales = $price*(1-($discount/100));
-        ?>
-        <div class="prdct_info">
-            <p><?=$month?>개월</p>
-            <p>- <?=$discount?>%</p>
-            <p><?= $sales?></p>
-        </div>
-       <?php
-          }
-        ?>
+        <span>전체 학원스토리</span><br>
+        <span class="dash_topline_i"><i class="fas fa-user-friends"></i>&nbsp;<?=$total_story?></span>
+        <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
-      <span>학원관리</span><br>
-      <?php
-          $sql = "SELECT 
-                    *
-                  FROM
-                  product
-                  WHERE
-                  prdct_name LIKE '학원관리%'
-                  ORDER BY prdct_name , month";
-
-          $result = mysqli_query($conn, $sql);
-          for($i=0; $i<3 ; $i++){
-
-          mysqli_data_seek($result, $i);
-          $row = mysqli_fetch_array($result);
-          $name = $row['prdct_name']; 
-          $month = $row['month']; 
-          $price = $row['price']; 
-          $discount = $row['discount'];
-          $sales = $price*(1-($discount/100));
-        ?>
-        <div class="prdct_info2">
-            <p><?=$month?>개월</p>
-            <p>- <?=$discount?>%</p>
-            <p><?= $sales?></p>
-        </div>
-       <?php
-          }
-        ?>
+        <span>신규 스토리</span><br>
+        <span class="dash_topline_i"><i class="fas fa-user-plus"></i>&nbsp;<span id="new_story">0</span></span>
+        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+      </div>
+      <div>
+        <span>이달의 총 조회수</span><br>
+        <span class="dash_topline_i"><i class="fas fa-user-minus"></i>&nbsp;<span id="total_hit">0</span></span>
+        <span class="caret down"><i class="fas fa-caret-down"></i></span>
       </div>
     </div>
     <!--end of 상단 회원수 변화-->
 
+    <div id="g_members_totalGraph_wrap">
+      <div id="g_members_totalGraph_cell1">
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Story Management<span>단위: 건</span></h4>
+        <canvas id="story_graph"></canvas>
+        <div class="btn_hide">
+          <button>숨기기</button>
+        </div>
+      </div>
+    </div>
+    <!-- end of 회원수 변화 그래프 -->
+
+    <div style="display:flex; width:960px; margin-bottom: 50px;">
+      <div id="dash_age_range_wrap">
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Age range</h4>
+        <canvas id="dash_age_range"></canvas>
+      </div>
+      <div id="dash_pm_ratio_wrap">
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Premium membership Ratio</h4>
+        <canvas id="dash_pm_ratio"></canvas>
+      </div>
+      <div id="dash_postGraph_wrap">
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Interest words</h4>
+        <!-- 관심사 단어 순위 -->
+        <div id="dash_intres_world_wrap">
+<?php
+        for($i=1; $i<=5; $i++){
+?>
+          <div class="dasn_intres_detail">
+            <span class="dasn_intres_label">0</span>
+            <span class="dasn_intres_data"></span>
+          </div>
+<?php
+        }
+?>
+        </div>
+      </div>
+    </div>
+    <!-- end of 그래프 3개 -->
+
     <div id="g_members_list_wrap">
       <div id="g_members_list">
-      <h4><i class="fas fa-award"></i>&nbsp;&nbsp;&nbsp;Product Setting
+        <h4>
+          <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;General member Management
           <div class="selectbox">
             <select id="search_select">
-              <option>상품명</option>
-              <option>개월</option>
-              <option>가격</option>
-              <option>할인율</option>
+              <option>회원번호</option>
+              <option>아이디</option>
+              <option>이메일</option>
+              <option>연락처</option>
+              <option>출생년도</option>
+              <option>관심사</option>
+              <option>유료만료일</option>
+              <option>가입일</option>
             </select>
           </div>
           <div class='search-box'>
@@ -130,24 +177,27 @@ var page = <?=$page?>;
 
         <div class="list_edit_delete_wrap">
           <button onclick="submitUpdate()">수정</button>
+          <button onclick="submitDelete()">삭제</button>
         </div>
         <ul id="member_list">
 				<li>
 					<span class="col1">No</span>
-					<span class="col2">상품번호</span>
-					<span class="col3">상품명</span>
-					<span class="col4">개월</span>
-					<span class="col5">가격</span>
-					<span class="col6">할인율</span>
-					<span class="col7">판매가</span>
+					<span class="col2">회원번호</span>
+					<span class="col3">아이디</span>
+					<span class="col4">이메일</span>
+					<span class="col5">연락처</span>
+					<span class="col6">출생년도</span>
+					<span class="col7">관심사</span>
+					<span class="col8">유료만료일</span>
+					<span class="col9">가입일</span>
 				</li>
 <?php
         $sql='';
 
         if($col!='' && $search !=''){
-          $sql = "SELECT * FROM product WHERE $col LIKE '%$search%' ORDER BY prdct_name ASC";
+          $sql = "SELECT * FROM g_members WHERE $col LIKE '%$search%' ORDER BY regist_day DESC";
         }else{
-          $sql = "SELECT * FROM product ORDER BY prdct_name ASC";
+          $sql = "SELECT * FROM g_members ORDER BY regist_day DESC";
         }
 
         $result = mysqli_query($conn, $sql);
@@ -173,20 +223,25 @@ var page = <?=$page?>;
           mysqli_data_seek($result, $i);
           $row = mysqli_fetch_array($result);
           $no         = $row["no"];
-          $prdct_name          = $row["prdct_name"];
-          $month        = $row["month"];
-          $price       = $row["price"];
-          $discount       = $row["discount"];
+          $id          = $row["id"];
+          $email        = $row["email"];
+          $phone       = $row["phone"];
+          $age       = $row["age"];
+          $intres       = $row["intres"];
+          $expiry_day       = $row["expiry_day"];
+          $regist_day  = $row["regist_day"];
 ?>
         <li class="list_row">
         <form method="post" action="#">
           <span class="col1"><?=$number?></span>
           <span class="col2"><input type="text" name="no[]" value="<?=$no?>" readonly></span>
-          <span class="col3"><input type="text" name="prdct_name[]" value="<?=$prdct_name?>" disabled maxlength="30" oninput="limitMaxLength(this)"/></span>
-          <span class="col4"><input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="month[]" value="<?=$month?>" disabled maxlength="11" oninput="limitMaxLength(this)"/></span>
-          <span class="col5"><input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="price[]" value="<?=$price?>" disabled maxlength="10" oninput="limitMaxLength(this)"/></span>
-          <span class="col6"><input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="discount[]" value="<?=$discount?>" disabled maxlength="11" oninput="limitMaxLength(this)"/></span>
-          <span class="col7"><?=$price-$price*($discount/100)?></span>
+          <span class="col3"><?=$id?></span>
+          <span class="col4"><input type="text" name="email[]" value="<?=$email?>" disabled maxlength="80" oninput="limitMaxLength(this)"/></span>
+          <span class="col5"><input type="number" name="phone[]" value="<?=$phone?>" disabled maxlength="12" oninput="limitMaxLength(this)"/></span>
+          <span class="col6"><?=$age?></span>
+          <span class="col7"><input type="text" name="intres[]" value="<?=$intres?>" disabled maxlength="10" oninput="limitMaxLength(this)"/></span>
+          <span class="col8"><input class="date_field" type="text" name="expiry_day[]" value="<?=$expiry_day?>" disabled readonly></span>
+          <span class="col9"><?=$regist_day?></span>
         </form>
         </li>	
 			
@@ -230,7 +285,7 @@ var page = <?=$page?>;
             $next = $last_page + 1;// > 버튼 누를때 나올 페이지
             $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
 
-            $url = "/eduplanet/admin/membership.php?";
+            $url = "/eduplanet/admin/gm_members.php?y=$y&m=$m";
             if($search!=''){
               $url .= "&col=$col&search=$search";
             }

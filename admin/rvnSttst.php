@@ -72,6 +72,7 @@
   <!--end of 년 월 선택바 -->
 
 <?php
+  $m2 = $m;
   if($m<10){
     $m2 = "0".$m;
   }
@@ -196,13 +197,9 @@
   $result = mysqli_query($conn, $sql);
   if($result){
     $row = mysqli_fetch_array($result);
-    $kakao = $row['kakao'];
-    $smile = $row['smile'];
-    $payco = $row['payco'];
-  }else{
-    $kakao = 0;
-    $smile = 0;
-    $payco = 0;
+    $kakao = $row['kakao']!=null ? $row['kakao']: 0;
+    $smile = $row['smile']!=null ? $row['smile']: 0;
+    $payco = $row['payco']!=null ? $row['payco']: 0;
   }
 
 ?>

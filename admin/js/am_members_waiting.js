@@ -128,7 +128,7 @@ function showPopupLayer(file_name){
 }
 
 function setDefaultImg(){
-    $('#bsns_lic_img').attr("src", "/eduplanet/admin/img/no_bsns_lic.png");
+    $('#bsns_lic_img').attr("src", "/eduplanet/img/no_bsns_lic.png");
     $('#bsns_lic_img').attr("width", "300px");
 }
 
