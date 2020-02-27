@@ -2,10 +2,6 @@
 var url = "/eduplanet/admin/am_members_waiting.php?";
 var bsnsLic_url = "/eduplanet/data/bsnsLic/";
 
-$(function(){
-    //listItemPicker();
-});
-
 
 function onclickSearch(){
 

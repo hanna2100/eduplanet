@@ -214,8 +214,6 @@
 				<span class="col6">등록일</span>
 			</li>
 <?php
-        $sql='';
-
         if($col!='' && $search !=''){
             $sql = "SELECT 
                         rv.no,
@@ -306,9 +304,9 @@
         <form method="post" action="#">
             <input type="hidden" name="no[]" value="<?=$no?>" readonly>
             <span class="col1"><?=$number?></span>
-            <span class="col2"><?=$acd_name?></span>
+            <span class="col2 left-align"><?=$acd_name?></span>
             <span class="col3"><?=$id?></span>
-            <span class="col4"><?=$one_line?></span>
+            <span class="col4 left-align"><?=$one_line?></span>
             <span class="col5"><?=sprintf('%0.1f', round($avg,1))?></span>
             <span class="col6"><?=$regist_day?></span>
         </form>

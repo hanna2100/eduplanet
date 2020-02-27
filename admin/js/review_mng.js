@@ -4,17 +4,6 @@ var url;
 $(function(){
   
     url = "/eduplanet/admin/review_mng.php?y="+y+"&m="+m;
-
-    $('.date_field').datepicker({
-        dateFormat: 'yy-mm-dd',
-        minDate: -0,
-        maxDate: "+1Y",
-        beforeShow: function() {
-            setTimeout(function(){
-                $('.ui-datepicker').css('z-index', 99999999999999);
-            }, 0);
-        }
-    });
     
     importReviewData();
     listItemPicker();

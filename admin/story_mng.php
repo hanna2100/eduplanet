@@ -72,12 +72,10 @@
   <!--end of 년 월 선택바 -->
 
 <?php
-  $m2 = $m;
-  if($m2<10){
-    $m2 = "0".$m2;
-  }
+  $m2 = $m2 = $m <10? "0".$m : $m;
   $sql = "SELECT 
-            COUNT(*) AS count 
+            COUNT(*) AS count,
+            SUM(hit) AS total_hit
           FROM
             acd_story
           WHERE
@@ -87,23 +85,33 @@
   $row = mysqli_fetch_array($result);
   $total_story = $row['count'];
 
+  $sql = "SELECT 
+            SUM(hit) AS total_hit
+          FROM
+            acd_story
+          WHERE
+            regist_day BETWEEN '$y-$m2-01' AND LAST_DAY('$y-$m2-01');";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_array($result);
+  $total_hit = $row['total_hit'];
+
 ?>
 <!-- 총 회원수 가져오기 -->
   <div class="sec_content">
     <div id="dash_topline">
       <div>
         <span>전체 학원스토리</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-friends"></i>&nbsp;<?=$total_story?></span>
+        <span class="dash_topline_i"><i class="fas fa-box-open"></i>&nbsp;<?=$total_story?></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
         <span>신규 스토리</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-plus"></i>&nbsp;<span id="new_story">0</span></span>
+        <span class="dash_topline_i"><i class="fas fa-book-open"></i>&nbsp;<span id="new_story">0</span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
         <span>이달의 총 조회수</span><br>
-        <span class="dash_topline_i"><i class="fas fa-user-minus"></i>&nbsp;<span id="total_hit">0</span></span>
+        <span class="dash_topline_i"><i class="far fa-eye"></i>&nbsp;<span id="total_hit"><?=$total_hit?></span></span>
         <span class="caret down"><i class="fas fa-caret-down"></i></span>
       </div>
     </div>
@@ -120,48 +128,16 @@
     </div>
     <!-- end of 회원수 변화 그래프 -->
 
-    <div style="display:flex; width:960px; margin-bottom: 50px;">
-      <div id="dash_age_range_wrap">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Age range</h4>
-        <canvas id="dash_age_range"></canvas>
-      </div>
-      <div id="dash_pm_ratio_wrap">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Premium membership Ratio</h4>
-        <canvas id="dash_pm_ratio"></canvas>
-      </div>
-      <div id="dash_postGraph_wrap">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Interest words</h4>
-        <!-- 관심사 단어 순위 -->
-        <div id="dash_intres_world_wrap">
-<?php
-        for($i=1; $i<=5; $i++){
-?>
-          <div class="dasn_intres_detail">
-            <span class="dasn_intres_label">0</span>
-            <span class="dasn_intres_data"></span>
-          </div>
-<?php
-        }
-?>
-        </div>
-      </div>
-    </div>
-    <!-- end of 그래프 3개 -->
-
     <div id="g_members_list_wrap">
       <div id="g_members_list">
         <h4>
-          <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;General member Management
+          <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Story Management
           <div class="selectbox">
             <select id="search_select">
-              <option>회원번호</option>
-              <option>아이디</option>
-              <option>이메일</option>
-              <option>연락처</option>
-              <option>출생년도</option>
-              <option>관심사</option>
-              <option>유료만료일</option>
-              <option>가입일</option>
+              <option>학원이름</option>
+              <option>제목</option>
+              <option>부제목</option>
+              <option>등록일</option>
             </select>
           </div>
           <div class='search-box'>
@@ -176,74 +152,76 @@
         <!-- end of 검색창 -->
 
         <div class="list_edit_delete_wrap">
-          <button onclick="submitUpdate()">수정</button>
           <button onclick="submitDelete()">삭제</button>
         </div>
-        <ul id="member_list">
+        <ul class="member_list">
 				<li>
 					<span class="col1">No</span>
-					<span class="col2">회원번호</span>
-					<span class="col3">아이디</span>
-					<span class="col4">이메일</span>
-					<span class="col5">연락처</span>
-					<span class="col6">출생년도</span>
-					<span class="col7">관심사</span>
-					<span class="col8">유료만료일</span>
-					<span class="col9">가입일</span>
+					<span class="col2">학원이름</span>
+					<span class="col3">제목</span>
+					<span class="col4">부제목</span>
+					<span class="col5">조회수</span>
+					<span class="col6">등록일</span>
+					<span class="col7">선택</span>
 				</li>
 <?php
-        $sql='';
-
         if($col!='' && $search !=''){
-          $sql = "SELECT * FROM g_members WHERE $col LIKE '%$search%' ORDER BY regist_day DESC";
+          $sql = "SELECT
+                    no, acd_name, title, subtitle, hit, regist_day
+                  FROM
+                    acd_story
+                  WHERE
+                      $col LIKE '%$search%'
+                  ORDER BY regist_day DESC";
         }else{
-          $sql = "SELECT * FROM g_members ORDER BY regist_day DESC";
+          $sql = "SELECT
+                    no, acd_name, title, subtitle, hit, regist_day
+                  FROM
+                    acd_story
+                  ORDER BY regist_day DESC";
         }
 
-        $result = mysqli_query($conn, $sql);
-        $total_record = mysqli_num_rows($result); 
+      $result = mysqli_query($conn, $sql);
+      $total_record = mysqli_num_rows($result); 
 
-        $scale = 10; // 가져올 글 수
+      $scale = 10; // 가져올 글 수
 
-        // 전체 페이지 수($total_page) 계산
-        if ($total_record % $scale == 0)
-          $total_page = floor($total_record/$scale);
-        else
-          $total_page = floor($total_record/$scale)+1;
+      // 전체 페이지 수($total_page) 계산
+      if ($total_record % $scale == 0)
+        $total_page = floor($total_record/$scale);
+      else
+        $total_page = floor($total_record/$scale)+1;
 
-        // 표시할 페이지($page)에 따라 $truncated_num(한페이지에서 10개 리스트 보여지고 그 뒤 짤리는 넘버) 계산
-        $truncated_num = ($page - 1) * $scale;
-        $start_num = $total_record - $truncated_num;
+      // 표시할 페이지($page)에 따라 $truncated_num(한페이지에서 10개 리스트 보여지고 그 뒤 짤리는 넘버) 계산
+      $truncated_num = ($page - 1) * $scale;
+      $start_num = $total_record - $truncated_num;
 
-        //게시판 맨 상단 번호
-        $number = $total_record - $truncated_num;
+      //게시판 맨 상단 번호
+      $number = $total_record - $truncated_num;
 
-        for ($i=$truncated_num; $i < $truncated_num+$scale && $i < $total_record; $i++){
-          // 가져올 레코드로 위치(포인터) 이동
-          mysqli_data_seek($result, $i);
-          $row = mysqli_fetch_array($result);
-          $no         = $row["no"];
-          $id          = $row["id"];
-          $email        = $row["email"];
-          $phone       = $row["phone"];
-          $age       = $row["age"];
-          $intres       = $row["intres"];
-          $expiry_day       = $row["expiry_day"];
-          $regist_day  = $row["regist_day"];
+      for ($i=$truncated_num; $i < $truncated_num+$scale && $i < $total_record; $i++){
+        // 가져올 레코드로 위치(포인터) 이동
+        mysqli_data_seek($result, $i);
+        $row = mysqli_fetch_array($result);
+        $no         = $row["no"];
+        $acd_name        = $row["acd_name"];
+        $title          = $row["title"];
+        $subtitle       = $row["subtitle"];
+        $hit       = $row["hit"];
+        $regist_day  = $row["regist_day"];
 ?>
-        <li class="list_row">
-        <form method="post" action="#">
+      <li class="list_row">
+      <form method="post" action="#">
           <span class="col1"><?=$number?></span>
-          <span class="col2"><input type="text" name="no[]" value="<?=$no?>" readonly></span>
-          <span class="col3"><?=$id?></span>
-          <span class="col4"><input type="text" name="email[]" value="<?=$email?>" disabled maxlength="80" oninput="limitMaxLength(this)"/></span>
-          <span class="col5"><input type="number" name="phone[]" value="<?=$phone?>" disabled maxlength="12" oninput="limitMaxLength(this)"/></span>
-          <span class="col6"><?=$age?></span>
-          <span class="col7"><input type="text" name="intres[]" value="<?=$intres?>" disabled maxlength="10" oninput="limitMaxLength(this)"/></span>
-          <span class="col8"><input class="date_field" type="text" name="expiry_day[]" value="<?=$expiry_day?>" disabled readonly></span>
-          <span class="col9"><?=$regist_day?></span>
-        </form>
-        </li>	
+          <span class="col2 left-align"><?=$acd_name?></span>
+          <span id ="view" class="col3 left-align" onclick="window.open('/eduplanet/acd_story/view.php?no=<?=$no?>')"><?=$title?></span>
+          <span class="col4 left-align"><?=$subtitle?></span>
+          <span class="col5"><?=$hit?></span>
+          <span class="col6"><?=$regist_day?></span>
+          <span class="col7"><input type="checkbox" name="no[]" id="item<?=$i?>" value="<?=$no?>">
+          <label for="item<?=$i?>"></label></span>
+      </form>
+      </li>	
 			
 <?php
    	    $number--;

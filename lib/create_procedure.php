@@ -405,6 +405,43 @@ function create_procedure($conn, $prcd_name){
             ORDER BY temp.date;
           END";
         break;
+
+        case "get_day_story_for_one_month":
+          $sql="CREATE PROCEDURE `get_day_story_for_one_month`(IN y CHAR(4), IN m CHAR(2))
+          BEGIN 
+                DECLARE start_date CHAR(10);
+                DECLARE last_date CHAR(10);
+                SET start_date = CONCAT(y,'-', m, '-01');
+                SET last_date = LAST_DAY(start_date);
+                
+            SELECT 
+            temp.date, origin.count
+            FROM
+            (SELECT 
+              a.date
+            FROM
+              (SELECT 
+              CURDATE() - INTERVAL (a.a + (10 * b.a) + (100 * c.a) + (1000 * d.a)) DAY AS date
+            FROM
+              (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS a
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS b
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS c
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS d) a
+            WHERE
+              a.date BETWEEN start_date AND last_date) AS temp
+              LEFT JOIN
+            (SELECT 
+              `regist_day` AS `date`, COUNT(*) AS `count`
+            FROM
+              acd_story
+            WHERE
+              DATE(`regist_day`) >= STR_TO_DATE(start_date, '%Y-%m-%d') AND DATE(`regist_day`) <= STR_TO_DATE(last_date, '%Y-%m-%d')
+            GROUP BY date) AS origin 
+                ON temp.date = origin.date
+            ORDER BY temp.date;
+                
+          END";
+        break;
       default:
         echo "<script>alert('해당 프로시저가 없습니다. ');</script>";
         break;
