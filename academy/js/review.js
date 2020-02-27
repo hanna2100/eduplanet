@@ -4,9 +4,7 @@ $(function(){
   // for(var i=1;i<=$rate_total_star;i++){
   //  $(".rate_star_ty1 span:nth-child("+i+")").addClass("checked");
   // }
-  for(var i=1;i<=rate_point;i++){
-   $(".rate_star_ty1 span:nth-child("+i+")").addClass("checked");
-  }
+
     console.log("2",rate_point);
 
 });
