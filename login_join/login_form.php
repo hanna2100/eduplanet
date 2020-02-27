@@ -44,8 +44,8 @@
            </form>
 
            <p class="fieldset">
-						<input type="checkbox" id="remember-me" checked>
-						<label for="remember-me"> 로그인 상태 유지</label>
+						<input type="checkbox" id="remember_me" checked>
+						<label for="remember_me"> 로그인 상태 유지</label>
 					</p>
 
            <hr>

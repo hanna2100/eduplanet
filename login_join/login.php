@@ -2,8 +2,8 @@
    @session_start();
    include "../lib/db_connector.php";
 
-   define(ADMIN_ID, "admin");
-   define(ADMIN_PW, "admin_12");
+   define('ADMIN_ID', "admin");
+   define('ADMIN_PW', "admin_12");
 
    $input_id = test_input($_POST['inputId']);
    $input_pw = test_input($_POST['inputPw']);
@@ -32,19 +32,26 @@
    $result = mysqli_query($conn, $sql);
    $num_match = mysqli_num_rows($result);
 
-   if(!$num_match){
-     alert_back('가입되지 않은 아이디 입니다. 다시 입력해주세요');
-     $input_id="";
-   }else{
-     $pw_match = mysqli_fetch_array($result);
-     if($input_pw != $pw_match['pw']){
-       alert_back('비밀번호를 잘못 입력하셨습니다.');
+   if($no == "gm_no" || $no == "am_no"){
+     if(!$num_match){
+       alert_back('가입되지 않은 아이디 입니다. 다시 입력해주세요');
+       $input_id="";
      }else{
-       $_SESSION[$no] = $pw_match["no"];
+       $pw_match = mysqli_fetch_array($result);
+       if($input_pw != $pw_match['pw']){
+         alert_back('비밀번호를 잘못 입력하셨습니다.');
+       }else if($no = "am_no" && $pw_match['approval'] == 'N'){
+         alert_back('현재 회원님의 학원회원 승인이 진행중입니다. 아직 로그인 하실 수 없습니다.');
+       }else{
+         $_SESSION[$no] = $pw_match["no"];
+         $_SESSION[$login_time] = date("y-m-d");
 
-       mysqli_close($conn);
-       header('Location: ../index.php');
+         mysqli_close($conn);
+         header('Location: ../index.php');
+       }
      }
    }
+
+
 
   ?>
