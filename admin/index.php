@@ -1,3 +1,17 @@
+<?php
+
+include $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/session_start.php";
+
+if ($admin== "" ){
+  echo("
+      <script>
+      alert('관리자 전용 페이지 입니다.');
+      history.go(-1)
+      </script>
+  ");
+  exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +37,7 @@
   <title>에듀플래닛 관리자페이지</title>
 </head>
 <body>
+
 <main>
 <?php
   include_once 'nav.php';
@@ -118,7 +133,7 @@
         return $total_arr;
     }
   }
-
+  mysqli_close($conn);
 ?>
 <script>
   var month_arr = <?= json_encode($month_arr);?>;
