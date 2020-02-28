@@ -99,6 +99,7 @@ a {
     margin: 0 auto;
     background-color: #ebecee;
     padding-top: 73px;
+    padding-bottom: 30px;
 }
 
 .follow_list_background {
@@ -389,4 +390,14 @@ ul {
 .page_num_direction:hover, .page_num_direction_last:hover, .page_num_set:hover {
     background-color: #2E89FF;
     color: white;
+}
+#acd_name_in {
+    float: left;
+    width: 192px;
+    line-height: 28px;
+    outline: none;
+    border: 1px solid white;
+    padding-left: 10px;
+    /* padding-right: 60px; */
+
 }
