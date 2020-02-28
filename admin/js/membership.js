@@ -2,6 +2,7 @@ var formsForUpdate = new Array();
 var url = "/eduplanet/admin/membership.php?";
 
 $(function(){
+    
     listItemPicker();
 });
 
@@ -71,5 +72,37 @@ function limitMaxLength(e){
          //판매가 조정
         e.parentNode.nextSibling.nextSibling.innerHTML = sales;
 
+    }
+}
+
+
+function submitUpdate(){   
+
+    var conf = confirm('멤버십 상품을 수정하시겠습니까?');
+
+    if(conf){
+        var serialize ='';
+
+        for(var i in formsForUpdate){
+            serialize += formsForUpdate[i].serialize() + "&";
+        }
+
+        serialize = serialize.slice(0,-1);
+        console.log(serialize);
+        $.ajax({
+            type: "post",
+            data: serialize,
+            url : "./lib/membership_update.php",
+            success : function(data){
+                if(data==1){
+                    location.href=url+'&page='+page;
+                }else{
+                    alert('오류발생: '+data);
+                }
+            },
+            error : function(){
+                alert("시스템에러");
+            }
+        });
     }
 }

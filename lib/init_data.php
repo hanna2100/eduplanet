@@ -67,7 +67,7 @@ function g_members_init_data(){
 
       array_push($gm_join_date, $join_date);
 
-      $sql .= "($no, 'test$no', '1234', 'test$no@google.com', '01012345678', '$birth', '$intres', '$membership', '$join_date'),";
+      $sql .= "($no, 'test$no', 'a123456~', 'test$no@google.com', '01012345678', '$birth', '$intres', '$membership', '$join_date'),";
       
     }
     //마지막 콤마 제거

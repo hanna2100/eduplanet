@@ -1,13 +1,12 @@
 
 $(function(){
-
     // 대시보드 그래프설정
+    importMembersData();
+
     salesGraph();
     reviewGraph();
     postGraph();
 
-    importMembersData();
-    
 });
 
 
@@ -326,129 +325,23 @@ function membersGraph(lbl, gm_in, am_in){
 }
 
 function salesGraph(){
-    var year = y;
-    var year2 = y;
-    var month = m;
-    var month2 = m;
-
-    if(month2<=5){
-        month = m+7;
-        year = y-1;
-    }else{
-        month = m-5;
-    }
-
-    console.log(gm_sales); //판매금액 6개월동안의 데이터
-    console.log(am_sales); 
-
-    //전년도 마지막날짜 달력
-    var lastDate1 = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-    //현재년도 마지막날짜 달력
-    var lastDate2 = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-
-    //윤년계산
-    if((year%4 === 0 && year%100 !== 0) || year%400 === 0 )
-        lastDate1[1] = 29;
-    if((year2%4 === 0 && year2%100 !== 0) || year2%400 === 0 )
-        lastDate2[1] = 29;
-
-    //달력 붙이기
-    var lastDate = lastDate1.concat(lastDate2);
-
-    //시작년도 끝년도가 다르면 전년도 달력에서부터 lastDate인덱스시작
-    var index;
-    if(year!=year2){ 
-        index = month-1;
-    }else{
-        index = 6+month2;
-    }
-
-    var total_gsales_arr = [];
-    var i=0; //전체 배열 하나씩 돌리려고
-    while(gm_sales.length>0){
-        var arr = [];
-        for(var j = 0; j<lastDate[index]; j++){
-            if(gm_sales[0]!=undefined){ //현재월을 선택하면 undefined가 뜨기때문에 조건넣음
-                arr.push(gm_sales[0]); //원본배열 맨 앞에있는것만 넣어줌
-                gm_sales.shift(); //원본배열 앞에서부터 하나씩 삭제함
-            }
-        }
-        total_gsales_arr[i] = arr;
-        i++;
-        index++;
-    }
-
-    // console.log(total_gsales_arr);
-
-    //인덱스 초기화
-    if(year!=year2){ 
-        index = month-1;
-    }else{
-        index = 6+month2;
-    }
-
-    var total_asales_arr = []; //학원회원매출
-    i=0; //전체 배열 하나씩 돌리려고
-    while(am_sales.length>0){
-        var arr = [];
-        for(var j = 0; j<lastDate[index]; j++){
-            if(am_sales[0]!=undefined){
-                arr.push(am_sales[0]); //원본배열 맨 앞에있는것만 넣어줌
-                am_sales.shift(); //원본배열 앞에서부터 하나씩 삭제함
-            }
-        }
-        total_asales_arr[i] = arr;
-        i++;
-        index++;
-    }
-
-    //일반회원 월별매출 구하기
-    var gsales_arr = [];
-    var no = 0;
-    for(var i = 0; i<total_gsales_arr.length; i++){
-        var sum = 0;
-        for (var j=0; j < total_gsales_arr[i].length; j++ ) {
-            sum += parseInt(total_gsales_arr[i][j]);
-        }
-
-        gsales_arr[no] = sum;
-        no++;
-    }
-
-    //학원회원 월별매출 구하기
-    var asales_arr = [];
-    no = 0;
-    for(var i = 0; i<total_asales_arr.length; i++){
-        var sum = 0;
-        for (var j=0; j < total_asales_arr[i].length; j++ ) {
-            sum += parseInt(total_asales_arr[i][j]);
-        }
-        asales_arr[no] = sum;
-        no++;
-    }
-
-
-    var increase = (gsales_arr[5]) + (asales_arr[5]);
-
-    console.log(gsales_arr);
-    console.log(asales_arr);
-
-    $('#increse_sales').text(increase);
 
     var ctx = document.getElementById('dash_salesGraph').getContext('2d');
+    ctx.canvas.width = 880;
+    ctx.canvas.height = 310;
     var chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
 
         // The data for our dataset
         data: {
-            labels: ['1월', '2월', '3월', '4월', '5월', '6월'],
+            labels:month_arr,
             datasets: [{
                 label: 'TOTAL',
                 backgroundColor: grey,
                 borderColor: grey,
                 pointHoverBackgroundColor: grey,
-                data:  gsales_arr.map((x, y) => x + asales_arr[y]),
+                data:  total_sales,
                 pointRadius: 1,
                 pointHitRadius: 10,
                 tension: 0.2,
@@ -460,7 +353,7 @@ function salesGraph(){
                 backgroundColor: red,
                 borderColor: red,
                 pointHoverBackgroundColor: red,
-                data: gsales_arr,
+                data: gm_sales,
                 pointRadius: 1,
                 pointHitRadius: 10,
                 tension: 0.2,
@@ -472,7 +365,7 @@ function salesGraph(){
                 backgroundColor: blue,
                 borderColor: blue,
                 pointHoverBackgroundColor: blue,
-                data: asales_arr,
+                data: am_sales,
                 pointRadius: 1,
                 pointHitRadius: 10,
                 tension: 0.2,
@@ -502,6 +395,8 @@ function salesGraph(){
         }
     });
 }
+
+
 
 function reviewGraph(){
     var ctx = document.getElementById('dash_reviewGraph').getContext('2d');
