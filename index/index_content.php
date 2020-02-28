@@ -8,6 +8,30 @@
             </div>
         </h2>
 
+        <!-- 슬라이더 start -->
+        <div class="index_slider">
+            <div class="slider-wrapper theme-mi-slider">
+                <div id="slider" class="nivoSlider">
+                    <img src="/eduplanet/index/nivo-slider/img/1.jpg" alt="" title="#htmlcaption1" />
+                    <img src="/eduplanet/index/nivo-slider/img/2.jpg" alt="" title="#htmlcaption2" />
+                    <img src="/eduplanet/index/nivo-slider/img/3.jpg" alt="" title="#htmlcaption3" />
+                </div>
+                <div id="htmlcaption1" class="nivo-html-caption">
+                    <h1>에듀플래닛 1</h1>
+                    <p>에듀플래닛을 가입하고 나의 성공시대 시작됐다 야옹야옹</p>
+                </div>
+                <div id="htmlcaption2" class="nivo-html-caption">
+                    <h1>에듀플래닛 2</h1>
+                    <p>에듀플래닛을 가입하고 나의 성공시대 시작됐다 야옹야옹</p>
+                </div>
+                <div id="htmlcaption3" class="nivo-html-caption">
+                    <h1>에듀플래닛 3</h1>
+                    <p>에듀플래닛을 가입하고 나의 성공시대 시작됐다 야옹야옹</p>
+                </div>
+            </div>
+        </div>
+        <!-- 슬라이더 end -->
+
         <form name="academy_search_form" action="#" method="POST">
 
             <div class="index_main_wrap">
