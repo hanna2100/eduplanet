@@ -5,17 +5,16 @@
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
      <title>review test</title>
+
      <!-- favicon -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
      <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-     <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
-     <!-- 자동완성 -->
+     <script src="http://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-     <!-- 스크립트 -->
-     <script src="/eduplanet/mypage/js/review_write.js"></script>
-     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+     <!-- 자동완성 -->
+
      <!--  star rating -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <!-- 리뷰 하단 페이징 아이콘 -->
@@ -32,6 +31,10 @@
      <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
      <link rel="stylesheet" href="/eduplanet/index/footer.css">
      <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
+     <!-- 스크립트 -->
+     <script src="/eduplanet/mypage/js/review_write.js"></script>
+     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+
    </head>
    <body>
      <header>
@@ -49,8 +52,8 @@
         $no = isset($_GET["no"]) ?  $_GET["no"] : 7;
         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
-        // print_r($_COOKIE);
-        // print_r($_SESSION);
+        print_r($_COOKIE);
+        print_r($_SESSION);
 
 
         // content_top
@@ -401,7 +404,7 @@
      </footer>
 
      <script src="./js/review.js"></script>
-     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+     <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
    </body>
