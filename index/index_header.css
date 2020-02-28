@@ -38,7 +38,7 @@ a {
     /* border-bottom: 1px solid black; */
     text-align: center;
     position: fixed;
-    z-index: 1;
+    z-index: 999999;
 }
 
 .index_header_menu {
@@ -156,7 +156,7 @@ a {
 
 .index_header_menu_hover i {
     position: relative;
-    top: -3px;
+    top: -5px;
     font-size: 28px;
     color: white;
     z-index: 1;

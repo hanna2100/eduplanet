@@ -36,6 +36,18 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+  <!-- 슬라이더 -->
+  <link rel="stylesheet" href="/eduplanet/index/nivo-slider/css/nivo-slider.css">
+  <link rel="stylesheet" href="/eduplanet/index/nivo-slider/css/mi-slider.css">
+  <script src="/eduplanet/index/nivo-slider/js/jquery.nivo.slider.js"></script>
+  <!-- <script src="/eduplanet/index/nivo-slider/js/jquery-3.1.1.min.js"></script> -->
+
+  <script type="text/javascript"> 
+		$(window).on('load', function() {
+		    $('#slider').nivoSlider(); 
+		}); 
+	</script>
+
   <style>
     body {
       background: #ebecee;
