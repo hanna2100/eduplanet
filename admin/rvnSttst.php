@@ -239,17 +239,17 @@ var payco = <?=$payco?>;
       <div>
         <span>월 총 수익</span><br>
         <span class="dash_topline_i"><i class="fas fa-money-bill-wave"></i>&nbsp;<span id="total_rvn"><?=number_format(array_sum($total_sales))?></span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>일반회원 수익</span><br>
         <span class="dash_topline_i"><i class="fas fa-user"></i>&nbsp;<span id="gm_rvn"><?=number_format(array_sum($gm_sales))?></span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>사업자회원 수익</span><br>
         <span class="dash_topline_i"><i class="fas fa-user-tie"></i>&nbsp;<span id="am_rvn"><?=number_format(array_sum($am_sales))?></span></span>
-        <span class="caret down"><i class="fas fa-caret-down"></i></span>
+        <span class="caret down"> </i></span>
       </div>
     </div>
     <!--end of 상단 수익 정보-->

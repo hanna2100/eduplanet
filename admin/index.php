@@ -146,27 +146,27 @@ if ($admin== "" ){
       <div>
         <span>월 매출</span><br>
         <span>&#8361; <span id="increse_sales"><?=number_format($total_sales[11])?></span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>일반회원 순증가</span><br>
         <span class="dash_topline_i"><i class="fas fa-user"></i> <span id="increse_gm"></span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>사업자회원 순증가</span><br>
         <span class="dash_topline_i"><i class="fas fa-user-tie"></i> <span id="increse_am"></span></span>
-        <span class="caret down"><i class="fas fa-caret-down"></i></span>
+        <span class="caret down"> </i></span>
       </div>
       <div>
         <span>신규리뷰</span><br>
         <span class="dash_topline_i"><i class="fas fa-star"></i><span id="increse_review"></span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>신규포스팅</span><br>
         <span class="dash_topline_i"><i class="fas fa-edit"></i><span id="increse_story"></span></span>
-        <span class="caret down"><i class="fas fa-caret-down"></i></span>
+        <span class="caret down"> </i></span>
       </div>
     </div>
     <div id="dash_salesGraph_wrap">
