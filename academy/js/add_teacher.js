@@ -1,11 +1,12 @@
+var teacherImgShow = false;
 var teacherName = false;
 var teacherSubject = false;
-var teahcerContent = false;
+var teacherContent = false;
 $("#formButton").attr("disabled", true);
 $("#saveForm").attr("disabled", true);
 
 $(document).ready(function(){
-  var teacherImg = $("#teacherImg"),
+  var teacherImgShowVal = $("#teacherImg"),
   teacherNameVal = $("#teacherName"),
   teacherSubjectVal = $("#teacherSubject"),
   teacherContentVal = $("#teacherContent");
@@ -13,7 +14,7 @@ $(document).ready(function(){
   teacherNameVal.keyup(function(){
     var nameValue = teacherNameVal.val();
     console.log(nameValue);
-    var exp = /^[a-zA-Z가-힣]{3,20}$/;
+    var exp = /^[a-zA-Z가-힣]{2,20}$/;
     if(nameValue === ""){
       $("#NameText").text('선생님의 이름을 입력하세요.');
       teacherName = false;
@@ -65,43 +66,64 @@ $(document).ready(function(){
     }
   });
 });
+var srcDefault = '../img/member_basic.png';
+$("#teacherImg").change(function(){
+   var input = (this);
+   var image = $(this).siblings('#teacherImgShow');
+   if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          console.log(this);
+          image.attr('src', e.target.result);
+          teacherImgShow = true;
+          allPass()
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+});
+
 
 function allPass(){
-  console.log("pass", teacherName, teacherSubject, teacherContent);
-  if(teacherName && teacherSubject && teacherContent){
+  console.log("pass", teacherImgShow, teacherName, teacherSubject, teacherContent);
+  if(teacherImgShow && teacherName && teacherSubject && teacherContent){
     $("#saveForm").attr("disabled", false);
   }else{
     $("#saveForm").attr("disabled", true);
   }
 }
 
+
 function formButtonOn(){
+  alert("선생님 정보가 등록되었습니다");
   $("#formButton").attr("disabled", false);
 }
 
 function scrollDiv(){
   var offset = $(".add_schedule").offset();
 
-  $("html bodt").animate({scrollTop:offset.top},3000);
+  $("html body").animate({scrollTop:offset.top},3000);
 }
 
-function saveTeacherInfo(){
-  var formImg
-  var teacherName
-  var teacherSchedule
-  var teacherContent
-  // $.ajax({
-  //   url : "add_teacher_info.php",
-  //   type : "post",
-  //   datatype : "json",
-  //   data : {
-  //     teacher_name : ,
-  //     teacher_subject : ,
-  //     teacher_content :
-  //   },
-  //   success : function(){
-  //     var html = "";
-  //     var ati = JSON.parse();
-  //   }
-  // });
+function saveTeacherInfo(parent, img, tn, ts, tc){
+  $("#formButton").attr("disabled", true);
+  var parent = parent;
+  var formImg = img;
+  var teacherName = tn;
+  var teacherSchedule = ts;
+  var teacherContent = tc;
+  $.ajax({
+    url : "add_teacher_info.php",
+    type : "post",
+    datatype : "json",
+    data : {
+      parent : parent,
+      teacher_img : formImg,
+      teacher_name : teacherName,
+      teacher_subject : teacherSchedule,
+      teacher_content : teacherContent
+    },
+    success : function(){
+      formButtonOn();
+    }
+  });
 }

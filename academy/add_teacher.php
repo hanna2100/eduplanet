@@ -26,40 +26,40 @@
         if(!$mode == "am"){
           echo "<script> alert('선생님 관리를 하실수 없습니다.'); history.go(-1); </script>";
         }
-        $parent = isset($_GET['parent']) ? $_GET['parnet'] : 1;
+        $parent = isset($_GET['no']) ? $_GET['no'] : 1;
        ?>
       <div class="add_teacher">
         <div class="teacher_info">
           <h1>선생님 등록</h1>
-          <div class="formImgBox">
-            <form class="formImg" action="<?=$action?>" method="post">
+          <form class="forminfo" action="<?=$action?>" method="post" enctype="multipart/form-data\">
+            <div class="formImgBox">
               <h3>선생님 이미지</h3>
-              <img src="../img/member_basic.png" alt=""><br>
-              <input type="file" id="teacherImg" name="teacherImg">
-            </form>
-          </div>
-          <div class="formInfoBox">
-            <form class="formBox" action="<?=$action?>" method="post">
-              <label for="teacherName">이름</label><br>
-              <input type="text" class="formInput" id="teacherName" name="teacherName" placeholder="선생님의 이름을 입력 하세요" required><br>
-              <p id="NameText">선생님의 이름을 입력하세요.</p>
-            </form>
-            <form class="formBox" action="<?=$action?>" method="post">
-              <label for="teacherSubject">수업 과목</label><br>
-              <input type="text" class="formInput" id="teacherSubject" name="teacherSubject" placeholder="선생님의 과목을 입력 하세요" required><br>
-              <p id="subjectText">과목을 입력하세요.</p>
-            </form>
-            <form class="formBox" action="<?=$action?>" method="post">
-              <label for="teacherContent">경력 사항 </label><br>
-              <input type="text" class="formInput" id="teacherContent" name="teacherContent" placeholder="선생님의 경력을 입력 하세요" required><br>
-              <p id="contentText">경력을 입력하세요.</p>
-            </form>
-          </div>
-          <div class="formButtonBox">
-            <form class="buttonBox" action="<?=$action?>" method="post">
-              <input type="button" class="saveForm" id="saveForm" value="선생님 등록하기" onclick="formButtonOn()">
-              <input type="button" class="formButton" id="formButton" value="시간표 등록하기" onclick="scrollDiv()">
-              <input type="reset" class="formButton" id="buttonClear" value="초기화">
+              <img id="teacherImgShow" src="../img/member_basic.png" alt=""><br>
+              <input type="file" id="teacherImg" name="teacherImg" accept=".jpg,.jpeg,.png,.gif">
+            </div>
+            <div class="formInfoBox">
+              <div class="formBox">
+                <label for="teacherName">이름</label><br>
+                <input type="text" class="formInput" id="teacherName" name="teacherName" placeholder="선생님의 이름을 입력 하세요" required><br>
+                <p id="NameText">선생님의 이름을 입력하세요.</p>
+              </div>
+              <div class="formBox">
+                <label for="teacherSubject">수업 과목</label><br>
+                <input type="text" class="formInput" id="teacherSubject" name="teacherSubject" placeholder="선생님의 과목을 입력 하세요" required><br>
+                <p id="subjectText">과목을 입력하세요.</p>
+              </div>
+              <div class="formBox">
+                <label for="teacherContent">경력 사항 </label><br>
+                <input type="text" class="formInput" id="teacherContent" name="teacherContent" placeholder="선생님의 경력을 입력 하세요" required><br>
+                <p id="contentText">경력을 입력하세요.</p>
+              </div>
+            </div>
+            <div class="formButtonBox">
+              <div class="buttonBox" action="<?=$action?>" method="post">
+                <input type="button" class="saveForm" id="saveForm" value="선생님 등록하기" onclick="saveTeacherInfo(<?=$parent?>, )">
+                <input type="button" class="formButton" id="formButton" value="시간표 등록하기" onclick="scrollDiv()">
+                <input type="reset" class="formButton" id="buttonClear" value="초기화">
+              </div>
             </form>
           </div>
         </div>
