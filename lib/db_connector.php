@@ -47,7 +47,7 @@ include_once 'create_procedure.php';
 $prcd_name = array('get_join_g_members', 'get_join_a_members', 'get_wthdr_g_members'
 , 'get_wthdr_a_members', 'get_new_academy_serialize', 'get_empty_academy_serialize', 'get_am_sales', 'get_gm_sales'
 , 'modify_data_for_testing', 'get_am_order_year_sales', 'get_gm_order_year_sales'
-,'get_day_reivew_for_one_month', 'get_day_story_for_one_month');
+,'get_day_reivew_for_one_month', 'get_day_story_for_one_month', 'get_story_sixmonth_data', 'get_review_sixmonth_data');
 for($i=0; $i<sizeof($prcd_name); $i++){
   create_procedure($conn, $prcd_name[$i]);
 }

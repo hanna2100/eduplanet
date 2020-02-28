@@ -1,6 +1,9 @@
+body {
+  background-color: #ebecee;
+}
+
 .add_teacher{
 width: 80%;
-height: 600px;
 margin-left: auto;
 margin-right: auto;
 }
@@ -42,7 +45,6 @@ margin-right: auto;
 }
 .formBox {
   height: 100px;
-  margin: 10px 0;
   padding-left: 20px;
 }
 .formBox:before{
@@ -55,8 +57,12 @@ margin-right: auto;
   font-weight: bold;
 }
 .formBox input {
+  width: 340px;
   font-size: 24px;
   border-radius: 10px;
+}
+.formBox p {
+  margin: 0px;
 }
 .formButtonBox {
   width: 100%;
@@ -64,7 +70,8 @@ margin-right: auto;
   padding-bottom: 20px;
 }
 .buttonBox input {
-  width: 160px;
+  margin-left: 10px;
+  margin-right: 10px;
   height: 60px;
   margin-top: 30px;
   color: white;
@@ -72,19 +79,106 @@ margin-right: auto;
   font-size: 24px;
   cursor: pointer;
 }
-.buttonBox input#formButton{
-  border: 0.5px solid #2E89FF;
+.buttonBox input#saveForm{
+  width: 200px;
+  border: none;
   background-color: #2E89FF;
 }
+.buttonBox input#saveForm:hover{
+  background-color: #4E88FF;
+}
+.buttonBox input#saveForm:disabled {
+  background-color: gray;
+  cursor: default;
+}
+.buttonBox input#formButton{
+  width: 200px;
+  border: none;
+  background-color: #2E89FF;
+}
+.buttonBox input#formButton:disabled {
+  visibility: hidden;
+  background-color: gray;
+  cursor: default;
+}
 .buttonBox input#formButton:hover {
-  border: 0.5px solid #4E88FF;
   background-color: #4E88FF;
 }
 .buttonBox input#buttonClear{
-  margin-left: 360px;
-  border: 0.5px solid #333;
+  width: 160px;
+  border: none;
   background-color: #333;
 }
 .buttonBox input#buttonClear:hover{
   background-color: #444;
+}
+.add_schedule {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hidden {
+  display: none;
+}
+.teacher_schecule {
+  background-color: white;
+  width: 800px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.teacher_schecule h1 {
+  font-size: 28px;
+  text-align: center;
+  padding-top: 20px;
+  margin: 20px 0;
+}
+.teacher_schecule .scheduleSubjectInfo {
+  text-align: center;
+}
+.teacher_schecule .scheduleSubjectInfo label {
+  font-size: 20px;
+}
+.teacher_schecule .scheduleSubjectInfo input {
+
+}
+.teacher_schecule table {
+  margin-top: 15px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.teacher_schecule table tr th,td {
+  text-align: center;
+}
+.teacher_schecule table tr td{
+  width: 120px;
+  height: 50px;
+  background-color: #2E89FF;
+  border-radius: 5px;
+}
+#saveSchedule {
+  background-color: #4E89FF;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  margin: 10px 0 20px 100px;
+  width: 130px;
+  height: 60px;
+}
+#saveSchedule:hover{
+  background-color: #2E89FF;
+}
+
+#clearSchedule {
+  background-color: #444;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  margin: 10px 0 20px 340px;
+  width: 130px;
+  height: 60px;
+}
+#clearSchedule:hover{
+  background-color: #333;
 }

@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>review test</title>
+    <title>lecture test</title>
     <!-- index_header_searchbar_in -->
     <!-- 제이쿼리 -->
     <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
