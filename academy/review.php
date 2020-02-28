@@ -48,6 +48,10 @@
         $no = isset($_GET["no"]) ?  $_GET["no"] : 7;
         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
+        // print_r($_COOKIE);
+        // print_r($_SESSION);
+
+
         // content_top
         $sql_top = "select avg(total_star), avg(facility), avg(acsbl), avg(teacher), avg(cost_efct), avg(achievement) from review where parent='$no';";
         $result_top = mysqli_query($conn, $sql_top);
@@ -63,240 +67,253 @@
 
     <section>
       <div class="inner_section">
-        <div id="content_top" class="content">
-          <h2 class="txt_title">전체 리뷰 통계</h2>
-          <div class="inner_content_top top_rating">
-            <div class="rate_star_wrap">
-              <span id="rate_point" class="rate_point"><?=$rate_point?></span>
-              <div class="rate_star_ty1">
-                <span class="fa fa-star total_star"></span>
-                <span class="fa fa-star total_star"></span>
-                <span class="fa fa-star total_star"></span>
-                <span class="fa fa-star total_star"></span>
-                <span class="fa fa-star total_star"></span>
-                <div class="rate_txt">총 만족도</div>
+        <div class="inner_section_left">
 
-                <script>
-                var rate_point = '<?=$rate_point?>';
-                for(var i=1;i<=rate_point;i++){
-                 $(".rate_star_ty1 span:nth-child("+i+")").addClass("checked");
-                }
-                console.log("1",rate_point);
-                </script>
+          <div id="content_top" class="content">
+            <h2 class="txt_title">전체 리뷰 통계</h2>
+            <div class="inner_content_top top_rating">
+              <div class="rate_star_wrap">
+                <span id="rate_point" class="rate_point"><?=$rate_point?></span>
+                <div class="rate_star_ty1">
+                  <span class="fa fa-star total_star"></span>
+                  <span class="fa fa-star total_star"></span>
+                  <span class="fa fa-star total_star"></span>
+                  <span class="fa fa-star total_star"></span>
+                  <span class="fa fa-star total_star"></span>
+                  <div class="rate_txt">총 만족도</div>
+
+                  <script>
+                  var rate_point = '<?=$rate_point?>';
+                  for(var i=1;i<=rate_point;i++){
+                   $(".rate_star_ty1 span:nth-child("+i+")").addClass("checked");
+                  }
+                  console.log("1",rate_point);
+                  </script>
 
 
+                </div>
+              </div>
+              <div class="rate_bar_wrap">
+                <p> 시설 </p>
+                  <div class="inner_rate_bar">
+                    <div class="rate_bar first"></div>
+                  </div>
+                <p> 교통편의성 </p>
+                  <div class="inner_rate_bar">
+                    <div class="rate_bar second"></div>
+                  </div>
+                <p> 강사 </p>
+                  <div class="inner_rate_bar">
+                    <div class="rate_bar third"></div>
+                  </div>
+                <p> 수강료 만족도 </p>
+                  <div class="inner_rate_bar">
+                    <div class="rate_bar four"></div>
+                  </div>
+                <p> 학업성취도 </p>
+                  <div class="inner_rate_bar">
+                    <div class="rate_bar five"></div>
+                  </div>
+                  <script>
+                  // 전체 리뷰 5가지 항목 rating bar
+                  $rate_bar_facility = 20*"<?=$rate_bar_facility?>";
+                  $rate_bar_acsbl = 20*"<?=$rate_bar_acsbl?>";
+                  $rate_bar_teacher = 20*"<?=$rate_bar_teacher?>";
+                  $rate_bar_cost_efct = 20*"<?=$rate_bar_cost_efct?>";
+                  $rate_bar_achievement = 20*"<?=$rate_bar_achievement?>";
+                  $('.first').css({'width': $rate_bar_facility+'%'});
+                  $('.second').css({'width': $rate_bar_acsbl+'%'});
+                  $('.third').css({'width': $rate_bar_teacher+'%'});
+                  $('.four').css({'width': $rate_bar_cost_efct+'%'});
+                  $('.five').css({'width': $rate_bar_achievement+'%'});
+                  </script>
               </div>
             </div>
-            <div class="rate_bar_wrap">
-              <p> 시설 </p>
-                <div class="inner_rate_bar">
-                  <div class="rate_bar first"></div>
-                </div>
-              <p> 교통편의성 </p>
-                <div class="inner_rate_bar">
-                  <div class="rate_bar second"></div>
-                </div>
-              <p> 강사 </p>
-                <div class="inner_rate_bar">
-                  <div class="rate_bar third"></div>
-                </div>
-              <p> 수강료 만족도 </p>
-                <div class="inner_rate_bar">
-                  <div class="rate_bar four"></div>
-                </div>
-              <p> 학업성취도 </p>
-                <div class="inner_rate_bar">
-                  <div class="rate_bar five"></div>
-                </div>
-                <script>
-                // 전체 리뷰 5가지 항목 rating bar
-                $rate_bar_facility = 20*"<?=$rate_bar_facility?>";
-                $rate_bar_acsbl = 20*"<?=$rate_bar_acsbl?>";
-                $rate_bar_teacher = 20*"<?=$rate_bar_teacher?>";
-                $rate_bar_cost_efct = 20*"<?=$rate_bar_cost_efct?>";
-                $rate_bar_achievement = 20*"<?=$rate_bar_achievement?>";
-                $('.first').css({'width': $rate_bar_facility+'%'});
-                $('.second').css({'width': $rate_bar_acsbl+'%'});
-                $('.third').css({'width': $rate_bar_teacher+'%'});
-                $('.four').css({'width': $rate_bar_cost_efct+'%'});
-                $('.five').css({'width': $rate_bar_achievement+'%'});
-                </script>
+            <div class="inner_content_top top_radar">
+              <div id="radarChart"></div>
             </div>
           </div>
-          <div class="inner_content_top top_radar">
-            <div id="radarChart"></div>
+
+          <div id="content_mid" class="content">
+              <h2 class="txt_title">장단점 키워드</h2>
+              <div id="container"></div>
           </div>
-        </div>
+      <?php
+          // content_bottom
+          $sql_bottom = "select review.*, g_members.age from review inner join g_members on review.user_no=g_members.no where parent='$no' order by regist_day desc;";
+          $result_bottom = mysqli_query($conn, $sql_bottom);
+          // 1. 전체 리뷰의 갯수
+          $total_record = mysqli_num_rows($result_bottom);
+          // 2. 한 페이지에 보여질 글의 갯수
+          define("SCALE", 5);
+          // 3. 전체 페이지 수
+          $total_pages = ($total_record % SCALE == 0)?($total_record/SCALE):(ceil($total_record/SCALE));
+          // 4. 현재 페이지의 제일 첫 게시글 번호 구하기
+          $set_page_amount = ($page - 1) * SCALE;
+          $record_number = $total_record - $set_page_amount;
 
-        <div id="content_mid" class="content">
-            <h2 class="txt_title">장단점 키워드</h2>
-            <div id="container"></div>
-        </div>
-    <?php
-        // content_bottom
-        $sql_bottom = "select review.*, g_members.age from review inner join g_members on review.user_no=g_members.no where parent='$no' order by regist_day desc;";
-        $result_bottom = mysqli_query($conn, $sql_bottom);
-        // 1. 전체 리뷰의 갯수
-        $total_record = mysqli_num_rows($result_bottom);
-        // 2. 한 페이지에 보여질 글의 갯수
-        define("SCALE", 5);
-        // 3. 전체 페이지 수
-        $total_pages = ($total_record % SCALE == 0)?($total_record/SCALE):(ceil($total_record/SCALE));
-        // 4. 현재 페이지의 제일 첫 게시글 번호 구하기
-        $set_page_amount = ($page - 1) * SCALE;
-        $record_number = $total_record - $set_page_amount;
+          // 5. 현재 페이지에 게시글 목록 출력하기
+          for($i=$set_page_amount ; $i<$set_page_amount+SCALE && $i<$total_record ; $i++){
+            mysqli_data_seek($result_bottom, $i);
+            $row = mysqli_fetch_array($result_bottom);
 
-        // 5. 현재 페이지에 게시글 목록 출력하기
-        for($i=$set_page_amount ; $i<$set_page_amount+SCALE && $i<$total_record ; $i++){
-          mysqli_data_seek($result_bottom, $i);
-          $row = mysqli_fetch_array($result_bottom);
+            $num = $row["no"];
+            $user_no = $row["user_no"];
+            $one_line = $row["one_line"];
+      	    $individual_star = floor($row["total_star"]);
+      	    $facility = $row["facility"]*20;
+      	    $acsbl = $row["acsbl"]*20;
+      	    $teacher = $row["teacher"]*20;
+      	    $cost_efct = $row["cost_efct"]*20;
+      	    $achievement = $row["achievement"]*20;
+      	    $benefit = $row["benefit"];
+      	    $drawback = $row["drawback"];
+            $regist_day = $row["regist_day"];
+            $age = date("yy")-$row["age"];
+            if($age<14){
+              $grade = "유초등";
+            }else if($age>=14 && $age<17){
+              $grade = "중등";
+            }else if($age>=17 && $age<20){
+              $grade = "고등";
+            }else {$grade = "성인";}
+      ?>
 
-          $num = $row["no"];
-          $user_no = $row["user_no"];
-          $one_line = $row["one_line"];
-    	    $individual_star = floor($row["total_star"]);
-    	    $facility = $row["facility"]*20;
-    	    $acsbl = $row["acsbl"]*20;
-    	    $teacher = $row["teacher"]*20;
-    	    $cost_efct = $row["cost_efct"]*20;
-    	    $achievement = $row["achievement"]*20;
-    	    $benefit = $row["benefit"];
-    	    $drawback = $row["drawback"];
-          $regist_day = $row["regist_day"];
-          $age = date("yy")-$row["age"];
-          if($age<14){
-            $grade = "유초등";
-          }else if($age>=14 && $age<17){
-            $grade = "중등";
-          }else if($age>=17 && $age<20){
-            $grade = "고등";
-          }else {$grade = "성인";}
-    ?>
-
-         <div id="content_bottom" class="content">
-             <h2 class="txt_title">멤버십 전용 리뷰</h2>
-             <div class="review_head">
-               <img src="../img/member_basic.png" alt="" width="50px" height="50px">
-                 <div class="review_member_info">
-                   <span> <?=$grade?> </span><span> | </span><span> <?=$regist_day?> </span>
-                 </div>
-             </div>
-             <hr>
-
-             <div class="review_body_wrap">
-               <div class="review_body_left review_body">
-                 <div id="rate_5_things">
-                    <span class="fa fa-star star0"></span>
-                    <span class="fa fa-star star1"></span>
-                    <span class="fa fa-star star2"></span>
-                    <span class="fa fa-star star3"></span>
-                    <span class="fa fa-star star4"></span>
-
-                    <script>
-                    // 각 리뷰의 별점(총만족도) 표시
-                      var star0 = document.getElementsByClassName("star0");
-                      var star1 = document.getElementsByClassName("star1");
-                      var star2 = document.getElementsByClassName("star2");
-                      var star3 = document.getElementsByClassName("star3");
-                      var star4 = document.getElementsByClassName("star4");
-                      var star = [star0, star1, star2, star3, star4];
-
-                      var i = <?=$i?>;
-                      var scale = <?=SCALE?>;
-                      var i = i - (scale*(<?=$page?>-1));
-                      var individual_star = <?= $individual_star ?>;
-
-                      for(var j=0;j<individual_star;j++){
-                        star[j][i].style.color="orange";
-                      }
-                    </script>
-                 </div>
-
-                   <!-- 개별 리뷰 5가지 항목 -->
-                    <div class="row">
-                      <div class="side">시설</div>
-                      <div class="middle">
-                       <div class="bar-container">
-                         <div class="bar-5" style="width:<?=$facility?>% !important"><?=$facility?></div>
-                       </div>
-                      </div>
-                      <div class="side">교통편의성</div>
-                      <div class="middle">
-                       <div class="bar-container">
-                         <div class="bar-4" style="width:<?=$acsbl?>% !important"><?=$acsbl?></div>
-                       </div>
-                      </div>
-                      <div class="side">강사</div>
-                      <div class="middle">
-                       <div class="bar-container">
-                         <div class="bar-3" style="width:<?=$teacher?>% !important"><?=$teacher?></div>
-                       </div>
-                      </div>
-                      <div class="side">수강료만족도</div>
-                      <div class="middle">
-                       <div class="bar-container">
-                         <div class="bar-2" style="width:<?=$cost_efct?>% !important"><?=$cost_efct?></div>
-                       </div>
-                      </div>
-                      <div class="side">학업성취도</div>
-                      <div class="middle">
-                       <div class="bar-container">
-                         <div class="bar-1" style="width:<?=$achievement?>% !important"><?=$achievement?></div>
-                       </div>
-                      </div>
-                    </div>
+           <div id="content_bottom" class="content">
+               <h2 class="txt_title">멤버십 전용 리뷰</h2>
+               <div class="review_head">
+                 <img src="../img/member_basic.png" alt="" width="50px" height="50px">
+                   <div class="review_member_info">
+                     <span> <?=$grade?> </span><span> | </span><span> <?=$regist_day?> </span>
+                   </div>
                </div>
+               <hr>
 
-               <div class="review_body_right review_body">
-                 <p class="one_line">"<?=$one_line?>"</p>
-                 <div class="review_txt">
-                   <p class="review_title" style="font-size:17px; color:tomato; font-weight:bold;"> 장점</p>
-                   <p class="review_content positive"><?=$benefit?></p>
-                   <p class="review_title" style="font-size:17px; color:#00bcd4; font-weight:bold;"> 단점</p>
-                   <p class="review_content negative"><?=$drawback?></p>
+               <div class="review_body_wrap">
+                 <div class="review_body_left review_body">
+                   <div id="rate_5_things">
+                      <span class="fa fa-star star0"></span>
+                      <span class="fa fa-star star1"></span>
+                      <span class="fa fa-star star2"></span>
+                      <span class="fa fa-star star3"></span>
+                      <span class="fa fa-star star4"></span>
+
+                      <script>
+                      // 각 리뷰의 별점(총만족도) 표시
+                        var star0 = document.getElementsByClassName("star0");
+                        var star1 = document.getElementsByClassName("star1");
+                        var star2 = document.getElementsByClassName("star2");
+                        var star3 = document.getElementsByClassName("star3");
+                        var star4 = document.getElementsByClassName("star4");
+                        var star = [star0, star1, star2, star3, star4];
+
+                        var i = <?=$i?>;
+                        var scale = <?=SCALE?>;
+                        var i = i - (scale*(<?=$page?>-1));
+                        var individual_star = <?= $individual_star ?>;
+
+                        for(var j=0;j<individual_star;j++){
+                          star[j][i].style.color="orange";
+                        }
+                      </script>
+                   </div>
+
+                     <!-- 개별 리뷰 5가지 항목 -->
+                      <div class="row">
+                        <div class="side">시설</div>
+                        <div class="middle">
+                         <div class="bar-container">
+                           <div class="bar-5" style="width:<?=$facility?>% !important"><?=$facility?></div>
+                         </div>
+                        </div>
+                        <div class="side">교통편의성</div>
+                        <div class="middle">
+                         <div class="bar-container">
+                           <div class="bar-4" style="width:<?=$acsbl?>% !important"><?=$acsbl?></div>
+                         </div>
+                        </div>
+                        <div class="side">강사</div>
+                        <div class="middle">
+                         <div class="bar-container">
+                           <div class="bar-3" style="width:<?=$teacher?>% !important"><?=$teacher?></div>
+                         </div>
+                        </div>
+                        <div class="side">수강료만족도</div>
+                        <div class="middle">
+                         <div class="bar-container">
+                           <div class="bar-2" style="width:<?=$cost_efct?>% !important"><?=$cost_efct?></div>
+                         </div>
+                        </div>
+                        <div class="side">학업성취도</div>
+                        <div class="middle">
+                         <div class="bar-container">
+                           <div class="bar-1" style="width:<?=$achievement?>% !important"><?=$achievement?></div>
+                         </div>
+                        </div>
+                      </div>
                  </div>
 
-                 <div class="overlay"></div>
-                 <div id="myModal" class="modal">
-                   <?php
-                      if($gm_no){
-                        $url = "../membership/index.php";
-                      }else{
-                        $url = "../login_join/login_form.php";
-                      }
-                    ?>
-                   <button type="button" name="button" class="btn_modal btn_membership" onclick="location.href='<?=$url?>'">멤버십 가입하고 전체보기</button>
-                   <button type="button" name="button" class="btn_modal btn_review" onclick="location.href='/eduplanet/acd_story/index.php'">학원리뷰 작성하고 전체보기</button>
+                 <div class="review_body_right review_body">
+                   <p class="one_line">"<?=$one_line?>"</p>
+                   <div class="review_txt">
+                     <p class="review_title" style="font-size:17px; color:tomato; font-weight:bold;"> 장점</p>
+                     <p class="review_content positive"><?=$benefit?></p>
+                     <p class="review_title" style="font-size:17px; color:#00bcd4; font-weight:bold;"> 단점</p>
+                     <p class="review_content negative"><?=$drawback?></p>
+                   </div>
+
+                   <div class="overlay"></div>
+                   <div id="myModal" class="modal">
+                     <?php
+                        if($gm_no){
+                          $url = "../membership/index.php";
+                        }else{
+                          $url = "../login_join/login_form.php";
+                        }
+                      ?>
+                     <button type="button" name="button" class="btn_modal btn_membership" onclick="location.href='<?=$url?>'">멤버십 가입하고 전체보기</button>
+                     <button type="button" name="button" class="btn_modal btn_review" onclick="location.href='/eduplanet/acd_story/index.php'">학원리뷰 작성하고 전체보기</button>
+                   </div>
                  </div>
+
+                <!-- 멤버십에 가입되어 있으면 리뷰 보여주고 아니면 안보여준다  -->
+                 <script>
+                    var gm_no = '<?=$gm_no?>';
+                    var pgm_no = '<?=$pgm_no?>';
+                    var admin = '<?=$admin?>';
+                    var overlay = document.getElementsByClassName("overlay");
+                    var modal = document.getElementsByClassName("modal");
+
+                    if(!gm_no && !pgm_no){
+                      overlay[i].style.display = "block";
+                      modal[i].style.display = "block";
+                    }else if(admin) {
+                      overlay[i].style.display = "none";
+                      modal[i].style.display = "none";
+                    }else {
+                      overlay[i].style.display = "none";
+                      modal[i].style.display = "none";
+                    }
+                  </script>
+
                </div>
+           </div>   <!-- end of content_bottom -->
 
-              <!-- 멤버십에 가입되어 있으면 리뷰 보여주고 아니면 안보여준다  -->
-               <script>
-                  var gm_no = '<?=$gm_no?>';
-                  var pgm_no = '<?=$pgm_no?>';
-                  var admin = '<?=$admin?>';
-                  var overlay = document.getElementsByClassName("overlay");
-                  var modal = document.getElementsByClassName("modal");
+      <?php
+          $record_number--;
+        } // end of for
+          mysqli_close($conn);
+      ?>
+    </div>    <!-- end of inner_section_left -->
 
-                  if(!gm_no && !pgm_no){
-                    overlay[i].style.display = "block";
-                    modal[i].style.display = "block";
-                  }else if(admin) {
-                    overlay[i].style.display = "none";
-                    modal[i].style.display = "none";
-                  }else {
-                    overlay[i].style.display = "none";
-                    modal[i].style.display = "none";
-                  }
-                </script>
 
-             </div>
-         </div>
-    <?php
-        $record_number--;
-      } // end of for
-        mysqli_close($conn);
-    ?>
+<!-- 옆구리   -->
+    <div class="inner_section_right">
+      <div class="yeopguri">
+        내용
+      </div>
+    </div>
+
 
 <!-- 하단 페이지 번호 인디케이터   -->
     <div class="page_num_wrap">
