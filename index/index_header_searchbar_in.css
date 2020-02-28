@@ -153,23 +153,30 @@ a {
     display: none;
 }
 
-.index_header_menu_hover img {
+.index_header_menu_hover i {
     position: relative;
-    /* top: 6px; */
-    width: 18px;
-    /* height: 9px; */
+    top: -3px;
+    font-size: 28px;
+    color: white;
+    z-index: 1;
+}
+
+.index_header_menu_hover_detail i {
+    position: relative;
+    top: -33px;
+    font-size: 28px;
+    color: white;
+    z-index: 1;
 }
 
 .index_header_menu_ul_left li:hover .index_header_menu_hover {
     display: block;
     position: relative;
-    top: 6px;
 }
 
 .index_header_menu_ul_left li:hover .index_header_menu_hover_detail {
     display: block;
     position: relative;
-    top: 6px;
 }
 
 /* 호버시, 흰색 서브메뉴 */
@@ -179,22 +186,14 @@ a {
     display: none;
 }
 
-.index_header_menu_hover_detail img {
-    position: relative;
-    top: -24px;
-    width: 18px;
-    /* height: 9px; */
-    z-index: 1;
-}
-
 .index_header_menu_hover_detail_review {
     width: 140px;
     height: 50px;
     border: 1px solid lightgray;
     position: relative;
-    top: -27px;
+    top: -44px;
     right: 65px;
-    box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     background: #fff;
     display: none;
@@ -229,9 +228,9 @@ a {
     height: 215px;
     border: 1px solid lightgray;
     position: relative;
-    top: -27px;
+    top: -44px;
     right: 63px;
-    box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     background: #fff;
     display: none;
@@ -309,7 +308,8 @@ a {
     /* 가로 스크롤바 숨기기 */
     overflow-x: hidden;
 }
-  /* IE 6 doesn't support max-height
+
+/* IE 6 doesn't support max-height
    * we use height instead, but this forces the menu to always be this tall
    */
 

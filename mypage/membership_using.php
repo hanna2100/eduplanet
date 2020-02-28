@@ -1,4 +1,4 @@
-<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/session_start.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +16,9 @@
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
@@ -55,11 +58,11 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php"; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header_searchbar_in.php"; ?>
             </div>
 
             <div class="header_mypage">
-                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/mypage/mypage_header.php"; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/mypage/mypage_header.php"; ?>
             </div>
         </header>
 
@@ -122,7 +125,7 @@
                         ";
                     }
 
-                    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
+                    include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
                     $sql = "SELECT * from gm_order WHERE gm_no='$user_no'";
 
@@ -200,7 +203,7 @@
         </div>
 
         <footer>
-            <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
+            <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
         </footer>
 
     </div>

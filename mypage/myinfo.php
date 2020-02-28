@@ -1,4 +1,4 @@
-<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/session_start.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +16,9 @@
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
@@ -56,7 +59,7 @@
 
     $user_no = $gm_no;
 
-    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
     $sql = "SELECT * FROM g_members WHERE no='$user_no'";
     $result = mysqli_query($conn, $sql);
@@ -83,11 +86,11 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php"; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header_searchbar_in.php"; ?>
             </div>
 
             <div class="header_mypage">
-                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/mypage/mypage_header.php"; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/mypage/mypage_header.php"; ?>
             </div>
         </header>
 
@@ -126,7 +129,7 @@
                         <form id="form_member" action="/eduplanet/mypage/gm_myinfo_update.php" method="post" autocomplete="on">
                             <div class="formBox">
                                 <label for="inputId">아이디</label>
-                                <input type="text" class="formInput" id="inputId" name="id" placeholder="아이디를 입력해 주세요" value="<?=$id?>" disabled>
+                                <input type="text" class="formInput" id="inputId" name="id" placeholder="아이디를 입력해 주세요" value="<?= $id ?>" disabled>
                                 <p class="subMsg" id="idSubMsg"></p>
                             </div>
                             <div class="formBox">
@@ -140,17 +143,17 @@
                             </div>
                             <div class="formBox">
                                 <label for="inputEmail">이메일</label>
-                                <input type="email" class="formInput" id="inputEmail" name="email" placeholder="이메일을 입력해 주세요" value="<?=$email?>" required>
+                                <input type="email" class="formInput" id="inputEmail" name="email" placeholder="이메일을 입력해 주세요" value="<?= $email ?>" required>
                                 <p class="subMsg" id="emailSubMsg"></p>
                             </div>
                             <div class="formBox">
                                 <label for="inputTel">전화번호</label>
-                                <input type="tel" class="formInput" id="inputTel" name="phone" placeholder="전화번호를 -없이 입력해 주세요" value="<?=$phone?>" required>
+                                <input type="tel" class="formInput" id="inputTel" name="phone" placeholder="전화번호를 -없이 입력해 주세요" value="<?= $phone ?>" required>
                                 <p class="subMsg" id="telSubMsg"></p>
                             </div>
                             <div class="formBox">
                                 <label for="inputIntres">관심과목</label>
-                                <input type="text" class="formInput" id="inputIntres" name="intres" placeholder="관심과목을 입력해 주세요" value="<?=$intres?>" required>
+                                <input type="text" class="formInput" id="inputIntres" name="intres" placeholder="관심과목을 입력해 주세요" value="<?= $intres ?>" required>
                                 <p class="subMsg" id="intresSubMsg"></p>
                             </div>
                             <div class="formBox">
@@ -183,7 +186,7 @@
 
 
         <footer>
-            <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
+            <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
         </footer>
 
 
