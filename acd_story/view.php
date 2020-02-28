@@ -41,7 +41,7 @@
 
     <?php
 
-    $story_no = $_GET["story_no"];
+    $story_no = $_GET["no"];
 
     include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
@@ -197,8 +197,9 @@
                     $sql = "SELECT S.no as story_no, S.* FROM acd_story S inner join academy A on S.parent=A.no
                             where parent=(select parent from acd_story where acd_story.no=$story_no) order by hit desc limit 4";
                     $result = mysqli_query($conn, $sql);
+                    $total_record = mysqli_num_rows($result);
 
-                    for ($i = 0; $i < 4; $i++) {
+                    for ($i = 0; $i < $total_record; $i++) {
 
                         mysqli_data_seek($result, $i);
                         $row = mysqli_fetch_array($result);
