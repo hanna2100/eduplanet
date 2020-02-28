@@ -1,4 +1,4 @@
-<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/session_start.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +16,9 @@
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
@@ -97,12 +100,12 @@
                     <a href="/eduplanet/mypage/am_myinfo.php">
                         <li id="mypage_user_myinfo">내 정보</li>
                     </a>
-                    
+
                     <a href="/eduplanet/mypage/am_membership_pay.php">
                         <li id="mypage_user_membership">멤버십/결제</li>
                     </a>
 
-                    <a href="/eduplanet/academy/index.php?no=<?=$am_no?>">
+                    <a href="/eduplanet/academy/index.php?no=<?= $am_no ?>">
                         <li id="mypage_user_review">My Academy</li>
                     </a>
                 </ul>
