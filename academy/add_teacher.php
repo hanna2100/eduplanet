@@ -24,7 +24,7 @@
         $mode = isset($_GET['mode']) ? $_GET['mode'] : "am";
         $action = "members_insert.php?mode=".$mode;
         if(!$mode == "am"){
-          echo "<script> alert('학원 관리를 하실수 없습니다.'); history.go(-1); </script>";
+          echo "<script> alert('선생님 관리를 하실수 없습니다.'); history.go(-1); </script>";
         }
         $parent = isset($_GET['parent']) ? $_GET['parnet'] : 1;
        ?>
