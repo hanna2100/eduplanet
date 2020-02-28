@@ -16,18 +16,20 @@
   <!-- 자동완성 -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  
+
   <!-- CSS -->
   <link rel="stylesheet" href="/eduplanet/index/index_header.css">
   <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
   <link rel="stylesheet" href="./join.css">
-  
+
 </head>
 
 <body onload='setDateBox()'>
 
   <header>
-    <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header.php"; ?>
+    <?php
+    include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header.php";
+    ?>
   </header>
 
   <main>
@@ -39,7 +41,7 @@
         if ($mode == "gm") {
           echo "<h2>일반 회원 가입</h2>
                 <a class='join_mode_p'>사업자 회원이신가요?</p>
-                <a href='/eduplanet/login_join/join_form.php?mode=am'><p class='join_mode_a'>일반 회원 가입</p></a>
+                <a href='/eduplanet/login_join/join_form.php?mode=am'><p class='join_mode_a'>사업자 회원 가입</p></a>
                        <form id='form_member' action=$action method='post' autocomplete='on'>
                     ";
         } else if ($mode == "am") {
@@ -81,9 +83,9 @@
                      ";
           } else if ($mode == "am") {
             echo "<label for='inputAcdName'>학원/교습소 이름</label>
-                      <input type='text' class='formInput' id='acd_name' name='acd_name' placeholder='학원/교습소 이름을 띄어쓰기없이 입력해주세요' required>
-                      <input type='hidden' id='si_name' name='si_name'>
-                      <input type='hidden' id='dong_name' name='dong_name'>
+                      <input type='text' class='formInput' id='acd_name_join' name='acd_name_join' placeholder='학원/교습소 이름을 띄어쓰기없이 입력해주세요' required>
+                      <input type='hidden' id='si_name_join' name='si_name_join'>
+                      <input type='hidden' id='dong_name_join' name='dong_name_join'>
                       <p class='subMsg' id='AcdNameSubMsg'></p>
                      ";
           }
@@ -131,7 +133,7 @@
       </div>
     </section>
   </main>
-  
+
   <script>
     var mode = '<?= $mode ?>';
   </script>

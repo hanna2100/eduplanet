@@ -68,6 +68,7 @@
 
         // gm_no, am_no 세션 값 주기
         $_SESSION[$mode_no] = $no;
+        $_SESSION[$login_time] = date("y-m-d");
 
       // 만료날짜가 있을 때 (유료회원일 때)
       } else {
@@ -77,25 +78,26 @@
         $today = date("Y-m-d");
         $today = strtotime($today);
         $expiry_day = strtotime($expiry_day);
-        
+
         // 만료날짜가 현재날짜보다 이전일 때 (멤버십이 끝났을 때)
         if ($expiry_day < $today) {
 
           // 테이블 만료날짜를 0000-00-00 으로 업데이트
           $sql_exp = "UPDATE $table SET expiry_day='0000-00-00' WHERE no=$no";
           mysqli_query($conn, $sql_exp);
-          
+
           if (!mysqli_query($conn, $sql_exp)) {
             echo "오류ㅠ.ㅠ : ".mysqli_error($conn);
           }
 
           $_SESSION[$mode_no] = $no;
-        
+
         // 만료날짜가 현재날짜보다 이후거나 같을 때 (멤버십이 이용중일 때)
         } else if ($expiry_day >= $today) {
 
           $_SESSION[$mode_no] = $no;
           $_SESSION[$pay] = $no;
+          $_SESSION[$login_time] = date("y-m-d");
 
         }
       }
