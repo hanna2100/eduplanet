@@ -1,53 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- favicon -->
-    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
-    <!-- jquery -->
-    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="/eduplanet/admin/js/admin.js"></script>
-    <script src="/eduplanet/admin/js/am_members_waiting.js"></script>
-    <!-- css -->
-    <link rel="stylesheet" href="/eduplanet/admin/css/am_members_waiting.css">
-    <link rel="stylesheet" href="/eduplanet/admin/css/nav.css">
-    <!-- 폰트 -->
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Montserrat&display=swap" rel="stylesheet">
-    <!-- 아이콘 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+  <!-- jquery -->
+  <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="/eduplanet/admin/js/admin.js"></script>
+  <script src="/eduplanet/admin/js/membership.js"></script>
+  <!-- css -->
+  <link rel="stylesheet" href="/eduplanet/admin/css/membership.css">
+  <link rel="stylesheet" href="/eduplanet/admin/css/nav.css">
+  <!-- 폰트 -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Montserrat&display=swap" rel="stylesheet">
+  <!-- 아이콘 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+  <!-- 차트 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <title>에듀플래닛 관리자페이지 - 멤버십설정</title>
+  <!-- Date 라이브러리 -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
+<main>
 <?php
+  include_once 'nav.php';
   include_once '../lib/db_connector.php';
-  
   $page = isset($_GET["page"])? $_GET["page"]: 1 ;
   $col = isset($_GET["col"])? $_GET["col"]: '' ;
   $search = isset($_GET["search"])? $_GET["search"]: '' ;
-
 ?>
-<!-- php 변수를 자바스크립트로 넘겨줌 -->
 <script>
-  var page = "<?=$page?>";
-  var col = "<?=$col?>";
-  var search = "<?=$search?>";
+var page = <?=$page?>;
 </script>
-<div id="g_members_list_wrap">
+<section>
+<!-- 총 회원수 가져오기 -->
+  <div class="sec_content">
+    <div id="dash_topline">
+      <div>
+        <span>프리미엄</span><br>
+        <?php
+          $sql = "SELECT 
+                    *
+                  FROM
+                  product
+                  WHERE
+                  prdct_name LIKE '프리미엄%'
+                  ORDER BY prdct_name , month";
+
+          $result = mysqli_query($conn, $sql);
+          for($i=0; $i<3 ; $i++){
+
+          mysqli_data_seek($result, $i);
+          $row = mysqli_fetch_array($result);
+          $name = $row['prdct_name']; 
+          $month = $row['month']; 
+          $price = $row['price']; 
+          $discount = $row['discount'];
+          $sales = $price*(1-($discount/100));
+        ?>
+        <div class="prdct_info">
+            <p><?=$month?>개월</p>
+            <p>- <?=$discount?>%</p>
+            <p><?= $sales?></p>
+        </div>
+       <?php
+          }
+        ?>
+      </div>
+      <div>
+      <span>학원관리</span><br>
+      <?php
+          $sql = "SELECT 
+                    *
+                  FROM
+                  product
+                  WHERE
+                  prdct_name LIKE '학원관리%'
+                  ORDER BY prdct_name , month";
+
+          $result = mysqli_query($conn, $sql);
+          for($i=0; $i<3 ; $i++){
+
+          mysqli_data_seek($result, $i);
+          $row = mysqli_fetch_array($result);
+          $name = $row['prdct_name']; 
+          $month = $row['month']; 
+          $price = $row['price']; 
+          $discount = $row['discount'];
+          $sales = $price*(1-($discount/100));
+        ?>
+        <div class="prdct_info2">
+            <p><?=$month?>개월</p>
+            <p>- <?=$discount?>%</p>
+            <p><?= $sales?></p>
+        </div>
+       <?php
+          }
+        ?>
+      </div>
+    </div>
+    <!--end of 상단 회원수 변화-->
+
+    <div id="g_members_list_wrap">
       <div id="g_members_list">
-        <h4>
-          <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Waiting list
+      <h4><i class="fas fa-award"></i>&nbsp;&nbsp;&nbsp;Product Setting
           <div class="selectbox">
             <select id="search_select">
-              <option>회원번호</option>
-              <option>아이디</option>
-              <option>이메일</option>
-              <option>학원번호</option>
-              <option>학원명</option>
-              <option>대표자명</option>
-              <option>가입일</option>
+              <option>상품명</option>
+              <option>개월</option>
+              <option>가격</option>
+              <option>할인율</option>
             </select>
           </div>
           <div class='search-box'>
@@ -62,28 +129,25 @@
         <!-- end of 검색창 -->
 
         <div class="list_edit_delete_wrap">
-          <button onclick="submitApproval()">승인</button>
-          <button onclick="submitDeny()">거절</button>
+          <button onclick="submitUpdate()">수정</button>
         </div>
         <ul id="member_list">
 				<li>
 					<span class="col1">No</span>
-					<span class="col3">아이디</span>
-					<span class="col4">이메일</span>
-					<span class="col5">학원번호</span>
-					<span class="col6">학원명</span>
-					<span class="col7">대표자명</span>
-          <span class="col8">가입일</span>
-					<span class="col2">첨부파일</span>
-					<span class="col9">선택</span>
+					<span class="col2">상품번호</span>
+					<span class="col3">상품명</span>
+					<span class="col4">개월</span>
+					<span class="col5">가격</span>
+					<span class="col6">할인율</span>
+					<span class="col7">판매가</span>
 				</li>
 <?php
         $sql='';
 
         if($col!='' && $search !=''){
-          $sql = "SELECT * FROM a_members WHERE $col LIKE '%$search%' AND approval = 'N' ORDER BY regist_day DESC";
+          $sql = "SELECT * FROM product WHERE $col LIKE '%$search%' ORDER BY prdct_name ASC";
         }else{
-          $sql = "SELECT * FROM a_members WHERE approval = 'N' ORDER BY regist_day DESC";
+          $sql = "SELECT * FROM product ORDER BY prdct_name ASC";
         }
 
         $result = mysqli_query($conn, $sql);
@@ -109,26 +173,20 @@
           mysqli_data_seek($result, $i);
           $row = mysqli_fetch_array($result);
           $no         = $row["no"];
-          $id          = $row["id"];
-          $email        = $row["email"];
-          $acd_no       = $row["acd_no"];
-          $acd_name       = $row["acd_name"];
-          $rprsn       = $row["rprsn"];
-          $file_copy       = $row["file_copy"];
-          $regist_day  = $row["regist_day"];
+          $prdct_name          = $row["prdct_name"];
+          $month        = $row["month"];
+          $price       = $row["price"];
+          $discount       = $row["discount"];
 ?>
         <li class="list_row">
         <form method="post" action="#">
           <span class="col1"><?=$number?></span>
-          <span class="col3"><?=$id?></span>
-          <span class="col4"><?=$email?></span>
-          <span class="col5"><?=$acd_no?></span>
-          <span class="col6"><?=$acd_name?></span>
-          <span class="col7"><?=$rprsn?></span>
-          <span class="col8"><?=$regist_day?></span>
-          <span class="col2"><i class="far fa-address-card" onclick="showPopupLayer('<?=$file_copy?>')"></i></span>
-          <span class="col9"><input type="checkbox" name="no[]" id="item<?=$i?>" value="<?=$no?>">
-          <label for="item<?=$i?>"></label></span>
+          <span class="col2"><input type="text" name="no[]" value="<?=$no?>" readonly></span>
+          <span class="col3"><input type="text" name="prdct_name[]" value="<?=$prdct_name?>" disabled maxlength="30" oninput="limitMaxLength(this)"/></span>
+          <span class="col4"><input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="month[]" value="<?=$month?>" disabled maxlength="2" oninput="limitMaxLength(this)"/></span>
+          <span class="col5"><input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="price[]" value="<?=$price?>" disabled maxlength="10" oninput="limitMaxLength(this)"/></span>
+          <span class="col6"><input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="discount[]" value="<?=$discount?>" disabled maxlength="3" oninput="limitMaxLength(this)"/></span>
+          <span class="col7"><?=$price-$price*($discount/100)?></span>
         </form>
         </li>	
 			
@@ -167,13 +225,14 @@
                 $first_page = $total_page - ($total_page % $page_scale)+1;
               }
             }
-
+            echo "<script>console.log($first_page, $last_page)</script>";
+            
             $next = $last_page + 1;// > 버튼 누를때 나올 페이지
             $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
 
-            $url = "/eduplanet/admin/am_members_waiting.php?";
+            $url = "/eduplanet/admin/membership.php?";
             if($search!=''){
-              $url .= "col=$col&search=$search";
+              $url .= "&col=$col&search=$search";
             }
             // 첫번째 페이지일 때 앵커 비활성화
             if ($first_page == 1) {
@@ -217,11 +276,8 @@
       </div>
       </div>
     </div>
-    <div id="overlay"></div>
-    <div id="popupLayer">
-      <center>
-        <img id ="bsns_lic_img" src="/eduplanet/img/no_bsns_lic.png" onerror="setDefaultImg()" alt="사업자등록증" width=600>
-      </center>
-    </div>
+  </div>
+</section>
+</main>
 </body>
 </html>

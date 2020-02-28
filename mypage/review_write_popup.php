@@ -13,7 +13,8 @@
 
             <div class="review_write_content">
                 <p class="review_write_content_p">작성을 완료하시면 모든 학원의 리뷰를 보실 수 있습니다.</p>
-                <p class="review_write_content_p">입력하신 모든 정보는 <b>익명</b>으로 처리됩니다.</p>
+                <p class="review_write_content_p">입력하신 모든 정보는 <b>익명</b>으로 처리됩니다.</p><br>
+                <p class="review_write_content_p">* 리뷰 삭제는 작성일로부터 30일 이후에 가능합니다.</p>
 
                 <!-- 학원명 선택 자동완성 구현하기 -->
                 <div class="search_academy">

@@ -72,9 +72,7 @@
   <!--end of 년 월 선택바 -->
 
 <?php
-  if($m<10){
-    $m2 = "0".$m;
-  }
+  $m2 = $m <10? "0".$m : $m;
 
   //매출데이터 가져오기
   $sql_arr = array();
@@ -196,13 +194,9 @@
   $result = mysqli_query($conn, $sql);
   if($result){
     $row = mysqli_fetch_array($result);
-    $kakao = $row['kakao'];
-    $smile = $row['smile'];
-    $payco = $row['payco'];
-  }else{
-    $kakao = 0;
-    $smile = 0;
-    $payco = 0;
+    $kakao = $row['kakao']!=null ? $row['kakao']: 0;
+    $smile = $row['smile']!=null ? $row['smile']: 0;
+    $payco = $row['payco']!=null ? $row['payco']: 0;
   }
 
 ?>

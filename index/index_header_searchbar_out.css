@@ -88,7 +88,7 @@ a {
 
 .index_header_home_img img {
     width: 25px;
-    height: 22px;
+    /* height: 22px; */
     padding-top: 10px;
     padding-bottom: 10px;
     /* border: 1px solid black; */
@@ -129,7 +129,7 @@ a {
 
 .index_header_review_img img {
     width: 18px;
-    height: 18px;
+    /* height: 18px; */
     /* border: 1px solid black; */
     padding-top: 17px;
     padding-bottom: 15px;
@@ -149,7 +149,7 @@ a {
 
 .index_header_profile_img img {
     width: 18px;
-    height: 18px;
+    /* height: 18px; */
     /* border: 1px solid black; */
     padding-top: 17px;
     padding-bottom: 15px;
@@ -164,7 +164,7 @@ a {
     position: relative;
     /* top: 6px; */
     width: 18px;
-    height: 9px;
+    /* height: 9px; */
 }
 
 .index_header_menu_ul_left li:hover .index_header_menu_hover {
@@ -190,7 +190,7 @@ a {
     position: relative;
     top: -24px;
     width: 18px;
-    height: 9px;
+    /* height: 9px; */
     z-index: 1;
 }
 
@@ -199,7 +199,7 @@ a {
     height: 50px;
     border: 1px solid lightgray;
     position: relative;
-    top: -25px;
+    top: -27px;
     right: 65px;
     box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
     border-radius: 4px;
@@ -236,7 +236,7 @@ a {
     height: 215px;
     border: 1px solid lightgray;
     position: relative;
-    top: -25px;
+    top: -27px;
     right: 63px;
     box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
     border-radius: 4px;
@@ -338,7 +338,7 @@ a {
 
 .index_header_search_logo img{
     width: 200px;
-    height: 40px;
+    /* height: 40px; */
     /* padding-top: 10px;
     padding-bottom: 10px; */
 }

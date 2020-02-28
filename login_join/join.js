@@ -30,13 +30,13 @@ $(document).ready(function(){
 
     if(idValue === ""){
       //아이디 입력 안 할 경우
-      $("#idSubMsg").text('아이디를 입력해주세요.');
+      $("#idSubMsg").text('아이디를 입력해 주세요.');
       idPass = false;
       isGmAllPass();
       isAmAllPass();
     } else if(!exp.test(idValue)) {
       //형식에 어긋날경우
-      $('#idSubMsg').text("아이디는 소문자와 숫자 4~12자리여야 합니다.");
+      $('#idSubMsg').text("영문 소문자와 숫자 4~12 자리 이내로 입력해 주세요.");
       idPass = false;
       isGmAllPass();
       isAmAllPass();
@@ -52,7 +52,7 @@ $(document).ready(function(){
         success : function(data) {
           //아이디 중복시
           if (data == 1) {
-            $("#idSubMsg").text("사용중인 아이디입니다.");
+            $("#idSubMsg").text("이미 사용 중인 아이디입니다.");
             idPass = false;
             isGmAllPass();
             isAmAllPass();
@@ -82,12 +82,12 @@ $(document).ready(function(){
     var exp = /^(?=.*\d{1,50})(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]{1,50})(?=.*[a-zA-Z]{1,50}).{8,50}$/;
 
     if(!exp.test(pw1Value) || !exp.test(pw2Value)){
-      $("#pwSubMsg").text("비밀번호는 숫자, 영문자, 특수문자가 모두 있는 8자리 글자여야 합니다.");
+      $("#pwSubMsg").text("숫자, 영문자, 특수문자 포함 8자리를 입력해 주세요.");
       pwPass = false;
       isGmAllPass();
       isAmAllPass();
     } else if(pw1Value != pw2Value){
-      $("#pwSubMsg").text("비밀번호가 서로 일치하지 않습니다.");
+      $("#pwSubMsg").text("비밀번호가 일치하지 않습니다.");
       pwPass = false;
       isGmAllPass();
       isAmAllPass();
@@ -106,7 +106,7 @@ $(document).ready(function(){
     var exp = /^[\w_\.\-]+@[\w\-]+\.[\w\-]+/;
 
     if(!exp.test(emailValue)){
-      $("#emailSubMsg").text("이메일 형식이 맞지 않습니다.");
+      $("#emailSubMsg").text("이메일 형식이 올바르지 않습니다.");
       emailPass = false;
       isGmAllPass();
       isAmAllPass();
@@ -124,7 +124,7 @@ $(document).ready(function(){
     var mobile_exp = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
 
     if(!mobile_exp.test(telValue)){
-      $("#telSubMsg").text("휴대전화 형식에 맞춰 -없이 입력해주세요");
+      $("#telSubMsg").text("- 없이 입력해 주세요.");
       telPass = false;
       isGmAllPass();
     }else{
@@ -155,7 +155,7 @@ $(document).ready(function(){
     var exp = /^[가-힣a-zA-Z]{2,10}$/;
 
     if(!exp.test(intresValue)){
-      $("#intresSubMsg").text("관심과목은 한글 혹은 영문 2~10자 이내로 입력해주세요.");
+      $("#intresSubMsg").text("한글 또는 영문 2~10자 이내로 입력해 주세요.");
       intresPass = false;
       isGmAllPass();
     }else{
@@ -172,7 +172,7 @@ $(document).ready(function(){
     var acdNameValue = inputAcdName.val();
     // var exp = /^[가-힣a-zA-Z]{2,50}$/;
     if(!acdNameValue){
-      $("#AcdNameSubMsg").text("학원/교습소명은 반드시 입력해 주세요.");
+      $("#AcdNameSubMsg").text("학원 / 교습소명은 필수 입력 항목입니다.");
       acdNamePass = false;
       isAmAllPass();
     }else{
@@ -190,7 +190,7 @@ $(document).ready(function(){
     var exp = /^[가-힣a-zA-Z]{2,50}$/;
 
     if(!exp.test(nameValue)){
-      $("#RprsnSubMsg").text("이름은 한글 혹은 영문 2자 이상이어야 합니다.");
+      $("#RprsnSubMsg").text("한글 또는 영문 2자 이상으로 입력해 주세요.");
       rprsnPass = false;
       isAmAllPass();
     }else{
@@ -204,7 +204,7 @@ $(document).ready(function(){
   $("input[name=inputLicense]").change(function(){
     var licenseValue = inputLicense.val();
     if(!licenseValue){
-      $("#LicenseSubMsg").text("사업자 등록증을 반드시 업로드 해주세요.");
+      $("#LicenseSubMsg").text("사업자 등록증은 필수 입력 항목입니다.");
       licensePass = false;
       isAmAllPass();
     }else{

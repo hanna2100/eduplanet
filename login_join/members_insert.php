@@ -73,7 +73,7 @@
 
   echo "
         <script>
-            alert('에듀플래닛에 오신 것을 환영합니다!');
+            alert('에듀플래닛에 오신 것을 환영합니다.');
             location.href = '/eduplanet/index.php';
         </script>
       ";

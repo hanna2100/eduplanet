@@ -60,41 +60,31 @@
   </div>
 
 <?php
-  //검색기간 변수설정 (6개월전 년, 월 ~현재 년,월)
-  $year = $y;
-  $year2 = $y;
-  $month = $m;
-  $month2 = $m;
-
-  if($month2<=5){
-      $month = $m+7;
-      $year = $y-1;
-  }else{
-      $month = $m-5;
-  }
+  $m2 = $m <10? "0".$m : $m;
 
   //매출데이터 가져오기
   $sql_arr = array();
-  array_push($sql_arr,"CALL get_gm_sales($year, $year2, $month, $month2)" );
-  array_push($sql_arr,"CALL get_am_sales($year, $year2, $month, $month2)" );
+  array_push($sql_arr,"CALL get_gm_order_year_sales($y, $m2)" );
+  array_push($sql_arr,"CALL get_am_order_year_sales($y, $m2)" );
 
   $total_arr = array();
   $total_arr = execute_multi($conn, $sql_arr);
 
-  $gm_sales = $total_arr[0]; //일반회원 일별 매출
-  $am_sales = $total_arr[1]; //학원회원 일별 매출
-  $total_sales = array(); //전체 일별 매출
+  $month_arr = $total_arr[0]; //일반회원 월별 매출 1년치
+  $gm_sales = $total_arr[1]; //일반회원 월별 매출 1년치
+  $am_sales = $total_arr[2]; //학원회원 월별 매출 1년치
+  $total_sales = array(); //전체 월별 매출 1년치
 
   for($i=0; $i<sizeof($gm_sales); $i++){
-    $day_sales = $gm_sales[$i] + $am_sales[$i];
-    array_push($total_sales, $day_sales);
-    
+    $month_sales = $gm_sales[$i] + $am_sales[$i];
+    array_push($total_sales, $month_sales);
   }
 
   function execute_multi($conn, $sql_arr){
     $total_arr = array();
     $am_sales = array();
     $gm_sales = array();
+    $month_arr = array();
 
     $sql = implode(';', $sql_arr) . ';';
 
@@ -105,12 +95,14 @@
             if ($result = mysqli_store_result($conn)) {
                 $total_record = mysqli_num_rows($result);
                 while ($row = mysqli_fetch_row($result)) {
-                  //row0번이 날짜, 1번이 매출
+                  //row0번이 월, 1번이 매출
                   $data = $row[1];
                   $data = $data==NULL? 0: $data;
+                  $month = $row[0];
 
                   if($flag==false){
                       array_push($am_sales, $data);
+                      array_push($month_arr, $month."월");
                   }else{
                       array_push($gm_sales, $data);
                   }
@@ -120,6 +112,7 @@
             }
         } while (mysqli_next_result($conn));
 
+        array_push($total_arr, $month_arr);
         array_push($total_arr, $am_sales);
         array_push($total_arr, $gm_sales);
         return $total_arr;
@@ -128,14 +121,16 @@
 
 ?>
 <script>
+  var month_arr = <?= json_encode($month_arr);?>;
   var gm_sales = <?= json_encode($gm_sales);?>;
   var am_sales = <?= json_encode($am_sales);?>;
+  var total_sales = <?= json_encode($total_sales);?>;
 </script>
   <div class="sec_content">
     <div id="dash_topline">
       <div>
-        <span>전체 매출</span><br>
-        <span>&#8361; 208,230</span>
+        <span>월 매출</span><br>
+        <span>&#8361; <span id="increse_sales"><?=number_format($total_sales[11])?></span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
@@ -150,39 +145,19 @@
       </div>
       <div>
         <span>신규리뷰</span><br>
-        <span class="dash_topline_i"><i class="fas fa-star"></i> 89</span>
+        <span class="dash_topline_i"><i class="fas fa-star"></i><span id="increse_review"></span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
         <span>신규포스팅</span><br>
-        <span class="dash_topline_i"><i class="fas fa-edit"></i> 57</span>
+        <span class="dash_topline_i"><i class="fas fa-edit"></i><span id="increse_story"></span></span>
         <span class="caret down"><i class="fas fa-caret-down"></i></span>
       </div>
     </div>
     <div id="dash_salesGraph_wrap">
       <div id="dash_salesGraph_cell1">
-        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Sales Graph<span>단위: 천원</span></h4>
+        <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Sales Graph<span>단위: 원</span></h4>
         <canvas id="dash_salesGraph"></canvas>
-      </div>
-      <div id="dash_salesGraph_cell2">
-        <div class="dash_salesGraph_detail">
-          <span class="dash_salesGraph_label">전체 매출</span>
-          <span class="dash_salesGraph_data">
-            209,310&nbsp;&nbsp;&nbsp;<span class="caret up"><i class="fas fa-caret-up"></i></span>
-            <p>전 월 대비 10%&nbsp;&nbsp;&nbsp;<span class="caret up"><i class="fas fa-caret-up"></i></span></p></span>
-        </div>
-        <div class="dash_salesGraph_detail">
-          <span class="dash_salesGraph_label">일반회원 매출</span>
-          <span class="dash_salesGraph_data">
-            109,310&nbsp;&nbsp;&nbsp;<span class="caret up"><i class="fas fa-caret-up"></i></span>
-            <p>전 월 대비 8%&nbsp;&nbsp;&nbsp;<span class="caret up"><i class="fas fa-caret-up"></i></span></p></span>
-        </div>
-        <div class="dash_salesGraph_detail">
-          <span class="dash_salesGraph_label">사업자회원 매출</span>
-          <span class="dash_salesGraph_data">
-            99,310&nbsp;&nbsp;&nbsp;<span class="caret down"><i class="fas fa-caret-down"></i></span>
-            <p>전 월 대비 7%&nbsp;&nbsp;&nbsp;<span class="caret down"><i class="fas fa-caret-down"></i></span></p></span>
-        </div>
       </div>
     </div>
     <div style="display:flex; width:960px; margin-bottom: 50px;">
