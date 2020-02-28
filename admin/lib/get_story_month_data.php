@@ -1,6 +1,5 @@
 <?php
 
-
 $y   = $_POST['y'];
 $m   = $_POST['m'];
 
@@ -19,7 +18,7 @@ if(!mysqli_affected_rows($conn)){
 //리뷰데이터 가져오기
 $review_cnt = array();
 
-$sql = "CALL get_day_reivew_for_one_month($y, $m)";
+$sql = "CALL get_day_story_for_one_month($y, $m)";
 $result = mysqli_query($conn, $sql);
 
 for($i=0; $i<mysqli_num_rows($result); $i++){

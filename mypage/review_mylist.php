@@ -128,17 +128,18 @@
                     <div class="mypage_content_title">
                         <h4>작성한 리뷰</h4>
                         <p>총 <span id="review_list_num"><?=$total_record?></span> 개의 리뷰를 작성하셨습니다.</p>
+                        <span id="review_delete_p">* 리뷰 삭제는 작성일로부터 30일 이후에 가능합니다.</span>
                     </div>
 
                     <?php
-                    if (!$result) {
+                    if ($total_record == 0) {
                     ?>
                         <!-- 작성한 리뷰가 없을 때 -->
                         <div class="mypage_content_list_none">
                             <h4>작성한 리뷰가 없습니다.</h4>
-                            <p>리뷰를 작성하시면 무료로 모든 학원 리뷰를 조회하실 수 있습니다.</p>
+                            <p>리뷰를 작성하시면 리뷰를 조회할 수 있는 <b>무료 이용권 (7일)</b> 을 드립니다.</p>
                             <p>지금 작성하시고 무료 혜택을 받아 보세요.</p>
-                            <a href="/eduplanet/mypage/review_write_popup.php"><button id="button_review_write">리뷰 작성하기</button></a>
+                            <button id="button_review_write" onclick="showPopup(1);">리뷰 작성하기</button>
                         </div>
 
 

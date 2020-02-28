@@ -1,15 +1,4 @@
 <?php
-// session_start();
-// $is_admin = isset($_SESSION["admin"])? $_SESSION["admin"]: 0 ;
-// if ( $is_admin != 1 ){
-//     echo("
-//         <script>
-//         alert('관리자 전용 페이지 입니다.');
-//         history.go(-1)
-//         </script>
-//     ");
-//     exit;
-// }
 
   //api받아오기
   include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";

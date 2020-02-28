@@ -205,6 +205,16 @@
     text-align: center;
 }
 
+#member_list > form> span{
+    margin: 0px 4px 0px 12px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 #member_list input {
     text-align: center;
 }
@@ -225,16 +235,18 @@
 
 .col1 {
     padding-left: 12px;
-    width: 50px;
+    width: 80px;
 }
 .col2 {
-    width: 180px;
+    width: 150px;
+    margin-left: 10px;
 }
 .col3 {
-    width: 100px;
+    width: 90px;
 }
 .col4{
-    width: 350px;
+    width: 340px;
+    margin-left: 10px;
 }
 .col5{
     width: 50px;
@@ -244,6 +256,10 @@
     width: 90px;
 }
 
+.left-align{
+    text-align: left !important;
+
+}
 
 
 #board_list {

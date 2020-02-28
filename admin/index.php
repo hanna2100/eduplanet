@@ -1,3 +1,17 @@
+<?php
+
+include $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/session_start.php";
+
+if ($admin== "" ){
+  echo("
+      <script>
+      alert('관리자 전용 페이지 입니다.');
+      history.go(-1)
+      </script>
+  ");
+  exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +37,7 @@
   <title>에듀플래닛 관리자페이지</title>
 </head>
 <body>
+
 <main>
 <?php
   include_once 'nav.php';
@@ -88,7 +103,7 @@
   for($i=0; $i<sizeof($gm_sales); $i++){
     $day_sales = $gm_sales[$i] + $am_sales[$i];
     array_push($total_sales, $day_sales);
-    
+
   }
 
   function execute_multi($conn, $sql_arr){
@@ -125,7 +140,7 @@
         return $total_arr;
     }
   }
-
+  mysqli_close($conn);
 ?>
 <script>
   var gm_sales = <?= json_encode($gm_sales);?>;
@@ -135,28 +150,28 @@
     <div id="dash_topline">
       <div>
         <span>월 매출</span><br>
-        <span>&#8361; <span id="increse_sales"></span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span>&#8361; <span id="increse_sales"><?=number_format($total_sales[11])?></span></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>일반회원 순증가</span><br>
         <span class="dash_topline_i"><i class="fas fa-user"></i> <span id="increse_gm"></span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>사업자회원 순증가</span><br>
         <span class="dash_topline_i"><i class="fas fa-user-tie"></i> <span id="increse_am"></span></span>
-        <span class="caret down"><i class="fas fa-caret-down"></i></span>
+        <span class="caret down"> </i></span>
       </div>
       <div>
         <span>신규리뷰</span><br>
-        <span class="dash_topline_i"><i class="fas fa-star"></i> 89</span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="dash_topline_i"><i class="fas fa-star"></i><span id="increse_review"></span></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>신규포스팅</span><br>
-        <span class="dash_topline_i"><i class="fas fa-edit"></i> 57</span>
-        <span class="caret down"><i class="fas fa-caret-down"></i></span>
+        <span class="dash_topline_i"><i class="fas fa-edit"></i><span id="increse_story"></span></span>
+        <span class="caret down"> </i></span>
       </div>
     </div>
     <div id="dash_salesGraph_wrap">

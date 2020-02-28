@@ -16,7 +16,7 @@ function academy_init_data($si_param, $dong_param){
 
   $acd_array = get_academy_from_api($si_param, $dong_param);
 
-  
+
   for($i=0; $i<sizeof($acd_array); $i++){
     $si_name = $acd_array[$i]->si_name;
     $dong_name = $acd_array[$i]->dong_name;
@@ -42,7 +42,7 @@ function academy_init_data($si_param, $dong_param){
 //일반 회원 테이블 - row 500개 생성
 function g_members_init_data(){
   global $gm_join_date;
-  
+
     $sql = "INSERT INTO `g_members` VALUES ";
     $intres_array = array("국어","영어","수학","미술","음악","과학","태권도","필라테스","IT","바리스타","요가","제빵");
 
@@ -67,8 +67,8 @@ function g_members_init_data(){
 
       array_push($gm_join_date, $join_date);
 
-      $sql .= "($no, 'test$no', '1234', 'test$no@google.com', '01012345678', '$birth', '$intres', '$membership', '$join_date'),";
-      
+      $sql .= "($no, 'test$no', 'a123456!', 'test$no@google.com', '01012345678', '$birth', '$intres', '$membership', '$join_date'),";
+
     }
     //마지막 콤마 제거
     $sql = substr($sql, 0, -1);
@@ -88,7 +88,7 @@ function a_members_init_data(){
   set_api_index(1);
   set_api_scale(31);
   $acd_array = get_academy_from_api("가평군", "가평읍");
-  
+
   for($i=0; $i<sizeof($acd_array); $i++){
     $acd_name = $acd_array[$i]->acd_name;
     $rprsn = $acd_array[$i]->rprsn;
@@ -96,7 +96,7 @@ function a_members_init_data(){
     array_push($acd_name_arr, $acd_name);
     array_push($rprsn_arr, $rprsn);
   }
-  
+
   $sql = "INSERT INTO `a_members` VALUES ";
   $i = 0;
   for($no = 1; $no<= 31 ; $no++){
@@ -104,12 +104,12 @@ function a_members_init_data(){
     $a_name = $acd_name_arr[$i];
     $r_name = $rprsn_arr[$i];
 
-    $file_copy = $no.".jpg";
+    $file_copy = "test_bsns_img.jpg";
 
     //가입일자생성
     $join_date = randomDate('2019-01-01', '2019-06-30');
     array_push($am_join_date, $join_date);
-    
+
     //멤버십기간 날짜 설정
     $mbship_period = rand(0,3);
     if($mbship_period==0){
@@ -124,7 +124,7 @@ function a_members_init_data(){
     $approval = $approval==0? 'N' : 'Y';
 
     $sql .= "($no, $no,'test$no', '1234', 'test$no@google.com', '$a_name', '$r_name', '$file_copy', '$approval', '$membership', '$join_date'),";
-    
+
     $i++;
   }
   //마지막 콤마 제거
@@ -175,7 +175,7 @@ function review_init_data(){
 //스토리 테이블
 function acd_story_init_data(){
   global $acd_name_arr;
-  
+
   $sql = "INSERT INTO `acd_story` VALUES ";
   $title_array = array("고양이 선생님 냥쿠르 대상 수상", "제3회 전국고양이서예경시대회 우승!", "냥냥축구교실, 80억 투자받다",
                        "50년 전통의 남영수수학학원", "고양이말 동시통역사 배출!", "패럿샘에게 배우는 야매피아노");
@@ -188,7 +188,7 @@ function acd_story_init_data(){
       $title = $title_array[$title];
       $subtitle = array_rand($subtitle_array);
       $subtitle = $subtitle_array[$subtitle];
-      $file_copy = (string)$no.'.jpg';
+      $file_copy = 'test_acd_story_img.jpg';
 
       //등록일자생성
       $regist_date = randomDate('2019-01-01', '2019-06-30');
@@ -228,12 +228,12 @@ function am_order_init_data() {
     $product = $product_array[$rand];
     $price = $price_array[$rand];
     $pay = $pay_array[$rand];
-    
+
     $sql .= "($no, $no,'$product', '$price', '$pay', '결제완료', '$regist_date'),";
 
     $i++;
   }
-  
+
   //마지막 콤마 제거
   $sql = substr($sql, 0, -1);
   $sql .= ";";
@@ -263,12 +263,12 @@ function gm_order_init_data() {
     $product = $product_array[$rand];
     $price = $price_array[$rand];
     $pay = $pay_array[$rand];
-    
+
     $sql .= "($no, $no,'$product', '$price', '$pay', '결제완료', '$regist_date'),";
 
     $i++;
   }
-  
+
   //마지막 콤마 제거
   $sql = substr($sql, 0, -1);
   $sql .= ";";
@@ -296,7 +296,7 @@ function withdrawal_init_data() {
     //탈퇴 날짜 생성
     $end_date = '2019-06-30';
     $wthd_date = randomDate($start_date, $end_date);
-    
+
     $sql .= "($no, 'G' ,'$mmbr_no', '$start_date', '$wthd_date'),";
   }
 
@@ -317,12 +317,12 @@ function withdrawal_init_data() {
     //탈퇴 날짜 생성
     $end_date = '2019-06-30';
     $wthd_date = randomDate($start_date, $end_date);
-    
+
     $sql .= "($no, 'A' ,'$mmbr_no', '$start_date', '$wthd_date'),";
 
     $i++;
   }
-  
+
   //마지막 콤마 제거
   $sql = substr($sql, 0, -1);
   $sql .= ";";
@@ -334,10 +334,10 @@ function random($min, $max, $num) {
   $arr = array();
 	while ($num > count($arr)) {
 		$i = rand($min, $max);
-		$arr[$i] = $i; 
+		$arr[$i] = $i;
 	}
 	return $arr;
-}	
+}
 
 function randomDate($start_date, $end_date){
   // 타임 스탬프로 변환
@@ -352,5 +352,3 @@ function randomDate($start_date, $end_date){
 
 
 ?>
-
-

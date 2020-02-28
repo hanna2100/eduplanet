@@ -168,12 +168,12 @@
     color: #fff;
 }
 
-#member_list {
+.member_list {
     margin: 10px 0 30px;
     list-style: none;
 }
 
-#member_list li:nth-child(1) {
+.member_list li:nth-child(1) {
     font-weight: bold;
     border-top: solid 1px #ececec;
     border-bottom: solid 1px #ececec;
@@ -184,7 +184,7 @@
     border-right: solid 1px #ececec;
 }
 
-#member_list li:last-child {
+.member_list li:last-child {
     border-bottom: solid 1px #ececec;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -192,7 +192,7 @@
     border-right: solid 1px #ececec;
 }
 
-#member_list li {
+.member_list li {
     padding: 10px 0;
     border-bottom: solid 1px #ececec;
     border-left: solid 1px #ececec;
@@ -200,22 +200,27 @@
     font-size: 0.8rem;
 }
 
-#member_list span {
+.member_list span {
     display: inline-block;
     text-align: center;
 }
 
-#member_list input {
-    text-align: center;
+.member_list > form> span{
+    margin: 0px 4px 0px 12px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-#member_list button {
+.member_list button {
     padding: 5px;
 }
 
 .list_row:hover{
     background-color: #e9e9e9a9;
-    cursor: pointer;
 }
 
 .list_row > form > span > input:disabled, .list_row > form > span > input:read-only{
@@ -224,38 +229,90 @@
 }
 
 .col1 {
-    padding-left: 12px;
+    padding-left: 10px;
     width: 50px;
+    margin: 0px 5px;
 }
 .col2 {
-    width: 50px;
+    width: 140px;
 }
 .col3 {
-    width: 100px;
+    width: 210px;
+    margin: 0px 4px;
 }
 .col4{
     width: 190px;
-}
-.col2 input, .col4 input, .col5 input, .col7 input, .col8 input  {
-    width: 90%;
+    margin: 0px 4px;
 }
 .col5{
-    width: 90px;
+    width: 70px;
+    margin: 0px 4px;
 }
 .col6 {
-    width: 80px;
+    padding-right: 12px;
+    width: 70px;
 }
 .col7{
-    width: 90px;
+    margin: 0px 4px;
+    width: 60px;
 }
-.col8  {
-    width: 90px;
+.col7 label{
+    position: relative;
+    top:6px;
+    left: 10px;
 }
-.col9 {
-    padding-right: 12px;
-    width: 90px;
+.left-align{
+    text-align: left !important;
+
+}
+#view:hover{
+    cursor: pointer;
+    font-weight: bold;
+}
+/* 체크박스 */
+
+input[type=checkbox] {  
+    display: none;  
 }
 
+input[type=checkbox] + label{
+    display: inline-block;  
+    cursor: pointer;  
+    position: relative;  
+    padding-left: 25px;  
+    margin-right: 15px;  
+    font-size: 13px;
+}
+
+input[type=checkbox]+ label:before {     
+
+    content: "";  
+    display: inline-block;  
+  
+    width: 20px;  
+    height: 20px;  
+
+    margin-right: 10px;  
+    position: absolute;  
+    left: 0;  
+    bottom: 1px;  
+    background-color: #ececec;  
+    border-radius: 2px; 
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
+}
+
+input[type=checkbox]:checked + label:before { 
+
+    content: "\2713";  /* 체크모양 */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
+    font-size: 18px; 
+    font-weight:800; 
+    color: #fff;  
+    background:#4da3ee;
+    text-align: center;  
+    line-height: 18px;
+
+} 
 
 
 #board_list {
@@ -286,7 +343,7 @@
 #board_list .col8 {
     width: 70px;
 }
-#member_list {
+.member_list {
     margin: 10px 0 30px;
     list-style: none;
 }
@@ -456,7 +513,7 @@
   width: 120px;
   border-radius: 3px;
   border: 1px solid #ececec;
-  margin-left: 250px;
+  margin-left: 350px;
 }
 
 .selectbox select {

@@ -1,10 +1,16 @@
 
 $(function(){
+<<<<<<< HEAD
 
     // 대시보드 그래프설정
+=======
+    // 대시보드 그래프설정
+    importMembersData();
+    getStorySixMonthData();
+    getReviewSixMonthData();
+>>>>>>> d0309af234e4a4029fb5b598e763c961915e6379
     salesGraph();
-    reviewGraph();
-    postGraph();
+
 
     importMembersData();
     
@@ -268,6 +274,157 @@ function getAcdMemberData(gm_in){
     });
 }
 
+
+
+function getStorySixMonthData(){
+
+    $.ajax({
+        url : "/eduplanet/admin/lib/get_story_sixmonth_data.php",
+        type : "post",
+        dataType: "json",
+        data: { y: y,
+                m: m},
+        success : function(data) {
+
+            //월 배열
+            var month_arr = data[0];
+            //스토리 갯수 배열
+            var story_cnt = data[1];
+
+            var increase = story_cnt[story_cnt.length-1]
+
+            $('#increse_story').text(increase);
+            storyGraph(month_arr, story_cnt);
+
+        },
+        error : function() {
+          console.log("스토리 그래프 ajax 실패");
+          }
+    });
+}
+
+function storyGraph(month_arr, story_cnt){
+
+    // console.log(gm_in);
+    // console.log(am_in);
+    var ctx = document.getElementById('dash_postGraph').getContext('2d');
+    ctx.canvas.width = 240;
+    ctx.canvas.height = 160;
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+
+        // The data for our dataset
+        data: {
+            labels: month_arr,
+            datasets: [{
+                label: '학원스토리 등록 수',
+                backgroundColor: green,
+                borderColor: green,
+                pointHoverBackgroundColor: green,
+                data: story_cnt,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                tension: 0.2,
+                fill: false,
+                borderWidth: 1
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            legend: {
+				display:false
+            },
+            scales: { //X,Y축 옵션
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true  //Y축의 값이 0부터 시작
+                    }
+                }]
+            }
+        }
+    });
+}
+
+
+function getReviewSixMonthData(){
+
+    $.ajax({
+        url : "/eduplanet/admin/lib/get_review_sixmonth_data.php",
+        type : "post",
+        dataType: "json",
+        data: { y: y,
+                m: m},
+        success : function(data) {
+
+            //월 배열
+            var month_arr = data[0];
+            //스토리 갯수 배열
+            var review_cnt = data[1];
+
+            var increase = review_cnt[review_cnt.length-1]
+
+            $('#increse_review').text(increase);
+
+            console.log(month_arr, review_cnt);
+            reviewGraph(month_arr, review_cnt);
+
+        },
+        error : function() {
+          console.log("리뷰 그래프 ajax 실패");
+          }
+    });
+}
+
+function reviewGraph(month_arr, review_cnt){
+
+    console.log(month_arr);
+    console.log(review_cnt);
+    var ctx = document.getElementById('dash_reviewGraph').getContext('2d');
+    ctx.canvas.width = 240;
+    ctx.canvas.height = 160;
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+
+        // The data for our dataset
+        data: {
+            labels: month_arr,
+            datasets: [{
+                label: '리뷰 등록 수',
+                backgroundColor: yellow,
+                borderColor: yellow,
+                pointHoverBackgroundColor: yellow,
+                data: review_cnt,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                tension: 0.2,
+                fill: false,
+                borderWidth: 1
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            legend: {
+				display:false
+            },
+            scales: { //X,Y축 옵션
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true  //Y축의 값이 0부터 시작
+                    }
+                }]
+            }
+        }
+    });
+}
+
 function membersGraph(lbl, gm_in, am_in){
 
     // console.log(gm_in);
@@ -503,6 +660,7 @@ function salesGraph(){
     });
 }
 
+<<<<<<< HEAD
 function reviewGraph(){
     var ctx = document.getElementById('dash_reviewGraph').getContext('2d');
     ctx.canvas.width = 240;
@@ -588,6 +746,8 @@ function postGraph(){
         }
     });
 }
+=======
+>>>>>>> d0309af234e4a4029fb5b598e763c961915e6379
 
 
 

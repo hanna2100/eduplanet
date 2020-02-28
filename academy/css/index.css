@@ -85,3 +85,13 @@ body {
 #asdf{
   color: black;
 }
+#acd_name_in {
+    float: left;
+    width: 192px;
+    line-height: 28px;
+    outline: none;
+    border: 1px solid white;
+    padding-left: 10px;
+    /* padding-right: 60px; */
+
+}

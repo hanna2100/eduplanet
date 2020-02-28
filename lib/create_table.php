@@ -86,7 +86,6 @@ function create_table($conn, $table_name){
                     `name` VARCHAR(20) NOT NULL,
                     `subject` CHAR(10) NOT NULL,
                     `content` VARCHAR(20) NOT NULL,
-                    `file_name` VARCHAR(50) NOT NULL,
                     `file_copy` VARCHAR(50) NOT NULL,
                     PRIMARY KEY(`no`),
                     FOREIGN KEY(`parent`) REFERENCES academy(`no`) 

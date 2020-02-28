@@ -37,6 +37,13 @@ body {
   height: 130px;
   border: 1px solid red;
 } */
+#mva1_img > a > img{
+  padding: 13px;
+  margin-left: 15px;
+  margin-top : 3px;
+  width: 100px;
+  height: 100px;
+}
  #more_btn{
   width: 120px;
   border-radius: 10px;
@@ -379,4 +386,13 @@ body {
   background-color: #F6F6F6;
   width: 100%;
   height: 1080px;
+}
+
+.index_main_search {
+  width: 492px;
+}
+
+#button_main_search {
+  position: relative;
+  left: -32px;
 }

@@ -130,7 +130,7 @@
                 </div>
                 <div id="section_bottom">
                   <p class="section_bottom">
-                        <a href="/companies?sort_by=review_compensation_cache" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
+                        <a href="/eduplanet/acd_list/view_all.php?district=&sort=star_max&category=ctg_star" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
                     </p>
                 </div>
               </div>
@@ -226,7 +226,7 @@
                 </div>
                 <div id="section_bottom">
                   <p class="section_bottom">
-                        <a href="/companies?sort_by=review_compensation_cache" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
+                        <a href="/eduplanet/acd_list/view_all.php?district=&sort=facility_max&category=ctg_facility" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
                     </p>
                 </div>
               </div>
@@ -322,7 +322,7 @@
                 </div>
                 <div id="section_bottom">
                   <p class="section_bottom">
-                        <a href="/companies?sort_by=review_compensation_cache" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
+                        <a href="/eduplanet/acd_list/view_all.php?district=&sort=acsbl_max&category=ctg_acsbl" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
                     </p>
                 </div>
               </div>
@@ -418,7 +418,7 @@
                 </div>
                 <div id="section_bottom">
                   <p class="section_bottom">
-                        <a href="/companies?sort_by=review_compensation_cache" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
+                        <a href="/eduplanet/acd_list/view_all.php?district=&sort=teacher_max&category=ctg_teacher" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
                     </p>
                 </div>
               </div>
@@ -514,7 +514,7 @@
                 </div>
                 <div id="section_bottom">
                   <p class="section_bottom">
-                        <a href="/companies?sort_by=review_compensation_cache" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
+                        <a href="/eduplanet/acd_list/view_all.php?district=&sort=cost_efct_max&category=ctg_cost_efct" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
                     </p>
                 </div>
               </div>
@@ -610,7 +610,7 @@
                 </div>
                 <div id="section_bottom">
                   <p class="section_bottom">
-                        <a href="/companies?sort_by=review_compensation_cache" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
+                        <a href="/eduplanet/acd_list/view_all.php?district=&sort=achievement_max&category=ctg_achievement" class="btn_rnd btn_rnd_arrow"><span class="txt">전체보기</span><span class="arrow"></span></a>
                     </p>
                 </div>
               </div>
@@ -631,12 +631,12 @@
 
         // DB에서 가져오기-------------------------------------
         include_once("../lib/db_connector.php");
-        $sql = "select academy.no,academy.acd_name,avg(review.total_star) from academy join review on academy.no = review.parent group by review.parent order by avg(review.total_star) desc";
-        $sql2 = "select academy.no,academy.acd_name,avg(review.facility) from academy join review on academy.no = review.parent group by review.parent order by avg(review.facility) desc";
-        $sql3 = "select academy.no,academy.acd_name,avg(review.acsbl) from academy join review on academy.no = review.parent group by review.parent order by avg(review.acsbl) desc";
-        $sql4 = "select academy.no,academy.acd_name,avg(review.teacher) from academy join review on academy.no = review.parent group by review.parent order by avg(review.teacher) desc";
-        $sql5 = "select academy.no,academy.acd_name,avg(review.cost_efct) from academy join review on academy.no = review.parent group by review.parent order by avg(review.cost_efct) desc";
-        $sql6 = "select academy.no,academy.acd_name,avg(review.achievement) from academy join review on academy.no = review.parent group by review.parent order by avg(review.achievement) desc";
+        $sql = "select academy.no,academy.acd_name,avg(review.total_star) from academy join review on academy.no = review.parent group by review.parent order by avg(review.total_star) desc limit 5";
+        $sql2 = "select academy.no,academy.acd_name,avg(review.facility) from academy join review on academy.no = review.parent group by review.parent order by avg(review.facility) desc limit 5";
+        $sql3 = "select academy.no,academy.acd_name,avg(review.acsbl) from academy join review on academy.no = review.parent group by review.parent order by avg(review.acsbl) desc limit 5";
+        $sql4 = "select academy.no,academy.acd_name,avg(review.teacher) from academy join review on academy.no = review.parent group by review.parent order by avg(review.teacher) desc limit 5";
+        $sql5 = "select academy.no,academy.acd_name,avg(review.cost_efct) from academy join review on academy.no = review.parent group by review.parent order by avg(review.cost_efct) desc limit 5";
+        $sql6 = "select academy.no,academy.acd_name,avg(review.achievement) from academy join review on academy.no = review.parent group by review.parent order by avg(review.achievement) desc limit 5";
 
         $result = mysqli_query($conn, $sql);
         $result2 = mysqli_query($conn, $sql2);
@@ -975,7 +975,7 @@
                         //이미지 넣어주기
                         console.log(a);
                         if(a[i]['img']===""){
-                            document.getElementsByClassName("acd_img")[i].src ="./img/edu_image.jpg";
+                            document.getElementsByClassName("acd_img")[i].src ="/eduplanet/img/acd_logo2.png";
                         }
                         else{
                             document.getElementsByClassName("acd_img")[i].src = a[i]['img'];
@@ -1101,7 +1101,7 @@
 
       <!--    --------------------------------------------------------------------------------->
       <div id="more_s">
-        <button type="button" name="button" id="more_btn">학원 더보기</button>
+        <button type="button" name="button" id="more_btn" onclick="location.href='/eduplanet/acd_list/view_all.php'">학원 더보기</button>
       </div>
 
       </div> <!-- main_contents end-->

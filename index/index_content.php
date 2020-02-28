@@ -1,9 +1,7 @@
 <div class="body_wrap">
 
-    <!-- 메인 상단 배경 ------------------------------------------------------>
     <div class="index_main_background">
 
-        <!-- <h2 class="index_title">EDU PLANET</h2> -->
         <h2 class="index_title">
             <div class="index_title_logo_img">
                 <img src="/eduplanet/img/eduplanet_logo.png" alt="index_title_logo_img">
@@ -12,11 +10,8 @@
 
         <form name="academy_search_form" action="#" method="POST">
 
-            <!-- 메인 상단 배경 속 검색창 -->
             <div class="index_main_wrap">
-
                 <div class="index_main_title">
-
                     <div class="index_main_search">
 
                         <select name="select_district" id="select_district">
@@ -60,33 +55,27 @@
                         </form>
 
                     </div>
-
                 </div>
             </div>
-
     </div>
 
-    <!-- 메인 콘텐츠 --------------------------------------------------------->
     <div class="index_content_wrap">
 
-        <!-- 강의 추천 ------------------------------------------------------->
+        <!-- 스토리 -------------------------------------------------------------------------------------------->
         <div class="index_content_cource">
 
-            <!-- 콘텐츠 타이틀 -->
             <div class="content_title_wrap">
                 <h2 class="title">학원 스토리</h2>
                 <a class="button_service_guide" href="./membership/index.php">상품안내 ></a>
-                <!-- <button type="button" class="button_service_guide" onclick="location.href='../membership/index.php'">상품안내 > </button> -->
             </div>
 
-
-            <!-- 강의 추천 리스트 -->
+            <!-- 스토리 리스트 -->
             <div class="content_cource_list">
                 <ul class="content_cource_unorder_list">
 
                     <?php
                     // 스토리 등록일자 기준 조회순으로 정렬
-                    $sql = "select S.parent, S.no, S.acd_name, S.title, S.subtitle, A.file_copy from acd_story S INNER JOIN academy A ON S.parent=A.no order by regist_day desc limit 4;";
+                    $sql = "select S.parent, S.no, S.acd_name, S.title, S.subtitle, A.file_copy, A.no as academy_no from acd_story S INNER JOIN academy A ON S.parent=A.no order by regist_day desc limit 4;";
                     $result = mysqli_query($conn, $sql);
 
                     for ($i = 0; $i < 4; $i++) {
@@ -94,6 +83,7 @@
                         $row = mysqli_fetch_array($result);
 
                         $story_no = $row['no'];
+                        $academy_no = $row['academy_no'];
                         $acd_name = $row['acd_name'];
                         $title = $row['title'];
                         $subtitle = $row['subtitle'];
@@ -101,29 +91,29 @@
 
                     ?>
                         <li>
-                            <!-- 강의 추천 리스트 하나의 컬럼 -->
                             <div class="cource_column">
-                                <a href="/eduplanet/acd_story/view.php?story_no=<?= $story_no ?>">
 
-                                    <!-- 1. 로고이미지 & 학원 이름 -->
+                                <a href="/eduplanet/academy/acd_story.php?no=<?= $academy_no ?>">
+                                    <!-- 학원 로고 & 학원 이름 -->
                                     <div class="cource_column_title">
                                         <div class="academy_small_logo">
 
                                             <?php
-                                                if ($file_copy != "") {
-                                                    echo "<img src='/eduplanet/data/acd_logo/$file_copy' alt='academy_small_logo'>";
-
-                                                } else {
-                                                    echo "<img src='/eduplanet/img/acd_logo.png' alt='academy_small_logo'>";
-                                                }
+                                            if ($file_copy != "") {
+                                                echo "<img src='/eduplanet/data/acd_logo/$file_copy' alt='academy_small_logo'>";
+                                            } else {
+                                                echo "<img src='/eduplanet/img/acd_logo.png' alt='academy_small_logo'>";
+                                            }
                                             ?>
 
                                         </div>
 
                                         <span id="academy_title_span"><?= $acd_name ?></span>
                                     </div>
+                                </a>
 
-                                    <!-- 2. 학원 이미지 & 짧은 소개 -->
+                                <a href="/eduplanet/acd_story/view.php?story_no=<?= $story_no ?>">
+                                    <!-- 스토리 이미지 & 글 -->
                                     <div class="cource_column_box">
                                         <div class="academy_img_box">
                                             <img src="/eduplanet/test_img/academy_box_img.jpg" alt="academy_img_box">
@@ -146,22 +136,18 @@
                     ?>
 
                 </ul>
-                <!-- end of ul // content_cource_unorder_list -->
             </div>
         </div>
 
-        <!-- end of 강의 추천 -->
-
-        <!-- 인덱스 메인 리뷰 ------------------------------------------------->
+        <!-- 리뷰 --------------------------------------------------------------------------------------------------->
         <div class="index_content_review">
 
-            <!-- 리뷰 타이틀 -->
             <div class="content_title_wrap_review">
                 <p class="review_title">수강생들이 직접 평가한</p>
                 <h2 class="title">"생생 학원 리뷰"</h2>
             </div>
 
-            <!-- 리뷰 컨텐츠 -->
+            <!-- 리뷰 리스트 -->
             <div class="content_review_list">
                 <ul>
 
@@ -204,17 +190,16 @@
                             <div class="review_column">
 
                                 <!-- 학원 로고 & 학원명 -->
-                                <a href="#">
+                                <a href="/eduplanet/academy/review.php?no=<?= $no ?>">
                                     <div class="review_column_title">
                                         <div class="academy_small_logo">
 
                                             <?php
-                                                if ($file_copy != "") {
-                                                    echo "<img src='/eduplanet/data/acd_logo/$file_copy' alt='academy_small_logo'>";
-
-                                                } else {
-                                                    echo "<img src='/eduplanet/img/acd_logo.png' alt='academy_small_logo'>";
-                                                }
+                                            if ($file_copy != "") {
+                                                echo "<img src='/eduplanet/data/acd_logo/$file_copy' alt='academy_small_logo'>";
+                                            } else {
+                                                echo "<img src='/eduplanet/img/acd_logo.png' alt='academy_small_logo'>";
+                                            }
                                             ?>
 
                                         </div>
@@ -237,12 +222,12 @@
 
                                             <?php
 
-                                                // 학원 정보에 class 가 없는 곳도 있음
-                                                if ($class != "") {
-                                                    echo "<span id='academy_option'>$class</span>";
-                                                } else {
-                                                    echo "<span id='academy_option'>교습소</span>";
-                                                }
+                                            // 학원 정보에 class 가 없는 곳은 기본값 넣어주기
+                                            if ($class != "") {
+                                                echo "<span id='academy_option'>$class</span>";
+                                            } else {
+                                                echo "<span id='academy_option'>교습소</span>";
+                                            }
                                             ?>
 
                                             <span class="comma"> · </span>
@@ -250,7 +235,6 @@
                                             <span class="comma"> · </span>
                                             <span id="regist_day"><?= $regist_day ?></span>
                                         </div>
-
 
                                         <?php
                                         // 총 만족도 평균에 따라 별 보여주기
@@ -275,7 +259,6 @@
                                     </div>
 
                                 </div>
-                                </a>
                             </div>
                         </li>
 
@@ -286,13 +269,8 @@
                     mysqli_close($conn);
                     ?>
 
-
                 </ul>
             </div>
-
         </div>
-
     </div>
-
 </div>
-<!-- end of body_wrap -->

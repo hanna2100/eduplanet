@@ -22,7 +22,7 @@ function getinfo(parent){
               html += `<td>금요일</td>`;
               html += `<td>토요일</td>`;
             }else{
-              html += `<td id="x`+x+`y1"> 1교시 <br> (9:00~9:50) </td>`;
+              html += `<td id="x`+x+`y1"> 1교시 <br> (8:00~8:50) </td>`;
               html += `<td id="x`+x+`y2"> 수업 등록 X </td>`;
               html += `<td id="x`+x+`y3"> 수업 등록 X </td>`;
               html += `<td id="x`+x+`y4"> 수업 등록 X </td>`;
@@ -47,7 +47,7 @@ function getinfo(parent){
           }
           var max_order = max - min + 2;
           var x = 0;
-          var time = 9;
+          var time = 8;
           for(i=max_order;i>0;i--){
             html += "<tr>";
             if(i==max_order){
@@ -58,6 +58,9 @@ function getinfo(parent){
               html += `<td>목요일</td>`;
               html += `<td>금요일</td>`;
               html += `<td>토요일</td>`;
+            }else if(time == 12){
+              html += `<td colspan="8">`+ `점심 시간<br>(13:00~14:00)` +`</td>`;
+              time++;
             }else{
               html += `<td id="x`+x+`y1"> `+ min++ +`교시</br>(`+ time +`:00 ~ `+ time++ +`:50 ) </td>`;
               html += `<td id="x`+x+`y2"> &nbsp </td>`;

@@ -7,7 +7,7 @@
     for($i = 0; $i < count($no); $i++){
 
         $n = $no[$i];
-        $sql = "DELETE FROM review WHERE no = $n;";
+        $sql = "DELETE FROM acd_story WHERE no = $n;";
 
         if(!mysqli_query($conn, $sql)){
             echo "0";
