@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <title>멤버십 인덱스</title>
      <!-- favicon -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
      <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -124,7 +125,7 @@
 
           <div class="membership_section mid_contents am_product" >
             <h2>학원관리</h2>
-            <div class="mid_sub_title">학원 회원으로 멤버십 가입하면 우리 학원의 스토리를 포스팅 할 수 있습니다!</div>
+            <div class="mid_sub_title">사업자 회원으로 멤버십 가입하면 우리 학원의 스토리를 포스팅 할 수 있습니다!</div>
               <div class="membership_icons_wrap">
                 <div class="membership_icons">
                   <img src="../img/advertising.png" alt="facilities" width="60%" height="60%">
@@ -141,11 +142,7 @@
                 <div class="membership_icons">
                   <img src="../img/blog.png" alt="teacher" width="60%" height="60%">
                   <span class="icon_text">학원스토리</span>
-                </div>
-                <!-- <div class="membership_icons">
-                  <img src="../img/book.png" alt="achievement" width="60%" height="60%">
-                  <span class="icon_text">학업성취도</span>
-                </div> -->
+                </div>                
               </div>
 
 
@@ -229,13 +226,9 @@
       if($gm_no){
         $(".am_product").css("display", "none");
         $(".gm_card").attr("disabled", false);
-        // $(".am_product").css("background", "rgba(46, 137, 255, 0.13)");
-        // $(".am_product").css("cursor", "not-allowed");
       }else if($am_no){
         $(".gm_product").css("display", "none");
         $(".am_card").attr("disabled", false);
-        // $(".gm_product").css("background", "rgba(46, 137, 255, 0.13)");
-        // $(".gm_product").css("cursor", "not-allowed");
       }else {
         $(".gm_card").attr("disabled", false);
         $(".am_card").attr("disabled", false);
