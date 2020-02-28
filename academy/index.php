@@ -3,7 +3,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="./css/index.css">
+
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -16,6 +16,7 @@
     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
     <link rel="stylesheet" href="/eduplanet/index/footer.css">
     <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
+    <link rel="stylesheet" href="./css/index.css">
 
 
 

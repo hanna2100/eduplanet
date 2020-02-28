@@ -1,5 +1,5 @@
 /* 공통 css */
-* { 
+* {
     padding: 0px;
     margin: 0px;
     font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
@@ -358,7 +358,7 @@ a {
 
 #acd_name_out {
     float: left;
-    width: 300px;
+    width: 300px !important;
     line-height: 41px;
     outline: none;
     border: 1px solid white;
