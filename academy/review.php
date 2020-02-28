@@ -6,6 +6,7 @@
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
      <title>review test</title>
      <!-- favicon -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
      <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
      <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
@@ -309,8 +310,10 @@
 
 <!-- 옆구리   -->
     <div class="inner_section_right">
-      <div class="yeopguri">
-        내용
+      <div class="inner_section_right_content">
+        <a href="/eduplanet/membership">
+          <img src="/eduplanet/academy/img/review_ad.png" alt="review_page_ad" width="100%" height="100%">
+        </a>
       </div>
     </div>
 
