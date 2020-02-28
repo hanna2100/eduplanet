@@ -389,16 +389,21 @@ ul {
 }
 
 .list_none {
-    padding-top: 100px;
-    padding-bottom: 140px;
+    padding-top: 50px;
+    padding-bottom: 60px;
     box-sizing: border-box;
     text-align: center;
+    color: gray;
+}
+
+.list_none h2 {
+    margin-bottom: 10px;
 }
 
 .list_none_p {
     /* text-align: center; */
     font-size: 13px;
-    color: black;
+    color: gray;
     padding-top: 3px;
 }
 

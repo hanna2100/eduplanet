@@ -313,3 +313,13 @@ a {
     font-weight: bold;
     color: #2E89FF;
 }
+
+#review_delete_p {
+    float: right;
+    color: gray;
+    font-weight: normal;
+}
+
+.mypage_content_title p {
+    float: left;
+}

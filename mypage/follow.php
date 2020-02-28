@@ -458,9 +458,10 @@
                     } else {
                         ?>
                             <div class="list_none">
+                                <h2>찜한 학원이 없습니다.</h2>
                                 <p class="list_none_p">아직 찜한 학원이 없습니다.</p>
                                 <p class="list_none_p">찜하기를 하신 후 모든 학원을 한 눈에 비교해 보세요.</p>
-                                <a href="/eduplanet/acd_list/index.php"></a><button type="button">학원 보러 가기</button>
+                                <a href="/eduplanet/acd_list/index.php"><button type="button">학원 보러 가기</button></a>
                             </div>
 
                         <?php

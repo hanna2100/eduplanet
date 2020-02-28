@@ -32,11 +32,25 @@
 
     $no = $row["no"];
 
-    $sql = "insert into review(parent, user_no, one_line, total_star, facility, acsbl, teacher, cost_efct, achievement, benefit, drawback, regist_day)";
-    $sql .= "values('$no', '$user_no', '$one_line', '$total_star', '$facility_star', '$acsbl_star', '$teacher_star', '$cost_efct_star', '$achievement_star', '$benefit', '$drawback', '$regist_day')";
+    // 리뷰 INSERT
+    $sql = "INSERT INTO review(parent, user_no, one_line, total_star, facility, acsbl, teacher, cost_efct, achievement, benefit, drawback, regist_day)";
+    $sql .= "VALUES('$no', '$user_no', '$one_line', '$total_star', '$facility_star', '$acsbl_star', '$teacher_star', '$cost_efct_star', '$achievement_star', '$benefit', '$drawback', '$regist_day')";
 
     mysqli_query($conn, $sql);
-    mysqli_error($conn);
+
+    // 무료 이용권 INSERT
+    $sql = "SELECT * FROM review WHERE user_no=$user_no";
+    $result = mysqli_query($conn, $sql);
+    $total_review = mysqli_num_rows($result);
+
+    // 작성한 리뷰가 없을 때
+    if ($total_review == 0) {
+        
+        $sql = "INSERT INTO gm_order(gm_no, prdct_name_month, price, pay_method, status, date)";
+        $sql .= "VALUES('$user_no', '무료 이용권 (7일)', '')";
+    }
+    
+
     mysqli_close($conn);
 
     echo "
