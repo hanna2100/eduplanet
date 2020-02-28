@@ -11,30 +11,28 @@ function getinfo(parent){
         var html ="";
         var sc = JSON.parse(schedule);
         if(sc.length==0){
+
           for(i=2;i>0;i--){
             html += "<tr>";
             if(i==2){
-              html += `<td>시간</td>`;
-              html += `<td>월요일</td>`;
-              html += `<td>화요일</td>`;
-              html += `<td>수요일</td>`;
-              html += `<td>목요일</td>`;
-              html += `<td>금요일</td>`;
-              html += `<td>토요일</td>`;
+              html += `<td class="sc_top"></td>`;
+              html += `<td class="sc_top">월</td>`;
+              html += `<td class="sc_top">화</td>`;
+              html += `<td class="sc_top">수</td>`;
+              html += `<td class="sc_top">목</td>`;
+              html += `<td class="sc_top">금</td>`;
+              html += `<td class="sc_top">토</td>`;
             }else{
-              html += `<td id="x`+x+`y1"> 1교시 <br> (8:00~8:50) </td>`;
-              html += `<td id="x`+x+`y2"> 수업 등록 X </td>`;
-              html += `<td id="x`+x+`y3"> 수업 등록 X </td>`;
-              html += `<td id="x`+x+`y4"> 수업 등록 X </td>`;
-              html += `<td id="x`+x+`y5"> 수업 등록 X </td>`;
-              html += `<td id="x`+x+`y6"> 수업 등록 X </td>`;
-              html += `<td id="x`+x+`y7"> 수업 등록 X </td>`;
+              html += `<td class="sc_time"></td>`;
+              html += `<td colspan="6"> 등록된 수업이 없습니다 </td>`;
             }
             html += "</tr>";
             x++;
           }
           document.getElementById('table').innerHTML = html;
+
         }else{
+
           var min = sc[0][1]; //최소 수업시간
           var max = sc[0][1]; //최대 수업시간
           for(i=0;i<sc.length;i++){
@@ -47,22 +45,19 @@ function getinfo(parent){
           }
           var max_order = max - min + 2;
           var x = 0;
-          var time = 8;
+
           for(i=max_order;i>0;i--){
             html += "<tr>";
             if(i==max_order){
-              html += `<td>시간</td>`;
-              html += `<td>월요일</td>`;
-              html += `<td>화요일</td>`;
-              html += `<td>수요일</td>`;
-              html += `<td>목요일</td>`;
-              html += `<td>금요일</td>`;
-              html += `<td>토요일</td>`;
-            }else if(time == 12){
-              html += `<td colspan="8">`+ `점심 시간<br>(13:00~14:00)` +`</td>`;
-              time++;
+              html += `<td class="sc_top"></td>`;
+              html += `<td class="sc_top">월</td>`;
+              html += `<td class="sc_top">화</td>`;
+              html += `<td class="sc_top">수</td>`;
+              html += `<td class="sc_top">목</td>`;
+              html += `<td class="sc_top">금</td>`;
+              html += `<td class="sc_top">토</td>`;
             }else{
-              html += `<td id="x`+x+`y1"> `+ min++ +`교시</br>(`+ time +`:00 ~ `+ time++ +`:50 ) </td>`;
+              html += `<td class="sc_time" id="x`+x+`y1">`+ min +`:00 ~ `+ min++ +`:50 </td>`;
               html += `<td id="x`+x+`y2"> &nbsp </td>`;
               html += `<td id="x`+x+`y3"> &nbsp </td>`;
               html += `<td id="x`+x+`y4"> &nbsp </td>`;
@@ -74,6 +69,7 @@ function getinfo(parent){
             x++;
           }
           min = min-2;
+
           document.getElementById('table').innerHTML = html;
 
           for(var i=0; i<sc.length; i++){
@@ -87,3 +83,6 @@ function getinfo(parent){
       }
     });
 }
+
+
+
