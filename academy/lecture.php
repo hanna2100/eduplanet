@@ -63,7 +63,6 @@
               $name = $row["name"];
               $subject = $row["subject"];
               $content = $row["content"];
-              $file_name = $row["file_name"];
               $teacher_name[$i] = $name;
               if ($i==0) {
           ?>

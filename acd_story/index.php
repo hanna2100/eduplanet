@@ -260,7 +260,7 @@
 
                             <a href="/eduplanet/acd_story/view.php?no=<?= $no ?>">
                                 <div class="story_list_column_img">
-                                    <img src="/eduplanet/data/<?= $file_copy ?>" alt="story_list_column_img">
+                                    <img src="/eduplanet/data/acd_story/<?= $file_copy ?>" alt="story_list_column_img">
                                 </div>
 
                                 <div class="story_list_column_text">
