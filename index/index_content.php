@@ -12,9 +12,10 @@
         <div class="index_slider">
             <div class="slider-wrapper theme-mi-slider">
                 <div id="slider" class="nivoSlider">
-                    <img src="/eduplanet/index/nivo-slider/img/1.jpg" alt="" title="#htmlcaption1" />
-                    <img src="/eduplanet/index/nivo-slider/img/2.jpg" alt="" title="#htmlcaption2" />
-                    <img src="/eduplanet/index/nivo-slider/img/3.jpg" alt="" title="#htmlcaption3" />
+                    <img src="/eduplanet/index/nivo-slider/img/slider_img1.jpg" alt="" title="#htmlcaption1" />
+                    <img src="/eduplanet/index/nivo-slider/img/slider_img2.jpg" alt="" title="#htmlcaption2" />
+                    <img src="/eduplanet/index/nivo-slider/img/slider_img3.jpg" alt="" title="#htmlcaption3" />
+                    <img src="/eduplanet/index/nivo-slider/img/slider_img4.jpg" alt="" title="#htmlcaption4" />
                 </div>
                 <div id="htmlcaption1" class="nivo-html-caption">
                     <h1>에듀플래닛 1</h1>
@@ -26,6 +27,10 @@
                 </div>
                 <div id="htmlcaption3" class="nivo-html-caption">
                     <h1>에듀플래닛 3</h1>
+                    <p>에듀플래닛을 가입하고 나의 성공시대 시작됐다 야옹야옹</p>
+                </div>
+                <div id="htmlcaption4" class="nivo-html-caption">
+                    <h1>에듀플래닛 4</h1>
                     <p>에듀플래닛을 가입하고 나의 성공시대 시작됐다 야옹야옹</p>
                 </div>
             </div>

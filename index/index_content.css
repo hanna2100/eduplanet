@@ -1,11 +1,11 @@
 /* 메인 상단 배경 */
 .index_main_background {
     width: 100%;
-    height: 530px;
+    /* height: 530px; */
     margin: 0 auto;
     /* background-color: #2E64FA; */
     /* background-color: #2E89FF; */
-    background-color: #fff;
+    /* background-color: #fff; */
 }
 
 /* 에듀플래닛 */
@@ -103,20 +103,22 @@ option {
 /* 메인 컨텐츠 */
 .index_content_wrap {
     width: 1060px;
-    height: 2350px;
+    /* height: 2350px; */
     margin: 0 auto;
     /* border: 1px solid black; */
-    margin-top: 130px;
+    position: relative;
 }
 
 /* 스토리 */
 .index_content_cource{
-    margin-top: 50px;
+    position: relative;
+    top: 10%;
 }
 
 .content_title_wrap {
+    position: relative;
     width: 100%;
-    height: 40px;
+    /* height: 40px; */
     /* border: 1px solid black; */
 }
 
@@ -140,9 +142,10 @@ option {
 }
 
 .content_cource_list {
-    width: 100%;
     /* border: 1px solid black; */
-    margin-top: 15px;
+    /* margin-top: 15px; */
+    position: relative;
+    top: 0;
 }
 
 ul {
@@ -248,6 +251,7 @@ ul {
 /* 리뷰 */
 .index_content_review {
     margin-top: 60px;
+    margin-bottom: 100px;
 }
 
 .content_title_wrap_review {
