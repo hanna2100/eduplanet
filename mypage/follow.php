@@ -284,7 +284,10 @@
 
                             $sql = "SELECT AVG(total_star) as total_star FROM review WHERE parent='$f_acd_no'";
                             $result_total_star = mysqli_query($conn, $sql);
-                            $total_record_review = mysqli_num_rows($result_total_star);
+
+                            $sql = "SELECT * FROM review WHERE parent='$f_acd_no'";
+                            $result_review = mysqli_query($conn, $sql);
+                            $total_record_review = mysqli_num_rows($result_review);
 
                             $row = mysqli_fetch_array($result_total_star);
                             $total_star = $row["total_star"];

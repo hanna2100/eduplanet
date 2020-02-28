@@ -2,6 +2,7 @@ var formsForUpdate = new Array();
 var url = "/eduplanet/admin/membership.php?";
 
 $(function(){
+    
     listItemPicker();
 });
 
@@ -104,7 +105,7 @@ function limitMaxLength(e){
 }
 
 
-function submitUpdate(){
+function submitUpdate(){   
 
     var conf = confirm('멤버십 상품을 수정하시겠습니까?');
 

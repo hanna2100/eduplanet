@@ -103,7 +103,7 @@ if ($admin== "" ){
   for($i=0; $i<sizeof($gm_sales); $i++){
     $day_sales = $gm_sales[$i] + $am_sales[$i];
     array_push($total_sales, $day_sales);
-
+    
   }
 
   function execute_multi($conn, $sql_arr){
@@ -141,7 +141,7 @@ if ($admin== "" ){
     }
   }
 
-  $sql = "SELECT
+  $sql = "SELECT 
           COUNT(IF(prdct_name_month = '학원관리 1개월',
               1,
               NULL)) AS one,
@@ -151,9 +151,9 @@ if ($admin== "" ){
           COUNT(IF(prdct_name_month = '학원관리 3개월',
               1,
               NULL)) AS three
-        FROM
+        FROM 
           am_order
-        WHERE
+        WHERE 
           date >= '$y-$m2-01' AND date <= LAST_DAY('$y-$m2-01')";
 
   $result = mysqli_query($conn, $sql);
@@ -166,11 +166,11 @@ if ($admin== "" ){
     $am_prdct_one = 0;
     $am_prdct_two = 0;
     $am_prdct_thr = 0;
-
+    
   }
 
-
-  $sql = "SELECT
+  
+  $sql = "SELECT 
           COUNT(IF(prdct_name_month = '프리미엄 1개월',
               1,
               NULL)) AS one,
@@ -180,9 +180,9 @@ if ($admin== "" ){
           COUNT(IF(prdct_name_month = '프리미엄 3개월',
               1,
               NULL)) AS three
-        FROM
+        FROM 
           gm_order
-        WHERE
+        WHERE 
           date >= '$y-$m2-01' AND date <= LAST_DAY('$y-$m2-01')";
 
   $result = mysqli_query($conn, $sql);
@@ -199,22 +199,18 @@ if ($admin== "" ){
 
   $sql = "SELECT sum(if(pay_method = '스마일페이',1,0)) smile, sum(if(pay_method = '카카오페이',1,0)) kakao, sum(if(pay_method = '페이코',1,0)) payco
         FROM (
-        (SELECT pay_method FROM am_order WHERE
+        (SELECT pay_method FROM am_order WHERE 
           date >= '$y-$m2-01' AND date <= LAST_DAY('$y-$m2-01'))
         union all
-        (SELECT pay_method FROM gm_order WHERE
+        (SELECT pay_method FROM gm_order WHERE 
           date >= '$y-$m2-01' AND date <= LAST_DAY('$y-$m2-01'))
         )tbl";
   $result = mysqli_query($conn, $sql);
   if($result){
     $row = mysqli_fetch_array($result);
-    $kakao = $row['kakao'];
-    $smile = $row['smile'];
-    $payco = $row['payco'];
-  }else{
-    $kakao = 0;
-    $smile = 0;
-    $payco = 0;
+    $kakao = $row['kakao']!=null ? $row['kakao']: 0;
+    $smile = $row['smile']!=null ? $row['smile']: 0;
+    $payco = $row['payco']!=null ? $row['payco']: 0;
   }
 
 ?>
@@ -304,7 +300,7 @@ var payco = <?=$payco?>;
 					<span class="col10">총합</span>
 				</li>
 <?php
-        $sql="SELECT
+        $sql="SELECT 
               a.date,
               SUM(IF(a.prdct_name_month = '프리미엄 1개월',
                   1,
@@ -332,10 +328,10 @@ var payco = <?=$payco?>;
                   NULL)) AS ao_sales,
               SUM(a.price) AS total_sales
           FROM
-              ((SELECT
+              ((SELECT 
                   gm_order.date, gm_order.prdct_name_month, gm_order.price
               FROM
-                  gm_order) UNION ALL (SELECT
+                  gm_order) UNION ALL (SELECT 
                   am_order.date, am_order.prdct_name_month, am_order.price
               FROM
                   am_order)) a
@@ -347,7 +343,7 @@ var payco = <?=$payco?>;
           ";
 
         $result = mysqli_query($conn, $sql);
-        $total_record = mysqli_num_rows($result);
+        $total_record = mysqli_num_rows($result); 
 
         $scale = 10; // 가져올 글 수
 
@@ -391,8 +387,8 @@ var payco = <?=$payco?>;
           <span class="col8"><?=$go_sales?></span>
           <span class="col9"><?=$ao_sales?></span>
           <span class="col10"><?=$total_sales?></span>
-        </li>
-
+        </li>	
+			
 <?php
    	    $number--;
       }
@@ -429,26 +425,26 @@ var payco = <?=$payco?>;
               }
             }
             echo "<script>console.log($first_page, $last_page)</script>";
-
+            
             $next = $last_page + 1;// > 버튼 누를때 나올 페이지
             $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
 
             $url = "/eduplanet/admin/rvnSttst.php?y=$y&m=$m";
-
+            
             // 첫번째 페이지일 때 앵커 비활성화
             if ($first_page == 1) {
               if($page!=1)
                 echo "<li><a href='$url&page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
               else
                 echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
-
+              
               echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
             } else {
               echo "<li><a href='$url&page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
               echo "<li><a href='$url&page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
             }
 
-
+            
             //페이지 번호 매기기
             for($i= $first_page ; $i <= $last_page ; $i++){
               if ($page == $i) {
@@ -460,18 +456,18 @@ var payco = <?=$payco?>;
 
             // 마지막 페이지일 때 앵커 비활성화
             if ($last_page == $total_page) {
-              echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
-
+              echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";   
+              
               if($page !=$total_page)
                 echo "<li><a href='$url&page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
               else
                 echo "<li><a><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
-
+              
             } else {
                 echo "<li><a href='$url&page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
                 echo "<li><a href='$url&page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
             }
-?>
+?> 
           </ul>
         </div>
       </div>

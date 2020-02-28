@@ -1,4 +1,4 @@
-<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/session_start.php"; ?>
 
 <div class="index_header_wrap">
 
@@ -135,8 +135,7 @@
                                     <li>멤버십/결제</li>
                                 </a>
 
-                                <!-- 경로수정하기 -->
-                                <a href="#">
+                                <a href="/eduplanet/academy/index.php?no=<?=$am_no?>">
                                     <li>My Academy</li>
                                 </a>
                                 <a href="/eduplanet/index/logout.php">
@@ -175,4 +174,4 @@
 
 </div>
 
-<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/mypage/review_write_popup.php"; ?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/mypage/review_write_popup.php"; ?>

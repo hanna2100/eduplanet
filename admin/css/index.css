@@ -1,25 +1,17 @@
 
 #dash_salesGraph_wrap{
-    display: table;
     width: 960px;
-    height: 250px;
+    height: 400px;
     border-radius: 10px;
     -webkit-box-shadow: 0px 1px 17px -6px #cfcfcf; 
     box-shadow: 0px 1px 17px -6px #cfcfcf;
     margin-bottom: 40px;
 }
 
-#dash_salesGraph_cell2{
-    display: table-cell;
-    vertical-align: middle;
-    padding-right: 40px;
-}
-
 #dash_salesGraph_cell1{
-    display: table-cell;
-    width: 500px;
-    height: 250px;
-    padding: 20px 40px 40px 40px;
+    width: 860px;
+    height: 340px;
+    padding: 20px 50px 40px 50px;
 }
 
 #dash_salesGraph_cell1>h4{

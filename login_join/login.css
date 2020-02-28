@@ -10,41 +10,44 @@
 body {
   background-color: #ebecee;
 }
-a { text-decoration: none; color: #2E89FF;}
+
+#main a { 
+  text-decoration: none; color: #2E89FF;
+}
 
 #main{
   margin: 0 auto;
   width: 450px;
-  height: 500px;
+  height: 590px;
+  position: relative;
 }
 
 section h2{
   font-size: 1.5rem;
-  margin-bottom: 50px;
-  margin-top: 100px;
+  margin-bottom: 20px;
 }
 
 #form_wrapper{
   border: 1px solid #dddddd;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   padding: 40px 30px;
+  margin-top: 130px;
   margin-bottom: 100px;
   background-color: #fff;
-  height: 100%;
+  /* height: 100%; */
+  box-sizing: border-box;
 }
 
 .formBox{
   text-align: left;
   margin-bottom: 20px;
 }
-.subMsg {
-  display: inline-block;
-}
 
 .formBox label{
   display: inline-block;
-  font-size: 1rem;
+  font-size: 14px;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 .formInput{
@@ -53,71 +56,55 @@ section h2{
   box-sizing: border-box;
   padding: 10px;
   font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid gray;
+  /* border-radius: 5px; */
+  border: 1px solid rgb(175, 175, 175);
 }
 
 .subMsg{
   font-size: 0.7rem;
-  color: red;
+  color: #2E89FF;
+  font-size: 12px;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-top: 5px;
 }
 
 #btnFormSubmit{
   width: 100%;
+  height: 70px;
   background-color: #2E89FF;
   border: 1px solid #2E89FF;
   font-size: 1rem;
   padding: 10px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   color: white;
   font-weight: bold;
-  margin-top: 20px;
-}
-
-#btnFormSubmit:hover{
+  margin-top: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
 }
 
 #btnFormSubmit:disabled {
   background: #ADD8E6;
   border: 1px solid #ADD8E6;
+  /* background-color: #2E89FF; */
+  /* border: 1px solid #2E89FF; */
   cursor: default;
 }
 
 /* 폼 하단 */
-.fieldset {
-  margin: 1.4em 0;
-}
-hr {
-  border:2px solid #f1f1f1;
-  max-width: 100%;
-  margin:30px 0;
-}
-.form_bottom, .fieldset {
-  font-size:13px;
-}
-table {
-  width:100%;
-  text-align: center;
-}
-td {
-  width: 50%;
-}
+.fieldset { margin: 1.4em 0;}
+hr { border:2px solid #f1f1f1; max-width: 100%; margin:30px 0;}
+.form_bottom, .fieldset { font-size:13px; }
+table { width:100%; text-align: center;}
+td { width: 50%;}
 .link {
   display: block;
   font-size: 15px;
   font-weight: bold;
   margin-top : 12px;
 }
-.form_bottom_wrapper {
+
+.index_header_wrap {
   position: relative;
-  /* border : 1px solid red; */
-  /* height: 30px; */
-}
-.form_bottom {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  /* top:50%; */
-  /* left:20%; */
 }

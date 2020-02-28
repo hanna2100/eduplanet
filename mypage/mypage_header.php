@@ -49,23 +49,27 @@
 
                     <?php
 
-                    $expiry_day = substr($expiry_day, 0, 4) . substr($expiry_day, 5, 2) . substr($expiry_day, 8, 2);
+                    // 만료날짜 계산
+                    // $expiry_day = substr($expiry_day, 0, 4) . substr($expiry_day, 5, 2) . substr($expiry_day, 8, 2);
 
-                    // 만료날짜 계산 후 보여주기 // 만료날짜 없으면 다른 문구 보여주기
-                    if ($expiry_day == "") {
+                    // 만료날짜가 없을 때
+                    if ($expiry_day == "0000-00-00") {
 
                         if ($gm_no) {
                             echo "<span class='user_info_membership_span'>리뷰를 작성하시면 모든 리뷰를 조회하실 수 있습니다. </span>";
                         } else if ($am_no) {
                             echo "<span class='user_info_membership_span'>멤버십을 등록하시면 모든 기능을 이용하실 수 있습니다. </span>";
                         }
-                    } else {
 
-                        $today = date("Ymd");
+                    // 만료날짜가 있을 때
+                    } else {
+                        
+                        $today = date("Y-m-d");
                         $member_day = (strtotime($expiry_day) - strtotime($today)) / 60 / 60 / 24;
 
                         if ($gm_no) {
                             echo "<span class='user_info_membership_span'>리뷰 조회 기간이 <span class='user_info_membership_span_blue'>$member_day</span> 일 남았습니다. </span>";
+
                         } else if ($am_no) {
                             echo "<span class='user_info_membership_span'>멤버십 이용 기간이 <span class='user_info_membership_span_blue'>$member_day</span> 일 남았습니다. </span>";
                         }

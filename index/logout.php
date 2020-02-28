@@ -11,6 +11,9 @@
   session_start();
   unset($_SESSION["am_no"]);
   unset($_SESSION["gm_no"]);
+  unset($_SESSION["pam_no"]);
+  unset($_SESSION["pgm_no"]);
+  unset($_SESSION["admin"]);
 
   // session =============================
   

@@ -48,56 +48,74 @@ if ($admin== "" ){
   $col = isset($_GET["col"])? $_GET["col"]: '' ;
   $search = isset($_GET["search"])? $_GET["search"]: '' ;
 ?>
+<script>
+var page = <?=$page?>;
+</script>
 <section>
-
-<?php
-  $sql = "SELECT 
-            *
-          FROM
-           product";
-
-  $result = mysqli_query($conn, $sql);
-  $row = mysqli_fetch_array($result);
-
-?>
 <!-- 총 회원수 가져오기 -->
   <div class="sec_content">
     <div id="dash_topline">
       <div>
         <span>프리미엄</span><br>
+        <?php
+          $sql = "SELECT 
+                    *
+                  FROM
+                  product
+                  WHERE
+                  prdct_name LIKE '프리미엄%'
+                  ORDER BY prdct_name , month";
+
+          $result = mysqli_query($conn, $sql);
+          for($i=0; $i<3 ; $i++){
+
+          mysqli_data_seek($result, $i);
+          $row = mysqli_fetch_array($result);
+          $name = $row['prdct_name']; 
+          $month = $row['month']; 
+          $price = $row['price']; 
+          $discount = $row['discount'];
+          $sales = $price*(1-($discount/100));
+        ?>
         <div class="prdct_info">
-            <p>1개월</p>
-            <p>- 10%</p>
-            <p>4500</p>
+            <p><?=$month?>개월</p>
+            <p>- <?=$discount?>%</p>
+            <p><?= $sales?></p>
         </div>
-        <div class="prdct_info">
-            <p>2개월</p>
-            <p>- 20%</p>
-            <p>9000</p>
-        </div>
-        <div class="prdct_info">
-            <p>3개월</p>
-            <p>- 30%</p>
-            <p>12000</p>
-        </div>
+       <?php
+          }
+        ?>
       </div>
       <div>
       <span>학원관리</span><br>
+      <?php
+          $sql = "SELECT 
+                    *
+                  FROM
+                  product
+                  WHERE
+                  prdct_name LIKE '학원관리%'
+                  ORDER BY prdct_name , month";
+
+          $result = mysqli_query($conn, $sql);
+          for($i=0; $i<3 ; $i++){
+
+          mysqli_data_seek($result, $i);
+          $row = mysqli_fetch_array($result);
+          $name = $row['prdct_name']; 
+          $month = $row['month']; 
+          $price = $row['price']; 
+          $discount = $row['discount'];
+          $sales = $price*(1-($discount/100));
+        ?>
         <div class="prdct_info2">
-            <p>1개월</p>
-            <p>- 10%</p>
-            <p>4500</p>
+            <p><?=$month?>개월</p>
+            <p>- <?=$discount?>%</p>
+            <p><?= $sales?></p>
         </div>
-        <div class="prdct_info2">
-            <p>2개월</p>
-            <p>- 20%</p>
-            <p>9000</p>
-        </div>
-        <div class="prdct_info2">
-            <p>3개월</p>
-            <p>- 30%</p>
-            <p>12000</p>
-        </div>
+       <?php
+          }
+        ?>
       </div>
     </div>
     <!--end of 상단 회원수 변화-->
@@ -126,7 +144,6 @@ if ($admin== "" ){
 
         <div class="list_edit_delete_wrap">
           <button onclick="submitUpdate()">수정</button>
-          <button onclick="submitDelete()">삭제</button>
         </div>
         <ul id="member_list">
 				<li>

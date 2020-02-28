@@ -234,7 +234,7 @@ if ($admin== "" ){
     <div id="overlay"></div>
     <div id="popupLayer">
       <center>
-        <img id ="bsns_lic_img" src="/eduplanet/admin/img/no_bsns_lic.png" onerror="setDefaultImg()" alt="사업자등록증" width=600>
+        <img id ="bsns_lic_img" src="/eduplanet/img/no_bsns_lic.png" onerror="setDefaultImg()" alt="사업자등록증" width=600>
       </center>
     </div>
 </body>

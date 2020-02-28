@@ -3,8 +3,7 @@ var pwPass = false;
 
 $(document).ready(function() {
   var inputId = $("#inputId"),
-      inputPw = $("#inputPw"),
-      inputRemember = $("#remember_me");
+      inputPw = $("#inputPw");
 
   inputId.keyup(function() {
     var idValue = inputId.val();
@@ -37,22 +36,20 @@ $(document).ready(function() {
       pwValue = false;
       isAllPass();
     }else if(!exp.test(pwValue)) {
-      $("#pwSubMsg").text("비밀번호는 숫자, 영문자, 특수문자를 모두 써주세요.");
+      $("#pwSubMsg").text("비밀번호는 숫자, 영문자, 특수문자가 모두 있는 8자리 글자여야 합니다.");
       pwPass = false;
       isAllPass();
     }else {
       $("#pwSubMsg").text("");
       pwPass = true;
       isAllPass();
+      // 엔터키 눌렀을 때 자동 로그인
+    if (window.event.keyCode == 13) {
+      document.getElementById('form_login').submit();
     }
+    }
+
   });
-
-  if(inputRemember){
-    $("input:checkbox[id=remember_me]:checked").val();
-
-  }
-
-
 });
 
 function isAllPass(){

@@ -42,10 +42,19 @@
     if (!$am_no) {
         echo "
         <script>
-            alert('기업회원만 이용 가능합니다.');
+            alert('사업자회원만 이용 가능합니다.');
             history.go(-1)
         </script>
     ";
+
+    } else if ($am_no && !$pam_no){
+        echo "
+        <script>
+            alert('멤버십 회원만 이용 가능합니다.');
+            history.go(-1)
+        </script>
+        ";
+
     } else {
 
         include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
