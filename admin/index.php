@@ -145,12 +145,12 @@
       </div>
       <div>
         <span>신규리뷰</span><br>
-        <span class="dash_topline_i"><i class="fas fa-star"></i> 89</span>
+        <span class="dash_topline_i"><i class="fas fa-star"></i><span id="increse_review"></span></span>
         <span class="caret up"><i class="fas fa-caret-up"></i></span>
       </div>
       <div>
         <span>신규포스팅</span><br>
-        <span class="dash_topline_i"><i class="fas fa-edit"></i> 57</span>
+        <span class="dash_topline_i"><i class="fas fa-edit"></i><span id="increse_story"></span></span>
         <span class="caret down"><i class="fas fa-caret-down"></i></span>
       </div>
     </div>

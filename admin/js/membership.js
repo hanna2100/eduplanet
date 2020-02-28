@@ -54,6 +54,35 @@ function limitMaxLength(e){
         e.value = e.value.slice(0, e.maxLength);
     }
 
+    //각 필드마다 형식확인
+    switch(e.name){
+        case 'month[]':
+            if(!(e.value>=1 && e.value<=12)){
+                e.value = '';
+            }
+        break;
+
+        case 'price[]':
+            if(!(e.value>=0 && e.value<=1000000)){
+                e.value = '';
+            }
+        break;
+
+        case 'discount[]':
+            if(!(e.value>=0 && e.value<=100)){
+                e.value = '';
+            }
+        break;
+
+        case 'prdct_name[]':
+
+            var exp = /^[가-힣a-zA-Z0-9]{1,10}$/;
+            if(!exp.test(e.value)){
+                e.value='';
+            }
+        break;
+    }
+
     //입력시 가격 자동계산
     if(e.name=='price[]'){
         var price = e.value;
@@ -62,7 +91,7 @@ function limitMaxLength(e){
         //계산
         var sales = price*( 1 - (discount/100));
         //판매가 조정
-        e.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML = sales;
+        e.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML = parseInt(sales);
 
     }else if(e.name=='discount[]'){
         var price = e.parentNode.previousSibling.previousSibling.firstChild.value;
@@ -70,7 +99,7 @@ function limitMaxLength(e){
          //계산
          var sales = price*( 1 - (discount/100));
          //판매가 조정
-        e.parentNode.nextSibling.nextSibling.innerHTML = sales;
+        e.parentNode.nextSibling.nextSibling.innerHTML = parseInt(sales);
 
     }
 }
@@ -81,6 +110,30 @@ function submitUpdate(){
     var conf = confirm('멤버십 상품을 수정하시겠습니까?');
 
     if(conf){
+
+        for(var i in formsForUpdate){
+            var value = formsForUpdate[i].children('.col3').children('input').val();
+            if(value === ''){
+                alert('상품명이 비어있습니다');
+                return;
+            }
+            value = formsForUpdate[i].children('.col4').children('input').val();
+            if(value === ''){
+                alert('개월 수가 비어있습니다');
+                return;
+            }
+            value = formsForUpdate[i].children('.col5').children('input').val();
+            if(value === ''){
+                alert('가격이 비어있습니다');
+                return;
+            }
+            value = formsForUpdate[i].children('.col6').children('input').val();
+            if(value === ''){
+                alert('할인율은 최소 0 ~ 최대 100 사이입니다');
+                return;
+            }
+        }
+
         var serialize ='';
 
         for(var i in formsForUpdate){

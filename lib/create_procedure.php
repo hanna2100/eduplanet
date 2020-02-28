@@ -442,6 +442,88 @@ function create_procedure($conn, $prcd_name){
                 
           END";
         break;
+
+        case "get_story_sixmonth_data":
+          $sql="CREATE PROCEDURE `get_story_sixmonth_data`(IN last_y INT(4), IN last_m INT(2))
+          BEGIN 
+                DECLARE start_date CHAR(10);
+                DECLARE last_date CHAR(10);
+                SET start_date = CONCAT(IF(last_m<=5, last_y-1, last_y),'-', IF(last_m<=5, last_m+7, last_m-5), '-01');
+                SET last_date = CONCAT(last_y,'-', last_m, '-01');
+                SET last_date = LAST_DAY(last_date);
+                
+            SELECT 
+            MONTH(temp.date)as month, origin.count
+            FROM
+            (SELECT 
+              a.date
+            FROM
+              (SELECT 
+              CURDATE() - INTERVAL (a.a + (10 * b.a) + (100 * c.a) + (1000 * d.a)) DAY AS date
+            FROM
+              (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS a
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS b
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS c
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS d) a
+            WHERE
+              a.date BETWEEN start_date AND last_date
+            group by MONTH(a.date)
+                order by a.date) AS temp
+                LEFT JOIN
+              (SELECT 
+                YEAR(regist_day)as year, MONTH(regist_day)as month, COUNT(*)as count
+              FROM
+                acd_story
+              WHERE
+                DATE(`regist_day`) >= STR_TO_DATE(start_date, '%Y-%m-%d')
+                  AND DATE(`regist_day`) <= STR_TO_DATE(last_date, '%Y-%m-%d')
+              GROUP BY LEFT(regist_day, 7)
+              ORDER BY regist_day) AS origin 	
+                ON MONTH(temp.date) = origin.month and YEAR(temp.date) = origin.year;
+  
+          END";
+        break;
+
+        case "get_review_sixmonth_data":
+          $sql="CREATE PROCEDURE `get_review_sixmonth_data`(IN last_y INT(4), IN last_m INT(2))
+          BEGIN 
+                DECLARE start_date CHAR(10);
+                DECLARE last_date CHAR(10);
+                SET start_date = CONCAT(IF(last_m<=5, last_y-1, last_y),'-', IF(last_m<=5, last_m+7, last_m-5), '-01');
+                SET last_date = CONCAT(last_y,'-', last_m, '-01');
+                SET last_date = LAST_DAY(last_date);
+                
+            SELECT 
+            MONTH(temp.date)as month, origin.count
+            FROM
+            (SELECT 
+              a.date
+            FROM
+              (SELECT 
+              CURDATE() - INTERVAL (a.a + (10 * b.a) + (100 * c.a) + (1000 * d.a)) DAY AS date
+            FROM
+              (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS a
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS b
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS c
+            CROSS JOIN (SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS d) a
+            WHERE
+              a.date BETWEEN start_date AND last_date
+            group by MONTH(a.date)
+                order by a.date) AS temp
+                LEFT JOIN
+              (SELECT 
+                YEAR(regist_day)as year, MONTH(regist_day)as month, COUNT(*)as count
+              FROM
+                review
+              WHERE
+                DATE(`regist_day`) >= STR_TO_DATE(start_date, '%Y-%m-%d')
+                  AND DATE(`regist_day`) <= STR_TO_DATE(last_date, '%Y-%m-%d')
+              GROUP BY LEFT(regist_day, 7)
+              ORDER BY regist_day) AS origin 	
+                ON MONTH(temp.date) = origin.month and YEAR(temp.date) = origin.year;
+
+          END";
+        break;
       default:
         echo "<script>alert('해당 프로시저가 없습니다. ');</script>";
         break;

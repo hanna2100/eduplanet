@@ -183,9 +183,9 @@ var page = <?=$page?>;
           <span class="col1"><?=$number?></span>
           <span class="col2"><input type="text" name="no[]" value="<?=$no?>" readonly></span>
           <span class="col3"><input type="text" name="prdct_name[]" value="<?=$prdct_name?>" disabled maxlength="30" oninput="limitMaxLength(this)"/></span>
-          <span class="col4"><input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="month[]" value="<?=$month?>" disabled maxlength="11" oninput="limitMaxLength(this)"/></span>
+          <span class="col4"><input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="month[]" value="<?=$month?>" disabled maxlength="2" oninput="limitMaxLength(this)"/></span>
           <span class="col5"><input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="price[]" value="<?=$price?>" disabled maxlength="10" oninput="limitMaxLength(this)"/></span>
-          <span class="col6"><input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="discount[]" value="<?=$discount?>" disabled maxlength="11" oninput="limitMaxLength(this)"/></span>
+          <span class="col6"><input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="discount[]" value="<?=$discount?>" disabled maxlength="3" oninput="limitMaxLength(this)"/></span>
           <span class="col7"><?=$price-$price*($discount/100)?></span>
         </form>
         </li>	
