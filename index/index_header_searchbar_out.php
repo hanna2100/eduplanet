@@ -135,8 +135,7 @@
                                         <li>멤버십/결제</li>
                                     </a>
 
-                                    <!-- 경로수정하기 -->
-                                    <a href="#">
+                                    <a href="/eduplanet/academy/index.php?no=<?=$am_no?>">
                                         <li>My Academy</li>
                                     </a>
                                     <a href="/eduplanet/index/logout.php">

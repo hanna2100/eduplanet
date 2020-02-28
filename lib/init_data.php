@@ -67,7 +67,7 @@ function g_members_init_data(){
 
       array_push($gm_join_date, $join_date);
 
-      $sql .= "($no, 'test$no', '1234', 'test$no@google.com', '01012345678', '$birth', '$intres', '$membership', '$join_date'),";
+      $sql .= "($no, 'test$no', 'a123456!', 'test$no@google.com', '01012345678', '$birth', '$intres', '$membership', '$join_date'),";
       
     }
     //마지막 콤마 제거
@@ -104,7 +104,7 @@ function a_members_init_data(){
     $a_name = $acd_name_arr[$i];
     $r_name = $rprsn_arr[$i];
 
-    $file_copy = $no.".jpg";
+    $file_copy = "test_bsns_img.jpg";
 
     //가입일자생성
     $join_date = randomDate('2019-01-01', '2019-06-30');
@@ -188,7 +188,7 @@ function acd_story_init_data(){
       $title = $title_array[$title];
       $subtitle = array_rand($subtitle_array);
       $subtitle = $subtitle_array[$subtitle];
-      $file_copy = (string)$no.'.jpg';
+      $file_copy = 'test_acd_story_img.jpg';
 
       //등록일자생성
       $regist_date = randomDate('2019-01-01', '2019-06-30');

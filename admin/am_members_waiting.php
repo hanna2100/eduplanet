@@ -1,3 +1,17 @@
+<?php
+
+include $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/session_start.php";
+
+if ($admin== "" ){
+  echo("
+      <script>
+      alert('관리자 전용 페이지 입니다.');
+      history.go(-1)
+      </script>
+  ");
+  exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -220,7 +234,7 @@
     <div id="overlay"></div>
     <div id="popupLayer">
       <center>
-        <img id ="bsns_lic_img" src="/eduplanet/admin/img/no_bsns_lic.png" onerror="setDefaultImg()" alt="사업자등록증" width=600>
+        <img id ="bsns_lic_img" src="/eduplanet/img/no_bsns_lic.png" onerror="setDefaultImg()" alt="사업자등록증" width=600>
       </center>
     </div>
 </body>

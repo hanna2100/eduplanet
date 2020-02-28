@@ -219,9 +219,9 @@ function g_membersGraph(join, wthdr, sbtr){
             labels: dayArray(y,m),
             datasets: [{
                 label: '신규회원',
-                backgroundColor: 'rgb(255, 51, 51, 0.2)',
-                borderColor:'rgb(255, 51, 51, 0.2)',
-                pointHoverBackgroundColor: 'rgb(255, 51, 51, 0.2)',
+                backgroundColor: 'rgb(0, 153, 255, 0.2)',
+                borderColor:'rgb(0, 153, 255, 0.2)',
+                pointHoverBackgroundColor: 'rgb(0, 153, 255, 0.2)',
                 data: join,
                 pointRadius: 1,
                 pointHitRadius: 10,
@@ -243,9 +243,9 @@ function g_membersGraph(join, wthdr, sbtr){
                 order: 3
             },{
                 label: '순 증가회원 수',
-                backgroundColor: red,
-                borderColor: red,
-                pointHoverBackgroundColor: red,
+                backgroundColor: blue,
+                borderColor: blue,
+                pointHoverBackgroundColor: blue,
                 data: sbtr,
                 pointRadius: 1,
                 pointHitRadius: 10,

@@ -129,7 +129,7 @@
                                         <li>로그아웃</li>
                                     </a>
 
-                                <?php
+                                <?php                     
                                     // 학원회원 메뉴
                                 } else if ($am_no) {
                                 ?>
@@ -141,8 +141,7 @@
                                         <li>멤버십/결제</li>
                                     </a>
 
-                                    <!-- 경로수정하기 -->
-                                    <a href="#">
+                                    <a href="/eduplanet/academy/index.php?no=<?=$am_no?>">
                                         <li>My Academy</li>
                                     </a>
                                     <a href="/eduplanet/index/logout.php">
