@@ -3,8 +3,7 @@
 $y   = $_POST['y'];
 $m   = $_POST['m'];
 
-include_once '../../lib/db_connector.php';
-
+include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
 //연결실패 에러점검
 if(!mysqli_affected_rows($conn)){
     mysqli_close($conn);
