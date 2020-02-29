@@ -1,6 +1,5 @@
 var idPass = false;
 var pwPass = false;
-var emailPass = false;
 
 var telPass = false;
 var agePass = false;
@@ -14,7 +13,6 @@ $(document).ready(function(){
   var inputId = $("#inputId"),
       inputPw1 = $("#inputPw1"),
       inputPw2 = $("#inputPw2"),
-      inputEmail = $("#inputEmail"),
       inputTel = $("#inputTel"),
       inputAge = $("#inputAge"),
       inputIntres = $("#inputIntres"),
@@ -23,48 +21,59 @@ $(document).ready(function(){
       inputLicense = $("#inputLicense");
 
 
-  //아이디 중복체크 - ajax사용
+  // 아이디 중복체크 - ajax사용
   inputId.keyup(function() {
+
     var idValue = inputId.val();
-    var exp = /^[a-z0-9]{4,12}$/;
+    var exp = /^[\w_\.\-]+@[\w\-]+\.[\w\-]+/;
 
     if(idValue === ""){
-      //아이디 입력 안 할 경우
-      $("#idSubMsg").text('아이디를 입력해 주세요.');
+
+      // 아이디 입력 안 할 경우
+      $("#idSubMsg").text('이메일을 입력해 주세요.');
       idPass = false;
       isGmAllPass();
       isAmAllPass();
+
     } else if(!exp.test(idValue)) {
-      //형식에 어긋날경우
-      $('#idSubMsg').text("영문 소문자와 숫자 4~12 자리 이내로 입력해 주세요.");
+
+      // 형식에 어긋날경우
+      $('#idSubMsg').text("이메일 형식이 올바르지 않습니다.");
       idPass = false;
       isGmAllPass();
       isAmAllPass();
+
     } else{
+
       if(mode == "gm"){
         var url = "members_checkId.php?id="+idValue+"&mode=gm";
+
       }else if(mode == "am"){
         var url = "members_checkId.php?id="+idValue+"&mode=am";
       }
+
       $.ajax({
         url : url,
         type : "get",
         success : function(data) {
+
           //아이디 중복시
           if (data == 1) {
-            $("#idSubMsg").text("이미 사용 중인 아이디입니다.");
+            $("#idSubMsg").text("이미 사용 중인 이메일입니다.");
             idPass = false;
             isGmAllPass();
             isAmAllPass();
+
           }else {
             //사용가능한 아이디
-            console.log("사용가능아이디");
+            console.log("사용가능 아이디");
             $("#idSubMsg").text("");
             idPass = true;
             isGmAllPass();
             isAmAllPass();
           }
         },
+
         error : function() {
             console.log("아이디 중복확인 ajax 실패");
             idPass = false;
@@ -100,24 +109,6 @@ $(document).ready(function(){
 
   });
 
-  //이메일 체크
-  inputEmail.keyup(function(){
-    var emailValue = inputEmail.val();
-    var exp = /^[\w_\.\-]+@[\w\-]+\.[\w\-]+/;
-
-    if(!exp.test(emailValue)){
-      $("#emailSubMsg").text("이메일 형식이 올바르지 않습니다.");
-      emailPass = false;
-      isGmAllPass();
-      isAmAllPass();
-    }else{
-      $("#emailSubMsg").text("");
-      emailPass = true;
-      isGmAllPass();
-      isAmAllPass();
-    }
-  });
-
   //전화번호 체크
   inputTel.keyup(function(){
     var telValue = inputTel.val();
@@ -133,8 +124,6 @@ $(document).ready(function(){
       isGmAllPass();
     }
   });
-
-
 
   //출생년도 select box
   inputAge.change(function(){
@@ -165,8 +154,6 @@ $(document).ready(function(){
     }
   });
 
-
-
   //학원/교습소명 체크
   inputAcdName.change(function(){
     var acdNameValue = inputAcdName.val();
@@ -181,8 +168,6 @@ $(document).ready(function(){
       isAmAllPass();
     }
   });
-
-
 
   //대표자명 체크
   inputRprsn.keyup(function(){
@@ -252,12 +237,7 @@ $(document).ready(function(){
           .append("<div><b>" + item.acd_name + "</b><br><span style='font-size: 12px; color: gray;'>" + item.si_name + " / " + item.dong_name + "</span></div>").appendTo(ul);
   };
 
-
 });
-
-
-
-
 
 function setDateBox(){
    var dt = new Date();
@@ -271,8 +251,8 @@ function setDateBox(){
 }
 
 function isGmAllPass(){
-    // console.log("GM패스", idPass, pwPass, emailPass, telPass, agePass, intresPass);
-  if(idPass && pwPass && emailPass && telPass && agePass && intresPass){
+    console.log("GM패스", idPass, pwPass, telPass, agePass, intresPass);
+  if(idPass && pwPass && telPass && agePass && intresPass){
     $("#btnFormSubmit").attr("disabled", false);
   }else{
     $("#btnFormSubmit").attr("disabled", true);
@@ -280,8 +260,8 @@ function isGmAllPass(){
 }
 
 function isAmAllPass(){
-    console.log("AM패스", idPass, pwPass, emailPass, acdNamePass, rprsnPass, licensePass);
-  if(idPass && pwPass && emailPass && acdNamePass && rprsnPass && licensePass){
+    console.log("AM패스", idPass, pwPass, acdNamePass, rprsnPass, licensePass);
+  if(idPass && pwPass && acdNamePass && rprsnPass && licensePass){
     $("#btnFormSubmit").attr("disabled", false);
   }else{
     $("#btnFormSubmit").attr("disabled", true);

@@ -49,13 +49,13 @@
         <form id="form_login" name="login_form" action="<?= $action ?>" method="post">
 
           <div class="formBox">
-            <label for="inputId">아이디&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" class="formInput" id="inputId" name="inputId" required>
+            <label for="inputId">아이디 (이메일)</label>
+            <input type="text" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해 주세요." required>
             <p class="subMsg" id="idSubMsg"></p>
           </div>
           <div class="formBox">
             <label for="inputPw">비밀번호</label>
-            <input type="password" class="formInput" id="inputPw" name="inputPw" required>
+            <input type="password" class="formInput" id="inputPw" name="inputPw" placeholder="비밀번호를 입력해 주세요." required>
             <p class="subMsg" id="pwSubMsg"></p>
           </div>
           <input type="button" id="btnFormSubmit" value="LOGIN" onclick="document.getElementById('form_login').submit()" disabled>
@@ -87,6 +87,95 @@
 
   </section>
 
+  <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
+
+  <!-- 일반회원 / 사업자 회원 구분해서 form 전송 -->
+  <?php
+  include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+
+  $mode = isset($_GET['mode']) ? $_GET['mode'] : "gm";
+  $action = "/eduplanet/login_join/join_form.php?mode=" . $mode;
+  ?>
+
+  <!-- 카카오 로그인 정보를 담는 form -->
+  <form name="kakao_form" action=<?= $action ?> method="POST">
+    <input id="kakao_id" name="kakao_id" type="hidden">
+    <input id="kakao_email" name="kakao_email" type="hidden">
+  </form>
+
+  <a id="kakao-login-btn"></a>
+
+  <script type='text/javascript'>
+    // 사용할 앱의 JavaScript 키 설정
+    Kakao.init('c0edd7bb36cbb280cb4e498b294c87be');
+
+    // 카카오 로그인 버튼 생성
+    Kakao.Auth.createLoginButton({
+
+      container: '#kakao-login-btn',
+
+      success: function(authObj) {
+
+        // 로그인 성공 시, API 호출
+        Kakao.API.request({
+
+          url: '/v2/user/me',
+
+          success: function(res) {
+
+            alert(JSON.stringify(res)); // kakao.api.request 에서 불러온 결과값 json형태로 출력
+            alert(JSON.stringify(authObj)); // Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
+            console.log(res.id); // id 정보 출력
+            console.log(res.kakao_account.email); // 이메일 정보 출력
+            console.log(authObj.access_token); // 토큰 값 출력
+
+            // 카카오 로그인해서 가져온 값 변수에 저장
+            var kakao_no = res.id;
+            var kakao_email = res.kakao_account.email;
+
+            // DB에 같은 아이디가 있는지 검사
+            var url = "members_checkId.php?id=" + kakao_email + "&mode=" + mode;
+
+            $.ajax({
+
+              url: url,
+              type: "GET",
+              success: function(data) {
+
+                // 이미 이메일이 가입되어 있을 때 --> 카카오 로그인
+                if (data == 1) {
+                  document.getElementById('form_login').submit();
+
+                } else {
+                  // 이메일이 가입되어 있지 않을 때 --> form 으로 이메일을 넘겨서 회원가입
+                  document.getElementById("kakao_id").value = kakao_no;
+                  document.getElementById("kakao_email").value = kakao_email;
+
+                  document.kakao_form.submit();
+                }
+              },
+
+              error: function() {
+                console.log("이메일 가입확인 ajax 실패");
+              }
+            });
+          },
+
+          fail: function(error) {
+            alert(JSON.stringify(error));
+          }
+        });
+      },
+
+      fail: function(err) {
+        alert(JSON.stringify(err));
+      }
+    });
+    //]]>
+  </script>
+
+  <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
+
   <script>
     var mode = '<?= $mode ?>';
 
@@ -95,36 +184,10 @@
       $(".join").html("<a href='./join_form.php?mode=am'>사업자 회원 가입</a>");
       $(".login").prev().html("일반 회원이시라면");
       $(".login").html("<a href='./login_form.php?mode=gm'>일반 회원 LOGIN</a>");
-
-      // 카카오 script key 입력
-      Kakao.init('03be234663870819293c389394e57405');
-      Kakao.Auth.createLoginButton({
-        container: '#kakao-login-btn',
-        success: function(authObj) {
-          Kakao.API.request({
-            url: '/v2/user/me',
-            success: function(res) {
-              alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
-              alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
-              console.log(res.kakao_account.email); //<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
-              console.log(res.kakao_account.birthday); //<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
-              console.log(res.properties.nickname); //<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근
-              var id = res.id;
-              var name = res.properties.nickname;
-              console.log(id);
-            }
-          })
-        },
-        fail: function(err) {
-          alert(JSON.stringify(err));
-        }
-      });
-
     }
   </script>
 
   <script src="./login.js"></script>
-
 </body>
 
 </html>

@@ -22,9 +22,29 @@
   <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
   <link rel="stylesheet" href="./join.css">
 
+  <!-- 스크립트 -->
+
+
 </head>
 
 <body onload='setDateBox()'>
+
+  <!-- 카카오 로그인 시 정보 가져오기 -->
+  <?php
+
+  if (isset($_POST["kakao_id"])) {
+    $kakao_id = $_POST["kakao_id"];
+  }
+
+  // if (isset($_POST["kakao_name"])) {
+  //   $kakao_name = $_POST["kakao_name"];
+  // }
+
+  if (isset($_POST["kakao_email"])) {
+    $kakao_email = $_POST["kakao_email"];
+  }
+  
+  ?>
 
   <header>
     <?php
@@ -35,42 +55,60 @@
   <main>
     <section>
       <div id="main">
+
         <?php
+        
         $mode = isset($_GET['mode']) ? $_GET['mode'] : "gm";
         $action = "members_insert.php?mode=" . $mode;
+
         if ($mode == "gm") {
-          echo "<h2>일반 회원 가입</h2>
-                <a class='join_mode_p'>사업자 회원이신가요?</p>
-                <a href='/eduplanet/login_join/join_form.php?mode=am'><p class='join_mode_a'>사업자 회원 가입</p></a>
-                       <form id='form_member' action=$action method='post' autocomplete='on'>
-                    ";
+          echo 
+              "<h2>일반 회원 가입</h2>
+              <p class='join_mode_p'>사업자 회원이신가요?</p>
+              <a href='/eduplanet/login_join/join_form.php?mode=am'><p class='join_mode_a'>사업자 회원 가입</p></a>
+              <form id='form_member' action=$action method='post' autocomplete='on'>
+              ";
+
         } else if ($mode == "am") {
-          echo "<h2>사업자 회원 가입</h2>
-                <p class='join_mode_p'>일반 회원이신가요?</p>
-                <a href='/eduplanet/login_join/join_form.php'><p class='join_mode_a'>일반 회원 가입</p></a>
-                      <form id='form_member' action=$action method='post' autocomplete='on' enctype='multipart/form-data'>
-                    ";
+          echo 
+              "<h2>사업자 회원 가입</h2>
+              <p class='join_mode_p'>일반 회원이신가요?</p>
+              <a href='/eduplanet/login_join/join_form.php'><p class='join_mode_a'>일반 회원 가입</p></a>
+              <form id='form_member' action=$action method='post' autocomplete='on' enctype='multipart/form-data'>
+              ";
         }
         ?>
 
         <div class="formBox">
-          <label for="inputId">아이디&nbsp;&nbsp;&nbsp;</label>
-          <input type="text" class="formInput" id="inputId" name="inputId" placeholder="아이디를 입력해주세요" required>
+          <label for="inputId">아이디 (이메일)</label>
+
+          <!-- 카카오에서 받아온 이메일이 있을 때 셋팅 -->
+          <?php
+          
+          if (isset($kakao_email)) {
+          ?>
+            <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" value="<?= $kakao_email ?>" required>
+
+          <?php
+          } else {
+          ?>
+            <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" required>
+
+          <?php
+          }
+          ?>
           <p class="subMsg" id="idSubMsg"></p>
         </div>
+
         <div class="formBox">
           <label for="inputPw1">비밀번호</label>
           <input type="password" class="formInput" id="inputPw1" name="inputPw1" placeholder="비밀번호를 입력해주세요" required>
         </div>
+
         <div class="formBox">
           <label for="inputPw2">비밀번호 확인</label>
           <input type="password" class="formInput" id="inputPw2" name="inputPw2" placeholder="비밀번호를 확인해주세요" required>
           <p class="subMsg" id="pwSubMsg"></p>
-        </div>
-        <div class="formBox">
-          <label for="inputEmail">이메일</label>
-          <input type="email" class="formInput" id="inputEmail" name="inputEmail" placeholder="이메일을 입력해주세요" required>
-          <p class="subMsg" id="emailSubMsg"></p>
         </div>
 
         <!-- mode:gm이면 전화번호 입력, mode:am이면 학원명 입력(학원명은 검색해서 입력받는 것으로 수정하기 : 일단은 인풋으로) -->
