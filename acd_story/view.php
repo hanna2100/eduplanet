@@ -17,6 +17,9 @@
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
 
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
     <!-- CSS -->
     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
     <link rel="stylesheet" href="/eduplanet/index/footer.css">
@@ -41,7 +44,7 @@
 
     <?php
 
-    $story_no = $_GET["no"];
+    $story_no = $_GET["story_no"];
 
     include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
@@ -113,19 +116,19 @@
                     </div>
 
                     <?php
-                        if ($gm_no) {
+                    if ($gm_no) {
                     ?>
 
-                    <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_add_like">찜하기</button></a>
+                        <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_add_like">찜하기</button></a>
 
                     <?php
-                        } else {
+                    } else {
                     ?>
 
-                    <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_add_like">찜하기</button></a>
+                        <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_add_like">찜하기</button></a>
 
                     <?php
-                        }
+                    }
                     ?>
 
                 </div>
@@ -195,11 +198,11 @@
                     <?php
 
                     $sql = "SELECT S.no as story_no, S.* FROM acd_story S inner join academy A on S.parent=A.no
-                            where parent=(select parent from acd_story where acd_story.no=$story_no) order by hit desc limit 4";
+                            where parent=(select parent from acd_story where acd_story.no=$story_no) order by hit desc";
                     $result = mysqli_query($conn, $sql);
                     $total_record = mysqli_num_rows($result);
 
-                    for ($i = 0; $i < $total_record; $i++) {
+                    for ($i = 0; $i < $total_record & $i < 4; $i++) {
 
                         mysqli_data_seek($result, $i);
                         $row = mysqli_fetch_array($result);

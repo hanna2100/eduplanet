@@ -116,17 +116,17 @@ if ($admin== "" ){
       <div>
         <span>전체 학원스토리</span><br>
         <span class="dash_topline_i"><i class="fas fa-box-open"></i>&nbsp;<?=$total_story?></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>신규 스토리</span><br>
         <span class="dash_topline_i"><i class="fas fa-book-open"></i>&nbsp;<span id="new_story">0</span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>이달의 총 조회수</span><br>
         <span class="dash_topline_i"><i class="far fa-eye"></i>&nbsp;<span id="total_hit"><?=$total_hit?></span></span>
-        <span class="caret down"><i class="fas fa-caret-down"></i></span>
+        <span class="caret down"> </i></span>
       </div>
     </div>
     <!--end of 상단 회원수 변화-->

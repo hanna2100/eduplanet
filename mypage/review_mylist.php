@@ -1,4 +1,4 @@
-<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/session_start.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +16,9 @@
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
@@ -40,10 +43,10 @@
     <script>
         $(document).ready(function() {
 
-            // 아이디에 따라 생성되는 프로필 이미지 만드는 함수 (세션에서 userid를 받아온다)
+            // 아이디에 따라 생성되는 프로필 이미지 만드는 함수 (세션에서 user를 받아온다)
             $(".user_img").each(function() {
 
-                $(this).prop('src', 'data:image/png;base64,' + new Identicon($.md5($(this).data("userid")), 80)).show();
+                $(this).prop('src', 'data:image/png;base64,' + new Identicon($.md5($(this).data("user")), 80)).show();
             });
         });
     </script>
@@ -55,11 +58,11 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php"; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header_searchbar_in.php"; ?>
             </div>
 
             <div class="header_mypage">
-                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/mypage/mypage_header.php"; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/mypage/mypage_header.php"; ?>
             </div>
         </header>
 
@@ -100,34 +103,34 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <?php
 
-                    $user_no = $gm_no;
+                $user_no = $gm_no;
 
-                    if (!$user_no) {
-                        echo "
+                if (!$user_no) {
+                    echo "
                             <script>
                                 alert('잘못된 접근입니다.');
                                 history.go(-1)
                             </script>
                         ";
-                    }
+                }
 
-                    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
+                include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
-                    // $sql = "SELECT review.no, acd_name, total_star, one_line, facility, acsbl, teacher, cost_efct, achievement, benefit, drawback FROM review INNER JOIN academy ON review.parent = academy.no WHERE user_no='$user_no'";
-                    $sql = "SELECT review.no, acd_name, total_star, regist_day FROM review INNER JOIN academy ON review.parent = academy.no WHERE user_no='$user_no'";
+                // $sql = "SELECT review.no, acd_name, total_star, one_line, facility, acsbl, teacher, cost_efct, achievement, benefit, drawback FROM review INNER JOIN academy ON review.parent = academy.no WHERE user_no='$user_no'";
+                $sql = "SELECT review.no, acd_name, total_star, regist_day FROM review INNER JOIN academy ON review.parent = academy.no WHERE user_no='$user_no'";
 
-                    $result = mysqli_query($conn, $sql);
-                    $total_record = mysqli_num_rows($result);
-                    ?>
+                $result = mysqli_query($conn, $sql);
+                $total_record = mysqli_num_rows($result);
+                ?>
 
                 <div class="mypage_content">
 
                     <div class="mypage_content_title">
                         <h4>작성한 리뷰</h4>
-                        <p>총 <span id="review_list_num"><?=$total_record?></span> 개의 리뷰를 작성하셨습니다.</p>
+                        <p>총 <span id="review_list_num"><?= $total_record ?></span> 개의 리뷰를 작성하셨습니다.</p>
                         <span id="review_delete_p">* 리뷰 삭제는 작성일로부터 30일 이후에 가능합니다.</span>
                     </div>
 
@@ -161,43 +164,43 @@
                             </div>
 
                             <?php
-                                for ($i=0; $i < $total_record; $i++) {
+                            for ($i = 0; $i < $total_record; $i++) {
 
                                 mysqli_data_seek($result, $i);
 
                                 $row = mysqli_fetch_array($result);
-                
+
                                 $acd_name = $row["acd_name"];
                                 $regist_day = $row["regist_day"];
                                 $total_star = $row["total_star"];
-                                
+
                                 $no = $row["no"];
-                             
+
                             ?>
 
-                            <div class="review_table_list">
-                                <ul>
-                                    <li id="update_review_no" style="display: none"><?=$no?></li>
+                                <div class="review_table_list">
+                                    <ul>
+                                        <li id="update_review_no" style="display: none"><?= $no ?></li>
 
-                                    <li id="review_acd_name"><?=$acd_name?></li>
-                                    <li id="review_regist_day"><?=$regist_day?></li>
-                                    <li id="review_status">등록완료</li>
-                                    <li id="review_total_star"><?=$total_star?></li>
+                                        <li id="review_acd_name"><?= $acd_name ?></li>
+                                        <li id="review_regist_day"><?= $regist_day ?></li>
+                                        <li id="review_status">등록완료</li>
+                                        <li id="review_total_star"><?= $total_star ?></li>
 
-                                    <li id="review_edit_delete">
-                                        <a id="review_update" href="#" onclick="showPopup(2, <?=$no?>);">수정 |</a>
-                                        <a href="#" onclick="deleteReview(<?=$no?>);"> 삭제</a>
-                                    </li>
+                                        <li id="review_edit_delete">
+                                            <a id="review_update" href="#" onclick="showPopup(2, <?= $no ?>);">수정 |</a>
+                                            <a href="#" onclick="deleteReview(<?= $no ?>);"> 삭제</a>
+                                        </li>
 
-                                </ul>
-                            </div>
+                                    </ul>
+                                </div>
 
                             <?php
                             }
                             mysqli_close($conn);
                             ?>
 
-                            
+
                         </div>
 
                     <?php
@@ -208,13 +211,13 @@
             </div>
 
         </div>
-        
+
         <footer>
-            <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
+            <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
         </footer>
-        
+
     </div>
-    
+
 </body>
 
 </html>

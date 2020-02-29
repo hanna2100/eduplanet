@@ -19,7 +19,7 @@
                 <a href="/eduplanet/acd_list/index.php">
                     <span>학원</span>
                     <div class="index_header_menu_hover">
-                        <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
+                        <i class="fas fa-caret-up"></i>
                     </div>
                 </a>
             </li>
@@ -28,7 +28,7 @@
                 <a href="/eduplanet/acd_story/index.php">
                     <span>스토리</span>
                     <div class="index_header_menu_hover">
-                        <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
+                        <i class="fas fa-caret-up"></i>
                     </div>
                 </a>
             </li>
@@ -37,7 +37,7 @@
                 <a href="/eduplanet/membership/index.php">
                     <span>멤버십</span>
                     <div class="index_header_menu_hover">
-                        <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
+                        <i class="fas fa-caret-up"></i>
                     </div>
                 </a>
             </li>
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="index_header_menu_hover_detail">
-                    <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
+                    <i class="fas fa-caret-up"></i>
 
                     <div class="index_header_menu_hover_detail_review">
                         <ul>
@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="index_header_menu_hover_detail">
-                    <img src="/eduplanet/img/index_header_hover.png" alt="index_header_menu_hover">
+                    <i class="fas fa-caret-up"></i>
 
 
                     <div class="index_header_menu_hover_detail_profile">
@@ -135,7 +135,7 @@
                                     <li>멤버십/결제</li>
                                 </a>
 
-                                <a href="/eduplanet/academy/index.php?no=<?=$am_no?>">
+                                <a href="/eduplanet/academy/index.php?no=<?= $am_no ?>">
                                     <li>My Academy</li>
                                 </a>
                                 <a href="/eduplanet/index/logout.php">

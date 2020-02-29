@@ -137,17 +137,17 @@ if ($admin== "" ){
       <div>
         <span>전체 리뷰</span><br>
         <span class="dash_topline_i"><i class="fas fa-box-open"></i>&nbsp;<span><?=$total_review?></span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>신규 리뷰</span><br>
         <span class="dash_topline_i"><i class="fas fa-edit"></i>&nbsp;<span id="new_review_cnt"></span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"> </i></span>
       </div>
       <div>
         <span>이달의 리뷰평점</span><br>
         <span class="dash_topline_i"><i class="fas fa-star"></i>&nbsp;<span><?=sprintf('%0.1f', round($review_avg,1))?></span></span>
-        <span class="caret down"><i class="fas fa-caret-down"></i></span>
+        <span class="caret down"> </i></span>
       </div>
     </div>
     <!--end of 상단 이달의 리뷰정보-->

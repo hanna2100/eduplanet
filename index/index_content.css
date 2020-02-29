@@ -1,11 +1,7 @@
 /* 메인 상단 배경 */
 .index_main_background {
     width: 100%;
-    height: 530px;
     margin: 0 auto;
-    /* background-color: #2E64FA; */
-    /* background-color: #2E89FF; */
-    background-color: #fff;
 }
 
 /* 에듀플래닛 */
@@ -15,14 +11,12 @@
     position: relative;
     top: 180px;
     text-align: center;
-    /* color: white; */
     color: black;
 }
 
 .index_title_logo_img {
     width: 300px;
     height: 50px;
-    /* margin-right: 40px; */
     position: relative;
     top: -14px;
     margin: 0 auto;
@@ -32,17 +26,22 @@
     height: 50px;
     padding-top: 10px;
     padding-bottom: 10px;
-    /* border: 1px solid black; */
+}
+
+/* 슬라이더 */
+.index_slider {
+    width: 100%;
+    position: relative;
 }
 
 /* 메인 상단 검색창 투명색 바 */
 .index_main_wrap {
     width: 100%;
     height: 140px;
-    margin-top: 30px;
-    background-color: rgba(0, 0, 0, 0.158);
-    position: relative;
-    top: 310px;
+    background-color: rgba(0, 0, 0, 0.623);
+    position: absolute;
+    bottom: 54px;
+    z-index: 99999;
 }
 
 .index_main_title {
@@ -54,7 +53,6 @@
     background-color: white;
     border: 3px solid #2E89FF;
 }
-
 
 /* 메인 검색창 */
 #acd_name_index {
@@ -93,24 +91,108 @@
 option {
     margin-bottom: 10px;
 }
+
 /***********************************************/
 
 /* 메인 컨텐츠 */
 .index_content_wrap {
     width: 1060px;
-    height: 2350px;
+    /* height: 2350px; */
     margin: 0 auto;
     /* border: 1px solid black; */
+    position: relative;
 }
 
-/* 강의 추천 */
-.index_content_cource{
-    margin-top: 50px;
+/* 오늘의소식 */
+.inner_section {
+    position: relative;
+    top: 30px;
+}
+
+.story_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 20px;
+    height: 423px;    
+    /* border: 1px solid grey; */
+}
+
+.story_card {
+    position: relative;
+    z-index: 1;
+}
+
+.story_card img:hover {
+    box-shadow: 0px 0px 5px 5px lightgray;
+}
+
+.story_contents {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    z-index: 0;
+    color: white;
+}
+
+.story_subtitle {
+    padding-top: 5px;
+    font-size: 14px;
+    color: white;
+}
+
+.story_title {
+    font-size: 22px;
+    font-weight: 800;
+    padding-bottom: 10px;
+    width: 217px;
+    max-height: 45px;
+    line-height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.story_card img {
+    border-radius: 15px;
+}
+
+.a3 {
+    grid-row: 1/3;
+    grid-column: 3/4;
+}
+
+.a3 img {
+    border-radius: 15px;
+}
+
+.a4 {
+    grid-column: 1/3;
+}
+
+#story_img_wrap {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+#story_img_wrap:hover {
+    box-shadow: 0px 0px 5px 5px lightgray;
+}
+
+/* 스토리 */
+.index_content_cource {
+    position: relative;
+    margin-top: 70px;
 }
 
 .content_title_wrap {
+    position: relative;
     width: 100%;
-    height: 40px;
+    /* height: 40px; */
     /* border: 1px solid black; */
 }
 
@@ -134,9 +216,10 @@ option {
 }
 
 .content_cource_list {
-    width: 100%;
     /* border: 1px solid black; */
-    margin-top: 15px;
+    /* margin-top: 15px; */
+    position: relative;
+    top: 0;
 }
 
 ul {
@@ -168,7 +251,7 @@ ul {
     border-radius: 5px;
 }
 
-.academy_small_logo img{
+.academy_small_logo img {
     width: 32px;
     height: 32px;
     display: inline-block;
@@ -194,7 +277,7 @@ ul {
     box-shadow: 0px 0px 5px 5px lightgray;
 }
 
-.academy_img_box img{
+.academy_img_box img {
     float: left;
     width: 247px;
     height: 170px;
@@ -221,7 +304,7 @@ ul {
     line-height: 25px;
     overflow: hidden;
     text-overflow: ellipsis;
-    display:-webkit-box;
+    display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
@@ -242,6 +325,7 @@ ul {
 /* 리뷰 */
 .index_content_review {
     margin-top: 60px;
+    margin-bottom: 150px;
 }
 
 .content_title_wrap_review {
@@ -301,12 +385,12 @@ ul {
     font-size: 23px;
     width: 454px;
     max-height: 102px;
-    display:-webkit-box;
-    -webkit-line-clamp:3;
-    -webkit-box-orient:vertical;
-    line-height:30px;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .academt_review_detail {
@@ -319,7 +403,7 @@ ul {
 #review_star {
     padding-top: 13px;
     width: 16px;
-    height: 16px;
+    /* height: 16px; */
     margin-right: 3px;
 }
 
@@ -361,7 +445,8 @@ ul {
     /* 가로 스크롤바 숨기기 */
     overflow-x: hidden;
 }
-  /* IE 6 doesn't support max-height
+
+/* IE 6 doesn't support max-height
    * we use height instead, but this forces the menu to always be this tall
    */
 

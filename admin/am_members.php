@@ -108,17 +108,17 @@ if ($admin== "" ){
       <div>
         <span>전체 사업자회원</span><br>
         <span class="dash_topline_i"><i class="fas fa-user-friends"></i>&nbsp;<span id="total_m"><?=$total_m?></span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"></span>
       </div>
       <div>
         <span>신규회원</span><br>
         <span class="dash_topline_i"><i class="fas fa-user-plus"></i>&nbsp;<span id="join_m">0</span></span>
-        <span class="caret up"><i class="fas fa-caret-up"></i></span>
+        <span class="caret up"></span>
       </div>
       <div>
         <span>탈퇴회원</span><br>
         <span class="dash_topline_i"><i class="fas fa-user-minus"></i>&nbsp;<span id="wthdr_m">0</span></span>
-        <span class="caret down"><i class="fas fa-caret-down"></i></span>
+        <span class="caret down"></span>
       </div>
     </div>
     <!--end of 상단 회원수 변화-->
