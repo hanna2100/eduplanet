@@ -1,6 +1,5 @@
 var idPass = false;
 var pwPass = false;
-var emailPass = false;
 
 var telPass = false;
 var agePass = false;
@@ -13,7 +12,6 @@ $(document).ready(function () {
 
     var inputPw1 = $("#inputPw1"),
         inputPw2 = $("#inputPw2"),
-        inputEmail = $("#inputEmail"),
         inputTel = $("#inputTel"),
         inputAge = $("#inputAge"),
         inputIntres = $("#inputIntres"),
@@ -29,36 +27,12 @@ $(document).ready(function () {
         if (!exp.test(pw1Value) || !exp.test(pw2Value)) {
             $("#pwSubMsg").text("숫자, 영문자, 특수문자 포함 8글자 이상 입력");
             pwPass = false;
-            // isGmAllPass();
-            // isAmAllPass();
         } else if (pw1Value != pw2Value) {
             $("#pwSubMsg").text("비밀번호가 일치하지 않습니다.");
             pwPass = false;
-            // isGmAllPass();
-            // isAmAllPass();
         } else {
             $("#pwSubMsg").text("");
             pwPass = true;
-            // isGmAllPass();
-            // isAmAllPass();
-        }
-    });
-
-    // 이메일 체크
-    inputEmail.keyup(function () {
-        var emailValue = inputEmail.val();
-        var exp = /^[\w_\.\-]+@[\w\-]+\.[\w\-]+/;
-
-        if (!exp.test(emailValue)) {
-            $("#emailSubMsg").text("이메일 형식이 올바르지 않습니다.");
-            emailPass = false;
-            // isGmAllPass();
-            // isAmAllPass();
-        } else {
-            $("#emailSubMsg").text("");
-            emailPass = true;
-            // isGmAllPass();
-            // isAmAllPass();
         }
     });
 
@@ -70,11 +44,9 @@ $(document).ready(function () {
         if (!mobile_exp.test(telValue)) {
             $("#telSubMsg").text("휴대전화 형식에 맞춰 - 없이 입력");
             telPass = false;
-            // isGmAllPass();
         } else {
             $("#telSubMsg").text("");
             telPass = true;
-            // isGmAllPass();
         }
     });
 
@@ -87,11 +59,9 @@ $(document).ready(function () {
         if (!exp.test(acdNameValue)) {
             $("#AcdNameSubMsg").text("한글 / 영문 2글자 이상 입력");
             acdNamePass = false;
-            // isAmAllPass();
         } else {
             $("#AcdNameSubMsg").text("");
             acdNamePass = true;
-            // isAmAllPass();
         }
     });
 
@@ -103,10 +73,8 @@ $(document).ready(function () {
 
         if (!ageValue) {
             agePass = false;
-            // isGmAllPass();
         } else {
             agePass = true;
-            // isGmAllPass();
         }
     });
 
@@ -118,11 +86,9 @@ $(document).ready(function () {
         if (!exp.test(intresValue)) {
             $("#intresSubMsg").text("한글 혹은 영문 2~10자 이내 입력");
             intresPass = false;
-            // isGmAllPass();
         } else {
             $("#intresSubMsg").text("");
             intresPass = true;
-            // isGmAllPass();
         }
     });
 
@@ -134,11 +100,9 @@ $(document).ready(function () {
         if (!exp.test(nameValue)) {
             $("#RprsnSubMsg").text("이름은 한글 혹은 영문 2자 이상이어야 합니다.");
             rprsnPass = false;
-            // isAmAllPass();
         } else {
             $("#RprsnSubMsg").text("");
             rprsnPass = true;
-            // isAmAllPass();
         }
     });
 });
@@ -159,18 +123,17 @@ function setDateBox() {
 function isGmAllPass() {
 
     // SELECT 해서 가져온 값은 true 셋팅
-    if (document.getElementById("inputEmail").value !== "" &&
+    if (
     document.getElementById("inputTel").value !== "" &&
     document.getElementById("inputAge").value !== "" &&
     document.getElementById("inputIntres").value !== "") {
 
-        emailPass = true;
         telPass = true;
         agePass = true;
         intresPass = true;
     }
 
-    if (!(pwPass && emailPass && telPass && agePass && intresPass)) {
+    if (!(pwPass && telPass && agePass && intresPass)) {
         alert("입력하신 항목을 다시 확인해 주세요.");
         
     } else {
@@ -182,16 +145,15 @@ function isGmAllPass() {
 function isAmAllPass() {
 
     // SELECT 해서 가져온 값은 true 셋팅
-    if (document.getElementById("inputEmail").value !== "" &&
+    if (
     document.getElementById("inputAcdName").value !== "" &&
     document.getElementById("inputRprsn").value !== "") {
 
-        emailPass = true;
         acdNamePass = true;
         rprsnPass = true;
     }
 
-    if (!(pwPass && emailPass && acdNamePass && rprsnPass)) {
+    if (!(pwPass && acdNamePass && rprsnPass)) {
         alert("입력하신 항목을 다시 확인해 주세요.");
         
     } else {
