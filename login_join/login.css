@@ -11,7 +11,7 @@ body {
   background-color: #ebecee;
 }
 
-#main a { 
+#main a {
   text-decoration: none; color: #2E89FF;
 }
 
@@ -107,4 +107,8 @@ td { width: 50%;}
 
 .index_header_wrap {
   position: relative;
+}
+#find_password {
+  float: right;
+  font-size: 13px;
 }

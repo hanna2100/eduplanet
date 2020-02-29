@@ -65,6 +65,7 @@
         <p class="fieldset">
           <input type="checkbox" id="remember-me" checked>
           <label for="remember-me"> 로그인 상태 유지</label>
+          <a id="find_password" href="./find_password.php?mode=<?=$mode?>" style="color:black">비번 찾기</a>
         </p>
 
         <hr>
