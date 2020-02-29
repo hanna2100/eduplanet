@@ -29,22 +29,22 @@
             <div class="academy_header_menu">
                 <ul class="academy_header_menu_ul">
                     <li>
-                        <a href="#">
+                        <a href="/eduplanet/academy/index.php">
                             <span class="header_menu_text">소개</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/eduplanet/academy/review.php">
                             <span class="header_menu_text">리뷰</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/eduplanet/academy/lecture.php">
                             <span class="header_menu_text">강의정보</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/eduplanet/academy/acd_story.php">
                             <span class="header_menu_text">스토리</span>
                         </a>
                     </li>
