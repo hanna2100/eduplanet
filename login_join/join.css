@@ -136,9 +136,3 @@ section h2 {
   margin-left: 10px;
   font-size: 14px;
 }
-
-input[type="email"]:disabled {
-  background: white;
-  border: 1px solid white;
-  color: black;
-}

@@ -13,7 +13,6 @@
 
   $mode = $_GET['mode'];
 
-  
   // 관리자 아이디, 비밀번호 입력 시 mode 설정
   if ($input_id == ADMIN_ID && $input_pw == ADMIN_PW) {
     $mode = "admin";

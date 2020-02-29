@@ -68,8 +68,10 @@
         </p>
 
         <hr>
+
         <div class="form_bottom">
           <table>
+
             <tr>
               <td style="border-right: 2px solid #f1f1f1;">
                 아직 회원이 아니신가요?
@@ -80,7 +82,13 @@
                 <span class="link login"><a href="./login_form.php?mode=am">사업자 회원 LOGIN</a></span>
               </td>
             </tr>
+
           </table>
+
+          <div class="social_button">
+            <a id="kakao-login-btn">
+          </div>
+
         </div>
       </div>
     </div>
@@ -97,15 +105,19 @@
   $action = "/eduplanet/login_join/join_form.php?mode=" . $mode;
   ?>
 
-  <!-- 카카오 로그인 정보를 담는 form -->
+  <!-- 카카오 로그인 정보를 담는 form (회원가입)-->
   <form name="kakao_form" action=<?= $action ?> method="POST">
     <input id="kakao_id" name="kakao_id" type="hidden">
     <input id="kakao_email" name="kakao_email" type="hidden">
   </form>
 
-  <a id="kakao-login-btn"></a>
+  <!-- 카카오 로그인 정보를 담는 form (로그인)-->
+  <form name="kakao_login_form" action="/eduplanet/login_join/kakao_login.php?mode=<?= $mode ?>" method="POST">
+    <input id="kakao_id_login" name="kakao_id_login" type="hidden">
+    <input id="kakao_email_login" name="kakao_email_login" type="hidden">
+  </form>
 
-  <script type='text/javascript'>
+  <script>
     // 사용할 앱의 JavaScript 키 설정
     Kakao.init('c0edd7bb36cbb280cb4e498b294c87be');
 
@@ -113,6 +125,7 @@
     Kakao.Auth.createLoginButton({
 
       container: '#kakao-login-btn',
+      size: 'large',
 
       success: function(authObj) {
 
@@ -144,10 +157,14 @@
 
                 // 이미 이메일이 가입되어 있을 때 --> 카카오 로그인
                 if (data == 1) {
-                  document.getElementById('form_login').submit();
 
-                } else {
+                  document.getElementById("kakao_id_login").value = kakao_no;
+                  document.getElementById("kakao_email_login").value = kakao_email;
+
+                  document.kakao_login_form.submit();
+
                   // 이메일이 가입되어 있지 않을 때 --> form 으로 이메일을 넘겨서 회원가입
+                } else {
                   document.getElementById("kakao_id").value = kakao_no;
                   document.getElementById("kakao_email").value = kakao_email;
 
@@ -172,7 +189,6 @@
         alert(JSON.stringify(err));
       }
     });
-    //]]>
   </script>
 
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->

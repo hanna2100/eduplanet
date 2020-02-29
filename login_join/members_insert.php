@@ -86,7 +86,7 @@ if ($mode == "am") {
   echo "
     <script>
         alert('회원가입이 완료되었습니다.');
-
+        location.href = '/eduplanet/login_join/login_form.php?mode=gm';
     </script>
   ";
 }

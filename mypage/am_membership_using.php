@@ -144,7 +144,7 @@
                             <h4>이용중인 멤버십이 없습니다.</h4>
                             <p>에듀 플래닛 멤버십을 이용하시면 모든 학원의 리뷰를 보실 수 있습니다.</p>
                             <p>현명한 학원 선택, 에듀 플래닛과 함께해 보세요.</p>
-                            <button id="button_membership_go" onclick="">멤버십 둘러보기</button>
+                            <a href="/eduplanet/membership/index.php"><button id="button_membership_go">멤버십 둘러보기</button></a>
                         </div>
 
                     <?php

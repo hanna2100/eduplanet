@@ -40,7 +40,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
   <link rel="stylesheet" href="/eduplanet/index/nivo-slider/css/nivo-slider.css">
   <link rel="stylesheet" href="/eduplanet/index/nivo-slider/css/mi-slider.css">
   <script src="/eduplanet/index/nivo-slider/js/jquery.nivo.slider.js"></script>
-  <!-- <script src="/eduplanet/index/nivo-slider/js/jquery-3.1.1.min.js"></script> -->
 
   <script type="text/javascript"> 
 		$(window).on('load', function() {
