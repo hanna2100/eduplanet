@@ -123,7 +123,7 @@ function a_members_init_data(){
     $approval = rand(0,1);
     $approval = $approval==0? 'N' : 'Y';
 
-    $sql .= "($no, $no,'test$no', '1234', 'test$no@google.com', '$a_name', '$r_name', '$file_copy', '$approval', '$membership', '$join_date'),";
+    $sql .= "('test$no@google.com', $no,'test$no', '1234', '$a_name', '$r_name', '$file_copy', '$approval', '$membership', '$join_date'),";
     
     $i++;
   }
