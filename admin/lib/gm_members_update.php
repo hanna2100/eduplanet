@@ -6,8 +6,7 @@
     $intres = $_POST['intres'];
     $expiry_day = $_POST['expiry_day'];
 
-    include_once '../../lib/db_connector.php';
-
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
     for($i = 0; $i < count($no); $i++){
 
         $em = $email[$i];

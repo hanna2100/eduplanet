@@ -2,8 +2,7 @@
 $y   = $_POST['y'];
 $m   = $_POST['m'];
 
-include_once '../../lib/db_connector.php';
-
+include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
 if($m<10){
     $m = "0".$m;
 }

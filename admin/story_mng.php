@@ -228,7 +228,7 @@ if ($admin== "" ){
       <form method="post" action="#">
           <span class="col1"><?=$number?></span>
           <span class="col2 left-align"><?=$acd_name?></span>
-          <span id ="view" class="col3 left-align" onclick="window.open('/eduplanet/acd_story/view.php?no=<?=$no?>')"><?=$title?></span>
+          <span id ="view" class="col3 left-align" onclick="window.open('/eduplanet/acd_story/view.php?story_no=<?=$no?>')"><?=$title?></span>
           <span class="col4 left-align"><?=$subtitle?></span>
           <span class="col5"><?=$hit?></span>
           <span class="col6"><?=$regist_day?></span>
