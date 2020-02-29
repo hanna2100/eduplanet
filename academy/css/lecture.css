@@ -2,6 +2,10 @@ body {
   background-color: #ebecee;
 }
 
+input::placeholder {
+  color: #bebebe;
+}
+
 #table {
   width: 960px;
   margin: 10px auto;
@@ -52,11 +56,11 @@ body {
   font-size: 17px;
 } 
 
-.table_temp tbody .sc_order{
+.table_temp tbody .sc_time, .table_temp tbody .sc_order{
   background-color: #d3d3d3;
 }
 
-.sc_order input{
+.sc_order input, .sc_time input{
   display: inline-block;
   width: 80px;
   background-color: #fff;
@@ -110,7 +114,7 @@ body {
   background-color: #fff;
 }
 
-#table tbody .sc_order{
+#table tbody .sc_time{
   background-color: #d3d3d3;
 }
 
@@ -244,26 +248,25 @@ body {
   cursor: pointer;
 }
 
-#add_schedule_button{
+.add_schedule_button{
   width: 700px;
   margin: 0px auto 40px auto;
   display: flex;
 }
 
-#add_schedule_button input, .buttonBox input{
+.add_schedule_button input, .buttonBox input{
   width: 100%;
   color: #fff;
   padding: 8px;
   font-size: 20px;
   margin: 5px;
 }
-
-#add_schedule_button input:first-child, .buttonBox input:first-child{
-  background-color: #333;
-  border: 1px solid #333;
-}
-
-#add_schedule_button input:last-child, .buttonBox input:last-child{
+.add_schedule_button input, .buttonBox input:last-child{
   border: 1px solid #2E89FF;
   background-color:#2E89FF;
+}
+
+.add_schedule_button input:first-child, .buttonBox input:first-child{
+  background-color: #333;
+  border: 1px solid #333;
 }
