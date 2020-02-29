@@ -2,7 +2,7 @@
 
     $no   = $_POST['no'];
 
-    include_once '../../lib/db_connector.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
 
     for($i = 0; $i < count($no); $i++){
 

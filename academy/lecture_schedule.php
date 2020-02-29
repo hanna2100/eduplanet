@@ -15,10 +15,11 @@
 
     $temp = array();
 
+    $no = $row["no"];
     $sc_day = $row["day"];
     $sc_order = $row["order"];
     $sc_subject = $row["subject"];
-    array_push($temp, $sc_day, $sc_order, $sc_subject);
+    array_push($temp, $sc_day, $sc_order, $sc_subject, $no);
     array_push($schedule_array, $temp);
   }
   echo json_encode($schedule_array);

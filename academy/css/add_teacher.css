@@ -1,51 +1,62 @@
-body {
-  background-color: #ebecee;
-}
+
 .add_teacher{
-width: 80%;
-margin-left: auto;
-margin-right: auto;
+width: 100%;
 }
 
 .teacher_info {
   background-color: white;
-  width: 800px;
-  height: 510px;
-  border-radius: 10px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  height: 400px;
 }
-.teacher_info h1 {
-  font-size: 28px;
-  margin-top: 40px;
-  padding-top: 15px;
-  margin-left: 60px;
-  margin-bottom: 10px;
+
+.teacher_info>h1{
+  width: 580px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 23px;
+  padding: 5px 10px;
+  background-color: #2E89FF;
+  color: #fff;
 }
+
+.teacher_info>h1>img{
+  float: right;
+  margin-top: 8px;
+  width: 20px;
+  height: 20px;
+}
+
+
 .formImgBox {
-  width: 240px;
-  height: 300px;
-  margin-left: 80px;
-  margin-right: 80px;
+  width: 164px;
+  height: 164px;
   float: left;
+  margin: 75px 45px;
 }
+
+.formInfoBox{
+  width: 300px;
+  margin: 40px 25px 40px 20px;
+  float: right;
+}
+
 .formImgBox h3 {
   text-align: center;
   margin-bottom: 10px;
 }
 .formImgBox img {
-  width: 240px;
-  height: 180px;
-  border-radius: 60px;
-  margin-bottom: 20px;
+  width: 164px;
+  height: 164px;
 }
 .formImgBox input {
-  width: 260px;
-  font-size: 20px;
+  margin-top: 10px;
+  width: 164;
+  font-size: 15px;
 }
 .formBox {
-  height: 100px;
-  padding-left: 20px;
+  width: 280px;
+  height: 80px;
+  margin-bottom: 20px;
 }
 .formBox:before{
   content:"*";
@@ -53,132 +64,69 @@ margin-right: auto;
   font-size: 1rem;
 }
 .formBox label {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
 }
 .formBox input {
-  width: 340px;
-  font-size: 24px;
-  border-radius: 10px;
+  width: 270px;
+  padding:5px;
+  font-size: 17px;
+  border: 1px solid #dddddd;
+  margin: 5px 0px;
 }
 .formBox p {
   margin: 0px;
+  font-size: 13px;
+  color: #444;
 }
 .formButtonBox {
   width: 100%;
   text-align: center;
   padding-bottom: 20px;
 }
+
+.buttonBox{
+  width: 540px;
+  margin: 0px auto;
+  display: flex;
+}
+
 .buttonBox input {
-  margin-left: 10px;
-  margin-right: 10px;
-  height: 60px;
-  margin-top: 30px;
-  color: white;
-  border-radius: 5px;
-  font-size: 24px;
-  cursor: pointer;
-}
-.buttonBox input#saveForm{
-  width: 200px;
-  border: none;
-  background-color: #2E89FF;
-}
-.buttonBox input#saveForm:hover{
-  background-color: #4E88FF;
-}
-.buttonBox input#saveForm:disabled {
-  background-color: gray;
-  cursor: default;
-}
-.buttonBox input#formButton{
-  width: 200px;
-  border: none;
-  background-color: #2E89FF;
-}
-.buttonBox input#formButton:disabled {
-  visibility: hidden;
-  background-color: gray;
-  cursor: default;
-}
-.buttonBox input#formButton:hover {
-  background-color: #4E88FF;
-}
-.buttonBox input#buttonClear{
-  width: 160px;
-  border: none;
-  background-color: #333;
-}
-.buttonBox input#buttonClear:hover{
-  background-color: #444;
-}
-.add_schedule {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
-.hidden {
-  display: none;
-}
-.teacher_schecule {
-  background-color: white;
-  width: 800px;
-  border-radius: 10px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.teacher_schecule h1 {
-  font-size: 28px;
-  text-align: center;
-  padding-top: 20px;
-  margin: 20px 0;
-}
-.teacher_schecule .scheduleSubjectInfo {
-  text-align: center;
-}
-.teacher_schecule .scheduleSubjectInfo label {
-  font-size: 20px;
-}
-.teacher_schecule .scheduleSubjectInfo input {
-
-}
-.teacher_schecule table {
-  margin-top: 15px;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
-.teacher_schecule table tr th,td {
-  text-align: center;
-}
-.teacher_schecule table tr td{
-  width: 120px;
+  width: 100%;
   height: 50px;
-  background-color: #2E89FF;
-  border-radius: 5px;
-}
-#saveSchedule {
-  background-color: #4E89FF;
+  color: white;
+  font-size: 18px;
   cursor: pointer;
-  border-radius: 10px;
-  border: none;
-  margin: 10px 0 20px 100px;
-  width: 130px;
-  height: 60px;
-}
-#saveSchedule:hover{
-  background-color: #2E89FF;
 }
 
-#clearSchedule {
-  background-color: #444;
-  cursor: pointer;
-  border-radius: 10px;
-  border: none;
-  margin: 10px 0 20px 340px;
-  width: 130px;
-  height: 60px;
+#saveForm{
+ padding: 5px;
+ background-color: #2E89FF;
+ border: 1px solid #2E89FF;
+ margin-left: 5px;
 }
-#clearSchedule:hover{
-  background-color: #333;
+
+#buttonClear{
+  padding: 5px;
+  background-color: #444444;
+  border: 1px solid #444444;
+  margin-right: 5px;
+}
+
+#insertSchedule>h1{
+  width: 780px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 23px;
+  padding: 5px 10px;
+  background-color: #2E89FF;
+  color: #fff;
+}
+
+#insertSchedule>h1>img{
+  float: right;
+  margin-top: 8px;
+  margin-right: 4px;
+  width: 20px;
+  height: 20px;
 }
