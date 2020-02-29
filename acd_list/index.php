@@ -1101,7 +1101,7 @@
 
       <!--    --------------------------------------------------------------------------------->
       <div id="more_s">
-        <button type="button" name="button" id="more_btn" onclick="location.href='/eduplanet/acd_list/view_all.php'">학원 더보기</button>
+        <button type="button" name="button" id="more_btn" onclick="location.href='/eduplanet/acd_list/view_all.php"><a href="/eduplanet/acd_list/view_all.php">학원 더보기</a></button>
       </div>
 
       </div> <!-- main_contents end-->

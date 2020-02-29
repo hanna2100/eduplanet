@@ -37,6 +37,9 @@ body {
   height: 130px;
   border: 1px solid red;
 } */
+#more_btn > a !important{
+  width: 120px;
+}
 #mva1_img > a > img{
   padding: 13px;
   margin-left: 15px;
@@ -45,7 +48,7 @@ body {
   height: 100px;
 }
  #more_btn{
-  width: 120px;
+  width: 100px;
   border-radius: 10px;
   background-color: #f3f3f4;
   color: black;
@@ -64,8 +67,8 @@ body {
   margin: 0 auto;
   position: absolute;
 
-  right: 10px;
-  bottom: -30px;
+  right: -5px;
+  bottom: -33px;
   width: 110px;
 
 }

@@ -25,13 +25,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
 
+
     <script>
         function selectOption(){
 
           selectDistrict = document.getElementById("follow_list_select_district").value;
           selectSort = document.getElementById("follow_list_select_mode").value;
-
-          location.href = "/eduplanet/acd_list/view_all.php?district=" + selectDistrict + "&sort=" + selectSort;
+          location.href = "/eduplanet/acd_list/view_all.php?district=" + selectDistrict + "&sort=" + selectSort ;
         }
     </script>
 
@@ -75,6 +75,7 @@
                   $selectDis = "";
 
                 }
+                  $sort = "전체 학원 리스트";
                 // 정렬방법 선택 체크
                 if(isset($_GET["sort"])){
 
@@ -91,8 +92,6 @@
                     $sort = "수강료 만족도";
                   }else if ($selectSort === "achievement_max"){
                     $sort = "학업 성취도";
-                  }else {
-                    $sort = "전체 학원 리스트";
                   }
 
                   echo "
@@ -173,7 +172,7 @@
                               FROM
                               	academy
                               	  left  JOIN
-                              	(SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt,avg(facility) as facility FROM review group by parent) review ON academy.no = review.parent
+                              	(SELECT parent, AVG(facility) as total_star, COUNT(*)as rv_cnt,avg(facility) as facility FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
                               	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis'
                               GROUP BY academy.no order by review.facility desc";
@@ -191,7 +190,7 @@
                               FROM
                               	academy
                               	  left  JOIN
-                              	(SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt,avg(acsbl) as acsbl FROM review group by parent) review ON academy.no = review.parent
+                              	(SELECT parent, AVG(acsbl) as total_star, COUNT(*)as rv_cnt,avg(acsbl) as acsbl FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
                               	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis'
                               GROUP BY academy.no order by review.acsbl desc";
@@ -209,7 +208,7 @@
                               FROM
                               	academy
                               	  left  JOIN
-                              	(SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt,avg(teacher) as teacher FROM review group by parent) review ON academy.no = review.parent
+                              	(SELECT parent, AVG(teacher) as total_star, COUNT(*)as rv_cnt,avg(teacher) as teacher FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
                               	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis'
                               GROUP BY academy.no order by review.teacher desc";
@@ -227,7 +226,7 @@
                               FROM
                               	academy
                               	  left  JOIN
-                              	(SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt,avg(cost_efct) as cost_efct FROM review group by parent) review ON academy.no = review.parent
+                              	(SELECT parent, AVG(cost_efct) as total_star, COUNT(*)as rv_cnt,avg(cost_efct) as cost_efct FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
                               	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis'
                               GROUP BY academy.no order by review.cost_efct desc;";
@@ -244,7 +243,7 @@
                               FROM
                               	academy
                               	  left  JOIN
-                              	(SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt,avg(achievement) as achievement FROM review group by parent) review ON academy.no = review.parent
+                              	(SELECT parent, AVG(achievement) as total_star, COUNT(*)as rv_cnt,avg(achievement) as achievement FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
                               	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis'
                               GROUP BY academy.no order by review.achievement desc";
@@ -318,7 +317,7 @@
                               FROM
                               	academy
                               	  left  JOIN
-                              	(SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt,avg(facility) as facility FROM review group by parent) review ON academy.no = review.parent
+                              	(SELECT parent, AVG(facility) as total_star, COUNT(*)as rv_cnt,avg(facility) as facility FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
                               	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent GROUP BY academy.no order by review.facility desc";
                         //교통 편의성 순
@@ -335,7 +334,7 @@
                               FROM
                               	academy
                               	  left  JOIN
-                              	(SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt,avg(acsbl) as acsbl FROM review group by parent) review ON academy.no = review.parent
+                              	(SELECT parent, AVG(acsbl) as total_star, COUNT(*)as rv_cnt,avg(acsbl) as acsbl FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
                               	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent GROUP BY academy.no order by review.acsbl desc";
                               //강사 만족도 순
@@ -352,7 +351,7 @@
                               FROM
                               	academy
                               	  left  JOIN
-                              	(SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt,avg(teacher) as teacher FROM review group by parent) review ON academy.no = review.parent
+                              	(SELECT parent, AVG(teacher) as total_star, COUNT(*)as rv_cnt,avg(teacher) as teacher FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
                               	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent GROUP BY academy.no order by review.teacher desc";
                               //수강료 만족도 순
@@ -369,7 +368,7 @@
                               FROM
                               	academy
                               	  left  JOIN
-                              	(SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt,avg(cost_efct) as cost_efct FROM review group by parent) review ON academy.no = review.parent
+                              	(SELECT parent, AVG(cost_efct) as total_star, COUNT(*)as rv_cnt,avg(cost_efct) as cost_efct FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
                               	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent GROUP BY academy.no order by review.cost_efct desc;";
                   }else if($selectSort == "achievement_max"){
@@ -385,7 +384,7 @@
                               FROM
                               	academy
                               	  left  JOIN
-                              	(SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt,avg(achievement) as achievement FROM review group by parent) review ON academy.no = review.parent
+                              	(SELECT parent, AVG(achievement) as total_star, COUNT(*)as rv_cnt,avg(achievement) as achievement FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
                               	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent GROUP BY academy.no order by review.achievement desc";
 
@@ -430,17 +429,6 @@
 
                 $result = mysqli_query($conn, $sql);
                 $total_record = mysqli_num_rows($result);
-
-                if($category=="ctg_str"){
-                  echo "
-                    <script>
-                      document.getElementsClassName('follow_academy_star_span')[2].innerHTML = 'gdgd';
-                      console.log('$category');
-                    </script>
-                  ";
-                }
-
-
 
                 ?>
 
@@ -577,6 +565,28 @@
                         //     $file_image = "";
                         // }
 
+                        if($category=="ctg_star"){
+                          $category = "총 만족도";
+                        }
+                        if($category=="ctg_facility"){
+                          $category = "시설 만족도";
+                        }
+                        if($category=="ctg_acsbl"){
+                          $category = "교통 편의성";
+                        }
+                        if($category=="ctg_acsbl"){
+                          $category = "강사 만족도";
+                        }
+                        if($category=="ctg_cost_efct"){
+                          $category = "수강료 만족도";
+                        }
+                        if($category=="ctg_achievement"){
+                          $category = "학업 성취도";
+                        }
+                        if($category=="ctg_all"){
+                          $category = "총 만족도";
+                        }
+
                     ?>
 
                         <li>
@@ -618,14 +628,25 @@
                                 </div>
 
                                 <div class="follow_academy_star_wrap">
-                                    <span class="follow_academy_star_span">총 만족도</span>
+                                    <span class="follow_academy_star_span" id="acd_category"><?=$sort?></span>
 
                                     <div class="follow_academy_star">
-                                        <img id="acd_star_1" class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
+                                        <!-- <img id="acd_star_1" class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
                                         <img id="acd_star_2"class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
                                         <img id="acd_star_3"class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
                                         <img id="acd_star_4"class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
-                                        <img id="acd_star_5"class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star">
+                                        <img id="acd_star_5"class="acd_star_class" src="/eduplanet/img/common_sprite.png" alt="follow_academy_star"> -->
+                                        <?php
+                                            // 총 만족도 평균에 따라 별 보여주기
+                                            for ($j = 1; $j <= 5; $j++) {
+
+                                                if ($j <= round($total_star)) {
+                                                    echo "<img class='acd_star_class' src='/eduplanet/img/yellow_star.png' alt='follow_academy_star'>";
+                                                } else {
+                                                    echo "<img class='acd_star_class' src='/eduplanet/img/yellow_star_empty.png' alt='follow_academy_star'>";
+                                                }
+                                            }
+                                            ?>
                                     </div>
 
                                     <span class="follow_academy_star_num"><?= $total_star
@@ -671,6 +692,15 @@
 
                             <?php
 
+                            $url = '/eduplanet/acd_list/view_all.php?';
+
+                            if(isset($_GET["sort"])){
+                              $url .="&sort=$selectSort";
+                            }
+                            if(isset($_GET["district"])){
+                              $url .="&district=$selectDis";
+                            }
+
                             // 페이지 쪽수 표시 량 (5 페이지씩 표기)
                             $page_scale = 5;
 
@@ -713,15 +743,15 @@
                             if ($first_page == 1) {
 
                                 if ($page != 1) {
-                                    echo "<li><a href='/eduplanet/acd_list/view_all.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                                    echo "<li><a href='$url&page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
                                 } else {
                                     echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
                                 }
 
                                 echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
                             } else {
-                                echo "<li><a href='/eduplanet/acd_list/view_all.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
-                                echo "<li><a href='/eduplanet/acd_list/view_all.php?page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
+                                echo "<li><a href='$url&page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                                echo "<li><a href='$url&page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
                             }
 
                             //페이지 번호 매기기
@@ -730,7 +760,7 @@
                                 if ($page == $i) {
                                     echo "<li><span class='page_num_set'><b style='color:#2E89FF'> $i </b></span></li>";
                                 } else {
-                                    echo "<li><a href='/eduplanet/acd_list/view_all.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
+                                    echo "<li><a href='$url&page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
                                 }
                             }
 
@@ -739,13 +769,13 @@
                                 echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
 
                                 if ($page != $total_page) {
-                                    echo "<li><a href='/eduplanet/acd_list/view_all.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                                    echo "<li><a href='$url&page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
                                 } else {
                                     echo "<li><a><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
                                 }
                             } else {
-                                echo "<li><a href='/eduplanet/acd_list/view_all.php?page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
-                                echo "<li><a href='/eduplanet/acd_list/view_all.php?page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                                echo "<li><a href='$url&?page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
+                                echo "<li><a href='$url&page=$total_page'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
                             }
                             ?>
                         </ul>

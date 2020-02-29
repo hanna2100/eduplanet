@@ -124,9 +124,9 @@
 
                 <div class="story_card a3">
                     <a href="/eduplanet/acd_list/view_all.php?district=&sort=achievement_max&category=ctg_achievement">
-                        <div class="story_img">
+                        <!-- <div class="story_img"> -->
                             <img src="/eduplanet/img/index_img2.jpg" width="100%" height="100%" alt="academy_story">
-                        </div>
+                        <!-- </div> -->
                         <div class="story_contents" style="top:75%">
                             <div class="story_subtitle">우리 아이는 공부를 싫어해요.</div>
                             <div class="story_title">학업 성취도 높은 학원</div>
@@ -137,7 +137,7 @@
                 <div class="story_card a4">
                     <a href="#">
                         <div class="story_img" id="story_img_wrap">
-                            <img id="story_img" src="/eduplanet/img/index_img3.jpg" width="100%" height="100%" alt="academy_story">
+                            <img id="story_img" src="/eduplanet/img/index_img3.jpg" width="100%" height="200px" alt="academy_story">
                         </div>
                         <div class="story_contents" style="left:5%">
                             <div class="story_subtitle">어려워진 미술 입시, 걱정마세요!</div>
