@@ -283,18 +283,20 @@ ul {
 
 .follow_academy_star_wrap {
     /* border: 1px solid black; */
-    width: 130px;
+    width: 280px;
     height: 90px;
     text-align: center;
     box-sizing: border-box;
-    padding-top: 20px;
+    padding-top: 35px;
+    padding-left: 10px;
+
 }
 
 .follow_academy_star_span {
     display: block;
     position: relative;
-    left: -30px;
-    padding-bottom: 5px;
+    left: -8px;
+    padding-bottom: 10px;
 }
 
 .follow_academy_star {
