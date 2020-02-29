@@ -1,10 +1,11 @@
 <?php
 @session_start();
-include "../lib/db_connector.php";
+include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
 date_default_timezone_set('Asia/Seoul');
 $today = date("Y-m-d");
 $mode = $_GET['mode'];
+
 $id = test_input($_POST['inputId']);
 $pw = test_input($_POST['inputPw1']);
 
@@ -85,7 +86,7 @@ if ($mode == "am") {
   echo "
     <script>
         alert('회원가입이 완료되었습니다.');
-        location.href = '/eduplanet/login_join/login_form.php';
+
     </script>
   ";
 }

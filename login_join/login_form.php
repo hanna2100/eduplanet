@@ -152,6 +152,7 @@
                   document.getElementById("kakao_email").value = kakao_email;
 
                   document.kakao_form.submit();
+                  alert("아이디가 등록되어 있지 않아, 회원가입 페이지로 이동합니다.");
                 }
               },
 

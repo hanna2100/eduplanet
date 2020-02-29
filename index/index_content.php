@@ -164,7 +164,7 @@
 
                         <?php
                         // 스토리 등록일자 기준 조회순으로 정렬
-                        $sql = "select S.parent, S.no, S.acd_name, S.title, S.subtitle, A.file_copy, A.no as academy_no from acd_story S INNER JOIN academy A ON S.parent=A.no order by regist_day desc limit 4;";
+                        $sql = "select S.parent, S.no, S.acd_name, S.title, S.subtitle, S.file_copy as s_file_copy, A.file_copy, A.no as academy_no from acd_story S INNER JOIN academy A ON S.parent=A.no order by regist_day desc limit 4;";
                         $result = mysqli_query($conn, $sql);
 
                         for ($i = 0; $i < 4; $i++) {
@@ -177,7 +177,8 @@
                             $title = $row['title'];
                             $subtitle = $row['subtitle'];
                             $file_copy = $row['file_copy'];
-
+                            $s_file_copy = $row['s_file_copy'];
+                            
                         ?>
                             <li>
                                 <div class="cource_column">
@@ -205,7 +206,7 @@
                                         <!-- 스토리 이미지 & 글 -->
                                         <div class="cource_column_box">
                                             <div class="academy_img_box">
-                                                <img src="/eduplanet/test_img/academy_box_img.jpg" alt="academy_img_box">
+                                                <img src="/eduplanet/data/acd_story/<?= $s_file_copy ?>" alt="academy_img_box">
                                             </div>
 
                                             <div class="academy_introduce">

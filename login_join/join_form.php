@@ -36,10 +36,6 @@
     $kakao_id = $_POST["kakao_id"];
   }
 
-  // if (isset($_POST["kakao_name"])) {
-  //   $kakao_name = $_POST["kakao_name"];
-  // }
-
   if (isset($_POST["kakao_email"])) {
     $kakao_email = $_POST["kakao_email"];
   }
@@ -84,11 +80,11 @@
 
           <!-- 카카오에서 받아온 이메일이 있을 때 셋팅 -->
           <?php
-          
+
           if (isset($kakao_email)) {
           ?>
-            <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" value="<?= $kakao_email ?>" required>
-
+            <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" value=<?= $kakao_email ?> disabled>
+            
           <?php
           } else {
           ?>

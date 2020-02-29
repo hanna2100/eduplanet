@@ -1,4 +1,5 @@
-var idPass = false;
+// 카카오 아이디 연동되었을 때
+var idPass = true;
 var pwPass = false;
 
 var telPass = false;
@@ -9,17 +10,17 @@ var acdNamePass = false;
 var rprsnPass = false;
 var licensePass= false;
 
-$(document).ready(function(){
-  var inputId = $("#inputId"),
-      inputPw1 = $("#inputPw1"),
-      inputPw2 = $("#inputPw2"),
-      inputTel = $("#inputTel"),
-      inputAge = $("#inputAge"),
-      inputIntres = $("#inputIntres"),
-      inputAcdName = $("#acd_name_join"),
-      inputRprsn = $("#inputRprsn"),
-      inputLicense = $("#inputLicense");
+var inputId = $("#inputId"),
+inputPw1 = $("#inputPw1"),
+inputPw2 = $("#inputPw2"),
+inputTel = $("#inputTel"),
+inputAge = $("#inputAge"),
+inputIntres = $("#inputIntres"),
+inputAcdName = $("#acd_name_join"),
+inputRprsn = $("#inputRprsn"),
+inputLicense = $("#inputLicense");
 
+$(document).ready(function(){
 
   // 아이디 중복체크 - ajax사용
   inputId.keyup(function() {
@@ -252,7 +253,7 @@ function setDateBox(){
 
 function isGmAllPass(){
     console.log("GM패스", idPass, pwPass, telPass, agePass, intresPass);
-  if(idPass && pwPass && telPass && agePass && intresPass){
+  if(inputId.val() !== "" && idPass && pwPass && telPass && agePass && intresPass){
     $("#btnFormSubmit").attr("disabled", false);
   }else{
     $("#btnFormSubmit").attr("disabled", true);
@@ -261,7 +262,7 @@ function isGmAllPass(){
 
 function isAmAllPass(){
     console.log("AM패스", idPass, pwPass, acdNamePass, rprsnPass, licensePass);
-  if(idPass && pwPass && acdNamePass && rprsnPass && licensePass){
+  if(inputId.val() !== "" && idPass && pwPass && acdNamePass && rprsnPass && licensePass){
     $("#btnFormSubmit").attr("disabled", false);
   }else{
     $("#btnFormSubmit").attr("disabled", true);
