@@ -7,11 +7,10 @@
     include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
     $pw1 = $_POST["pw1"];
-    $email = $_POST["email"];
     $acd_name = $_POST["acd_name"];
     $rprsn = $_POST["rprsn"];
 
-    $sql = "UPDATE a_members SET pw='$pw1', email='$email', acd_name='$acd_name', rprsn='$rprsn' WHERE no=$user_no";
+    $sql = "UPDATE a_members SET pw='$pw1', acd_name='$acd_name', rprsn='$rprsn' WHERE no=$user_no";
 
     mysqli_query($conn, $sql);
     mysqli_close($conn);

@@ -76,7 +76,6 @@
     $row = mysqli_fetch_array($result);
 
     $id = $row["id"];
-    $email = $row["email"];
     $acd_name = $row["acd_name"];
     $rprsn = $row["rprsn"];
 
@@ -141,11 +140,6 @@
                                 <p class="subMsg" id="pwSubMsg"></p>
                             </div>
                             <div class="formBox">
-                                <label for="inputEmail">이메일</label>
-                                <input type="email" class="formInput" id="inputEmail" name="email" placeholder="이메일을 입력해 주세요" value="<?= $email ?>" required>
-                                <p class="subMsg" id="emailSubMsg"></p>
-                            </div>
-                            <div class="formBox">
                                 <label for='inputAcdName'>학원/교습소 이름</label>
                                 <input type='text' class='formInput' id='inputAcdName' name='acd_name' placeholder='공백 없이 입력해 주세요.' value="<?= $acd_name ?>" required>
                                 <p class='subMsg' id='AcdNameSubMsg'></p>
@@ -162,29 +156,19 @@
                             </div> -->
                     </div>
 
-
                     <div class="button_div">
                         <input type="button" id="btnFormSubmit" value="수정완료" onclick="isAmAllPass();">
                     </div>
                     </form>
                 </div>
-
-
             </div>
-
         </div>
-
-
-
-
 
         <footer>
             <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
         </footer>
 
-
     </div>
-
 </body>
 
 </html>

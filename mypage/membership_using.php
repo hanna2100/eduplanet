@@ -131,8 +131,13 @@
 
                     $result = mysqli_query($conn, $sql);
                     $total_record = mysqli_num_rows($result);
+                    
+                    // 해당 아이디의 만료날짜가 0000-00-00 인지 점검 (== 이용중인 멤버십이 없음)
+                    $sql_exp = "SELECT expiry_day FROM g_members WHERE no='$user_no'";
+                    $result_exp = mysqli_query($conn, $sql_exp);
+                    $using_exp = $row["expiry_day"];
 
-                    if (!$total_record) {
+                    if ($using_exp == "0000-00-00") {
 
                     ?>
                         <!-- 이용 내역이 없을 때 -->
