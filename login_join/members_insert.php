@@ -1,26 +1,29 @@
 <?php
 @session_start();
-include "../lib/db_connector.php";
+include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
-$today = date("yy-m-d");
+date_default_timezone_set('Asia/Seoul');
+$today = date("Y-m-d");
 $mode = $_GET['mode'];
+
 $id = test_input($_POST['inputId']);
 $pw = test_input($_POST['inputPw1']);
-$email = test_input($_POST['inputEmail']);
 
 // 일반회원 모드
 if ($mode == "gm") {
+
   $tel = test_input($_POST['inputTel']);
   $age = test_input($_POST['inputAge']);
   $intres = test_input($_POST['inputIntres']);
 
-  $sql_insert = "insert into g_members values
-            (null, '$id', '$pw', '$email', '$tel', $age, '$intres', '0000-00-00', '$today');";
+  $sql_insert = "INSERT into g_members values
+            (null, '$id', '$pw', '$tel', $age, '$intres', '0000-00-00', '$today');";
   $sql_select = "select * from g_members where id='$id'";
   $no = "gm_no";
 
   // 학원회원 모드
 } else if ($mode == "am") {
+
   $upload_dir = '../data/bsnsLic/';
   $upfile_name = $_FILES["inputLicense"]["name"]; // 사용자가 실제 올린 파일 이름
   $upfile_tmp_name = $_FILES["inputLicense"]["tmp_name"];  // 서버가 임의로 준 임시 파일 이름
@@ -53,13 +56,13 @@ if ($mode == "gm") {
   $acdName = test_input($_POST['acd_name']);
   $rprsn = test_input($_POST['inputRprsn']);
 
-  $sql_search = "select no from academy where acd_name='$acdName'";
+  $sql_search = "SELECT no from academy where acd_name='$acdName'";
   $result_search = mysqli_query($conn, $sql_search);
   $row = mysqli_fetch_array($result_search);
   $acdNo = $row[0];
 
-  $sql_insert = "insert into a_members values
-            (null, '$acdNo', '$id', '$pw', '$email', '$acdName', '$rprsn', '$copied_file_name', 'N', '0000-00-00', '$today');";
+  $sql_insert = "INSERT into a_members values
+            (null, '$acdNo', '$id', '$pw', '$acdName', '$rprsn', '$copied_file_name', 'N', '0000-00-00', '$today');";
   $sql_select = "select * from a_members where id='$id'";
   $no = "am_no";
 }
@@ -83,7 +86,7 @@ if ($mode == "am") {
   echo "
     <script>
         alert('회원가입이 완료되었습니다.');
-        location.href = '/eduplanet/login_join/login_form.php';
+        location.href = '/eduplanet/login_join/login_form.php?mode=gm';
     </script>
   ";
 }
