@@ -73,10 +73,6 @@ if ($expiry_day == "0000-00-00") {
         $sql_exp = "UPDATE $table_members SET expiry_day='0000-00-00' WHERE no=$no";
         mysqli_query($conn, $sql_exp);
 
-        if (!mysqli_query($conn, $sql_exp)) {
-            echo "오류ㅠ.ㅠ : " . mysqli_error($conn);
-        }
-
         $_SESSION[$mode_no] = $no;
         alert_move('에듀플래닛에 오신 것을 환영합니다. \n멤버십 이용기간이 만료되어 멤버십 페이지로 이동합니다.', '/eduplanet/membership/index.php');
 
