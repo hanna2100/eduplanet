@@ -32,7 +32,7 @@
 
    <header>
        <?php
-        include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
+        include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header.php";
        ?>
    </header>
 
@@ -95,7 +95,7 @@
                 temp_pw_val = "";
               }else{
                 alert("비밀번호가 변경되었습니다.\n 다시 로그인 해주세요.");
-                // location.href = './login_form.php';
+                location.href = './login_form.php';
               }
           },
           error : function() {

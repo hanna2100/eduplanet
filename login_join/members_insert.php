@@ -17,7 +17,7 @@ if ($mode == "gm") {
   $intres = test_input($_POST['inputIntres']);
 
   $sql_insert = "INSERT into g_members values
-            (null, '$id', '$pw', '$tel', $age, '$intres', '0000-00-00', '$today');";
+            (null, '$id', '$pw', '$tel', $age, '$intres', '', '', '0000-00-00', '$today');";
   $sql_select = "select * from g_members where id='$id'";
   $no = "gm_no";
 
@@ -62,7 +62,7 @@ if ($mode == "gm") {
   $acdNo = $row[0];
 
   $sql_insert = "INSERT into a_members values
-            (null, '$acdNo', '$id', '$pw', '$acdName', '$rprsn', '$copied_file_name', 'N', '0000-00-00', '$today');";
+            (null, '$acdNo', '$id', '$pw', '$acdName', '$rprsn', '$copied_file_name', 'N', '', '', '0000-00-00', '$today');";
   $sql_select = "select * from a_members where id='$id'";
   $no = "am_no";
 }

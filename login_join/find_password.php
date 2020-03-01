@@ -19,8 +19,9 @@
     <header>
         <?php
          include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
-         include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
+         include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header.php";
          $mode = $_GET["mode"];
+         // echo !extension_loaded('openssl')?"Not Available":"Available";
         ?>
     </header>
 
