@@ -86,7 +86,7 @@
           </table>
 
           <div class="social_button">
-            <a id="kakao-login-btn">
+            <a id="kakao_login_button" herf="#" onclick="kakaoConn();"><img src="/eduplanet/img/kakao_login_button.png" alt="kakao_login_button"></a>
           </div>
 
         </div>
@@ -121,11 +121,12 @@
     // 사용할 앱의 JavaScript 키 설정
     Kakao.init('c0edd7bb36cbb280cb4e498b294c87be');
 
-    // 카카오 로그인 버튼 생성
-    Kakao.Auth.createLoginButton({
+    function kakaoConn() { 
 
-      container: '#kakao-login-btn',
-      size: 'large',
+      Kakao.Auth.logout();
+
+    // 카카오 로그인 버튼 생성
+    Kakao.Auth.loginForm({
 
       success: function(authObj) {
 
@@ -136,8 +137,8 @@
 
           success: function(res) {
 
-            alert(JSON.stringify(res)); // kakao.api.request 에서 불러온 결과값 json형태로 출력
-            alert(JSON.stringify(authObj)); // Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
+            //alert(JSON.stringify(res)); // kakao.api.request 에서 불러온 결과값 json형태로 출력
+            //alert(JSON.stringify(authObj)); // Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
             console.log(res.id); // id 정보 출력
             console.log(res.kakao_account.email); // 이메일 정보 출력
             console.log(authObj.access_token); // 토큰 값 출력
@@ -189,6 +190,8 @@
         alert(JSON.stringify(err));
       }
     });
+
+  } // end of kakaoConn();
   </script>
 
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
