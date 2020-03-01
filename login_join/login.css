@@ -114,8 +114,15 @@ td { width: 50%;}
   text-align: center;
   padding-top: 30px;
 }
+
 #kakao_login_button {
   cursor: pointer;
+  margin-bottom: 10px;
+}
+
+#naver_id_login a img {
+  width: 388px;
+  height: 46px;
 }
 
 #find_password {

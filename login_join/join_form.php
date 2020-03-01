@@ -13,6 +13,9 @@
   <!-- 폰트 -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
 
+  <!-- 아이콘 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
   <!-- 자동완성 -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -21,9 +24,6 @@
   <link rel="stylesheet" href="/eduplanet/index/index_header.css">
   <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
   <link rel="stylesheet" href="./join.css">
-
-  <!-- 스크립트 -->
-
 
 </head>
 
@@ -39,7 +39,7 @@
   if (isset($_POST["kakao_email"])) {
     $kakao_email = $_POST["kakao_email"];
   }
-  
+
   ?>
 
   <header>
@@ -53,21 +53,20 @@
       <div id="main">
 
         <?php
-        
+
         $mode = isset($_GET['mode']) ? $_GET['mode'] : "gm";
         $action = "members_insert.php?mode=" . $mode;
 
         if ($mode == "gm") {
-          echo 
-              "<h2>일반 회원 가입</h2>
+          echo
+            "<h2>일반 회원 가입</h2>
               <p class='join_mode_p'>사업자 회원이신가요?</p>
               <a href='/eduplanet/login_join/join_form.php?mode=am'><p class='join_mode_a'>사업자 회원 가입</p></a>
               <form id='form_member' action=$action method='post' autocomplete='on'>
               ";
-
         } else if ($mode == "am") {
-          echo 
-              "<h2>사업자 회원 가입</h2>
+          echo
+            "<h2>사업자 회원 가입</h2>
               <p class='join_mode_p'>일반 회원이신가요?</p>
               <a href='/eduplanet/login_join/join_form.php'><p class='join_mode_a'>일반 회원 가입</p></a>
               <form id='form_member' action=$action method='post' autocomplete='on' enctype='multipart/form-data'>
@@ -84,7 +83,7 @@
           if (isset($kakao_email)) {
           ?>
             <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" value="<?= $kakao_email ?>" readonly>
-            
+
           <?php
           } else {
           ?>

@@ -21,6 +21,9 @@
   <!-- 폰트 -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
 
+  <!-- 아이콘 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
   <!-- CSS -->
   <link rel="stylesheet" href="/eduplanet/index/index_header.css">
   <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
@@ -35,7 +38,7 @@
 
 </head>
 
-<body>
+<body onload="naverLoginButtonSetting();">
 
   <header>
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header.php"; ?>
@@ -91,8 +94,7 @@
           </table>
 
           <div class="social_button">
-            <a id="kakao_login_button" herf="#" onclick="kakaoConn();"><img src="/eduplanet/img/kakao_login_button.png" alt="kakao_login_button"></a>
-            <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+            <div id="kakao_login_button" onclick="kakaoConn();"><img src="/eduplanet/img/kakao_login_button.png" alt="kakao_login_button"></div>
             <div id="naver_id_login"></div>
           </div>
 
@@ -203,22 +205,28 @@
 
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
 
-  <!-- naver login -->
-
-  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
-  <script type="text/javascript">
+  <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
+  
+  <script>
+    
+    // 네이버 로그인 버튼 이미지 바꾸기
+    function naverLoginButtonSetting() {
+      $("#naver_id_login img").attr("src", '/eduplanet/img/naver_login_button.png');
+    }
+    
     var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://127.0.0.1/eduplanet/login_join/naver_callback.php");
     var state = naver_id_login.getUniqState();
-    naver_id_login.setButton("green", 3,80);
+    
     naver_id_login.setDomain("http://127.0.0.1/eduplanet/login_join/naver_callback.php");
     naver_id_login.setState(state);
     naver_id_login.setPopup();
     naver_id_login.init_naver_id_login();
+      
   </script>
 
-  <!-- naver login -->
+<!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
 
-  <script>
+<script>
     var mode = '<?= $mode ?>';
 
     if (mode == "am") {
