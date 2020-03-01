@@ -98,7 +98,7 @@ a {
     /* border: 1px solid black; */
     margin: 0 auto;
     background-color: #ebecee;
-    padding-top: 73px;
+    padding-top: 20px;
     padding-bottom: 30px;
 }
 
@@ -172,6 +172,8 @@ a {
     width: 80px;
     height: 80px;
     border: 1px solid lightgray;
+    margin-left: -13px;
+    margin-right: 10px;
 }
 
 .follow_list_column_img img {
@@ -254,7 +256,7 @@ a {
 #button_academy_heart {
     float: right;
     margin-left: 5px;
-    background : url('/eduplanet/img/common_sprite.png') no-repeat 0 -2680px;
+    background : url('/eduplanet/img/common_sprite.png') no-repeat 0 -2661px;
     background-color: transparent;
     border: 1px solid transparent;
     width: 20px;
@@ -264,7 +266,7 @@ a {
 }
 
 #button_academy_heart:hover {
-    background : url('/eduplanet/img/common_sprite.png') no-repeat 0 -2661px;
+    background : url('/eduplanet/img/common_sprite.png') no-repeat 0 -2680px;
     width: 20px;
     height: 18px;
 }

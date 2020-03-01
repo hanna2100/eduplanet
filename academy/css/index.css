@@ -52,7 +52,11 @@ body {
   font-size: 17px;
 
 }
+#infor_modify{
 
+  margin-left: 1000px;
+  margin-top: 10px;
+}
 #eduform{
   margin: 0 auto;
   padding: 0auto;
