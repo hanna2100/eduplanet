@@ -53,7 +53,7 @@ if ($expiry_day == "0000-00-00") {
     } else {
 
         $_SESSION[$mode_no] = $no;
-        alert_move('에듀플래닛에 오신 것을 환영합니다. 멤버십 이용기간이 만료되어 멤버십 페이지로 이동합니다.', '/eduplanet/membership/index.php');
+        alert_move('에듀플래닛에 오신 것을 환영합니다. \n멤버십 이용기간이 만료되어 멤버십 페이지로 이동합니다.', '/eduplanet/membership/index.php');
     }
 
 
@@ -78,7 +78,7 @@ if ($expiry_day == "0000-00-00") {
         }
 
         $_SESSION[$mode_no] = $no;
-        alert_move('에듀플래닛에 오신 것을 환영합니다. 멤버십 이용기간이 만료되어 멤버십 페이지로 이동합니다.', '/eduplanet/membership/index.php');
+        alert_move('에듀플래닛에 오신 것을 환영합니다. \n멤버십 이용기간이 만료되어 멤버십 페이지로 이동합니다.', '/eduplanet/membership/index.php');
 
     // 만료날짜가 현재날짜보다 이후거나 같을 때 (멤버십이 이용중일 때)
     } else if ($expiry_day >= $today) {

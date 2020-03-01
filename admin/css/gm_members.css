@@ -228,10 +228,10 @@
     width: 50px;
 }
 .col2 {
-    width: 50px;
+    width: 60px;
 }
 .col3 {
-    width: 100px;
+    width: 190px;
 }
 .col4{
     width: 190px;
@@ -240,20 +240,20 @@
     width: 90%;
 }
 .col5{
-    width: 90px;
+    width: 130px;
 }
 .col6 {
     width: 80px;
 }
 .col7{
-    width: 90px;
+    width: 120px;
 }
 .col8  {
-    width: 90px;
+    width: 100px;
 }
 .col9 {
     padding-right: 12px;
-    width: 90px;
+    width: 100px;
 }
 
 
@@ -269,7 +269,7 @@
     width: 60px;
 }
 #board_list .col3 {
-    width: 80px;
+    width: 130px;
 }
 #board_list .col4 {
     width: 80px;

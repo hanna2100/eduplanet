@@ -212,7 +212,6 @@ if ($admin== "" ){
 					<span class="col1">No</span>
 					<span class="col2">회원번호</span>
 					<span class="col3">아이디</span>
-					<span class="col4">이메일</span>
 					<span class="col5">학원번호</span>
 					<span class="col6">학원명</span>
 					<span class="col7">대표자명</span>
@@ -252,7 +251,6 @@ if ($admin== "" ){
           $row = mysqli_fetch_array($result);
           $no         = $row["no"];
           $id          = $row["id"];
-          $email        = $row["email"];
           $acd_no       = $row["acd_no"];
           $acd_name       = $row["acd_name"];
           $rprsn       = $row["rprsn"];
@@ -264,7 +262,6 @@ if ($admin== "" ){
           <span class="col1"><?=$number?></span>
           <span class="col2"><input type="text" name="no[]" value="<?=$no?>" readonly></span>
           <span class="col3"><?=$id?></span>
-          <span class="col4"><input type="text" name="email[]" value="<?=$email?>" disabled maxlength="80" oninput="limitMaxLength(this)"/></span>
           <span class="col5"><?=$acd_no?></span>
           <span class="col6"><?=$acd_name?></span>
           <span class="col7"><?=$rprsn?></span>

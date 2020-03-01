@@ -42,7 +42,6 @@ function listItemPicker(){
         $(this).css('background-color' , '#8ec4f0a9');
         $(this).children('form').children('.col4').children('input').prop('disabled',false);
         $(this).children('form').children('.col5').children('input').prop('disabled',false);
-        $(this).children('form').children('.col7').children('input').prop('disabled',false);
         $(this).children('form').children('.col8').children('input').prop('disabled',false);
 
         formsForUpdate.push($(this).children('form'));

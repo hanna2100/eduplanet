@@ -198,7 +198,6 @@ if ($admin== "" ){
 					<span class="col1">No</span>
 					<span class="col2">회원번호</span>
 					<span class="col3">아이디</span>
-					<span class="col4">이메일</span>
 					<span class="col5">연락처</span>
 					<span class="col6">출생년도</span>
 					<span class="col7">관심사</span>
@@ -238,7 +237,6 @@ if ($admin== "" ){
           $row = mysqli_fetch_array($result);
           $no         = $row["no"];
           $id          = $row["id"];
-          $email        = $row["email"];
           $phone       = $row["phone"];
           $age       = $row["age"];
           $intres       = $row["intres"];
@@ -250,7 +248,6 @@ if ($admin== "" ){
           <span class="col1"><?=$number?></span>
           <span class="col2"><input type="text" name="no[]" value="<?=$no?>" readonly></span>
           <span class="col3"><?=$id?></span>
-          <span class="col4"><input type="text" name="email[]" value="<?=$email?>" disabled maxlength="80" oninput="limitMaxLength(this)"/></span>
           <span class="col5"><input type="number" name="phone[]" value="<?=$phone?>" disabled maxlength="12" oninput="limitMaxLength(this)"/></span>
           <span class="col6"><?=$age?></span>
           <span class="col7"><input type="text" name="intres[]" value="<?=$intres?>" disabled maxlength="10" oninput="limitMaxLength(this)"/></span>
