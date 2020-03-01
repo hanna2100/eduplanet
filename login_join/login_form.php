@@ -92,6 +92,8 @@
 
           <div class="social_button">
             <a id="kakao_login_button" herf="#" onclick="kakaoConn();"><img src="/eduplanet/img/kakao_login_button.png" alt="kakao_login_button"></a>
+            <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+            <div id="naver_id_login"></div>
           </div>
 
         </div>
@@ -202,13 +204,12 @@
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
 
   <!-- naver login -->
-  <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-  <div id="naver_id_login"></div>
+
   <!-- //네이버아이디로로그인 버튼 노출 영역 -->
   <script type="text/javascript">
     var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://127.0.0.1/eduplanet/login_join/naver_callback.php");
     var state = naver_id_login.getUniqState();
-    naver_id_login.setButton("white", 3,48);
+    naver_id_login.setButton("green", 3,80,30);
     naver_id_login.setDomain("YOUR_SERVICE_URL");
     naver_id_login.setState(state);
     naver_id_login.setPopup();
