@@ -163,7 +163,7 @@ a {
 
 .index_header_menu_hover_detail i {
     position: relative;
-    top: -33px;
+    top: -35px;
     font-size: 28px;
     color: white;
     z-index: 1;
@@ -191,7 +191,7 @@ a {
     height: 50px;
     border: 1px solid lightgray;
     position: relative;
-    top: -44px;
+    top: -46px;
     right: 65px;
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
@@ -228,7 +228,7 @@ a {
     height: 215px;
     border: 1px solid lightgray;
     position: relative;
-    top: -44px;
+    top: -46px;
     right: 63px;
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
