@@ -46,15 +46,11 @@
      </header>
 
      <?php
-        include "../lib/db_connector.php";
+        // include "../lib/db_connector.php";
         // $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : 1;
         // $no : academy 테이블의 no, review 테이블의 parent
         $no = isset($_GET["no"]) ?  $_GET["no"] : 7;
         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-
-        print_r($_COOKIE);
-        print_r($_SESSION);
-
 
         // content_top
         $sql_top = "select avg(total_star), avg(facility), avg(acsbl), avg(teacher), avg(cost_efct), avg(achievement) from review where parent='$no';";
@@ -269,9 +265,9 @@
                    <div class="overlay"></div>
                    <div id="myModal" class="modal">
                      <?php
-                        if($gm_no){
-                          $url = "../membership/index.php";
-                        }else{
+                        if($gm_no && !$pgm_no){
+                          $url = "../membership/index.php?gm_no='$gm_no'";
+                        }else if(!$gm_no){
                           $url = "../login_join/login_form.php";
                         }
                       ?>
