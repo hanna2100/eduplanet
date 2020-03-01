@@ -37,9 +37,6 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 </head>
-
-<body onload="naverLoginButtonSetting();">
-
   <header>
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header.php"; ?>
   </header>
@@ -92,10 +89,18 @@
             </tr>
 
           </table>
-
+          <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
+           <?php
+             // 네이버 로그인 접근토큰 요청 예제
+             $client_id = "bVUclMb7FkFxQxcyDJLm";
+             $redirectURI = urlencode("http://localhost/eduplanet/login_join/naver_callback.php");
+             $state = "RAMDOM_STATE";
+             $apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=".$client_id."&redirect_uri=".$redirectURI."&state=".$state;
+           ?>
+           <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
           <div class="social_button">
             <div id="kakao_login_button" onclick="kakaoConn();"><img src="/eduplanet/img/kakao_login_button.png" alt="kakao_login_button"></div>
-            <div id="naver_id_login"></div>
+            <a href="<?php echo $apiURL ?>"><img height="46" src="/eduplanet/img/naver_login_button.png"/></a>
           </div>
 
         </div>
@@ -205,26 +210,7 @@
 
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
 
-  <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
 
-  <script>
-
-    // 네이버 로그인 버튼 이미지 바꾸기
-    function naverLoginButtonSetting() {
-      $("#naver_id_login img").attr("src", '/eduplanet/img/naver_login_button.png');
-    }
-
-    var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://localhost/eduplanet/login_join/naver_callback.php");
-    var state = naver_id_login.getUniqState();
-
-    naver_id_login.setDomain("http://localhost/eduplanet/login_join/naver_callback.php");
-    naver_id_login.setState(state);
-    naver_id_login.setPopup();
-    naver_id_login.init_naver_id_login();
-
-  </script>
-
-<!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
 
 <script>
     var mode = '<?= $mode ?>';

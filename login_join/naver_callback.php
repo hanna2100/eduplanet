@@ -1,22 +1,25 @@
-<!-- naver_login_callback.php -->
-<!doctype html>
-<html lang="ko">
-  <head>
-    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-  </head>
-  <body>
-    <script type="text/javascript">
-      var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://127.0.0.1/eduplanet/login_join/naver_callback.php");
-      // 접근 토큰 값 출력
-      alert(naver_id_login.oauthParams.access_token);
-      // 네이버 사용자 프로필 조회
-      naver_id_login.get_naver_userprofile("naverSignInCallback()");
-      // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-      function naverSignInCallback() {
-        alert(naver_id_login.getProfileData('email'));
-        alert(naver_id_login.getProfileData('profile_image'));
-      }
-    </script>
-  </body>
-</html>
+<?php
+  // 네이버 로그인 콜백 예제
+  $client_id = "bVUclMb7FkFxQxcyDJLm";
+  $client_secret = "01ri0laBcC";
+  $code = $_GET["code"];;
+  $state = $_GET["state"];;
+  $redirectURI = urlencode("http://localhost/eduplanet/login_join/login_form.php");
+  $url = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=".$client_id."&client_secret=".$client_secret."&redirect_uri=".$redirectURI."&code=".$code."&state=".$state;
+  $is_post = false;
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $url);
+  curl_setopt($ch, CURLOPT_POST, $is_post);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  $headers = array();
+  $response = curl_exec ($ch);
+  $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  echo "status_code:".$status_code."
+";
+  curl_close ($ch);
+  if($status_code == 200) {
+    echo $response;
+  } else {
+    echo "Error 내용:".$response;
+  }
+?>
