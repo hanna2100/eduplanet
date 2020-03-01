@@ -209,8 +209,8 @@
   <script type="text/javascript">
     var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://127.0.0.1/eduplanet/login_join/naver_callback.php");
     var state = naver_id_login.getUniqState();
-    naver_id_login.setButton("green", 3,80,30);
-    naver_id_login.setDomain("YOUR_SERVICE_URL");
+    naver_id_login.setButton("green", 3,80);
+    naver_id_login.setDomain("http://127.0.0.1/eduplanet/login_join/naver_callback.php");
     naver_id_login.setState(state);
     naver_id_login.setPopup();
     naver_id_login.init_naver_id_login();
