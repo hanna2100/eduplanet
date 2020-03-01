@@ -206,22 +206,22 @@
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
 
   <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
-  
+
   <script>
-    
+
     // 네이버 로그인 버튼 이미지 바꾸기
     function naverLoginButtonSetting() {
       $("#naver_id_login img").attr("src", '/eduplanet/img/naver_login_button.png');
     }
-    
-    var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://127.0.0.1/eduplanet/login_join/naver_callback.php");
+
+    var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://localhost/eduplanet/login_join/naver_callback.php");
     var state = naver_id_login.getUniqState();
-    
-    naver_id_login.setDomain("http://127.0.0.1/eduplanet/login_join/naver_callback.php");
+
+    naver_id_login.setDomain("http://localhost/eduplanet/login_join/naver_callback.php");
     naver_id_login.setState(state);
     naver_id_login.setPopup();
     naver_id_login.init_naver_id_login();
-      
+
   </script>
 
 <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
