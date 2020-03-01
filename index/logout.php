@@ -1,8 +1,8 @@
 <script>
-  // Kakao.Auth.logout();
-  alert("로그아웃이 완료되었습니다.");
-</script>
 
+  alert("로그아웃이 완료되었습니다.");
+  
+</script>
 
 <?php
 

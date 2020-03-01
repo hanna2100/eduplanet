@@ -53,7 +53,7 @@ if ($mode == "gm") {
     $copied_file_name = "";
   }
 
-  $acdName = test_input($_POST['acd_name']);
+  $acdName = test_input($_POST['acd_name_join']);
   $rprsn = test_input($_POST['inputRprsn']);
 
   $sql_search = "SELECT no from academy where acd_name='$acdName'";
@@ -68,9 +68,6 @@ if ($mode == "gm") {
 }
 
 mysqli_query($conn, $sql_insert);
-$result = mysqli_query($conn, $sql_select);
-$row = mysqli_fetch_array($result);
-
 mysqli_close($conn);
 
 if ($mode == "am") {

@@ -114,3 +114,7 @@ td { width: 50%;}
   text-align: center;
   padding-top: 30px;
 }
+
+#kakao_login_button {
+  cursor: pointer;
+}
