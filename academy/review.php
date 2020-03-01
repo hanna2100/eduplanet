@@ -40,16 +40,15 @@
      <header>
          <?php
           include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
+          include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
           include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
           include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/academy/header/academy_header.php";
          ?>
      </header>
 
-     <?php
-        // include "../lib/db_connector.php";
-        // $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : 1;
+     <?php      
         // $no : academy 테이블의 no, review 테이블의 parent
-        $no = isset($_GET["no"]) ?  $_GET["no"] : 7;
+        $no = isset($_GET["no"]) ?  $_GET["no"] : "";
         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
         // content_top

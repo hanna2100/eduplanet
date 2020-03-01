@@ -35,59 +35,64 @@
                 </div> -->
             </div>
 
-            <form name="academy_search_form" action="#" method="POST">
+            <div class="index_main_wrap">
+                <div class="index_main_title">
+                    <div class="index_main_search">
 
-                <div class="index_main_wrap">
-                    <div class="index_main_title">
-                        <div class="index_main_search">
+                        <select name="select_district" id="select_district">
+                            <option selected value="">시/군 선택</option>
+                            <option value="가평군">가평군</option>
+                            <option value="고양시">고양시</option>
+                            <option value="과천시">과천시</option>
+                            <option value="광명시">광명시</option>
+                            <option value="광주시">광주시</option>
+                            <option value="구리시">구리시</option>
+                            <option value="군포시">군포시</option>
+                            <option value="김포시">김포시</option>
+                            <option value="남양주시">남양주시</option>
+                            <option value="동두천시">동두천시</option>
+                            <option value="부천시">부천시</option>
+                            <option value="성남시">성남시</option>
+                            <option value="수원시">수원시</option>
+                            <option value="시흥시">시흥시</option>
+                            <option value="안산시">안산시</option>
+                            <option value="안성시">안성시</option>
+                            <option value="안양시">안양시</option>
+                            <option value="양주시">양주시</option>
+                            <option value="양평군">양평군</option>
+                            <option value="여주시">여주시</option>
+                            <option value="연천군">연천군</option>
+                            <option value="오산시">오산시</option>
+                            <option value="용인시">용인시</option>
+                            <option value="의왕시">의왕시</option>
+                            <option value="의정부시">의정부시</option>
+                            <option value="이천시">이천시</option>
+                            <option value="파주시">파주시</option>
+                            <option value="평택시">평택시</option>
+                            <option value="포천시">포천시</option>
+                            <option value="하남시">하남시</option>
+                            <option value="화성시">화성시</option>
+                        </select>
 
-                            <select name="select_district" id="select_district">
-                                <option selected value="">시/군 선택</option>
-                                <option value="가평군">가평군</option>
-                                <option value="고양시">고양시</option>
-                                <option value="과천시">과천시</option>
-                                <option value="광명시">광명시</option>
-                                <option value="광주시">광주시</option>
-                                <option value="구리시">구리시</option>
-                                <option value="군포시">군포시</option>
-                                <option value="김포시">김포시</option>
-                                <option value="남양주시">남양주시</option>
-                                <option value="동두천시">동두천시</option>
-                                <option value="부천시">부천시</option>
-                                <option value="성남시">성남시</option>
-                                <option value="수원시">수원시</option>
-                                <option value="시흥시">시흥시</option>
-                                <option value="안산시">안산시</option>
-                                <option value="안성시">안성시</option>
-                                <option value="안양시">안양시</option>
-                                <option value="양주시">양주시</option>
-                                <option value="양평군">양평군</option>
-                                <option value="여주시">여주시</option>
-                                <option value="연천군">연천군</option>
-                                <option value="오산시">오산시</option>
-                                <option value="용인시">용인시</option>
-                                <option value="의왕시">의왕시</option>
-                                <option value="의정부시">의정부시</option>
-                                <option value="이천시">이천시</option>
-                                <option value="파주시">파주시</option>
-                                <option value="평택시">평택시</option>
-                                <option value="포천시">포천시</option>
-                                <option value="하남시">하남시</option>
-                                <option value="화성시">화성시</option>
-                            </select>
+                        <input placeholder="학원 이름으로 검색" type="text" name="search" id="acd_name_index" onkeyup="enterKey();">
+                        <button id="button_main_search" type="button" onclick="searchAcademy();">검색</button>
 
-                                <input placeholder="학원 이름으로 검색" type="text" name="search" id="acd_name_index">
-                                <button id="button_main_search" type="button" onclick="searchAcademy();">검색</button>
+                        <script>
+                            // 엔터키 눌렀을 때 자동검색
+                            function enterKey() {
+                                if (window.event.keyCode == 13) {
+                                    searchAcademy();
+                                }
+                            }
 
-                                <script>
-                                    function searchAcademy() {
-                                        location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_index").value;
-                                    }
-                                </script>
+                            function searchAcademy() {
+                                location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_index").value;
+                            }
+                        </script>
 
-                        </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 
@@ -129,7 +134,7 @@
                 <div class="story_card a3">
                     <a href="/eduplanet/acd_list/view_all.php?district=&sort=achievement_max&category=ctg_achievement">
                         <!-- <div class="story_img"> -->
-                            <img src="/eduplanet/img/index_img2.jpg" width="100%" height="100%" alt="academy_story">
+                        <img src="/eduplanet/img/index_img2.jpg" width="100%" height="100%" alt="academy_story">
                         <!-- </div> -->
                         <div class="story_contents" style="top:75%">
                             <div class="story_subtitle">우리 아이는 공부를 싫어해요.</div>
@@ -182,7 +187,7 @@
                             $subtitle = $row['subtitle'];
                             $file_copy = $row['file_copy'];
                             $s_file_copy = $row['s_file_copy'];
-                            
+
                         ?>
                             <li>
                                 <div class="cource_column">

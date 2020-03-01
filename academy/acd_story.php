@@ -8,24 +8,25 @@
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../index/index_content.css">
+    <link rel="stylesheet" href="./css/acd_story.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
+    <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
+    <link rel="stylesheet" href="/eduplanet/index/footer.css">
     <!-- 자동완성 -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- 스크립트 -->
     <script src="/eduplanet/mypage/js/review_write.js"></script>
     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
-    <!-- CSS -->
-    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
-    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
-    <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
-    <link rel="stylesheet" href="../index/index_content.css">
-    <link rel="stylesheet" href="./css/acd_story.css">
-    <link rel="stylesheet" href="/eduplanet/index/footer.css">
   </head>
   <body>
     <header>
         <?php
          include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
+         include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
          include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
          include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/academy/header/academy_header.php";
         ?>
@@ -33,8 +34,7 @@
 
     <section>
       <?php
-         include "../lib/db_connector.php";
-         $no = isset($_GET["no"]) ?  $_GET["no"] : 7; // academy 넘버
+         $no = isset($_GET["no"]) ?  $_GET["no"] : ""; // academy 넘버
 
          // 해당 학원의 스토리 조회순 정렬
          $sql_hit = "select no, subtitle, title, file_copy from acd_story where parent='$no' order by hit desc limit 4;";
@@ -129,6 +129,10 @@
                             where parent=(select parent from acd_story where acd_story.no=$story_no) order by hit desc";
                     $result = mysqli_query($conn, $sql);
                     $rows_num = mysqli_num_rows($result);
+                    if($rows_num<1){
+                      echo "<h3>아직 등록된 스토리가 없습니다.</h3>";
+                    }else{
+
 
                     for ($i = 0; $i < $rows_num; $i++) {
 
@@ -165,7 +169,8 @@
                         <span class="span_padding"></span>
 
                     <?php
-                    }
+                    } // end of for
+                  }
                     ?>
 
                 </ul>

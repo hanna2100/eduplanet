@@ -46,10 +46,17 @@
             </ul>
 
             <div class="index_header_searchbar_in">
-                <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_in">
+                <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_in" onkeyup="enterKey();">
                 <button id="button_main_search" type="button" onclick="searchAcademy();">검색</button>
 
                 <script>
+                    // 엔터키 눌렀을 때 자동검색
+                    function enterKey() {
+                        if (window.event.keyCode == 13) {
+                            searchAcademy();
+                        }
+                    }
+
                     function searchAcademy() {
                         location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_in").value;
                     }
