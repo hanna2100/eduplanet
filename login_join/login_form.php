@@ -29,6 +29,10 @@
   <!-- 스크립트 -->
   <script src="/eduplanet/mypage/js/review_write.js"></script>
 
+  <!-- naver-->
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 </head>
 
 <body>
@@ -58,14 +62,14 @@
             <input type="password" class="formInput" id="inputPw" name="inputPw" placeholder="비밀번호를 입력해 주세요." required>
             <p class="subMsg" id="pwSubMsg"></p>
           </div>
-          <input type="button" id="btnFormSubmit" value="LOGIN" onclick="document.getElementById('form_login').submit()" disabled>
+          <input type="button" id="btnFormSubmit" class="btnForm" value="LOGIN" onclick="document.getElementById('form_login').submit()" disabled>
 
         </form>
 
         <p class="fieldset">
           <input type="checkbox" id="remember-me" checked>
           <label for="remember-me"> 로그인 상태 유지</label>
-          <a id="find_password" href="./find_password.php?mode=<?=$mode?>" style="color:black">비번 찾기</a>
+          <a id="find_password" href="./find_password.php?mode=<?=$mode?>" style="color:black">비밀번호 찾기</a>
         </p>
 
         <hr>
@@ -122,7 +126,7 @@
     // 사용할 앱의 JavaScript 키 설정
     Kakao.init('c0edd7bb36cbb280cb4e498b294c87be');
 
-    function kakaoConn() { 
+    function kakaoConn() {
 
       Kakao.Auth.logout();
 
@@ -196,6 +200,22 @@
   </script>
 
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
+
+  <!-- naver login -->
+  <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+  <div id="naver_id_login"></div>
+  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+  <script type="text/javascript">
+    var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://127.0.0.1/eduplanet/login_join/naver_callback.php");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("white", 3,48);
+    naver_id_login.setDomain("YOUR_SERVICE_URL");
+    naver_id_login.setState(state);
+    naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login();
+  </script>
+
+  <!-- naver login -->
 
   <script>
     var mode = '<?= $mode ?>';

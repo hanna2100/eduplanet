@@ -223,6 +223,13 @@
     padding: 5px;
 }
 
+.list_row>form>span{
+    color: #333;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .list_row:hover{
     background-color: #e9e9e9a9;
     cursor: pointer;
@@ -238,14 +245,14 @@
     width: 80px;
 }
 .col2 {
-    width: 150px;
+    width: 110px;
     margin-left: 10px;
 }
 .col3 {
-    width: 90px;
+    width: 180px;
 }
 .col4{
-    width: 340px;
+    width: 300px;
     margin-left: 10px;
 }
 .col5{

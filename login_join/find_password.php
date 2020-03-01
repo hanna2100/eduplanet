@@ -8,22 +8,41 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/eduplanet/index/index_header.css">
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+    <link rel="stylesheet" href="./login.css">
+
   </head>
   <body>
 
     <header>
         <?php
          include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
-         // include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
+         include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
          $mode = $_GET["mode"];
         ?>
     </header>
 
-    <h2>비번 찾기</h2>
-    <p>이메일을 입력해주세요</p>
-    <input type="email" id="inputEmail" name="inputEmail" value="">
-    <p class="subMsg" id="emailSubMsg"></p>
-    <input type="button" id="btn_find_pw" value="비밀번호 찾기"  disabled>
+
+
+    <section>
+      <div id="main">
+        <div id="form_wrapper">
+
+          <h2>비밀번호 찾기</h2>
+
+          <div class="formBox">
+            <label for="inputId">이메일을 입력해주세요</label>
+            <input type="email" class="formInput" id="inputEmail" name="inputEmail" placeholder="이메일을 입력해 주세요." required>
+              <p class="subMsg" id="emailSubMsg"></p>
+          </div>
+
+          <input type="button" id="btn_find_pw" class="btnForm" value="비밀번호 찾기"  disabled>
+
+        </div>
+      </div>
+    </section>
 
     <script>
     var mode = '<?=$mode?>';
@@ -54,10 +73,11 @@
           success : function(data) {
             code = data;
               if(data == 0){
-                console.log("데이터", data);
                 alert("등록되지않은 이메일입니다.");
               }else{
+                console.log("데이터", code);
                 alert("임시 비밀번호가 전송되었습니다!");
+
               }
           },
           error : function() {
