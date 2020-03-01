@@ -57,7 +57,6 @@ if ($admin== "" ){
             <select id="search_select">
               <option>회원번호</option>
               <option>아이디</option>
-              <option>이메일</option>
               <option>학원번호</option>
               <option>학원명</option>
               <option>대표자명</option>
@@ -83,7 +82,6 @@ if ($admin== "" ){
 				<li>
 					<span class="col1">No</span>
 					<span class="col3">아이디</span>
-					<span class="col4">이메일</span>
 					<span class="col5">학원번호</span>
 					<span class="col6">학원명</span>
 					<span class="col7">대표자명</span>
@@ -124,7 +122,6 @@ if ($admin== "" ){
           $row = mysqli_fetch_array($result);
           $no         = $row["no"];
           $id          = $row["id"];
-          $email        = $row["email"];
           $acd_no       = $row["acd_no"];
           $acd_name       = $row["acd_name"];
           $rprsn       = $row["rprsn"];
@@ -135,7 +132,6 @@ if ($admin== "" ){
         <form method="post" action="#">
           <span class="col1"><?=$number?></span>
           <span class="col3"><?=$id?></span>
-          <span class="col4"><?=$email?></span>
           <span class="col5"><?=$acd_no?></span>
           <span class="col6"><?=$acd_name?></span>
           <span class="col7"><?=$rprsn?></span>
