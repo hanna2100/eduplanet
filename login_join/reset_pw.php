@@ -13,6 +13,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
     if($row['temp_pw'] == $temp_pw){
       $sql_update = "UPDATE $table SET pw='$new_pw' WHERE hash='$hash';";
+      mysqli_query($conn, $sql_update);
       echo "1";
     }else{
       echo "0";

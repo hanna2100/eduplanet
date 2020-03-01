@@ -11,7 +11,7 @@
   }else if($mode == "am"){
     $table = "a_members";
   }
-      $sql = "SELECT * FROM $table where email = '$email'";
+      $sql = "SELECT * FROM $table where id = '$email'";
       $result = mysqli_query($conn,$sql);
 
       if (!$result) {
@@ -34,10 +34,10 @@
                \n\n임시 비밀번호 : ".$code."
                \n\nhttp://localhost/eduplanet/login_join/find_pw_code_insert.php?hash=".$hash."&mode=".$mode."";
 
-        mailer($from,"eduplanet_ad@naver.com", $to, $subject, $body);
+        mailer($from,"iamashley44@naver.com", $to, $subject, $body);
 
 
-       $sql_hash = "UPDATE $table SET hash='$hash', temp_pw='$code' WHERE email='$to';";
+       $sql_hash = "UPDATE $table SET hash='$hash', temp_pw='$code' WHERE id='$to';";
        // "INSERT INTO $table (hash, temp_pw) VALUES ('$hash', '$code'); ";
        mysqli_query($conn, $sql_hash);
 
@@ -57,16 +57,18 @@
           $mail = new PHPMailer(); // defaults to using php "mail()"
 
           // 디버그 모드(production 환경에서는 주석 처리한다.)
-          $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+          // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+          $mail->SMTPDebug = 4;
 
           $mail->IsSMTP();
              //   $mail->SMTPDebug = 2;
           $mail->SMTPSecure = "ssl";
+          // $mail->SMTPSecure = "tls";
           $mail->SMTPAuth = true;
           $mail->Host = "smtp.naver.com";
           $mail->Port = 465;
-          $mail->Username = "eduplanet_ad@naver.com";
-          $mail->Password = "eduedu123!!";
+          $mail->Username = "iamashley44@naver.com";
+          $mail->Password = "wpffktha123!!";
           $mail->CharSet = 'UTF-8';
           $mail->From = $fmail;
           $mail->FromName = $fname;
