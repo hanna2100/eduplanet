@@ -45,12 +45,17 @@
 
             </ul>
 
-            <form name="search_academy_form" action="#" method="post">
-                <div class="index_header_searchbar_in">
-                    <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_in">
-                    <button id="button_main_search" type="button">검색</button>
-                </div>
-            </form>
+            <div class="index_header_searchbar_in">
+                <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_in">
+                <button id="button_main_search" type="button" onclick="searchAcademy();">검색</button>
+
+                <script>
+                    function searchAcademy() {
+                        location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_in").value;
+                    }
+                </script>
+
+            </div>
 
             <ul class="index_header_menu_ul_right">
 

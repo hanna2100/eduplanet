@@ -223,10 +223,15 @@
                         <option value="화성시">화성시</option>
                     </select>
 
-                    <form name="search_academy_form" action="#" method="post">
-                        <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_out">
-                        <button id="button_main_search" type="button">검색</button>
-                    </form>
+                    <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_out">
+                    <button id="button_main_search" type="button" onclick="searchAcademy();">검색</button>
+
+                    <script>
+                        function searchAcademy() {
+                            location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_out").value;
+                        }
+                    </script>
+
 
                 </div>
 

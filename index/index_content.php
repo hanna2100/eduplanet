@@ -76,10 +76,14 @@
                                 <option value="화성시">화성시</option>
                             </select>
 
-                            <form name="search_academy_form" action="#" method="post">
-                                <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_index">
-                                <button id="button_main_search" type="button">검색</button>
-                            </form>
+                                <input placeholder="학원 이름으로 검색" type="text" name="search" id="acd_name_index">
+                                <button id="button_main_search" type="button" onclick="searchAcademy();">검색</button>
+
+                                <script>
+                                    function searchAcademy() {
+                                        location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_index").value;
+                                    }
+                                </script>
 
                         </div>
                     </div>
@@ -135,7 +139,7 @@
                 </div>
 
                 <div class="story_card a4">
-                    <a href="#">
+                    <a href="/eduplanet/acd_list/view_all.php?search=미술">
                         <div class="story_img" id="story_img_wrap">
                             <img id="story_img" src="/eduplanet/img/index_img3.jpg" width="100%" height="200px" alt="academy_story">
                         </div>

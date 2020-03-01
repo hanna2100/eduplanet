@@ -29,6 +29,10 @@
   <!-- 스크립트 -->
   <script src="/eduplanet/mypage/js/review_write.js"></script>
 
+  <!-- naver-->
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 </head>
 
 <body>
@@ -88,6 +92,8 @@
 
           <div class="social_button">
             <a id="kakao_login_button" herf="#" onclick="kakaoConn();"><img src="/eduplanet/img/kakao_login_button.png" alt="kakao_login_button"></a>
+            <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+            <div id="naver_id_login"></div>
           </div>
 
         </div>
@@ -122,7 +128,7 @@
     // 사용할 앱의 JavaScript 키 설정
     Kakao.init('c0edd7bb36cbb280cb4e498b294c87be');
 
-    function kakaoConn() { 
+    function kakaoConn() {
 
       Kakao.Auth.logout();
 
@@ -196,6 +202,21 @@
   </script>
 
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
+
+  <!-- naver login -->
+
+  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+  <script type="text/javascript">
+    var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://127.0.0.1/eduplanet/login_join/naver_callback.php");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("green", 3,80);
+    naver_id_login.setDomain("http://127.0.0.1/eduplanet/login_join/naver_callback.php");
+    naver_id_login.setState(state);
+    naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login();
+  </script>
+
+  <!-- naver login -->
 
   <script>
     var mode = '<?= $mode ?>';
