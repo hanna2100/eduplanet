@@ -12,9 +12,9 @@
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
     <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
 
-    <script src="/eduplanet/mypage/js/review_write.js"></script>
     <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_out.css">
@@ -73,6 +73,13 @@
                   ";
                 }else {
                   $selectDis = "";
+                  echo "
+                    <script>
+                      function setSelectDis() {
+
+                      }
+                    </script>
+                  ";
 
                 }
                   $sort = "전체 학원 리스트";
@@ -106,6 +113,13 @@
                   // $selectSort = $_GET["sort"];
                 }else{
                   $selectSort = "" ;
+                  echo "
+                    <script>
+                      function setSelectSort() {
+
+                      }
+                    </script>
+                  ";
                 }
 
                 if(isset($_GET["category"])){
@@ -548,6 +562,11 @@
 
                         $total_star = sprintf('%0.1f',$total_star);
 
+
+
+
+
+
                         // if(is_float($total_star)===true){
                         //   $total_star = $total_star;
                         //
@@ -643,16 +662,33 @@
                                     <span>학원 찜하기</span>
                                     <?php
                                         if ($gm_no) {
-                                    ?>
 
-                                    <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>&light=1"><button type="button" id="button_academy_heart">like</button></a>
+
+                                          $sql7 = "select * from follow where user_no = $gm_no and acd_no = $no ";
+                                          $result7 = mysqli_query($conn,$sql7);
+                                          $row7 = mysqli_fetch_array($result7);
+
+                                          // var_dump($row7);
+
+                                          if($row7){
+                                            echo "
+                                              <a href='/eduplanet/acd_story/follow.php?no=$parent'><button type='button' id='button_academy_heart_on'>like</button></a>
+                                            ";
+
+                                          }else{
+                                            echo "
+                                              <a href='/eduplanet/acd_story/follow.php?no=$parent'><button type='button' id='button_academy_heart_off'>like</button></a>
+                                              ";
+                                          }
+
+                                    ?>
 
                                     <?php
                                         } else {
                                     ?>
 
 
-                                    <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
+                                    <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart_off">like</button></a>
 
                                     <?php
                                         }
@@ -711,19 +747,6 @@
                         </li>
 
                     <?php
-                        $sql7 = "select * from follow where user_no = $gm_no and acd_no = $no ";
-                        $result7 = mysqli_query($conn,$sql7);
-                        mysqli_data_seek($result7,$total_record);
-                        $row7 = mysqli_fetch_array($result7);
-
-                        $jim = $row['user_no'];
-                        echo "
-                          <script>
-                            console.log($jim);
-                          </script>
-                        ";
-
-
                         $page_start--;
                     }
 
