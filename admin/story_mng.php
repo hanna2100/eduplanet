@@ -277,7 +277,7 @@ if ($admin== "" ){
             $next = $last_page + 1;// > 버튼 누를때 나올 페이지
             $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
 
-            $url = "/eduplanet/admin/gm_members.php?y=$y&m=$m";
+            $url = "/eduplanet/admin/story_mng.php?y=$y&m=$m";
             if($search!=''){
               $url .= "&col=$col&search=$search";
             }

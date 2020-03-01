@@ -221,7 +221,7 @@
                                     <div class="cource_column_box">
 
                                         <div class="academy_img_box">
-                                            <img src="/eduplanet/acd_story/<?= $file_copy ?>" alt="academy_sto">
+                                            <img src="/eduplanet/data/acd_story/<?= $file_copy ?>" alt="academy_sto">
                                         </div>
 
                                         <div class="academy_introduce">

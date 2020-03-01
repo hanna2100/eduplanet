@@ -203,6 +203,7 @@
 #member_list span {
     display: inline-block;
     text-align: center;
+
 }
 
 #member_list input {
@@ -228,10 +229,10 @@
     width: 35px;
 }
 .col2 {
-    width: 50px;
+    width: 60px;
 }
 .col3 {
-    width: 90px;
+    width: 190px;
 }
 .col4{
     width: 170px;
@@ -240,22 +241,21 @@
     width: 90%;
 }
 .col5{
-    width: 50px;
+    width: 60px;
 }
 .col6 {
-    width: 200px;
+    width: 230px;
 }
 .col7{
     width: 60px;
 }
 .col8  {
-    width: 90px;
+    width: 100px;
 }
 .col9 {
     padding-right: 10px;
-    width: 90px;
+    width: 100px;
 }
-
 
 
 #board_list {

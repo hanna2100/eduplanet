@@ -50,8 +50,8 @@
   </head>
   <body>
   <?php
-  include "../index/index_header_searchbar_in.php";
-  include "./header/academy_header.php";
+  include_once "../index/index_header_searchbar_in.php";
+  include_once "./header/academy_header.php";
 
   $acd_no = isset($_GET["no"]) ?  $_GET["no"] : 1;
   ?>
@@ -63,18 +63,19 @@
         <div class="title">
           <h1>강의 정보</h1>
           <div>
-            <button onclick="popupUpdateTeacher()">수정/삭제</button>
+            <button onclick="deleteTeacher()">강사삭제</button>
             <button onclick="popupInsertTeacher()">강사추가</button>
           </div>
         </div>
       <?php
-        include "../lib/db_connector.php";
+        include_once "../lib/db_connector.php";
         $sql = "select * from teacher where parent='$acd_no'";
         $result = mysqli_query($conn, $sql);
         $row_num = mysqli_num_rows($result);
       ?>
         <div class="teacher_carousel">
           <?php
+          $parent;
             for ($i=0; $i < $row_num; $i++) {
               mysqli_data_seek($result, $i);
               $row = mysqli_fetch_array($result);
@@ -121,68 +122,33 @@
     <div id="insertTeacher">
         <div class="teacher_info">
           <h1>선생님 등록<img src="/eduplanet/img/close_icon.png" id="btn_add_tu_close"></h1>
-          <form class="forminfo" action="<?=$action?>" method="post" enctype="multipart/form-data\">
+          <form id="tc_insert_form" action="#" method="post" enctype="multipart/form-data\">
             <div class="formImgBox">
               <img id="teacherImgShow" src="../img/member_basic.png" alt=""><br>
-              <input type="file" id="teacherImg" name="teacherImg" accept=".jpg,.jpeg,.png,.gif">
+              <input type="file" id="upfile" name="upfile" accept=".jpg,.jpeg,.png,.gif">
+              <input type="hidden" name="parent" value="<?=$parent?>">
             </div>
             <div class="formInfoBox">
               <div class="formBox">
                 <label for="teacherName">이름</label><br>
-                <input type="text" class="formInput" id="teacherName" name="teacherName" placeholder="선생님의 이름을 입력 하세요" required><br>
+                <input type="text" class="formInput" id="teacherName" name="teacher_name" placeholder="선생님의 이름을 입력 하세요" required><br>
                 <p id="NameText">선생님의 이름을 입력하세요.</p>
               </div>
               <div class="formBox">
                 <label for="teacherSubject">수업 과목</label><br>
-                <input type="text" class="formInput" id="teacherSubject" name="teacherSubject" placeholder="선생님의 과목을 입력 하세요" required><br>
+                <input type="text" class="formInput" id="teacherSubject" name="teacher_subject" placeholder="선생님의 과목을 입력 하세요" required><br>
                 <p id="subjectText">과목을 입력하세요.</p>
               </div>
               <div class="formBox">
                 <label for="teacherContent">경력 사항 </label><br>
-                <input type="text" class="formInput" id="teacherContent" name="teacherContent" placeholder="선생님의 경력을 입력 하세요" required><br>
+                <input type="text" class="formInput" id="teacherContent" name="teacher_content" placeholder="선생님의 경력을 입력 하세요" required><br>
                 <p id="contentText">경력을 입력하세요.</p>
               </div>
             </div>
             <div class="formButtonBox">
               <div class="buttonBox" action="<?=$action?>" method="post">
                 <input type="reset" class="formButton" id="buttonClear" value="초기화">
-                <input type="button" class="saveForm" id="saveForm" value="선생님 등록하기" onclick="saveTeacherInfo(<?=$parent?>, )">
-              </div>
-            </form>
-          </div>
-        </div>
-    </div>
-
-    <!-- 선생님 수정 레이어 -->
-    <div id="updateTeacher">
-        <div class="teacher_info">
-          <h1>선생님 수정<img src="/eduplanet/img/close_icon.png" id="btn_add_t_close"></h1>
-          <form class="forminfo" action="<?=$action?>" method="post" enctype="multipart/form-data\">
-            <div class="formImgBox">
-              <img id="teacherImgShow" src="../img/member_basic.png" alt=""><br>
-              <input type="file" name="teacherImg" accept=".jpg,.jpeg,.png,.gif">
-            </div>
-            <div class="formInfoBox">
-              <div class="formBox">
-                <label for="teacherName">이름</label><br>
-                <input type="text" class="formInput" name="teacherName" placeholder="선생님의 이름을 입력 하세요" required><br>
-                <p id="NameText">선생님의 이름을 입력하세요.</p>
-              </div>
-              <div class="formBox">
-                <label for="teacherSubject">수업 과목</label><br>
-                <input type="text" class="formInput" name="teacherSubject" placeholder="선생님의 과목을 입력 하세요" required><br>
-                <p id="subjectText">과목을 입력하세요.</p>
-              </div>
-              <div class="formBox">
-                <label for="teacherContent">경력 사항 </label><br>
-                <input type="text" class="formInput" name="teacherContent" placeholder="선생님의 경력을 입력 하세요" required><br>
-                <p id="contentText">경력을 입력하세요.</p>
-              </div>
-            </div>
-            <div class="formButtonBox">
-              <div class="buttonBox">
-                <input type="reset" class="formButton"  value="삭제하기">
-                <input type="button" class="saveForm" value="수정하기">
+                <input type="button" value="선생님 등록하기" onclick="submitTeacherInsert()">
               </div>
             </form>
           </div>
@@ -206,7 +172,7 @@
         </tr>
         <tr>
           <td class="sc_order">
-            <input type="number" name="input_order[]" placeholder="시간입력" oninput="setOrder(this)">
+            <input type="number" name="input_order1[]" placeholder="시간입력" oninput="setOrder(this)">
           </td>
           <td>
             <form action="#" method="post">
@@ -259,12 +225,12 @@
         </tr>
 
       </table>
-      <div id="add_time" onclick="addScheduleTime()">
+      <div id="add_time" onclick="addScheduleTime('insert')">
         <i class="fas fa-plus-square" style="color: #2E89FF">&nbsp;&nbsp;시간표 추가하기</i>
       </div>
 
-      <div id="add_schedule_button">
-        <input type="reset" value="초기화" onclick="clearLectureTable()">
+      <div class="add_schedule_button">
+        <input type="reset" value="초기화" onclick="clearLectureTable('insert')">
         <input type="button" value="시간표 등록하기" onclick="insertLecture()">
       </div>
     
@@ -273,23 +239,24 @@
 
     <!-- 시간표 수정 레이어 -->
     <div id="updateSchedule">
-      <h1>시간표 등록<img src="/eduplanet/img/close_icon.png" id="btn_add_si_close"></h1>
+      <h1>시간표 수정 및 삭제<img src="/eduplanet/img/close_icon.png" id="btn_add_su_close"></h1>
       <p>* 시간은 0~24시 사이로 입력하셔야 합니다</p>
-      <table class="table_temp">
+      <table id="scheduleTblUpdate" class="table_temp">
         
       </table>
-      <div id="add_time" onclick="addScheduleTime()">
+      <div id="add_time" onclick="addScheduleTime('update')">
         <i class="fas fa-plus-square" style="color: #2E89FF">&nbsp;&nbsp;시간표 추가하기</i>
       </div>
 
-      <div id="add_schedule_button">
-        <input type="reset" value="초기화" onclick="clearLectureTable()">
-        <input type="button" value="시간표 등록하기" onclick="insertLecture()">
+      <div class="add_schedule_button">
+        <input type="reset" value="초기화" onclick="clearLectureTable('update')">
+        <input type="reset" value="시간표 삭제하기" onclick="deleteLecture()">
+        <input type="button" value="시간표 수정하기" onclick="updateLecture()">
       </div>
     </div>
 
     <footer>
-      <?php include "../index/footer.php"; ?>
+      <?php include_once "../index/footer.php"; ?>
     </footer>
   </body>
 </html>

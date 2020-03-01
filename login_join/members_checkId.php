@@ -1,5 +1,5 @@
 <?php
-  include "../lib/db_connector.php";
+ include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
   $id = $_GET["id"];
   $mode = $_GET["mode"];

@@ -15,7 +15,7 @@
                     <img src="/eduplanet/index/nivo-slider/img/slider_img1.jpg" alt="" title="#htmlcaption1" />
                     <img src="/eduplanet/index/nivo-slider/img/slider_img2.jpg" alt="" title="#htmlcaption2" />
                     <img src="/eduplanet/index/nivo-slider/img/slider_img3.jpg" alt="" title="#htmlcaption3" />
-                    <img src="/eduplanet/index/nivo-slider/img/slider_img4.jpg" alt="" title="#htmlcaption4" />
+                    <!-- <img src="/eduplanet/index/nivo-slider/img/slider_img4.jpg" alt="" title="#htmlcaption4" /> -->
                 </div>
                 <div id="htmlcaption1" class="nivo-html-caption">
                     <h1>에듀플래닛 1</h1>
@@ -29,10 +29,10 @@
                     <h1>에듀플래닛 3</h1>
                     <p>에듀플래닛을 가입하고 나의 성공시대 시작됐다 야옹야옹</p>
                 </div>
-                <div id="htmlcaption4" class="nivo-html-caption">
+                <!-- <div id="htmlcaption4" class="nivo-html-caption">
                     <h1>에듀플래닛 4</h1>
                     <p>에듀플래닛을 가입하고 나의 성공시대 시작됐다 야옹야옹</p>
-                </div>
+                </div> -->
             </div>
 
             <form name="academy_search_form" action="#" method="POST">
@@ -76,10 +76,14 @@
                                 <option value="화성시">화성시</option>
                             </select>
 
-                            <form name="search_academy_form" action="#" method="post">
-                                <input placeholder="학원 이름으로 검색" type="text" name="acd_name" id="acd_name_index">
-                                <button id="button_main_search" type="button">검색</button>
-                            </form>
+                                <input placeholder="학원 이름으로 검색" type="text" name="search" id="acd_name_index">
+                                <button id="button_main_search" type="button" onclick="searchAcademy();">검색</button>
+
+                                <script>
+                                    function searchAcademy() {
+                                        location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_index").value;
+                                    }
+                                </script>
 
                         </div>
                     </div>
@@ -135,7 +139,7 @@
                 </div>
 
                 <div class="story_card a4">
-                    <a href="#">
+                    <a href="/eduplanet/acd_list/view_all.php?search=미술">
                         <div class="story_img" id="story_img_wrap">
                             <img id="story_img" src="/eduplanet/img/index_img3.jpg" width="100%" height="200px" alt="academy_story">
                         </div>
@@ -164,7 +168,7 @@
 
                         <?php
                         // 스토리 등록일자 기준 조회순으로 정렬
-                        $sql = "select S.parent, S.no, S.acd_name, S.title, S.subtitle, A.file_copy, A.no as academy_no from acd_story S INNER JOIN academy A ON S.parent=A.no order by regist_day desc limit 4;";
+                        $sql = "select S.parent, S.no, S.acd_name, S.title, S.subtitle, S.file_copy as s_file_copy, A.file_copy, A.no as academy_no from acd_story S INNER JOIN academy A ON S.parent=A.no order by regist_day desc limit 4;";
                         $result = mysqli_query($conn, $sql);
 
                         for ($i = 0; $i < 4; $i++) {
@@ -177,7 +181,8 @@
                             $title = $row['title'];
                             $subtitle = $row['subtitle'];
                             $file_copy = $row['file_copy'];
-
+                            $s_file_copy = $row['s_file_copy'];
+                            
                         ?>
                             <li>
                                 <div class="cource_column">
@@ -205,7 +210,7 @@
                                         <!-- 스토리 이미지 & 글 -->
                                         <div class="cource_column_box">
                                             <div class="academy_img_box">
-                                                <img src="/eduplanet/test_img/academy_box_img.jpg" alt="academy_img_box">
+                                                <img src="/eduplanet/data/acd_story/<?= $s_file_copy ?>" alt="academy_img_box">
                                             </div>
 
                                             <div class="academy_introduce">
