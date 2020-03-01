@@ -7,11 +7,11 @@
   $mode = $_POST["mode"];
 
   if($mode == "gm"){
-    $sql="SELECT * FROM g_members where email = '$email'";
+    $table = "g_members";
   }else if($mode == "am"){
-    $sql="SELECT * FROM a_members where email = '$email'";
+    $table = "a_members";
   }
-
+      $sql = "SELECT * FROM $table where email = '$email'";
       $result = mysqli_query($conn,$sql);
 
       if (!$result) {
@@ -23,14 +23,24 @@
       if($rowcount){
         srand((double)microtime()*1000000); //난수값 초기화
         $code=rand(100000,999999);
+        $hash = md5(rand(0,1000)); // 해시 생성 함수
         echo $code;
         //   $count=1;
         $to=$email;
         $from="eduplanet 관리자";
         $subject="eduplanet 비밀번호 변경 확인 메일";
-        $body="안녕하세요, \n 임시 비밀번호 입니다.\n임시 비밀번호 : ".$code."\n정확히 입력해주세요.";
+        $body="\n안녕하세요!
+               \n\n아래 링크를 클릭하여 임시 비밀번호를 새로운 비밀번호로 설정해주세요.
+               \n\n임시 비밀번호 : ".$code."
+               \n\nhttp://localhost/eduplanet/login_join/find_pw_code_insert.php?hash=".$hash."&mode=".$mode."";
 
         mailer($from,"eduplanet_ad@naver.com", $to, $subject, $body);
+
+
+       $sql_hash = "UPDATE $table SET hash='$hash', temp_pw='$code' WHERE email='$to';";
+       // "INSERT INTO $table (hash, temp_pw) VALUES ('$hash', '$code'); ";
+       mysqli_query($conn, $sql_hash);
+
         } else {
           echo "0";
           // echo "unregistered";
