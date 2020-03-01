@@ -2,7 +2,7 @@
 
     include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
 
-    // 리뷰 글번호
+    // 찜목록 글번호
     $follow_no = $_GET["no"];
 
     $sql = "DELETE FROM follow WHERE no=$follow_no";

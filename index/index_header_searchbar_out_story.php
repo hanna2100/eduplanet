@@ -235,7 +235,7 @@
                         }
 
                         function searchAcademy() {
-                            location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_out").value;
+                            location.href = '/eduplanet/acd_story/index.php?search=' + document.getElementById("acd_name_out").value;
                         }
                     </script>
 
