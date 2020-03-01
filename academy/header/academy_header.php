@@ -14,6 +14,7 @@
 <body>
   <?php
     $no = $_GET["no"];
+
     include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php"; //절대경로
 
     // $servername = "localhost";
@@ -89,22 +90,22 @@
                 <div class="academy_header_menu">
                     <ul class="academy_header_menu_ul">
                         <li>
-                            <a href="#">
+                            <a href="../academy/index.php?no=<?=$parent?>">
                                 <span class="header_menu_text">소개</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="../academy/review.php?no=<?=$parent?>">
                                 <span class="header_menu_text">리뷰</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="../academy/lecture.php?no=<?=$parent?>">
                                 <span class="header_menu_text">강의정보</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="../academy/acd_story.php?no=<?=$parent?>">
                                 <span class="header_menu_text">스토리</span>
                             </a>
                         </li>

@@ -81,9 +81,7 @@ section {
 }
 
 a { text-decoration: none; color: #333; }
-.acd_name_in {
 
-}
 
 /*  하단 다른 스토리 */
 .academy_other_story_list_wrap {
@@ -91,4 +89,9 @@ a { text-decoration: none; color: #333; }
 }
 .cource_column_box {
   border: 1px solid #2E89FF;
+}
+
+.index_header_searchbar_in{
+  width: 245px;
+  height:32px;
 }
