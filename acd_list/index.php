@@ -1,4 +1,4 @@
-
+<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -631,12 +631,12 @@
 
         // DB에서 가져오기-------------------------------------
         include_once("../lib/db_connector.php");
-        $sql = "select academy.no,academy.acd_name,avg(review.total_star) from academy join review on academy.no = review.parent group by review.parent order by avg(review.total_star) desc limit 5";
-        $sql2 = "select academy.no,academy.acd_name,avg(review.facility) from academy join review on academy.no = review.parent group by review.parent order by avg(review.facility) desc limit 5";
-        $sql3 = "select academy.no,academy.acd_name,avg(review.acsbl) from academy join review on academy.no = review.parent group by review.parent order by avg(review.acsbl) desc limit 5";
-        $sql4 = "select academy.no,academy.acd_name,avg(review.teacher) from academy join review on academy.no = review.parent group by review.parent order by avg(review.teacher) desc limit 5";
-        $sql5 = "select academy.no,academy.acd_name,avg(review.cost_efct) from academy join review on academy.no = review.parent group by review.parent order by avg(review.cost_efct) desc limit 5";
-        $sql6 = "select academy.no,academy.acd_name,avg(review.achievement) from academy join review on academy.no = review.parent group by review.parent order by avg(review.achievement) desc limit 5";
+        $sql = "select academy.no,review.parent,academy.acd_name,avg(review.total_star) from academy join review on academy.no = review.parent group by review.parent order by avg(review.total_star) desc limit 5";
+        $sql2 = "select academy.no,review.parent,academy.acd_name,avg(review.facility) from academy join review on academy.no = review.parent group by review.parent order by avg(review.facility) desc limit 5";
+        $sql3 = "select academy.no,review.parent,academy.acd_name,avg(review.acsbl) from academy join review on academy.no = review.parent group by review.parent order by avg(review.acsbl) desc limit 5";
+        $sql4 = "select academy.no,review.parent,academy.acd_name,avg(review.teacher) from academy join review on academy.no = review.parent group by review.parent order by avg(review.teacher) desc limit 5";
+        $sql5 = "select academy.no,review.parent,academy.acd_name,avg(review.cost_efct) from academy join review on academy.no = review.parent group by review.parent order by avg(review.cost_efct) desc limit 5";
+        $sql6 = "select academy.no,review.parent,academy.acd_name,avg(review.achievement) from academy join review on academy.no = review.parent group by review.parent order by avg(review.achievement) desc limit 5";
 
         $result = mysqli_query($conn, $sql);
         $result2 = mysqli_query($conn, $sql2);
@@ -660,6 +660,7 @@
             $row = mysqli_fetch_array($result);
             // $no = $row["no"];
             $acd_name = $row["acd_name"];
+            $parent = $row["parent"];
             $total_star = $row["avg(review.total_star)"];
             $total_grade = round($total_star, 1);
             $no = $row["no"];
@@ -691,6 +692,7 @@
             mysqli_data_seek($result2, $i);
             $row = mysqli_fetch_array($result2);
             $acd_name = $row["acd_name"];
+            $parent = $row["parent"];
             $facility = $row["avg(review.facility)"];
             $no = $row["no"];
             $total_grade = round($facility, 1);
@@ -720,6 +722,7 @@
             mysqli_data_seek($result3, $i);
             $row = mysqli_fetch_array($result3);
             $acd_name = $row["acd_name"];
+            $parent = $row["parent"];
             $accesible = $row["avg(review.acsbl)"];
             $no = $row["no"];
             $total_grade = round($accesible, 1);
@@ -746,6 +749,7 @@
             mysqli_data_seek($result4, $i);
             $row = mysqli_fetch_array($result4);
             $acd_name = $row["acd_name"];
+            $parent = $row["parent"];
             $teacher = $row["avg(review.teacher)"];
             $no = $row["no"];
             $total_grade = round($teacher, 1);
@@ -772,6 +776,7 @@
             mysqli_data_seek($result5, $i);
             $row = mysqli_fetch_array($result5);
             $acd_name = $row["acd_name"];
+            $parent = $row["parent"];
             $cost_effect = $row["avg(review.cost_efct)"];
             $no = $row["no"];
             $total_grade = round($cost_effect, 1);
@@ -798,6 +803,7 @@
             mysqli_data_seek($result6, $i);
             $row = mysqli_fetch_array($result6);
             $acd_name = $row["acd_name"];
+            $parent = $row["parent"];
             $achievement = $row["avg(review.achievement)"];
             $no = $row["no"];
             $total_grade = round($achievement, 1);
@@ -862,7 +868,22 @@
                   <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
                   <div class="story_academy_heart">
                       <span>학원 찜하기</span>
-                      <button id="button_academy_heart" onclick="onclick_heart()">like</button>
+                      <?php
+                          if ($gm_no) {
+                      ?>
+
+                      <a class="jjim" href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart">like</button></a>
+
+                      <?php
+                          } else {
+                      ?>
+
+                      <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
+
+                      <?php
+                          }
+                      ?>
+                      <!-- <button id="button_academy_heart" onclick="onclick_heart()">like</button> -->
                   </div>
                 </div>
                 <div class="see_more">
@@ -888,7 +909,22 @@
                   <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
                   <div class="story_academy_heart">
                       <span>학원 찜하기</span>
-                      <button id="button_academy_heart" onclick="onclick_heart()">like</button>
+                      <?php
+                          if ($gm_no) {
+                      ?>
+
+                      <a class="jjim" href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart">like</button></a>
+
+                      <?php
+                          } else {
+                      ?>
+
+                      <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
+
+                      <?php
+                          }
+                      ?>
+                      <!-- <button id="button_academy_heart" onclick="onclick_heart()">like</button> -->
                   </div>
                 </div>
                 <div class="see_more">
@@ -914,7 +950,22 @@
                   <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
                   <div class="story_academy_heart">
                       <span>학원 찜하기</span>
-                      <button id="button_academy_heart" onclick="onclick_heart()">like</button>
+                      <?php
+                          if ($gm_no) {
+                      ?>
+
+                      <a class="jjim" href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart">like</button></a>
+
+                      <?php
+                          } else {
+                      ?>
+
+                      <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
+
+                      <?php
+                          }
+                      ?>
+                      <!-- <button id="button_academy_heart" onclick="onclick_heart()">like</button> -->
                   </div>
                 </div>
                 <div class="see_more">
@@ -939,7 +990,22 @@
                   <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
                   <div class="story_academy_heart">
                       <span>학원 찜하기</span>
-                      <button id="button_academy_heart" onclick="onclick_heart()">like</button>
+                      <?php
+                          if ($gm_no) {
+                      ?>
+
+                      <a class="jjim" href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart">like</button></a>
+
+                      <?php
+                          } else {
+                      ?>
+
+                      <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
+
+                      <?php
+                          }
+                      ?>
+                      <!-- <button id="button_academy_heart" onclick="onclick_heart()">like</button> -->
                   </div>
                 </div>
                 <div class="see_more">
@@ -956,7 +1022,6 @@
           var lng ;
           var juso;
 
-
           function getMydongAcd(siName,dongName){
             $.ajax({
                 type: "post", //보내는 타입은 post 방식이여
@@ -971,6 +1036,7 @@
                   //  제이슨 해당정보를 해독을 함
                     var a = JSON.parse(response); //택배를 뜯는느낌 // 이것은 json 정보를 우리가 볼수있게 해독해주는 것이여.
                     console.log(a[0]['acdName']);
+                    var acd_no_array = [];
                     for (var i = 0; i < 4; i++) {
                         //이미지 넣어주기
                         console.log(a);
@@ -997,8 +1063,21 @@
                         // 학원 정보 자세히
                         document.getElementsByClassName("see_more")[i].onclick = moreInfo(a[i]['no']);
                         // console.log(a[i]['no']);
+                        // document.getElementsByClassName("")[i]
+                        var jim = a[i]['parent']; //이거를 어떻게 저기로 보내느냐 그것이 문제다
+                        acd_no_array.push(a[i]['parent']);
+                        // document.getElementsByClassName("jjim")[0].
+
+                        // $(".jjim")[0].attr("href", "/eduplanet/acd_story/follow.php?no="+a[i]['parent']);
+                        // document.getElementsByClassName("story_academy_heart").
 
                     }
+                    var i = 0;
+                    $(".jjim").each(function(){
+                      $(this).attr("href", "/eduplanet/acd_story/follow.php?no="+acd_no_array[i]);
+                      i++;
+                    });
+
 
                     // document.getElementById("see_more"+0).onclick = function(){
                     //

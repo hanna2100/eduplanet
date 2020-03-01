@@ -5,7 +5,8 @@
     include_once("../lib/db_connector.php");
 
 
-    $sql= " select * from academy where si_name = '$siName' and dong_name = '$dongName'; ";
+    // $sql= " select * from academy where si_name = '$siName' and dong_name = '$dongName'; ";
+    $sql = "select academy.*,review.parent from academy inner join review on academy.no = review.parent where si_name = '가평군' and dong_name = '가평읍' group by parent;";
     $result=mysqli_query($conn,$sql);
 
     for($i=0;$i<mysqli_num_rows($result);$i++){
@@ -13,7 +14,7 @@
         $row=mysqli_fetch_array($result);
 
         //리스트에 연관 배열{"name":aa,"address":bb}이런식으로 가져옴
-        $list[$i]=array("acdName" => $row["acd_name"],"tel"=>$row["tel"],"address" => $row['address'], "no" => $row["no"], "img" => $row["file_copy"]);
+        $list[$i]=array("acdName" => $row["acd_name"],"tel"=>$row["tel"],"address" => $row['address'], "no" => $row["no"], "img" => $row["file_copy"] , "parent" => $row["parent"]);
     }
 
 

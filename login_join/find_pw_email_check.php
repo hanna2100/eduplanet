@@ -57,8 +57,8 @@
           $mail = new PHPMailer(); // defaults to using php "mail()"
 
           // 디버그 모드(production 환경에서는 주석 처리한다.)
-          // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-          $mail->SMTPDebug = 4;
+          $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+          // $mail->SMTPDebug = 4;
 
           $mail->IsSMTP();
              //   $mail->SMTPDebug = 2;

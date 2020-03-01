@@ -77,6 +77,11 @@
             </ul>
           </table>
         </div> <!-- infor -->
+        <div id="infor_modify">
+            <button type="button" name="button" >정보수정</button>
+        </div>
+
+
       </div><!-- eduform end -->
 
     <div id="infor_map">

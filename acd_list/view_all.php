@@ -17,8 +17,8 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
-    <script src="/eduplanet/searchbar/searchbar_in.js"></script>
+    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_out.css">
+    <script src="/eduplanet/searchbar/searchbar_out.js"></script>
     <link rel="stylesheet" href="/eduplanet/index/footer.css">
     <link rel="stylesheet" href="./css/view_all.css">
     <!-- 아이콘 -->
@@ -42,7 +42,7 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php"; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_out.php"; ?>
             </div>
         </header>
 
@@ -128,6 +128,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                               	total_star,
                               	str_cnt,
                               	rv_cnt
@@ -146,6 +147,7 @@
                                   academy.acd_name,
                                   academy.address,
                                   academy.file_copy,
+                                  review.parent,
                                   total_star,
                                   str_cnt,
                                   rv_cnt
@@ -165,6 +167,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                                   facility,
                               	total_star,
                               	str_cnt,
@@ -183,6 +186,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                                   acsbl,
                               	total_star,
                               	str_cnt,
@@ -201,6 +205,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                                   teacher,
                               	total_star,
                               	str_cnt,
@@ -219,6 +224,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                                   cost_efct,
                               	total_star,
                               	str_cnt,
@@ -236,6 +242,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                                   achievement,
                               	total_star,
                               	str_cnt,
@@ -256,6 +263,7 @@
                                 academy.acd_name,
                                 academy.address,
                                 academy.file_copy,
+                                review.parent,
                                 total_star,
                                 str_cnt,
                                 rv_cnt
@@ -276,6 +284,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                               	total_star,
                               	str_cnt,
                               	rv_cnt
@@ -292,6 +301,7 @@
                                   academy.acd_name,
                                   academy.address,
                                   academy.file_copy,
+                                  review.parent,
                                   total_star,
                                   str_cnt,
                                   rv_cnt
@@ -310,6 +320,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                                   facility,
                               	total_star,
                               	str_cnt,
@@ -327,6 +338,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                                   acsbl,
                               	total_star,
                               	str_cnt,
@@ -344,6 +356,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                                   teacher,
                               	total_star,
                               	str_cnt,
@@ -361,6 +374,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                                   cost_efct,
                               	total_star,
                               	str_cnt,
@@ -377,6 +391,7 @@
                               	academy.acd_name,
                               	academy.address,
                               	academy.file_copy,
+                                review.parent,
                                   achievement,
                               	total_star,
                               	str_cnt,
@@ -396,6 +411,7 @@
                                 academy.acd_name,
                                 academy.address,
                                 academy.file_copy,
+                                review.parent,
                                 total_star,
                                 str_cnt,
                                 rv_cnt
@@ -414,6 +430,7 @@
                               academy.acd_name,
                               academy.address,
                               academy.file_copy,
+                              review.parent,
                               total_star,
                               str_cnt,
                               rv_cnt
@@ -434,9 +451,7 @@
 
                 <!-- select box -------------------------------------------------------------------------------------->
                 <div class="follow_list_select">
-                  <script type="text/javascript">
-                    console.log(<?= $total_record ?>);
-                  </script>
+
                     <h2>
                         <span id="view_all_title">우리동네학원</span>
                         <span id="view_all_review"></span>
@@ -525,6 +540,7 @@
                         $no = $row["no"]; //넘
                         $acd_name = $row["acd_name"]; //학원명
                         $address = $row["address"]; //주소
+                        $parent = $row["parent"];
                         $file_copy = $row["file_copy"]; //학원로고
                         $total_star = $row["total_star"]; //평점
                         $review_count = $row["rv_cnt"]; // 리뷰 수
@@ -597,7 +613,8 @@
                                 <!-- 클릭 시 href=학원페이지                           parent=<?= $parent ?>&acd_name=<?= $acd_name ?>     -->
                                 <a href="/eduplanet/academy/index.php?no=<?= $no ?>">
                                     <div class="follow_list_column_img">
-                                        <img src="/eduplanet/data/acd_logo/travel.png" alt="academy_list_column_img">
+                                        <img src="/eduplanet/img/acd_logo2.png" alt="academy_list_column_img">
+                                        <!-- 파일이미지 들어가면 $file_copy로 바꾸어라!!!!!!!!!!!!!!!!!!!!!@@@@ -->
                                     </div>
 
                                     <div class="follow_list_column_text">
@@ -624,7 +641,23 @@
 
                                 <div class="follow_academy_heart">
                                     <span>학원 찜하기</span>
-                                    <button type="button" id="button_academy_heart" onclick="deleteFollow(<?=$follow_no?>);">like</button>
+                                    <?php
+                                        if ($gm_no) {
+                                    ?>
+
+                                    <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>&light=1"><button type="button" id="button_academy_heart">like</button></a>
+
+                                    <?php
+                                        } else {
+                                    ?>
+
+
+                                    <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
+
+                                    <?php
+                                        }
+                                    ?>
+                                    <!-- <button type="button" id="button_academy_heart" onclick="deleteFollow(<?=$follow_no?>);">like</button> -->
                                 </div>
 
                                 <div class="follow_academy_star_wrap">
@@ -678,8 +711,22 @@
                         </li>
 
                     <?php
+                        $sql7 = "select * from follow where user_no = $gm_no and acd_no = $no ";
+                        $result7 = mysqli_query($conn,$sql7);
+                        mysqli_data_seek($result7,$total_record);
+                        $row7 = mysqli_fetch_array($result7);
+
+                        $jim = $row['user_no'];
+                        echo "
+                          <script>
+                            console.log($jim);
+                          </script>
+                        ";
+
+
                         $page_start--;
                     }
+
                     mysqli_close($conn);
                     ?>
 

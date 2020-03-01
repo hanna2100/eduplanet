@@ -14,6 +14,7 @@
 <body>
   <?php
     $no = $_GET["no"];
+
     include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php"; //절대경로
 
     // $servername = "localhost";
@@ -23,13 +24,14 @@
     //
     // // 1 .Create connection mysql -u root -p 123456 -h 192.168.0.230
     // $conn = mysqli_connect($servername, $username, $password);
-    $sql = "select academy.no,academy.si_name,academy.acd_name,academy.file_copy,avg(review.total_star),avg(review.facility),avg(review.acsbl),avg(review.teacher),avg(review.cost_efct),avg(review.achievement) from academy join review on academy.no = review.parent where academy.no = $no group by review.parent order by avg(review.total_star) desc";
+    $sql = "select academy.no,academy.si_name,academy.acd_name,academy.file_copy,review.parent,avg(review.total_star),avg(review.facility),avg(review.acsbl),avg(review.teacher),avg(review.cost_efct),avg(review.achievement) from academy join review on academy.no = review.parent where academy.no = $no group by review.parent order by avg(review.total_star) desc";
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($result);
 
     $acd_name = $row["acd_name"];
     $si_name = $row["si_name"];
     $file_copy = $row["file_copy"];
+    $parent = $row["parent"];
     $avg_total = $row["avg(review.total_star)"];
     // $avg_facility = $row["avg(review.facility)"];
     // $avg_acsbl = $row["avg(review.acsbl)"];
@@ -88,27 +90,43 @@
                 <div class="academy_header_menu">
                     <ul class="academy_header_menu_ul">
                         <li>
-                            <a href="#">
+                            <a href="../academy/index.php?no=<?=$parent?>">
                                 <span class="header_menu_text">소개</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="../academy/review.php?no=<?=$parent?>">
                                 <span class="header_menu_text">리뷰</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="../academy/lecture.php?no=<?=$parent?>">
                                 <span class="header_menu_text">강의정보</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="../academy/acd_story.php?no=<?=$parent?>">
                                 <span class="header_menu_text">스토리</span>
                             </a>
                         </li>
+                        <?php
+                        if ($gm_no) {
+                        ?>
 
-                        <button id="button_add_like" type="button" onclick="">찜하기</button>
+                            <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_add_like">찜하기</button></a>
+
+                        <?php
+                        } else {
+                        ?>
+
+                            <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_add_like">찜하기</button></a>
+
+                        <?php
+                        }
+                        ?>
+
+
+                        <!-- <button id="button_add_like" type="button" onclick="">찜하기</button> -->
                     </ul>
 
                 </div>
