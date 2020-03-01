@@ -2,6 +2,7 @@
 var teacher_no = '';
 var schedule_flag = false; //선생님의 시간표가 이미 있는 지 여부(시간표 이중insert방지)
 var url = '/eduplanet/academy/lecture.php?no=';
+var sc_delete_forms ; //삭제할 시간표 폼들
 
 $(function(){
 
@@ -99,6 +100,31 @@ function getinfo(parent){
     });
 }
 
+function submitTeacherInsert(){
+  var form = $('#tc_insert_form')[0];
+  var formData = new FormData(form);
+  formData.append("upfile", $("#upfile")[0].files[0]);
+
+  $.ajax({
+    type: "post",
+    processData: false,
+    contentType: false,
+    data: formData,
+    url : "/eduplanet/academy/insert_teacher.php",
+    success : function(data){
+        if(data==1){
+            alert('선생님이 등록되었습니다');
+            location.href=url+acd_no;
+        }else{
+            alert('Error: '+data);
+        }
+    },
+    error : function(){
+        alert("시스템에러");
+    }
+});
+}
+
 
 function popupInsertTeacher(){
   $("#insertTeacher, #overlay").show();
@@ -139,40 +165,29 @@ function popupInsertSchedule(){
 
   }
 }
+function deleteTeacher(){
 
-//선생님 수정/삭제버튼 눌렀을때
-function popupUpdateTeacher(){
-  console.log(teacher_no);
-  if(teacher_no==''){
-    alert('선생님을 선택해주세요');
-  }else{
-
-    //TODO
-    //ajax로 서버에서 선생님 정보 받아서(teacher_no로 기본키검색) #updateTeacher에 뿌려주기
-
-    $("#updateTeacher, #overlay").show();
-    setPopupLayerPos("#updateTeacher");
-  
-    $("#overlay").click(function(e){
-      e.preventDefault();
-      $("#updateTeacher").hide();
-      clearLectureTable();
-      $("#overlay").hide();
-    });
-  
-    $("#btn_add_t_close").click(function(e){
-      e.preventDefault();
-      $("#updateTeacher").hide();
-      clearLectureTable();
-      $("#overlay").hide();
-    });
-  }
+  $.ajax({
+    type: "post",
+    data: {no: teacher_no},
+    url : "/eduplanet/academy/delete_teacher.php",
+    success : function(data){
+        if(data==1){
+            alert('선생님이 삭제되었습니다');
+            location.href=url+acd_no;
+        }else{
+            alert('Error: '+data);
+        }
+    },
+    error : function(){
+        alert("시스템에러");
+    }
+});
 }
 
 function popupUpdateSchedule(){
-  console.log(teacher_no);
-  if(teacher_no==''){
-    alert('선생님을 선택해주세요');
+  if(schedule_flag==false){
+    alert('등록된 시간표가 없습니다');
   }else{
 
     scheduleTblLoad();
@@ -183,19 +198,21 @@ function popupUpdateSchedule(){
     $("#overlay").click(function(e){
       e.preventDefault();
       $("#updateSchedule").hide();
-      clearLectureTable();
+      clearLectureTable('update');
       $("#overlay").hide();
     });
   
-    $("#btn_add_t_close").click(function(e){
+    $("#btn_add_su_close").click(function(e){
       e.preventDefault();
       $("#updateSchedule").hide();
-      clearLectureTable();
+      clearLectureTable('update');
       $("#overlay").hide();
     });
   }
 }
 
+
+//시간표 수정을 위한 시간표 업로드
 function scheduleTblLoad(){
   $.ajax({
     url : "lecture_schedule.php",
@@ -216,8 +233,12 @@ function scheduleTblLoad(){
       for(var i=0; i<sc.length; i++){
         time_array.push(sc[i][1]);
       }
-      Array.from(new Set(array)); //중복제거
+      time_array = Array.from(new Set(time_array)); //중복제거
+      time_array.sort(function(a,b) {return a-b;});
 
+      console.log(time_array);
+      var html = '';
+      var j = 0; //time_array용 인덱스
       //월화수목~도 찍어야해서 length에 +1
       for(i=0 ; i<time_array.length+1 ;i++){
         html += "<tr>";
@@ -229,84 +250,98 @@ function scheduleTblLoad(){
             <td class="sc_top">목</td>
             <td class="sc_top">금</td>
             <td class="sc_top">토</td>`;
-
         }else{
-
           html += `<td class="sc_order">
-          <input type="number" name="input_order[]" placeholder="시간입력" oninput="setOrder(this)">
+          <input value="`+time_array[j]+`" type="number" name="input_order2[]" placeholder="시간입력" oninput="setOrder(this)">
         </td>
         <td>
           <form action="#" method="post">
-            <input class="order_value" type="hidden" name="order[]" value="">
-            <input class="parent_value" type="hidden" name="parent[]" value="">
+            <input class="order_value" type="hidden" name="order[]" value="`+time_array[j]+`">
+            <input class="parent_value" type="hidden" name="parent[]" value="`+teacher_no+`">
             <input type="hidden" name="day[]" value="1">
-            <input type="text" name="subject[]" placeholder="과목">
+            <input id="a1b`+time_array[j]+`" type="text" name="subject[]" placeholder="과목">
           </form>
         </td>
         <td>
           <form action="#" method="post">
-            <input class="order_value" type="hidden" name="order[]" value="">
-            <input class="parent_value" type="hidden" name="parent[]" value="">
+            <input class="order_value" type="hidden" name="order[]" value="`+time_array[j]+`">
+            <input class="parent_value" type="hidden" name="parent[]" value="`+teacher_no+`">
             <input type="hidden" name="day[]" value="2">
-            <input type="text" name="subject[]" placeholder="과목">
+            <input id="a2b`+time_array[j]+`" type="text" name="subject[]" placeholder="과목">
           </form>
         </td>
         <td>
           <form action="#" method="post">
-            <input class="order_value" type="hidden" name="order[]" value="">
-            <input class="parent_value" type="hidden" name="parent[]" value="">
+            <input class="order_value" type="hidden" name="order[]" value="`+time_array[j]+`">
+            <input class="parent_value" type="hidden" name="parent[]" value="`+teacher_no+`">
             <input type="hidden" name="day[]" value="3">
-            <input type="text" name="subject[]" placeholder="과목">
+            <input id="a3b`+time_array[j]+`" type="text" name="subject[]" placeholder="과목">
           </form>
         </td>
         <td>
           <form action="#" method="post">
-            <input class="order_value" type="hidden" name="order[]" value="">
-            <input class="parent_value" type="hidden" name="parent[]" value="">
+            <input class="order_value" type="hidden" name="order[]" value="`+time_array[j]+`">
+            <input class="parent_value" type="hidden" name="parent[]" value="`+teacher_no+`">
             <input type="hidden" name="day[]" value="4">
-            <input type="text" name="subject[]" placeholder="과목">
+            <input id="a4b`+time_array[j]+`" type="text" name="subject[]" placeholder="과목">
           </form>
         </td>
         <td>
           <form action="#" method="post">
-            <input class="order_value" type="hidden" name="order[]" value="">
-            <input class="parent_value" type="hidden" name="parent[]" value="">
+            <input class="order_value" type="hidden" name="order[]" value="`+time_array[j]+`">
+            <input class="parent_value" type="hidden" name="parent[]" value="`+teacher_no+`">
             <input type="hidden" name="day[]" value="5">
-            <input type="text" name="subject[]" placeholder="과목">
+            <input id="a5b`+time_array[j]+`" type="text" name="subject[]" placeholder="과목">
           </form>
         </td>
         <td>
           <form action="#" method="post">
-            <input class="order_value" type="hidden" name="order[]" value="">
-            <input class="parent_value" type="hidden" name="parent[]" value="">
+            <input class="order_value" type="hidden" name="order[]" value="`+time_array[j]+`">
+            <input class="parent_value" type="hidden" name="parent[]" value="`+teacher_no+`">
             <input type="hidden" name="day[]" value="6">
-            <input type="text" name="subject[]" placeholder="과목">
+            <input id="a6b`+time_array[j]+`" type="text" name="subject[]" placeholder="과목">
           </form>
         </td>`;
+        j++;
         }
         html += "</tr>";
-        x++;
       }
 
-          document.getElementById('table').innerHTML = html;
+      sc_delete_forms = $('<form></form>');
+      sc_delete_forms.attr('action', '#');
+      sc_delete_forms.attr('method', 'post');
+      for(var k=0; k<sc.length; k++){
+        var no = $('<input type="hidden" name="no[]" value="'+sc[k][3]+'">');
+        sc_delete_forms.append(no);
+      }
+      sc_delete_forms.appendTo('body');
 
-          for(var i=0; i<sc.length; i++){
-            var x = sc[i][1]-min_time+1;
-            var y = parseInt(sc[i][0])+1;
+      document.getElementById('scheduleTblUpdate').innerHTML = html;
 
-            var id = '#x'+x+'y'+y;
-            $(id).html(sc[i][2]);
-          }
+      for(var i=0; i<sc.length; i++){
+        var a = parseInt(sc[i][0]);
+        var b = sc[i][1];
+        var id = '#a'+a+'b'+b;
+        $(id).val(sc[i][2]);
+      }
 
     }
   });
 }
 
-function addScheduleTime(){
-
+function addScheduleTime(type){
+  var name ;
+  var $table;
+  if(type=='insert'){
+    name= 'input_order1[]';
+    $table = $('.table_temp:first');
+  }else{
+    name= 'input_order2[]';
+    $table = $('.table_temp:last')
+  }
   var html= `<tr>
   <td class="sc_order">
-    <input type="number" name="input_order[]" placeholder="시간입력" oninput="setOrder(this)">
+    <input type="number" name="`+name+`" placeholder="시간입력" oninput="setOrder(this)">
   </td>
   <td>
     <form action="#" method="post">
@@ -359,13 +394,22 @@ function addScheduleTime(){
 </tr>`;
 
   
-  $('.table_temp').append(html);
+  $table.append(html);
 }
 
 
 //시간표 초기화
-function clearLectureTable(){
-  $('.table_temp').html(`<tr>
+function clearLectureTable(type){
+  var name ;
+  var $table;
+  if(type=='insert'){
+    name= 'input_order1[]';
+    $table = $('.table_temp:first');
+  }else{
+    name= 'input_order2[]';
+    $table = $('.table_temp:last')
+  }
+  $table.html(`<tr>
   <td class="sc_top"></td>
   <td class="sc_top">월</td>
   <td class="sc_top">화</td>
@@ -376,7 +420,7 @@ function clearLectureTable(){
 </tr>
 <tr>
   <td class="sc_order">
-    <input type="number" name="input_order[]" placeholder="시간입력" oninput="setOrder(this)">
+    <input type="number" name="`+name+`" placeholder="시간입력" oninput="setOrder(this)">
   </td>
   <td>
     <form action="#" method="post">
@@ -429,6 +473,8 @@ function clearLectureTable(){
 </tr>`);
 }
 
+
+
 //시간표에 시간입력하면 자동으로 form의 order, parent의 value값을 설정
 function setOrder(e){
   var order = e.value;
@@ -441,8 +487,9 @@ function setOrder(e){
 function insertLecture(){
   var returnNow = false;
   //시간이 입력되었는지 검사
-  $("input[name='input_order[]']").each(function() {
+  $("input[name='input_order1[]']").each(function() {
     if(!$(this).val()) {//시간이 입력 안되어 있으면
+        console.log($(this));
         alert('좌측에 시간이 모두 입력되었는 지 확인해주세요');
         returnNow = true;
         return false;
@@ -486,6 +533,102 @@ function insertLecture(){
           alert("시스템에러");
       }
   });
+}
+
+
+function updateLecture(){
+  var returnNow = false;
+  //시간이 입력되었는지 검사
+  $("input[name='input_order2[]']").each(function() {
+    if(!$(this).val()) {//시간이 입력 안되어 있으면
+        alert('좌측에 시간이 모두 입력되었는 지 확인해주세요');
+        returnNow = true;
+        return false;
+    }
+  });
+  //시간이 입력되지 않았으므로 함수종료
+  if(returnNow){
+    return;
+  }
+
+  //선생님의 기존 시간표를 몽땅 다 지우고 수정하나 시간표를 insert할것임
+  var serialize = sc_delete_forms.serialize();
+
+  $.ajax({
+    type: "post",
+    data: serialize,
+    url : "/eduplanet/academy/delete_lecture.php",
+    success : function(data){
+        if(data!=1){
+          alert('[error] db 정보 수정에 실패했습니다.');
+          returnNow = true;
+        }
+    },
+    error : function(){
+        alert("시스템에러");
+    }
+  });
+  if(returnNow){
+    return;
+  }
+  
+  //새 시간표를 전부 insert
+  var formsForLecture = new Array(); //db lecture테이블에 들어갈 폼들
+
+  //폼 과목이 입력된것만 걸러내서 배열에 저장
+  $("input:text[name='subject[]']").each(function() {
+    if($(this).val()) {//과목이 입력되어 있으면
+        formsForLecture.push($(this).closest("form")); //해당 폼 객체를 배열에 저장
+    }
+  });
+
+  //여러개의 폼들을 직렬화하여 db전송
+  var serialize ='';
+
+  for(var i in formsForLecture){
+      serialize += formsForLecture[i].serialize() + '&';
+  }
+  serialize = serialize.slice(0,-1);
+  console.log(serialize);
+  $.ajax({
+      type: "post",
+      data: serialize,
+      url : "/eduplanet/academy/insert_lecture.php",
+      success : function(data){
+          if(data==1){
+              alert('시간표가 등록되었습니다');
+              location.href=url+acd_no;
+          }else{
+              alert('오류발생: '+data);
+          }
+      },
+      error : function(){
+          alert("시스템에러");
+      }
+  });
+}
+
+function deleteLecture(){
+  var serialize = sc_delete_forms.serialize();
+
+  console.log(serialize);
+  $.ajax({
+    type: "post",
+    data: serialize,
+    url : "/eduplanet/academy/delete_lecture.php",
+    success : function(data){
+        if(data==1){
+            alert('시간표가 삭제되었습니다');
+            location.href=url+acd_no;
+        }else{
+          alert('오류발생: '+data);
+        }
+    },
+    error : function(){
+        alert("시스템에러");
+    }
+  });
+
 }
 
 function setPopupLayerPos(selector){
