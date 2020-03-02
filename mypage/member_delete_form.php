@@ -52,32 +52,44 @@
         });
     </script>
 
+    <script>
+        // 탈퇴완료 버튼을 눌렀을 때
+        function delete_member_check() {
+
+            var deleteConf = confirm('정말 탈퇴하시겠습니까? \n이용중인 멤버십은 모두 삭제됩니다.');
+
+            if (deleteConf === true) {
+                document.delete_member.submit();
+
+            } else {
+                alert("회원 탈퇴가 취소되었습니다.");
+            }
+        }
+    </script>
+
 </head>
 
 <body>
+
     <?php
 
     $user_no = $gm_no;
+
+    if (!$user_no) {
+        echo "
+                <script>
+                    alert('잘못된 접근입니다.');
+                    history.go(-1)
+                </script>
+            ";
+    }
 
     include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
     $sql = "SELECT * FROM g_members WHERE no='$user_no'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
-
     $id = $row["id"];
-    $phone = $row["phone"];
-    $age = $row["age"];
-    $intres = $row["intres"];
-
-    // 출생년도 가져와서 셋팅하기
-    echo "
-        <script>
-            $(document).ready(function () {
-                $('#inputAge option[value=' + $age + ']').attr('selected', 'selected');
-            });
-        </script>
-        ";
 
     ?>
 
@@ -117,53 +129,35 @@
             <div class="mypage_content">
 
                 <div class="myinfo_title">
-                    <h2>내 정보</h2>
-                    <p>* 정보를 수정하신 후 수정완료 버튼을 눌러 주세요.</p>
+                    <h2>회원탈퇴</h2>
+                    <div class="member_delete_title">
+                        <span>* 탈퇴 시 이용중인 멤버십은 모두 삭제됩니다.</span>
+                        <span>* 회원 탈퇴를 원하시면 비밀번호를 입력해 주세요.</span>
+                    </div>
                 </div>
 
                 <div class="myinfo_content">
 
                     <div class="myinfo_content_form">
 
-                        <form id="form_member" action="/eduplanet/mypage/gm_myinfo_update.php" method="post" autocomplete="on">
+                        <form id="form_member" name="delete_member" action="/eduplanet/mypage/member_delete.php" method="post" autocomplete="on">
                             <div class="formBox">
                                 <label for="inputId">아이디</label>
-                                <input type="text" class="formInput" id="inputId" name="id" placeholder="아이디를 입력해 주세요" value="<?= $id ?>" disabled>
-                                <p class="subMsg" id="idSubMsg"></p>
+                                <input type="text" class="formInput" id="inputId" name="inputId" value="<?= $id ?>" readonly>
                             </div>
                             <div class="formBox">
                                 <label for="inputPw1">비밀번호</label>
-                                <input type="password" class="formInput" id="inputPw1" name="pw1" placeholder="비밀번호를 입력해 주세요" required>
-                            </div>
-                            <div class="formBox">
-                                <label for="inputPw2">비밀번호 확인</label>
-                                <input type="password" class="formInput" id="inputPw2" name="pw2" placeholder="비밀번호를 확인해 주세요" required>
-                                <p class="subMsg" id="pwSubMsg"></p>
-                            </div>
-                            <div class="formBox">
-                                <label for="inputTel">전화번호</label>
-                                <input type="tel" class="formInput" id="inputTel" name="phone" placeholder="전화번호를 -없이 입력해 주세요" value="<?= $phone ?>" required>
-                                <p class="subMsg" id="telSubMsg"></p>
-                            </div>
-                            <div class="formBox">
-                                <label for="inputIntres">관심과목</label>
-                                <input type="text" class="formInput" id="inputIntres" name="intres" placeholder="관심과목을 입력해 주세요" value="<?= $intres ?>" required>
-                                <p class="subMsg" id="intresSubMsg"></p>
-                            </div>
-                            <div class="formBox">
-                                <label for="inputAge">출생년도</label>
-                                <select id="inputAge" name="age" title="year" required></select>
+                                <input type="password" class="formInput" id="inputPw1" name="inputPw1" placeholder="비밀번호를 입력해 주세요" required>
                             </div>
                     </div>
 
                     <div class="button_div">
-                        <input type="button" id="btnFormSubmit" value="수정완료" onclick="isGmAllPass();">
+                        <input type="button" id="btnFormSubmit" value="탈퇴완료" onclick="delete_member_check();">
                     </div>
+
                     </form>
                 </div>
             </div>
-
-            <a href="/eduplanet/mypage/member_delete_form.php" id="member_delete">회원탈퇴</a>
         </div>
 
         <footer>
