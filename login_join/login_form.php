@@ -35,6 +35,8 @@
   <!-- naver-->
   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+
 
 </head>
   <header>
@@ -62,15 +64,17 @@
             <input type="password" class="formInput" id="inputPw" name="inputPw" placeholder="비밀번호를 입력해 주세요." required>
             <p class="subMsg" id="pwSubMsg"></p>
           </div>
+
+          <p class="fieldset">
+            <input type="checkbox" id="remember-me" name="auto_login" value="2">
+            <label for="remember-me"> 로그인 상태 유지</label>
+            <a id="find_password" href="./find_password.php?mode=<?=$mode?>" style="color:black">비밀번호 찾기</a>
+          </p>
+
           <input type="button" id="btnFormSubmit" class="btnForm" value="LOGIN" onclick="document.getElementById('form_login').submit()" disabled>
 
         </form>
 
-        <p class="fieldset">
-          <input type="checkbox" id="remember-me" checked>
-          <label for="remember-me"> 로그인 상태 유지</label>
-          <a id="find_password" href="./find_password.php?mode=<?=$mode?>" style="color:black">비밀번호 찾기</a>
-        </p>
 
         <hr>
 
@@ -89,18 +93,10 @@
             </tr>
 
           </table>
-          <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
-           <?php
-             // 네이버 로그인 접근토큰 요청 예제
-             $client_id = "bVUclMb7FkFxQxcyDJLm";
-             $redirectURI = urlencode("http://localhost/eduplanet/login_join/naver_callback.php");
-             $state = "RAMDOM_STATE";
-             $apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=".$client_id."&redirect_uri=".$redirectURI."&state=".$state;
-           ?>
-           <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
+
           <div class="social_button">
             <div id="kakao_login_button" onclick="kakaoConn();"><img src="/eduplanet/img/kakao_login_button.png" alt="kakao_login_button"></div>
-            <a href="<?php echo $apiURL ?>"><img height="46" src="/eduplanet/img/naver_login_button.png"/></a>
+            <div id="naver_id_login"></div>
           </div>
 
         </div>
@@ -113,6 +109,8 @@
 
   <!-- 일반회원 / 사업자 회원 구분해서 form 전송 -->
   <?php
+  include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+
   $mode = isset($_GET['mode']) ? $_GET['mode'] : "gm";
   $action = "/eduplanet/login_join/join_form.php?mode=" . $mode;
   ?>
@@ -185,29 +183,35 @@
                   alert("아이디가 등록되어 있지 않아, 회원가입 페이지로 이동합니다.");
                 }
               },
-
               error: function() {
                 console.log("이메일 가입확인 ajax 실패");
               }
             });
           },
-
           fail: function(error) {
             alert(JSON.stringify(error));
           }
         });
       },
-
       fail: function(err) {
         alert(JSON.stringify(err));
       }
     });
-
   } // end of kakaoConn();
   </script>
 
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
 
+  <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
+  <script type="text/javascript">
+    var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://localhost/eduplanet/login_join/naver_callback.php");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("green", 3,40);
+    naver_id_login.setDomain("http://localhost/eduplanet/login_join/join_form.php");
+    naver_id_login.setState(state);
+    naver_id_login.init_naver_id_login();
+  </script>
+  <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
 
 
 <script>

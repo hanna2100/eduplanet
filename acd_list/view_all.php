@@ -672,7 +672,7 @@
 
                                           if($row7){
                                             echo "
-                                              <a href='/eduplanet/acd_story/follow.php?no=$parent'><button type='button' id='button_academy_heart_on'>like</button></a>
+                                              <a href='/eduplanet/acd_story/unfollow.php?no=$parent'><button type='button' id='button_academy_heart_on'>like</button></a>
                                             ";
 
                                           }else{

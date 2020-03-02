@@ -82,7 +82,18 @@ body {
   width: 70px;
   text-align: center;
 }
-#button_academy_heart {
+#button_academy_heart_off:hover {
+    float: right;
+    margin-left: 5px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    background : url('/eduplanet/img/common_sprite.png') no-repeat 0 -2680px;
+    width: 20px;
+    height: 18px;
+    color: transparent;
+    cursor: pointer;
+}
+#button_academy_heart_off {
     float: right;
     margin-left: 5px;
     background-color: transparent;
@@ -95,7 +106,13 @@ body {
 }
 
 
-#button_academy_heart:hover {
+#button_academy_heart_on:hover {
+    background : url('/eduplanet/img/common_sprite.png') no-repeat 0 -2661px;
+
+    width: 20px;
+    height: 18px;
+}
+#button_academy_heart_on {
     background : url('/eduplanet/img/common_sprite.png') no-repeat 0 -2680px;
 
     width: 20px;
