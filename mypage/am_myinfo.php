@@ -162,6 +162,8 @@
                     </form>
                 </div>
             </div>
+
+            <a href="/eduplanet/mypage/am_member_delete_form.php" id="member_delete">회원탈퇴</a>
         </div>
 
         <footer>

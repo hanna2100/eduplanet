@@ -79,7 +79,7 @@ a {
     margin: 0 auto;
     margin-top: 73px;
     box-sizing: border-box;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 .mypage_content {
@@ -131,6 +131,10 @@ label {
     margin-bottom: 25px;
 }
 
+.formBox_last {
+    margin-bottom: 10px;
+}
+
 .myinfo_content input {
     width: 200px;
     /* height: 20px; */
@@ -178,4 +182,18 @@ input[type="text"]:disabled {
     background: white;
     border: 1px solid white;
     color: black;
+}
+
+#member_delete {
+    margin-top: 20px;
+    float: right;
+    text-decoration: underline;
+}
+
+.member_delete_title {
+    margin-top: 10px;
+}
+
+.member_delete_title span {
+    display: block;
 }
