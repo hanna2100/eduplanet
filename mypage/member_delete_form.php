@@ -56,13 +56,21 @@
         // 탈퇴완료 버튼을 눌렀을 때
         function delete_member_check() {
 
-            var deleteConf = confirm('정말 탈퇴하시겠습니까? \n이용중인 멤버십은 모두 삭제됩니다.');
+            // 비밀번호를 입력하지 않았을 때
+            if (document.getElementById("inputPw1").value === "") {
 
-            if (deleteConf === true) {
-                document.delete_member.submit();
+                alert("비밀번호가 입력되지 않았습니다.");
 
             } else {
-                alert("회원 탈퇴가 취소되었습니다.");
+
+                var deleteConf = confirm('정말 탈퇴하시겠습니까? \n이용중인 멤버십은 모두 삭제됩니다.');
+
+                if (deleteConf === true) {
+                    document.delete_member.submit();
+
+                } else {
+                    alert("회원 탈퇴가 취소되었습니다.");
+                }
             }
         }
     </script>
@@ -145,7 +153,7 @@
                                 <label for="inputId">아이디</label>
                                 <input type="text" class="formInput" id="inputId" name="inputId" value="<?= $id ?>" readonly>
                             </div>
-                            <div class="formBox">
+                            <div class="formBox_last">
                                 <label for="inputPw1">비밀번호</label>
                                 <input type="password" class="formInput" id="inputPw1" name="inputPw1" placeholder="비밀번호를 입력해 주세요" required>
                             </div>

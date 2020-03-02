@@ -131,6 +131,10 @@ label {
     margin-bottom: 25px;
 }
 
+.formBox_last {
+    margin-bottom: 10px;
+}
+
 .myinfo_content input {
     width: 200px;
     /* height: 20px; */
