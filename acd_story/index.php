@@ -398,11 +398,11 @@
 
                                     if ($total_record_heart == 0) {
                                 ?>
-                                        <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart_off"></button></a>
+                                        <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart_off">flw</button></a>
                                 <?php
                                     } else if ($total_record_heart != 0) {
                                 ?>
-                                        <a href="/eduplanet/acd_story/unfollow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart_on"></button></a>
+                                        <a href="/eduplanet/acd_story/unfollow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart_on">flw</button></a>
                                 <?php
                                     }
                                 ?>
@@ -412,7 +412,7 @@
                                 } else {
                                 ?>
 
-                                    <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
+                                    <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart_off">flw</button></a>
 
                                 <?php
                                 }

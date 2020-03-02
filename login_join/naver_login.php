@@ -4,7 +4,7 @@
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
-$input_id = test_input($_POST['kakao_email_login']);
+$input_id = test_input($_POST['naver_email_login']);
 
 $mode = $_GET['mode'];
 
@@ -42,7 +42,7 @@ if ($expiry_day == "0000-00-00") {
     $result_order = mysqli_query($conn, $sql_order);
     $row_order = mysqli_fetch_array($result_order);
     $latest_order_date = $row_order['success'];
-    
+
     // 기존에 멤버십 구입을 한번도 하지 않은 경우
     if (!$latest_order_date) {
 
