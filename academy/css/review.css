@@ -14,11 +14,22 @@ body, html, #radarChart, #linearGauge {
   padding:0;
 }
 
-#container {
+#content_mid>div{
+  margin-top: 30px;
+  display: flex;
+}
+
+#good_key, #bad_key {
   width: 100%;
-  height: 90%;
-  margin: 20px 0 0 0;
+  height: 270px;
   padding: 0;
+  margin: 0px 10px;
+}
+
+#not_found_keyword{
+  width: 100%;
+  height: 270px;
+  display: none;
 }
 
 section {
@@ -95,7 +106,7 @@ section {
 
 hr{ border:3px solid #f1f1f1; max-width: 100%; margin: 10px 0;}
 .review_body_wrap { display: grid; grid-template-columns: 1fr 2fr; z-index: 0;}
-.review_title { font-size : 3em, color: tomato, font-weight: bold; margin: 10px;}
+.review_title { font-size : 3em; color: tomato; font-weight: bold; margin: 10px;}
 .review_body_left {
   font-family: Arial;
   margin: 0 50px 0 0; /* Center website */
