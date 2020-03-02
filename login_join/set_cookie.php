@@ -5,8 +5,9 @@
     if(headers_sent($file, $line)){
       echo "쿠키를 생성할 수 없습니다.";
     }else {
-      setcookie("user_id_cookie", $id, time()+180, "/");  // 테스트를 위해 3분(180초)만 유지
-      setcookie("user_hash_cookie", $hash, time()+180, "/");
+      $aa = setcookie("user_id_cookie", $id, time()+60*60, "/");
+      // if($aa) echo "쿠키 생성 완료";
+      setcookie("user_hash_cookie", $hash, time()+60*60, "/");
   ?>
     <script>location.href = "/eduplanet/index.php";</script>
   <?php

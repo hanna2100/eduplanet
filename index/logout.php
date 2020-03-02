@@ -11,8 +11,14 @@ unset($_SESSION["pam_no"]);
 unset($_SESSION["pgm_no"]);
 unset($_SESSION["admin"]);
 
-unset($_COOKIE["user_id_cookie"]);
-unset($_COOKIE["user_hash_cookie"]);
+// 쿠키 unset
+if(isset($_COOKIE["user_id_cookie"]) && isset($_COOKIE["user_hash_cookie"])){
+  setcookie("user_id_cookie", "", time()-3600);
+  setcookie("user_hash_cookie", "", time()-3600);
+}
+
+// unset($_COOKIE["user_id_cookie"]);
+// unset($_COOKIE["user_hash_cookie"]);
 
 echo "
         <script>
