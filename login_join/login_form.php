@@ -64,15 +64,17 @@
             <input type="password" class="formInput" id="inputPw" name="inputPw" placeholder="비밀번호를 입력해 주세요." required>
             <p class="subMsg" id="pwSubMsg"></p>
           </div>
+
+          <p class="fieldset">
+            <input type="checkbox" id="remember-me" name="auto_login" value="2">
+            <label for="remember-me"> 로그인 상태 유지</label>
+            <a id="find_password" href="./find_password.php?mode=<?=$mode?>" style="color:black">비밀번호 찾기</a>
+          </p>
+
           <input type="button" id="btnFormSubmit" class="btnForm" value="LOGIN" onclick="document.getElementById('form_login').submit()" disabled>
 
         </form>
 
-        <p class="fieldset">
-          <input type="checkbox" id="remember-me" checked>
-          <label for="remember-me"> 로그인 상태 유지</label>
-          <a id="find_password" href="./find_password.php?mode=<?=$mode?>" style="color:black">비밀번호 찾기</a>
-        </p>
 
         <hr>
 
