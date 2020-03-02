@@ -128,10 +128,10 @@
                     $sql = "SELECT S.no as story_no, S.* FROM acd_story S inner join academy A on S.parent=A.no
                             where parent=(select parent from acd_story where acd_story.no=$story_no) order by hit desc";
                     $result = mysqli_query($conn, $sql);
-                    $rows_num = mysqli_num_rows($result);
-                    if($rows_num<1){
-                      echo "<h3>아직 등록된 스토리가 없습니다.</h3>";
+                    if(!$result){
+                      echo "<br><br><h1>앞으로 더 많은 스토리가 등록될 예정입니다!</h1>";
                     }else{
+                      $rows_num = mysqli_num_rows($result);
 
 
                     for ($i = 0; $i < $rows_num; $i++) {
