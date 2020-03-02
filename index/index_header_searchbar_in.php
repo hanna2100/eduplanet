@@ -152,17 +152,15 @@
                                     <a href="/eduplanet/mypage/am_membership_pay.php">
                                         <li>멤버십/결제</li>
                                     </a>
-
+                                    <a href="/eduplanet/mypage/story.php">
+                                        <li>스토리 관리</li>
+                                    </a>
                                     <a href="/eduplanet/academy/index.php?no=<?= $am_no ?>">
                                         <li>My Academy</li>
                                     </a>
                                     <a href="/eduplanet/index/logout.php">
                                         <li>로그아웃</li>
                                     </a>
-
-                                    <script>
-                                        document.getElementsByClassName("index_header_menu_hover_detail_profile")[0].style.height = "175px";
-                                    </script>
 
                                 <?php
                                     // 로그인 안했을 때

@@ -60,11 +60,17 @@
 
         include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
-        $sql = "SELECT acd_name, si_name FROM academy WHERE no='$am_no'";
+        $sql = "SELECT * FROM a_members WHERE no=$am_no";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_array($result);
 
+        $acd_no = $row["acd_no"];
         $acd_name = $row["acd_name"];
+
+        $sql = "SELECT si_name FROM academy WHERE no='$acd_no'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result);
+
         $si_name = $row["si_name"];
 
         mysqli_close($conn);
@@ -134,6 +140,7 @@
                                     <label id="story_post_img_label" for="story_post_img">사진 (필수)</label>
                                     <span id="story_post_img_check" class="story_post_input_check"></span>
                                     <input type="file" id="upfile" name="upfile" onchange="checkInputImg();">
+                                    <img id="preview" src="" alt="사진을 선택하시면 이 곳에 미리보기가 표시됩니다.">
 
                                 </div>
 

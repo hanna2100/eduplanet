@@ -124,6 +124,10 @@
                         <li id="mypage_user_membership">멤버십/결제</li>
                     </a>
 
+                    <a href="/eduplanet/mypage/story.php">
+                        <li id="mypage_user_story">스토리 관리</li>
+                    </a>
+
                     <a href="/eduplanet/academy/index.php?no=<?= $am_no ?>">
                         <li id="mypage_user_review">My Academy</li>
                     </a>

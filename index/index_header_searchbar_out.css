@@ -400,6 +400,8 @@ option {
 
     /* 가로 스크롤바 숨기기 */
     overflow-x: hidden;
+
+    z-index: 99999;
 }
 
 /* IE 6 doesn't support max-height

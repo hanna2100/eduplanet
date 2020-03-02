@@ -59,7 +59,7 @@ function checkInput() {
             document.story_post_form.submit();
         }
 
-    // 주제가 세개일 때
+        // 주제가 세개일 때
     } else if (classNum == 3) {
 
         if (document.getElementById("story_post_title").value === "" ||
@@ -91,32 +91,100 @@ function checkInput() {
 
     }
 
-    // if (document.getElementById("story_post_title").value === "" ||
-    //     document.getElementById("story_post_content").value === "" ||
-    //     document.getElementById("story_post_subtitle_1").value === "" ||
-    //     document.getElementById("story_post_description_1").value === "" ||
-    //     document.getElementById("story_post_img").value === "" ||
-    //     document.getElementById("story_post_subtitle_2").value === "" ||
-    //     document.getElementById("story_post_description_2").value === "" ||
-    //     document.getElementById("story_post_subtitle_3").value === "" ||
-    //     document.getElementById("story_post_description_3").value === "" ||
+}
 
-    //     document.getElementById("story_post_title_check").innerHTML !== "" ||
-    //     document.getElementById("story_post_content_check").innerHTML !== "" ||
-    //     document.getElementById("story_post_subtitle_1_check").innerHTML !== "" ||
-    //     document.getElementById("story_post_description_1_check").innerHTML !== "" ||
-    //     document.getElementById("story_post_img_check").innerHTML !== "" ||
-    //     document.getElementById("story_post_subtitle_2_check").innerHTML !== "" ||
-    //     document.getElementById("story_post_description_2_check").innerHTML !== "" ||
-    //     document.getElementById("story_post_subtitle_3_check").innerHTML !== "" ||
-    //     document.getElementById("story_post_description_3_check").innerHTML !== "") {
+function checkInputModify() {
 
-    //     alert("입력되지 않은 항목이 있는지 확인해 주세요.");
+    // if (document.getElementById("upfile").value === "" ||
+    //     document.getElementById("story_post_img_check").innerHTML !== "") {
+
+    //     document.getElementById("story_post_img_check").innerHTML = "사진을 첨부해 주세요.";
 
     // } else {
-
-    //     document.story_post_form.submit();
+    //     document.getElementById("story_post_img_check").innerHTML = "";
     // }
+
+    var classNum = document.getElementsByClassName("story_post_wrap").length;
+
+    // 주제가 하나일 때
+    if (classNum == 1) {
+
+        if (document.getElementById("story_post_title").value === "" ||
+            document.getElementById("story_post_content").value === "" ||
+            document.getElementById("story_post_subtitle_1").value === "" ||
+            document.getElementById("story_post_description_1").value === "" ||
+            // document.getElementById("upfile").value === "" ||
+
+            document.getElementById("story_post_title_check").innerHTML !== "" ||
+            document.getElementById("story_post_content_check").innerHTML !== "" ||
+            document.getElementById("story_post_subtitle_1_check").innerHTML !== "" ||
+            document.getElementById("story_post_description_1_check").innerHTML !== "" ||
+            document.getElementById("story_post_img_check").innerHTML !== "") {
+
+            alert("입력되지 않은 항목이 있는지 확인해 주세요.");
+
+        } else {
+
+            document.story_modify_form.submit();
+        }
+
+        // 주제가 두개일 때    
+    } else if (classNum == 2) {
+
+        if (document.getElementById("story_post_title").value === "" ||
+            document.getElementById("story_post_content").value === "" ||
+            document.getElementById("story_post_subtitle_1").value === "" ||
+            document.getElementById("story_post_description_1").value === "" ||
+            // document.getElementById("upfile").value === "" ||
+            document.getElementById("story_post_subtitle_2").value === "" ||
+            document.getElementById("story_post_description_2").value === "" ||
+
+            document.getElementById("story_post_title_check").innerHTML !== "" ||
+            document.getElementById("story_post_content_check").innerHTML !== "" ||
+            document.getElementById("story_post_subtitle_1_check").innerHTML !== "" ||
+            document.getElementById("story_post_description_1_check").innerHTML !== "" ||
+            document.getElementById("story_post_img_check").innerHTML !== "" ||
+            document.getElementById("story_post_subtitle_2_check").innerHTML !== "" ||
+            document.getElementById("story_post_description_2_check").innerHTML !== "") {
+
+            alert("입력되지 않은 항목이 있는지 확인해 주세요.");
+
+        } else {
+
+            document.story_modify_form.submit();
+        }
+
+        // 주제가 세개일 때
+    } else if (classNum == 3) {
+
+        if (document.getElementById("story_post_title").value === "" ||
+            document.getElementById("story_post_content").value === "" ||
+            document.getElementById("story_post_subtitle_1").value === "" ||
+            document.getElementById("story_post_description_1").value === "" ||
+            // document.getElementById("upfile").value === "" ||
+            document.getElementById("story_post_subtitle_2").value === "" ||
+            document.getElementById("story_post_description_2").value === "" ||
+            document.getElementById("story_post_subtitle_3").value === "" ||
+            document.getElementById("story_post_description_3").value === "" ||
+
+            document.getElementById("story_post_title_check").innerHTML !== "" ||
+            document.getElementById("story_post_content_check").innerHTML !== "" ||
+            document.getElementById("story_post_subtitle_1_check").innerHTML !== "" ||
+            document.getElementById("story_post_description_1_check").innerHTML !== "" ||
+            document.getElementById("story_post_img_check").innerHTML !== "" ||
+            document.getElementById("story_post_subtitle_2_check").innerHTML !== "" ||
+            document.getElementById("story_post_description_2_check").innerHTML !== "" ||
+            document.getElementById("story_post_subtitle_3_check").innerHTML !== "" ||
+            document.getElementById("story_post_description_3_check").innerHTML !== "") {
+
+            alert("입력되지 않은 항목이 있는지 확인해 주세요.");
+
+        } else {
+
+            document.story_modify_form.submit();
+        }
+
+    }
 }
 
 function checkInputTitle() {
@@ -193,8 +261,18 @@ function checkInputDescription3() {
 
 function checkInputImg() {
 
+    var postImg = document.getElementById("upfile").files;
+
+    var reader = new FileReader();
+    reader.readAsDataURL(postImg[0]);
+
+    reader.onload = function () {
+        document.getElementById("preview").src = reader.result;
+    }
+
     if (document.getElementById("upfile").value === "") {
         document.getElementById("story_post_img_check").innerHTML = "사진을 첨부해 주세요.";
+
     } else {
         document.getElementById("story_post_img_check").innerHTML = "";
     }
