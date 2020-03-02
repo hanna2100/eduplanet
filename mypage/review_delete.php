@@ -21,10 +21,6 @@
     $today = date("Y-m-d");
     $today = strtotime($today);
     
-    //echo "
-    //    $regist_day.' 뚜둔 '.$delete_day.' 뚜둔 '.$today
-    //";
-
     // 현재 날짜가 삭제 가능 날짜와 같거나 이후일 때 (삭제 가능)
     if ($today >= $delete_day) {
 

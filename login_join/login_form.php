@@ -113,8 +113,6 @@
 
   <!-- 일반회원 / 사업자 회원 구분해서 form 전송 -->
   <?php
-  include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
-
   $mode = isset($_GET['mode']) ? $_GET['mode'] : "gm";
   $action = "/eduplanet/login_join/join_form.php?mode=" . $mode;
   ?>
