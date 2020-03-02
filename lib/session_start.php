@@ -1,10 +1,25 @@
 <?php
-
+include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
     session_start();
 
     // 일반 회원
     if (isset($_SESSION["gm_no"])) {
         $gm_no = $_SESSION["gm_no"];
+        $table_members = "g_members";
+
+        if(isset($_COOKIE['user_id_cookie']) && isset($_COOKIE['user_hash_cookie'])){
+            $id = $_COOKIE['user_id_cookie'];
+            $master_key = 'eduplanet';
+            $sql = "SELECT * FROM $table_members WHERE id='$id';";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result);
+            $pass = $row['pw'];
+            $hash = md5($master_key.$pass);
+            if($_COOKIE['user_hash_cookie'] == $hash){
+              $_SESSION['id'] = $id;
+            }
+        }
+
     } else {
         $gm_no = "";
     }
@@ -12,6 +27,21 @@
     // 기업 회원
     if (isset($_SESSION["am_no"])) {
         $am_no = $_SESSION["am_no"];
+        $table_members = "a_members";
+
+        if(isset($_COOKIE['user_id_cookie']) && isset($_COOKIE['user_hash_cookie'])){
+            $id = $_COOKIE['user_id_cookie'];
+            $master_key = 'eduplanet';
+            $sql = "SELECT * FROM $table_members WHERE id='$id';";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result);
+            $pass = $row['pw'];
+            $hash = md5($master_key.$pass);
+            if($_COOKIE['user_hash_cookie'] == $hash){
+              $_SESSION['id'] = $id;
+            }
+        }
+
     } else {
         $am_no = "";
     }
@@ -36,6 +66,8 @@
     } else {
         $admin = "";
     }
+
+
 ?>
 
 <script>
