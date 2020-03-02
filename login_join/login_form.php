@@ -35,6 +35,8 @@
   <!-- naver-->
   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+
 
 </head>
   <header>
@@ -89,18 +91,10 @@
             </tr>
 
           </table>
-          <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
-           <?php
-             // 네이버 로그인 접근토큰 요청 예제
-             $client_id = "bVUclMb7FkFxQxcyDJLm";
-             $redirectURI = urlencode("http://localhost/eduplanet/login_join/naver_callback.php");
-             $state = "RAMDOM_STATE";
-             $apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=".$client_id."&redirect_uri=".$redirectURI."&state=".$state;
-           ?>
-           <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
+
           <div class="social_button">
             <div id="kakao_login_button" onclick="kakaoConn();"><img src="/eduplanet/img/kakao_login_button.png" alt="kakao_login_button"></div>
-            <a href="<?php echo $apiURL ?>"><img height="46" src="/eduplanet/img/naver_login_button.png"/></a>
+            <div id="naver_id_login"></div>
           </div>
 
         </div>
@@ -130,6 +124,8 @@
     <input id="kakao_id_login" name="kakao_id_login" type="hidden">
     <input id="kakao_email_login" name="kakao_email_login" type="hidden">
   </form>
+
+
 
   <script>
     // 사용할 앱의 JavaScript 키 설정
@@ -210,6 +206,69 @@
 
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
 
+  <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
+
+  <script type="text/javascript">
+    <?php
+      include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+      $mode = isset($_GET['mode']) ? $_GET['mode'] : "gm";
+
+      $action = "/eduplanet/login_join/join_form.php?mode=" . $mode;
+    ?>
+    var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://localhost/eduplanet/login_join/login_form.php");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("green", 3,40);
+    naver_id_login.setDomain("http://localhost/eduplanet/login_join/login_form.php");
+    naver_id_login.setState(state);
+    naver_id_login.init_naver_id_login();
+    console.log(<?=$mode?>);
+    var url = "members_checkId.php?id=" + naver_email + "&mode=" + mode;
+
+    $.ajax({
+
+      url: url,
+      type: "GET",
+      success: function(data) {
+
+        // 이미 이메일이 가입되어 있을 때 --> 네이버 로그인
+        if (data == 1) {
+
+          document.getElementById("naver_id_login").value = naver_no;
+          document.getElementById("naver_email_login").value = naver_email;
+
+          document.kakao_login_form.submit();
+
+          // 이메일이 가입되어 있지 않을 때 --> form 으로 이메일을 넘겨서 회원가입
+        } else {
+          document.getElementById("naver_id").value = naver_no;
+          document.getElementById("naver_email").value = naver_email;
+
+          document.kakao_form.submit();
+          alert("아이디가 등록되어 있지 않아, 회원가입 페이지로 이동합니다.");
+        }
+      },
+
+      error: function() {
+        console.log("이메일 가입확인 ajax 실패");
+      }
+    });
+  </script>
+
+  <!-- 네이버 로그인 정보를 담는 form (회원가입)-->
+  <form name="naver_form" action=<?= $action ?> method="POST">
+    <input id="naver_id" name="naver_id" type="hidden">
+    <input id="naver_email" name="naver_email" type="hidden">
+  </form>
+
+  <!-- 네이버 로그인 정보를 담는 form (로그인)-->
+  <form name="naver_login_form" action="/eduplanet/login_join/naver_login.php?mode=<?= $mode ?>" method="POST">
+    <input id="naver_id_login" name="naver_id_login" type="hidden">
+    <input id="naver_email_login" name="naver_email_login" type="hidden">
+  </form>
+
+
+
+   <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
 
 
 <script>

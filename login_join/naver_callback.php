@@ -1,25 +1,29 @@
-<?php
-  // 네이버 로그인 콜백 예제
-  $client_id = "bVUclMb7FkFxQxcyDJLm";
-  $client_secret = "01ri0laBcC";
-  $code = $_GET["code"];;
-  $state = $_GET["state"];;
-  $redirectURI = urlencode("http://localhost/eduplanet/login_join/login_form.php");
-  $url = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=".$client_id."&client_secret=".$client_secret."&redirect_uri=".$redirectURI."&code=".$code."&state=".$state;
-  $is_post = false;
-  $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, $url);
-  curl_setopt($ch, CURLOPT_POST, $is_post);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  $headers = array();
-  $response = curl_exec ($ch);
-  $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-  echo "status_code:".$status_code."
-";
-  curl_close ($ch);
-  if($status_code == 200) {
-    echo $response;
-  } else {
-    echo "Error 내용:".$response;
-  }
-?>
+<script type="text/javascript">
+  var naverLogin = new naver.LoginWithNaverId({
+    clientId: "bVUclMb7FkFxQxcyDJLm",
+    callbackUrl: "http://localhost/eduplanet/login_join/naver_callback.php",
+    isPopup: false, /* 팝업을 통한 연동처리 여부 */
+    loginButton: {color: "green", type: 3, height: 60}/* 로그인 버튼의 타입을 지정 */
+  });
+  naverLogin.init();
+
+  naverLogin.getLoginStatus(function (status) {
+    if (status) {
+      var email = naverLogin.user.getEmail();
+      var name = naverLogin.user.getNickName();
+      var profileImage = naverLogin.user.getProfileImage();
+      var birthday = naverLogin.user.getBirthday();
+      var uniqId = naverLogin.user.getId();
+      var age = naverLogin.user.getAge();
+      console.log(email);
+      console.log(name);
+
+
+      var array = email.split("@");
+      naverLogin.logout();
+      location.href="http://<?= $_SERVER['HTTP_HOST'];?>/eduplanet/login_join/join_form.php?userid="+email+"&username="+array[0]+"&usermember_type=sns_log";
+    } else {
+      console.log("AccessToken이 올바르지 않습니다.");
+    }
+  });
+</script>
