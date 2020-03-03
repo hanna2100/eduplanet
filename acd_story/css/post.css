@@ -181,12 +181,14 @@ a {
 }
 
 .story_post_wrap {
+    width: 100%;
+    height: 350px;
     margin-top: 30px;
-    /* border: 1px solid lightgray;
-    border-radius: 10px; */
+    /* border: 1px solid lightgray; */
+    /* border-radius: 10px; */
     padding: 30px;
     box-sizing: border-box;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 label {
@@ -205,25 +207,26 @@ label {
 }
 
 .story_academy_content_wrap input {
-    width: 625px;
+    width: 635px;
     height: 35px;
     padding-left: 10px;
     line-height: 25px;
     font-size: 14px;
     margin-bottom: 25px;
-    border-radius: 3px;
-    border: 1px solid lightgray;
+    /* border-radius: 3px; */
+    border: 1px solid rgb(179, 179, 179);
     /* border-bottom: 1px solid lightgray; */
 }
 
 .story_academy_content_wrap textarea {
-    width: 615px;
+    float: left;
+    width: 635px;
     height: 150px;
     padding: 10px;
     font-size: 14px;
     /* border-radius: 3px; */
-    border: 1px solid lightgray;
-    margin-bottom: 70px;
+    border: 1px solid rgb(179, 179, 179);
+    /* margin-bottom: 70px; */
 }
 
 #story_post_img {
@@ -248,8 +251,10 @@ label {
 
 .story_content_image {
     width: 650px;
+    /* height: 640px; */
     margin-top: 30px;
     margin-bottom: 30px;
+    padding-bottom: 60px;
     /* border: 1px solid lightgray; */
     /* border-radius: 10px; */
     /* padding: 20px; */
@@ -278,7 +283,7 @@ label {
 
 .story_post_add_subject span {
     display: inline-block;
-    width: 567px;
+    width: 547px;
     font-size: 14px;
     padding-left: 10px;
 }
@@ -310,4 +315,21 @@ label {
     left: 0;
     border: 1px solid #ebecee;
     background-color: #ebecee;
+}
+
+#preview {
+    position: relative;
+    top: 10px;
+    max-width: 635px;
+    border: 1px solid lightgray;
+}
+
+.story_content_image p {
+    padding-left: 20px;
+    padding-top: 3px;
+}
+
+#upfile {
+    margin-left: 10px;
+    margin-top: 10px;
 }

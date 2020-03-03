@@ -7,9 +7,76 @@ $(function(){
     
     importReviewData();
     listItemPicker();
-
+    getWordCloudData();
 });
 
+
+function getWordCloudData(){
+
+    $.ajax({
+      type: "post",
+      data: { mode: 'admin', 
+            year: y,
+            month: m},
+      datatype: 'json',
+      url : "/eduplanet/lib/get_wordcloud_api.php",
+      success : function(data){
+        data = data.trim();
+  
+        $not_found_keyword1 = $('#not_found_keyword1');
+        $not_found_keyword2 = $('#not_found_keyword2');
+        $good_key = $("#good_key");
+        $bad_key = $("#bad_key");
+        if(data=='not_found'){
+          $not_found_keyword1.text('[Request error] 요청값이 올바르지 않습니다');
+          $not_found_keyword2.text('[Request error] 요청값이 올바르지 않습니다');
+          $not_found_keyword1.css('display', 'block');
+          $not_found_keyword2.css('display', 'block');
+          $good_key.css('display', 'none');
+          $bad_key.css('display', 'none');
+        }else if(data=='no_data'){
+          $not_found_keyword1.text('작성된 리뷰가 없습니다');
+          $not_found_keyword2.text('작성된 리뷰가 없습니다');
+          $not_found_keyword1.css('display', 'block');
+          $not_found_keyword2.css('display', 'block');
+          $good_key.css('display', 'none');
+          $bad_key.css('display', 'none');
+
+          }else{
+            data = JSON.parse(data);
+  
+            var good = data[0]; //장점키워드
+            var bad = data[1]; //단점키워드
+  
+            var good_array = [];
+            var bad_array = [];
+            var blue_colors = ['#2E64FE', '#0080FF', '#2E9AFE', '#58ACFA'];
+            var red_colors = ['#F78181', '#FA5858', '#FE642E', '#FA8258'];
+  
+            var length = good.length>20? 20 : good.length;
+            for(var i=0; i<length; i++){
+              good_array.push({text: good[i][0], weight: good[i][1], color: randomItem(blue_colors)});
+            }
+  
+            length = bad.length>20? 20 : bad.length;
+            for(var i=0; i<length; i++){
+              bad_array.push({text: bad[i][0], weight: bad[i][1], color: randomItem(red_colors)});
+            }
+            console.log(bad_array);
+            
+            $good_key.jQCloud(good_array);
+            $bad_key.jQCloud(bad_array);
+  
+          }
+      },
+      error : function(){
+          alert("시스템에러");
+      }
+    });
+  }
+  function randomItem(a) {
+    return a[Math.floor(Math.random() * a.length)];
+  }
 
 function listItemPicker(){
     $('.list_row').click(function(){

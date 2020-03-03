@@ -992,9 +992,10 @@
                       <span>학원 찜하기</span>
                       <?php
                           if ($gm_no) {
+                        
                       ?>
 
-                      <a class="jjim" href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart">like</button></a>
+                      <a class="jjim" href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart_on">like</button></a>
 
                       <?php
                           } else {
@@ -1072,10 +1073,10 @@
                         // document.getElementsByClassName("story_academy_heart").
 
                     }
-                    var i = 0;
+                    var i = 0; //each() 각각 하나씩 넣어준다
                     $(".jjim").each(function(){
                       $(this).attr("href", "/eduplanet/acd_story/follow.php?no="+acd_no_array[i]);
-                      i++;
+                      i++;    //attr() 속성을변경해준다
                     });
 
 
