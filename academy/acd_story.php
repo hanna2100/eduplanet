@@ -12,12 +12,12 @@
   <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../index/index_content.css">
-  <link rel="stylesheet" href="./css/acd_story.css">
+  <!-- <link rel="stylesheet" href="../index/index_content.css"> -->
   <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
   <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
   <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
   <link rel="stylesheet" href="/eduplanet/index/footer.css">
+  <link rel="stylesheet" href="./css/acd_story.css">
   <link rel="stylesheet" href="/eduplanet/acd_story/css/view.css">
 
   <!-- 자동완성 -->

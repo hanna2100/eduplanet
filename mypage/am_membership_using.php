@@ -151,6 +151,7 @@
                     // 해당 아이디의 만료날짜가 0000-00-00 인지 점검 (== 이용중인 멤버십이 없음)
                     $sql_exp = "SELECT expiry_day FROM a_members WHERE no='$user_no'";
                     $result_exp = mysqli_query($conn, $sql_exp);
+                    $row = mysqli_fetch_array($result_exp);
                     $using_exp = $row["expiry_day"];
 
                     if ($using_exp == "0000-00-00") {

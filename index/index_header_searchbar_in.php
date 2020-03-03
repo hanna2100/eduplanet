@@ -115,7 +115,7 @@
 
                         include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
                         
-                        $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
+                        $sql = "SELECT acd_no FROM a_members WHERE no='$am_no';";
                         $result = mysqli_query($conn, $sql);
                         $row = mysqli_fetch_array($result);
                         $acd_no = $row["acd_no"];

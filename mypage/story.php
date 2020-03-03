@@ -334,7 +334,7 @@
                                 <h2>스토리가 없습니다.</h2>
                                 <p class="list_none_p">아직 작성하신 스토리가 없습니다.</p>
                                 <p class="list_none_p">스토리를 작성하여 학원의 이야기를 담아 보세요.</p>
-                                <a href="/eduplanet/acd_story/post.php"><button type="button">스토리 작성하러 가기</button></a>
+                                <a href="/eduplanet/acd_story/post.php"><button type="button">스토리 작성하기</button></a>
                             </div>
 
                         <?php

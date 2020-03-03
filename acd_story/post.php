@@ -73,8 +73,6 @@
 
         $si_name = $row["si_name"];
 
-        mysqli_close($conn);
-
     ?>
 
         <header>

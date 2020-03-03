@@ -158,12 +158,12 @@
                             </div>
                             <div class="formBox">
                                 <label for='inputAcdName'>학원/교습소 이름</label>
-                                <input type='text' class='formInput' id='inputAcdName' name='acd_name' placeholder='공백 없이 입력해 주세요.' value="<?= $acd_name ?>" required>
+                                <input type='text' class='formInput' id='inputAcdName' name='acd_name' value="<?= $acd_name ?>" disabled>
                                 <p class='subMsg' id='AcdNameSubMsg'></p>
                             </div>
                             <div class="formBox">
                                 <label for='inputRprsn'>대표자명</label>
-                                <input type='text' class='formInput' id='inputRprsn' name='rprsn' placeholder='대표자명을 입력해 주세요' value="<?= $rprsn ?>" required>
+                                <input type='text' class='formInput' id='inputRprsn' name='rprsn' value="<?= $rprsn ?>" disabled>
                                 <p class='subMsg' id='RprsnSubMsg'></p>
                             </div>
                             <!-- <div class="formBox">
