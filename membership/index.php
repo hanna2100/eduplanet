@@ -29,6 +29,8 @@
   <body>
     <header>
        <?php
+        include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
+        include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
         include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
        ?>
     </header>
@@ -37,8 +39,6 @@
         <?php
           $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : "";
           $am_no = isset($_SESSION["am_no"]) ?  $_SESSION["am_no"] : "";
-
-          include "../lib/db_connector.php";
         ?>
 
         <div class="membership_container">
@@ -142,7 +142,7 @@
                 <div class="membership_icons">
                   <img src="../img/blog.png" alt="teacher" width="60%" height="60%">
                   <span class="icon_text">학원스토리</span>
-                </div>                
+                </div>
               </div>
 
 

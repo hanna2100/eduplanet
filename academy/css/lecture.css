@@ -129,6 +129,7 @@ input::placeholder {
 }
 
 .teacher_box {
+  cursor: pointer;
   margin: 0px 20px;
   background-color: white;
 }
@@ -269,4 +270,42 @@ input::placeholder {
 .add_schedule_button input:first-child, .buttonBox input:first-child{
   background-color: #333;
   border: 1px solid #333;
+}
+.not_found_teacher_wrap{
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+#not_found_teacher{
+  width: 960px;
+  height: 300px;
+  margin: 0px auto;
+  background-color: #fff;
+  display: none;
+  border-top: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+  text-align: center;
+  
+}
+
+#not_found_teacher h2{
+  color: rgb(122, 122, 122);
+  font-size: 25px;
+  margin: 60px 0px 30px 0px;
+}
+
+#not_found_teacher p{
+  color: gray;
+  font-size: 15px;
+  margin: 5px;
+}
+
+#not_found_teacher button{
+  padding: 10px 30px;
+  background-color: #2E89FF;
+  border: 1px solid #2E89FF;
+  color: #fff;
+  margin: 15px;
+  cursor: pointer;
 }
