@@ -5,10 +5,14 @@
     include_once("../lib/db_connector.php");
 
 
-    // $sql= " select * from academy where si_name = '$siName' and dong_name = '$dongName'; ";
-    $sql = "select academy.*,review.parent from academy inner join review on academy.no = review.parent where si_name = '가평군' and dong_name = '가평읍' group by parent;";
+    // 우리동네 학원 정보 가져오기 쿼리
+    $sql = "select academy.*,review.parent from academy inner join review on academy.no = review.parent where si_name = '$siName' and dong_name = '$dongName' group by parent;";
     $result=mysqli_query($conn,$sql);
-
+    if(mysqli_num_rows($result)==0){
+      echo "
+        Norow!
+      ";
+    }else{
     for($i=0;$i<mysqli_num_rows($result);$i++){
         mysqli_data_seek($result,$i);
         $row=mysqli_fetch_array($result);
@@ -21,4 +25,5 @@
     //받은 정보를 제이슨으로 ajax success함수에 반환 encode 택배상자같은느낌.
     $gg = json_encode($list); //제이슨으로 포장하는느낌
     echo $gg; // success로 보내주는 행위
+  }
 ?>

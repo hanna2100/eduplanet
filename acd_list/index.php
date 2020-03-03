@@ -866,25 +866,7 @@
                 </div>
                 <div id="call_dibs">
                   <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
-                  <div class="story_academy_heart">
-                      <span>학원 찜하기</span>
-                      <?php
-                          if ($gm_no) {
-                      ?>
 
-                      <a class="jjim" href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart">like</button></a>
-
-                      <?php
-                          } else {
-                      ?>
-
-                      <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
-
-                      <?php
-                          }
-                      ?>
-                      <!-- <button id="button_academy_heart" onclick="onclick_heart()">like</button> -->
-                  </div>
                 </div>
                 <div class="see_more">
                   <span> <a href="#" id="see_more">자세히</a></span>
@@ -907,25 +889,7 @@
                 </div>
                 <div id="call_dibs">
                   <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
-                  <div class="story_academy_heart">
-                      <span>학원 찜하기</span>
-                      <?php
-                          if ($gm_no) {
-                      ?>
 
-                      <a class="jjim" href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart">like</button></a>
-
-                      <?php
-                          } else {
-                      ?>
-
-                      <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
-
-                      <?php
-                          }
-                      ?>
-                      <!-- <button id="button_academy_heart" onclick="onclick_heart()">like</button> -->
-                  </div>
                 </div>
                 <div class="see_more">
                   <span><a href="#" id="see_more">자세히</a></span>
@@ -948,25 +912,7 @@
                 </div>
                 <div id="call_dibs">
                   <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
-                  <div class="story_academy_heart">
-                      <span>학원 찜하기</span>
-                      <?php
-                          if ($gm_no) {
-                      ?>
 
-                      <a class="jjim" href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart">like</button></a>
-
-                      <?php
-                          } else {
-                      ?>
-
-                      <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
-
-                      <?php
-                          }
-                      ?>
-                      <!-- <button id="button_academy_heart" onclick="onclick_heart()">like</button> -->
-                  </div>
                 </div>
                 <div class="see_more">
                   <span><a href="#" id="see_more">자세히</a></span>
@@ -988,26 +934,7 @@
                 </div>
                 <div id="call_dibs">
                   <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
-                  <div class="story_academy_heart">
-                      <span>학원 찜하기</span>
-                      <?php
-                          if ($gm_no) {
-                        
-                      ?>
 
-                      <a class="jjim" href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart_on">like</button></a>
-
-                      <?php
-                          } else {
-                      ?>
-
-                      <a href="javascript:alert('일반회원만 이용 가능합니다.')"><button type="button" id="button_academy_heart">like</button></a>
-
-                      <?php
-                          }
-                      ?>
-                      <!-- <button id="button_academy_heart" onclick="onclick_heart()">like</button> -->
-                  </div>
                 </div>
                 <div class="see_more">
                   <span><a href="#" id="see_more">자세히</a></span>
@@ -1031,53 +958,62 @@
                       "dongName":dongName}, //이것으로 작업을 할것이여
                 url: "./infor.php", //여기로 보낼것이여 저 2개의 데이터를
                 success: function (response) { //저기서 작업하고 여 response로 값이 올것이여.
+                    response = response.trim();
+                    console.log(response);
+                    if(response == "Norow!"){
 
-                    // console.log(response);
+                       //폼 수정 하면 밑에 3줄 주석 풀어라!
+                      // document.getElementById("my_village_academy").style.display = "none";
+                      // document.getElementById("more_s").style.display = "none";
+                      // document.getElementById("contents_wrap").style.height = "770px";
+                    }else{
+                      var a = JSON.parse(response); //택배를 뜯는느낌 // 이것은 json 정보를 우리가 볼수있게 해독해주는 것이여.
+                      console.log(a[0]['acdName']);
+                      var acd_no_array = [];
+                      for (var i = 0; i < 4; i++) {
+                          //이미지 넣어주기
+                          console.log(a);
+                          if(a[i]['img']===""){
+                              document.getElementsByClassName("acd_img")[i].src ="/eduplanet/img/acd_logo2.png";
+                          }
+                          else{
+                              document.getElementsByClassName("acd_img")[i].src = a[i]['img'];
+                          }
+                          //학원명 넣어주기
+                          document.getElementsByClassName("aca_name")[i].innerHTML = a[i]['acdName'];
+
+                          //번호 넣어주기
+                          if(a[i]['tel']==''){
+                            // alert("뭣이여");
+                            document.getElementsByClassName("aca_tel")[i].innerHTML = " # 번호 정보 없음";
+                          }else{
+                            document.getElementsByClassName("aca_tel")[i].innerHTML = a[i]['tel'];
+                          }
+                          //학원주소 넣어주기
+                          document.getElementsByClassName("aca_address")[i].innerHTML = a[i]['address'];
+                          console.log(a[i]['no']);
+
+                          // 학원 정보 자세히
+                          document.getElementsByClassName("see_more")[i].onclick = moreInfo(a[i]['no']);
+                          // console.log(a[i]['no']);
+                          // document.getElementsByClassName("")[i]
+                          var jim = a[i]['parent']; //이거를 어떻게 저기로 보내느냐 그것이 문제다
+                          acd_no_array.push(a[i]['parent']);
+                          // document.getElementsByClassName("jjim")[0].
+
+                          // $(".jjim")[0].attr("href", "/eduplanet/acd_story/follow.php?no="+a[i]['parent']);
+                          // document.getElementsByClassName("story_academy_heart").
+
+                      }
+                      var i = 0; //each() 각각 하나씩 넣어준다
+                      $(".jjim").each(function(){
+                        $(this).attr("href", "/eduplanet/acd_story/follow.php?no="+acd_no_array[i]);
+                        i++;    //attr() 속성을변경해준다
+                      });
+                    }
                     // console.log(response[0]["acd_name"]);
                   //  제이슨 해당정보를 해독을 함
-                    var a = JSON.parse(response); //택배를 뜯는느낌 // 이것은 json 정보를 우리가 볼수있게 해독해주는 것이여.
-                    console.log(a[0]['acdName']);
-                    var acd_no_array = [];
-                    for (var i = 0; i < 4; i++) {
-                        //이미지 넣어주기
-                        console.log(a);
-                        if(a[i]['img']===""){
-                            document.getElementsByClassName("acd_img")[i].src ="/eduplanet/img/acd_logo2.png";
-                        }
-                        else{
-                            document.getElementsByClassName("acd_img")[i].src = a[i]['img'];
-                        }
-                        //학원명 넣어주기
-                        document.getElementsByClassName("aca_name")[i].innerHTML = a[i]['acdName'];
 
-                        //번호 넣어주기
-                        if(a[i]['tel']==''){
-                          // alert("뭣이여");
-                          document.getElementsByClassName("aca_tel")[i].innerHTML = " # 번호 정보 없음";
-                        }else{
-                          document.getElementsByClassName("aca_tel")[i].innerHTML = a[i]['tel'];
-                        }
-                        //학원주소 넣어주기
-                        document.getElementsByClassName("aca_address")[i].innerHTML = a[i]['address'];
-                        console.log(a[i]['no']);
-
-                        // 학원 정보 자세히
-                        document.getElementsByClassName("see_more")[i].onclick = moreInfo(a[i]['no']);
-                        // console.log(a[i]['no']);
-                        // document.getElementsByClassName("")[i]
-                        var jim = a[i]['parent']; //이거를 어떻게 저기로 보내느냐 그것이 문제다
-                        acd_no_array.push(a[i]['parent']);
-                        // document.getElementsByClassName("jjim")[0].
-
-                        // $(".jjim")[0].attr("href", "/eduplanet/acd_story/follow.php?no="+a[i]['parent']);
-                        // document.getElementsByClassName("story_academy_heart").
-
-                    }
-                    var i = 0; //each() 각각 하나씩 넣어준다
-                    $(".jjim").each(function(){
-                      $(this).attr("href", "/eduplanet/acd_story/follow.php?no="+acd_no_array[i]);
-                      i++;    //attr() 속성을변경해준다
-                    });
 
 
                     // document.getElementById("see_more"+0).onclick = function(){
@@ -1121,12 +1057,12 @@
 
                 navigator.geolocation.getCurrentPosition(function(position) {
 
-                    lat = 37.825968;
-                    //position.coords.latitude; //현위치 위도경도
-                    lng = 127.510878;
-                    // position.coords.longitude; //현위치 위도경도
-                    console.log(lat);
-                    console.log(lng);
+                    // lat = 37.825968;
+                    lat = position.coords.latitude; //현위치 위도경도
+                    // lng = 127.510878;
+                    lng = position.coords.longitude; //현위치 위도경도
+                    console.log(position.coords.latitude);
+                    console.log(position.coords.longitude);
 
                     var geocoder = new kakao.maps.services.Geocoder();
                     var coord = new kakao.maps.LatLng(lat,lng);
