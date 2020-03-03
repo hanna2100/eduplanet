@@ -71,6 +71,8 @@
       <div class="inner_section">
         <div class="inner_section_left">
 
+        <h2 class="review_title_top">학원 리뷰</h2>
+
           <div id="content_top" class="content">
             <h2 class="txt_title">전체 리뷰 통계</h2>
             <div class="inner_content_top top_rating">

@@ -121,6 +121,37 @@
 
         </div>
 
+        <?php
+            $name = "안녕 세상아";
+            $no = $_GET["no"];
+            // $page = $_GET["page"];
+
+            // DB에서 가져오기-------------------------------------
+            include_once("../lib/db_connector.php");
+
+            // $con = mysqli_connect("localhost","root","123456","eduplanet");
+            $sql = "select * from academy where no = $no";
+            $result = mysqli_query($conn, $sql);
+
+            $row = mysqli_fetch_array($result);
+
+            $acd_name = $row["acd_name"]; //교습과정
+            $rprsn = $row["rprsn"]; //대표자명
+            $class = $row["class"]; //대표과정
+            $address = $row["address"]; //주소
+            $tel = $row["tel"]; //전화
+            $website = $row["website"]; //사이트 주소
+            $schoolbus = $row["schoolbus"]; //스쿨버스 여부
+            $introduce = $row["introduce"]; // 소개
+            // $latitude = $row["latitude"];  //위도
+            // $longtitude = $row["longitude"]; //경도
+            //-------------------------------
+
+            //DB 닫아주기
+            mysqli_close($conn);
+
+            ?>
+
 
       </div><!-- eduform end -->
       <!-- 팝업레이어 -->
@@ -156,15 +187,15 @@
               </ul>
               <ul>
                 <li class="li_width">웹사이트</li>
-                <li> <input id="site_address2" type="url" name="website" value="" placeholder="웹사이트를 입력해 주세요."> </li>
+                <li> <input id="site_address2" type="url" name="website" value="<?=$website?>" placeholder="웹사이트를 입력해 주세요."> </li>
               </ul>
               <ul>
                 <li class="li_width">통학버스 여부</li>
-                <li><input id="schoolbus_status2" type="text" name="schoolbus" value="" placeholder="통학버스 여부를 입력해 주세요."> </li>
+                <li><input id="schoolbus_status2" type="text" name="schoolbus" value="<?=$schoolbus?>" placeholder="통학버스 여부를 입력해 주세요."> </li>
               </ul>
               <ul>
                 <li class="li_width2">소개</li>
-                <li><textarea id="introduce2" name="introduce" rows="7" cols="90" placeholder="학원을 소개하는 글을 간단하게 입력해 주세요."></textarea> </li>
+                <li><textarea id="introduce2" name="introduce" rows="7" cols="90" placeholder="학원을 소개하는 글을 간단하게 입력해 주세요."><?=$introduce?></textarea> </li>
               </ul>
               <ul>
                 <li class="li_width">학원 로고</li>
@@ -197,38 +228,7 @@
 
           <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=79f3ade82ebdd492df0cd3712dc6f828&libraries=services"></script>
           <script>
-            <?php
-            $name = "안녕 세상아";
-            $no = $_GET["no"];
-            // $page = $_GET["page"];
-
-            // DB에서 가져오기-------------------------------------
-            include_once("../lib/db_connector.php");
-
-            // $con = mysqli_connect("localhost","root","123456","eduplanet");
-            $sql = "select * from academy where no = $no";
-            $result = mysqli_query($conn, $sql);
-
-            $row = mysqli_fetch_array($result);
-
-            $acd_name = $row["acd_name"]; //교습과정
-            $rprsn = $row["rprsn"]; //대표자명
-            $class = $row["class"]; //대표과정
-            $address = $row["address"]; //주소
-            $tel = $row["tel"]; //전화
-            $website = $row["website"]; //사이트 주소
-            $schoolbus = $row["schoolbus"]; //스쿨버스 여부
-            $introduce = $row["introduce"]; // 소개
-            // $latitude = $row["latitude"];  //위도
-            // $longtitude = $row["longitude"]; //경도
-            //-------------------------------
-
-            //DB 닫아주기
-            mysqli_close($conn);
-
-            ?>
-
-
+            
             // 학원 정보 span에 띄우기---------------
             document.getElementById("course_name").innerHTML = "<?= $acd_name ?>"
             document.getElementById("rep_course").innerHTML = "<?= $rprsn ?>"
