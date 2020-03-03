@@ -75,14 +75,13 @@
             <h2 class="txt_title">전체 리뷰 통계</h2>
             <div class="inner_content_top top_rating">
               <div class="rate_star_wrap">
-                <span id="rate_point" class="rate_point"><?=$rate_point?></span>
+                <span id="rate_point" class="rate_point"><span class="rate_txt">총 만족도 </span><?=$rate_point?>.0</span>
                 <div class="rate_star_ty1">
                   <span class="fa fa-star total_star"></span>
                   <span class="fa fa-star total_star"></span>
                   <span class="fa fa-star total_star"></span>
                   <span class="fa fa-star total_star"></span>
                   <span class="fa fa-star total_star"></span>
-                  <div class="rate_txt">총 만족도</div>
 
                   <script>
                   var rate_point = '<?=round($rate_point)?>';
@@ -196,6 +195,7 @@
                <div class="review_body_wrap">
                  <div class="review_body_left review_body">
                    <div id="rate_5_things">
+                      <span id="total_star_span">총 만족도</span>
                       <span class="fa fa-star star0"></span>
                       <span class="fa fa-star star1"></span>
                       <span class="fa fa-star star2"></span>
@@ -282,6 +282,7 @@
 
                 <!-- 멤버십에 가입되어 있으면 리뷰 보여주고 아니면 안보여준다  -->
                  <script>
+                    var no = '<?=$no?>';
                     var gm_no = '<?=$gm_no?>';
                     var am_no = '<?=$am_no?>';
                     var pgm_no = '<?=$pgm_no?>';
@@ -290,11 +291,11 @@
                     var overlay = document.getElementsByClassName("overlay");
                     var modal = document.getElementsByClassName("modal");
 
-          
+
                     if(pgm_no || admin){
                       overlay[i].style.display = "none";
                       modal[i].style.display = "none";
-                    }else if(am_no == pam_no){
+                    }else if(no == pam_no){
                       overlay[i].style.display = "none";
                       modal[i].style.display = "none";
                     }else {

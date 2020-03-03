@@ -137,7 +137,7 @@
 
                                     <label id="story_post_img_label" for="story_post_img">사진 (필수)</label>
                                     <span id="story_post_img_check" class="story_post_input_check"></span>
-                                    <input type="file" id="upfile" name="upfile" onchange="checkInputImg();">
+                                    <input type="file" id="upfile" name="upfile" onchange="checkInputImg();" accept=".jpg,.jpeg,.png,.gif">
                                     <img id="preview" src="" alt="사진을 선택하시면 이 곳에 미리보기가 표시됩니다.">
 
                                 </div>
