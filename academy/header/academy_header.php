@@ -69,7 +69,8 @@
                         <span id="academy_star_span"><?= round($avg_total,1) ?></span>
                         <?php
                         $val = round($avg_total,1);
-                          echo "
+                        if($avg_total){
+                            echo "
                             <script>
                             if($avg_total%1==0){
                               document.getElementById('academy_star_span').innerHTML = $avg_total+'.0';
@@ -79,6 +80,14 @@
                             </script>
 
                           ";
+                        }else{
+                            echo "
+                            <script>
+                              document.getElementById('academy_star_span').innerHTML = 0;
+                            </script>
+                          "; 
+                        }
+                          
                          ?>
                         <span id="academy_district"><?= $si_name ?></span>
 
