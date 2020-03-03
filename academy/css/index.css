@@ -19,6 +19,11 @@ body {
     top: -20px;
 }
 
+#preview {
+  position: relative;
+  left: 118px;
+}
+
 
 .body_wrap {
     position: relative;
