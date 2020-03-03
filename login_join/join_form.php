@@ -39,6 +39,9 @@
   if (isset($_POST["kakao_email"])) {
     $kakao_email = $_POST["kakao_email"];
   }
+  if (isset($_POST["naver_id"])) {
+    $naver_id = $_POST["naver_id"];
+  }
 
   ?>
 
