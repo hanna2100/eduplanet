@@ -1,7 +1,7 @@
  <?php
 
-  @session_start();
 
+  include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
   include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
 
@@ -14,6 +14,7 @@
 
   $mode = $_GET['mode'];
 
+  
 
   // 관리자 아이디, 비밀번호 입력 시 mode 설정
   if ($input_id == ADMIN_ID && $input_pw == ADMIN_PW) {
@@ -95,8 +96,17 @@
         // 기존에 멤버십 구입을 했으나 만료된 경우
         else{
 
+          // 테이블 만료날짜를 0000-00-00 으로 업데이트
+          // $sql_exp = "UPDATE $table_members SET expiry_day='0000-00-00' WHERE no=$no";
+          // mysqli_query($conn, $sql_exp);
+          //
+          // if (!mysqli_query($conn, $sql_exp)) {
+          //   echo "오류ㅠ.ㅠ : ".mysqli_error($conn);
+          // }
+
           // gm_no, am_no 세션 값 주기
           $_SESSION[$mode_no] = $no;
+          unset($_SESSION[$pay]);
 
           // 자동로그인(로그인 유지) 체크박스 선택시 cookie를 굽기 위해 set_cookie 페이지로 이동
           if(isset($_POST['auto_login'])){
@@ -130,6 +140,7 @@
           }
 
           $_SESSION[$mode_no] = $no;
+          unset($_SESSION[$pay]);
 
           // 자동로그인(로그인 유지) 체크박스 선택시 cookie를 굽기 위해 set_cookie 페이지로 이동
           if(isset($_POST['auto_login'])){

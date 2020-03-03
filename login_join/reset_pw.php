@@ -1,7 +1,6 @@
 <?php
 include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
-
     $table = $_POST["table"];
     $hash = $_POST["hash"];
     $temp_pw = $_POST["temp_pw"];
