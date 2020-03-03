@@ -23,8 +23,8 @@
      <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
      <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-radar.min.js"></script>
      <!-- word cloud  -->
-     <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
-     <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+     <link rel="stylesheet" href="/eduplanet/academy/css/jqcloud.min.css">
+     <script src="/eduplanet/academy/js/jqcloud.min.js" charset="utf-8"></script>
      <!-- CSS -->
      <link rel="stylesheet" href="./css/review.css">
      <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
@@ -63,6 +63,9 @@
         $rate_bar_cost_efct = round($row_top[4],1);
         $rate_bar_achievement = round($row_top[5],1);
     ?>
+    <script>
+    var get_no = <?=$no?>
+    </script>
 
     <section>
       <div class="inner_section">
@@ -135,7 +138,10 @@
 
           <div id="content_mid" class="content">
               <h2 class="txt_title">장단점 키워드</h2>
-              <div id="container"></div>
+              <div>
+                <div id="good_key"></div><div id="bad_key"></div>
+                <div id="not_found_keyword"></div>
+              </div>
           </div>
       <?php
           // content_bottom
