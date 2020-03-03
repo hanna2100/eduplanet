@@ -152,11 +152,11 @@
                                 </div>
 
                                 <div class="story_post_wrap">
-                                    <label for="story_post_subtitle_1">주제</label>
+                                    <label for="story_post_subtitle_1">Title.1</label>
                                     <span id="story_post_subtitle_1_check" class="story_post_input_check"></span>
                                     <input id="story_post_subtitle_1" name="story_post_subtitle_1" type="text" placeholder="ex ) 자기소개" onkeyup="checkInputSubtitle1();">
 
-                                    <label for="story_post_description_1">내용</label>
+                                    <label for="story_post_description_1">Content.1</label>
                                     <span id="story_post_description_1_check" class="story_post_input_check"></span>
                                     <textarea id="story_post_description_1" name="story_post_description_1" type="text" placeholder="내용을 입력해 주세요." onkeyup="checkInputDescription1();"></textarea>
                                 </div>

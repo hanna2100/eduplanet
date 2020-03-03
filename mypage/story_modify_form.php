@@ -183,11 +183,11 @@
                                 </div>
 
                                 <div class="story_post_wrap">
-                                    <label for="story_post_subtitle_1">주제</label>
+                                    <label for="story_post_subtitle_1">Title.1</label>
                                     <span id="story_post_subtitle_1_check" class="story_post_input_check"></span>
                                     <input id="story_post_subtitle_1" name="story_post_subtitle_1" type="text" value="<?= $subject1 ?>" placeholder="ex ) 자기소개" onkeyup="checkInputSubtitle1();">
 
-                                    <label for="story_post_description_1">내용</label>
+                                    <label for="story_post_description_1">Content.1</label>
                                     <span id="story_post_description_1_check" class="story_post_input_check"></span>
                                     <textarea id="story_post_description_1" name="story_post_description_1" type="text" placeholder="내용을 입력해 주세요." onkeyup="checkInputDescription1();"><?= $content1 ?></textarea>
                                 </div>
@@ -196,11 +196,11 @@
                                 if (($subject2 != "" && $content2 != "") && ($subject3 == "" && $content3 == "")) {
                                 ?>
                                     <div class="story_post_wrap">
-                                        <label id="story_post_subtitle_2_label" for="story_post_subtitle_2">주제 2</label>
+                                        <label id="story_post_subtitle_2_label" for="story_post_subtitle_2">Title.2</label>
                                         <span id="story_post_subtitle_2_check" class="story_post_input_check"></span>
                                         <input id="story_post_subtitle_2" name="story_post_subtitle_2" type="text" value="<?= $subject2 ?>" placeholder="ex ) 공부비법 / 강의비법" onkeyup="checkInputSubtitle2();">
 
-                                        <label for="story_post_description_2">내용 2</label>
+                                        <label for="story_post_description_2">Content.2</label>
                                         <span id="story_post_description_2_check" class="story_post_input_check"></span>
                                         <textarea id="story_post_description_2" name="story_post_description_2" type="text" placeholder="내용을 입력해 주세요." onkeyup="checkInputDescription2();"><?= $content2 ?></textarea>
                                     </div>
@@ -210,21 +210,21 @@
                                 ?>
 
                                     <div class="story_post_wrap">
-                                        <label id="story_post_subtitle_2_label" for="story_post_subtitle_2">주제 2</label>
+                                        <label id="story_post_subtitle_2_label" for="story_post_subtitle_2">Title.2</label>
                                         <span id="story_post_subtitle_2_check" class="story_post_input_check"></span>
                                         <input id="story_post_subtitle_2" name="story_post_subtitle_2" type="text" value="<?= $subject2 ?>" placeholder="ex ) 공부비법 / 강의비법" onkeyup="checkInputSubtitle2();">
 
-                                        <label for="story_post_description_2">내용 2</label>
+                                        <label for="story_post_description_2">Content.2</label>
                                         <span id="story_post_description_2_check" class="story_post_input_check"></span>
                                         <textarea id="story_post_description_2" name="story_post_description_2" type="text" placeholder="내용을 입력해 주세요." onkeyup="checkInputDescription2();"><?= $content2 ?></textarea>
                                     </div>
 
                                     <div class="story_post_wrap">
-                                        <label for="story_post_subtitle_3">주제 3</label>
+                                        <label for="story_post_subtitle_3">Title.3</label>
                                         <span id="story_post_subtitle_3_check" class="story_post_input_check"></span>
                                         <input id="story_post_subtitle_3" name="story_post_subtitle_3" type="text" value="<?= $subject3 ?>" placeholder="ex ) 마지막으로 한마디" onkeyup="checkInputSubtitle3();">
 
-                                        <label for="story_post_description_3">내용 3</label>
+                                        <label for="story_post_description_3">Content.3</label>
                                         <span id="story_post_description_3_check" class="story_post_input_check"></span>
                                         <textarea id="story_post_description_3" name="story_post_description_3" type="text" placeholder="내용을 입력해 주세요." onkeyup="checkInputDescription3();"><?= $content3 ?></textarea>
                                     </div>

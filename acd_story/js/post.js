@@ -299,7 +299,7 @@ function storyPostAddSubject() {
         var parent = document.getElementById("story_academy_html");
         var subject = document.createElement("div");
         subject.className = "story_post_wrap";
-        subject.innerHTML = "<div class='story_post_wrap'><label for='story_post_subtitle_2'>주제 2)</label><span id='story_post_subtitle_2_check' class='story_post_input_check'></span><input id='story_post_subtitle_2' name='story_post_subtitle_2' type='text' placeholder='ex ) 공부비법 / 강의비법' onkeyup='checkInputSubtitle2();'><label for='story_post_description_2'>내용 2)</label><span id='story_post_description_2_check' class='story_post_input_check'></span><textarea id='story_post_description_2' name='story_post_description_2' type='text' placeholder='내용을 입력해 주세요.' onkeyup='checkInputDescription2();'></textarea></div>";
+        subject.innerHTML = "<div class='story_post_wrap'><label for='story_post_subtitle_2'>Title.2</label><span id='story_post_subtitle_2_check' class='story_post_input_check'></span><input id='story_post_subtitle_2' name='story_post_subtitle_2' type='text' placeholder='ex ) 공부비법 / 강의비법' onkeyup='checkInputSubtitle2();'><label for='story_post_description_2'>Content.2</label><span id='story_post_description_2_check' class='story_post_input_check'></span><textarea id='story_post_description_2' name='story_post_description_2' type='text' placeholder='내용을 입력해 주세요.' onkeyup='checkInputDescription2();'></textarea></div>";
         parent.appendChild(subject.lastChild);
         alert("추가가 완료되었습니다.");
 
@@ -313,7 +313,7 @@ function storyPostAddSubject() {
         var parent = document.getElementById("story_academy_html");
         var subject = document.createElement("div");
         subject.className = "story_post_wrap";
-        subject.innerHTML = "<div class='story_post_wrap'><label for='story_post_subtitle_3'>주제 3)</label><span id='story_post_subtitle_3_check' class='story_post_input_check'></span><input id='story_post_subtitle_3' name='story_post_subtitle_3' type='text' placeholder='ex ) 마지막으로 한마디' onkeyup='checkInputSubtitle3();'><label for='story_post_description_3'>내용 3)</label><span id='story_post_description_3_check' class='story_post_input_check'></span><textarea id='story_post_description_3' name='story_post_description_3' type='text' placeholder='내용을 입력해 주세요.' onkeyup='checkInputDescription3();'></textarea></div>";
+        subject.innerHTML = "<div class='story_post_wrap'><label for='story_post_subtitle_3'>Title.3</label><span id='story_post_subtitle_3_check' class='story_post_input_check'></span><input id='story_post_subtitle_3' name='story_post_subtitle_3' type='text' placeholder='ex ) 마지막으로 한마디' onkeyup='checkInputSubtitle3();'><label for='story_post_description_3'>Content.3</label><span id='story_post_description_3_check' class='story_post_input_check'></span><textarea id='story_post_description_3' name='story_post_description_3' type='text' placeholder='내용을 입력해 주세요.' onkeyup='checkInputDescription3();'></textarea></div>";
         parent.appendChild(subject.lastChild);
         alert("추가가 완료되었습니다.");
 
