@@ -41,49 +41,51 @@
       <div id="eduform">
 
         <div id="edutitle">
-          <h1>학원정보</h1>
+          <h1 class="title">학원 정보</h1>
         </div>
         <div id="infor">
           <table>
             <ul>
-              <li class="li_width">교습과정명</li>
+              <li class="li_width_index">교습과정명</li>
               <li><span id="course_name" name="spand"></span></li>
             </ul>
             <ul>
-              <li class="li_width">대표자명</li>
+              <li class="li_width_index">대표자명</li>
               <li><span id="rep_course" name="saa"></span></li>
             </ul>
             <ul>
-              <li class="li_width">주소(도로명)</li>
+              <li class="li_width_index">주소 (도로명)</li>
               <li><span id="address"></span></li>
             </ul>
             <ul>
-              <li class="li_width">전화번호</li>
+              <li class="li_width_index">전화번호</li>
               <li><span id="number"></span></li>
             </ul>
             <ul>
-              <li class="li_width">웹사이트</li>
+              <li class="li_width_index">강사 / 강의정보</li>
+              <li><span id="information_class"></span></li>
+            </ul>
+            <ul>
+              <li class="li_width_index">웹사이트</li>
               <li><span id="site_address">-</span></li>
             </ul>
             <ul>
-              <li class="li_width">소개</li>
-              <li><span id="introduce">-</span></li>
-            </ul>
-            <ul>
-              <li class="li_width">통학버스 여부</li>
+              <li class="li_width_index">통학버스 여부</li>
               <li><span id="schoolbus_status">-</span></li>
             </ul>
             <ul>
-              <li class="li_width">강사,강의정보</li>
-              <li><span id="information_class"></span></li>
+              <li class="li_width_index">소개</li>
+              <li><span id="introduce">-</span></li>
             </ul>
+            
+            
           </table>
         </div> <!-- infor -->
         <div id="infor_modify">
             <?php
               if($am_no){
              ?>
-             <button type="button" name="button" onclick="popupAddInfo()">정보수정</button>
+             <button id="modify_button" type="button" name="button" onclick="popupAddInfo()">정보수정</button>
               <?php
             }else {
 
@@ -103,8 +105,9 @@
       <div id="addInfo">
       <form id="edit_form" action="./index_edit.php" method="post">
 
-        <h1><span id="edit_text">정보 수정</span><img src="/eduplanet/img/close_icon.png" id="btn_add_tu_close"></h1>
+        <h1><span id="edit_text">학원 정보 수정</span><img src="/eduplanet/img/close_icon.png" id="btn_add_tu_close"></h1>
         <table>
+          <div class="edit_div">
           <ul>
             <li class="li_width">교습과정명</li>
             <li><span id="course_name2" name="spand"></span></li>
@@ -114,7 +117,7 @@
             <li><span id="rep_course2" name="saa"></span></li>
           </ul>
           <ul>
-            <li class="li_width">주소(도로명)</li>
+            <li class="li_width">주소 (도로명)</li>
             <li><span id="address2"></span></li>
           </ul>
           <ul>
@@ -122,33 +125,35 @@
             <li><span id="number2"></span></li>
           </ul>
           <ul>
-            <li class="li_width">웹사이트</li>
-            <li> <input id="site_address2" type="url" name="website" value="" style="width:250px;height:25px;"> </li>
+            <li class="li_width">강사 / 강의정보</li>
+            <li><span id="information_class2"></span></li>
           </ul>
           <ul>
-            <li class="li_width2">소개</li>
-            <li><textarea id="introduce2" name="introduce" rows="7" cols="90"></textarea> </li>
-            <!-- <input id="introduce2" type="text" name="" value="" style="width:350px;height:25px;"> -->
+            <li class="li_width">웹사이트</li>
+            <li> <input id="site_address2" type="url" name="website" value="" placeholder="웹사이트를 입력해 주세요."> </li>
           </ul>
           <ul>
             <li class="li_width">통학버스 여부</li>
-            <li><input id="schoolbus_status2" type="text" name="schoolbus" value=""style="width:250px;height:25px;"> </li>
+            <li><input id="schoolbus_status2" type="text" name="schoolbus" value="" placeholder="통학버스 여부를 입력해 주세요."> </li>
           </ul>
           <ul>
-            <li class="li_width">강사,강의정보</li>
-            <li><span id="information_class2"></span></li>
+            <li class="li_width2">소개</li>
+            <li><textarea id="introduce2" name="introduce" rows="7" cols="90" placeholder="학원을 소개하는 글을 간단하게 입력해 주세요."></textarea> </li>
           </ul>
+          
+          </div>
+          
         </table>
       </form>
         <div id="adjust">
-          <button type="button" name="button" id="edit" onclick="document.getElementById('edit_form').submit();">수정하기</button>
-          <button type="button" name="button" id="cancel" onclick="popupAddInfo()">취소</button>
+          <button type="button" name="button" id="edit" onclick="document.getElementById('edit_form').submit();">수정완료</button>
+          <button type="button" name="button" id="cancel" onclick="popupAddInfo()">수정취소</button>
         </div>
       </div>
 
     <div id="infor_map">
       <div id="map_div">
-        <h1>위치 보기</h1>
+        <h1 class="title">학원 위치 보기</h1>
       </div>
       <div id="mapp">
 

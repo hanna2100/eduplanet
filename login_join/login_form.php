@@ -32,10 +32,6 @@
   <!-- 스크립트 -->
   <script src="/eduplanet/mypage/js/review_write.js"></script>
 
-  <!-- naver-->
-  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
 
 </head>
@@ -91,12 +87,19 @@
                 <span class="link login"><a href="./login_form.php?mode=am">사업자 회원 LOGIN</a></span>
               </td>
             </tr>
+            <?php
+              // 네이버 로그인 접근토큰 요청 예제
+              $client_id = "bVUclMb7FkFxQxcyDJLm";
+              $redirectURI = urlencode("http://localhost/eduplanet/login_join/login_form.php");
+              $state = "RAMDOM_STATE";
+              $apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=".$client_id."&redirect_uri=".$redirectURI."&state=".$state;
+            ?>
 
           </table>
-
           <div class="social_button">
             <div id="kakao_login_button" onclick="kakaoConn();"><img src="/eduplanet/img/kakao_login_button.png" alt="kakao_login_button"></div>
             <div id="naver_id_login"></div>
+            <a href="<?php echo $apiURL ?>"><img height="46" src="../img/naver_login_button.png"/></a>
           </div>
 
         </div>
@@ -203,14 +206,51 @@
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
 
   <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
-  <script type="text/javascript">
-    var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://localhost/eduplanet/login_join/naver_callback.php");
-    var state = naver_id_login.getUniqState();
-    naver_id_login.setButton("green", 3,40);
-    naver_id_login.setDomain("http://localhost/eduplanet/login_join/join_form.php");
-    naver_id_login.setState(state);
-    naver_id_login.init_naver_id_login();
-  </script>
+
+  <!-- naver -->
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+
+  <?php
+    define( 'NAVER_OAUTH_AUTHORIZE_URL', 'https://nid.naver.com/oauth2.0/authorize' );
+	  define( 'NAVER_OAUTH_TOKEN_URL', 'https://nid.naver.com/oauth2.0/token' );
+	  define( 'NAVER_GET_USERINFO_URL', 'https://apis.naver.com/nidlogin/nid/getUserProfile.xml');
+
+    $token = "AAAAOUoBq0kF4D87SvdAD2MS_iJYh2w7BEKPc3ayDU9nRtmwEuRTdwbvEkqn76gwgZNo5gQ1n8YwS7ZLCd98agAPmDo";
+    $header = "Bearer ".$token; // Bearer 다음에 공백 추가
+    $url = "https://openapi.naver.com/v1/nid/me";
+    $is_post = false;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, $is_post);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $headers = array();
+    $headers[] = "Authorization: ".$header;
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    $response = curl_exec ($ch);
+    $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    echo "status_code:".$status_code."<br>";
+    curl_close ($ch);
+    if($status_code == 200) {
+      echo $response;
+    } else {
+      echo "Error 내용:".$response;
+    }
+  ?>
+
+  <!-- 네이버 로그인 정보를 담는 form (회원가입)-->
+  <form name="naver_form" action=<?= $action ?> method="POST">
+    <input id="naver_id" name="naver_id" type="hidden">
+    <input id="naver_email" name="naver_email" type="hidden">
+  </form>
+
+  <!-- 네이버 로그인 정보를 담는 form (로그인)-->
+  <form name="naver_login_form" action="/eduplanet/login_join/naver_login.php?mode=<?= $mode ?>" method="POST">
+    <input id="naver_id_login" name="naver_id_login" type="hidden">
+    <input id="naver_email_login" name="naver_email_login" type="hidden">
+  </form>
+
   <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
 
 

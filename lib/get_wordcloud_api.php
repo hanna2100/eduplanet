@@ -2,10 +2,13 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
 
+$mode = isset($_POST['mode'])? $_POST['mode']: null;
 $no = isset($_POST['no'])? $_POST['no']: null;
+$y = isset($_POST['year'])? $_POST['year']: null;
+$m = isset($_POST['month'])? $_POST['month']: null;
 
-if(!$no){
-    echo "not_found_no";
+if(($mode=='review' && $no==null) || (($mode=='admin' && $y==null)||($mode=='admin' && $m==null))){
+    echo "not_found";
     exit;
 }
 
@@ -14,10 +17,26 @@ $accessKey = "86344d80-3c18-4e84-be99-2a100b23ff59";
 $analysisCode = "ner"; //언어분석코드 개체명
 $text = "YOUR_SENTENCE"; //분석할 문장
 
-$sql = "SELECT benefit, drawback FROM review where parent = $no;";
-$result = mysqli_query($conn, $sql);
+if($no){
+    $sql = "SELECT benefit, drawback FROM review where parent = $no;";
+}
 
-if(!$result){
+if($y && $m){
+    $sql = "SELECT 
+                benefit, drawback
+            FROM
+                review
+            WHERE
+                regist_day BETWEEN DATE('$y-$m-01') AND LAST_DAY('$y-$m-01')
+            ORDER BY
+                rand()
+            limit
+                20";
+}
+
+$result = mysqli_query($conn, $sql);
+$row_num = mysqli_num_rows($result);
+if($row_num==0){
     echo "no_data";
     exit;
 }

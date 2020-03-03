@@ -56,12 +56,10 @@ function onclickSearch(){
 
     if(col=="학원이름"){
         col="acd_name";
-    }else if(col=="글쓴이"){
-        col="id";
-    }else if(col=="한줄평"){
-        col="one_line";
-    }else if(col=="평균평점"){
-        col="avg";
+    }else if(col=="제목"){
+        col="title";
+    }else if(col=="부제목"){
+        col="subtitle";
     }else if(col=="등록일"){
         col="regist_day";
     }
