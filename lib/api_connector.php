@@ -26,8 +26,8 @@ function set_api_scale($num){
 
 //Academy객체 배열을 반환
 function get_academy_from_api($si_name, $dong_name){
-    global $api_index;
-    global $api_scale;
+    $api_index =1;
+    $api_scale =30;
 
     $si_name = strToHex($si_name);
     $dong_name = strToHex($dong_name);
@@ -91,9 +91,8 @@ function get_academy_from_api($si_name, $dong_name){
 
 //디코딩한 json을 academy객체로 배열생성
 function get_academy_list($array_input){
-
+    
     $array_input = $array_input["TninsttInstutM"][1]["row"];
-
     $array_output = array();
 
     for($i=0; $i<sizeof($array_input); $i++){

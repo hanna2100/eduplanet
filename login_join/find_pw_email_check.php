@@ -11,6 +11,8 @@
   }else if($mode == "am"){
     $table = "a_members";
   }
+
+      // 기존 회원이 맞는지 체크
       $sql = "SELECT * FROM $table where id = '$email'";
       $result = mysqli_query($conn,$sql);
 
@@ -25,7 +27,6 @@
         $code=rand(100000,999999);
         $hash = md5(rand(0,1000)); // 해시 생성 함수
         echo $code;
-        //   $count=1;
         $to=$email;
         $from="eduplanet 관리자";
         $subject="eduplanet 비밀번호 변경 확인 메일";
@@ -38,7 +39,6 @@
 
 
        $sql_hash = "UPDATE $table SET hash='$hash', temp_pw='$code' WHERE id='$to';";
-       // "INSERT INTO $table (hash, temp_pw) VALUES ('$hash', '$code'); ";
        mysqli_query($conn, $sql_hash);
 
         } else {
@@ -58,17 +58,16 @@
 
           // 디버그 모드(production 환경에서는 주석 처리한다.)
           $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+          // $mail->SMTPDebug = 2;
           // $mail->SMTPDebug = 4;
 
           $mail->IsSMTP();
-             //   $mail->SMTPDebug = 2;
           $mail->SMTPSecure = "ssl";
-          // $mail->SMTPSecure = "tls";
           $mail->SMTPAuth = true;
           $mail->Host = "smtp.naver.com";
           $mail->Port = 465;
           $mail->Username = "iamashley44@naver.com";
-          $mail->Password = "wpffktha123!!";
+          $mail->Password = "249EYBG2KCJX";
           $mail->CharSet = 'UTF-8';
           $mail->From = $fmail;
           $mail->FromName = $fname;

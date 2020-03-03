@@ -27,20 +27,27 @@ function getWordCloudData(){
 
   $.ajax({
     type: "post",
-    data: {no: get_no},
+    data: {no: get_no, mode: 'review'},
     datatype: 'json',
     url : "/eduplanet/lib/get_wordcloud_api.php",
     success : function(data){
-      data = JSON.parse(data);
-
+      data = data.trim();
+      console.log(data);
         $not_found_keyword = $('#not_found_keyword');
-        if(data=='not_found_no'){//학원 넘버가 없을때
-          $not_found_keyword.text('학원번호가 올바르지 않습니다');
+        $good_key = $("#good_key");
+        $bad_key = $("#bad_key");
+        if(data=='not_found'){//학원 넘버가 없을때
+          $not_found_keyword.text('[Request error] 요청값이 올바르지 않습니다');
           $not_found_keyword.css('display', 'block');
+          $good_key.css('display', 'none');
+          $bad_key.css('display', 'none');
         }else if(data=='no_data'){
           $not_found_keyword.text('작성된 리뷰가 없습니다');
           $not_found_keyword.css('display', 'block');
+          $good_key.css('display', 'none');
+          $bad_key.css('display', 'none');
         }else{
+          data = JSON.parse(data);
 
           var good = data[0]; //장점키워드
           var bad = data[1]; //단점키워드
@@ -60,8 +67,8 @@ function getWordCloudData(){
             bad_array.push({text: bad[i][0], weight: bad[i][1], color: randomItem(red_colors)});
           }
 
-          $("#good_key").jQCloud(good_array);
-          $("#bad_key").jQCloud(bad_array);
+          $good_key.jQCloud(good_array);
+          $bad_key.jQCloud(bad_array);
 
         }
     },

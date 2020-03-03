@@ -7,31 +7,36 @@ $gm_join_date = array();
 //기업회원 가입 날짜 배열
 $am_join_date = array();
 
-//academy 테이블 -가평읍의 학원 데이터 31개
-function academy_init_data($si_param, $dong_param){
+//academy 테이블 
+function academy_init_data(){
   $sql ="INSERT INTO `academy` VALUES "; //리턴할 sql문장
 
-  set_api_index(1);
-  set_api_scale(31);
+  $acd_array1 = get_academy_from_api("가평군", "가평읍");
+  $acd_array2 = get_academy_from_api("수원시", "영통동");
+  $acd_array3 = get_academy_from_api("시흥시", "거모동");
+  $acd_array4 = get_academy_from_api("고양시", "성사동");
+  $acd_array5 = get_academy_from_api("성남시", "성남동");
+  $acd_array6 = get_academy_from_api("광명시", "하안동");
 
-  $acd_array = get_academy_from_api($si_param, $dong_param);
+  $acd_array_total = array_merge($acd_array1,$acd_array2,$acd_array3,$acd_array4,$acd_array5,$acd_array6);
+  
 
   
-  for($i=0; $i<sizeof($acd_array); $i++){
-    $si_name = $acd_array[$i]->si_name;
-    $dong_name = $acd_array[$i]->dong_name;
-    $sector = $acd_array[$i]->sector;
-    $acd_name = $acd_array[$i]->acd_name;
-    $rprsn = $acd_array[$i]->rprsn;
-    $class = $acd_array[$i]->class;
-    $tel = $acd_array[$i]->tel;
-    $address = $acd_array[$i]->address;
+  for($i=0; $i<sizeof($acd_array_total); $i++){
+    $si_name = $acd_array_total[$i]->si_name;
+    $dong_name = $acd_array_total[$i]->dong_name;
+    $sector = $acd_array_total[$i]->sector;
+    $acd_name = $acd_array_total[$i]->acd_name;
+    $rprsn = $acd_array_total[$i]->rprsn;
+    $class = $acd_array_total[$i]->class;
+    $tel = $acd_array_total[$i]->tel;
+    $address = $acd_array_total[$i]->address;
 
     $no = $i+1;
 
     $sql .= "($no, '$si_name','$dong_name','$sector','$acd_name','$rprsn','$class','$tel','$address', '', '', '', '')";
 
-    if($i != sizeof($acd_array)-1){
+    if($i != sizeof($acd_array_total)-1){
       $sql .=", ";
     }
   }
@@ -76,7 +81,7 @@ function g_members_init_data(){
     return $sql;
 }
 
-//학원회원 테이블 - 31개 row 생성
+//학원회원 테이블 - 30개 row 생성
 function a_members_init_data(){
   global $acd_name_arr;
   global $am_join_date;
@@ -85,10 +90,8 @@ function a_members_init_data(){
   //학원데이터 학원명, 대표자명 가져옴
   $rprsn_arr = array();
 
-  set_api_index(1);
-  set_api_scale(31);
   $acd_array = get_academy_from_api("가평군", "가평읍");
-  
+
   for($i=0; $i<sizeof($acd_array); $i++){
     $acd_name = $acd_array[$i]->acd_name;
     $rprsn = $acd_array[$i]->rprsn;
@@ -99,7 +102,7 @@ function a_members_init_data(){
   
   $sql = "INSERT INTO `a_members` VALUES ";
   $i = 0;
-  for($no = 1; $no<= 31 ; $no++){
+  for($no = 1; $no<= 30 ; $no++){
 
     $a_name = $acd_name_arr[$i];
     $r_name = $rprsn_arr[$i];
@@ -145,7 +148,7 @@ function review_init_data(){
   for($no = 1; $no<= 150 ; $no++){
 
     //난수생성 rand(최소숫자, 최대숫자)
-    $parent = rand(1, 31);
+    $parent = rand(1, 30);
     $user_no = rand(1, 100);
     $rating1 = rand(2, 5);
     $rating2 = rand(1, 5);
@@ -182,7 +185,7 @@ function acd_story_init_data(){
   $subtitle_array = array("가평 No.1 학원", "20년 경력의 노하우를 알려드립니다", "1:1 개인별 맞춤수업 진행!", "최고 시설에서 최고의 강의를", "우리 학원은 화장실이 3개나 있어요");
 
   for($no = 1; $no<= 150 ; $no++){
-      $parent = rand(1, 31);
+      $parent = rand(1, 30);
       $acd_name = $acd_name_arr[$parent-1];
       $title = array_rand($title_array);
       $title = $title_array[$title];
@@ -302,7 +305,7 @@ function withdrawal_init_data() {
 
 
   // 학원회원8명 탈퇴
-  $no_temp = random(1,31, 8); //1~100까지 숫자중 중복없이 30개 추출
+  $no_temp = random(1,30, 8); //1~100까지 숫자중 중복없이 30개 추출
   $no_array = array();
   foreach ($no_temp as $v){
     array_push($no_array, $v);

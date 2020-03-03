@@ -13,7 +13,9 @@
     $row = mysqli_fetch_array($result);
     $file_copy = $row['file_copy'];
 
-    unlink("../data/teacher_img/".$file_copy);
+    if($file_copy){
+        unlink($_SERVER['DOCUMENT_ROOT'] ."/eduplanet/data/teacher_img/".$file_copy);
+    }
     
     $sql = "DELETE FROM teacher WHERE no = $no";
 

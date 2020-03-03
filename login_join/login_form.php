@@ -32,10 +32,6 @@
   <!-- 스크립트 -->
   <script src="/eduplanet/mypage/js/review_write.js"></script>
 
-  <!-- naver-->
-  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
 
 </head>
@@ -92,8 +88,8 @@
               </td>
             </tr>
 
-          </table>
 
+          </table>
           <div class="social_button">
             <div id="kakao_login_button" onclick="kakaoConn();"><img src="/eduplanet/img/kakao_login_button.png" alt="kakao_login_button"></div>
             <div id="naver_id_login"></div>
@@ -203,14 +199,54 @@
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
 
   <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
+  <!-- naver -->
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+
+  <!-- 네이버 로그인 정보를 담는 form (회원가입)-->
+  <form name="naver_form" action=<?= $action ?> method="POST">
+    <input id="naver_id" name="naver_id" type="hidden">
+  </form>
+
+  <!-- 네이버 로그인 정보를 담는 form (로그인)-->
+  <form name="naver_login_form" action="/eduplanet/login_join/naver_login.php?mode=<?= $mode ?>" method="POST">
+    <input id="naver_id_login" name="naver_id_login" type="hidden">
+  </form>
+
   <script type="text/javascript">
-    var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://localhost/eduplanet/login_join/naver_callback.php");
-    var state = naver_id_login.getUniqState();
-    naver_id_login.setButton("green", 3,40);
-    naver_id_login.setDomain("http://localhost/eduplanet/login_join/join_form.php");
-    naver_id_login.setState(state);
-    naver_id_login.init_naver_id_login();
-  </script>
+   var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://localhost/eduplanet/login_join/login_form.php");
+   var state = naver_id_login.getUniqState();
+   var naver_id;
+   naver_id_login.setButton("green", 3,48);
+   naver_id_login.setDomain("http://localhost/eduplanet/login_join/login_form.php");
+   naver_id_login.setState(state);
+   naver_id_login.init_naver_id_login();
+   naver_id_login.get_naver_userprofile("membercheck()");
+   function membercheck(){
+     naverSignInCallback();
+     var url = "members_checkId.php?id=" + naver_id + "&mode=" + '<?=$mode?>';
+     $.ajax({
+       url : url,
+       type : "GET",
+       success: function(data) {
+         // 이미 이메일이 가입되어 있을 때 --> 네이버 로그인
+         if (data == 1) {
+           document.getElementById("naver_id_login").value = naver_id;
+           document.naver_login_form.submit();
+           // 이메일이 가입되어 있지 않을 때 --> form 으로 이메일을 넘겨서 회원가입
+         } else {
+           document.getElementById("naver_id").value = naver_id;
+           document.naver_form.submit();
+           alert("아이디가 등록되어 있지 않아, 회원가입 페이지로 이동합니다.");
+         }
+       }
+     });
+   }
+   function naverSignInCallback() {
+     naver_id = naver_id_login.getProfileData('email');
+   }
+   </script>
   <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
 
 

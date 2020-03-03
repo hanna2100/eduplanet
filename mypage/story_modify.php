@@ -41,14 +41,6 @@ if (isset($_POST["story_post_subtitle_3"]) && isset($_POST["story_post_descripti
     $content3 = "";
 }
 
-if (isset($_POST["file_name"]) && isset($_POST["file_copy"])) {
-    $file_name = $_POST["file_name"];
-    $file_copy = $_POST["file_copy"];
-} else {
-    $file_name = "";
-    $file_copy = "";
-}
-
 $old_file_copy = $_POST["old_file_copy"];
 
 $upload_dir = "../data/acd_story/";
@@ -131,3 +123,4 @@ if ($upfile_name == "") {
                 </script>
                 ";
 }
+?>

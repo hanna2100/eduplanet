@@ -165,27 +165,87 @@
                 if ($selectDis != "") {
 
                     if ($selectSort == "star_max") {
-                        $sql = "SELECT academy.no as acd_no, acd_name, si_name, follow.acd_no as f_acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' and academy.si_name='$selectDis' GROUP BY follow.no ORDER BY review.total_star DESC";
+
+                        $sql =
+                            "SELECT academy.no as acd_no, 
+                            acd_name, 
+                            si_name, 
+                            follow.acd_no as f_acd_no, 
+                            follow.no, 
+                            review.total_star 
+                            FROM follow 
+                            INNER JOIN academy 
+                            ON follow.acd_no = academy.no 
+                            INNER JOIN review 
+                            ON academy.no = review.parent 
+                            WHERE follow.user_no='$user_no' 
+                            and academy.si_name='$selectDis' 
+                            GROUP BY follow.no 
+                            ORDER BY review.total_star DESC";
                     } else if ($selectSort == "regist_day") {
-                        $sql = "SELECT academy.no as acd_no, acd_name, si_name, follow.acd_no as f_acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' and academy.si_name='$selectDis' GROUP BY follow.no ORDER BY follow.no DESC";
+
+                        $sql =
+                            "SELECT academy.no as acd_no, 
+                            acd_name, 
+                            si_name, 
+                            follow.acd_no as f_acd_no, 
+                            follow.no, 
+                            review.total_star 
+                            FROM follow 
+                            INNER JOIN academy 
+                            ON follow.acd_no = academy.no 
+                            INNER JOIN review 
+                            ON academy.no = review.parent 
+                            WHERE follow.user_no='$user_no' 
+                            AND academy.si_name='$selectDis' 
+                            GROUP BY follow.no 
+                            ORDER BY follow.no DESC";
                     }
 
                     // 지역이 선택되지 않았을 때
                 } else if ($selectDis == "") {
 
                     if ($selectSort == "star_max") {
-                        $sql = "SELECT academy.no as acd_no, acd_name, si_name, follow.acd_no as f_acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' GROUP BY follow.no ORDER BY review.total_star DESC";
+
+                        $sql =
+                            "SELECT academy.no as acd_no, 
+                            acd_name, 
+                            si_name, 
+                            follow.acd_no as f_acd_no, 
+                            follow.no, 
+                            review.total_star 
+                            FROM follow 
+                            INNER JOIN academy 
+                            ON follow.acd_no = academy.no 
+                            INNER JOIN review 
+                            ON academy.no = review.parent 
+                            WHERE follow.user_no='$user_no' 
+                            GROUP BY follow.no 
+                            ORDER BY review.total_star DESC";
 
                         // 기본 셋팅은 최근 등록순
                     } else {
-                        $sql = "SELECT academy.no as acd_no, acd_name, si_name, follow.acd_no as f_acd_no, follow.no, review.total_star FROM follow INNER JOIN academy ON follow.acd_no = academy.no INNER JOIN review ON academy.no = review.parent WHERE follow.user_no='$user_no' GROUP BY follow.no ORDER BY follow.no DESC";
+
+                        $sql =
+                            "SELECT academy.no as acd_no, 
+                            acd_name, 
+                            si_name, 
+                            follow.acd_no as f_acd_no, 
+                            follow.no, 
+                            review.total_star 
+                            FROM follow 
+                            INNER JOIN academy 
+                            ON follow.acd_no = academy.no 
+                            INNER JOIN review 
+                            ON academy.no = review.parent 
+                            WHERE follow.user_no='$user_no' 
+                            GROUP BY follow.no 
+                            ORDER BY follow.no DESC";
                     }
                 }
 
                 $result = mysqli_query($conn, $sql);
                 $total_record = mysqli_num_rows($result);
-
-
 
                 ?>
 
@@ -292,12 +352,6 @@
                             $row = mysqli_fetch_array($result_total_star);
                             $total_star = $row["total_star"];
                             $total_star = sprintf('%0.1f', $total_star);
-
-                            // if ($row["file_name"]) {
-                            //     $file_image = "<img src='./img/file.gif' height='13'>";
-                            // } else {
-                            //     $file_image = "";
-                            // }
 
                         ?>
 
@@ -474,14 +528,9 @@
             </div>
         </div>
 
-
-
-
-
         <footer>
             <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
         </footer>
-
 
     </div>
 

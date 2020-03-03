@@ -43,7 +43,8 @@
 
         <div class="membership_container">
           <div class="membership_section top_banner">
-              top_banner
+            <img class="img_banner gm_banner" src="/eduplanet/img/membership_banner_gm.png" alt="ad for gm">
+              <img class="img_banner am_banner" src="/eduplanet/img/membership_banner_am.png" alt="ad for am">
           </div>
 
           <div class="membership_section mid_contents gm_product">
@@ -224,12 +225,15 @@
       var $am_no = '<?=$am_no?>';
 
       if($gm_no){
+        $(".am_banner").css("display", "none");
         $(".am_product").css("display", "none");
         $(".gm_card").attr("disabled", false);
       }else if($am_no){
+        $(".gm_banner").css("display", "none");
         $(".gm_product").css("display", "none");
         $(".am_card").attr("disabled", false);
       }else {
+        $(".am_banner").css("display", "none");
         $(".gm_card").attr("disabled", false);
         $(".am_card").attr("disabled", false);
         $(".membership_card").click(function(){

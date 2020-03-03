@@ -165,10 +165,9 @@
                                     <span id="story_post_img_check" class="story_post_input_check"></span>
                                     <p>* 사진을 수정하시려면 파일 선택 버튼을 눌러 주세요.</p>
                                     <p>* <b>파일을 선택하지 않으시면 기존의 사진이 등록됩니다.</b></p>
-                                    <input type="file" id="upfile" name="upfile" onchange="checkInputImg();" value="<?=$file_name?>">
+                                    <input type="file" id="upfile" name="upfile" onchange="checkInputImg();" accept=".jpg,.jpeg,.png,.gif">
                                     <img id="preview" src="/eduplanet/data/acd_story/<?= $file_copy ?>" alt="사진을 선택하시면 이 곳에 미리보기가 표시됩니다.">
 
-                                    <input id="old_file_name" name="old_file_name" type="hidden" value=<?=$file_name?>>
                                     <input id="old_file_copy" name="old_file_copy" type="hidden" value=<?=$file_copy?>>
 
                                 </div>

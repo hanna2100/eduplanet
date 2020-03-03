@@ -39,6 +39,10 @@
   if (isset($_POST["kakao_email"])) {
     $kakao_email = $_POST["kakao_email"];
   }
+  if (isset($_POST["naver_id"])) {
+    $naver_id = $_POST["naver_id"];
+    echo $naver_id;
+  }
 
   ?>
 
@@ -55,21 +59,20 @@
         <?php
 
         $mode = isset($_GET['mode']) ? $_GET['mode'] : "gm";
-        $action = "members_insert.php?mode=" . $mode;
 
         if ($mode == "gm") {
           echo
             "<h2>일반 회원 가입</h2>
               <p class='join_mode_p'>사업자 회원이신가요?</p>
               <a href='/eduplanet/login_join/join_form.php?mode=am'><p class='join_mode_a'>사업자 회원 가입</p></a>
-              <form id='form_member' action=$action method='post' autocomplete='on'>
+              <form id='form_member' action='join_member_mailing.php?mode=gm' method='post' autocomplete='on'>
               ";
         } else if ($mode == "am") {
           echo
             "<h2>사업자 회원 가입</h2>
               <p class='join_mode_p'>일반 회원이신가요?</p>
               <a href='/eduplanet/login_join/join_form.php'><p class='join_mode_a'>일반 회원 가입</p></a>
-              <form id='form_member' action=$action method='post' autocomplete='on' enctype='multipart/form-data'>
+              <form id='form_member' action='a_members_insert.php?mode=am' method='post' autocomplete='on' enctype='multipart/form-data'>
               ";
         }
         ?>
@@ -85,10 +88,13 @@
             <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" value="<?= $kakao_email ?>" readonly>
 
           <?php
-          } else {
+          } else if(isset($naver_id)){
+          ?>
+            <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" value="<?= $naver_id ?>" readonly>
+          <?php
+          }else {
           ?>
             <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" required>
-
           <?php
           }
           ?>

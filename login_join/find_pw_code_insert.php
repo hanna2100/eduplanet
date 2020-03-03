@@ -77,9 +77,11 @@
         var table = "<?=$table?>";
         var temp_pw_val = $("#temp_pw").val();
         var inputPw1_val = $("#inputPw1").val();
+
         console.log("hash", hash);
         console.log("table", table);
         console.log("input val", temp_pw_val, inputPw1_val);
+
         $.ajax({
           url : './reset_pw.php',
           type : 'POST',
@@ -92,7 +94,7 @@
           success : function(data) {
               if(data == 0){
                 alert("임시번호가 일치하지 않습니다.");
-                temp_pw_val = "";
+                $("#temp_pw").val('');
               }else{
                 alert("비밀번호가 변경되었습니다.\n 다시 로그인 해주세요.");
                 location.href = './login_form.php';
