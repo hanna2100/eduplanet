@@ -77,7 +77,7 @@
             <h2 class="txt_title">전체 리뷰 통계</h2>
             <div class="inner_content_top top_rating">
               <div class="rate_star_wrap">
-                <span id="rate_point" class="rate_point"><span class="rate_txt">총 만족도 </span><?=$rate_point?>.0</span>
+                <span id="rate_point" class="rate_point"><span class="rate_txt">총 만족도 </span><?=$rate_point?></span>
                 <div class="rate_star_ty1">
                   <span class="fa fa-star total_star"></span>
                   <span class="fa fa-star total_star"></span>
