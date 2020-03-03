@@ -1,4 +1,4 @@
-<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/session_start.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -14,9 +14,8 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
-    <script src="/eduplanet/academy/js/index.js">
+    <script src="/eduplanet/academy/js/index.js"></script>
 
-    </script>
     <link rel="stylesheet" href="/eduplanet/index/footer.css">
     <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
     <link rel="stylesheet" href="./css/index.css">
@@ -82,15 +81,16 @@
         </div> <!-- infor -->
         <div id="infor_modify">
             <?php
-              if($gm_no){
+              if($am_no){
              ?>
-            <button type="button" name="button" onclick="popupAddInfo()">정보수정</button>
-            <?php
-          }else{
-            
-          }
+             <button type="button" name="button" onclick="popupAddInfo()">정보수정</button>
+              <?php
+            }else {
 
-             ?>
+            }
+              ?>
+
+
         </div>
 
 

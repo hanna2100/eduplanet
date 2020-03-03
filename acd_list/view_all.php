@@ -128,6 +128,11 @@
                 }else{
                   $category = "";
                 }
+                if(isset($_GET["search"])){
+                  $search = $_GET["search"];
+                }else{
+                  $search = "";
+                }
 
 
                 include_once "../lib/db_connector.php";
@@ -456,6 +461,24 @@
                               (SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis'
                           GROUP BY academy.no";
                 }
+                if($search !== ""){
+                  $sql = "SELECT
+                              academy.no,
+                              academy.acd_name,
+                              academy.address,
+                              academy.file_copy,
+                              review.parent,
+                              total_star,
+                              str_cnt,
+                              rv_cnt
+                          FROM
+                              academy
+                                left  JOIN
+                              (SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt FROM review group by parent) review ON academy.no = review.parent
+                                left JOIN
+                              (SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.acd_name like '%$search%' or academy.class like '%$search%'
+                          GROUP BY academy.no";
+                }
 
 
                 $result = mysqli_query($conn, $sql);
@@ -478,7 +501,7 @@
                     </h2>
                     <span id="follow_total_span">총 <span id="follow_total_num"><?= $total_record ?></span> 개의 학원이 있습니다.</span>
 
-                    <div class="follow_select">
+                    <div class="follow_select"> 
                         <select name="follow_list_select_district" id="follow_list_select_district" onchange="selectOption();">
                             <option value="" selected>시/군 선택</option>
                             <option value="가평군">가평군</option>
