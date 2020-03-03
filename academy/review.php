@@ -46,7 +46,7 @@
          ?>
      </header>
 
-     <?php      
+     <?php
         // $no : academy 테이블의 no, review 테이블의 parent
         $no = isset($_GET["no"]) ?  $_GET["no"] : "";
         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
@@ -283,20 +283,23 @@
                 <!-- 멤버십에 가입되어 있으면 리뷰 보여주고 아니면 안보여준다  -->
                  <script>
                     var gm_no = '<?=$gm_no?>';
+                    var am_no = '<?=$am_no?>';
                     var pgm_no = '<?=$pgm_no?>';
+                    var pam_no = '<?=$pam_no?>';
                     var admin = '<?=$admin?>';
                     var overlay = document.getElementsByClassName("overlay");
                     var modal = document.getElementsByClassName("modal");
 
-                    if(!gm_no && !pgm_no){
-                      overlay[i].style.display = "block";
-                      modal[i].style.display = "block";
-                    }else if(admin) {
+          
+                    if(pgm_no || admin){
+                      overlay[i].style.display = "none";
+                      modal[i].style.display = "none";
+                    }else if(am_no == pam_no){
                       overlay[i].style.display = "none";
                       modal[i].style.display = "none";
                     }else {
-                      overlay[i].style.display = "none";
-                      modal[i].style.display = "none";
+                      overlay[i].style.display = "block";
+                      modal[i].style.display = "block";
                     }
                   </script>
 

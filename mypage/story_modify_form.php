@@ -99,8 +99,6 @@
         $file_name = $row["file_name"];
         $file_copy = $row["file_copy"];
 
-        mysqli_close($conn);
-
     ?>
 
         <header>

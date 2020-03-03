@@ -66,6 +66,19 @@
             </div>
         </header>
 
+        <?php
+                
+            if ($am_no) {
+
+                include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+                
+                $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_array($result);
+                $acd_no = $row["acd_no"];
+            }
+        ?>
+
         <div class="mypage_user_menu_background">
             <div class="mypage_user_menu">
                 <ul>
@@ -81,7 +94,7 @@
                         <li id="mypage_user_story">스토리 관리</li>
                     </a>
 
-                    <a href="/eduplanet/academy/index.php?no=<?= $am_no ?>">
+                    <a href="/eduplanet/academy/index.php?no=<?= $acd_no ?>">
                         <li id="mypage_user_review">My Academy</li>
                     </a>
                 </ul>
@@ -138,6 +151,7 @@
                     // 해당 아이디의 만료날짜가 0000-00-00 인지 점검 (== 이용중인 멤버십이 없음)
                     $sql_exp = "SELECT expiry_day FROM a_members WHERE no='$user_no'";
                     $result_exp = mysqli_query($conn, $sql_exp);
+                    $row = mysqli_fetch_array($result_exp);
                     $using_exp = $row["expiry_day"];
 
                     if ($using_exp == "0000-00-00") {

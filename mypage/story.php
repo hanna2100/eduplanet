@@ -68,6 +68,19 @@
             </div>
         </header>
 
+        <?php
+                
+            if ($am_no) {
+
+                include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+                
+                $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_array($result);
+                $acd_no = $row["acd_no"];
+            }
+        ?>
+
         <div class="mypage_user_menu_background">
             <div class="mypage_user_menu">
                 <ul>
@@ -83,7 +96,7 @@
                         <li id="mypage_user_story">스토리 관리</li>
                     </a>
 
-                    <a href="/eduplanet/academy/index.php?no=<?= $am_no ?>">
+                    <a href="/eduplanet/academy/index.php?no=<?= $acd_no ?>">
                         <li id="mypage_user_review">My Academy</li>
                     </a>
                 </ul>
@@ -321,7 +334,7 @@
                                 <h2>스토리가 없습니다.</h2>
                                 <p class="list_none_p">아직 작성하신 스토리가 없습니다.</p>
                                 <p class="list_none_p">스토리를 작성하여 학원의 이야기를 담아 보세요.</p>
-                                <a href="/eduplanet/acd_story/post.php"><button type="button">스토리 작성하러 가기</button></a>
+                                <a href="/eduplanet/acd_story/post.php"><button type="button">스토리 작성하기</button></a>
                             </div>
 
                         <?php

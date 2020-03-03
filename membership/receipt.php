@@ -27,6 +27,8 @@
   <body>
     <header>
        <?php
+        include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
+        include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
         include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
        ?>
     </header>
@@ -35,7 +37,6 @@
       $gm_no = isset($_SESSION["gm_no"]) ?  $_SESSION["gm_no"] : "";
       $am_no = isset($_SESSION["am_no"]) ?  $_SESSION["am_no"] : "";
 
-      include "../lib/db_connector.php";
       if(isset($_GET['product']) && isset($_GET['price']) && isset($_GET['payMethod']) && isset($_GET['expired_date'])){
         $product = $_GET['product'];
         $price = $_GET['price'];
@@ -51,10 +52,12 @@
         $sql_order = "INSERT INTO `gm_order` VALUES (null, $gm_no, '$product', $price, '$payMethod', '$status', '$expired_date');";
         $sql_members = "UPDATE `g_members` SET expiry_day='$expired_date' where no=$gm_no;";
         $product_info = "학원정보/리뷰 열람";
+        $_SESSION['pgm_no'] = $gm_no;
       }else if($am_no){
         $sql_order = "INSERT INTO `am_order` VALUES (null, $am_no, '$product', $price, '$payMethod', '$status', '$expired_date');";
         $sql_members = "UPDATE `a_members` SET expiry_day='$expired_date' where no=$am_no;";
         $product_info = "학원 스토리 포스팅";
+        $_SESSION['pam_no'] = $am_no;
       }
 
       mysqli_query($conn, $sql_order);
