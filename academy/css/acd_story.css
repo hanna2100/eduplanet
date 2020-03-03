@@ -21,8 +21,15 @@ section {
   position: relative;
 }
 
+.title {
+  position: relative;
+  /* top: -26px; */
+  font-size: 24px;
+}
+
 .content_title_wrap {
   text-align: left;
+  margin-top: 35px;
 }
 
 .cource_column {
@@ -34,4 +41,44 @@ section {
 
 .cource_column:hover {
   box-shadow: 0px 0px 5px 5px lightgray;
+}
+
+.not_found_teacher_wrap{
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+#not_found_teacher{
+  width: 1060px;
+  height: 300px;
+  margin: 0px auto;
+  background-color: #fff;
+  border-top: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#not_found_teacher h2{
+  color: rgb(122, 122, 122);
+  font-size: 25px;
+  margin: 60px 0px 30px 0px;
+}
+
+#not_found_teacher p{
+  color: gray;
+  font-size: 15px;
+  margin: 5px;
+}
+
+#not_found_teacher button{
+  padding: 10px 30px;
+  background-color: #2E89FF;
+  border: 1px solid #2E89FF;
+  color: #fff;
+  margin: 15px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
 }

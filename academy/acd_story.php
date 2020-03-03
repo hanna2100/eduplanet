@@ -17,8 +17,8 @@
   <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
   <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
   <link rel="stylesheet" href="/eduplanet/index/footer.css">
-  <link rel="stylesheet" href="./css/acd_story.css">
   <link rel="stylesheet" href="/eduplanet/acd_story/css/view.css">
+  <link rel="stylesheet" href="/eduplanet/academy/css/acd_story.css">
 
   <!-- 자동완성 -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -63,43 +63,60 @@
           $result = mysqli_query($conn, $sql);
           $total_record = mysqli_num_rows($result);
 
-          for ($i = 0; $i < $total_record; $i++) {
+          if ($total_record != 0) {
 
-            mysqli_data_seek($result, $i);
-            $row = mysqli_fetch_array($result);
+            for ($i = 0; $i < $total_record; $i++) {
 
-            $story_no = $row['story_no'];
-            $acd_name = $row['acd_name'];
-            $title = $row['title'];
-            $subtitle = $row['subtitle'];
-            $file_copy = $row['file_copy'];
+              mysqli_data_seek($result, $i);
+              $row = mysqli_fetch_array($result);
+
+              $story_no = $row['story_no'];
+              $acd_name = $row['acd_name'];
+              $title = $row['title'];
+              $subtitle = $row['subtitle'];
+              $file_copy = $row['file_copy'];
 
           ?>
 
-            <li>
-              <div class="cource_column">
-                <a href="/eduplanet/acd_story/view.php?story_no=<?= $story_no ?>">
-                  <div class="cource_column_box">
+              <li>
+                <div class="cource_column">
+                  <a href="/eduplanet/acd_story/view.php?story_no=<?= $story_no ?>">
+                    <div class="cource_column_box">
 
-                    <div class="academy_img_box">
-                      <img src="/eduplanet/data/acd_story/<?= $file_copy ?>" alt="academy_sto">
+                      <div class="academy_img_box">
+                        <img src="/eduplanet/data/acd_story/<?= $file_copy ?>" alt="academy_sto">
+                      </div>
+
+                      <div class="academy_introduce">
+                        <h3 id="academy_introduce_title"><?= $title ?></h3>
+                        <p id="academy_introduce_content"><?= $subtitle ?></p>
+                      </div>
+
                     </div>
+                  </a>
+                </div>
+              </li>
 
-                    <div class="academy_introduce">
-                      <h3 id="academy_introduce_title"><?= $title ?></h3>
-                      <p id="academy_introduce_content"><?= $subtitle ?></p>
-                    </div>
+              <span class="span_padding"></span>
 
-                  </div>
-                </a>
+            <?php
+            }
+          } else {
+            ?>
+
+            <div id="not_found_teacher_wrap">
+              <div id="not_found_teacher">
+                <h2>학원 스토리가 없습니다</h2>
+                <p>사업자 회원이시라면 학원관리 멤버십을 통해</p>
+                <p>학원 스토리를 작성하실 수 있습니다</p>
+                <button onclick='location.href="/eduplanet/acd_story/post.php"'>스토리 작성하기</button>
               </div>
-            </li>
-
-            <span class="span_padding"></span>
+            </div>
 
           <?php
           }
           ?>
+
 
         </ul>
 

@@ -136,14 +136,14 @@ input::placeholder {
 
 #lecture_container {
   width: 1060px;
-  margin: 30px auto;
+  margin: 0 auto;
 }
 
 .title>h1 {
   display: inline-block;
-  margin-left: 50px;
-  font-size: 28px;
-  padding-bottom: 10px;
+  font-size: 24px;
+  margin-top: 35px;
+  margin-bottom: 22px;
 }
 
 .teacher_img {
@@ -271,6 +271,7 @@ input::placeholder {
   background-color: #333;
   border: 1px solid #333;
 }
+
 .not_found_teacher_wrap{
   width: 100%;
   display: block;
@@ -278,7 +279,7 @@ input::placeholder {
 }
 
 #not_found_teacher{
-  width: 960px;
+  width: 1060px;
   height: 300px;
   margin: 0px auto;
   background-color: #fff;
@@ -308,4 +309,6 @@ input::placeholder {
   color: #fff;
   margin: 15px;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
 }
