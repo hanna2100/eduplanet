@@ -49,10 +49,9 @@ if (isset($_POST["file_name"]) && isset($_POST["file_copy"])) {
     $file_copy = "";
 }
 
-$old_file_name = $_POST["old_file_name"];
 $old_file_copy = $_POST["old_file_copy"];
 
-$upload_dir = '../data/acd_story/';
+$upload_dir = "../data/acd_story/";
 
 $upfile_name = $_FILES["upfile"]["name"];
 $upfile_tmp_name = $_FILES["upfile"]["tmp_name"];
@@ -112,11 +111,17 @@ if ($upfile_name == "") {
                 </script>
                 ";
 
-// 새로 첨부한 사진이 있을 때
+    // 새로 첨부한 사진이 있을 때
 } else if ($upfile_name != "") {
 
     $sql = "UPDATE acd_story SET title='$title', subtitle='$subtitle', subject2='$subject2', subject3='$subject3', content1='$content1', content2='$content2', content3='$content3', file_name='$upfile_name', file_copy='$copied_file_name' WHERE no='$no'";
     mysqli_query($conn, $sql);
+
+    // 기존 사진 삭제
+    if ($old_file_copy) {
+        unlink($_SERVER['DOCUMENT_ROOT'] . "/eduplanet/data/acd_story/" . $old_file_copy);
+    }
+
     mysqli_close($conn);
 
     echo "

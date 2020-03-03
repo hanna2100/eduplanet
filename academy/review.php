@@ -4,7 +4,7 @@
    <head>
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-     <title>review test</title>
+     <title>에듀플래닛</title>
 
      <!-- favicon -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
@@ -26,11 +26,11 @@
      <link rel="stylesheet" href="/eduplanet/academy/css/jqcloud.min.css">
      <script src="/eduplanet/academy/js/jqcloud.min.js" charset="utf-8"></script>
      <!-- CSS -->
+     <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
      <link rel="stylesheet" href="./css/review.css">
      <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
      <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
      <link rel="stylesheet" href="/eduplanet/index/footer.css">
-     <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
      <!-- 스크립트 -->
      <script src="/eduplanet/mypage/js/review_write.js"></script>
      <script src="/eduplanet/searchbar/searchbar_in.js"></script>
@@ -85,13 +85,12 @@
                   <div class="rate_txt">총 만족도</div>
 
                   <script>
-                  var rate_point = '<?=$rate_point?>';
+                  var rate_point = '<?=round($rate_point)?>';
                   for(var i=1;i<=rate_point;i++){
                    $(".rate_star_ty1 span:nth-child("+i+")").addClass("checked");
                   }
                   console.log("1",rate_point);
                   </script>
-
 
                 </div>
               </div>
@@ -354,20 +353,22 @@
                  }
                }
 
+               $link = '/eduplanet/academy/review.php?no='.$no;
+
                $next = $last_page + 1;// > 버튼 누를때 나올 페이지
                $prev = $first_page - 1;// < 버튼 누를때 나올 페이지
 
                // 첫번째 페이지일 때 앵커 비활성화
                if ($first_page == 1) {
                  if($page!=1)
-                   echo "<li><a href='/eduplanet/admin/gm_members.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                   echo "<li><a href='$link&page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
                  else
                    echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
 
                  echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
                } else {
-                 echo "<li><a href='/eduplanet/academy/review.php?page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
-                 echo "<li><a href='/eduplanet/academy/review.php?page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
+                 echo "<li><a href='$link&page=1'><span class='page_num_direction'><i class='fas fa-angle-double-left'></i></span></a></li>";
+                 echo "<li><a href='$link&page=$prev'><span class='page_num_direction'><i class='fas fa-angle-left'></i></span></a></li>";
                }
 
                //페이지 번호 매기기
@@ -375,7 +376,7 @@
                  if ($page == $i) {
                    echo "<li><span class='page_num_set'><b style='color:#2E89FF'> $i </b></span></li>";
                  } else {
-                   echo "<li><a href='/eduplanet/academy/review.php?page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
+                   echo "<li><a href='$link&page=$i'><span class='page_num_set'> &nbsp$i&nbsp </span></a></li>";
                  }
                }
 
@@ -384,13 +385,13 @@
                  echo "<li><a><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
 
                  if($page !=$total_pages)
-                   echo "<li><a href='/eduplanet/academy/review.php?page=$total_pages'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                   echo "<li><a href='$link&page=$total_pages'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
                  else
                    echo "<li><a><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
 
                } else {
-                   echo "<li><a href='/eduplanet/academy/review.php?page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
-                   echo "<li><a href='/eduplanet/academy/review.php?page=$total_pages'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
+                   echo "<li><a href='$link&page=$next'><span class='page_num_direction'><i class='fas fa-angle-right'></i></span></a></li>";
+                   echo "<li><a href='$link&page=$total_pages'><span class='page_num_direction_last'><i class='fas fa-angle-double-right'></i></span></a></li>";
                }
    ?>
              </ul>

@@ -91,6 +91,19 @@
                     </div>
                 </li>
 
+                <?php
+                
+                    if ($am_no) {
+
+                        include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+                        
+                        $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_array($result);
+                        $acd_no = $row["acd_no"];
+                    }
+                ?>
+
                 <li>
                     <!-- 내정보 -->
                     <div class="index_header_profile_img">
@@ -137,7 +150,7 @@
                                     <a href="/eduplanet/mypage/story.php">
                                         <li>스토리 관리</li>
                                     </a>
-                                    <a href="/eduplanet/academy/index.php?no=<?= $am_no ?>">
+                                    <a href="/eduplanet/academy/index.php?no=<?= $acd_no ?>">
                                         <li>My Academy</li>
                                     </a>
                                     <a href="/eduplanet/index/logout.php">

@@ -1,6 +1,5 @@
 
 function popupAddInfo(){ //정보수정 버튼을 눌렀을때 둘다 모달창이랑 뒤에 흐린화면을 보여준다.
-
   $("#addInfo, #overlay").show();
   setPopupLayerPos("#addInfo");
 
