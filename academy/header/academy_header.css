@@ -46,8 +46,8 @@ a {
     width: 100px;
     height: 100px;
     display: inline-block;
-    background-color: white;
-    border: 2px solid lightgray;
+    background-color: transparent;
+    /* border: 2px solid lightgray; */
     border-radius: 5px;
     cursor: pointer;
     position: relative;
@@ -73,7 +73,7 @@ a {
     width: 1060px;
     height: 210px;
     /* border: 1px solid black; */
-    background-color: #fff;
+    /* background-color: #fff; */
 }
 
 #academy_title {
@@ -130,7 +130,7 @@ a {
     width: 1060px;
     height: 65px;
     /* border: 1px solid black; */
-    background-color: #fff;
+    /* background-color: #fff; */
 }
 
 .academy_header_menu_ul {
@@ -143,7 +143,6 @@ a {
     display: inline-block;
     padding-bottom: 21px;
     margin-right: 50px;
-    height: 100%;
 }
 
 .academy_header_menu_ul li:hover {
@@ -152,8 +151,8 @@ a {
 
 .academy_header_menu_ul span {
     /* border: 1px solid black; */
-    padding-top: 16px;
-    padding-bottom: 21px;
+    /* padding-top: 16px;
+    padding-bottom: 21px; */
     font-size: 16px;
     color: rgb(58, 58, 58);
     font-weight: normal;

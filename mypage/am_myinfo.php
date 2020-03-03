@@ -93,6 +93,19 @@
             </div>
         </header>
 
+        <?php
+                
+            if ($am_no) {
+
+                include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+                
+                $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_array($result);
+                $acd_no = $row["acd_no"];
+            }
+        ?>
+
         <div class="mypage_user_menu_background">
             <div class="mypage_user_menu">
                 <ul>
@@ -104,7 +117,11 @@
                         <li id="mypage_user_membership">멤버십/결제</li>
                     </a>
 
-                    <a href="/eduplanet/academy/index.php?no=<?= $am_no ?>">
+                    <a href="/eduplanet/mypage/story.php">
+                        <li id="mypage_user_story">스토리 관리</li>
+                    </a>
+
+                    <a href="/eduplanet/academy/index.php?no=<?= $acd_no ?>">
                         <li id="mypage_user_review">My Academy</li>
                     </a>
                 </ul>
@@ -141,12 +158,12 @@
                             </div>
                             <div class="formBox">
                                 <label for='inputAcdName'>학원/교습소 이름</label>
-                                <input type='text' class='formInput' id='inputAcdName' name='acd_name' placeholder='공백 없이 입력해 주세요.' value="<?= $acd_name ?>" required>
+                                <input type='text' class='formInput' id='inputAcdName' name='acd_name' value="<?= $acd_name ?>" disabled>
                                 <p class='subMsg' id='AcdNameSubMsg'></p>
                             </div>
                             <div class="formBox">
                                 <label for='inputRprsn'>대표자명</label>
-                                <input type='text' class='formInput' id='inputRprsn' name='rprsn' placeholder='대표자명을 입력해 주세요' value="<?= $rprsn ?>" required>
+                                <input type='text' class='formInput' id='inputRprsn' name='rprsn' value="<?= $rprsn ?>" disabled>
                                 <p class='subMsg' id='RprsnSubMsg'></p>
                             </div>
                             <!-- <div class="formBox">
