@@ -282,6 +282,7 @@
 
                 <!-- 멤버십에 가입되어 있으면 리뷰 보여주고 아니면 안보여준다  -->
                  <script>
+                    var no = '<?=$no?>';
                     var gm_no = '<?=$gm_no?>';
                     var am_no = '<?=$am_no?>';
                     var pgm_no = '<?=$pgm_no?>';
@@ -290,11 +291,11 @@
                     var overlay = document.getElementsByClassName("overlay");
                     var modal = document.getElementsByClassName("modal");
 
-          
+
                     if(pgm_no || admin){
                       overlay[i].style.display = "none";
                       modal[i].style.display = "none";
-                    }else if(am_no == pam_no){
+                    }else if(no == pam_no){
                       overlay[i].style.display = "none";
                       modal[i].style.display = "none";
                     }else {
