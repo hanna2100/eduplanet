@@ -121,7 +121,7 @@
 
                 $acd_no = $row["acd_no"];
 
-                $sql = "SELECT * FROM acd_story WHERE acd_story.parent = $acd_no ORDER BY no DESC";
+                $sql = "SELECT * FROM acd_story WHERE acd_story.parent = $acd_no ORDER BY acd_story.no DESC";
 
                 $result = mysqli_query($conn, $sql);
                 $total_record = mysqli_num_rows($result);
@@ -131,6 +131,7 @@
                 <div class="follow_list_select">
                     <h2>
                         스토리 관리
+                        <button id="button_write_story" onclick="location.href='/eduplanet/acd_story/post.php'">스토리 등록</button>
                     </h2>
                     <span id="follow_total_span">총 <span id="follow_total_num"><?= $total_record ?></span> 개의 스토리가 있습니다.</span>
                 </div>
@@ -189,20 +190,18 @@
                                     </a>
 
                                     <div class="story_academy_heart">
-                                        <button id="story_delete" type="button" onclick="delete_story();">삭제</button>
+                                        <button id="story_delete" type="button" onclick="delete_story(<?=$no?>);">삭제</button>
                                         <a href="/eduplanet/mypage/story_modify_form.php?no=<?=$no?>"><button id="story_modify" type="button">수정</button></a>
                                     </div>
 
-                                    <input id="story_no" type="hidden" value="<?= $no ?>">
-
                                     <script>
-                                        function delete_story() {
+                                        function delete_story(story_no) {
 
                                             var deleteConf = confirm('정말 삭제하시겠습니까? \n삭제된 스토리는 복구할 수 없습니다.');
 
                                             if (deleteConf === true) {
 
-                                                location.href = "/eduplanet/mypage/story_delete.php?no=" + document.getElementById("story_no").value;
+                                                location.href = "/eduplanet/mypage/story_delete.php?no=" + story_no;
 
                                             } else {
                                                 alert("스토리 삭제가 취소되었습니다.");
