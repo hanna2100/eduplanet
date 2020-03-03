@@ -96,7 +96,6 @@ section {
   float: left;
   width: 50%;
   height: 80%;
-  margin-top: 20px;
 }
 
 #content_top {
@@ -451,4 +450,11 @@ hr {
 
 .btn_modal:hover {
   background-color: rgba(46, 137, 255, 0.13);
+}
+
+.review_title_top {
+  font-size: 24px;
+  font-weight: bold;
+  position: relative;
+  top: 10px;
 }
