@@ -3,11 +3,10 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>lecture test</title>
 
     <!-- index_header_searchbar_in -->
     <!-- 제이쿼리 -->
-    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
 
     <!-- 자동완성 -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -15,7 +14,6 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
-
     <!-- 스크립트 -->
     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
 
@@ -28,8 +26,6 @@
     <link rel="stylesheet" href="./header/academy_header.css">
     <link rel="stylesheet" href="../index/footer.css">
     <!-- 나의 css -->
-    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="./js/lecture.js"></script>
     <script src="./js/slide.js"></script>
     <link rel="stylesheet" href="./css/lecture.css">
@@ -39,22 +35,22 @@
     <!-- slick css&lib -->
     <link rel="stylesheet" type="text/css" href="/eduplanet/lib/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="/eduplanet/lib/slick/slick-theme.css">
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="/eduplanet/lib/slick/slick.min.js"></script>
 
-
-
-    <title></title>
+    <title>에듀플래닛</title>
 
   </head>
-  <body>
   <?php
-  include_once "../index/index_header_searchbar_in.php";
-  include_once "./header/academy_header.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/academy/header/academy_header.php";
 
-  $acd_no = isset($_GET["no"]) ?  $_GET["no"] : 1;
-  ?>
+    $acd_no = isset($_GET["no"]) ?  $_GET["no"] : "";
+
+    ?>
+  <body>
     <script>
       var acd_no = <?=$acd_no?>
     </script>
@@ -63,15 +59,18 @@
         <div class="title">
           <h1>강의 정보</h1>
           <div>
-            <button onclick="deleteTeacher()">강사삭제</button>
-            <button onclick="popupInsertTeacher()">강사추가</button>
+            <button class="only_pam" onclick="deleteTeacher()">강사삭제</button>
+            <button class="only_pam" onclick="popupInsertTeacher()">강사추가</button>
           </div>
         </div>
       <?php
         include_once "../lib/db_connector.php";
         $sql = "select * from teacher where parent='$acd_no'";
         $result = mysqli_query($conn, $sql);
-        $row_num = mysqli_num_rows($result);
+        $row_num = 0;
+        if($result){
+          $row_num = mysqli_num_rows($result);
+        }
       ?>
         <div class="teacher_carousel">
           <?php
@@ -100,12 +99,27 @@
           ?>
         </div>
       </div>
+      <div id="not_found_teacher_wrap">
+        <div id ="not_found_teacher">
+            <h2>강사정보가 없습니다</h2>
+            <p>사업자 회원이시라면 학원관리 멤버십을 통해</p>
+            <p>강사정보와 시간표를 입력하실 수 있습니다</p>
+            <button onclick='location.href="/eduplanet/membership/index.php"'>멤버십 바로가기</button>
+        </div>
+      </div>
+      <script>
+        var row_num = '<?=$row_num?>';
+        if(row_num==0){
+          $('#not_found_teacher').css('display','block');
+          $('.teacher_carousel').css('display','none');
+        }
+      </script>
         <div class="teacher_schedule">
           <div class="title">
             <h1 id="teacher_lecture">강의 시간표</h1>
             <div>
-              <button onclick="popupUpdateSchedule()">수정/삭제</button>
-              <button onclick="popupInsertSchedule()">시간표 추가</button>
+              <button class="only_pam" onclick="popupUpdateSchedule()">수정/삭제</button>
+              <button class="only_pam" onclick="popupInsertSchedule()">시간표 추가</button>
             </div>
           </div>
           <table id="table">
@@ -258,5 +272,13 @@
     <footer>
       <?php include_once "../index/footer.php"; ?>
     </footer>
+    <script>
+      var is_pam = '<?=$pam_no?>';
+      if(!(is_pam==acd_no)){
+        $(".only_pam").each(function(){
+          $(this).css('display','none');
+        });
+      }
+    </script>
   </body>
 </html>
