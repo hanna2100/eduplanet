@@ -84,10 +84,13 @@
             <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" value="<?= $kakao_email ?>" readonly>
 
           <?php
-          } else {
+          } else if(isset($naver_id)){
+          ?>
+            <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" value="<?= $naver_id ?>" readonly>
+          <?php
+          }else {
           ?>
             <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" required>
-
           <?php
           }
           ?>
