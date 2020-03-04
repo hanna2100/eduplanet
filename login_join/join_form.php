@@ -5,20 +5,21 @@
   <meta charset="utf-8">
   <title>에듀플래닛</title>
 
+  <!-- 자동완성 -->
+  <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
   <!-- favicon -->
   <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
-  <script src="https://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
+  <!-- <script src="https://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script> -->
 
   <!-- 폰트 -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
 
   <!-- 아이콘 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-
-  <!-- 자동완성 -->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <!-- CSS -->
   <link rel="stylesheet" href="/eduplanet/index/index_header.css">
@@ -87,11 +88,11 @@
             <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" value="<?= $kakao_email ?>" readonly>
 
           <?php
-          } else if(isset($naver_id)){
+          } else if (isset($naver_id)) {
           ?>
             <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" value="<?= $naver_id ?>" readonly>
           <?php
-          }else {
+          } else {
           ?>
             <input type="email" class="formInput" id="inputId" name="inputId" placeholder="이메일을 입력해주세요" required>
           <?php

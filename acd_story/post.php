@@ -8,11 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
+    <!-- 자동완성 -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
     <!-- 제이쿼리 -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -30,11 +35,6 @@
     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
     <script src="/eduplanet/mypage/js/review_write.js"></script>
     <script src="/eduplanet/acd_story/js/post.js"></script>
-
-    <!-- 자동완성 -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
 
 </head>
 

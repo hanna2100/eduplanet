@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body> -->
   <?php
     $no = isset($_GET["no"]) ? $_GET["no"] : '';
 
@@ -166,6 +166,6 @@
             </div>
         </div>
     </div>
-</body>
+<!-- </body>
 
-</html>
+</html> -->

@@ -8,11 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
+    <!-- 자동완성 -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
     <!-- 제이쿼리 -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -30,11 +35,6 @@
     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
     <script src="/eduplanet/mypage/js/review_write.js"></script>
     <script src="/eduplanet/acd_story/js/post.js"></script>
-
-    <!-- 자동완성 -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
 
 </head>
 
@@ -132,7 +132,7 @@
 
             <!-- 스토리 작성 ------------------------------------------------------------------------------------------>
 
-            <form name="story_modify_form" action="/eduplanet/mypage/story_modify.php?no=<?=$no?>" method="post" enctype="multipart/form-data">
+            <form name="story_modify_form" action="/eduplanet/mypage/story_modify.php?no=<?= $no ?>" method="post" enctype="multipart/form-data">
 
                 <div class="story_academy_content_wrap">
 
@@ -154,13 +154,13 @@
                                         <label for="story_post_content">소제목</label>
                                         <span id="story_post_content_check" class="story_post_input_check"></span>
                                         <input id="story_post_content" name="story_post_content" type="text" value="<?= $subtitle ?>" placeholder="소제목을 입력해 주세요." onkeyup="checkInputContent();">
-                                        
+
                                     </div>
-                                    
+
                                 </div>
-                                
+
                                 <div class="story_content_image">
-                                    
+
                                     <label id="story_post_img_label" for="story_post_img">사진 (필수)</label>
                                     <span id="story_post_img_check" class="story_post_input_check"></span>
                                     <p>* 사진을 수정하시려면 파일 선택 버튼을 눌러 주세요.</p>
@@ -168,7 +168,7 @@
                                     <input type="file" id="upfile" name="upfile" onchange="checkInputImg();" accept=".jpg,.jpeg,.png,.gif">
                                     <img id="preview" src="/eduplanet/data/acd_story/<?= $file_copy ?>" alt="사진을 선택하시면 이 곳에 미리보기가 표시됩니다.">
 
-                                    <input id="old_file_copy" name="old_file_copy" type="hidden" value=<?=$file_copy?>>
+                                    <input id="old_file_copy" name="old_file_copy" type="hidden" value=<?= $file_copy ?>>
 
                                 </div>
 

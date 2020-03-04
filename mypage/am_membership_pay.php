@@ -1,4 +1,4 @@
-<?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/session_start.php"; ?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/session_start.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,11 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
+    <!-- 자동완성 -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
     <!-- 제이쿼리 -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -31,10 +36,6 @@
     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
     <script src="/eduplanet/mypage/js/review_write.js"></script>
 
-    <!-- 자동완성 -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
     <!-- identicon (프로필 이미지) -->
     <script src="//cdn.rawgit.com/placemarker/jQuery-MD5/master/jquery.md5.js"></script>
     <script src="//rawgit.com/stewartlord/identicon.js/master/pnglib.js"></script>
@@ -50,7 +51,7 @@
             });
         });
     </script>
-    
+
 </head>
 
 <body>
@@ -58,25 +59,25 @@
 
         <header>
             <div class="header_searchbar_fix">
-                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/index_header_searchbar_in.php"; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header_searchbar_in.php"; ?>
             </div>
 
             <div class="header_mypage">
-                <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/mypage/mypage_header.php"; ?>
+                <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/mypage/mypage_header.php"; ?>
             </div>
         </header>
 
         <?php
-                
-            if ($am_no) {
 
-                include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
-                
-                $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
-                $result = mysqli_query($conn, $sql);
-                $row = mysqli_fetch_array($result);
-                $acd_no = $row["acd_no"];
-            }
+        if ($am_no) {
+
+            include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+
+            $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result);
+            $acd_no = $row["acd_no"];
+        }
         ?>
 
         <div class="mypage_user_menu_background">
@@ -85,7 +86,7 @@
                     <a href="/eduplanet/mypage/am_myinfo.php">
                         <li id="mypage_user_myinfo">내 정보</li>
                     </a>
-                    
+
                     <a href="/eduplanet/mypage/am_membership_pay.php">
                         <li id="mypage_user_membership">멤버십/결제</li>
                     </a>
@@ -94,7 +95,7 @@
                         <li id="mypage_user_story">스토리 관리</li>
                     </a>
 
-                    <a href="/eduplanet/academy/index.php?no=<?=$acd_no?>">
+                    <a href="/eduplanet/academy/index.php?no=<?= $acd_no ?>">
                         <li id="mypage_user_review">My Academy</li>
                     </a>
                 </ul>
@@ -141,7 +142,7 @@
                         ";
                     }
 
-                    include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php";
+                    include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
 
                     $sql = "SELECT * from am_order WHERE am_no='$user_no'";
 
@@ -213,7 +214,7 @@
         </div>
 
         <footer>
-            <?php include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/index/footer.php"; ?>
+            <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
         </footer>
 
     </div>

@@ -8,11 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
+    <!-- 자동완성 -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
     <!-- 제이쿼리 -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -31,10 +36,6 @@
     <!-- 스크립트 -->
     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
     <script src="/eduplanet/mypage/js/review_write.js"></script>
-
-    <!-- 자동완성 -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- identicon (프로필 이미지) -->
     <script src="//cdn.rawgit.com/placemarker/jQuery-MD5/master/jquery.md5.js"></script>
@@ -69,16 +70,16 @@
         </header>
 
         <?php
-                
-            if ($am_no) {
 
-                include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
-                
-                $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
-                $result = mysqli_query($conn, $sql);
-                $row = mysqli_fetch_array($result);
-                $acd_no = $row["acd_no"];
-            }
+        if ($am_no) {
+
+            include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+
+            $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result);
+            $acd_no = $row["acd_no"];
+        }
         ?>
 
         <div class="mypage_user_menu_background">
@@ -203,8 +204,8 @@
                                     </a>
 
                                     <div class="story_academy_heart">
-                                        <button id="story_delete" type="button" onclick="delete_story(<?=$no?>);">삭제</button>
-                                        <a href="/eduplanet/mypage/story_modify_form.php?no=<?=$no?>"><button id="story_modify" type="button">수정</button></a>
+                                        <button id="story_delete" type="button" onclick="delete_story(<?= $no ?>);">삭제</button>
+                                        <a href="/eduplanet/mypage/story_modify_form.php?no=<?= $no ?>"><button id="story_modify" type="button">수정</button></a>
                                     </div>
 
                                     <script>
