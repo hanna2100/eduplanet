@@ -104,3 +104,4 @@ function alert_move($msg, $url) {
 
     exit;
 };
+?>
