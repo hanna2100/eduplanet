@@ -132,7 +132,7 @@
      function naverLoginButtonSetting() {
       $("#naver_id_login img").attr("src", '/eduplanet/img/naver_login_button.png');
     }
-    
+
     // 사용할 앱의 JavaScript 키 설정
     Kakao.init('c0edd7bb36cbb280cb4e498b294c87be');
 
@@ -210,7 +210,6 @@
   <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
   <!-- naver -->
   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
   <!-- 네이버 로그인 정보를 담는 form (회원가입)-->
@@ -231,7 +230,9 @@
    naver_id_login.setDomain("https://localhost/eduplanet/login_join/login_form.php");
    naver_id_login.setState(state);
    naver_id_login.init_naver_id_login();
-   naver_id_login.get_naver_userprofile("membercheck()");
+   if(naver_id_login.is_callback == true){
+     naver_id_login.get_naver_userprofile("membercheck()");
+   }
    function membercheck(){
      naverSignInCallback();
      var url = "members_checkId.php?id=" + naver_id + "&mode=" + '<?=$mode?>';
@@ -254,6 +255,14 @@
    }
    function naverSignInCallback() {
      naver_id = naver_id_login.getProfileData('email');
+     naver_age = naver_id_login.getProfileData('age');
+     naver_birthday = naver_id_login.getProfileData('birthday');
+     naver_email = naver_id_login.getProfileData('id');
+     naver_enc_id = naver_id_login.getProfileData('enc_id');
+     naver_gender = naver_id_login.getProfileData('gender');
+     naver_nickname = naver_id_login.getProfileData('nickname');
+     naver_profile_image = naver_id_login.getProfileData('profile_image');
+     naver_name = naver_id_login.getProfileData('name');
    }
    </script>
   <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->

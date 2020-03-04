@@ -14,7 +14,7 @@
      <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
      <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_in.css">
      <link rel="stylesheet" href="/eduplanet/index/footer.css">
-     <link rel="stylesheet" href="/code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
      <link rel="stylesheet" href="./css/index.css">
      <!-- 스크립트 -->
      <script src="/eduplanet/mypage/js/review_write.js"></script>
