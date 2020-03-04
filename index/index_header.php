@@ -162,10 +162,10 @@
                             } else {
                             ?>
                                 <!-- <a id="not_mem" href="javascript:alert('로그인 후 이용 가능합니다.')"><li>로그인 해주세요.</li></a> -->
-                                <a id="not_mem" href="/eduplanet/login_join/login_form.php">
+                                <a class="not_mem" href="/eduplanet/login_join/login_form.php">
                                     <li>로그인</li>
                                 </a>
-                                <a id="not_mem" href="/eduplanet/login_join/join_form.php">
+                                <a class="not_mem" href="/eduplanet/login_join/join_form.php">
                                     <li>회원가입</li>
                                 </a>
                                 <script>

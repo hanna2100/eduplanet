@@ -59,12 +59,16 @@ section {
   height: 600px;
   background-color: white;
   grid-column: 2/3;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 50px;
 }
 
 .inner_section_right_content {
   width: 100%;
   height: 100%;
   border: 1px solid lightgray;
+
   /* padding: 24px; */
 }
 
