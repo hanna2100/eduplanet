@@ -111,15 +111,13 @@
       echo "
         <script>
             alert('이메일 전송에 실패했습니다. 다시 시도해주세요.');
-
+            location.href='./join_form.php';
         </script>
       ";
     }
 
 
 
-
-  // location.href='./join_form.php';
 
     function mailer($fname, $fmail, $to, $subject, $content, $type=0, $file="", $cc="", $bcc="")
     {
@@ -129,7 +127,7 @@
           $mail = new PHPMailer(); // defaults to using php "mail()"
 
           // 디버그 모드(production 환경에서는 주석 처리한다.)
-          $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+          // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
           // $mail->SMTPDebug = 2;
           // $mail->SMTPDebug = 4;
 
