@@ -10,7 +10,7 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
      <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-     <script src="http://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
+     <script src="https://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
      <!-- 자동완성 -->

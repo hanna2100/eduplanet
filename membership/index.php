@@ -8,7 +8,7 @@
      <!-- favicon -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
      <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
-     <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+     <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
      <!-- CSS -->
      <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">

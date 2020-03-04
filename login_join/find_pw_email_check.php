@@ -33,7 +33,7 @@
         $body="\n안녕하세요!
                \n\n아래 링크를 클릭하여 임시 비밀번호를 새로운 비밀번호로 설정해주세요.
                \n\n임시 비밀번호 : ".$code."
-               \n\nhttp://localhost/eduplanet/login_join/find_pw_code_insert.php?hash=".$hash."&mode=".$mode."";
+               \n\nhttps://localhost/eduplanet/login_join/find_pw_code_insert.php?hash=".$hash."&mode=".$mode."";
 
         mailer($from,"iamashley44@naver.com", $to, $subject, $body);
 

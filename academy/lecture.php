@@ -6,7 +6,7 @@
 
     <!-- index_header_searchbar_in -->
     <!-- 제이쿼리 -->
-    <script src="http://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
 
     <!-- 자동완성 -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

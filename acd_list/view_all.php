@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
     <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
 
-    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/eduplanet/mypage/js/review_write.js"></script>
 

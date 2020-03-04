@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
   <!-- 제이쿼리 -->
-  <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
 
   <!-- 카카오 로그인 -->
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -201,7 +201,7 @@
   <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
   <!-- naver -->
   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
   <!-- 네이버 로그인 정보를 담는 form (회원가입)-->
@@ -215,11 +215,11 @@
   </form>
 
   <script type="text/javascript">
-   var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "http://localhost/eduplanet/login_join/login_form.php");
+   var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "https://localhost/eduplanet/login_join/login_form.php");
    var state = naver_id_login.getUniqState();
    var naver_id;
    naver_id_login.setButton("green", 3,48);
-   naver_id_login.setDomain("http://localhost/eduplanet/login_join/login_form.php");
+   naver_id_login.setDomain("https://localhost/eduplanet/login_join/login_form.php");
    naver_id_login.setState(state);
    naver_id_login.init_naver_id_login();
    naver_id_login.get_naver_userprofile("membercheck()");

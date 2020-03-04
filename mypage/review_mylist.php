@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
     <!-- 제이쿼리 -->
-    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">

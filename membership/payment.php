@@ -7,7 +7,7 @@
     <title>멤버십 결제페이지</title>
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
-    <script src="http://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
     <!-- 결제 라이브러리 -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">

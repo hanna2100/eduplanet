@@ -8,7 +8,7 @@
   <!-- favicon -->
   <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
-  <script src="http://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
+  <script src="https://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
 
   <!-- 폰트 -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -78,7 +78,7 @@
       $age = base64_encode($age);
       $intres = base64_encode($intres);
 
-      $url = "http://localhost/eduplanet/login_join/join_member_code_insert.php?code=$code&mode=$mode&id=$id&pw=$pw&tel=$tel&age=$age&intres=$intres";
+      $url = "https://localhost/eduplanet/login_join/join_member_code_insert.php?code=$code&mode=$mode&id=$id&pw=$pw&tel=$tel&age=$age&intres=$intres";
 
   }
 
