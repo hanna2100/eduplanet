@@ -170,7 +170,6 @@ if ($admin== "" ){
             <select id="search_select">
               <option>회원번호</option>
               <option>아이디</option>
-              <option>이메일</option>
               <option>연락처</option>
               <option>출생년도</option>
               <option>관심사</option>

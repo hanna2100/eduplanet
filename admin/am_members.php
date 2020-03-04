@@ -182,7 +182,6 @@ if ($admin== "" ){
             <select id="search_select">
               <option>회원번호</option>
               <option>아이디</option>
-              <option>이메일</option>
               <option>학원번호</option>
               <option>학원명</option>
               <option>대표자명</option>
