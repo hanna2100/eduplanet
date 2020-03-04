@@ -6,7 +6,7 @@
 
 
     // 우리동네 학원 정보 가져오기 쿼리
-    $sql = "select academy.*,review.parent from academy inner join review on academy.no = review.parent where si_name = '$siName' and dong_name = '$dongName' group by parent;";
+    $sql = "select academy.*,review.parent,avg(review.total_star) as total_star from academy inner join review on academy.no = review.parent where si_name = '$siName' and dong_name = '$dongName' group by parent;";
     $result=mysqli_query($conn,$sql);
     if(mysqli_num_rows($result)==0){
       echo "
@@ -18,7 +18,7 @@
         $row=mysqli_fetch_array($result);
 
         //리스트에 연관 배열{"name":aa,"address":bb}이런식으로 가져옴
-        $list[$i]=array("acdName" => $row["acd_name"],"tel"=>$row["tel"],"address" => $row['address'], "no" => $row["no"], "img" => $row["file_copy"] , "parent" => $row["parent"]);
+        $list[$i]=array("acdName" => $row["acd_name"],"tel"=>$row["tel"],"address" => $row['address'], "no" => $row["no"], "img" => $row["file_copy"] , "parent" => $row["parent"] , "total_star" => $row["total_star"]);
     }
 
 

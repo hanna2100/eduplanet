@@ -41,7 +41,6 @@
   }
   if (isset($_POST["naver_id"])) {
     $naver_id = $_POST["naver_id"];
-    echo $naver_id;
   }
 
   ?>

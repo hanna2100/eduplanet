@@ -12,23 +12,18 @@ body {
   margin: auto 0;
   background-color: white;
 }
-.membership_container{
-  /* width: 100%; */
-}
+
 /* top & bottom */
 .bottom_info {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 300px;
-  /* height: 50vh; */
 }
 /*  상단 배너 */
 .top_banner {
   /* width: 100%; */
   background-color: #fff;
-  height: 300px;
-  text-align: center;
 }
 .img_banner{
   width: 100%;

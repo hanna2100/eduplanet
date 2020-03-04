@@ -59,6 +59,7 @@
                                   </span>
                           </span>
                           <span class="txt1">
+                            <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                               <span id="acd_score0"></span>
                           </span>
                       </dd>
@@ -75,6 +76,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                           <span id="acd_score1"></span>
                         </span>
                     </dd>
@@ -91,6 +93,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                           <span id="acd_score2"></span>
                         </span>
                     </dd>
@@ -107,6 +110,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="acd_score3"></span>
                         </span>
                     </dd>
@@ -123,6 +127,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="acd_score4"></span>
                         </span>
                     </dd>
@@ -155,6 +160,7 @@
                                   </span>
                           </span>
                           <span class="txt1">
+                            <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                               <span id="facility_score0">4.6</span>
                           </span>
                       </dd>
@@ -171,6 +177,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="facility_score1">4.6</span>
                         </span>
                     </dd>
@@ -187,6 +194,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="facility_score2">4.6</span>
                         </span>
                     </dd>
@@ -203,6 +211,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="facility_score3">4.6</span>
                         </span>
                     </dd>
@@ -219,6 +228,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="facility_score4">4.6</span>
                         </span>
                     </dd>
@@ -251,6 +261,7 @@
                                   </span>
                           </span>
                           <span class="txt1">
+                            <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                               <span id="accesible_score0">4.6</span>
                           </span>
                       </dd>
@@ -267,6 +278,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                           <span id="accesible_score1">4.6</span>
                         </span>
                     </dd>
@@ -283,6 +295,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                         <span id="accesible_score2">4.6</span>
                         </span>
                     </dd>
@@ -299,6 +312,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                           <span id="accesible_score3">4.6</span>
                         </span>
                     </dd>
@@ -315,6 +329,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                           <span id="accesible_score4">4.6</span>
                         </span>
                     </dd>
@@ -347,6 +362,7 @@
                                   </span>
                           </span>
                           <span class="txt1">
+                            <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                               <span id="teacher_score0">4.6</span>
                           </span>
                       </dd>
@@ -363,6 +379,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="teacher_score1">4.6</span>
                         </span>
                     </dd>
@@ -379,6 +396,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="teacher_score2">4.6</span>
                         </span>
                     </dd>
@@ -395,6 +413,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="teacher_score3">4.6</span>
                         </span>
                     </dd>
@@ -411,6 +430,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="teacher_score4">4.6</span>
                         </span>
                     </dd>
@@ -443,6 +463,7 @@
                                   </span>
                           </span>
                           <span class="txt1">
+                            <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                               <span id="cost_effect_score0">4.6</span>
                           </span>
                       </dd>
@@ -459,6 +480,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="cost_effect_score1">4.6</span>
                         </span>
                     </dd>
@@ -475,6 +497,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="cost_effect_score2">4.6</span>
                         </span>
                     </dd>
@@ -491,6 +514,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="cost_effect_score3">4.6</span>
                         </span>
                     </dd>
@@ -507,6 +531,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="cost_effect_score4">4.6</span>
                         </span>
                     </dd>
@@ -539,6 +564,7 @@
                                   </span>
                           </span>
                           <span class="txt1">
+                            <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                               <span id="achievement_score0">4.6</span>
                           </span>
                       </dd>
@@ -555,6 +581,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="achievement_score1">4.6</span>
                         </span>
                     </dd>
@@ -571,6 +598,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="achievement_score2">4.6</span>
                         </span>
                     </dd>
@@ -587,6 +615,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                           <span id="achievement_score3">4.6</span>
                         </span>
                     </dd>
@@ -603,6 +632,7 @@
                                 </span>
                         </span>
                         <span class="txt1">
+                          <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="14">
                             <span id="achievement_score4">4.6</span>
                         </span>
                     </dd>
@@ -620,6 +650,9 @@
           </article>
 
         </div> <!--first_contents end-->
+        <div class="view_all">
+           <button class="blue_bar_button" id="view_all_button" onclick="location.href='/eduplanet/acd_list/view_all.php'">학원 전체 보기</button>
+        </div>
 <!-- ===================================================================================================== -->
         <?php
 
@@ -864,12 +897,16 @@
                 <div id="academy_address">
                   <span class="aca_address">인천광역시 계양구 계산동</span>
                 </div>
-                <div id="call_dibs">
+                <!-- <div id="call_dibs"> -->
                   <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
 
-                </div>
+                <!-- </div>  -->
                 <div class="see_more">
-                  <span> <a href="#" id="see_more">자세히</a></span>
+                  <span> <a href="#" id="see_more">상세 정보 보기</a></span>
+                </div>
+                <div class="star">
+                   <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="18">
+                   <span id="star_span">몇점</span>
                 </div>
 
               </div>
@@ -892,7 +929,11 @@
 
                 </div>
                 <div class="see_more">
-                  <span><a href="#" id="see_more">자세히</a></span>
+                  <span> <a href="#" id="see_more">상세 정보 보기</a></span>
+                </div>
+                <div class="star">
+                   <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="18">
+                   <span id="star_span">몇점</span>
                 </div>
 
               </div>
@@ -915,7 +956,11 @@
 
                 </div>
                 <div class="see_more">
-                  <span><a href="#" id="see_more">자세히</a></span>
+                  <span> <a href="#" id="see_more">상세 정보 보기</a></span>
+                </div>
+                <div class="star">
+                   <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="18">
+                   <span id="star_span">몇점</span>
                 </div>
 
               </div>
@@ -937,12 +982,18 @@
 
                 </div>
                 <div class="see_more">
-                  <span><a href="#" id="see_more">자세히</a></span>
+                  <span> <a href="#" id="see_more">상세 정보 보기</a></span>
                 </div>
-
+                <div class="star">
+                   <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="18">
+                   <span id="star_span">몇점</span>
+                </div>
               </div>
 
         </div><!--second_contents end -->
+
+
+
         <!-- 현위치 주소 가져오기 ------------------------------------------->
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=79f3ade82ebdd492df0cd3712dc6f828&libraries=services"></script>
         <script type="text/javascript">
@@ -1105,7 +1156,11 @@
                           getMydongAcd(address[1],address[2]);
                         }
                         console.log(siName);
-                        $("#see_more0").attr('href', '/eduplanet/acd_list/view_all.php?district='+siName);
+                        // 가평군 수원시 등등 address[1]을 가져와서 get으로 보낸다 그럼 학원더보기를 눌렀을때 내 위치 학원이 뜬다
+                        // $("#see_more0").attr('href', '/eduplanet/acd_list/view_all.php?district='+siName);
+                        $("#view_all_button2").click(function(){
+                          location.replace('/eduplanet/acd_list/view_all.php?district='+siName);
+                        });
                       }
                     };
 
@@ -1134,9 +1189,12 @@
         </script>
 
       <!--    --------------------------------------------------------------------------------->
-      <div id="more_s">
-        <button type="button" name="button" id="more_btn" onclick="location.href='/eduplanet/acd_list/view_all.php?="><a id="see_more0" href="/eduplanet/acd_list/view_all.php?district=">학원 더보기</a></button>
+      <div class="view_all">
+      <button class="blue_bar_button" id="view_all_button2" onclick="location.href='/eduplanet/acd_list/view_all.php'">우리동네 학원 전체보기</button>
       </div>
+      <!-- <div id="more_s">
+        <button type="button" name="button" id="more_btn" onclick="location.href='/eduplanet/acd_list/view_all.php?="><a id="see_more0" href="/eduplanet/acd_list/view_all.php?district=">학원 더보기</a></button>
+      </div> -->
 
       </div> <!-- main_contents end-->
 
