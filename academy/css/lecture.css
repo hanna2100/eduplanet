@@ -96,6 +96,7 @@ input::placeholder {
 .title> div{
   float: right;
   margin-right: 70px;
+  margin-top: 30px;
 }
 
 .title>div>button{

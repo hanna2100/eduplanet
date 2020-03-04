@@ -291,12 +291,19 @@
 
       </div>
     </div> <!-- eduInforMain -->
-
-
   </main>
   <footer>
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
   </footer>
+  <script>
+      var no = <?=$no?>;
+      var is_pam = '<?=$pam_no?>';
+      if(!(is_pam == no)){
+        $("#modify_button").each(function(){
+          $(this).css('display','none');
+        });
+      }
+  </script>
 </body>
 
 </html>

@@ -18,16 +18,16 @@
                     <!-- <img src="/eduplanet/index/nivo-slider/img/slider_img4.jpg" alt="" title="#htmlcaption4" /> -->
                 </div>
                 <div id="htmlcaption1" class="nivo-html-caption">
-                    <h1>에듀플래닛 1</h1>
-                    <p>에듀플래닛을 가입하고 나의 성공시대 시작됐다 야옹야옹</p>
+                    <h1>별처럼 많은 학원들</h1>
+                    <p>선택이 고민이시라면</p>
                 </div>
                 <div id="htmlcaption2" class="nivo-html-caption">
-                    <h1>에듀플래닛 2</h1>
-                    <p>에듀플래닛을 가입하고 나의 성공시대 시작됐다 야옹야옹</p>
+                    <h1>나에게 꼭 맞는 학원 찾기</h1>
+                    <p>에듀플래닛에서 시작해 보세요.</p>
                 </div>
                 <div id="htmlcaption3" class="nivo-html-caption">
-                    <h1>에듀플래닛 3</h1>
-                    <p>에듀플래닛을 가입하고 나의 성공시대 시작됐다 야옹야옹</p>
+                    <h1>텅 빈 강의실</h1>
+                    <p>한숨은 이제 그만! 에듀플래닛으로 학원관리를 시작해 볼까요?</p>
                 </div>
                 <!-- <div id="htmlcaption4" class="nivo-html-caption">
                     <h1>에듀플래닛 4</h1>
