@@ -91,11 +91,11 @@
             </li>
 
             <?php
-                
+
                 if ($am_no) {
 
                     include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
-                    
+
                     $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_array($result);
@@ -132,9 +132,11 @@
                                 <a href="/eduplanet/mypage/review_mylist.php">
                                     <li>리뷰</li>
                                 </a>
-                                <a href="/eduplanet/index/logout.php">
+                                <a href="/eduplanet/index/logout.php" onclick=" ">
                                     <li>로그아웃</li>
+                                    <iframe id="naver_logout" src="https://nid.naver.com/nidlogin.logout" width="" height="" style="display:hidden;"></iframe>
                                 </a>
+
 
                             <?php
                                 // 학원회원 메뉴

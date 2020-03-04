@@ -42,6 +42,7 @@ if ($expiry_day == "0000-00-00") {
     $result_order = mysqli_query($conn, $sql_order);
     $row_order = mysqli_fetch_array($result_order);
     $latest_order_date = $row_order['success'];
+    echo $latest_order_date;
 
     // 기존에 멤버십 구입을 한번도 하지 않은 경우
     if (!$latest_order_date) {
