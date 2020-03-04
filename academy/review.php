@@ -295,7 +295,6 @@
                     var overlay = document.getElementsByClassName("overlay");
                     var modal = document.getElementsByClassName("modal");
 
-                        console.log(no);
                     if(admin){
                       overlay[i].style.display = "none";
                       modal[i].style.display = "none";

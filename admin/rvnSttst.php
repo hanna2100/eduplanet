@@ -33,7 +33,7 @@ if ($admin== "" ){
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
   <!-- 차트 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-  <title>에듀플래닛 관리자페이지 - 수익관리</title>
+  <title>에듀플래닛</title>
   <!-- Date 라이브러리 -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery.min.js"></script>
