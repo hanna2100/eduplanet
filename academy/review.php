@@ -295,8 +295,8 @@
                     var overlay = document.getElementsByClassName("overlay");
                     var modal = document.getElementsByClassName("modal");
 
-
-                    if(pgm_no || admin){
+                        console.log(no);
+                    if(admin){
                       overlay[i].style.display = "none";
                       modal[i].style.display = "none";
                     }else if(no == pam_no){
