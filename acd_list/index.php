@@ -7,31 +7,31 @@
 
     <!-- 제이쿼리 -->
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    
+
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
-    
+
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    
+
     <!-- 자동완성 -->
     <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    
+
     <!-- css -->
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_out.css">
     <link rel="stylesheet" href="/eduplanet/index/footer.css">
     <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
-    
+
     <!-- 스크립트 -->
     <link rel="stylesheet" href="./js/index.js">
     <script src="/eduplanet/mypage/js/review_write.js"></script>
     <script src="/eduplanet/searchbar/searchbar_out.js"></script>
 
   </head>
-  
+
   <body>
 
     <header>
@@ -906,16 +906,13 @@
                 <div id="academy_address">
                   <span class="aca_address">인천광역시 계양구 계산동</span>
                 </div>
-                <!-- <div id="call_dibs"> -->
-                  <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
 
-                <!-- </div>  -->
                 <div class="see_more">
                   <span> <a href="#" id="see_more">상세 정보 보기</a></span>
                 </div>
                 <div class="star">
                    <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="18">
-                   <span id="star_span">몇점</span>
+                   <span class="star_span">몇점</span>
                 </div>
 
               </div>
@@ -933,16 +930,13 @@
                 <div id="academy_address">
                   <span class="aca_address">인천광역시 계양구 계산동</span>
                 </div>
-                <div id="call_dibs">
-                  <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
 
-                </div>
                 <div class="see_more">
                   <span> <a href="#" id="see_more">상세 정보 보기</a></span>
                 </div>
                 <div class="star">
                    <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="18">
-                   <span id="star_span">몇점</span>
+                   <span class="star_span">몇점</span>
                 </div>
 
               </div>
@@ -960,16 +954,13 @@
                 <div id="academy_address">
                   <span class="aca_address">인천광역시 계양구 계산동</span>
                 </div>
-                <div id="call_dibs">
-                  <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
 
-                </div>
                 <div class="see_more">
                   <span> <a href="#" id="see_more">상세 정보 보기</a></span>
                 </div>
                 <div class="star">
                    <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="18">
-                   <span id="star_span">몇점</span>
+                   <span class="star_span">몇점</span>
                 </div>
 
               </div>
@@ -986,16 +977,13 @@
                 <div id="academy_address">
                   <span class="aca_address">인천광역시 계양구 계산동</span>
                 </div>
-                <div id="call_dibs">
-                  <!-- <button type="button" name="button" id="call_dibs_button"><span>학원 찜하기</span></button> -->
 
-                </div>
                 <div class="see_more">
                   <span> <a href="#" id="see_more">상세 정보 보기</a></span>
                 </div>
                 <div class="star">
                    <img src="/eduplanet/img/academy_big_one_star.png" alt="star" width="18">
-                   <span id="star_span">몇점</span>
+                   <span class="star_span">몇점</span>
                 </div>
               </div>
 
@@ -1059,6 +1047,8 @@
                           //학원명 넣어주기
                           document.getElementsByClassName("aca_name")[i].innerHTML = a[i]['acdName'];
 
+                          //평점 넣어 주기
+                          document.getElementsByClassName("star_span")[i].innerHTML = parseFloat(a[i]['total_star']).toFixed(1);
                           //번호 넣어주기
                           if(a[i]['tel']==''){
                             // alert("뭣이여");
@@ -1074,6 +1064,7 @@
                           document.getElementsByClassName("see_more")[i].onclick = moreInfo(a[i]['no']);
                           // console.log(a[i]['no']);
                           // document.getElementsByClassName("")[i]
+
                           var jim = a[i]['parent']; //이거를 어떻게 저기로 보내느냐 그것이 문제다
                           acd_no_array.push(a[i]['parent']);
                           // document.getElementsByClassName("jjim")[0].
@@ -1134,10 +1125,10 @@
 
                 navigator.geolocation.getCurrentPosition(function(position) {
 
-                    // lat = 37.825968;
-                    lat = position.coords.latitude; //현위치 위도경도
-                    // lng = 127.510878;
-                    lng = position.coords.longitude; //현위치 위도경도
+                    lat = 37.825968; //임시
+                    // lat = position.coords.latitude; //현위치 위도경도
+                    lng = 127.510878; //임시
+                    // lng = position.coords.longitude; //현위치 위도경도
                     console.log(position.coords.latitude);
                     console.log(position.coords.longitude);
 
