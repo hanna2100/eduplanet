@@ -32,7 +32,7 @@ if ($admin== "" ){
     <!-- 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
-    <title>학원 데이터 업데이트</title>
+    <title>에듀플래닛</title>
 </head>
 <body>
 <?php
