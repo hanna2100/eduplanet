@@ -159,9 +159,7 @@ if ($admin== "" ){
       <div id="g_members_totalGraph_cell1">
         <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Review Graph<span>단위: 건</span></h4>
         <canvas id="review_totalGraph"></canvas>
-        <div class="btn_hide">
-          <button>숨기기</button>
-        </div>
+
       </div>
     </div>
     <!-- end of 회원수 변화 그래프 -->

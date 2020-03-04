@@ -258,9 +258,7 @@ var payco = <?=$payco?>;
       <div id="g_members_totalGraph_cell1">
         <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Sales Graph<span>단위: 만원</span></h4>
         <canvas id="g_members_totalGraph"></canvas>
-        <div class="btn_hide">
-          <button>숨기기</button>
-        </div>
+
       </div>
     </div>
     <!-- end of 수익 변화 그래프 -->

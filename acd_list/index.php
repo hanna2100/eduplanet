@@ -1122,10 +1122,10 @@
 
                 navigator.geolocation.getCurrentPosition(function(position) {
 
-                    // lat = 37.825968; //임시
-                    lat = position.coords.latitude; //현위치 위도경도
-                    // lng = 127.510878; //임시
-                    lng = position.coords.longitude; //현위치 위도경도
+                    lat = 37.825968; //임시
+                    // lat = position.coords.latitude; //현위치 위도경도
+                    lng = 127.510878; //임시
+                    // lng = position.coords.longitude; //현위치 위도경도
                     console.log(position.coords.latitude);
                     console.log(position.coords.longitude);
 
