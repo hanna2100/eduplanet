@@ -1,6 +1,7 @@
 <?php
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
+
     $sql = "CALL modify_data_for_testing()";
     
     if(mysqli_query($conn, $sql)){
@@ -12,6 +13,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/eduplanet/lib/db_connector.php";
     }else{
         
          mysqli_close($conn);
+         echo "0";
 
     }
 

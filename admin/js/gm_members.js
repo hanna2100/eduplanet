@@ -126,8 +126,6 @@ function onclickSearch(){
         col="no";
     }else if(col=="아이디"){
         col="id";
-    }else if(col=="이메일"){
-        col="email";
     }else if(col=="연락처"){
         col="phone";
     }else if(col=="출생년도"){
