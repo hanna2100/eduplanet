@@ -132,9 +132,8 @@
                                 <a href="/eduplanet/mypage/review_mylist.php">
                                     <li>리뷰</li>
                                 </a>
-                                <a href="/eduplanet/index/logout.php" onclick=" ">
+                                <a href="/eduplanet/index/logout.php">
                                     <li>로그아웃</li>
-                                    <iframe id="naver_logout" src="https://nid.naver.com/nidlogin.logout" width="" height="" style="display:hidden;"></iframe>
                                 </a>
 
 
