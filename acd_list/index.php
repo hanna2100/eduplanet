@@ -3,26 +3,35 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Edu Planet</title>
-    <link rel="stylesheet" href="./css/index.css">
+    <title>에듀플래닛</title>
+
+    <!-- 제이쿼리 -->
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    <link rel="stylesheet" href="./js/index.js">
+    
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
+    
+    <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
-    <script src="/eduplanet/mypage/js/review_write.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    
+    <!-- 자동완성 -->
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+    <!-- css -->
+    <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_out.css">
-    <script src="/eduplanet/searchbar/searchbar_out.js"></script>
     <link rel="stylesheet" href="/eduplanet/index/footer.css">
-
-
-
+    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+    
+    <!-- 스크립트 -->
+    <link rel="stylesheet" href="./js/index.js">
+    <script src="/eduplanet/mypage/js/review_write.js"></script>
+    <script src="/eduplanet/searchbar/searchbar_out.js"></script>
 
   </head>
+  
   <body>
 
     <header>

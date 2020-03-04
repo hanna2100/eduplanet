@@ -71,8 +71,15 @@
                 <div class="academy_header_info">
 
                 <div class="academy_big_logo">
-                    <img src="/eduplanet/img/acd_logo2.png" alt="academy_big_logo">
-                    <!-- <img src="/eduplanet/data/acd_logo/<?= $file_copy ?>" alt="academy_big_logo">   db에 이미지 넣으면 위에거 주석 , 이건 주석풀어라~~ -->
+                <?php
+                    if($file_copy){
+                        echo "<img src='/eduplanet/data/acd_logo/$file_copy>' alt='academy_big_logo'>"; 
+
+                    }else{
+                        echo '<img src="/eduplanet/img/acd_logo2.png" alt="academy_big_logo">';
+                        
+                    }
+                ?>
                 </div>
 
                 <h1 id="academy_title"><?= $acd_name ?></h1>
