@@ -35,6 +35,9 @@
 
 
 </head>
+
+<body onload="naverLoginButtonSetting();">
+
   <header>
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header.php"; ?>
   </header>
@@ -124,6 +127,12 @@
   </form>
 
   <script>
+
+     // 네이버 로그인 버튼 이미지 바꾸기
+     function naverLoginButtonSetting() {
+      $("#naver_id_login img").attr("src", '/eduplanet/img/naver_login_button.png');
+    }
+    
     // 사용할 앱의 JavaScript 키 설정
     Kakao.init('c0edd7bb36cbb280cb4e498b294c87be');
 
