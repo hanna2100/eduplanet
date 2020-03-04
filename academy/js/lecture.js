@@ -51,13 +51,13 @@ function getinfo(parent){
           schedule_flag = true;
 
           var temp_array = [];
-  
+
           for(var i=0; i<sc.length; i++){
             temp_array.push(sc[i][1]);
           }
           max_time = Math.max.apply(null, temp_array); // 최대값
           min_time = Math.min.apply(null, temp_array); //최소값
-  
+
           var tr_max = max_time - min_time +2 ; //행 - 1행은 월~금, 총 행은 14-9+2 줄
           var html = "";
           var x = 0; //시간표 x좌표
@@ -150,13 +150,13 @@ function popupInsertSchedule(){
   }else{
     $("#insertSchedule, #overlay").show();
     setPopupLayerPos("#insertSchedule");
-  
+
     $("#overlay").click(function(e){
       e.preventDefault();
       $("#insertSchedule").hide();
       $("#overlay").hide();
     });
-  
+
     $("#btn_add_si_close").click(function(e){
       e.preventDefault();
       $("#insertSchedule").hide();
@@ -194,14 +194,14 @@ function popupUpdateSchedule(){
 
     $("#updateSchedule, #overlay").show();
     setPopupLayerPos("#updateSchedule");
-  
+
     $("#overlay").click(function(e){
       e.preventDefault();
       $("#updateSchedule").hide();
       clearLectureTable('update');
       $("#overlay").hide();
     });
-  
+
     $("#btn_add_su_close").click(function(e){
       e.preventDefault();
       $("#updateSchedule").hide();
@@ -229,7 +229,7 @@ function scheduleTblLoad(){
 
       //몇행 생성할지 생각해보자 (타임이 몇종류?있는지 검사)
       var time_array = [];
-  
+
       for(var i=0; i<sc.length; i++){
         time_array.push(sc[i][1]);
       }
@@ -393,7 +393,7 @@ function addScheduleTime(type){
   </td>
 </tr>`;
 
-  
+
   $table.append(html);
 }
 
@@ -493,6 +493,12 @@ function insertLecture(){
         alert('좌측에 시간이 모두 입력되었는 지 확인해주세요');
         returnNow = true;
         return false;
+    }else{
+      if($(this).val() < 0 || $(this).val() >24 ){
+        alert("시간은 0~24시 사이로 입력하셔야 합니다!");
+        returnNow = true;
+        return false;
+      }
     }
   });
   //시간이 입력되지 않았으므로 함수종료
@@ -544,6 +550,12 @@ function updateLecture(){
         alert('좌측에 시간이 모두 입력되었는 지 확인해주세요');
         returnNow = true;
         return false;
+    }else{
+      if($(this).val() < 0 || $(this).val() >24 ){
+        alert("시간은 0~24시 사이로 입력하셔야 합니다!");
+        returnNow = true;
+        return false;
+      }
     }
   });
   //시간이 입력되지 않았으므로 함수종료
@@ -571,7 +583,7 @@ function updateLecture(){
   if(returnNow){
     return;
   }
-  
+
   //새 시간표를 전부 insert
   var formsForLecture = new Array(); //db lecture테이블에 들어갈 폼들
 
@@ -636,6 +648,3 @@ function setPopupLayerPos(selector){
   $(selector).css("left", (($(window).width()-$(selector).outerWidth())/2+$(window).scrollLeft())+"px");
   $(selector).css("position", "absolute");
 }
-
-
-
