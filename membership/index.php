@@ -43,7 +43,7 @@
 
         <div class="membership_container">
           <div class="membership_section top_banner">
-            <img class="img_banner gm_banner" src="/eduplanet/img/membership_banner_gm.png" alt="ad for gm">
+              <img class="img_banner gm_banner" src="/eduplanet/img/membership_banner_gm.png" alt="ad for gm">
               <img class="img_banner am_banner" src="/eduplanet/img/membership_banner_am.png" alt="ad for am">
           </div>
 
