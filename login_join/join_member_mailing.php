@@ -83,7 +83,7 @@
   }
 
 
-        $to=$id_email;      
+        $to=$id_email;
         $from="eduplanet 관리자";
         $subject="eduplanet 회원가입 인증 확인 메일";
         $body="\n\n안녕하세요!
@@ -111,7 +111,7 @@
       echo "
         <script>
             alert('이메일 전송에 실패했습니다. 다시 시도해주세요.');
-            location.href='./join_form.php';
+
         </script>
       ";
     }
@@ -119,7 +119,7 @@
 
 
 
-
+  // location.href='./join_form.php';
 
     function mailer($fname, $fmail, $to, $subject, $content, $type=0, $file="", $cc="", $bcc="")
     {
@@ -129,7 +129,7 @@
           $mail = new PHPMailer(); // defaults to using php "mail()"
 
           // 디버그 모드(production 환경에서는 주석 처리한다.)
-          // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+          $mail->SMTPDebug = SMTP::DEBUG_SERVER;
           // $mail->SMTPDebug = 2;
           // $mail->SMTPDebug = 4;
 
@@ -140,7 +140,7 @@
           $mail->Host = "smtp.naver.com";
           $mail->Port = 465;
           $mail->Username = "iamashley44@naver.com";
-          $mail->Password = "249EYBG2KCJX";
+          $mail->Password = "N84L8X5S7HGX";
           $mail->CharSet = 'UTF-8';
           $mail->From = $fmail;
           $mail->FromName = $fname;
