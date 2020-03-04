@@ -34,46 +34,31 @@ $id_exist = mysqli_num_rows($result);
 $no = $row["no"];
 $expiry_day = $row["expiry_day"];
 
-$sql_order = "SELECT EXISTS (SELECT date FROM $table_order WHERE $mode_no='$no' order by date desc) as success;";
-
 // 사업자 승인여부 검사
 if ($mode == "am") {
-
+    
     $acd_no = $row["acd_no"];
-
+    
     $sql_approval = "SELECT approval FROM a_members WHERE acd_no=$acd_no; ";
     $result_approval = mysqli_query($conn, $sql_approval);
     $row_approval = mysqli_fetch_array($result_approval);
-
+    
     $approval = $row_approval['approval'];
 }
 
 if ($mode == "am" && $approval == "N"){
-
+    
     alert_move('현재 승인절차가 진행중입니다. 승인 후 로그인 가능합니다.', '/eduplanet/index.php');
-
+    
 }
+
+$sql_order = "SELECT EXISTS (SELECT date FROM $table_order WHERE $mode_no='$no' order by date desc) as success;";
 
 // 만료날짜가 없을 때 (유료회원이 아닐 때)
 if ($expiry_day == "0000-00-00") {
 
-    $result_order = mysqli_query($conn, $sql_order);
-    $row_order = mysqli_fetch_array($result_order);
-    $latest_order_date = $row_order['success'];
-    
-    // 기존에 멤버십 구입을 한번도 하지 않은 경우
-    if (!$latest_order_date) {
-
-        $_SESSION[$mode_no] = $no;
-        alert_move('에듀플래닛에 오신 것을 환영합니다.', '/eduplanet/index.php');
-
-    // 기존에 멤버십 구입을 했으나 만료된 경우
-    } else {
-
-        $_SESSION[$mode_no] = $no;
-        alert_move('에듀플래닛에 오신 것을 환영합니다. \n멤버십 이용기간이 만료되어 멤버십 페이지로 이동합니다.', '/eduplanet/membership/index.php');
-    }
-
+    $_SESSION[$mode_no] = $no;
+    alert_move('에듀플래닛에 오신 것을 환영합니다.', '/eduplanet/index.php');
 
 // 만료날짜가 있을 때 (유료회원일 때)
 } else {
@@ -92,6 +77,8 @@ if ($expiry_day == "0000-00-00") {
         mysqli_query($conn, $sql_exp);
 
         $_SESSION[$mode_no] = $no;
+        unset($_SESSION[$pay]);
+
         alert_move('에듀플래닛에 오신 것을 환영합니다. \n멤버십 이용기간이 만료되어 멤버십 페이지로 이동합니다.', '/eduplanet/membership/index.php');
 
     // 만료날짜가 현재날짜보다 이후거나 같을 때 (멤버십이 이용중일 때)
@@ -99,6 +86,7 @@ if ($expiry_day == "0000-00-00") {
 
         $_SESSION[$mode_no] = $no;
         $_SESSION[$pay] = $no;
+
         alert_move('에듀플래닛에 오신 것을 환영합니다.', '/eduplanet/index.php');
     }
 }

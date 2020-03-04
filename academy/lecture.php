@@ -186,7 +186,7 @@
         </tr>
         <tr>
           <td class="sc_order">
-            <input type="number" name="input_order1[]" placeholder="시간입력" oninput="setOrder(this)">
+            <input type="number" name="input_order1[]" placeholder="시간입력" oninput="setOrder(this)" max="24" min="0">
           </td>
           <td>
             <form action="#" method="post">
@@ -247,7 +247,7 @@
         <input type="reset" value="초기화" onclick="clearLectureTable('insert')">
         <input type="button" value="시간표 등록하기" onclick="insertLecture()">
       </div>
-    
+
     </div>
 
 
@@ -256,7 +256,7 @@
       <h1>시간표 수정 및 삭제<img src="/eduplanet/img/close_icon.png" id="btn_add_su_close"></h1>
       <p>* 시간은 0~24시 사이로 입력하셔야 합니다</p>
       <table id="scheduleTblUpdate" class="table_temp">
-        
+
       </table>
       <div id="add_time" onclick="addScheduleTime('update')">
         <i class="fas fa-plus-square" style="color: #2E89FF">&nbsp;&nbsp;시간표 추가하기</i>
