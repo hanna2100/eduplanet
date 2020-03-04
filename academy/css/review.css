@@ -54,7 +54,7 @@ section {
 }
 
 .inner_section_right {
-  margin-top: 30px;
+  margin-top: 95px;
   width: 230px;
   height: 600px;
   background-color: white;
@@ -90,6 +90,7 @@ section {
 .txt_title {
   font-size: em;
   margin: 0;
+  margin-bottom: 15px;
 }
 
 .inner_content_top {
@@ -192,11 +193,11 @@ section {
 
 /* bottom */
 #content_bottom {
-  height: 500px;
+  height: 540px;
 }
 
 .review_head {
-  margin-top: 20px;
+  margin-top: 30px;
   overflow: auto;
 }
 
@@ -225,6 +226,7 @@ hr {
   display: grid;
   grid-template-columns: 1fr 2fr;
   z-index: 0;
+  margin-top: 30px;
 }
 
 .review_title {
@@ -247,6 +249,8 @@ hr {
 
 .review_body_right {
   position: relative;
+  padding-top: 10px;
+  margin-top: 10px;
 }
 
 .fa {
@@ -276,7 +280,7 @@ hr {
 
 /* The bar container */
 .bar-container {
-  width: 100%;
+  width: 90%;
   background-color: #f1f1f1;
   text-align: center;
   color: white;
@@ -285,35 +289,35 @@ hr {
 /* Individual bars */
 .bar-5 {
   height: 20px;
-  background-color: #4CAF50;
+  background-color: rgb(124, 209, 127);
   font-size: 13px;
   margin-bottom: 10px;
 }
 
 .bar-4 {
   height: 20px;
-  background-color: #2196F3;
+  background-color: rgb(90, 171, 238);
   font-size: 13px;
   margin-bottom: 10px;
 }
 
 .bar-3 {
   height: 20px;
-  background-color: #00bcd4;
+  background-color: #50c5d4;
   font-size: 13px;
   margin-bottom: 10px;
 }
 
 .bar-2 {
   height: 20px;
-  background-color: #ff9800;
+  background-color: #ffbe5d;
   font-size: 13px;
   margin-bottom: 10px;
 }
 
 .bar-1 {
   height: 20px;
-  background-color: #f44336;
+  background-color: #f1847c;
   font-size: 13px;
 }
 
@@ -405,7 +409,7 @@ hr {
 
 /* 모달 */
 .overlay {
-  filter: blur(3px);
+  filter: blur(5px);
   -webkit-filter: blur(3px);
   position: absolute;
   top: 0;
@@ -415,8 +419,9 @@ hr {
   width: 100%;
   height: 100%;
   background: #000;
-  opacity: 0.4;
+  opacity: 0.3;
   z-index: 1;
+  border-radius: 10px;
 }
 
 .modal {
@@ -429,7 +434,7 @@ hr {
   box-shadow: 0 3px 8px 0 rgba(50, 52, 56, 0.2);
   padding: 32px;
   border: 1px solid #c5c7cc;
-  border-radius: 3px;
+  border-radius: 5px;
   background-color: #fff;
   z-index: 12;
 }
