@@ -26,6 +26,25 @@
   <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
   <link rel="stylesheet" href="./join.css">
 
+  <style>
+  .inner_section {
+    padding: 5em;
+    width: 50%;
+    margin: 10% auto;
+    background: #fff;
+    text-align: center;
+  }
+  .home, h1 {
+    display: block; padding-bottom: 2em;
+  }
+  .join_mail {
+    display: block;
+  }
+  div h1{
+    font-size: 40px;
+  }
+  </style>
+
 </head>
 
 <body>
@@ -36,11 +55,19 @@
     ?>
   </header>
 
-  <section>
-    <div class="">
-      <h1> </h1>
+<section>
+
+  <div class="inner_section">
+    <div class="home">
+      <a href="../index.php"><img src="/eduplanet/img/acd_logo2.png" width="100px" height="80px" alt="thank you!"></a>
     </div>
-  </section>
+    <div class="join_mail">
+        <h1>회원가입 인증 메일을 보냈습니다! <br>메일을 확인해주세요.</h1>
+    </div>
+
+  </div>
+
+</section>
 
 </body>
 
@@ -102,7 +129,6 @@ function join_mailing_success()
   echo "
         <script>
             alert('회원가입 인증 메일을 보냈습니다! 메일을 확인해주세요.');
-            self.close();
         </script>
       ";
 }
