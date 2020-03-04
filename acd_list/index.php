@@ -29,7 +29,8 @@
     <link rel="stylesheet" href="./js/index.js">
     <script src="/eduplanet/mypage/js/review_write.js"></script>
     <script src="/eduplanet/searchbar/searchbar_out.js"></script>
-
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
   </head>
 
   <body>
@@ -1013,25 +1014,12 @@
                     console.log(response);
                     if(response == "Norow!"){
 
-                       //폼 수정 하면 밑에 3줄 주석 풀어라!
-                      // document.getElementById("my_village_academy").style.display = "none";
-                      // document.getElementById("more_s").style.display = "none";
-                      // document.getElementById("contents_wrap").style.height = "770px";
+                      // 폼 수정 하면 밑에 3줄 주석 풀어라!
+                      document.getElementById("my_village_academy").style.display = "none";
+                      document.getElementById("view_all_button2").style.display = "none";
+                      document.getElementById("contents_wrap").style.height = "770px";
                     }else{
                       var a = JSON.parse(response); //택배를 뜯는느낌 // 이것은 json 정보를 우리가 볼수있게 해독해주는 것이여.
-
-                      // $.ajax({
-                      //   type: "post",
-                      //   datatype:"JSON",
-                      //   data:{"siName":siName,
-                      //         "dongName":dongName},
-                      //   url : "./view_all.php",
-                      //   success: function(respon)
-                      //
-                      //
-                      //
-                      //
-                      // });
 
                       console.log(a[0]['acdName']);
                       var acd_no_array = [];
@@ -1042,7 +1030,7 @@
                               document.getElementsByClassName("acd_img")[i].src ="/eduplanet/img/acd_logo2.png";
                           }
                           else{
-                              document.getElementsByClassName("acd_img")[i].src = a[i]['img'];
+                              document.getElementsByClassName("acd_img")[i].src ="/eduplanet/data/acd_logo/"+a[i]['img'];
                           }
                           //학원명 넣어주기
                           document.getElementsByClassName("aca_name")[i].innerHTML = a[i]['acdName'];
@@ -1062,15 +1050,10 @@
 
                           // 학원 정보 자세히
                           document.getElementsByClassName("see_more")[i].onclick = moreInfo(a[i]['no']);
-                          // console.log(a[i]['no']);
-                          // document.getElementsByClassName("")[i]
 
-                          var jim = a[i]['parent']; //이거를 어떻게 저기로 보내느냐 그것이 문제다
+                          var jim = a[i]['parent'];
                           acd_no_array.push(a[i]['parent']);
-                          // document.getElementsByClassName("jjim")[0].
 
-                          // $(".jjim")[0].attr("href", "/eduplanet/acd_story/follow.php?no="+a[i]['parent']);
-                          // document.getElementsByClassName("story_academy_heart").
 
                       }
                       var i = 0; //each() 각각 하나씩 넣어준다
@@ -1082,28 +1065,6 @@
                     // console.log(response[0]["acd_name"]);
                   //  제이슨 해당정보를 해독을 함
 
-
-
-                    // document.getElementById("see_more"+0).onclick = function(){
-                    //
-                    //   location.href="../academy/index.php?no="+a[0]['no'];
-                    //
-                    // }
-                    // document.getElementById("see_more"+1).onclick = function(){
-                    //
-                    //   location.href="../academy/index.php?no="+a[1]['no'];
-                    //
-                    // }
-                    // document.getElementById("see_more"+2).onclick = function(){
-                    //
-                    //   location.href="../academy/index.php?no="+a[2]['no'];
-                    //
-                    // }
-                    // document.getElementById("see_more"+3).onclick = function(){
-                    //
-                    //   location.href="../academy/index.php?no="+a[3]['no'];
-                    //
-                    // }
 
                 },error:function(request,status,error){
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -1125,10 +1086,10 @@
 
                 navigator.geolocation.getCurrentPosition(function(position) {
 
-                    lat = 37.825968; //임시
-                    // lat = position.coords.latitude; //현위치 위도경도
-                    lng = 127.510878; //임시
-                    // lng = position.coords.longitude; //현위치 위도경도
+                    // lat = 37.825968; //임시
+                    lat = position.coords.latitude; //현위치 위도경도
+                    // lng = 127.510878; //임시
+                    lng = position.coords.longitude; //현위치 위도경도
                     console.log(position.coords.latitude);
                     console.log(position.coords.longitude);
 
