@@ -36,7 +36,6 @@
 
 </head>
 
-<body onload="naverLoginButtonSetting();">
 
   <header>
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header.php"; ?>
