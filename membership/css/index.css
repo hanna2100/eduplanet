@@ -26,12 +26,12 @@ body {
 /*  상단 배너 */
 .top_banner {
   /* width: 100%; */
-  background-color: #696969;
+  background-color: #fff;
   height: 300px;
   text-align: center;
 }
 .img_banner{
-  height: 100%;
+  width: 100%;
   margin: 0 auto;
   padding-top : 2%;
 }
