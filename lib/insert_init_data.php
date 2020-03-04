@@ -21,7 +21,7 @@ function insert_init_data($conn, $table_name){
             $sql = a_members_init_data();
             break;
           case 'academy' :
-            $sql = academy_init_data("가평군","가평읍");
+            $sql = academy_init_data();
             break;
           case 'teacher' :
             $sql = "INSERT INTO `teacher` VALUES (1, 1,'고 양희','피아노','국제 냥쿠르 대상',  'test_teacher_1.jpg'),

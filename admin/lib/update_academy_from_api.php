@@ -17,26 +17,30 @@
   //새로운 temp 데이터 가져오기
   $sql ="INSERT INTO `academy_temp` VALUES "; //리턴할 sql문장
 
-  set_api_index(1);
-  set_api_scale(100);
+  $acd_array1 = get_academy_from_api("가평군", "가평읍");
+  $acd_array2 = get_academy_from_api("수원시", "영통동");
+  $acd_array3 = get_academy_from_api("시흥시", "거모동");
+  $acd_array4 = get_academy_from_api("고양시", "성사동");
+  $acd_array5 = get_academy_from_api("성남시", "성남동");
+  $acd_array6 = get_academy_from_api("광명시", "하안동");
 
-  $acd_array = get_academy_from_api("가평군", "가평읍");
-
-  for($i=0; $i<sizeof($acd_array); $i++){
-    $si_name = $acd_array[$i]->si_name;
-    $dong_name = $acd_array[$i]->dong_name;
-    $sector = $acd_array[$i]->sector;
-    $acd_name = $acd_array[$i]->acd_name;
-    $rprsn = $acd_array[$i]->rprsn;
-    $class = $acd_array[$i]->class;
-    $tel = $acd_array[$i]->tel;
-    $address = $acd_array[$i]->address;
+  $acd_array_total = array_merge($acd_array1,$acd_array2,$acd_array3,$acd_array4,$acd_array5,$acd_array6);
+  
+  for($i=0; $i<sizeof($acd_array_total); $i++){
+    $si_name = $acd_array_total[$i]->si_name;
+    $dong_name = $acd_array_total[$i]->dong_name;
+    $sector = $acd_array_total[$i]->sector;
+    $acd_name = $acd_array_total[$i]->acd_name;
+    $rprsn = $acd_array_total[$i]->rprsn;
+    $class = $acd_array_total[$i]->class;
+    $tel = $acd_array_total[$i]->tel;
+    $address = $acd_array_total[$i]->address;
 
     $no = $i+1;
 
     $sql .= "($no, '$si_name','$dong_name','$sector','$acd_name','$rprsn','$class','$tel','$address')";
 
-    if($i != sizeof($acd_array)-1){
+    if($i != sizeof($acd_array_total)-1){
       $sql .=", ";
     }
   }
@@ -46,6 +50,8 @@
   
   if($result){
     echo "1";
+  }else{
+    echo "0";
   }
 
 

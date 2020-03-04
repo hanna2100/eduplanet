@@ -47,6 +47,7 @@ function updateAcdFromApi(){
                 location.replace(url);
             }else{
                 alert("API 업데이트를 실패했습니다");
+                console.log(data);
             }
         },
         error : function(){

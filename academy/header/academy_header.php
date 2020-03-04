@@ -13,7 +13,7 @@
 
 <body>
   <?php
-    $no = $_GET["no"];
+    $no = isset($_GET["no"]) ? $_GET["no"] : '';
 
     include_once $_SERVER["DOCUMENT_ROOT"]."/eduplanet/lib/db_connector.php"; //절대경로
 
@@ -24,15 +24,29 @@
     //
     // // 1 .Create connection mysql -u root -p 123456 -h 192.168.0.230
     // $conn = mysqli_connect($servername, $username, $password);
-    $sql = "select academy.no,academy.si_name,academy.acd_name,academy.file_copy,review.parent,avg(review.total_star),avg(review.facility),avg(review.acsbl),avg(review.teacher),avg(review.cost_efct),avg(review.achievement) from academy join review on academy.no = review.parent where academy.no = $no group by review.parent order by avg(review.total_star) desc";
+
+    $sql = "SELECT 
+                academy.no,
+                academy.si_name,
+                academy.acd_name,
+                academy.file_copy,
+                AVG(review.total_star)
+            FROM
+                academy
+                    JOIN
+                review ON academy.no = review.parent
+            WHERE
+                academy.no = $no";
+
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($result);
 
     $acd_name = $row["acd_name"];
     $si_name = $row["si_name"];
     $file_copy = $row["file_copy"];
-    $parent = $row["parent"];
+    $parent = $no;
     $avg_total = $row["avg(review.total_star)"];
+    
     // $avg_facility = $row["avg(review.facility)"];
     // $avg_acsbl = $row["avg(review.acsbl)"];
     // $avg_teacher = $row["avg(review.teacher)"];

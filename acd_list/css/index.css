@@ -72,14 +72,22 @@ body {
   width: 110px;
 
 }
+#see_more{
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
 .see_more{
   position: absolute;
-  bottom: 15px;
-  right: 30px;
+  top: 25px;
+  right: 20px;
   border: 1px solid lightgray;
   border-radius: 5px;
-  background-color: #f3f3f4;
-  width: 70px;
+  background-color: #2E89FF;
+  line-height: 80px;
+  width: 80px;
+  height: 80px;
+
   text-align: center;
 }
 #button_academy_heart_off:hover {
