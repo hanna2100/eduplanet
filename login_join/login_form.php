@@ -36,7 +36,6 @@
 
 </head>
 
-<body onload="naverLoginButtonSetting();">
 
   <header>
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/index_header.php"; ?>
@@ -95,7 +94,13 @@
           </table>
           <div class="social_button">
             <div id="kakao_login_button" onclick="kakaoConn();"><img src="/eduplanet/img/kakao_login_button.png" alt="kakao_login_button"></div>
-            <div id="naver_id_login"></div>
+            <div id="naver_id_login" style="visibility:hidden; height:0px;"></div>
+            <div id="naver_id_login_button" style="cursor:pointer;" onclick="document.getElementById('naver_id_login_anchor').click();">
+              <img src="/eduplanet/img/naver_login_button.png" alt="">
+            </div>
+            <div class="">
+
+            </div>
           </div>
 
         </div>
@@ -127,12 +132,6 @@
   </form>
 
   <script>
-
-     // 네이버 로그인 버튼 이미지 바꾸기
-     function naverLoginButtonSetting() {
-      $("#naver_id_login img").attr("src", '/eduplanet/img/naver_login_button.png');
-    }
-
     // 사용할 앱의 JavaScript 키 설정
     Kakao.init('c0edd7bb36cbb280cb4e498b294c87be');
 
@@ -209,6 +208,7 @@
 
   <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
   <!-- naver -->
+
   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
   <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
@@ -226,7 +226,6 @@
    var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "https://localhost/eduplanet/login_join/login_form.php");
    var state = naver_id_login.getUniqState();
    var naver_id;
-   naver_id_login.setButton("green", 3,48);
    naver_id_login.setDomain("https://localhost/eduplanet/login_join/login_form.php");
    naver_id_login.setState(state);
    naver_id_login.init_naver_id_login();

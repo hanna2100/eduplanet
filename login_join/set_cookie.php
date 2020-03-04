@@ -22,7 +22,7 @@
           }
         }else {
   ?>
-          <script>location.href = "/eduplanet/index.php";</script>
+           <script>location.href = "/eduplanet/index.php";</script>
   <?php
 
         }

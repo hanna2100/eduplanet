@@ -19,7 +19,8 @@
   <link rel="stylesheet" href="/eduplanet/index/footer.css">
   <link rel="stylesheet" href="/eduplanet/academy/header/academy_header.css">
   <link rel="stylesheet" href="./css/index.css">
-
+  <!-- 아이콘 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
 
 
@@ -228,7 +229,7 @@
 
           <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=79f3ade82ebdd492df0cd3712dc6f828&libraries=services"></script>
           <script>
-            
+
             // 학원 정보 span에 띄우기---------------
             document.getElementById("course_name").innerHTML = "<?= $acd_name ?>"
             document.getElementById("rep_course").innerHTML = "<?= $rprsn ?>"
@@ -291,12 +292,19 @@
 
       </div>
     </div> <!-- eduInforMain -->
-
-
   </main>
   <footer>
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/index/footer.php"; ?>
   </footer>
+  <script>
+      var no = <?=$no?>;
+      var is_pam = '<?=$pam_no?>';
+      if(!(is_pam == no)){
+        $("#modify_button").each(function(){
+          $(this).css('display','none');
+        });
+      }
+  </script>
 </body>
 
 </html>

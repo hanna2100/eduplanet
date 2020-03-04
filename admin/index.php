@@ -34,7 +34,7 @@ if ($admin== "" ){
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
   <!-- 차트 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-  <title>에듀플래닛 관리자페이지</title>
+  <title>에듀플래닛</title>
 </head>
 <body>
 

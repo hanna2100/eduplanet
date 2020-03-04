@@ -30,7 +30,7 @@
                 academy.si_name,
                 academy.acd_name,
                 academy.file_copy,
-                AVG(review.total_star)
+                AVG(review.total_star) as avg
             FROM
                 academy
                     JOIN
@@ -45,7 +45,8 @@
     $si_name = $row["si_name"];
     $file_copy = $row["file_copy"];
     $parent = $no;
-    $avg_total = $row["avg(review.total_star)"];
+    $avg_total = $row['avg'];
+
     
     // $avg_facility = $row["avg(review.facility)"];
     // $avg_acsbl = $row["avg(review.acsbl)"];
@@ -73,11 +74,11 @@
                 <div class="academy_big_logo">
                 <?php
                     if($file_copy){
-                        echo "<img src='/eduplanet/data/acd_logo/$file_copy>' alt='academy_big_logo'>"; 
+                        echo "<img src='/eduplanet/data/acd_logo/$file_copy' alt='academy_big_logo'>"; 
 
                     }else{
                         echo '<img src="/eduplanet/img/acd_logo2.png" alt="academy_big_logo">';
-                        
+
                     }
                 ?>
                 </div>
@@ -87,7 +88,7 @@
                     <div class="academy_title_detail">
                         <img src="/eduplanet/img/academy_big_one_star.png" alt="academy_big_one_star">
 
-                        <span id="academy_star_span"><?= round($avg_total,1) ?></span>
+                        <span id="academy_star_span"><?=$avg_total?></span>
                         <?php
                         $val = round($avg_total,1);
                         if($avg_total){
