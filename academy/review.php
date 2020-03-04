@@ -272,13 +272,15 @@
                    <div id="myModal" class="modal">
                      <?php
                         if($gm_no && !$pgm_no){
-                          $url = "../membership/index.php?gm_no='$gm_no'";
+                          $url_membership = "../membership/index.php?gm_no=$gm_no";
+                          $url_review = "/eduplanet/mypage/review_mylist.php";
                         }else if(!$gm_no){
-                          $url = "../login_join/login_form.php";
+                          $url_membership = "../login_join/login_form.php";
+                          $url_review = "../login_join/login_form.php";
                         }
                       ?>
-                     <button type="button" name="button" class="btn_modal btn_membership" onclick="location.href='<?=$url?>'">멤버십 가입하고 전체보기</button>
-                     <button type="button" name="button" class="btn_modal btn_review" onclick="location.href='/eduplanet/acd_story/index.php'">학원리뷰 작성하고 전체보기</button>
+                     <button type="button" name="button" class="btn_modal btn_membership" onclick="location.href='<?=$url_membership?>'">멤버십 가입하고 전체보기</button>
+                     <button type="button" name="button" class="btn_modal btn_review" onclick="location.href='<?=$url_review?>'">학원리뷰 작성하고 전체보기</button>
                    </div>
                  </div>
 
