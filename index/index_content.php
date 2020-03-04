@@ -12,27 +12,22 @@
         <div class="index_slider">
             <div class="slider-wrapper theme-mi-slider">
                 <div id="slider" class="nivoSlider">
-                    <img src="/eduplanet/index/nivo-slider/img/slider_img1.jpg" alt="" title="#htmlcaption1" />
-                    <img src="/eduplanet/index/nivo-slider/img/slider_img2.jpg" alt="" title="#htmlcaption2" />
-                    <img src="/eduplanet/index/nivo-slider/img/slider_img3.jpg" alt="" title="#htmlcaption3" />
-                    <!-- <img src="/eduplanet/index/nivo-slider/img/slider_img4.jpg" alt="" title="#htmlcaption4" /> -->
+                    <img src="/eduplanet/index/nivo-slider/img/slider_img1.jpg" alt="index_img" title="#htmlcaption1" />
+                    <img src="/eduplanet/index/nivo-slider/img/slider_img2.jpg" alt="index_img" title="#htmlcaption2" />
+                    <img src="/eduplanet/index/nivo-slider/img/slider_img3.jpg" alt="index_img" title="#htmlcaption3" />
                 </div>
                 <div id="htmlcaption1" class="nivo-html-caption">
-                    <h1>별처럼 많은 학원들</h1>
-                    <p>선택이 고민이시라면</p>
+                    <h1>우주의 별들처럼 수 많은 학원들</h1>
+                    <p>모든 학원의 정보를 한 눈에 보고, 간편하게 비교해 보세요.</p>
                 </div>
                 <div id="htmlcaption2" class="nivo-html-caption">
-                    <h1>나에게 꼭 맞는 학원 찾기</h1>
-                    <p>에듀플래닛에서 시작해 보세요.</p>
+                    <h1>나에게 꼭 맞는 학원 찾기, 어려우시죠?</h1>
+                    <p>에듀플래닛과 함께 시작해 보세요.</p>
                 </div>
                 <div id="htmlcaption3" class="nivo-html-caption">
-                    <h1>텅 빈 강의실</h1>
-                    <p>한숨은 이제 그만! 에듀플래닛으로 학원관리를 시작해 볼까요?</p>
+                    <h1>텅 빈 강의실, 한숨은 이제 그만!</h1>
+                    <p>효율적인 학원 관리의 시작, 에듀플래닛과 함께하세요.</p>
                 </div>
-                <!-- <div id="htmlcaption4" class="nivo-html-caption">
-                    <h1>에듀플래닛 4</h1>
-                    <p>에듀플래닛을 가입하고 나의 성공시대 시작됐다 야옹야옹</p>
-                </div> -->
             </div>
 
             <div class="index_main_wrap">
@@ -78,7 +73,7 @@
                         <button id="button_main_search" type="button" onclick="searchAcademy();">검색</button>
 
                         <script>
-                            // 엔터키 눌렀을 때 자동검색
+                            // 엔터키 눌렀을 때 자동 검색
                             function enterKey() {
                                 if (window.event.keyCode == 13) {
                                     searchAcademy();
@@ -86,7 +81,32 @@
                             }
 
                             function searchAcademy() {
-                                location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_index").value;
+
+                                // 검색어를 입력하지 않았을 때
+                                if (document.getElementById("acd_name_index").value == "") {
+
+                                    // 지역을 선택하지 않았을 때
+                                    if (document.getElementById("select_district").value == "") {
+                                        location.href = '/eduplanet/acd_list/view_all.php';
+
+                                    // 지역을 선택했을 때
+                                    } else if (document.getElementById("select_district").value != "") {
+                                        location.href = '/eduplanet/acd_list/view_all.php?district=' + document.getElementById("select_district").value + '&sort=bace_max';
+                                    }
+
+                                // 검색어를 입력했을 때
+                                } else if (document.getElementById("acd_name_index").value != "") {
+
+                                    // 지역을 선택하지 않았을 때
+                                    if (document.getElementById("select_district").value == "") {
+                                        location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_index").value;
+
+                                    // 지역을 선택했을 때
+                                    } else if (document.getElementById("select_district").value != "") {
+                                        location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_index").value + '&district=' + document.getElementById("select_district").value;
+                                    }
+
+                                }
                             }
                         </script>
 
@@ -132,7 +152,7 @@
                 </div>
 
                 <div class="story_card a3">
-                    <a href="/eduplanet/acd_list/view_all.php?district=&sort=achievement_max&category=ctg_achievement">
+                    <a href="/eduplanet/acd_list/view_all.php?district=전체&sort=achievement_max">
                         <!-- <div class="story_img"> -->
                         <img src="/eduplanet/img/index_img2.jpg" width="100%" height="100%" alt="academy_story">
                         <!-- </div> -->

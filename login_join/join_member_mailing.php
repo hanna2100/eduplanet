@@ -83,7 +83,7 @@
   }
 
 
-        $to=$id_email;      
+        $to=$id_email;
         $from="eduplanet 관리자";
         $subject="eduplanet 회원가입 인증 확인 메일";
         $body="\n\n안녕하세요!
@@ -119,8 +119,6 @@
 
 
 
-
-
     function mailer($fname, $fmail, $to, $subject, $content, $type=0, $file="", $cc="", $bcc="")
     {
           if ($type != 1) $content = nl2br($content);
@@ -140,7 +138,7 @@
           $mail->Host = "smtp.naver.com";
           $mail->Port = 465;
           $mail->Username = "iamashley44@naver.com";
-          $mail->Password = "249EYBG2KCJX";
+          $mail->Password = "N84L8X5S7HGX";
           $mail->CharSet = 'UTF-8';
           $mail->From = $fmail;
           $mail->FromName = $fname;

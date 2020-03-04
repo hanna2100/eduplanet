@@ -34,6 +34,14 @@
     position: relative;
 }
 
+.index_slider h1  {
+    font-size: 26px;
+}
+
+.index_slider p  {
+    font-size: 18px;
+}
+
 /* 메인 상단 검색창 투명색 바 */
 .index_main_wrap {
     width: 100%;
