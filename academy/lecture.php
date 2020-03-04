@@ -39,6 +39,19 @@
     <script type="text/javascript" src="/eduplanet/lib/slick/slick.min.js"></script>
 
     <title>에듀플래닛</title>
+    <script>
+      function checkInputImg() {
+
+        var postImg = document.getElementById("upfile").files;
+
+        var reader = new FileReader();
+        reader.readAsDataURL(postImg[0]);
+
+        reader.onload = function() {
+          document.getElementById("teacherImgShow").src = reader.result;
+        }
+      }
+    </script>
 
   </head>
   <?php
@@ -136,12 +149,17 @@
     <div id="insertTeacher">
         <div class="teacher_info">
           <h1>선생님 등록<img src="/eduplanet/img/close_icon.png" id="btn_add_tu_close"></h1>
+
           <form id="tc_insert_form" action="#" method="post" enctype="multipart/form-data\">
+
             <div class="formImgBox">
-              <img id="teacherImgShow" src="../img/member_basic.png" alt=""><br>
-              <input type="file" id="upfile" name="upfile" accept=".jpg,.jpeg,.png,.gif">
+              <img id="teacherImgShow" src="../img/member_basic.png" alt="" width="100" height="100"><br>
+              <input type="file" id="upfile" name="upfile"onchange="checkInputImg();" accept=".jpg,.jpeg,.png,.gif">
+
               <input type="hidden" name="parent" value="<?=$parent?>">
+              <input id="old_file_copy" name="old_file_copy" type="hidden" value=<?= $file_copy ?>>
             </div>
+
             <div class="formInfoBox">
               <div class="formBox">
                 <label for="teacherName">이름</label><br>
