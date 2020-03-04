@@ -91,11 +91,11 @@
             </li>
 
             <?php
-                
+
                 if ($am_no) {
 
                     include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
-                    
+
                     $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_array($result);
@@ -132,9 +132,10 @@
                                 <a href="/eduplanet/mypage/review_mylist.php">
                                     <li>리뷰</li>
                                 </a>
-                                <a href="/eduplanet/index/logout.php">
+                                <a href="/eduplanet/index/logout.php" class="logout_a">
                                     <li>로그아웃</li>
                                 </a>
+
 
                             <?php
                                 // 학원회원 메뉴
@@ -153,10 +154,9 @@
                                 <a href="/eduplanet/academy/index.php?no=<?= $acd_no ?>">
                                     <li>My Academy</li>
                                 </a>
-                                <a href="/eduplanet/index/logout.php">
+                                <a href="/eduplanet/index/logout.php" class="logout_a">
                                     <li>로그아웃</li>
                                 </a>
-
                             <?php
                                 // 로그인 안했을 때
                             } else {
@@ -182,7 +182,11 @@
         </ul>
 
     </div>
-
+    <div class="hidden_naver_logout" style="visibility: hidden;">
+      <!-- 네이버 로그아웃 -->
+      <!-- 회원가입 또는 로그인 해도 다른 사이트에서 로그아웃 상태 -->
+      <iframe src="https://nid.naver.com/nidlogin.logout" width="0px" height="0px" style="visibility: hidden;"></iframe>
+    </div>
 </div>
 
 <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/mypage/review_write_popup.php"; ?>

@@ -65,9 +65,6 @@
     $approval = $row_approval['approval'];
   }
 
-  $sql_order = "SELECT EXISTS (SELECT date FROM $table_order WHERE $mode_no='$no' order by date desc) as success;";
-
-
   // DB 에서 가져온 아이디가 없을 때
   if (!$id_exist) {
 
@@ -88,14 +85,6 @@
       // 만료날짜가 없을 때 (유료회원이 아닐 때)
       if ($expiry_day == "0000-00-00") {
 
-
-        // 기존에 멤버십 구입을 한번도 하지 않은 경우
-        $result_order = mysqli_query($conn, $sql_order);
-        $row_order = mysqli_fetch_array($result_order);
-        $latest_order_date = $row_order['success'];
-
-        if(!$latest_order_date){
-
           // gm_no, am_no 세션 값 주기
           $_SESSION[$mode_no] = $no;
 
@@ -107,23 +96,7 @@
           }else{
             alert_move('에듀플래닛에 오신 것을 환영합니다.', '/eduplanet/index.php');
           }
-        }
-        // 기존에 멤버십 구입을 했으나 만료된 경우
-        else{
-
-          // gm_no, am_no 세션 값 주기
-          $_SESSION[$mode_no] = $no;
-          unset($_SESSION[$pay]);
-
-          // 자동로그인(로그인 유지) 체크박스 선택시 cookie를 굽기 위해 set_cookie 페이지로 이동
-          if(isset($_POST['auto_login'])){
-            $master_key = 'eduplanet';
-            $hash = md5($master_key.$pw);
-            alert_move('에듀플래닛에 오신 것을 환영합니다.', "/eduplanet/login_join/set_cookie.php?id=$input_id&hash=$hash");
-          }else{
-            alert_move('에듀플래닛에 오신 것을 환영합니다. \n멤버십 이용기간이 만료되어 멤버십 페이지로 이동합니다.', '/eduplanet/membership/index.php');
-          }
-        }
+        // }
 
 
       // 만료날짜가 있을 때 (유료회원일 때)
@@ -142,10 +115,6 @@
           $sql_exp = "UPDATE $table_members SET expiry_day='0000-00-00' WHERE no=$no";
           mysqli_query($conn, $sql_exp);
 
-          if (!mysqli_query($conn, $sql_exp)) {
-            echo "오류ㅠ.ㅠ : ".mysqli_error($conn);
-          }
-
           $_SESSION[$mode_no] = $no;
           unset($_SESSION[$pay]);
 
@@ -153,7 +122,8 @@
           if(isset($_POST['auto_login'])){
             $master_key = 'eduplanet';
             $hash = md5($master_key.$pw);
-            alert_move('에듀플래닛에 오신 것을 환영합니다.', "/eduplanet/login_join/set_cookie.php?id=$input_id&hash=$hash");
+            $expiry = 'Y';
+            alert_move('에듀플래닛에 오신 것을 환영합니다. \n멤버십 이용기간이 만료되어 멤버십 페이지로 이동합니다.', "/eduplanet/login_join/set_cookie.php?id=$input_id&hash=$hash&expiry=$expiry");
           }else{
             alert_move('에듀플래닛에 오신 것을 환영합니다. \n멤버십 이용기간이 만료되어 멤버십 페이지로 이동합니다.', '/eduplanet/membership/index.php');
           }
@@ -179,7 +149,7 @@
       mysqli_close($conn);
 
     }
-  
+
 
   function alert_move($msg, $url){
     echo "
