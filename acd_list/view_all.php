@@ -19,14 +19,17 @@
   <link rel="stylesheet" href="/eduplanet/index/footer.css">
   <link rel="stylesheet" href="./css/view_all.css">
 
-  <!-- 스크립트 -->
-  <script src="/eduplanet/mypage/js/review_write.js"></script>
+
 
   <!-- 자동완성 -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="/eduplanet/searchbar/searchbar_out.js"></script>
+
+  <!-- 스크립트 -->
+  <script src="/eduplanet/mypage/js/review_write.js"></script>
+
 
   <!-- 아이콘 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
@@ -998,15 +1001,16 @@
                     $result7 = mysqli_query($conn, $sql7);
                     $row7 = mysqli_fetch_array($result7);
 
-                    // var_dump($row7);
+                  
 
                     if ($row7) {
                       echo "
-                                              <a href='/eduplanet/acd_story/unfollow.php?no=$parent'><button type='button' id='button_academy_heart_on'>like</button></a>
+
+                                              <a href='/eduplanet/acd_story/unfollow.php?no=$no'><button type='button' id='button_academy_heart_on'>like</button></a>
                                             ";
                     } else {
                       echo "
-                                              <a href='/eduplanet/acd_story/follow.php?no=$parent'><button type='button' id='button_academy_heart_off'>like</button></a>
+                                              <a href='/eduplanet/acd_story/follow.php?no=$no'><button type='button' id='button_academy_heart_off'>like</button></a>
                                               ";
                     }
 
