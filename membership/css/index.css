@@ -12,28 +12,23 @@ body {
   margin: auto 0;
   background-color: white;
 }
-.membership_container{
-  /* width: 100%; */
-}
+
 /* top & bottom */
 .bottom_info {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 300px;
-  /* height: 50vh; */
 }
 /*  상단 배너 */
 .top_banner {
-  /* width: 100%; */
-  background-color: #696969;
   height: 300px;
   text-align: center;
 }
 .img_banner{
+  width: 1060px;
+  margin: 3% auto;
   height: 100%;
-  margin: 0 auto;
-  padding-top : 2%;
 }
  /* 아이콘 */
 .membership_icons_wrap {
