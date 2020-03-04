@@ -207,6 +207,14 @@
   <!-- 카카오 로그인 ------------------------------------------------------------------------------------------->
 
   <!-- 네이버 로그인 ------------------------------------------------------------------------------------------->
+
+  <?php
+    include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+
+    $mode = isset($_GET['mode']) ? $_GET['mode'] : "gm";
+    $action = "/eduplanet/login_join/join_form.php?mode=" . $mode;
+  ?>
+
   <!-- naver -->
 
   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -218,14 +226,13 @@
   </form>
 
   <!-- 네이버 로그인 정보를 담는 form (로그인)-->
-  <form name="naver_login_form" action="/eduplanet/login_join/naver_login.php?mode=<?= $mode ?>" method="POST">
-    <input id="naver_id_login" name="naver_id_login" type="hidden">
+  <form name="naver_login_email" action="/eduplanet/login_join/naver_login.php?mode=<?= $mode ?>" method="POST">
+    <input id="naver_login" name="naver_login" type="hidden">
   </form>
 
   <script type="text/javascript">
    var naver_id_login = new naver_id_login("bVUclMb7FkFxQxcyDJLm", "https://localhost/eduplanet/login_join/login_form.php");
    var state = naver_id_login.getUniqState();
-   var naver_id;
    naver_id_login.setDomain("https://localhost/eduplanet/login_join/login_form.php");
    naver_id_login.setState(state);
    naver_id_login.init_naver_id_login();
@@ -234,18 +241,18 @@
    }
    function membercheck(){
      naverSignInCallback();
-     var url = "members_checkId.php?id=" + naver_id + "&mode=" + '<?=$mode?>';
+     var url = "members_checkId.php?id=" + naver_email + "&mode=" + '<?=$mode?>';
      $.ajax({
        url : url,
        type : "GET",
        success: function(data) {
          // 이미 이메일이 가입되어 있을 때 --> 네이버 로그인
          if (data == 1) {
-           document.getElementById("naver_id_login").value = naver_id;
-           document.naver_login_form.submit();
+           document.getElementById("naver_login").value = naver_email;
+           document.naver_login_email.submit();
            // 이메일이 가입되어 있지 않을 때 --> form 으로 이메일을 넘겨서 회원가입
          } else {
-           document.getElementById("naver_id").value = naver_id;
+           document.getElementById("naver_id").value = naver_email;
            document.naver_form.submit();
            alert("아이디가 등록되어 있지 않아, 회원가입 페이지로 이동합니다.");
          }
@@ -253,10 +260,10 @@
      });
    }
    function naverSignInCallback() {
-     naver_id = naver_id_login.getProfileData('email');
+     naver_id = naver_id_login.getProfileData('id');
      naver_age = naver_id_login.getProfileData('age');
      naver_birthday = naver_id_login.getProfileData('birthday');
-     naver_email = naver_id_login.getProfileData('id');
+     naver_email = naver_id_login.getProfileData('email');
      naver_enc_id = naver_id_login.getProfileData('enc_id');
      naver_gender = naver_id_login.getProfileData('gender');
      naver_nickname = naver_id_login.getProfileData('nickname');

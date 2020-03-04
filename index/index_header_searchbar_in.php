@@ -58,7 +58,17 @@
                     }
 
                     function searchAcademy() {
-                        location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_in").value;
+
+                        // 검색어를 입력하지 않았을 때
+                        if (document.getElementById("acd_name_in").value == "") {
+
+                            location.href = '/eduplanet/acd_list/view_all.php';
+
+                        // 검색어를 입력했을 때
+                        } else if (document.getElementById("acd_name_in").value != "") {
+
+                            location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_in").value;
+                        }
                     }
                 </script>
 
@@ -110,16 +120,16 @@
                 </li>
 
                 <?php
-                
-                    if ($am_no) {
 
-                        include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
-                        
-                        $sql = "SELECT acd_no FROM a_members WHERE no='$am_no';";
-                        $result = mysqli_query($conn, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $acd_no = $row["acd_no"];
-                    }
+                if ($am_no) {
+
+                    include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+
+                    $sql = "SELECT acd_no FROM a_members WHERE no='$am_no';";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_array($result);
+                    $acd_no = $row["acd_no"];
+                }
                 ?>
 
                 <li>
