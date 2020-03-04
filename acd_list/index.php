@@ -949,6 +949,9 @@
           var lat ;
           var lng ;
           var juso;
+          function gotoOurCityAcademy(){
+
+          }
 
           function getMydongAcd(siName,dongName){
             $.ajax({
@@ -968,6 +971,20 @@
                       // document.getElementById("contents_wrap").style.height = "770px";
                     }else{
                       var a = JSON.parse(response); //택배를 뜯는느낌 // 이것은 json 정보를 우리가 볼수있게 해독해주는 것이여.
+
+                      // $.ajax({
+                      //   type: "post",
+                      //   datatype:"JSON",
+                      //   data:{"siName":siName,
+                      //         "dongName":dongName},
+                      //   url : "./view_all.php",
+                      //   success: function(respon)
+                      //
+                      //
+                      //
+                      //
+                      // });
+
                       console.log(a[0]['acdName']);
                       var acd_no_array = [];
                       for (var i = 0; i < 4; i++) {
@@ -1051,7 +1068,7 @@
               }
             }
 
-
+            var siName = "";
             function getLocation() {
               if (navigator.geolocation) { // GPS를 지원하면
 
@@ -1078,7 +1095,7 @@
 
                         //마지막글자를 추출한다. ex)수원시 -> '시'
                         var lastAddress = address[1].charAt(address[1].length-1);
-
+                        siName = address[1];
                         console.log(lastAddress);
                         if(lastAddress === "시"){
                           //이 경우 동은 address[3]에 있기에
@@ -1087,7 +1104,8 @@
                           //나머지는 군 이기에 요렇게.
                           getMydongAcd(address[1],address[2]);
                         }
-
+                        console.log(siName);
+                        $("#see_more0").attr('href', '/eduplanet/acd_list/view_all.php?district='+siName);
                       }
                     };
 
@@ -1117,7 +1135,7 @@
 
       <!--    --------------------------------------------------------------------------------->
       <div id="more_s">
-        <button type="button" name="button" id="more_btn" onclick="location.href='/eduplanet/acd_list/view_all.php"><a href="/eduplanet/acd_list/view_all.php">학원 더보기</a></button>
+        <button type="button" name="button" id="more_btn" onclick="location.href='/eduplanet/acd_list/view_all.php?="><a id="see_more0" href="/eduplanet/acd_list/view_all.php?district=">학원 더보기</a></button>
       </div>
 
       </div> <!-- main_contents end-->

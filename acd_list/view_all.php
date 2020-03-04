@@ -194,34 +194,34 @@
                     //           GROUP BY academy.no order by review.total_star desc";
 
                   $sql= " SELECT
-                          academy.no,
-                          academy.acd_name,
-                          academy.address,
-                          academy.file_copy,
-                          review.parent,
-                          total_star,
-                          str_cnt,
-                          rv_cnt
-                      FROM
-                          academy
-                              LEFT JOIN
-                          (SELECT
-                              parent, AVG(total_star) AS total_star, COUNT(*) AS rv_cnt
+                              academy.no,
+                              academy.acd_name,
+                              academy.address,
+                              academy.file_copy,
+                              review.parent,
+                              total_star,
+                              str_cnt,
+                              rv_cnt
                           FROM
-                              review
-                          GROUP BY parent) review ON academy.no = review.parent
-                              LEFT JOIN
-                          (SELECT
-                              parent, COUNT(*) AS str_cnt
-                          FROM
-                              acd_story
-                          GROUP BY parent) acd_story ON academy.no = acd_story.parent
-                      WHERE
-                          academy.si_name = '가평군'
-                              AND academy.acd_name LIKE '%수학%'
-                              OR academy.class LIKE '%수학%'
-                      GROUP BY academy.no
-                      ORDER BY review.total_star DESC";
+                              academy
+                                  LEFT JOIN
+                              (SELECT
+                                  parent, AVG(total_star) AS total_star, COUNT(*) AS rv_cnt
+                              FROM
+                                  review
+                              GROUP BY parent) review ON academy.no = review.parent
+                                  LEFT JOIN
+                              (SELECT
+                                  parent, COUNT(*) AS str_cnt
+                              FROM
+                                  acd_story
+                              GROUP BY parent) acd_story ON academy.no = acd_story.parent
+                          WHERE
+                              academy.si_name = '$selectDis'
+                                  AND (academy.acd_name LIKE '%$search%'
+                                  OR academy.class LIKE '%$search%')
+                          GROUP BY academy.no
+                          ORDER BY review.total_star DESC";
 
 
                   }else if($selectSort == "bace_max"){
@@ -239,7 +239,7 @@
                                     left  JOIN
                                   (SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt FROM review group by parent) review ON academy.no = review.parent
                                     left JOIN
-                                  (SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and academy.acd_name like '%$search%' or academy.class like '%$search%'
+                                  (SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and (academy.acd_name like '%$search%' or academy.class like '%$search%')
                               GROUP BY academy.no";
 
                           // 시설 만족도 순
@@ -260,7 +260,7 @@
                               	  left  JOIN
                               	(SELECT parent, AVG(facility) as total_star, COUNT(*)as rv_cnt,avg(facility) as facility FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
-                              	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and academy.acd_name like '%$search%' or academy.class like '%$search%'
+                              	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and (academy.acd_name like '%$search%' or academy.class like '%$search%')
                               GROUP BY academy.no order by review.facility desc";
                         //교통 편의성 순
                   }else if($selectSort == "acsbl_max"){
@@ -279,7 +279,7 @@
                               	  left  JOIN
                               	(SELECT parent, AVG(acsbl) as total_star, COUNT(*)as rv_cnt,avg(acsbl) as acsbl FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
-                              	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and academy.acd_name like '%$search%' or academy.class like '%$search%'
+                              	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and (academy.acd_name like '%$search%' or academy.class like '%$search%')
                               GROUP BY academy.no order by review.acsbl desc";
                               //강사 만족도 순
                   }else if($selectSort == "teacher_max"){
@@ -298,7 +298,7 @@
                               	  left  JOIN
                               	(SELECT parent, AVG(teacher) as total_star, COUNT(*)as rv_cnt,avg(teacher) as teacher FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
-                              	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and academy.acd_name like '%$search%' or academy.class like '%$search%'
+                              	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and (academy.acd_name like '%$search%' or academy.class like '%$search%')
                               GROUP BY academy.no order by review.teacher desc";
                               //수강료 만족도 순
                   }else if ($selectSort == "cost_efct_max"){
@@ -317,7 +317,7 @@
                               	  left  JOIN
                               	(SELECT parent, AVG(cost_efct) as total_star, COUNT(*)as rv_cnt,avg(cost_efct) as cost_efct FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
-                              	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and academy.acd_name like '%$search%' or academy.class like '%$search%'
+                              	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and (academy.acd_name like '%$search%' or academy.class like '%$search%')
                               GROUP BY academy.no order by review.cost_efct desc;";
                   }else if($selectSort == "achievement_max"){
                     $sql = "SELECT
@@ -335,7 +335,7 @@
                               	  left  JOIN
                               	(SELECT parent, AVG(achievement) as total_star, COUNT(*)as rv_cnt,avg(achievement) as achievement FROM review group by parent) review ON academy.no = review.parent
                               	  left JOIN
-                              	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and academy.acd_name like '%$search%' or academy.class like '%$search%'
+                              	(SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and (academy.acd_name like '%$search%' or academy.class like '%$search%')
                               GROUP BY academy.no order by review.achievement desc";
 
                   }
@@ -355,7 +355,7 @@
                                   left  JOIN
                                 (SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt FROM review group by parent) review ON academy.no = review.parent
                                   left JOIN
-                                (SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and academy.acd_name like '%$search%' or academy.class like '%$search%'
+                                (SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent where academy.si_name = '$selectDis' and (academy.acd_name like '%$search%' or academy.class like '%$search%')
                             GROUP BY academy.no";
                   }
 
@@ -893,7 +893,7 @@
                     <h2>
                         <!-- 검색 학원 정렬 -->
                         <span id="view_all_search"></span>
-                        <span id="view_all_title"></span>
+                        <span id="view_all_title">우리동네학원</span>
                         <span id="view_all_review"></span>
                         <!-- <script type="text/javascript">
                           if(selectSort == "facility_max"){
