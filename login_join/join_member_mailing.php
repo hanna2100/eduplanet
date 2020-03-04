@@ -83,8 +83,7 @@
   }
 
 
-        $to=$id_email;
-        echo $to;
+        $to=$id_email;      
         $from="eduplanet 관리자";
         $subject="eduplanet 회원가입 인증 확인 메일";
         $body="\n\n안녕하세요!
