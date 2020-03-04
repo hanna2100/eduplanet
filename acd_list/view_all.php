@@ -5,24 +5,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>에듀플래닛</title>
+     <title>에듀플래닛</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="/eduplanet/mypage/css/follow.css"> -->
-    <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
-    <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+     <!-- 폰트 -->
+     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
+     <!-- <link rel="stylesheet" href="/eduplanet/mypage/css/follow.css"> -->
 
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="/eduplanet/mypage/js/review_write.js"></script>
+     <!-- 파비콘 -->
+     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_out.css">
-    <script src="/eduplanet/searchbar/searchbar_out.js"></script>
-    <link rel="stylesheet" href="/eduplanet/index/footer.css">
-    <link rel="stylesheet" href="./css/view_all.css">
-    <!-- 아이콘 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+     <!-- css -->
+     <link rel="stylesheet" href="/eduplanet/mypage/css/review_write_popup.css">
+     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_out.css">
+     <link rel="stylesheet" href="/eduplanet/index/footer.css">
+     <link rel="stylesheet" href="./css/view_all.css">
+
+     <!-- 스크립트 -->
+     <script src="/eduplanet/mypage/js/review_write.js"></script>
+
+     <!-- 자동완성 -->
+     <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+     <script src="/eduplanet/mypage/js/review_write.js"></script>
+
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+     <link rel="stylesheet" href="/eduplanet/index/index_header_searchbar_out.css">
+     <script src="/eduplanet/searchbar/searchbar_out.js"></script>
+     <link rel="stylesheet" href="/eduplanet/index/footer.css">
+     <link rel="stylesheet" href="./css/view_all.css">
+
+     <!-- 아이콘 -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
     <?php
       if(isset($_GET["search"])){
@@ -162,6 +175,22 @@
 
                 include_once "../lib/db_connector.php";
                 // $sql = "select academy.no,academy.acd_name,academy.file_copy,avg(review.total_star),acd_story.parent from academy join review on academy.no = review.parent join acd_story on review.parent = acd_story.parent group by review.parent";
+                $sql = "SELECT
+                            academy.no,
+                            academy.acd_name,
+                            academy.address,
+                            academy.file_copy,
+                            review.parent,
+                            total_star,
+                            str_cnt,
+                            rv_cnt
+                        FROM
+                            academy
+                              left  JOIN
+                            (SELECT parent, AVG(total_star) as total_star, COUNT(*)as rv_cnt FROM review group by parent) review ON academy.no = review.parent
+                              left JOIN
+                            (SELECT parent, COUNT(*)as str_cnt FROM acd_story group by parent) acd_story ON academy.no = acd_story.parent GROUP BY academy.no";
+
 
                 //검색어 있을때
                 if($search !=""){
@@ -893,7 +922,7 @@
                     <h2>
                         <!-- 검색 학원 정렬 -->
                         <span id="view_all_search"></span>
-                        <span id="view_all_title">우리동네학원</span>
+                        <span id="view_all_title">학원리스트</span>
                         <span id="view_all_review"></span>
                         <!-- <script type="text/javascript">
                           if(selectSort == "facility_max"){
