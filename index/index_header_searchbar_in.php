@@ -62,12 +62,27 @@
                         // 검색어를 입력하지 않았을 때
                         if (document.getElementById("acd_name_in").value == "") {
 
-                            location.href = '/eduplanet/acd_list/view_all.php';
+                            // 지역을 선택하지 않았을 때
+                            if (document.getElementById("select_district").value == "") {
+                                location.href = '/eduplanet/acd_list/view_all.php';
 
-                        // 검색어를 입력했을 때
+                                // 지역을 선택했을 때
+                            } else if (document.getElementById("select_district").value != "") {
+                                location.href = '/eduplanet/acd_list/view_all.php?district=' + document.getElementById("select_district").value + '&sort=bace_max';
+                            }
+
+                            // 검색어를 입력했을 때
                         } else if (document.getElementById("acd_name_in").value != "") {
 
-                            location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_in").value;
+                            // 지역을 선택하지 않았을 때
+                            if (document.getElementById("select_district").value == "") {
+                                location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_in").value;
+
+                                // 지역을 선택했을 때
+                            } else if (document.getElementById("select_district").value != "") {
+                                location.href = '/eduplanet/acd_list/view_all.php?search=' + document.getElementById("acd_name_in").value + '&district=' + document.getElementById("select_district").value;
+                            }
+
                         }
                     }
                 </script>

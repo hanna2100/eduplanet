@@ -8,16 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
-    <!-- 자동완성 -->
-    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
     <!-- 제이쿼리 -->
-    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -35,6 +30,10 @@
     <script src="/eduplanet/searchbar/searchbar_out.js"></script>
     <script src="/eduplanet/mypage/js/review_write.js"></script>
 
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <script>
         function selectOption() {
 
@@ -45,8 +44,8 @@
             // 검색어가 있을 때
             if (search !== "") {
                 location.href = "/eduplanet/acd_story/index.php?district=" + selectDis + "&sort=" + selectSort + "&search=" + search;
-
-                // 검색어가 없을 때
+                
+            // 검색어가 없을 때
             } else if (search === "") {
                 location.href = "/eduplanet/acd_story/index.php?district=" + selectDis + "&sort=" + selectSort;
 
@@ -79,6 +78,7 @@
             if (isset($_GET["search"])) {
                 $search = $_GET["search"];
                 echo "<input type='hidden' value=$search id='search_keyword'>";
+                
             } else {
                 $search = "";
                 echo "<input type='hidden' value='' id='search_keyword'>";
@@ -141,7 +141,7 @@
                 // 지역 옵션이 선택되어 있을 때
                 if ($selectDis != "") {
 
-                    $sql =
+                    $sql = 
                         "SELECT academy.no as acd_no, 
                         acd_story.no, 
                         acd_story.parent, 
@@ -163,10 +163,10 @@
                         GROUP BY acd_story.no 
                         ORDER BY $sort DESC";
 
-                    // 지역 옵션이 선택되지 않았을 때
+                // 지역 옵션이 선택되지 않았을 때
                 } else if ($selectDis == "") {
 
-                    $sql =
+                    $sql = 
                         "SELECT academy.no as acd_no, 
                         acd_story.no, 
                         acd_story.parent, 
@@ -189,14 +189,14 @@
                 }
 
 
-                // 검색어가 없을 때 ===============================================================================================
+            // 검색어가 없을 때 ===============================================================================================
             } else if ($search == "") {
 
                 // 지역 옵션이 선택되어 있을 때
                 if ($selectDis != "") {
 
-                    $sql =
-                        "SELECT academy.no as acd_no, 
+                        $sql = 
+                            "SELECT academy.no as acd_no, 
                             acd_story.no, 
                             acd_story.parent, 
                             acd_story.acd_name, 
@@ -216,11 +216,11 @@
                             GROUP BY acd_story.no 
                             ORDER BY $sort DESC";
 
-                    // 지역 옵션이 선택되지 않았을 때
+                // 지역 옵션이 선택되지 않았을 때
                 } else if ($selectDis == "") {
 
-                    $sql =
-                        "SELECT academy.no as acd_no, 
+                        $sql = 
+                            "SELECT academy.no as acd_no, 
                             acd_story.no, 
                             acd_story.parent, 
                             acd_story.acd_name, 
@@ -389,7 +389,7 @@
 
                                 <?php
                                 if ($gm_no) {
-
+                                    
                                     // 찜 여부에 따라 다른 하트 보여주기
 
                                     $sql_heart = "SELECT * FROM follow WHERE user_no='$gm_no' AND acd_no=$parent";
@@ -399,13 +399,13 @@
                                     if ($total_record_heart == 0) {
                                 ?>
                                         <a href="/eduplanet/acd_story/follow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart_off">flw</button></a>
-                                    <?php
+                                <?php
                                     } else if ($total_record_heart != 0) {
-                                    ?>
+                                ?>
                                         <a href="/eduplanet/acd_story/unfollow.php?no=<?= $parent ?>"><button type="button" id="button_academy_heart_on">flw</button></a>
-                                    <?php
+                                <?php
                                     }
-                                    ?>
+                                ?>
 
 
                                 <?php
