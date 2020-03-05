@@ -195,14 +195,11 @@
                                         <li id="membership_valid_day"><?= $membership_day ?> 일</li>
                                     </ul>
                                 </div>
-
-
-                        </div>
-
-                <?php
+                        <?php
                             }
                         }
-                ?>
+                        ?>
+                        </div>
 
                 </div>
             </div>
