@@ -28,6 +28,9 @@
   <script src="/eduplanet/mypage/js/review_write.js"></script>
   <script src="/eduplanet/searchbar/searchbar_in.js"></script>
 
+  <!-- 아이콘 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
 </head>
 
 <body>
