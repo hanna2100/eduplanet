@@ -23,7 +23,6 @@
         $file_name = $file[0];
         $file_ext = $file[1];
         $new_file_name = date("y_m_d_h_i_s");
-        $new_file_name = $new_file_name . "_" . $file_name;  // 현재 시간과 파일 이름을 붙여서 새로운 임시 이름을 만든다
         $copied_file_name = $new_file_name . "." . $file_ext;  // 새로 만든 임시 이름에 확장자를 붙인다
         $uploaded_file = $upload_dir . $copied_file_name;  // 파일을 저장할 경로를 앞에 붙인다
 
@@ -47,14 +46,20 @@
       $row = mysqli_fetch_array($result_search);
       $acdNo = $row[0];
 
+      var_dump($acdNo);
+
       $sql_insert = "INSERT into a_members values
                     (null, '$acdNo', '$id', '$pw', '$acdName', '$rprsn', '$copied_file_name', 'N', '', '', '0000-00-00', '$today');";
       $sql_select = "select * from a_members where id='$id'";
       $no = "am_no";
 
+      var_dump($sql_insert);
 
-
-       mysqli_query($conn, $sql_insert);
+      $result = mysqli_query($conn, $sql_insert);
+       if(!$result){
+           mysqli_close($conn);
+           die('Could not update data - ' . mysqli_error($conn));
+       }
        mysqli_close($conn);
 
        echo ('
