@@ -393,8 +393,13 @@ function importIntresData(){
                 }else{
                     document.getElementsByClassName('dasn_intres_label')[i].innerHTML = ++rank;
                 }
-                document.getElementsByClassName('dasn_intres_data')[i].innerHTML
-                =data[0][i]+'<span>('+data[1][i]+')</span>';
+                if(data[0][i]==null){
+                    document.getElementsByClassName('dasn_intres_data')[i].innerHTML = '-';
+                    document.getElementsByClassName('dasn_intres_label')[i].innerHTML = '-';
+                }else{
+                    document.getElementsByClassName('dasn_intres_data')[i].innerHTML =data[0][i]+'<span>('+data[1][i]+')</span>';
+
+                }
 
                 temp = data[1][i];
             }

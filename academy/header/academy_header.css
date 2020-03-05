@@ -1,4 +1,4 @@
-* { 
+* {
     padding: 0px;
     margin: 0px;
     font-family: 'Noto Sans KR', 'Noto Sans Korean', '돋움', dotum, Arial, sans-serif;
@@ -10,7 +10,7 @@ body {
     display: block;
     min-height: 1080px;
     min-width: 1060px;
-    background: #f3f3f4; 
+    background: #f3f3f4;
     font-size: 13px;
     color: #333;
     margin: 0;
@@ -46,9 +46,10 @@ a {
     width: 100px;
     height: 100px;
     display: inline-block;
-    background-color: transparent;
+
+    background-color: white;
     /* border: 2px solid lightgray; */
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     position: relative;
     top: -27px;

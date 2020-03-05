@@ -10,8 +10,8 @@ body {
     display: block;
     min-height: 1080px;
     min-width: 1060px;
-    /* background: #ebecee; */
-    background: #f3f3f4; 
+    background: #ebecee;
+    /* background: #f3f3f4;  */
     font-size: 13px;
     color: #333;
 }
@@ -189,7 +189,7 @@ a {
 /* 하단 학원 스토리 */
 
 .academy_other_story_list_wrap {
-    background-color: #f3f3f4;
+    background-color: #ebecee;
     width: 100%;
     margin-bottom: 70px;
     /* height: 450px; */

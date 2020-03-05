@@ -8,16 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에듀플래닛</title>
 
-    <!-- 자동완성 -->
-    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
     <!-- favicon -->
     <link rel="shortcut icon" href="/eduplanet/img/favicon.png">
 
     <!-- 제이쿼리 -->
-    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet">
@@ -35,6 +30,10 @@
     <!-- 스크립트 -->
     <script src="/eduplanet/searchbar/searchbar_in.js"></script>
     <script src="/eduplanet/mypage/js/review_write.js"></script>
+
+    <!-- 자동완성 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- identicon (프로필 이미지) -->
     <script src="//cdn.rawgit.com/placemarker/jQuery-MD5/master/jquery.md5.js"></script>
@@ -173,6 +172,7 @@
                             si_name, 
                             follow.acd_no as f_acd_no, 
                             follow.no, 
+                            academy.file_copy as file_copy,
                             review.total_star 
                             FROM follow 
                             INNER JOIN academy 
@@ -189,6 +189,7 @@
                             "SELECT academy.no as acd_no, 
                             acd_name, 
                             si_name, 
+                            academy.file_copy as file_copy,
                             follow.acd_no as f_acd_no, 
                             follow.no, 
                             review.total_star 
@@ -212,6 +213,7 @@
                             "SELECT academy.no as acd_no, 
                             acd_name, 
                             si_name, 
+                            academy.file_copy as file_copy,
                             follow.acd_no as f_acd_no, 
                             follow.no, 
                             review.total_star 
@@ -231,6 +233,7 @@
                             "SELECT academy.no as acd_no, 
                             acd_name, 
                             si_name, 
+                            academy.file_copy as file_copy,
                             follow.acd_no as f_acd_no, 
                             follow.no, 
                             review.total_star 
@@ -338,6 +341,7 @@
                             $acd_no = $row["acd_no"];
                             $f_acd_no = $row["f_acd_no"];
                             $follow_no = $row["no"];
+                            $file_copy = $row["file_copy"];
 
                             $sql = "SELECT * FROM acd_story WHERE parent='$f_acd_no'";
                             $result_story = mysqli_query($conn, $sql);
@@ -364,7 +368,13 @@
                                     <!-- 클릭 시 href=학원페이지 -->
                                     <a href="/eduplanet/academy/index.php?no=<?= $acd_no ?>">
                                         <div class="follow_list_column_img">
-                                            <img src="/eduplanet/test_img/academy_big_logo.jpg" alt="follow_list_column_img">
+                                            <?php
+                                                if(!$file_copy){
+                                                    echo "<img src='/eduplanet/img/acd_logo2.png' alt='follow_list_column_img'>";
+                                                }else{
+                                                    echo "<img src='/eduplanet/data/acd_logo/$file_copy' alt='follow_list_column_img'>";
+                                                }
+                                            ?>
                                         </div>
 
                                         <div class="follow_list_column_text">

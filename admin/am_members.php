@@ -127,9 +127,7 @@ if ($admin== "" ){
       <div id="g_members_totalGraph_cell1">
         <h4><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Academy member Graph<span>단위: 명</span></h4>
         <canvas id="g_members_totalGraph"></canvas>
-        <div class="btn_hide">
-          <button>숨기기</button>
-        </div>
+
       </div>
     </div>
     <!-- end of 회원수 변화 그래프 -->

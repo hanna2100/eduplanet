@@ -92,16 +92,16 @@
                 </li>
 
                 <?php
+                
+                    if ($am_no) {
 
-                if ($am_no) {
-
-                    include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
-
-                    $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
-                    $result = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_array($result);
-                    $acd_no = $row["acd_no"];
-                }
+                        include_once $_SERVER["DOCUMENT_ROOT"] . "/eduplanet/lib/db_connector.php";
+                        
+                        $sql = "SELECT acd_no FROM a_members WHERE no=$am_no;";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_array($result);
+                        $acd_no = $row["acd_no"];
+                    }
                 ?>
 
                 <li>
@@ -247,36 +247,7 @@
                         }
 
                         function searchAcademy() {
-                            
-                        }
-
-                        function searchAcademy() {
-
-                            // 검색어를 입력하지 않았을 때
-                            if (document.getElementById("acd_name_out").value == "") {
-
-                                // 지역을 선택하지 않았을 때
-                                if (document.getElementById("select_district").value == "") {
-                                    location.href = '/eduplanet/acd_story/index.php';
-
-                                // 지역을 선택했을 때
-                                } else if (document.getElementById("select_district").value != "") {
-                                    location.href = '/eduplanet/acd_story/index.php?district=' + document.getElementById("select_district").value + '&sort=regist_day';
-                                }
-
-                                // 검색어를 입력했을 때
-                            } else if (document.getElementById("acd_name_out").value != "") {
-
-                                // 지역을 선택하지 않았을 때
-                                if (document.getElementById("select_district").value == "") {
-                                    location.href = '/eduplanet/acd_story/index.php?search=' + document.getElementById("acd_name_out").value;
-
-                                    // 지역을 선택했을 때
-                                } else if (document.getElementById("select_district").value != "") {
-                                    location.href = '/eduplanet/acd_story/index.php?search=' + document.getElementById("acd_name_out").value + '&district=' + document.getElementById("select_district").value;
-                                }
-
-                            }
+                            location.href = '/eduplanet/acd_story/index.php?search=' + document.getElementById("acd_name_out").value;
                         }
                     </script>
 
